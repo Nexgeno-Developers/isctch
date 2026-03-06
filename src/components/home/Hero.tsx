@@ -121,7 +121,7 @@ export default function Hero({ data }: HeroProps) {
             <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold leading-tight mb-2">
               <span className="text-white">{currentSlideData.title}</span>
               <br />
-              <span className="text-[#00d4ff]">{currentSlideData.titleHighlight}</span>
+              <span className="text-[#009FE8]">{currentSlideData.titleHighlight}</span>
             </h1>
           </div>
 
@@ -155,10 +155,10 @@ export default function Hero({ data }: HeroProps) {
                 <button
                   key={category.id}
                   onClick={(e) => handleCategoryClick(category.slideIndex, e)}
-                  className={`flex-shrink-0 px-4 py-2 border rounded-full text-sm md:text-base font-medium transition-all whitespace-nowrap cursor-pointer ${
+                  className={`flex-shrink-0 px-4 py-2 rounded-full text-sm md:text-base font-thin transition-all whitespace-nowrap cursor-pointer ${
                     currentSlide === category.slideIndex
-                      ? 'border-[#00d4ff] text-[#00d4ff] bg-[#00d4ff] bg-opacity-10'
-                      : 'border-white text-white hover:border-[#00d4ff] hover:text-[#00d4ff]'
+                      ? 'border-[#009FE8] text-white border bg-opacity-10 !font-semibold'
+                      : 'text-white'
                   }`}
                 >
                   {category.label}
