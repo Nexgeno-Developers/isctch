@@ -28,7 +28,7 @@ export default function NavigationDropdown({ item }: NavigationDropdownProps) {
     <div className="relative group">
       <Link
         href={item.href}
-        className="text-gray-700 hover:text-blue-600 transition-colors font-medium flex items-center space-x-1 relative"
+        className="text-gray-700 hover:text-blue-600 transition-colors font-medium flex items-center space-x-1 relative py-2"
       >
         <span>{item.label}</span>
         <svg
@@ -47,12 +47,16 @@ export default function NavigationDropdown({ item }: NavigationDropdownProps) {
         <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-600 transition-all group-hover:w-full" />
       </Link>
 
+      {/* Invisible bridge to prevent gap */}
+      <div className="absolute top-full left-0 w-full h-3 bg-transparent pointer-events-none group-hover:pointer-events-auto" />
+
       {/* Dropdown Menu - CSS hover based */}
-      <div className="absolute top-full left-0 mt-3 min-w-[220px] bg-white rounded-xl shadow-2xl border border-gray-100 py-2 z-50 opacity-0 invisible -translate-y-2 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 transition-all duration-200 pointer-events-none group-hover:pointer-events-auto">
+      <div className="absolute top-full left-0 mt-0 pt-3 min-w-[220px] bg-transparent z-50 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 pointer-events-none group-hover:pointer-events-auto">
         {/* Arrow indicator */}
-        <div className="absolute -top-2 left-6 w-4 h-4 bg-white border-l border-t border-gray-100 rotate-45" />
+        <div className="absolute top-0 left-6 w-4 h-4 bg-white border-l border-t border-gray-100 rotate-45" />
         
-        <div className="relative bg-white rounded-xl overflow-hidden">
+        {/* Dropdown content */}
+        <div className="relative bg-white rounded-xl shadow-2xl border border-gray-100 py-2 mt-2">
           {item.children.map((child, index) => (
             <Link
               key={child.id}
