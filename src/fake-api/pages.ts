@@ -6,9 +6,30 @@
  * with actual fetch calls to the API_CONFIG endpoints.
  */
 
+export interface PageSchema {
+  '@context': string;
+  '@type': string;
+  headline?: string;
+  description?: string;
+  url?: string;
+  datePublished?: string;
+  dateModified?: string;
+  author?: {
+    '@type': string;
+    name: string;
+  };
+  publisher?: {
+    '@type': string;
+    name: string;
+  };
+  [key: string]: unknown;
+}
+
 export interface PageSEO {
   meta_title: string;
   meta_description: string;
+  canonical_url?: string;
+  schema?: PageSchema;
 }
 
 export interface PageData {
@@ -41,6 +62,13 @@ export async function getPageData(slug: string): Promise<PageData | null> {
       seo: {
         meta_title: 'About Us - Learn More About Our Company',
         meta_description: 'Discover our story, mission, and the team behind our innovative solutions.',
+        canonical_url: '/about',
+        schema: {
+          '@context': 'https://schema.org',
+          '@type': 'AboutPage',
+          headline: 'About Us',
+          description: 'Discover our story, mission, and the team behind our innovative solutions.',
+        },
       },
     },
     'services': {
@@ -59,6 +87,13 @@ export async function getPageData(slug: string): Promise<PageData | null> {
       seo: {
         meta_title: 'Our Services - Comprehensive Solutions',
         meta_description: 'Explore our range of services including web development, mobile apps, and cloud solutions.',
+        canonical_url: '/services',
+        schema: {
+          '@context': 'https://schema.org',
+          '@type': 'Service',
+          headline: 'Our Services',
+          description: 'Explore our range of services including web development, mobile apps, and cloud solutions.',
+        },
       },
     },
     'contact': {
@@ -73,6 +108,13 @@ export async function getPageData(slug: string): Promise<PageData | null> {
       seo: {
         meta_title: 'Contact Us - Get in Touch',
         meta_description: 'Reach out to us for inquiries, support, or to discuss your project needs.',
+        canonical_url: '/contact',
+        schema: {
+          '@context': 'https://schema.org',
+          '@type': 'ContactPage',
+          headline: 'Contact Us',
+          description: 'Reach out to us for inquiries, support, or to discuss your project needs.',
+        },
       },
     },
   };

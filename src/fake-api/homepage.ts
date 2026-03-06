@@ -38,11 +38,26 @@ export interface Testimonial {
   avatar?: string;
 }
 
+export interface HomepageSEO {
+  meta_title: string;
+  meta_description: string;
+  canonical_url?: string;
+  schema?: {
+    '@context': string;
+    '@type': string;
+    headline?: string;
+    description?: string;
+    url?: string;
+    [key: string]: unknown;
+  };
+}
+
 export interface HomepageData {
   hero: Hero;
   services: Service[];
   products: Product[];
   testimonials: Testimonial[];
+  seo?: HomepageSEO;
 }
 
 /**
@@ -61,6 +76,17 @@ export async function getHomepageData(): Promise<HomepageData> {
       subtitle: 'Building the future with innovative solutions',
       ctaText: 'Get Started',
       ctaLink: '/contact',
+    },
+    seo: {
+      meta_title: 'Lamipak - Building the Future with Innovative Solutions1',
+      meta_description: 'Welcome to our platform. Discover our services, products, and solutions for your business needs.',
+      canonical_url: '/',
+      schema: {
+        '@context': 'https://schema.org',
+        '@type': 'WebSite',
+        headline: 'Welcome to Our Platform',
+        description: 'Building the future with innovative solutions',
+      },
     },
     services: [
       {

@@ -1,8 +1,34 @@
+import type { Metadata } from 'next';
 import { fetchHomepageData } from '@/lib/api';
+import { getCanonicalUrl } from '@/config/site';
 import Hero from '@/components/home/Hero';
 import Services from '@/components/home/Services';
 import Products from '@/components/home/Products';
 import Testimonials from '@/components/home/Testimonials';
+
+/**
+ * Generate metadata for homepage
+ */
+export async function generateMetadata(): Promise<Metadata> {
+  const homepageData = await fetchHomepageData();
+  
+  const seo = homepageData.seo || {
+    meta_title: 'Lamipak - Your Platform',
+    meta_description: 'Building the future with innovative solutions',
+  };
+
+  const canonicalUrl = seo.canonical_url 
+    ? getCanonicalUrl(seo.canonical_url)
+    : getCanonicalUrl('/');
+
+  return {
+    title: seo.meta_title,
+    description: seo.meta_description,
+    alternates: {
+      canonical: canonicalUrl,
+    },
+  };
+}
 
 /**
  * Homepage Component
@@ -14,12 +40,28 @@ export default async function HomePage() {
   // Single API call to fetch all homepage sections
   const homepageData = await fetchHomepageData();
 
+  // Prepare schema data with canonical URL
+  const schemaData = homepageData.seo?.schema ? {
+    ...homepageData.seo.schema,
+    url: homepageData.seo.canonical_url 
+      ? getCanonicalUrl(homepageData.seo.canonical_url)
+      : getCanonicalUrl('/'),
+  } : null;
+
   return (
-    <main>
-      <Hero data={homepageData.hero} />
-      <Services services={homepageData.services} />
-      <Products products={homepageData.products} />
-      <Testimonials testimonials={homepageData.testimonials} />
-    </main>
+    <>
+      {schemaData && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaData) }}
+        />
+      )}
+      <main>
+        <Hero data={homepageData.hero} />
+        <Services services={homepageData.services} />
+        <Products products={homepageData.products} />
+        <Testimonials testimonials={homepageData.testimonials} />
+      </main>
+    </>
   );
 }

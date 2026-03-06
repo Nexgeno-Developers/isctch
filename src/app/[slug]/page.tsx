@@ -1,6 +1,7 @@
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 import { fetchPageData } from '@/lib/api';
+import { getCanonicalUrl } from '@/config/site';
 
 interface PageProps {
   params: Promise<{
@@ -28,10 +29,19 @@ export async function generateMetadata(
     };
   }
 
-  return {
+  const canonicalUrl = pageData.seo.canonical_url 
+    ? getCanonicalUrl(pageData.seo.canonical_url)
+    : getCanonicalUrl(`/${slug}`);
+
+  const metadata: Metadata = {
     title: pageData.seo.meta_title,
     description: pageData.seo.meta_description,
+    alternates: {
+      canonical: canonicalUrl,
+    },
   };
+
+  return metadata;
 }
 
 export default async function DynamicPage({ params }: PageProps) {
@@ -42,17 +52,33 @@ export default async function DynamicPage({ params }: PageProps) {
     notFound();
   }
 
+  // Prepare schema data with canonical URL
+  const schemaData = pageData.seo.schema ? {
+    ...pageData.seo.schema,
+    url: pageData.seo.canonical_url 
+      ? getCanonicalUrl(pageData.seo.canonical_url)
+      : getCanonicalUrl(`/${slug}`),
+  } : null;
+
   return (
-    <main className="min-h-screen">
-      <div className="container mx-auto px-4 py-16 md:py-24">
-        <h1 className="text-4xl md:text-5xl font-bold mb-8 text-gray-900">
-          {pageData.title}
-        </h1>
-        <div
-          className="prose prose-lg max-w-none text-gray-700"
-          dangerouslySetInnerHTML={{ __html: pageData.content }}
+    <>
+      {schemaData && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaData) }}
         />
-      </div>
-    </main>
+      )}
+      <main className="min-h-screen">
+        <div className="container mx-auto px-4 py-16 md:py-24">
+          <h1 className="text-4xl md:text-5xl font-bold mb-8 text-gray-900">
+            {pageData.title}
+          </h1>
+          <div
+            className="prose prose-lg max-w-none text-gray-700"
+            dangerouslySetInnerHTML={{ __html: pageData.content }}
+          />
+        </div>
+      </main>
+    </>
   );
 }
