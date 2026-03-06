@@ -11,9 +11,31 @@ interface HeroProps {
 export default function Hero({ data }: HeroProps) {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
+  const [imagesLoaded, setImagesLoaded] = useState(false);
 
   const slides = data.slides;
   const totalSlides = slides.length;
+
+  // Preload all images
+  useEffect(() => {
+    const imagePromises = slides.map((slide) => {
+      return new Promise((resolve, reject) => {
+        const img = new Image();
+        img.onload = resolve;
+        img.onerror = reject;
+        img.src = slide.backgroundImage;
+      });
+    });
+
+    Promise.all(imagePromises)
+      .then(() => {
+        setImagesLoaded(true);
+      })
+      .catch((error) => {
+        console.error('Error loading images:', error);
+        setImagesLoaded(true); // Still show content even if some images fail
+      });
+  }, [slides]);
 
   // Auto-play functionality
   useEffect(() => {
@@ -55,24 +77,38 @@ export default function Hero({ data }: HeroProps) {
         {slides.map((slide, index) => (
           <div
             key={slide.id}
-            className={`absolute inset-0 bg-cover bg-center transition-opacity duration-1000 ${
-              index === currentSlide ? 'opacity-100 z-0' : 'opacity-0 z-[-1]'
+            className={`absolute inset-0 transition-opacity duration-1000 ${
+              index === currentSlide ? 'opacity-100 z-0' : 'opacity-0 z-[-1] pointer-events-none'
             }`}
-            style={{
-              backgroundImage: `url(${slide.backgroundImage})`,
-            }}
           >
-            {/* Dark Blue Overlay */}
-            <div className="absolute inset-0 bg-[#0a1a3a] bg-opacity-80" />
-            {/* Blur Effect */}
-            <div className="absolute inset-0 backdrop-blur-sm" />
+            {/* Background Image using img tag */}
+            <img
+              src={slide.backgroundImage}
+              alt={slide.category}
+              className="absolute inset-0 w-full h-full object-cover"
+              loading={index === 0 ? 'eager' : 'lazy'}
+              onError={(e) => {
+                console.error('Image failed to load:', slide.backgroundImage);
+                (e.target as HTMLImageElement).style.display = 'none';
+              }}
+            />
+            {/* Gradient Overlay */}
+            <div
+              className="absolute inset-0"
+              style={{
+                background:
+                  'linear-gradient(83.04deg, #0E233C 13.24%, rgba(12, 47, 86, 0.607692) 69.2%, rgba(11, 59, 113, 0.2) 92.42%)',
+              }}
+            />
+            {/* Blur Effect - Reduced */}
+            <div className="absolute inset-0 backdrop-blur-[2px]" />
           </div>
         ))}
       </div>
 
       {/* Content */}
       <div className="relative z-10 h-full flex flex-col">
-        <div className="container mx-auto px-4 flex-1 flex flex-col justify-center">
+        <div className="container mx-auto flex-1 flex flex-col justify-center">
           {/* Category Label */}
           <div className="mb-4">
             <span className="text-white text-sm md:text-base font-medium tracking-wider uppercase">
