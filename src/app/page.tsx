@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { fetchHomepageData } from '@/lib/api';
 import { getCanonicalUrl } from '@/config/site';
 import Hero from '@/components/home/Hero';
+import Approach from '@/components/home/Approach';
 import Services from '@/components/home/Services';
 import Products from '@/components/home/Products';
 import Testimonials from '@/components/home/Testimonials';
@@ -58,6 +59,7 @@ export default async function HomePage() {
       )}
       <main>
         <Hero data={homepageData.hero} />
+        <Approach />
         <Services services={homepageData.services} />
         <Products products={homepageData.products} />
         <Testimonials testimonials={homepageData.testimonials} />

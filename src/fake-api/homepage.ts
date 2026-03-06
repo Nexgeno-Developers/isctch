@@ -64,8 +64,32 @@ export interface HomepageSEO {
   };
 }
 
+export interface QuestionOption {
+  id: string;
+  label: string;
+  value: string;
+}
+
+export interface Question {
+  id: string;
+  question: string;
+  options: QuestionOption[];
+}
+
+export interface ApproachData {
+  title: string;
+  titleHighlight: string;
+  subtitle: string;
+  image: string;
+  imageAlt: string;
+  questions: Question[];
+  ctaText: string;
+  ctaLink: string;
+}
+
 export interface HomepageData {
   hero: Hero;
+  approach: ApproachData;
   services: Service[];
   products: Product[];
   testimonials: Testimonial[];
@@ -163,6 +187,50 @@ export async function getHomepageData(): Promise<HomepageData> {
           slideIndex: 4, // Fifth slide
         },
       ],
+    },
+    approach: {
+      title: 'We engineer the future of',
+      titleHighlight: 'aseptic packaging.',
+      subtitle: 'Answer three questions and discover your optimal packaging system.',
+      image: '/our-approch-image.webp',
+      imageAlt: 'Professional examining aseptic packaging in laboratory',
+      questions: [
+        {
+          id: '1',
+          question: 'What product are you packaging?',
+          options: [
+            { id: '1-1', label: 'Dairy', value: 'dairy' },
+            { id: '1-2', label: 'Juice', value: 'juice' },
+            { id: '1-3', label: 'Plant-Based', value: 'plant-based' },
+            { id: '1-4', label: 'Liquid Food', value: 'liquid-food' },
+            { id: '1-5', label: 'Nutritional', value: 'nutritional' },
+            { id: '1-6', label: 'Pharma', value: 'pharma' },
+          ],
+        },
+        {
+          id: '2',
+          question: 'What production scale?',
+          options: [
+            { id: '2-1', label: 'Startup', value: 'startup' },
+            { id: '2-2', label: 'Regional', value: 'regional' },
+            { id: '2-3', label: 'Global Scale', value: 'global-scale' },
+            { id: '2-4', label: 'High-Speed Line', value: 'high-speed-line' },
+          ],
+        },
+        {
+          id: '3',
+          question: 'What is your target market region?',
+          options: [
+            { id: '3-1', label: 'Asia Pacific', value: 'asia-pacific' },
+            { id: '3-2', label: 'Europe', value: 'europe' },
+            { id: '3-3', label: 'North America', value: 'north-america' },
+            { id: '3-4', label: 'Middle East & Africa', value: 'middle-east-africa' },
+            { id: '3-5', label: 'Latin America', value: 'latin-america' },
+          ],
+        },
+      ],
+      ctaText: 'DISCOVER YOUR SYSTEM',
+      ctaLink: '/solutions',
     },
     seo: {
       meta_title: 'Lamipak - Building the Future with Innovative Solutions1',

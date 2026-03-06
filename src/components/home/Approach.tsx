@@ -1,0 +1,14 @@
+import { fetchHomepageData } from '@/lib/api';
+import ApproachClient from './ApproachClient';
+
+/**
+ * Approach Component (Server Component)
+ * 
+ * Fetches homepage data server-side and passes approach data to client component
+ * for interactivity.
+ */
+export default async function Approach() {
+  const homepageData = await fetchHomepageData();
+
+  return <ApproachClient data={homepageData.approach} />;
+}

@@ -13,5 +13,6 @@ export const API_CONFIG = {
     page: (slug: string) => `/page/${slug}`,
     header: '/header',
     footer: '/footer',
+    approach: '/approach',
   },
 } as const;
