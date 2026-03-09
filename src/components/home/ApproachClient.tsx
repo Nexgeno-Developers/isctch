@@ -95,14 +95,14 @@ export default function ApproachClient({ data }: ApproachClientProps) {
                   <h3 className="text-xl font-semibold text-gray-900 mb-4">
                     {question.question}
                   </h3>
-                  <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+                  <div className="flex flex-wrap gap-3">
                     {question.options.map((option) => {
                       const isSelected = answers[question.id] === option.value;
                       return (
                         <button
                           key={option.id}
                           onClick={() => handleOptionSelect(question.id, option.value)}
-                          className={`px-4 py-3 rounded-lg text-sm font-medium transition-all ${
+                          className={`px-4 py-2  rounded-full text-[14px] font-medium transition-all ${
                             isSelected
                               ? 'bg-[#009FE8] text-white shadow-md'
                               : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
