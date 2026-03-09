@@ -13,9 +13,6 @@ import LatestPressRelease from '@/components/home/LatestPressRelease';
 import CallToAction from '@/components/home/CallToAction';
 import NewsletterSubscription from '@/components/home/NewsletterSubscription';
 import FAQ from '@/components/home/FAQ';
-import Services from '@/components/home/Services';
-import Products from '@/components/home/Products';
-import Testimonials from '@/components/home/Testimonials';
 
 /**
  * Generate metadata for homepage
@@ -81,10 +78,6 @@ export default async function HomePage() {
         <LatestPressRelease />
         <CallToAction />
         <NewsletterSubscription />
-        
-        <Services services={homepageData.services} />
-        <Products products={homepageData.products} />
-        <Testimonials testimonials={homepageData.testimonials} />
       </main>
     </>
   );
