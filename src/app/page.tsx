@@ -8,6 +8,7 @@ import CommercialServices from '@/components/home/CommercialServices';
 import LatestInsights from '@/components/home/LatestInsights';
 import ProductSustainabilitySeries from '@/components/home/ProductSustainabilitySeries';
 import WorkInSustainability from '@/components/home/WorkInSustainability';
+import InnovationInPackaging from '@/components/home/InnovationInPackaging';
 import FAQ from '@/components/home/FAQ';
 import Services from '@/components/home/Services';
 import Products from '@/components/home/Products';
@@ -73,6 +74,8 @@ export default async function HomePage() {
         <ProductSustainabilitySeries />
         <WorkInSustainability />
         <FAQ />
+        <InnovationInPackaging />
+        
         <Services services={homepageData.services} />
         <Products products={homepageData.products} />
         <Testimonials testimonials={homepageData.testimonials} />

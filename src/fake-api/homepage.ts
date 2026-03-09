@@ -162,6 +162,24 @@ export interface FAQData {
   items: FAQItem[];
 }
 
+export interface InnovationCard {
+  id: string;
+  title: string;
+  time: string;
+  date: string;
+  image: string;
+  imageAlt: string;
+  imagePosition: 'top' | 'bottom';
+  isHighlighted?: boolean;
+  link: string;
+  ctaText: string;
+}
+
+export interface InnovationInPackagingData {
+  cards: InnovationCard[];
+  exploreMoreLink: string;
+}
+
 export interface HomepageData {
   hero: Hero;
   approach: ApproachData;
@@ -170,6 +188,7 @@ export interface HomepageData {
   latestInsights: LatestInsightsData;
   productSustainability: ProductSustainabilityData;
   workInSustainability: WorkInSustainabilityData;
+  innovationInPackaging: InnovationInPackagingData;
   faq: FAQData;
   services: Service[];
   products: Product[];
@@ -526,6 +545,71 @@ export async function getHomepageData(): Promise<HomepageData> {
           id: '6',
           question: 'What support do you provide for regulatory compliance?',
           answer: 'We provide extensive support for regulatory compliance, including documentation for FDA, EU, and other international standards. Our team assists with validation protocols, quality documentation, and regulatory submissions. We stay updated with the latest regulations and ensure our systems meet all applicable food safety and packaging standards worldwide.',
+        },
+      ],
+    },
+    innovationInPackaging: {
+      exploreMoreLink: '/innovation',
+      cards: [
+        {
+          id: '1',
+          title: 'Del envase al mundo digital: transformando la conexión con el consumidor a través de One Pack One Code',
+          time: '10:00 AM',
+          date: 'January 21, 2026',
+          image: '/banner-slider1.jpg', // Replace with actual innovation image
+          imageAlt: 'Industrial facility with recycling machinery',
+          imagePosition: 'top',
+          isHighlighted: false,
+          link: '/innovation/one-pack-one-code',
+          ctaText: 'Learn More',
+        },
+        {
+          id: '2',
+          title: 'Del envase al mundo digital: transformando la conexión con el consumidor a través de One Pack One Code',
+          time: '10:00 AM',
+          date: 'January 21, 2026',
+          image: '/banner-slider2.jpg', // Replace with actual innovation image
+          imageAlt: 'Milk cartons with blue patterns',
+          imagePosition: 'bottom',
+          isHighlighted: true,
+          link: '/innovation/digital-packaging',
+          ctaText: 'Learn More',
+        },
+        {
+          id: '3',
+          title: 'Del envase al mundo digital: transformando la conexión con el consumidor a través de One Pack One Code',
+          time: '10:00 AM',
+          date: 'January 21, 2026',
+          image: '/banner-slider3.jpg', // Replace with actual innovation image
+          imageAlt: 'Bottling line in factory',
+          imagePosition: 'top',
+          isHighlighted: false,
+          link: '/innovation/consumer-connection',
+          ctaText: 'Learn More',
+        },
+        {
+          id: '4',
+          title: 'Sustainable Packaging Solutions for the Future',
+          time: '2:00 PM',
+          date: 'February 15, 2026',
+          image: '/banner-slider4.jpg',
+          imageAlt: 'Sustainable packaging solutions',
+          imagePosition: 'top',
+          isHighlighted: false,
+          link: '/innovation/sustainable-solutions',
+          ctaText: 'Learn More',
+        },
+        {
+          id: '5',
+          title: 'Smart Packaging Technology Revolution',
+          time: '11:30 AM',
+          date: 'March 10, 2026',
+          image: '/banner-slider5.jpg',
+          imageAlt: 'Smart packaging technology',
+          imagePosition: 'bottom',
+          isHighlighted: true,
+          link: '/innovation/smart-packaging',
+          ctaText: 'Learn More',
         },
       ],
     },
