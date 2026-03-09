@@ -138,6 +138,20 @@ export interface ProductSustainabilityData {
   products: SustainabilityProductCard[];
 }
 
+export interface SustainabilityWorkCard {
+  id: string;
+  title: string;
+  description: string;
+  icon: 'A+' | 'star' | 'checkmark';
+  iconShape: 'square' | 'circle' | 'shield';
+  link: string;
+  ctaText: string;
+}
+
+export interface WorkInSustainabilityData {
+  cards: SustainabilityWorkCard[];
+}
+
 export interface HomepageData {
   hero: Hero;
   approach: ApproachData;
@@ -145,6 +159,7 @@ export interface HomepageData {
   commercialServices: CommercialServicesData;
   latestInsights: LatestInsightsData;
   productSustainability: ProductSustainabilityData;
+  workInSustainability: WorkInSustainabilityData;
   services: Service[];
   products: Product[];
   testimonials: Testimonial[];
@@ -417,6 +432,55 @@ export async function getHomepageData(): Promise<HomepageData> {
           imageAlt: 'GreenWrap - Biodegradable wrapping solution',
           link: '/products/greenwrap',
           ctaText: 'Read More',
+        },
+      ],
+    },
+    workInSustainability: {
+      cards: [
+        {
+          id: '1',
+          title: 'CDP A Grade',
+          description: 'Recognized by CDP for leadership in environmental transparency and climate action across our global operations.',
+          icon: 'A+',
+          iconShape: 'square',
+          link: '/sustainability/cdp-a-grade',
+          ctaText: 'Learn More',
+        },
+        {
+          id: '2',
+          title: 'LEED Platinum',
+          description: 'Our manufacturing facilities achieve LEED Platinum certification — the highest standard in sustainable building design.',
+          icon: 'star',
+          iconShape: 'circle',
+          link: '/sustainability/leed-platinum',
+          ctaText: 'Learn More',
+        },
+        {
+          id: '3',
+          title: 'Our Commitment',
+          description: 'Active partnerships with environmental NGOs to drive circular economy initiatives and reduce packaging waste globally.',
+          icon: 'checkmark',
+          iconShape: 'shield',
+          link: '/sustainability/our-commitment',
+          ctaText: 'Learn More',
+        },
+        {
+          id: '4',
+          title: 'Carbon Neutral',
+          description: 'Achieving carbon neutrality across all operations through renewable energy and carbon offset programs.',
+          icon: 'checkmark',
+          iconShape: 'circle',
+          link: '/sustainability/carbon-neutral',
+          ctaText: 'Learn More',
+        },
+        {
+          id: '5',
+          title: 'Zero Waste',
+          description: 'Implementing zero-waste initiatives at all facilities to minimize environmental impact and maximize resource efficiency.',
+          icon: 'star',
+          iconShape: 'square',
+          link: '/sustainability/zero-waste',
+          ctaText: 'Learn More',
         },
       ],
     },
