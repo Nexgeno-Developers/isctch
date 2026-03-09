@@ -17,9 +17,17 @@ export default async function Footer() {
           <div className="lg:col-span-1">
             {/* Logo */}
             <Link href={footerData.logo.href} className="block mb-4">
-              <h2 className="text-2xl md:text-3xl font-bold text-white">
-                {footerData.logo.text}
-              </h2>
+              {footerData.logo.image ? (
+                <img
+                  src={footerData.logo.image}
+                  alt={footerData.logo.text || 'Logo'}
+                  className="h-8 md:h-12 w-auto"
+                />
+              ) : (
+                <h2 className="text-2xl md:text-3xl font-bold text-white">
+                  {footerData.logo.text}
+                </h2>
+              )}
             </Link>
 
             {/* Description */}
