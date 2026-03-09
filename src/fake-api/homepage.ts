@@ -201,6 +201,14 @@ export interface CallToActionData {
   ctaLink: string;
 }
 
+export interface NewsletterSubscriptionData {
+  headline: string;
+  subtitle: string;
+  placeholder: string;
+  buttonText: string;
+  backgroundImage: string;
+}
+
 export interface HomepageData {
   hero: Hero;
   approach: ApproachData;
@@ -212,6 +220,7 @@ export interface HomepageData {
   innovationInPackaging: InnovationInPackagingData;
   latestPressRelease: LatestPressReleaseData;
   callToAction: CallToActionData;
+  newsletterSubscription: NewsletterSubscriptionData;
   faq: FAQData;
   services: Service[];
   products: Product[];
@@ -686,6 +695,13 @@ export async function getHomepageData(): Promise<HomepageData> {
       description: 'Our engineering team is ready to walk you through any technical details.',
       ctaText: 'TALK TO AN ENGINEER',
       ctaLink: '/contact',
+    },
+    newsletterSubscription: {
+      headline: 'Stay ahead in aseptic engineering.',
+      subtitle: 'Get the latest insights delivered to your inbox.',
+      placeholder: 'Enter your email',
+      buttonText: 'SUBSCRIBE',
+      backgroundImage: '/newsletter-bg.jpg',
     },
     seo: {
       meta_title: 'Lamipak - Building the Future with Innovative Solutions1',
