@@ -324,7 +324,7 @@ export async function getHomepageData(): Promise<HomepageData> {
       title: 'We engineer the future of',
       titleHighlight: 'aseptic packaging.',
       subtitle: 'Answer three questions and discover your optimal packaging system.',
-      image: '/our-approch-image1.webp',
+      image: '/approcah_image.jpg',
       imageAlt: 'Professional examining aseptic packaging in laboratory',
       questions: [
         {
@@ -365,7 +365,7 @@ export async function getHomepageData(): Promise<HomepageData> {
       ctaLink: '/solutions',
     },
     videoBanner: {
-      title: 'Innovation in Aseptic Packaging',
+      title: 'Innovation in aseptic packaging',
       videoUrl: '/video2.mp4', // or .gif for GIF files
       ctaText: 'View how we help global brands',
       ctaLink: '/about',

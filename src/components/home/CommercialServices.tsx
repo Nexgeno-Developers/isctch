@@ -14,7 +14,7 @@ export default async function CommercialServices() {
   const data = homepageData.commercialServices;
 
   return (
-    <section className="py-16 md:py-24 bg-white">
+    <section className="pt-16 md:pt-24 bg-gray-50">
       <div className="container mx-auto px-4">
         {/* Section Title */}
         <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-center mb-12 md:mb-16">
@@ -23,7 +23,7 @@ export default async function CommercialServices() {
         </h2>
 
         {/* Service Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 lg:gap-12 max-w-7xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 lg:gap-12">
           {data.cards.map((card) => (
             <ServiceCard key={card.id} card={card} />
           ))}

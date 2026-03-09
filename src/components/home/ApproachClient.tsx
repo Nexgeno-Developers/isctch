@@ -57,7 +57,7 @@ export default function ApproachClient({ data }: ApproachClientProps) {
             </div>
 
             {/* Title */}
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 leading-16">
               <span className="text-gray-900">{data.title}</span> 
              
                <span className="text-[#009FE8]"> {data.titleHighlight}</span>
@@ -104,7 +104,7 @@ export default function ApproachClient({ data }: ApproachClientProps) {
             {currentQuestion && (
               <div className="mb-8">
                 <h3 className="text-xl font-semibold text-gray-900 mb-4">
-                  {currentQuestionIndex + 1}. {currentQuestion.question}{' '}
+                  Question {currentQuestionIndex + 1}: {currentQuestion.question}{' '}
                   <span className="text-sm font-thin">Question {currentQuestionIndex + 1} of {data.questions.length}</span>
                 </h3>
                 <div className="flex flex-wrap gap-3">

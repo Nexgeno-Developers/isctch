@@ -74,32 +74,32 @@ export async function getHeaderData(): Promise<HeaderData> {
     navigation: [
       {
         id: '1',
-        label: 'SOLUTIONS',
+        label: 'Solutions',
         href: '/solutions',
       },
       {
         id: '2',
-        label: 'INDUSTRIES',
+        label: 'Industries',
         href: '/industries',
       },
       {
         id: '3',
-        label: 'SUSTAINABILITY',
+        label: 'Sustainability',
         href: '/sustainability',
       },
       {
         id: '4',
-        label: 'INSIGHTS',
+        label: 'Insights',
         href: '/insights',
       },
       {
         id: '5',
-        label: 'ABOUT',
+        label: 'About Us',
         href: '/about',
       },
     ],
     cta: {
-      text: 'CONTACT',
+      text: 'Contact Us',
       href: '/contact',
     },
   };

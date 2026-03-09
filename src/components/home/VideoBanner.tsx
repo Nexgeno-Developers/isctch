@@ -115,7 +115,7 @@ export default async function VideoBanner() {
         <div className="mt-auto pb-10 md:pb-14">
           <Link
             href={data.ctaLink}
-            className="inline-flex items-center text-white text-lg md:text-xl font-medium hover:text-[#009FE8] transition-colors group"
+            className="inline-flex items-center text-white text-lg md:text-[32px] font-medium hover:text-[#009FE8] transition-colors group"
           >
             {data.ctaText}
             <svg

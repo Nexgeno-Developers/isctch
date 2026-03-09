@@ -16,7 +16,7 @@ export default function NavigationDropdown({ item }: NavigationDropdownProps) {
     return (
       <Link
         href={item.href}
-        className="text-white hover:text-[#00d4ff] transition-colors font-medium uppercase text-sm tracking-wider relative group"
+        className="text-white hover:text-[#00d4ff] transition-colors font-[600]  uppercase text-sm tracking-wider relative group"
       >
         {item.label}
         <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#00d4ff] transition-all group-hover:w-full" />
@@ -28,7 +28,7 @@ export default function NavigationDropdown({ item }: NavigationDropdownProps) {
     <div className="relative group">
       <Link
         href={item.href}
-        className="text-white hover:text-[#00d4ff] transition-colors font-medium uppercase text-sm tracking-wider flex items-center space-x-1 relative py-2"
+        className="text-white hover:text-[#00d4ff] transition-colors font-medium text-sm tracking-wider flex items-center space-x-1 relative py-2"
       >
         <span>{item.label}</span>
         <svg
