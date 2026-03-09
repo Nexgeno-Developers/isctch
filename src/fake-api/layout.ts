@@ -44,14 +44,15 @@ export interface SocialLink {
 }
 
 export interface FooterData {
+  logo: {
+    text: string;
+    image?: string;
+    href: string;
+  };
+  description: string;
   columns: FooterColumn[];
   socialLinks?: SocialLink[];
   copyright: string;
-  additionalLinks?: Array<{
-    id: string;
-    label: string;
-    href: string;
-  }>;
 }
 
 /**
@@ -115,60 +116,79 @@ export async function getFooterData(): Promise<FooterData> {
 
   // Mock data - in real implementation, this would fetch from API
   return {
+    logo: {
+      text: 'LAMIPAK',
+      image: '/logo.png',
+      href: '/',
+    },
+    description: 'Engineering the future of aseptic liquid packaging. Precision, sterility, and scale built for global leaders.',
     columns: [
       {
         id: '1',
-        title: 'Company',
+        title: 'Quick Links',
         links: [
-          { id: '1', label: 'About Us', href: '/about' },
-          { id: '2', label: 'Services', href: '/services' },
-          { id: '3', label: 'Contact', href: '/contact' },
+          { id: '1', label: 'Solutions', href: '/solutions' },
+          { id: '2', label: 'Industries', href: '/industries' },
+          { id: '3', label: 'Sustainability', href: '/sustainability' },
+          { id: '4', label: 'About', href: '/about' },
         ],
       },
       {
         id: '2',
-        title: 'Resources',
+        title: 'Legal',
         links: [
-          { id: '4', label: 'Documentation', href: '/docs' },
-          { id: '5', label: 'Support', href: '/support' },
-          { id: '6', label: 'Blog', href: '/blog' },
+          { id: '5', label: 'Terms & Condition', href: '/terms' },
+          { id: '6', label: 'Privacy Policy', href: '/privacy' },
+          { id: '7', label: 'Downloads', href: '/downloads' },
+          { id: '8', label: 'Blogs', href: '/blog' },
         ],
       },
       {
         id: '3',
-        title: 'Legal',
+        title: 'Connect',
         links: [
-          { id: '7', label: 'Privacy Policy', href: '/privacy' },
-          { id: '8', label: 'Terms of Service', href: '/terms' },
-          { id: '9', label: 'Cookie Policy', href: '/cookies' },
+          { id: '9', label: 'Insights', href: '/insights' },
+          { id: '10', label: 'Careers', href: '/careers' },
+          { id: '11', label: 'Contact', href: '/contact' },
+        ],
+      },
+      {
+        id: '4',
+        title: 'Contact',
+        links: [
+          { id: '12', label: 'Standard Products', href: '/products/standard' },
+          { id: '13', label: 'LamiSleeve', href: '/products/lamisleeve' },
+          { id: '14', label: 'LamiPure', href: '/products/lamipure' },
+          { id: '15', label: 'Caps ETC', href: '/products/caps' },
         ],
       },
     ],
     socialLinks: [
       {
         id: '1',
-        platform: 'Facebook',
-        href: 'https://facebook.com',
+        platform: 'Twitter',
+        href: 'https://twitter.com',
+        icon: 'twitter',
       },
       {
         id: '2',
-        platform: 'Twitter',
-        href: 'https://twitter.com',
+        platform: 'Facebook',
+        href: 'https://facebook.com',
+        icon: 'facebook',
       },
       {
         id: '3',
-        platform: 'LinkedIn',
-        href: 'https://linkedin.com',
+        platform: 'Instagram',
+        href: 'https://instagram.com',
+        icon: 'instagram',
       },
       {
         id: '4',
-        platform: 'Instagram',
-        href: 'https://instagram.com',
+        platform: 'YouTube',
+        href: 'https://youtube.com',
+        icon: 'youtube',
       },
     ],
-    copyright: `© ${new Date().getFullYear()} Lamipak. All rights reserved.`,
-    additionalLinks: [
-      { id: '1', label: 'Sitemap', href: '/sitemap' },
-    ],
+    copyright: `© ${new Date().getFullYear()} Lamipak. All Rights Reserved.`,
   };
 }
