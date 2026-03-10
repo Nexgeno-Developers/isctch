@@ -86,6 +86,11 @@ export interface ProductData {
     imageAlt: string;
     slug?: string; // Link to product detail page if it's a product
   }>;
+  technicalConsultation?: {
+    question: string;
+    ctaText: string;
+    ctaLink: string;
+  };
   seo: ProductSEO;
 }
 
@@ -151,6 +156,11 @@ const products: ProductData[] = [
       <p>Ideal for dairy products, plant-based beverages, liquid foods, and nutritional drinks.</p>
     `,
     relatedProducts: ['lamipure-sterile-packaging', 'caps-etc-closure-solutions'],
+    technicalConsultation: {
+      question: 'NEED ENGINEERING GUIDANCE FOR YOUR PRODUCTION LINE?',
+      ctaText: 'REQUEST TECHNICAL CONSULTATION',
+      ctaLink: '/contact',
+    },
     seo: {
       meta_title: 'LamiSleeve Aseptic Packaging | Lamipak - Premium Packaging Solutions',
       meta_description: 'Discover LamiSleeve aseptic packaging - advanced barrier technology for extended shelf life. Perfect for dairy, beverages, and liquid foods.',
@@ -206,6 +216,11 @@ const products: ProductData[] = [
       'Consumer confidence',
     ],
     relatedProducts: ['lamisleeve-aseptic-packaging', 'caps-etc-closure-solutions'],
+    technicalConsultation: {
+      question: 'NEED ENGINEERING GUIDANCE FOR YOUR PRODUCTION LINE?',
+      ctaText: 'REQUEST TECHNICAL CONSULTATION',
+      ctaLink: '/contact',
+    },
     seo: {
       meta_title: 'LamiPure Sterile Packaging | Lamipak - Pharmaceutical Grade Solutions',
       meta_description: 'Ultra-clean sterile packaging for pharmaceutical and sensitive liquid products. FDA approved with Class A sterility standards.',
@@ -262,6 +277,11 @@ const products: ProductData[] = [
       'Consumer confidence',
     ],
     relatedProducts: ['lamisleeve-aseptic-packaging', 'caps-etc-closure-solutions'],
+    technicalConsultation: {
+      question: 'NEED ENGINEERING GUIDANCE FOR YOUR PRODUCTION LINE?',
+      ctaText: 'REQUEST TECHNICAL CONSULTATION',
+      ctaLink: '/contact',
+    },
     seo: {
       meta_title: 'LamiPure Sterile Packaging | Lamipak - Pharmaceutical Grade Solutions',
       meta_description: 'Ultra-clean sterile packaging for pharmaceutical and sensitive liquid products. FDA approved with Class A sterility standards.',
@@ -317,6 +337,11 @@ const products: ProductData[] = [
       'Extended product freshness',
     ],
     relatedProducts: ['lamisleeve-aseptic-packaging', 'lamipure-sterile-packaging'],
+    technicalConsultation: {
+      question: 'NEED ENGINEERING GUIDANCE FOR YOUR PRODUCTION LINE?',
+      ctaText: 'REQUEST TECHNICAL CONSULTATION',
+      ctaLink: '/contact',
+    },
     seo: {
       meta_title: 'Caps ETC Closure Solutions | Lamipak - Secure Packaging Closures',
       meta_description: 'Innovative closure systems with tamper-evident features. Screw caps, snap caps, and pull-tab solutions for all packaging needs.',
@@ -434,6 +459,11 @@ const products: ProductData[] = [
       <p>Ideal for dairy products, plant-based beverages, liquid foods, and nutritional drinks requiring high-speed production lines.</p>
     `,
     relatedProducts: ['lamisleeve-aseptic-packaging', 'lamipure-sterile-packaging'],
+    technicalConsultation: {
+      question: 'NEED ENGINEERING GUIDANCE FOR YOUR PRODUCTION LINE?',
+      ctaText: 'REQUEST TECHNICAL CONSULTATION',
+      ctaLink: '/contact',
+    },
     accessories: [
       {
         id: '1',

@@ -9,6 +9,7 @@ import ProductSpecifications from '@/components/products/ProductSpecifications';
 import ProductFeatures from '@/components/products/ProductFeatures';
 import ProductAccessories from '@/components/products/ProductAccessories';
 import SimilarProducts from '@/components/products/SimilarProducts';
+import TechnicalConsultationCTA from '@/components/products/TechnicalConsultationCTA';
 
 interface ProductPageProps {
   params: Promise<{
@@ -223,6 +224,9 @@ export default async function ProductPage({ params }: ProductPageProps) {
 
         {/* Similar Products Section */}
         <SimilarProducts currentProductSlug={productData.slug} />
+
+        {/* Technical Consultation CTA Section */}
+        <TechnicalConsultationCTA data={productData.technicalConsultation} />
 
         {/* Content Section */}
         <section className="container mx-auto px-4 py-12 md:py-16">
