@@ -8,6 +8,7 @@ import Breadcrumbs from '@/components/common/Breadcrumbs';
 import ProductSpecifications from '@/components/products/ProductSpecifications';
 import ProductFeatures from '@/components/products/ProductFeatures';
 import ProductAccessories from '@/components/products/ProductAccessories';
+import SimilarProducts from '@/components/products/SimilarProducts';
 
 interface ProductPageProps {
   params: Promise<{
@@ -220,6 +221,11 @@ export default async function ProductPage({ params }: ProductPageProps) {
           <ProductAccessories accessories={productData.accessories} />
         )}
 
+        {/* Similar Products Section */}
+        {productData.relatedProducts && productData.relatedProducts.length > 0 && (
+          <SimilarProducts relatedProductSlugs={productData.relatedProducts} />
+        )}
+
         {/* Content Section */}
         <section className="container mx-auto px-4 py-12 md:py-16">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 md:gap-12">
@@ -342,26 +348,6 @@ export default async function ProductPage({ params }: ProductPageProps) {
                 </div>
               )}
 
-              {/* Related Products */}
-              {productData.relatedProducts && productData.relatedProducts.length > 0 && (
-                <div className="bg-white rounded-[25px] p-6 md:p-8 shadow-sm">
-                  <h3 className="text-2xl font-bold text-gray-900 mb-6">
-                    Related Products
-                  </h3>
-                  <ul className="space-y-4">
-                    {productData.relatedProducts.map((relatedSlug) => (
-                      <li key={relatedSlug}>
-                        <Link
-                          href={`/products/${relatedSlug}`}
-                          className="text-[#009FE8] hover:text-[#0077B6] transition-colors font-medium"
-                        >
-                          View Product →
-                        </Link>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              )}
             </div>
           </div>
         </section>
