@@ -50,6 +50,7 @@ export interface ProductData {
   technicalSheetText?: string;
   productImage3D?: string; // 3D product visualization image
   applicationImages?: Record<string, string>; // Images for each application (e.g., { 'DAIRY': '/image1.jpg', 'JUICE': '/image2.jpg' })
+  productVideo?: string; // Product video URL (e.g., '/product-dt-video-new.gif')
   sizes?: string[]; // Available sizes (e.g., ['200ml', '250ml', '500ml', '1000ml'])
   quickSpecifications?: Array<{
     label: string;
@@ -288,6 +289,7 @@ const products: ProductData[] = [
       'PLANT-BASED': '/product_image_3.jpg',
       'LIQUID FOODS': '/product_image_1.jpg',
     },
+    productVideo: '/product-dt-video-new.gif',
     sizes: ['200ml', '250ml', '500ml', '1000ml'],
     quickSpecifications: [
       { label: 'Filling Speed', value: 'Up to 24,000 packs/hour' },

@@ -182,6 +182,32 @@ export default async function ProductPage({ params }: ProductPageProps) {
         {/* Product Specifications Section */}
         <ProductSpecifications product={productData} />
 
+        {/* Product Video Section */}
+        {productData.productVideo && (
+          <section className="bg-white py-12 md:py-16">
+            <div className="container mx-auto px-4">
+              <div className="relative w-full aspect-video rounded-[25px] overflow-hidden bg-gray-100">
+                {productData.productVideo.endsWith('.gif') ? (
+                  <img
+                    src={productData.productVideo}
+                    alt={`${productData.title} video`}
+                    className="w-full h-full object-cover"
+                  />
+                ) : (
+                  <video
+                    src={productData.productVideo}
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    className="w-full h-full object-cover"
+                  />
+                )}
+              </div>
+            </div>
+          </section>
+        )}
+
         {/* Content Section */}
         <section className="container mx-auto px-4 py-12 md:py-16">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 md:gap-12">
