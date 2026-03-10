@@ -24,6 +24,7 @@ export interface Hero {
     href: string;
     slideIndex: number; // Index of the slide this category corresponds to
   }>;
+  videoUrl?: string; // Optional video URL for hero section
 }
 
 export interface Service {
