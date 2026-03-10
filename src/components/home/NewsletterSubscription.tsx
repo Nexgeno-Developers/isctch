@@ -17,15 +17,15 @@ export default async function NewsletterSubscription() {
       <div className="absolute inset-0">
         <div className="relative w-full h-full">
           <Image
-            src={data.backgroundImage}
-            alt="Aseptic engineering background"
+            src="/newsletter_bg.png"
+            alt="Newsletter background"
             fill
             className="object-cover"
             sizes="100vw"
             priority
           />
           {/* Dark Blue Overlay */}
-          <div className="absolute inset-0 bg-[#0E233C] opacity-90" />
+          <div className="absolute inset-0 bg-[#0E233CE5]" />
           {/* Blur Effect */}
           <div className="absolute inset-0 backdrop-blur-sm" />
         </div>
@@ -33,7 +33,7 @@ export default async function NewsletterSubscription() {
 
       {/* Content */}
       <div className="relative z-10 container mx-auto px-4">
-        <div className="max-w-3xl mx-auto text-center">
+        <div className=" mx-auto text-center">
           {/* Headline */}
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4">
             {data.headline}
