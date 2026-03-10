@@ -79,6 +79,13 @@ export interface ProductData {
   benefits?: string[];
   content?: string; // HTML content
   relatedProducts?: string[]; // Array of product slugs
+  accessories?: Array<{
+    id: string;
+    name: string;
+    image: string;
+    imageAlt: string;
+    slug?: string; // Link to product detail page if it's a product
+  }>;
   seo: ProductSEO;
 }
 
@@ -371,6 +378,43 @@ const products: ProductData[] = [
       <p>Ideal for dairy products, plant-based beverages, liquid foods, and nutritional drinks requiring high-speed production lines.</p>
     `,
     relatedProducts: ['lamisleeve-aseptic-packaging', 'lamipure-sterile-packaging'],
+    accessories: [
+      {
+        id: '1',
+        name: 'Telescopic Straw',
+        image: '/product_image_1.jpg',
+        imageAlt: 'Telescopic Straw accessory',
+        slug: 'telescopic-straw',
+      },
+      {
+        id: '2',
+        name: 'U-Shape Straw',
+        image: '/product_image_2.jpg',
+        imageAlt: 'U-Shape Straw accessory',
+        slug: 'u-shape-straw',
+      },
+      {
+        id: '3',
+        name: 'Telescopic Straw',
+        image: '/product_image_1.jpg',
+        imageAlt: 'Telescopic Straw accessory',
+        slug: 'telescopic-straw',
+      },
+      {
+        id: '4',
+        name: 'Telescopic Straw',
+        image: '/product_image_1.jpg',
+        imageAlt: 'Telescopic Straw accessory',
+        slug: 'telescopic-straw',
+      },
+      {
+        id: '5',
+        name: 'Telescopic Straw',
+        image: '/product_image_1.jpg',
+        imageAlt: 'Telescopic Straw accessory',
+        slug: 'telescopic-straw',
+      },
+    ],
     seo: {
       meta_title: 'Brick Slim Aseptic Carton | Lamipak - High-Speed Packaging Solutions',
       meta_description: 'Discover Brick Slim - precision-engineered aseptic carton for high-speed filling and extended shelf life. Perfect for modern production environments.',
