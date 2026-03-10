@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import { fetchHomepageData } from '@/lib/api';
 import NewsletterForm from './NewsletterForm';
 
@@ -12,24 +11,19 @@ export default async function NewsletterSubscription() {
   const data = homepageData.newsletterSubscription;
 
   return (
-    <section className="relative py-16 md:py-24 overflow-hidden">
-      {/* Background Image with Overlay */}
-      <div className="absolute inset-0">
-        <div className="relative w-full h-full">
-          <Image
-            src="/newsletter_bg.png"
-            alt="Newsletter background"
-            fill
-            className="object-cover"
-            sizes="100vw"
-            priority
-          />
-          {/* Dark Blue Overlay */}
-          <div className="absolute inset-0 bg-[#0E233CE5]" />
-          {/* Blur Effect */}
-          <div className="absolute inset-0 backdrop-blur-sm" />
-        </div>
-      </div>
+    <section 
+      className="relative py-16 md:py-24 overflow-hidden"
+      style={{
+        backgroundImage: 'url(/newsletter_bg.png)',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat'
+      }}
+    >
+      {/* Dark Blue Overlay */}
+      <div className="absolute inset-0 bg-[#0E233CE5]" />
+      {/* Blur Effect */}
+      <div className="absolute inset-0 backdrop-blur-sm" />
 
       {/* Content */}
       <div className="relative z-10 container mx-auto px-4">
