@@ -21,17 +21,17 @@ export default async function Footer() {
                 <img
                   src={footerData.logo.image}
                   alt={footerData.logo.text || 'Logo'}
-                  className="h-8 md:h-12 w-auto"
+                  className="w-[140px] w-auto"
                 />
               ) : (
-                <h2 className="text-2xl md:text-3xl font-bold text-white">
+                <h2 className="text-2xl md:text-3xl font-normal text-white">
                   {footerData.logo.text}
                 </h2>
               )}
             </Link>
 
             {/* Description */}
-            <p className="text-white text-sm md:text-base mb-6 leading-relaxed">
+            <p className="text-white text-sm md:text-base font-thin mb-6 leading-relaxed">
               {footerData.description}
             </p>
 
@@ -84,7 +84,7 @@ export default async function Footer() {
                   <li key={link.id}>
                     <Link
                       href={link.href}
-                      className="text-white hover:opacity-80 transition-opacity text-sm md:text-base"
+                      className="font-thin text-white hover:opacity-80 transition-opacity text-sm md:text-base"
                     >
                       {link.label}
                     </Link>

@@ -118,7 +118,7 @@ export async function getFooterData(): Promise<FooterData> {
   return {
     logo: {
       text: 'LAMIPAK',
-      image: '/logo.png',
+      image: '/footer-logo.png',
       href: '/',
     },
     description: 'Engineering the future of aseptic liquid packaging. Precision, sterility, and scale built for global leaders.',
