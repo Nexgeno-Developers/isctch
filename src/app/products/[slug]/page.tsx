@@ -4,6 +4,7 @@ import Link from 'next/link';
 import type { Metadata } from 'next';
 import { fetchProductData, getAllProductSlugs } from '@/lib/api';
 import { getCanonicalUrl } from '@/config/site';
+import Breadcrumbs from '@/components/common/Breadcrumbs';
 
 interface ProductPageProps {
   params: Promise<{
@@ -57,7 +58,7 @@ export async function generateMetadata(
       type: 'website',
     },
     twitter: {
-      card: productData.seo.twitter_card || 'summary_large_image',
+      card: (productData.seo.twitter_card as 'summary_large_image' | 'summary' | 'player' | 'app') || 'summary_large_image',
       title: productData.seo.twitter_title || productData.seo.meta_title,
       description: productData.seo.twitter_description || productData.seo.meta_description,
       images: productData.seo.twitter_image ? [productData.seo.twitter_image] : [productData.image],
@@ -161,6 +162,19 @@ export default async function ProductPage({ params }: ProductPageProps) {
                 )}
               </div>
             </div>
+          </div>
+        </section>
+
+        {/* Breadcrumbs */}
+        <section className="bg-white border-b border-gray-200">
+          <div className="container mx-auto px-4 py-4">
+            <Breadcrumbs
+              items={[
+                { label: 'Products', href: '/products' },
+                ...(productData.category ? [{ label: productData.category }] : []),
+                { label: productData.title },
+              ]}
+            />
           </div>
         </section>
 
