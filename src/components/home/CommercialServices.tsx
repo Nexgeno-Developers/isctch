@@ -14,7 +14,7 @@ export default async function CommercialServices() {
   const data = homepageData.commercialServices;
 
   return (
-    <section className="pt-16 md:pt-24 bg-gray-50">
+    <section className="bg-[#f8f8f8] pt-16 md:pt-24">
       <div className="container mx-auto px-4">
         {/* Section Title */}
         <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-center mb-8 md:mb-12">
@@ -38,7 +38,7 @@ export default async function CommercialServices() {
  */
 function ServiceCard({ card }: { card: CommercialServiceCard }) {
   return (
-    <div className="bg-white rounded-[25px] shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
+    <div className="bg-white rounded-[25px]  overflow-hidden transition-shadow duration-300">
       {/* Image */}
       <div className="relative h-64 md:h-80 overflow-hidden rounded-t-[25px]">
         <Image

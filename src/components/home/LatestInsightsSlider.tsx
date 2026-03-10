@@ -140,7 +140,7 @@ function InsightCard({ card }: { card: InsightCard }) {
       href={card.link}
       className="block group h-full"
     >
-      <div className="rounded-[50px] overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300 h-full bg-[#009FE8] p-[15px]">
+      <div className="rounded-[50px] overflow-hidden transition-shadow duration-300 h-full bg-[#009FE8] p-[15px]">
         {/* Image */}
         <div className="relative h-64 md:h-72 overflow-hidden rounded-t-[50px]">
           <Image

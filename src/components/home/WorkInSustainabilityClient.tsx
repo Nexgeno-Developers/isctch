@@ -36,7 +36,7 @@ export default function WorkInSustainabilityClient({ data }: WorkInSustainabilit
  */
 function WorkCard({ card }: { card: SustainabilityWorkCard }) {
   return (
-    <div className="bg-gray-100 rounded-[50px] px-6 py-[60px] md:px-8 md:py-[80px] hover:shadow-lg transition-shadow duration-300 h-full">
+    <div className="bg-[#EDF0F1] rounded-[50px] px-6 py-[60px] md:px-8 md:py-[80px] h-full">
       {/* Icon */}
       <div className="mb-6">
         <div className={`w-16 h-16 ${card.iconShape === 'square' ? 'rounded-lg' : card.iconShape === 'circle' ? 'rounded-full' : 'rounded-t-lg rounded-b-sm'} bg-[#009FE8] flex items-center justify-center`}>

@@ -41,7 +41,7 @@ export default async function ProductSustainabilitySeries() {
  */
 function ProductCard({ product }: { product: SustainabilityProductCard }) {
   return (
-    <div className="bg-white rounded-[50px] overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 h-full p-[15px]">
+    <div className="bg-white rounded-[50px] overflow-hidden transition-shadow duration-300 h-full p-[15px]">
       {/* Image */}
       <div className="relative h-64 md:h-72 overflow-hidden rounded-[50px]">
         <Image

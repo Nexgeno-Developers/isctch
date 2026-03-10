@@ -16,10 +16,10 @@ export default async function LatestPressRelease() {
   const visibleCards = data.cards.slice(0, cardsPerView);
 
   return (
-    <section className="py-16 md:py-24 bg-gray-50">
+    <section className="pb-16 md:pb-24 bg-gray-50">
       <div className="container mx-auto px-4">
         {/* Header */}
-        <div className="mb-12 md:mb-16">
+        <div className="mb-8 md:mb-12">
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold">
             <span className="text-gray-900">Latest</span>{' '}
             <span className="text-[#009FE8]">Press Release</span>
@@ -42,7 +42,7 @@ export default async function LatestPressRelease() {
  */
 function PressReleaseCard({ card, imagePosition }: { card: PressReleaseCard; imagePosition: 'top' | 'bottom' }) {
   return (
-    <div className="bg-white rounded-[50px] overflow-hidden hover:shadow-lg transition-shadow duration-300 h-full flex flex-col">
+    <div className="bg-[#EDF0F1] rounded-[50px] overflow-hidden duration-300 h-full flex flex-col">
       {/* Image - Top Section (for 2nd card) */}
       {imagePosition === 'top' && (
         <div className="relative h-48 rounded-[50px] md:h-56 overflow-hidden">
@@ -57,16 +57,16 @@ function PressReleaseCard({ card, imagePosition }: { card: PressReleaseCard; ima
       )}
 
       {/* Content Section */}
-      <div className="p-4 md:p-6 flex-1 flex flex-col">
+      <div className="px-8 py-12 flex-1 flex flex-col">
         {/* Category */}
         <div className="mb-3">
-          <span className="text-sm md:text-base font-medium text-[#009FE8]">
+          <span className="text-sm md:text-[14px] font-[400] text-[#000]">
             {card.category}
           </span>
         </div>
 
         {/* Title */}
-        <h3 className="text-xl md:text-2xl font-bold mb-4 flex-1 text-gray-900">
+        <h3 className="text-xl md:text-2xl font-semibold mb-4 flex-1 text-gray-900">
           {card.title}
         </h3>
 

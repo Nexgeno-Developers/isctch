@@ -38,12 +38,12 @@ InnovationSliderInteractive.Cards = Cards;
  */
 function InnovationCard({ card }: { card: InnovationCard }) {
   const isHighlighted = card.isHighlighted || false;
-  const cardBgClass = isHighlighted ? 'bg-[#009FE8]' : 'bg-gray-100';
+  const cardBgClass = isHighlighted ? 'bg-[#009FE8]' : 'bg-[#EDF0F1]';
   const textColorClass = isHighlighted ? 'text-white' : 'text-gray-900';
   const linkColorClass = isHighlighted ? 'text-white' : 'text-[#009FE8]';
 
   return (
-    <div className={`${cardBgClass} rounded-[50px] overflow-hidden hover:shadow-lg transition-shadow duration-300 h-full flex flex-col p-[15px]`}>
+    <div className={`${cardBgClass} rounded-[50px] overflow-hidden transition-shadow duration-300 h-full flex flex-col p-[30px]`}>
       {/* Image - Position depends on card type */}
       {card.imagePosition === 'top' ? (
         <div className="relative h-48 md:h-56 overflow-hidden rounded-[50px]">
@@ -58,7 +58,7 @@ function InnovationCard({ card }: { card: InnovationCard }) {
       ) : null}
 
       {/* Content */}
-      <div className={`p-4 md:p-6 flex-1 flex flex-col ${card.imagePosition === 'bottom' ? 'order-1' : ''}`}>
+      <div className={`pt-8 pb-0 flex-1 flex flex-col ${card.imagePosition === 'bottom' ? 'order-1' : ''}`}>
         {/* Time and Date */}
         <div className={`flex items-center gap-4 mb-4 ${textColorClass}`}>
           <div className="flex items-center gap-2">
@@ -76,7 +76,7 @@ function InnovationCard({ card }: { card: InnovationCard }) {
         </div>
 
         {/* Title */}
-        <h3 className={`text-xl md:text-2xl font-bold mb-4 flex-1 ${textColorClass}`}>
+        <h3 className={`text-xl md:text-[24px] font-semibold mb-4 flex-1 ${textColorClass}`}>
           {card.title}
         </h3>
 
@@ -104,7 +104,7 @@ function InnovationCard({ card }: { card: InnovationCard }) {
 
       {/* Image - Bottom position */}
       {card.imagePosition === 'bottom' ? (
-        <div className="relative rounded-[50px] h-48 md:h-56 overflow-hidden order-2">
+        <div className="relative rounded-[50px] h-48 md:h-56 overflow-hidden order-2 mt-4">
           <Image
             src={card.image}
             alt={card.imageAlt}
