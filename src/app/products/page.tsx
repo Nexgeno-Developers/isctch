@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
-import { getAllProductSlugs, fetchProductData } from '@/lib/api';
+import { getAllProductSlugs, fetchProductData, getAllCategories } from '@/lib/api';
 import { getCanonicalUrl } from '@/config/site';
 
 /**
@@ -44,6 +44,9 @@ export default async function ProductsPage() {
   // Filter out any null products (shouldn't happen, but safety check)
   const validProducts = products.filter((product): product is NonNullable<typeof product> => product !== null);
 
+  // Fetch all categories
+  const categories = await getAllCategories();
+
   return (
     <main className="min-h-screen bg-gray-50">
       {/* Hero Section */}
@@ -59,6 +62,32 @@ export default async function ProductsPage() {
           </div>
         </div>
       </section>
+
+      {/* Category Filters */}
+      {categories.length > 0 && (
+        <section className="bg-gray-50 border-b border-gray-200">
+          <div className="container mx-auto px-4 py-8">
+            <div className="flex flex-wrap items-center gap-4">
+              <span className="text-gray-700 font-medium">Filter by Category:</span>
+              <Link
+                href="/products"
+                className="px-4 py-2 rounded-full border-2 border-[#009FE8] text-[#009FE8] hover:bg-[#009FE8] hover:text-white transition-colors font-medium"
+              >
+                All Products
+              </Link>
+              {categories.map((category) => (
+                <Link
+                  key={category.id}
+                  href={`/products/category/${category.slug}`}
+                  className="px-4 py-2 rounded-full border-2 border-gray-300 text-gray-700 hover:border-[#009FE8] hover:text-[#009FE8] transition-colors font-medium"
+                >
+                  {category.name}
+                </Link>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* Products Grid */}
       <section className="container mx-auto px-4 py-12 md:py-16">

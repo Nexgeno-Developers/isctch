@@ -71,6 +71,7 @@ export interface ProductData {
     imageAlt: string;
   }>;
   category?: string;
+  categorySlug?: string; // Category slug for URL routing
   specifications?: Array<{
     label: string;
     value: string;
@@ -122,6 +123,7 @@ const products: ProductData[] = [
       },
     ],
     category: 'Aseptic Packaging',
+    categorySlug: 'aseptic-packaging',
     sizes: ['250ml', '500ml', '750ml', '1000ml'],
     specifications: [
       { label: 'Material', value: 'Multi-layer barrier film' },
@@ -198,6 +200,7 @@ const products: ProductData[] = [
     technicalSheetUrl: '/technical-sheets/lamipure.pdf',
     technicalSheetText: 'DOWNLOAD TECHNICAL SHEET',
     category: 'Sterile Packaging',
+    categorySlug: 'sterile-packaging',
     sizes: ['100ml', '250ml', '500ml'],
     specifications: [
       { label: 'Sterility Level', value: 'Class A (ISO 14644)' },
@@ -260,6 +263,7 @@ const products: ProductData[] = [
     technicalSheetUrl: '/technical-sheets/lamipure.pdf',
     technicalSheetText: 'DOWNLOAD TECHNICAL SHEET',
     category: 'Sterile Packaging',
+    categorySlug: 'sterile-packaging',
     sizes: ['100ml', '250ml', '500ml'],
     specifications: [
       { label: 'Sterility Level', value: 'Class A (ISO 14644)' },
@@ -321,6 +325,7 @@ const products: ProductData[] = [
     technicalSheetUrl: '/technical-sheets/caps-etc.pdf',
     technicalSheetText: 'DOWNLOAD TECHNICAL SHEET',
     category: 'Closure Systems',
+    categorySlug: 'closure-systems',
     sizes: ['200ml', '250ml', '500ml', '1000ml'],
     specifications: [
       { label: 'Types', value: 'Screw cap, Snap cap, Pull-tab' },
@@ -434,6 +439,7 @@ const products: ProductData[] = [
     ],
     applications: ['DAIRY', 'JUICE', 'PLANT-BASED', 'LIQUID FOODS'],
     category: 'Aseptic Packaging',
+    categorySlug: 'aseptic-packaging',
     specifications: [
       { label: 'Material', value: 'Multi-layer aseptic carton' },
       { label: 'Capacity', value: '200ml - 1L' },
@@ -537,6 +543,156 @@ const products: ProductData[] = [
       },
     },
   },
+  {
+    id: '6',
+    slug: 'brick-base',
+    title: 'Brick Base',
+    description: 'Classic aseptic carton design with proven reliability for dairy and beverage applications. Ideal for standard production lines.',
+    shortDescription: 'Classic aseptic carton with proven reliability',
+    image: '/simimalr_product_1.jpg',
+    imageAlt: 'Brick Base Aseptic Carton',
+    heroBackgroundImage: '/banner-slider1.jpg',
+    technicalSheetUrl: '/technical-sheets/brick-base.pdf',
+    technicalSheetText: 'DOWNLOAD TECHNICAL SHEET',
+    category: 'Aseptic Packaging',
+    categorySlug: 'aseptic-packaging',
+    sizes: ['200ml', '250ml', '500ml', '1000ml'],
+    quickSpecifications: [
+      { label: 'Filling Speed', value: 'Up to 18,000 packs/hour' },
+      { label: 'Shelf Life', value: 'Up to 12 months' },
+      { label: 'Barrier Structure', value: 'Multi-layer composite' },
+      { label: 'Design', value: 'Classic brick shape' },
+    ],
+    compatibleWith: [
+      'Standard filling lines',
+      'Aseptic systems',
+      'Traditional production',
+    ],
+    applications: ['DAIRY', 'JUICE', 'BEVERAGES'],
+    seo: {
+      meta_title: 'Brick Base Aseptic Carton | Lamipak - Classic Packaging Solutions',
+      meta_description: 'Classic aseptic carton design with proven reliability for dairy and beverage applications. Ideal for standard production lines.',
+      canonical_url: '/products/brick-base',
+      og_title: 'Brick Base Aseptic Carton | Lamipak',
+      og_description: 'Classic aseptic carton with proven reliability',
+      og_image: '/product_image_1.jpg',
+      twitter_card: 'summary_large_image',
+      twitter_title: 'Brick Base Aseptic Carton',
+      twitter_description: 'Classic aseptic carton for dairy and beverages',
+      twitter_image: '/product_image_1.jpg',
+      schema: {
+        '@context': 'https://schema.org',
+        '@type': 'Product',
+        name: 'Brick Base Aseptic Carton',
+        description: 'Classic aseptic carton design with proven reliability',
+        image: '/product_image_1.jpg',
+        brand: {
+          '@type': 'Brand',
+          name: 'Lamipak',
+        },
+      },
+    },
+  },
+  {
+    id: '7',
+    slug: 'brick-edge',
+    title: 'Brick Edge',
+    description: 'Innovative edge-sealed aseptic carton with enhanced structural integrity. Perfect for premium dairy and beverage products.',
+    shortDescription: 'Edge-sealed carton with enhanced integrity',
+    image: '/simimalr_product_3.jpg',
+    imageAlt: 'Brick Edge Aseptic Carton',
+    heroBackgroundImage: '/banner-slider3.jpg',
+    technicalSheetUrl: '/technical-sheets/brick-edge.pdf',
+    technicalSheetText: 'DOWNLOAD TECHNICAL SHEET',
+    category: 'Aseptic Packaging',
+    categorySlug: 'aseptic-packaging',
+    sizes: ['250ml', '500ml', '750ml', '1000ml'],
+    quickSpecifications: [
+      { label: 'Filling Speed', value: 'Up to 20,000 packs/hour' },
+      { label: 'Shelf Life', value: 'Up to 12 months' },
+      { label: 'Barrier Structure', value: 'Enhanced edge-sealed' },
+      { label: 'Design', value: 'Premium edge-sealed' },
+    ],
+    compatibleWith: [
+      'Premium filling lines',
+      'Aseptic systems',
+      'High-quality production',
+    ],
+    applications: ['DAIRY', 'PREMIUM BEVERAGES', 'LIQUID FOODS'],
+    seo: {
+      meta_title: 'Brick Edge Aseptic Carton | Lamipak - Premium Packaging Solutions',
+      meta_description: 'Innovative edge-sealed aseptic carton with enhanced structural integrity. Perfect for premium dairy and beverage products.',
+      canonical_url: '/products/brick-edge',
+      og_title: 'Brick Edge Aseptic Carton | Lamipak',
+      og_description: 'Edge-sealed carton with enhanced integrity',
+      og_image: '/product_image_2.jpg',
+      twitter_card: 'summary_large_image',
+      twitter_title: 'Brick Edge Aseptic Carton',
+      twitter_description: 'Premium edge-sealed aseptic carton',
+      twitter_image: '/product_image_2.jpg',
+      schema: {
+        '@context': 'https://schema.org',
+        '@type': 'Product',
+        name: 'Brick Edge Aseptic Carton',
+        description: 'Innovative edge-sealed aseptic carton',
+        image: '/product_image_2.jpg',
+        brand: {
+          '@type': 'Brand',
+          name: 'Lamipak',
+        },
+      },
+    },
+  },
+  {
+    id: '8',
+    slug: 'brick-sq',
+    title: 'Brick Sq',
+    description: 'Square-shaped aseptic carton offering optimal space efficiency and modern design. Ideal for retail display and storage.',
+    shortDescription: 'Square carton with optimal space efficiency',
+    image: '/simimalr_product_4.jpg',
+    imageAlt: 'Brick Sq Aseptic Carton',
+    heroBackgroundImage: '/banner-slider4.jpg',
+    technicalSheetUrl: '/technical-sheets/brick-sq.pdf',
+    technicalSheetText: 'DOWNLOAD TECHNICAL SHEET',
+    category: 'Aseptic Packaging',
+    categorySlug: 'aseptic-packaging',
+    sizes: ['200ml', '250ml', '500ml', '1000ml'],
+    quickSpecifications: [
+      { label: 'Filling Speed', value: 'Up to 22,000 packs/hour' },
+      { label: 'Shelf Life', value: 'Up to 12 months' },
+      { label: 'Barrier Structure', value: 'Multi-layer composite' },
+      { label: 'Design', value: 'Square shape' },
+    ],
+    compatibleWith: [
+      'Modern filling lines',
+      'Aseptic systems',
+      'Retail-focused production',
+    ],
+    applications: ['DAIRY', 'JUICE', 'BEVERAGES', 'LIQUID FOODS'],
+    seo: {
+      meta_title: 'Brick Sq Aseptic Carton | Lamipak - Square Packaging Solutions',
+      meta_description: 'Square-shaped aseptic carton offering optimal space efficiency and modern design. Ideal for retail display and storage.',
+      canonical_url: '/products/brick-sq',
+      og_title: 'Brick Sq Aseptic Carton | Lamipak',
+      og_description: 'Square carton with optimal space efficiency',
+      og_image: '/product_image_3.jpg',
+      twitter_card: 'summary_large_image',
+      twitter_title: 'Brick Sq Aseptic Carton',
+      twitter_description: 'Square-shaped aseptic carton for retail',
+      twitter_image: '/product_image_3.jpg',
+      schema: {
+        '@context': 'https://schema.org',
+        '@type': 'Product',
+        name: 'Brick Sq Aseptic Carton',
+        description: 'Square-shaped aseptic carton',
+        image: '/product_image_3.jpg',
+        brand: {
+          '@type': 'Brand',
+          name: 'Lamipak',
+        },
+      },
+    },
+  },
 ];
 
 /**
@@ -563,4 +719,36 @@ export async function getAllProductSlugs(): Promise<string[]> {
   await new Promise((resolve) => setTimeout(resolve, 50));
 
   return products.map((p) => p.slug);
+}
+
+/**
+ * Helper function to convert category name to slug
+ */
+function categoryNameToSlug(name: string): string {
+  return name.toLowerCase().replace(/\s+/g, '-');
+}
+
+/**
+ * Gets products by category slug
+ * 
+ * @param categorySlug - The category slug
+ * @returns Promise<ProductData[]>
+ */
+export async function getProductsByCategory(categorySlug: string): Promise<ProductData[]> {
+  await new Promise((resolve) => setTimeout(resolve, 100));
+  
+  // Import category to get category name for matching
+  const { getCategoryBySlug } = await import('./categories');
+  const category = await getCategoryBySlug(categorySlug);
+  
+  if (!category) return [];
+  
+  // Filter products by category name or slug
+  return products.filter((p) => {
+    if (p.categorySlug) {
+      return p.categorySlug === categorySlug;
+    }
+    // Fallback to category name matching
+    return p.category === category.name || categoryNameToSlug(p.category || '') === categorySlug;
+  });
 }
