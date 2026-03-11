@@ -172,7 +172,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
         </section>
 
         {/* Breadcrumbs */}
-        <section className="bg-white border-b border-gray-200">
+        <section className="bg-gray-50">
           <div className="container mx-auto px-4 py-4">
             <Breadcrumbs
               items={[
@@ -189,7 +189,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
 
         {/* Product Video Section */}
         {productData.productVideo && (
-          <section className="bg-white py-12 md:py-16">
+          <section className="bg-gray-50 py-12 md:py-16">
             <div className="container mx-auto px-4">
               <div className="relative w-full aspect-video rounded-[25px] overflow-hidden bg-gray-100">
                 {productData.productVideo.endsWith('.gif') ? (
