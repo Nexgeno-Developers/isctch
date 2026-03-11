@@ -189,7 +189,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
 
         {/* Product Video Section */}
         {productData.productVideo && (
-          <section className="bg-gray-50 py-12 md:py-16">
+          <section className="bg-gray-50 pt-4 pb-4 md:pt-8 md:pb-12">
             <div className="container mx-auto px-4">
               <div className="relative w-full aspect-video rounded-[25px] overflow-hidden bg-gray-100">
                 {productData.productVideo.endsWith('.gif') ? (

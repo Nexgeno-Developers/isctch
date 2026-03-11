@@ -41,7 +41,7 @@ export default async function SimilarProducts({ currentProductSlug }: SimilarPro
   }
 
   return (
-    <section className="bg-gray-50 py-12 md:py-16">
+    <section className="bg-gray-50 py-8 md:py-8">
       <div className="container mx-auto px-4">
         {/* Section Header with Title and Arrows */}
         <div className="flex items-center justify-between mb-8 md:mb-12 relative">

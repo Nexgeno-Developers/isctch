@@ -17,7 +17,7 @@ export default function ProductFeatures({ features }: ProductFeaturesProps) {
   }
 
   return (
-    <section className="bg-gray-50 py-12 md:py-16">
+    <section className="bg-gray-50 py-8 md:py-8">
       <div className="container mx-auto px-4">
         {/* Section Title */}
         <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-8 md:mb-12 text-center">
