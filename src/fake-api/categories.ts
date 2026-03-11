@@ -34,6 +34,13 @@ export interface ProductCategory {
   image?: string;
   heroBackgroundImage?: string; // Background image for hero section
   heroSubtitle?: string; // Subtitle text for hero section (e.g., "PURE DAIRY, SAFELY PACKED FOR YOU")
+  pilotPlant?: {
+    label: string;
+    heading: string;
+    ctaText: string;
+    ctaLink: string;
+    backgroundImage?: string;
+  };
   seo?: CategorySEO;
 }
 
@@ -49,6 +56,13 @@ const categories: ProductCategory[] = [
     image: '/category-aseptic.jpg',
     heroBackgroundImage: '/banner-slider1.jpg',
     heroSubtitle: 'Extended shelf life, superior barrier protection',
+    pilotPlant: {
+      label: 'PILOT PLANT',
+      heading: 'TEST YOUR PRODUCT ON PILOT LINES BEFORE FULL-SCALE COMMITMENT',
+      ctaText: 'REQUEST PILOT ACCESS',
+      ctaLink: '/contact',
+      backgroundImage: '/pilot-plant-bg',
+    },
     seo: {
       meta_title: 'Aseptic Packaging Solutions | Lamipak - Extended Shelf Life Packaging',
       meta_description: 'Discover our advanced aseptic packaging solutions designed for extended shelf life, superior barrier protection, and sustainable packaging for dairy, beverages, and liquid foods.',

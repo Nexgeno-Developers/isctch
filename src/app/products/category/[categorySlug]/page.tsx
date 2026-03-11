@@ -8,6 +8,7 @@ import {
   getProductsByCategory
 } from '@/lib/api';
 import { getCanonicalUrl } from '@/config/site';
+import TechnicalConsultationCTA from '@/components/products/TechnicalConsultationCTA';
 
 interface CategoryPageProps {
   params: Promise<{
@@ -145,7 +146,7 @@ export default async function CategoryProductsPage({ params }: CategoryPageProps
 
         {/* Products We Support Section */}
         {products.length > 0 && (
-          <section className="bg-white py-12 md:py-16">
+          <section className="bg-gray-50 py-12 md:py-16">
             <div className="container mx-auto px-4">
               <div className="text-center">
                 {/* Section Label */}
@@ -175,6 +176,11 @@ export default async function CategoryProductsPage({ params }: CategoryPageProps
               </div>
             </div>
           </section>
+        )}
+
+        {/* Pilot Plant CTA Section */}
+        {category.pilotPlant && (
+          <TechnicalConsultationCTA data={category.pilotPlant} />
         )}
       </main>
     </>
