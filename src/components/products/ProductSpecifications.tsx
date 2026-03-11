@@ -28,20 +28,20 @@ export default function ProductSpecifications({ product }: ProductSpecifications
           {/* Right Side - Product Information */}
           <div>
             {/* Title */}
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-4 border-b border-gray-200 pb-4">
+            <h2 className="text-[24px] md:text-[30px] lg:text-[36px] font-bold text-gray-900 pb-2">
               {product.title}
             </h2>
 
             {/* Description */}
             {product.description && (
-              <p className="text-lg md:text-xl text-gray-700 mb-8 leading-relaxed border-b border-gray-200 pb-8">
+              <p className="text-lg md:text-xl text-gray-700 mb-8 leading-relaxed">
                 {product.description}
               </p>
             )}
 
             {/* Size & Formats */}
             {product.sizes && product.sizes.length > 0 && (
-              <div className="mb-8 border-b border-gray-200 pb-8">
+              <div className="mb-12">
                 <h3 className="text-xl md:text-2xl font-semibold text-gray-900 mb-4">
                   Size & Formats
                 </h3>
@@ -49,7 +49,7 @@ export default function ProductSpecifications({ product }: ProductSpecifications
                   {product.sizes.map((size, index) => (
                     <span
                       key={index}
-                      className="px-4 py-2 border-2 border-[#009FE8] text-[#009FE8] rounded-lg text-base md:text-lg font-medium"
+                      className="px-12 py-2 border border-[#009FE8] text-[#000] rounded-full text-base md:text-lg font-medium"
                     >
                       {size}
                     </span>
@@ -60,13 +60,13 @@ export default function ProductSpecifications({ product }: ProductSpecifications
 
             {/* Quick Specifications */}
             {product.quickSpecifications && product.quickSpecifications.length > 0 && (
-              <div className="mb-8 border-b border-gray-200 pb-8">
-                <h3 className="text-xl md:text-2xl font-semibold text-gray-900 mb-4">
+              <div className="mb-8 pb-4">
+                <h3 className="text-xl md:text-2xl font-semibold text-gray-900 mb-6">
                   Quick Specifications
                 </h3>
                 <dl className="space-y-3">
                   {product.quickSpecifications.map((spec, index) => (
-                    <div key={index} className="flex justify-between items-start">
+                    <div key={index} className="flex justify-between items-start border-b border-[#EEEEEE] pb-4">
                       <dt className="text-base md:text-lg text-gray-700 font-medium pr-4">
                         {spec.label}:
                       </dt>

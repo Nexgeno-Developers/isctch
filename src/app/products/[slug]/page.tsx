@@ -132,7 +132,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
             <div className="container mx-auto flex-1 flex flex-col justify-center px-4">
               <div className="text-center">
                 {/* Product Title */}
-                <h1 className="pt-[160px] text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold text-white mb-6 uppercase tracking-tight">
+                <h1 className="pt-[160px] text-3xl md:text-5xl lg:text-6xl xl:text-6xl font-bold text-white mb-6 uppercase tracking-tight">
                   {productData.title}
                 </h1>
 
