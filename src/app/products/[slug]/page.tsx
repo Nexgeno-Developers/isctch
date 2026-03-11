@@ -10,6 +10,7 @@ import ProductFeatures from '@/components/products/ProductFeatures';
 import ProductAccessories from '@/components/products/ProductAccessories';
 import SimilarProducts from '@/components/products/SimilarProducts';
 import TechnicalConsultationCTA from '@/components/products/TechnicalConsultationCTA';
+import NewsletterSubscription from '@/components/home/NewsletterSubscription';
 
 interface ProductPageProps {
   params: Promise<{
@@ -227,6 +228,9 @@ export default async function ProductPage({ params }: ProductPageProps) {
 
         {/* Technical Consultation CTA Section */}
         <TechnicalConsultationCTA data={productData.technicalConsultation} />
+
+        {/* Newsletter Subscription Section */}
+        <NewsletterSubscription />
       </main>
     </>
   );
