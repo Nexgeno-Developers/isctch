@@ -379,10 +379,10 @@ const products: ProductData[] = [
     technicalSheetText: 'DOWNLOAD TECHNICAL SHEET',
     productImage3D: '/product_image_1.jpg',
     applicationImages: {
-      'DAIRY': '/product_image_1.jpg',
-      'JUICE': '/product_image_2.jpg',
-      'PLANT-BASED': '/product_image_3.jpg',
-      'LIQUID FOODS': '/product_image_1.jpg',
+      'DAIRY': '/dairy_product_image.jpg',
+      'JUICE': '/dairy_product_image.jpg',
+      'PLANT-BASED': '/dairy_product_image.jpg',
+      'LIQUID FOODS': '/dairy_product_image.jpg',
     },
     productVideo: '/product-dt-video-new.gif',
     productFeatures: [
