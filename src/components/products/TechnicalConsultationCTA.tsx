@@ -18,9 +18,9 @@ export default function TechnicalConsultationCTA({ data }: TechnicalConsultation
   }
 
   return (
-    <section className="bg-gray-50 py-12 md:py-16">
-      <div className="container mx-auto px-4">
-        <div className="relative rounded-[50px] overflow-hidden">
+    <section className="bg-gray-50 py-8 md:py-8">
+      <div className="container mx-auto px-4 pb-12">
+        <div className="relative rounded-[50px] overflow-hidden ">
           {/* Background Image */}
           <div className="absolute inset-0">
             <Image
