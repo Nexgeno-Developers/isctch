@@ -78,7 +78,7 @@ export default function ContactSustainability() {
               {/* Submit Button */}
               <button
                 type="submit"
-                className="inline-flex items-center text-[#009FE8] text-base md:text-lg font-bold uppercase tracking-wider hover:text-[#0077B6] transition-colors group"
+                className="cursor-pointer inline-flex items-center text-[#009FE8] text-base md:text-lg font-bold uppercase tracking-wider hover:text-[#0077B6] transition-colors group"
               >
                 SUBMIT
                 <svg

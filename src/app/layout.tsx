@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
+import { Suspense } from "react";
 import "./globals.css";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
@@ -26,11 +27,13 @@ export default function RootLayout({
       <body
         className={`${poppins.variable} font-sans antialiased`}
       >
-        <NavigationProgressProvider>
-          <Header />
-          {children}
-          <Footer />
-        </NavigationProgressProvider>
+        <Suspense fallback={null}>
+          <NavigationProgressProvider>
+            <Header />
+            {children}
+            <Footer />
+          </NavigationProgressProvider>
+        </Suspense>
       </body>
     </html>
   );

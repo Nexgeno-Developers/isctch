@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { usePathname, useSearchParams } from 'next/navigation';
+import { usePathname } from 'next/navigation';
 
 /**
  * Navigation Progress Provider Component (Client Component)
@@ -11,7 +11,6 @@ import { usePathname, useSearchParams } from 'next/navigation';
  */
 export default function NavigationProgressProvider({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
-  const searchParams = useSearchParams();
   const [isLoading, setIsLoading] = useState(false);
   const [progress, setProgress] = useState(0);
   const [currentPath, setCurrentPath] = useState(pathname);
@@ -151,7 +150,7 @@ export default function NavigationProgressProvider({ children }: { children: Rea
         setTimeout(checkPageLoad, 100);
       }
     }
-  }, [pathname, searchParams, currentPath, isLoading]);
+  }, [pathname, currentPath, isLoading]);
 
   // Initial page load
   useEffect(() => {
