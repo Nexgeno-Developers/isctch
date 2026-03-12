@@ -110,7 +110,7 @@ export default async function CategoryProductsPage({ params }: CategoryPageProps
 
       <main className="min-h-screen bg-gray-50">
         {/* Hero Section */}
-        <section className="relative h-[70vh] min-h-[500px] overflow-hidden">
+        <section className="relative pt-[220px] pb-[150px] overflow-hidden">
           {/* Background Image with Overlay */}
           <div className="absolute inset-0">
             {category.heroBackgroundImage ? (
@@ -133,16 +133,16 @@ export default async function CategoryProductsPage({ params }: CategoryPageProps
             <div className="container mx-auto flex-1 flex flex-col justify-center px-4">
               <div className="text-center">
                 {/* Category Title */}
-                <h1 className="pt-[160px] text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold text-white mb-6 uppercase tracking-tight">
+                <h1 className="text-3xl md:text-5xl lg:text-6xl xl:text-6xl font-bold text-white  tracking-tight">
                   {category.name}
                 </h1>
 
                 {/* Subtitle */}
-                {category.heroSubtitle && (
-                  <p className="text-center text-lg md:text-xl lg:text-2xl text-[#009FE8] mb-8 leading-relaxed max-w-3xl mx-auto font-bold uppercase tracking-wider">
+                {/* {category.heroSubtitle && (
+                  <p className="text-center text-lg md:text-xl lg:text-2xl text-[#009FE8] mb-8 leading-relaxed max-w-3xl mx-auto font-bold tracking-wider">
                     {category.heroSubtitle}
                   </p>
-                )}
+                )} */}
               </div>
             </div>
           </div>
