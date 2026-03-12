@@ -12,6 +12,7 @@ import TechnicalConsultationCTA from '@/components/products/TechnicalConsultatio
 import CategoryGlobalImpact from '@/components/products/CategoryGlobalImpact';
 import LatestInsights from '@/components/home/LatestInsights';
 import SimilarProducts from '@/components/products/SimilarProducts';
+import ContactSustainability from '@/components/products/ContactSustainability';
 
 interface CategoryPageProps {
   params: Promise<{
@@ -198,6 +199,9 @@ export default async function CategoryProductsPage({ params }: CategoryPageProps
 
         {/* Similar Products Section */}
         <SimilarProducts />
+
+        {/* Contact & Sustainability Section */}
+        <ContactSustainability />
         
       </main>
     </>
