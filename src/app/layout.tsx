@@ -3,6 +3,7 @@ import { Poppins } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
+import NavigationProgressProvider from "@/components/common/NavigationProgressProvider";
 
 const poppins = Poppins({
   weight: ['300', '400', '500', '600', '700', '800', '900'],
@@ -25,9 +26,11 @@ export default function RootLayout({
       <body
         className={`${poppins.variable} font-sans antialiased`}
       >
-        <Header />
-        {children}
-        <Footer />
+        <NavigationProgressProvider>
+          <Header />
+          {children}
+          <Footer />
+        </NavigationProgressProvider>
       </body>
     </html>
   );
