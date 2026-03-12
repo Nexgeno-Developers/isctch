@@ -14,7 +14,7 @@ export default function FAQItemClient({ item }: FAQItemClientProps) {
     <div className="border-b border-gray-200 last:border-b-0">
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="w-full py-6 flex items-center justify-between text-left group"
+        className="cursor-pointer w-full py-6 flex items-center justify-between text-left group"
         aria-expanded={isOpen}
       >
         {/* Question Text */}
