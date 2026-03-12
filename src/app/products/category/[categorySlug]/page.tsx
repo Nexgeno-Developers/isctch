@@ -10,6 +10,7 @@ import {
 import { getCanonicalUrl } from '@/config/site';
 import TechnicalConsultationCTA from '@/components/products/TechnicalConsultationCTA';
 import CategoryGlobalImpact from '@/components/products/CategoryGlobalImpact';
+import LatestInsights from '@/components/home/LatestInsights';
 
 interface CategoryPageProps {
   params: Promise<{
@@ -190,6 +191,9 @@ export default async function CategoryProductsPage({ params }: CategoryPageProps
         {category.globalImpact && (
           <CategoryGlobalImpact data={category.globalImpact} />
         )}
+
+        {/* Latest Insights Section */}
+        <LatestInsights />
         
       </main>
     </>
