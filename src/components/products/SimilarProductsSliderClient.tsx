@@ -60,7 +60,7 @@ export default function SimilarProductsSliderClient({
           <button
             onClick={handlePrev}
             disabled={isBeginning && !shouldLoop}
-            className="cursor-pointer swiper-button-prev-similar w-12 h-12 rounded-full border-2 border-[#009FE8] bg-white hover:bg-[#009FE8] flex items-center justify-center transition-all group disabled:opacity-50 disabled:cursor-not-allowed shadow-lg"
+            className="cursor-pointer swiper-button-prev-similar w-12 h-12 rounded-full border-2 border-[#009FE8] bg-white hover:bg-[#009FE8] flex items-center justify-center transition-all group disabled:opacity-50 disabled:cursor-not-allowed"
             aria-label="Previous products"
           >
             <svg

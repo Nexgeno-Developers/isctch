@@ -42,7 +42,8 @@ export default function LatestInsightsClient({ data }: LatestInsightsClientProps
             <div className="flex items-center gap-3">
               <button
                 onClick={() => swiperRef.current?.slidePrev()}
-                className="cursor-pointer  w-12 h-12 rounded-full border-2 border-[#009FE8] bg-white hover:bg-[#009FE8] flex items-center justify-center transition-all group shadow-lg"
+                className="cursor-pointer  w-12 h-12 rounded-full border-2 border-[#009FE8] bg-white hover:bg-[#009FE8] flex items-center justify-center 
+                transition-all group"
                 aria-label="Previous insights"
               >
                 <svg
