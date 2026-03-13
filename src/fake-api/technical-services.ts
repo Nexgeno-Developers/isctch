@@ -43,7 +43,6 @@ export interface TechnicalServiceData {
     icon?: string; // Star icon or other icon
     detailedDescription?: string; // Longer description paragraph
   };
-  features?: string[];
   detailedFeatures?: {
     id: string;
     title: string;
@@ -51,15 +50,12 @@ export interface TechnicalServiceData {
     image: string;
     imageAlt: string;
   }[];
-  benefits?: string[];
-  process?: {
-    title: string;
-    description: string;
-    steps?: {
-      title: string;
-      description: string;
-      icon?: string;
-    }[];
+  connectSection?: {
+    heading: string;
+    headingHighlight: string;
+    formTitle: string;
+    illustrationImage: string;
+    illustrationAlt: string;
   };
   cta?: {
     label?: string;
@@ -88,14 +84,6 @@ const technicalServices: TechnicalServiceData[] = [
       icon: '/images/icons/star.svg',
       detailedDescription: 'LamiCare is Lamipak\'s foundational technical service program designed to ensure stable, reliable, and efficient performance across your aseptic carton packaging and aseptic liquid packaging production lines. As part of Lamipak\'s integrated aseptic packaging solutions, LamiCare helps customers maintain production stability while supporting long-term efficiency and sustainable packaging solutions objectives.'
     },
-    features: [
-      'Preventative Maintenance',
-      'Corrective Maintenance',
-      'Remote Support',
-      'Overall Assessment',
-      'Spare Parts',
-      'Training'
-    ],
     detailedFeatures: [
       {
         id: '1',
@@ -140,12 +128,13 @@ const technicalServices: TechnicalServiceData[] = [
         imageAlt: 'Training & Capability Building'
       }
     ],
-    benefits: [
-      'Foundational operational support',
-      'Reduced downtime',
-      'Extended equipment life',
-      'Improved operational efficiency'
-    ],
+    connectSection: {
+      heading: 'Connect with Our Technical Experts',
+      headingHighlight: 'Technical Experts',
+      formTitle: 'Send Us A Message',
+      illustrationImage: '/images/technical-services/connect-experts-illustration.jpg',
+      illustrationAlt: 'Connect with Technical Experts'
+    },
     cta: {
       label: 'GET STARTED',
       heading: 'Ready to Get Started with Lami Care?',
@@ -188,20 +177,13 @@ const technicalServices: TechnicalServiceData[] = [
       icon: '/images/icons/star.svg',
       detailedDescription: 'LamiPremium is Lamipak\'s advanced technical service program designed to deliver enhanced performance commitments and operational excellence. This tier provides comprehensive maintenance management, machine optimization, and customized solutions to maximize your production efficiency and equipment value.'
     },
-    features: [
-      'Performance Commitment',
-      'Maintenance Management',
-      'Machine Volume Conversion',
-      'Machine Refurbish & Reconditioning',
-      'Machine Installation & Commissioning',
-      'Package Volume Customization'
-    ],
-    benefits: [
-      'Enhanced performance guarantees',
-      'Optimized machine operations',
-      'Customized solutions',
-      'Extended equipment value'
-    ],
+    connectSection: {
+      heading: 'Connect with Our Technical Experts',
+      headingHighlight: 'Technical Experts',
+      formTitle: 'Send Us A Message',
+      illustrationImage: '/images/technical-services/connect-experts-illustration.jpg',
+      illustrationAlt: 'Connect with Technical Experts'
+    },
     cta: {
       label: 'GET STARTED',
       heading: 'Upgrade to LamiPremium?',
@@ -244,20 +226,13 @@ const technicalServices: TechnicalServiceData[] = [
       icon: '/images/icons/star.svg',
       detailedDescription: 'LamiPartner is Lamipak\'s premier technical service program offering strategic partnership and complete operational transformation. This tier includes operational cost commitment, advanced digital solutions, automation services, and comprehensive support to drive your business growth and innovation.'
     },
-    features: [
-      'Operational cost commitment',
-      'Digital Solution (31 Smart Version)',
-      'Automation Service',
-      'New Format Customization',
-      'Machine Start-up',
-      'Plant Components'
-    ],
-    benefits: [
-      'Cost optimization',
-      'Digital transformation',
-      'Advanced automation',
-      'Complete partnership support'
-    ],
+    connectSection: {
+      heading: 'Connect with Our Technical Experts',
+      headingHighlight: 'Technical Experts',
+      formTitle: 'Send Us A Message',
+      illustrationImage: '/images/technical-services/connect-experts-illustration.jpg',
+      illustrationAlt: 'Connect with Technical Experts'
+    },
     cta: {
       label: 'GET STARTED',
       heading: 'Become a LamiPartner?',

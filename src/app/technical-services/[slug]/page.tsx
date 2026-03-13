@@ -9,6 +9,8 @@ import TechnicalConsultationCTA from '@/components/products/TechnicalConsultatio
 import NewsletterSubscription from '@/components/home/NewsletterSubscription';
 import VerticalTabsFeatures from '@/components/technical-services/VerticalTabsFeatures';
 import VideoBanner from '@/components/home/VideoBanner';
+import ConnectTechnicalExperts from '@/components/technical-services/ConnectTechnicalExperts';
+import CallToAction from '@/components/home/CallToAction';
 
 interface TechnicalServicePageProps {
   params: Promise<{
@@ -226,113 +228,22 @@ export default async function TechnicalServicePage({ params }: TechnicalServiceP
           <VerticalTabsFeatures features={serviceData.detailedFeatures} />
         )}
 
+      <VideoBanner />
 
-        <VideoBanner />
 
-        {/* Features Section (Fallback if no detailedFeatures) */}
-        {!serviceData.detailedFeatures && serviceData.features && serviceData.features.length > 0 && (
-          <section className="bg-gray-50 py-12 md:py-16">
-            <div className="container mx-auto px-4">
-              <div className="max-w-4xl mx-auto">
-                <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-8">
-                  Key Features
-                </h2>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  {serviceData.features.map((feature, index) => (
-                    <div key={index} className="flex items-start">
-                      <svg
-                        className="w-6 h-6 text-[#009FE8] mr-3 flex-shrink-0 mt-1"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M5 13l4 4L19 7"
-                        />
-                      </svg>
-                      <p className="text-gray-700 text-lg">{feature}</p>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </section>
-        )}
-
-        {/* Benefits Section */}
-        {serviceData.benefits && serviceData.benefits.length > 0 && (
-          <section className="bg-white py-12 md:py-16">
-            <div className="container mx-auto px-4">
-              <div className="max-w-4xl mx-auto">
-                <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-8">
-                  Benefits
-                </h2>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  {serviceData.benefits.map((benefit, index) => (
-                    <div key={index} className="flex items-start">
-                      <div className="w-8 h-8 rounded-full bg-[#009FE8] flex items-center justify-center mr-3 flex-shrink-0">
-                        <svg
-                          className="w-5 h-5 text-white"
-                          fill="none"
-                          stroke="currentColor"
-                          viewBox="0 0 24 24"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth={2}
-                            d="M5 13l4 4L19 7"
-                          />
-                        </svg>
-                      </div>
-                      <p className="text-gray-700 text-lg">{benefit}</p>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </section>
-        )}
-
-        {/* Process Section */}
-        {serviceData.process && (
-          <section className="bg-gray-50 py-12 md:py-16">
-            <div className="container mx-auto px-4">
-              <div className="max-w-4xl mx-auto">
-                <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-                  {serviceData.process.title}
-                </h2>
-                {serviceData.process.description && (
-                  <p className="text-xl text-gray-700 mb-8">
-                    {serviceData.process.description}
-                  </p>
-                )}
-                {serviceData.process.steps && serviceData.process.steps.length > 0 && (
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                    {serviceData.process.steps.map((step, index) => (
-                      <div key={index} className="bg-white rounded-[20px] p-6 shadow-sm">
-                        <div className="flex items-center justify-center w-12 h-12 rounded-full bg-[#009FE8] text-white font-bold text-xl mb-4">
-                          {index + 1}
-                        </div>
-                        <h3 className="text-xl font-bold text-gray-900 mb-2">
-                          {step.title}
-                        </h3>
-                        <p className="text-gray-600">
-                          {step.description}
-                        </p>
-                      </div>
-                    ))}
-                  </div>
-                )}
-              </div>
-            </div>
-          </section>
+        {/* Connect with Technical Experts Section */}
+        {serviceData.connectSection && (
+          <ConnectTechnicalExperts
+            heading={serviceData.connectSection.heading}
+            headingHighlight={serviceData.connectSection.headingHighlight}
+            formTitle={serviceData.connectSection.formTitle}
+            illustrationImage={serviceData.connectSection.illustrationImage}
+            illustrationAlt={serviceData.connectSection.illustrationAlt}
+          />
         )}
 
        
+       <CallToAction />
         {/* Newsletter Subscription Section */}
         <NewsletterSubscription />
       </main>
