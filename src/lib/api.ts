@@ -21,10 +21,16 @@ import {
   getAllCategorySlugs as fakeGetAllCategorySlugs,
   type ProductCategory
 } from '@/fake-api/categories';
+import {
+  getTechnicalServiceData as fakeGetTechnicalServiceData,
+  getAllTechnicalServices as fakeGetAllTechnicalServices,
+  getAllTechnicalServiceSlugs as fakeGetAllTechnicalServiceSlugs,
+  type TechnicalServiceData
+} from '@/fake-api/technical-services';
 import { getCanonicalUrl } from '@/config/site';
 
 // Re-export types for convenience
-export type { ProductData, ProductCategory };
+export type { ProductData, ProductCategory, TechnicalServiceData };
 import { getHeaderData as fakeGetHeaderData, type HeaderData } from '@/fake-api/layout';
 import { getFooterData as fakeGetFooterData, type FooterData } from '@/fake-api/layout';
 
@@ -218,4 +224,60 @@ export async function getProductsByCategory(categorySlug: string): Promise<Produ
   }
   
   return fakeGetProductsByCategory(categorySlug);
+}
+
+/**
+ * Fetches technical service data by slug
+ * 
+ * @param slug - The technical service slug
+ * @returns Promise<TechnicalServiceData | null>
+ */
+export async function fetchTechnicalServiceData(slug: string): Promise<TechnicalServiceData | null> {
+  if (useRealAPI()) {
+    // TODO: Replace with real API call when Laravel backend is ready
+    // const response = await fetch(`${API_CONFIG.baseUrl}${API_CONFIG.endpoints.technicalService(slug)}`);
+    // if (!response.ok) {
+    //   if (response.status === 404) return null;
+    //   throw new Error('Failed to fetch technical service data');
+    // }
+    // return response.json();
+    throw new Error('Real API not yet implemented');
+  }
+  
+  return fakeGetTechnicalServiceData(slug);
+}
+
+/**
+ * Gets all technical services
+ * 
+ * @returns Promise<TechnicalServiceData[]>
+ */
+export async function getAllTechnicalServices(): Promise<TechnicalServiceData[]> {
+  if (useRealAPI()) {
+    // TODO: Replace with real API call when Laravel backend is ready
+    // const response = await fetch(`${API_CONFIG.baseUrl}${API_CONFIG.endpoints.technicalServices}`);
+    // if (!response.ok) throw new Error('Failed to fetch technical services');
+    // return response.json();
+    throw new Error('Real API not yet implemented');
+  }
+  
+  return fakeGetAllTechnicalServices();
+}
+
+/**
+ * Gets all technical service slugs (for static generation)
+ * 
+ * @returns Promise<string[]>
+ */
+export async function getAllTechnicalServiceSlugs(): Promise<string[]> {
+  if (useRealAPI()) {
+    // TODO: Replace with real API call when Laravel backend is ready
+    // const response = await fetch(`${API_CONFIG.baseUrl}${API_CONFIG.endpoints.technicalServices}`);
+    // if (!response.ok) throw new Error('Failed to fetch technical services');
+    // const data = await response.json();
+    // return data.map((service: TechnicalServiceData) => service.slug);
+    throw new Error('Real API not yet implemented');
+  }
+  
+  return fakeGetAllTechnicalServiceSlugs();
 }
