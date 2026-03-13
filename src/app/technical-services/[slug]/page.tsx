@@ -8,6 +8,7 @@ import Breadcrumbs from '@/components/common/Breadcrumbs';
 import TechnicalConsultationCTA from '@/components/products/TechnicalConsultationCTA';
 import NewsletterSubscription from '@/components/home/NewsletterSubscription';
 import VerticalTabsFeatures from '@/components/technical-services/VerticalTabsFeatures';
+import VideoBanner from '@/components/home/VideoBanner';
 
 interface TechnicalServicePageProps {
   params: Promise<{
@@ -225,6 +226,9 @@ export default async function TechnicalServicePage({ params }: TechnicalServiceP
           <VerticalTabsFeatures features={serviceData.detailedFeatures} />
         )}
 
+
+        <VideoBanner />
+
         {/* Features Section (Fallback if no detailedFeatures) */}
         {!serviceData.detailedFeatures && serviceData.features && serviceData.features.length > 0 && (
           <section className="bg-gray-50 py-12 md:py-16">
@@ -328,18 +332,7 @@ export default async function TechnicalServicePage({ params }: TechnicalServiceP
           </section>
         )}
 
-        {/* CTA Section */}
-        {serviceData.cta && serviceData.cta.ctaText && serviceData.cta.ctaLink && (
-          <TechnicalConsultationCTA
-            data={{
-              label: serviceData.cta.label,
-              heading: serviceData.cta.heading,
-              ctaText: serviceData.cta.ctaText,
-              ctaLink: serviceData.cta.ctaLink,
-            }}
-          />
-        )}
-
+       
         {/* Newsletter Subscription Section */}
         <NewsletterSubscription />
       </main>
