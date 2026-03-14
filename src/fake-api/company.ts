@@ -55,11 +55,33 @@ export interface CompanyNavigation {
   items: CompanyNavigationItem[];
 }
 
+export interface AboutUsQuadrantSection {
+  topLeft: {
+    title: string;
+    titleHighlight: string;
+    paragraphs: string[];
+  };
+  topRight: {
+    image: string;
+    imageAlt: string;
+  };
+  bottomLeft: {
+    image: string;
+    imageAlt: string;
+  };
+  bottomRight: {
+    title: string;
+    titleHighlight: string;
+    paragraphs: string[];
+  };
+}
+
 export interface CompanyData {
   hero: CompanyHero;
   statistics: CompanyStatistic[];
   journey: JourneyData;
   navigation: CompanyNavigation;
+  aboutUsQuadrant?: AboutUsQuadrantSection;
   seo: CompanySEO;
 }
 
@@ -208,6 +230,32 @@ export async function getCompanyData(): Promise<CompanyData> {
           href: '/our-company/responsibility',
         },
       ],
+    },
+    aboutUsQuadrant: {
+      topLeft: {
+        title: 'Lamipak: A Global Leader in Aseptic Carton Packaging',
+        titleHighlight: 'Lamipak',
+        paragraphs: [
+          'Lamipak is a leading aseptic carton packaging manufacturer, providing high-performance solutions for the global food and beverage industry. We specialize in advanced aseptic processing and packaging systems that ensure product safety, extended shelf life, and operational efficiency.',
+          'Before 2007, Lamipak focused on mass production of paper-based packaging materials. In 2007, we established a dedicated aseptic packaging brand and manufacturing facility for aseptic liquid packaging, marking a significant milestone in our journey toward innovation and excellence.',
+        ],
+      },
+      topRight: {
+        image: '/images/company/facility-1.jpg',
+        imageAlt: 'Lamipak industrial facility with solar panels',
+      },
+      bottomLeft: {
+        image: '/images/company/facility-2.jpg',
+        imageAlt: 'Lamipak manufacturing facility aerial view',
+      },
+      bottomRight: {
+        title: 'Leading the Future of Eco-Friendly Aseptic Packaging',
+        titleHighlight: 'Eco-Friendly Aseptic Packaging',
+        paragraphs: [
+          'Over the past decade, Lamipak has evolved into a globally recognized provider of sustainable packaging solutions, serving customers in over 87 countries. Our environmentally friendly packaging solutions offer superior barrier performance and compatibility with modern filling systems, with production increasing fourfold within five years.',
+          'Lamipak continuously innovates in aseptic packaging materials and systems, supporting various brands in dairy, juice, plant-based, and functional beverages with reliable, scalable, and sustainable solutions. We are committed to delivering packaging solutions that combine quality, efficiency, and environmental responsibility.',
+        ],
+      },
     },
     seo: {
       meta_title: 'About Us - Lamipak',

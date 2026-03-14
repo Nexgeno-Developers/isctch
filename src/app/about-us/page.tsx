@@ -5,6 +5,7 @@ import CompanyHero from '@/components/company/CompanyHero';
 import CompanyStatistics from '@/components/company/CompanyStatistics';
 import Journey from '@/components/company/Journey';
 import CompanyNavigationServer from '@/components/company/CompanyNavigationServer';
+import AboutUsQuadrantServer from '@/components/company/AboutUsQuadrantServer';
 import VideoBanner from '@/components/home/VideoBanner';
 import CallToAction from '@/components/home/CallToAction';
 import NewsletterSubscription from '@/components/home/NewsletterSubscription';
@@ -68,17 +69,12 @@ export default async function AboutUsPage() {
       <main className="min-h-screen bg-white">
         {/* Hero Section */}
         <CompanyHero data={companyData.hero} />
-
-        {/* Statistics Section */}
-        <CompanyStatistics statistics={companyData.statistics} />
-
-        {/* Journey Section */}
-        <Journey />
-
-        <VideoBanner />
-        
-        {/* Navigation Section */}
+  {/* Navigation Section */}
         <CompanyNavigationServer />
+        {/* Quadrant Section - Full Width */}
+        <AboutUsQuadrantServer />
+        
+      
 
         <CallToAction />
         <NewsletterSubscription />
