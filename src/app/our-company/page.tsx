@@ -6,6 +6,8 @@ import CompanyStatistics from '@/components/company/CompanyStatistics';
 import Journey from '@/components/company/Journey';
 import CompanyNavigationServer from '@/components/company/CompanyNavigationServer';
 import VideoBanner from '@/components/home/VideoBanner';
+import CallToAction from '@/components/home/CallToAction';
+import NewsletterSubscription from '@/components/home/NewsletterSubscription';
 
 /**
  * Generate metadata for Our Company page
@@ -79,6 +81,9 @@ export default async function OurCompanyPage() {
 <VideoBanner />
         {/* Navigation Section */}
         <CompanyNavigationServer />
+
+        <CallToAction />
+        <NewsletterSubscription />
 
         
       </main>
