@@ -228,7 +228,7 @@ export default async function TechnicalServicePage({ params }: TechnicalServiceP
           <VerticalTabsFeatures features={serviceData.detailedFeatures} />
         )}
 
-      <VideoBanner />
+      <VideoBanner videoOnly={true} />
 
 
         {/* Connect with Technical Experts Section */}
@@ -241,7 +241,6 @@ export default async function TechnicalServicePage({ params }: TechnicalServiceP
             illustrationAlt={serviceData.connectSection.illustrationAlt}
           />
         )}
-
        
        <CallToAction />
         {/* Newsletter Subscription Section */}

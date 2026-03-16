@@ -5,12 +5,16 @@ import { useState, useEffect } from 'react';
 import { fetchHomepageData } from '@/lib/api';
 import type { VideoBannerData } from '@/fake-api/homepage';
 
+interface VideoBannerProps {
+  videoOnly?: boolean; // If true, hides text and CTA, shows only video
+}
+
 /**
  * Video Banner Component (Client Component)
  * 
  * Fetches homepage data and renders the video banner with play functionality.
  */
-export default function VideoBanner() {
+export default function VideoBanner({ videoOnly = false }: VideoBannerProps = {}) {
   const [data, setData] = useState<VideoBannerData | null>(null);
   const [isVideoPlaying, setIsVideoPlaying] = useState(false);
 
@@ -70,7 +74,7 @@ export default function VideoBanner() {
       )}
 
       {/* Content - Hidden when video is playing */}
-      {!isVideoPlaying && (
+      {!isVideoPlaying && !videoOnly && (
         <div className="relative z-10 h-full flex flex-col items-center px-4">
           {/* Main Title - Top */}
           <div className="pt-8 md:pt-20 lg:pt-20">
@@ -118,6 +122,25 @@ export default function VideoBanner() {
               </svg>
             </Link>
           </div>
+        </div>
+      )}
+
+      {/* Play Button Only - When videoOnly is true */}
+      {!isVideoPlaying && videoOnly && (
+        <div className="relative z-10 h-full flex items-center justify-center">
+          <button
+            onClick={() => setIsVideoPlaying(true)}
+            className="cursor-pointer w-20 h-20 md:w-24 md:h-24 rounded-full bg-white bg-opacity-90 hover:bg-opacity-100 flex items-center justify-center transition-all group shadow-lg"
+            aria-label="Play video"
+          >
+            <svg
+              className="w-8 h-8 md:w-10 md:h-10 text-gray-800 ml-1 group-hover:scale-110 transition-transform"
+              fill="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path d="M8 5v14l11-7z" />
+            </svg>
+          </button>
         </div>
       )}
     </section>
