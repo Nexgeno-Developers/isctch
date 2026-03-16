@@ -57,7 +57,7 @@ export default function JourneyClient({ data }: JourneyClientProps) {
               </div>
 
               {/* Years List with Dots */}
-              <div className="flex flex-col gap-2 md:gap-3 flex-1 relative">
+              <div className="flex flex-col gap-2 md:gap-8 flex-1 relative">
                 {data.milestones.map((milestone) => {
                   const isSelected = milestone.year === selectedYear;
                   return (
@@ -65,7 +65,7 @@ export default function JourneyClient({ data }: JourneyClientProps) {
                       {/* Dot - Positioned between timeline and year text, center-aligned */}
                       <div className="absolute -left-6 md:-left-7 top-1/2 -translate-y-1/2 flex items-center justify-center">
                         <div
-                          className={`w-3 h-3 rounded-full transition-all ${
+                          className={`w-4 h-4 rounded-full transition-all ${
                             isSelected
                               ? 'bg-[#009FE8] border-3 border-white shadow-md'
                               : 'bg-transparent'
@@ -74,7 +74,7 @@ export default function JourneyClient({ data }: JourneyClientProps) {
                       </div>
                       <button
                         onClick={() => setSelectedYear(milestone.year)}
-                        className={`cursor-pointer text-left transition-colors flex items-center pb-5 ${
+                        className={`cursor-pointer text-left transition-colors flex items-center ${
                           isSelected
                             ? 'text-[#009FE8] font-semibold'
                             : 'text-gray-600 hover:text-gray-900'
@@ -88,10 +88,10 @@ export default function JourneyClient({ data }: JourneyClientProps) {
               </div>
 
               {/* Large Year Display */}
-              <div className="hidden lg:flex flex-col items-start justify-start ml-4 lg:ml-8 flex-shrink-0">
+              <div className="hidden lg:flex flex-col items-start justify-start  flex-shrink-0 absolute ml-[190px]">
                 <div className="text-[#009FE8] font-bold leading-none">
                   <div className="text-7xl md:text-8xl lg:text-9xl xl:text-[10rem]">{yearParts.first}</div>
-                  <div className="text-7xl md:text-8xl lg:text-9xl xl:text-[10rem]">{yearParts.second}</div>
+                  <div className="text-7xl md:text-8xl lg:text-9xl xl:text-[10rem] ml-[70px]">{yearParts.second}</div>
                 </div>
               </div>
             </div>
