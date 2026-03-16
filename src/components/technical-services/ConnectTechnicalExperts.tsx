@@ -53,7 +53,7 @@ export default function ConnectTechnicalExperts({
   };
 
   return (
-    <section className="bg-gray-50 py-12 md:py-16 lg:py-20">
+    <section className="bg-gray-50 py-4 md:py-8 lg:py-12">
       <div className="container mx-auto px-4">
         {/* Section Heading */}
         <div className="text-center mb-12 md:mb-16">
@@ -64,7 +64,7 @@ export default function ConnectTechnicalExperts({
         </div>
 
         {/* Main Card */}
-        <div className="bg-white rounded-[50px] overflow-hidden shadow-lg">
+        <div className="bg-white rounded-[50px] overflow-hidden">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-0">
             {/* Left Section - Contact Form */}
             <div className="p-8 md:p-10 lg:p-12">
@@ -143,7 +143,7 @@ export default function ConnectTechnicalExperts({
                 {/* Submit Button */}
                 <button
                   type="submit"
-                  className="inline-flex items-center text-[#009FE8] text-base md:text-lg font-bold uppercase tracking-wider hover:text-[#0077B6] transition-colors group"
+                  className="cursor-pointer inline-flex items-center text-[#009FE8] text-base md:text-lg font-bold uppercase tracking-wider hover:text-[#0077B6] transition-colors group"
                 >
                   SEND MESSAGE
                   <svg
@@ -164,14 +164,14 @@ export default function ConnectTechnicalExperts({
             </div>
 
             {/* Right Section - Illustration */}
-            <div className="relative bg-[#0e233c] rounded-r-[50px] lg:rounded-l-none lg:rounded-r-[50px] min-h-[400px] lg:min-h-full">
-              <div className="absolute inset-0 flex items-center justify-center p-8">
+            <div className="relative  rounded-[50px] lg:rounded-l-none">
+              <div className="absolute inset-0 flex items-center rounded-[50px] justify-center p-8">
                 <Image
                   src={illustrationImage}
                   alt={illustrationAlt}
                   width={600}
                   height={600}
-                  className="object-contain w-full h-full"
+                  className="object-contain rounded-[50px] w-full h-full"
                 />
               </div>
             </div>

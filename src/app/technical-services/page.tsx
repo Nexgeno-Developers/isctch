@@ -69,7 +69,7 @@ export default async function TechnicalServicesPage() {
       </section>
 
       {/* Technical Support Service Section */}
-      <section className="bg-gray-50">
+      <section className="bg-gray-50 pb-12">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-0 items-center">
           {/* Left Column - Text Content */}
           <div className="container mx-auto px-4 lg:px-16 xl:px-24">
@@ -95,10 +95,10 @@ export default async function TechnicalServicesPage() {
       </section>
 
       {/* Upgrade & Expand Section */}
-      <section className="bg-gray-50 py-12 md:py-16 lg:py-20">
-        <div className="container mx-auto px-4">
+      <section className="bg-gray-50 py-4 md:py-8 lg:py-12">
+        <div className="bg-[#EDF0F1] rounded-[50px] p-8 md:p-12 lg:p-16  container mx-auto px-4">
           {/* Section Heading */}
-          <div className="text-center mb-12 md:mb-16">
+          <div className="text-center mb-8 md:mb-12">
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900">
               <span className="text-[#009FE8]">{listingData.upgradeSection.headingHighlight}</span>{' '}
               {listingData.upgradeSection.heading.replace(listingData.upgradeSection.headingHighlight, '').trim()}
@@ -110,17 +110,17 @@ export default async function TechnicalServicesPage() {
             {listingData.upgradeSection.cards.map((card) => (
               <div
                 key={card.id}
-                className="bg-white rounded-[25px] overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col"
+                className="bg-white rounded-[50px] overflow-hidden transition-all duration-300 flex flex-col p-[15px]"
               >
                 {/* Video Thumbnail */}
-                <div className="relative aspect-video bg-gray-100 overflow-hidden">
+                <div className="rounded-[50px] relative aspect-video bg-gray-100 overflow-hidden">
                   <img
                     src={card.thumbnail}
                     alt={card.thumbnailAlt}
                     className="w-full h-full object-cover"
                   />
                   {/* Play Button Overlay */}
-                  <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-20 hover:bg-opacity-30 transition-opacity">
+                  <div className="absolute inset-0 flex items-center justify-center bg-opacity-20 hover:bg-opacity-30 transition-opacity">
                     <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center shadow-lg">
                       <svg
                         className="w-8 h-8 text-[#009FE8] ml-1"
@@ -134,7 +134,7 @@ export default async function TechnicalServicesPage() {
                 </div>
 
                 {/* Card Content */}
-                <div className="p-6 md:p-8 flex-1 flex flex-col">
+                <div className="pl-[15px] pr-[15px] pt-[25px] pb-[15px] flex-1 flex flex-col">
                   {/* Title */}
                   <h3 className="text-2xl md:text-3xl font-bold text-[#009FE8] mb-4">
                     {card.title}
@@ -173,7 +173,7 @@ export default async function TechnicalServicesPage() {
       </section>
 
       {/* Service Differentiation Section */}
-      <section className="bg-gray-50 py-12 md:py-16 lg:py-20">
+      <section className="bg-gray-50 py-4 md:py-8 lg:py-12">
         <div className="container mx-auto px-4">
           <div className="bg-[#009FE8] rounded-[50px] p-8 md:p-12 lg:p-16">
             {/* Section Title */}
@@ -186,32 +186,32 @@ export default async function TechnicalServicesPage() {
               <table className="w-full text-white">
                 {/* Header Row 1 */}
                 <thead>
-                  <tr className="border-b border-white border-opacity-30">
-                    <th className="text-left py-4 px-4 md:px-6 font-semibold text-lg md:text-xl">
+                  <tr className="border-b border-[#3DBEF9] border-opacity-30">
+                    <th className="text-left py-4 font-semibold text-lg md:text-xl">
                       {listingData.serviceDifferentiation.headerRow1.empty}
                     </th>
-                    <th className="text-center py-4 px-4 md:px-6 font-bold text-lg md:text-xl uppercase">
+                    <th className="text-center py-4 font-bold text-lg md:text-xl uppercase">
                       {listingData.serviceDifferentiation.headerRow1.lamiCare}
                     </th>
-                    <th className="text-center py-4 px-4 md:px-6 font-bold text-lg md:text-xl uppercase">
+                    <th className="text-center py-4 font-bold text-lg md:text-xl uppercase">
                       {listingData.serviceDifferentiation.headerRow1.lamiPremium}
                     </th>
-                    <th className="text-center py-4 px-4 md:px-6 font-bold text-lg md:text-xl uppercase">
+                    <th className="text-center py-4 font-bold text-lg md:text-xl uppercase">
                       {listingData.serviceDifferentiation.headerRow1.lamiPartner}
                     </th>
                   </tr>
                   {/* Header Row 2 */}
-                  <tr className="border-b border-white border-opacity-30">
-                    <th className="text-left py-4 px-4 md:px-6 font-semibold text-base md:text-lg">
+                  <tr className="border-b border-[#3DBEF9] border-opacity-30">
+                    <th className="text-left py-4 font-semibold text-base md:text-lg">
                       {listingData.serviceDifferentiation.headerRow2.focus}
                     </th>
-                    <th className="text-center py-4 px-4 md:px-6 font-semibold text-base md:text-lg">
+                    <th className="text-center py-4 font-semibold text-base md:text-lg">
                       {listingData.serviceDifferentiation.headerRow2.stability}
                     </th>
-                    <th className="text-center py-4 px-4 md:px-6 font-semibold text-base md:text-lg">
+                    <th className="text-center py-4 font-semibold text-base md:text-lg">
                       {listingData.serviceDifferentiation.headerRow2.performance}
                     </th>
-                    <th className="text-center py-4 px-4 md:px-6 font-semibold text-base md:text-lg">
+                    <th className="text-center py-4 font-semibold text-base md:text-lg">
                       {listingData.serviceDifferentiation.headerRow2.transformation}
                     </th>
                   </tr>
@@ -221,18 +221,18 @@ export default async function TechnicalServicesPage() {
                   {listingData.serviceDifferentiation.rows.map((row, index) => (
                     <tr
                       key={index}
-                      className={`border-b border-white border-opacity-20 ${index === listingData.serviceDifferentiation.rows.length - 1 ? '' : ''}`}
+                      className={`border-b border-[#3DBEF9] border-opacity-20 ${index === listingData.serviceDifferentiation.rows.length - 1 ? '' : ''}`}
                     >
-                      <td className="py-4 px-4 md:px-6 font-bold text-base md:text-lg uppercase">
+                      <td className="py-4  font-bold text-base md:text-lg uppercase">
                         {row.category}
                       </td>
-                      <td className="py-4 px-4 md:px-6 text-center text-base md:text-lg">
+                      <td className="py-4 text-center text-base md:text-lg">
                         {row.lamiCare}
                       </td>
-                      <td className="py-4 px-4 md:px-6 text-center text-base md:text-lg">
+                      <td className="py-4  text-center text-base md:text-lg">
                         {row.lamiPremium}
                       </td>
-                      <td className="py-4 px-4 md:px-6 text-center text-base md:text-lg">
+                      <td className="py-4 text-center text-base md:text-lg">
                         {row.lamiPartner}
                       </td>
                     </tr>
@@ -245,10 +245,10 @@ export default async function TechnicalServicesPage() {
       </section>
 
       {/* Driving Operational Success Section */}
-      <section className="bg-white py-12 md:py-16 lg:py-20">
+      <section className="bg-gray-50 py-4 md:py-8 lg:py-12">
         <div className="container mx-auto px-4">
           {/* Section Heading */}
-          <div className="text-center mb-12 md:mb-16">
+          <div className="text-center mb-8 md:mb-12">
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900">
               <span className="text-[#009FE8]">{listingData.operationalSuccess.headingHighlight}</span>{' '}
               {listingData.operationalSuccess.heading.replace(listingData.operationalSuccess.headingHighlight, '').trim()}
@@ -260,28 +260,29 @@ export default async function TechnicalServicesPage() {
             {listingData.operationalSuccess.cards.map((card) => (
               <div
                 key={card.id}
-                className="bg-white rounded-[25px] overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col h-full"
+                className="bg-white rounded-[50px] overflow-hidden transition-all duration-300 flex flex-col h-full p-[15px]"
               >
                 {/* Card Image */}
-                <div className="relative aspect-square overflow-hidden bg-gray-100 rounded-t-[25px]">
+                <div className="relative w-full h-auto overflow-hidden bg-gray-100 rounded-[50px]">
                   <Image
                     src={card.image}
                     alt={card.imageAlt}
-                    fill
-                    className="object-cover"
+                    width={800}
+                    height={600}
+                    className="w-full h-auto object-cover"
                     sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw"
                   />
                 </div>
 
                 {/* Card Content */}
-                <div className="p-6 md:p-8 flex-1 flex flex-col">
+                <div className="pl-[15px] pr-[15px] pt-[25px] pb-[15px] flex-1 flex flex-col">
                   {/* Title */}
                   <h3 className="text-xl md:text-2xl font-bold text-[#009FE8] mb-4">
                     {card.title}
                   </h3>
 
                   {/* Description */}
-                  <p className="text-gray-700 mb-6 flex-1 leading-relaxed">
+                  <p className="text-gray-700 mb-2 flex-1 leading-relaxed">
                     {card.description}
                   </p>
 

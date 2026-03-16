@@ -97,7 +97,7 @@ export interface TechnicalServicesListingData {
 export function getTechnicalServicesListingData(): TechnicalServicesListingData {
   return {
     heroTitle: 'Technical Service',
-    heroBackgroundImage: '/technical_bg.jpg',
+    heroBackgroundImage: '/banner-slider1.jpg',
     introSection: {
       heading: 'Technical Support Service',
       paragraphs: [
@@ -116,7 +116,7 @@ export function getTechnicalServicesListingData(): TechnicalServicesListingData 
           id: '1',
           title: 'Lami Care',
           description: 'Focused on foundational operational support, this tier includes Preventative Maintenance, Corrective Maintenance, Remote Support, Overall Assessment, Spare Parts, Training.',
-          thumbnail: '/images/technical-services/lami-care-thumbnail.jpg',
+          thumbnail: '/technical_video.jpg',
           thumbnailAlt: 'Lami Care Service',
           ctaText: 'Discover More',
           ctaLink: '/technical-services/lami-care'
@@ -125,7 +125,7 @@ export function getTechnicalServicesListingData(): TechnicalServicesListingData 
           id: '2',
           title: 'LamiPremium',
           description: 'This tier include Performance Commitment, Maintenance Management, Machine Volume Conversion, Machine Refurbish & Reconditioning, Machine Installation & Commissioning, Package Volume Customization.',
-          thumbnail: '/images/technical-services/lami-premium-thumbnail.jpg',
+          thumbnail: '/technical_video.jpg',
           thumbnailAlt: 'LamiPremium Service',
           ctaText: 'Discover More',
           ctaLink: '/technical-services/lami-premium'
@@ -134,7 +134,7 @@ export function getTechnicalServicesListingData(): TechnicalServicesListingData 
           id: '3',
           title: 'LamiPartner',
           description: 'It includes Operational cost commitment, Digital Solution (31 Smart Version), Automation Service, New Format Customization, Machine Start-up, Plant Components.',
-          thumbnail: '/images/technical-services/lami-partner-thumbnail.jpg',
+          thumbnail: '/technical_video.jpg',
           thumbnailAlt: 'LamiPartner Service',
           ctaText: 'Discover More',
           ctaLink: '/technical-services/lami-partner'
@@ -184,7 +184,7 @@ export function getTechnicalServicesListingData(): TechnicalServicesListingData 
           id: '1',
           title: 'Spare Parts',
           description: 'Elevate reliability and minimize downtime where our spare parts services can ensure seamless access to critical components for sustained operational excellence.',
-          image: '/images/technical-services/spare-parts.jpg',
+          image: '/driving_image_1.jpg',
           imageAlt: 'Spare Parts Service',
           ctaText: 'Discover More',
           ctaLink: '/technical-services/spare-parts'
@@ -193,7 +193,7 @@ export function getTechnicalServicesListingData(): TechnicalServicesListingData 
           id: '2',
           title: 'Lamipak Value Added Engineering',
           description: 'We stand as a strategic partner that goes beyond being a mere packaging provider, offering expert technical support to optimize your operations and drive innovation.',
-          image: '/images/technical-services/value-added-engineering.jpg',
+          image: '/driving_image_2.jpg',
           imageAlt: 'Lamipak Value Added Engineering',
           ctaText: 'Discover More',
           ctaLink: '/technical-services/value-added-engineering'
@@ -202,7 +202,7 @@ export function getTechnicalServicesListingData(): TechnicalServicesListingData 
           id: '3',
           title: 'R&D Center',
           description: 'Our R&D Center is an innovation hub merging cutting-edge technology with continuous research to create smarter, stronger, and more sustainable packaging solutions.',
-          image: '/images/technical-services/rd-center.jpg',
+          image: '/driving_image_3.jpg',
           imageAlt: 'R&D Center',
           ctaText: 'Discover More',
           ctaLink: '/technical-services/rd-center'
@@ -211,7 +211,7 @@ export function getTechnicalServicesListingData(): TechnicalServicesListingData 
           id: '4',
           title: 'Pilot Plan',
           description: 'Our Pilot Plant serves as a small-scale manufacturing facility that enables precise sample production before moving to mass production. This facility provides the perfect testing ground for new products and processes.',
-          image: '/images/technical-services/pilot-plan.jpg',
+          image: '/driving_image_4.jpg',
           imageAlt: 'Pilot Plan',
           ctaText: 'Discover More',
           ctaLink: '/technical-services/pilot-plan'
@@ -222,7 +222,7 @@ export function getTechnicalServicesListingData(): TechnicalServicesListingData 
       heading: 'Connect with Our Technical Experts',
       headingHighlight: 'Technical Experts',
       formTitle: 'Send Us A Message',
-      illustrationImage: '/images/technical-services/connect-experts-illustration.jpg',
+      illustrationImage: '/connected_image.jpg',
       illustrationAlt: 'Connect with Technical Experts'
     }
   };

@@ -77,7 +77,7 @@ const technicalServices: TechnicalServiceData[] = [
     shortDescription: 'Focused on foundational operational support, this tier includes Preventative Maintenance, Corrective Maintenance, Remote Support, Overall Assessment, Spare Parts, Training.',
     image: '/images/technical-services/lami-care-thumbnail.jpg',
     imageAlt: 'Lami Care Service',
-    heroBackgroundImage: '/technical_bg.jpg',
+    heroBackgroundImage: '/banner-slider1.jpg',
     category: 'Service Tier',
     introSection: {
       tagline: 'Ensuring Operational Excellence',
@@ -170,7 +170,7 @@ const technicalServices: TechnicalServiceData[] = [
     shortDescription: 'This tier include Performance Commitment, Maintenance Management, Machine Volume Conversion, Machine Refurbish & Reconditioning, Machine Installation & Commissioning, Package Volume Customization.',
     image: '/images/technical-services/lami-premium-thumbnail.jpg',
     imageAlt: 'LamiPremium Service',
-    heroBackgroundImage: '/technical_bg.jpg',
+    heroBackgroundImage: '/banner-slider1.jpg',
     category: 'Service Tier',
     introSection: {
       tagline: 'Enhanced Performance & Efficiency',
@@ -219,7 +219,7 @@ const technicalServices: TechnicalServiceData[] = [
     shortDescription: 'It includes Operational cost commitment, Digital Solution (31 Smart Version), Automation Service, New Format Customization, Machine Start-up, Plant Components.',
     image: '/images/technical-services/lami-partner-thumbnail.jpg',
     imageAlt: 'LamiPartner Service',
-    heroBackgroundImage: '/technical_bg.jpg',
+    heroBackgroundImage: '/banner-slider1.jpg',
     category: 'Service Tier',
     introSection: {
       tagline: 'Strategic Partnership & Transformation',
