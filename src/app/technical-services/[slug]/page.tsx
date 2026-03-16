@@ -162,28 +162,20 @@ export default async function TechnicalServicePage({ params }: TechnicalServiceP
                 <div className="flex justify-center lg:justify-start">
                   <div className="relative w-64 h-64 md:w-80 md:h-80">
                     {/* Gradient Border Circle */}
-                    <div className="absolute inset-0 rounded-full p-1 bg-gradient-to-b from-[#009FE8] to-[#0077B6]">
-                      <div className="w-full h-full rounded-full bg-white flex flex-col items-center justify-center p-8">
-                        {/* Star Icon */}
-                        {serviceData.introSection.icon && (
-                          <div className="mb-4">
-                            <svg
-                              className="w-12 h-12 md:w-16 md:h-16 text-[#009FE8]"
-                              fill="currentColor"
-                              viewBox="0 0 24 24"
-                            >
-                              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-                            </svg>
+                    <div className="absolute inset-0 rounded-full">
+                      <div className="w-full h-full rounded-full flex items-center justify-center">
+                        {/* Image */}
+                        {serviceData.introSection.image && (
+                          <div className="relative w-full h-full rounded-full overflow-hidden">
+                            <Image
+                              src={serviceData.introSection.image}
+                              alt={serviceData.introSection.imageAlt || serviceData.title}
+                              fill
+                              className="object-cover"
+                              sizes="(max-width: 768px) 240px, 304px"
+                            />
                           </div>
                         )}
-                        {/* Service Title */}
-                        <h2 className="text-2xl md:text-3xl font-bold text-[#009FE8] mb-2 uppercase">
-                          {serviceData.title}
-                        </h2>
-                        {/* Tagline */}
-                        <p className="text-sm md:text-base text-gray-700 text-center leading-tight">
-                          {serviceData.introSection.tagline}
-                        </p>
                       </div>
                     </div>
                   </div>

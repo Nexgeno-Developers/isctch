@@ -40,7 +40,9 @@ export interface TechnicalServiceData {
   category?: string;
   introSection?: {
     tagline: string; // e.g., "Ensuring Operational Excellence"
-    icon?: string; // Star icon or other icon
+    icon?: string; // Star icon or other icon (deprecated, use image instead)
+    image?: string; // Image path for circular graphic
+    imageAlt?: string; // Alt text for image
     detailedDescription?: string; // Longer description paragraph
   };
   detailedFeatures?: {
@@ -87,13 +89,15 @@ const technicalServices: TechnicalServiceData[] = [
     title: 'Lami Care',
     description: 'Focused on foundational operational support, this tier includes Preventative Maintenance, Corrective Maintenance, Remote Support, Overall Assessment, Spare Parts, Training.',
     shortDescription: 'Focused on foundational operational support, this tier includes Preventative Maintenance, Corrective Maintenance, Remote Support, Overall Assessment, Spare Parts, Training.',
-    image: '/images/technical-services/lami-care-thumbnail.jpg',
+    image: '/lacare_hero.jpg',
     imageAlt: 'Lami Care Service',
     heroBackgroundImage: '/banner-slider1.jpg',
     category: 'Service Tier',
     introSection: {
       tagline: 'Ensuring Operational Excellence',
       icon: '/images/icons/star.svg',
+      image: '/lacare_hero.jpg',
+      imageAlt: 'Lami Care Service',
       detailedDescription: 'LamiCare is Lamipak\'s foundational technical service program designed to ensure stable, reliable, and efficient performance across your aseptic carton packaging and aseptic liquid packaging production lines. As part of Lamipak\'s integrated aseptic packaging solutions, LamiCare helps customers maintain production stability while supporting long-term efficiency and sustainable packaging solutions objectives.'
     },
     detailedFeatures: [
@@ -208,7 +212,7 @@ const technicalServices: TechnicalServiceData[] = [
     category: 'Service Tier',
     introSection: {
       tagline: 'Enhanced Performance & Efficiency',
-      icon: '/images/icons/star.svg',
+      icon: '/lacare_hero.jpg',
       detailedDescription: 'LamiPremium is Lamipak\'s advanced technical service program designed to deliver enhanced performance commitments and operational excellence. This tier provides comprehensive maintenance management, machine optimization, and customized solutions to maximize your production efficiency and equipment value.'
     },
     connectSection: {
