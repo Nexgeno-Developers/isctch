@@ -11,7 +11,7 @@ export default async function CallToAction() {
   const data = homepageData.callToAction;
 
   return (
-    <section className="">
+    <section className="bg-gray-50">
       <div className="container mx-auto px-4">
         <div className="bg-[#EDF0F1] rounded-[50px] p-8 md:p-12 lg:p-16">
           <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 md:gap-8">
