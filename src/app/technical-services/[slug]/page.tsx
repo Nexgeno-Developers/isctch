@@ -9,6 +9,7 @@ import TechnicalConsultationCTA from '@/components/products/TechnicalConsultatio
 import NewsletterSubscription from '@/components/home/NewsletterSubscription';
 import VerticalTabsFeatures from '@/components/technical-services/VerticalTabsFeatures';
 import VideoBanner from '@/components/home/VideoBanner';
+import OperationalSuccess from '@/components/technical-services/OperationalSuccess';
 import ConnectTechnicalExperts from '@/components/technical-services/ConnectTechnicalExperts';
 import CallToAction from '@/components/home/CallToAction';
 
@@ -154,7 +155,7 @@ export default async function TechnicalServicePage({ params }: TechnicalServiceP
 
         {/* Intro Section with Circular Graphic */}
         {serviceData.introSection && (
-          <section className="bg-white py-12 md:py-16">
+          <section className="bg-gray-50 py-12 pt-12 pb-4 md:pt-20 pb-8">
             <div className="container mx-auto px-4">
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
                 {/* Left Column - Circular Graphic */}
@@ -230,6 +231,10 @@ export default async function TechnicalServicePage({ params }: TechnicalServiceP
 
       <VideoBanner videoOnly={true} />
 
+        {/* Driving Operational Success Section */}
+        {serviceData.operationalSuccess && (
+          <OperationalSuccess data={serviceData.operationalSuccess} />
+        )}
 
         {/* Connect with Technical Experts Section */}
         {serviceData.connectSection && (

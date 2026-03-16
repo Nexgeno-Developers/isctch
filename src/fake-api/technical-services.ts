@@ -57,6 +57,18 @@ export interface TechnicalServiceData {
     illustrationImage: string;
     illustrationAlt: string;
   };
+  operationalSuccess?: {
+    heading: string;
+    headingHighlight: string;
+    cards: {
+      id: string;
+      title: string;
+      image: string;
+      imageAlt: string;
+      overlayText: string; // Large semi-transparent text overlay (e.g., "LAMINATUR", "LAMIPURE")
+      icon: string; // Icon type: 'pilot-plan' or 'rd-center'
+    }[];
+  };
   cta?: {
     label?: string;
     heading?: string;
@@ -132,8 +144,30 @@ const technicalServices: TechnicalServiceData[] = [
       heading: 'Connect with Our Technical Experts',
       headingHighlight: 'Technical Experts',
       formTitle: 'Send Us A Message',
-      illustrationImage: '/images/technical-services/connect-experts-illustration.jpg',
+      illustrationImage: '/connected_image.jpg',
       illustrationAlt: 'Connect with Technical Experts'
+    },
+    operationalSuccess: {
+      heading: 'Driving Operational Success',
+      headingHighlight: 'Driving Operational',
+      cards: [
+        {
+          id: '1',
+          title: 'Pilot Plan',
+          image: '/driving_opration_one.jpg',
+          imageAlt: 'Pilot Plan - LamiNatural Product',
+          overlayText: 'LAMINATUR',
+          icon: 'pilot-plan'
+        },
+        {
+          id: '2',
+          title: 'R&D Center',
+          image: '/driving_opration_two.jpg',
+          imageAlt: 'R&D Center - LamiPure Product',
+          overlayText: 'LAMIPURE',
+          icon: 'rd-center'
+        }
+      ]
     },
     cta: {
       label: 'GET STARTED',
@@ -181,7 +215,7 @@ const technicalServices: TechnicalServiceData[] = [
       heading: 'Connect with Our Technical Experts',
       headingHighlight: 'Technical Experts',
       formTitle: 'Send Us A Message',
-      illustrationImage: '/images/technical-services/connect-experts-illustration.jpg',
+      illustrationImage: '/connected_image.jpg',
       illustrationAlt: 'Connect with Technical Experts'
     },
     cta: {
@@ -230,7 +264,7 @@ const technicalServices: TechnicalServiceData[] = [
       heading: 'Connect with Our Technical Experts',
       headingHighlight: 'Technical Experts',
       formTitle: 'Send Us A Message',
-      illustrationImage: '/images/technical-services/connect-experts-illustration.jpg',
+      illustrationImage: '/connected_image.jpg',
       illustrationAlt: 'Connect with Technical Experts'
     },
     cta: {
