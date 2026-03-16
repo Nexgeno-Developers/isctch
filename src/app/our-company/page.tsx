@@ -81,7 +81,7 @@ export default async function OurCompanyPage() {
 
 <VideoBanner videoOnly={true} />
         {/* Navigation Section */}
-        <CompanyNavigationServer activePath="/our-company" />
+        <CompanyNavigationServer />
 
         <CallToAction />
         <NewsletterSubscription />

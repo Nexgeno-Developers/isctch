@@ -45,7 +45,7 @@ export default function CompanyNavigation({ data, activePath }: CompanyNavigatio
   return (
     <section className="py-12 md:py-16 bg-white">
       <div className="container mx-auto px-4">
-        <div className="flex flex-wrap justify-center gap-6 gap-[100px]">
+        <div className="flex flex-wrap justify-between">
           {data.items.map((item) => {
             // Check if current path matches item href, or if on /about-us and item is "About us" (/our-company)
             const isActive = activePath === item.href || 
@@ -60,7 +60,7 @@ export default function CompanyNavigation({ data, activePath }: CompanyNavigatio
                 {/* Circular Icon Container */}
                 <div className={`w-20 h-20 md:w-[180px] md:h-[180px] rounded-full flex items-center justify-center mb-3 transition-colors ${
                   isActive
-                    ? 'bg-[#009FE8] border-2 border-[#009FE8] shadow-md'
+                    ? 'bg-[#009FE8]'
                     : 'bg-[#EDF0F1] '
                 }`}>
                   <div className={isActive ? 'text-white' : 'text-[#009FE8]'}>
