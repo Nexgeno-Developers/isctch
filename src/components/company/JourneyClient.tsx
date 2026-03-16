@@ -52,12 +52,12 @@ export default function JourneyClient({ data }: JourneyClientProps) {
           <div className="flex flex-col">
             <div className="flex items-start gap-4 lg:gap-6 w-full">
               {/* Timeline Line */}
-              <div className="relative flex-shrink-0">
-                <div className="w-0.5 bg-[#009FE8] min-h-[500px] md:min-h-[600px]" />
+              <div className="relative flex-shrink-0 self-stretch">
+                <div className="absolute left-0 top-0 bottom-0 w-0.5 bg-[#009FE8]" />
               </div>
 
               {/* Years List with Dots */}
-              <div className="flex flex-col gap-2 md:gap-3 flex-1 relative ">
+              <div className="flex flex-col gap-2 md:gap-3 flex-1 relative">
                 {data.milestones.map((milestone) => {
                   const isSelected = milestone.year === selectedYear;
                   return (
@@ -67,20 +67,20 @@ export default function JourneyClient({ data }: JourneyClientProps) {
                         <div
                           className={`w-3 h-3 rounded-full transition-all ${
                             isSelected
-                              ? 'bg-[#009FE8] border-2 border-white shadow-md'
+                              ? 'bg-[#009FE8] border-3 border-white shadow-md'
                               : 'bg-transparent'
                           }`}
                         />
                       </div>
                       <button
                         onClick={() => setSelectedYear(milestone.year)}
-                        className={`text-left transition-colors flex items-center pb-5 ${
+                        className={`cursor-pointer text-left transition-colors flex items-center pb-5 ${
                           isSelected
                             ? 'text-[#009FE8] font-semibold'
                             : 'text-gray-600 hover:text-gray-900'
                         }`}
                       >
-                        <span className="text-base md:text-lg lg:text-[24px] font-bold  leading-tight">{milestone.year}</span>
+                        <span className="text-base md:text-lg lg:text-[24px] font-bold leading-tight">{milestone.year}</span>
                       </button>
                     </div>
                   );
