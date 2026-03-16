@@ -34,13 +34,10 @@ export interface TechnicalServiceData {
   description: string;
   shortDescription?: string;
   image: string;
-  imageAlt: string;
   heroBackgroundImage?: string;
   icon?: string;
   category?: string;
   introSection?: {
-    tagline: string; // e.g., "Ensuring Operational Excellence"
-    icon?: string; // Star icon or other icon (deprecated, use image instead)
     image?: string; // Image path for circular graphic
     imageAlt?: string; // Alt text for image
     detailedDescription?: string; // Longer description paragraph
@@ -90,12 +87,9 @@ const technicalServices: TechnicalServiceData[] = [
     description: 'Focused on foundational operational support, this tier includes Preventative Maintenance, Corrective Maintenance, Remote Support, Overall Assessment, Spare Parts, Training.',
     shortDescription: 'Focused on foundational operational support, this tier includes Preventative Maintenance, Corrective Maintenance, Remote Support, Overall Assessment, Spare Parts, Training.',
     image: '/lacare_hero.jpg',
-    imageAlt: 'Lami Care Service',
     heroBackgroundImage: '/banner-slider1.jpg',
     category: 'Service Tier',
     introSection: {
-      tagline: 'Ensuring Operational Excellence',
-      icon: '/images/icons/star.svg',
       image: '/lacare_hero.jpg',
       imageAlt: 'Lami Care Service',
       detailedDescription: 'LamiCare is Lamipak\'s foundational technical service program designed to ensure stable, reliable, and efficient performance across your aseptic carton packaging and aseptic liquid packaging production lines. As part of Lamipak\'s integrated aseptic packaging solutions, LamiCare helps customers maintain production stability while supporting long-term efficiency and sustainable packaging solutions objectives.'
@@ -207,12 +201,9 @@ const technicalServices: TechnicalServiceData[] = [
     description: 'This tier include Performance Commitment, Maintenance Management, Machine Volume Conversion, Machine Refurbish & Reconditioning, Machine Installation & Commissioning, Package Volume Customization.',
     shortDescription: 'This tier include Performance Commitment, Maintenance Management, Machine Volume Conversion, Machine Refurbish & Reconditioning, Machine Installation & Commissioning, Package Volume Customization.',
     image: '/images/technical-services/lami-premium-thumbnail.jpg',
-    imageAlt: 'LamiPremium Service',
     heroBackgroundImage: '/banner-slider1.jpg',
     category: 'Service Tier',
     introSection: {
-      tagline: 'Enhanced Performance & Efficiency',
-      icon: '/lacare_hero.jpg',
       detailedDescription: 'LamiPremium is Lamipak\'s advanced technical service program designed to deliver enhanced performance commitments and operational excellence. This tier provides comprehensive maintenance management, machine optimization, and customized solutions to maximize your production efficiency and equipment value.'
     },
     connectSection: {
@@ -256,12 +247,9 @@ const technicalServices: TechnicalServiceData[] = [
     description: 'It includes Operational cost commitment, Digital Solution (31 Smart Version), Automation Service, New Format Customization, Machine Start-up, Plant Components.',
     shortDescription: 'It includes Operational cost commitment, Digital Solution (31 Smart Version), Automation Service, New Format Customization, Machine Start-up, Plant Components.',
     image: '/images/technical-services/lami-partner-thumbnail.jpg',
-    imageAlt: 'LamiPartner Service',
     heroBackgroundImage: '/banner-slider1.jpg',
     category: 'Service Tier',
     introSection: {
-      tagline: 'Strategic Partnership & Transformation',
-      icon: '/images/icons/star.svg',
       detailedDescription: 'LamiPartner is Lamipak\'s premier technical service program offering strategic partnership and complete operational transformation. This tier includes operational cost commitment, advanced digital solutions, automation services, and comprehensive support to drive your business growth and innovation.'
     },
     connectSection: {
