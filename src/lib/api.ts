@@ -28,6 +28,12 @@ import {
   type TechnicalServiceData
 } from '@/fake-api/technical-services';
 import {
+  getAllMarketingServices as fakeGetAllMarketingServices,
+  getMarketingServiceData as fakeGetMarketingServiceData,
+  getAllMarketingServiceSlugs as fakeGetAllMarketingServiceSlugs,
+  type MarketingServiceData,
+} from '@/fake-api/marketing-services';
+import {
   getTechnicalServicesListingData as fakeGetTechnicalServicesListingData,
   type TechnicalServicesListingData
 } from '@/fake-api/technical-services-listing';
@@ -38,7 +44,14 @@ import {
 import { getCanonicalUrl } from '@/config/site';
 
 // Re-export types for convenience
-export type { ProductData, ProductCategory, TechnicalServiceData, TechnicalServicesListingData, CompanyData };
+export type {
+  ProductData,
+  ProductCategory,
+  TechnicalServiceData,
+  TechnicalServicesListingData,
+  CompanyData,
+  MarketingServiceData,
+};
 import { getHeaderData as fakeGetHeaderData, type HeaderData } from '@/fake-api/layout';
 import { getFooterData as fakeGetFooterData, type FooterData } from '@/fake-api/layout';
 
@@ -323,3 +336,62 @@ export async function fetchCompanyData(): Promise<CompanyData> {
   
   return fakeGetCompanyData();
 }
+
+/**
+ * Fetches all marketing services
+ *
+ * @returns Promise<MarketingServiceData[]>
+ */
+export async function getAllMarketingServices(): Promise<MarketingServiceData[]> {
+  if (useRealAPI()) {
+    // TODO: Replace with real API call when Laravel backend is ready
+    // const response = await fetch(`${API_CONFIG.baseUrl}${API_CONFIG.endpoints.marketingServices}`);
+    // if (!response.ok) throw new Error('Failed to fetch marketing services');
+    // return response.json();
+    throw new Error('Real API not yet implemented');
+  }
+
+  return fakeGetAllMarketingServices();
+}
+
+/**
+ * Fetches single marketing service by slug
+ *
+ * @param slug - The marketing service slug
+ * @returns Promise<MarketingServiceData | null>
+ */
+export async function fetchMarketingServiceData(
+  slug: string,
+): Promise<MarketingServiceData | null> {
+  if (useRealAPI()) {
+    // TODO: Replace with real API call when Laravel backend is ready
+    // const response = await fetch(`${API_CONFIG.baseUrl}${API_CONFIG.endpoints.marketingService(slug)}`);
+    // if (!response.ok) {
+    //   if (response.status === 404) return null;
+    //   throw new Error('Failed to fetch marketing service data');
+    // }
+    // return response.json();
+    throw new Error('Real API not yet implemented');
+  }
+
+  return fakeGetMarketingServiceData(slug);
+}
+
+/**
+ * Gets all marketing service slugs (for static generation)
+ *
+ * @returns Promise<string[]>
+ */
+export async function getAllMarketingServiceSlugs(): Promise<string[]> {
+  if (useRealAPI()) {
+    // TODO: Replace with real API call when Laravel backend is ready
+    // const response = await fetch(`${API_CONFIG.baseUrl}${API_CONFIG.endpoints.marketingServices}`);
+    // if (!response.ok) throw new Error('Failed to fetch marketing services');
+    // const data = await response.json();
+    // return data.map((service: MarketingServiceData) => service.slug);
+    throw new Error('Real API not yet implemented');
+  }
+
+  return fakeGetAllMarketingServiceSlugs();
+}
+
