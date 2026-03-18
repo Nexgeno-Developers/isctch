@@ -48,6 +48,13 @@ import {
   getCompanyData as fakeGetCompanyData,
   type CompanyData
 } from '@/fake-api/company';
+import {
+  getCareersListingData as fakeGetCareersListingData,
+  getCareerJobBySlug as fakeGetCareerJobBySlug,
+  getAllCareerJobSlugs as fakeGetAllCareerJobSlugs,
+  type CareersListingData,
+  type CareerJob,
+} from '@/fake-api/careers';
 import { getCanonicalUrl } from '@/config/site';
 
 // Re-export types for convenience
@@ -60,6 +67,8 @@ export type {
   MarketingServiceData,
   MarketingServicesOverview,
   MarketingNewsItem,
+  CareersListingData,
+  CareerJob,
 };
 import { getHeaderData as fakeGetHeaderData, type HeaderData } from '@/fake-api/layout';
 import { getFooterData as fakeGetFooterData, type FooterData } from '@/fake-api/layout';
@@ -344,6 +353,55 @@ export async function fetchCompanyData(): Promise<CompanyData> {
   }
   
   return fakeGetCompanyData();
+}
+
+/**
+ * Fetch careers listing data (server-side)
+ */
+export async function fetchCareersListingData(): Promise<CareersListingData> {
+  if (useRealAPI()) {
+    // TODO: Replace with real API call when Laravel backend is ready
+    // const response = await fetch(`${API_CONFIG.baseUrl}${API_CONFIG.endpoints.careers}`);
+    // if (!response.ok) throw new Error('Failed to fetch careers');
+    // return response.json();
+    throw new Error('Real API not yet implemented');
+  }
+
+  return fakeGetCareersListingData();
+}
+
+/**
+ * Fetch single career job by slug (server-side)
+ */
+export async function fetchCareerJobBySlug(slug: string): Promise<CareerJob | null> {
+  if (useRealAPI()) {
+    // TODO: Replace with real API call when Laravel backend is ready
+    // const response = await fetch(`${API_CONFIG.baseUrl}${API_CONFIG.endpoints.career(slug)}`);
+    // if (!response.ok) {
+    //   if (response.status === 404) return null;
+    //   throw new Error('Failed to fetch career job');
+    // }
+    // return response.json();
+    throw new Error('Real API not yet implemented');
+  }
+
+  return fakeGetCareerJobBySlug(slug);
+}
+
+/**
+ * Get all career job slugs (for static generation)
+ */
+export async function getAllCareerJobSlugs(): Promise<string[]> {
+  if (useRealAPI()) {
+    // TODO: Replace with real API call when Laravel backend is ready
+    // const response = await fetch(`${API_CONFIG.baseUrl}${API_CONFIG.endpoints.careers}`);
+    // if (!response.ok) throw new Error('Failed to fetch careers');
+    // const data = await response.json();
+    // return data.map((job: CareerJob) => job.slug);
+    throw new Error('Real API not yet implemented');
+  }
+
+  return fakeGetAllCareerJobSlugs();
 }
 
 /**

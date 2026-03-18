@@ -20,6 +20,8 @@ export const API_CONFIG = {
     technicalService: (slug: string) => `/technical-services/${slug}`,
     technicalServicesListing: '/technical-services/listing',
     company: '/company',
+    careers: '/careers',
+    career: (slug: string) => `/careers/${slug}`,
     header: '/header',
     footer: '/footer',
     approach: '/approach',
