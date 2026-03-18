@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import Image from 'next/image';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Pagination } from 'swiper/modules';
@@ -19,11 +19,15 @@ export interface MarketingNewsItem {
 }
 
 interface LatestNewsClientProps {
-  items: MarketingNewsItem[];
+  trendItems: MarketingNewsItem[];
+  pressItems: MarketingNewsItem[];
 }
 
-export default function LatestNewsClient({ items }: LatestNewsClientProps) {
+export default function LatestNewsClient({ trendItems, pressItems }: LatestNewsClientProps) {
   const swiperRef = useRef<SwiperType | null>(null);
+  const [activeTab, setActiveTab] = useState<'trend' | 'press'>('trend');
+
+  const items = activeTab === 'trend' ? trendItems : pressItems;
 
   if (!items || items.length === 0) {
     return null;
@@ -41,18 +45,34 @@ export default function LatestNewsClient({ items }: LatestNewsClientProps) {
           </h2>
         </div>
 
-        {/* Tabs (visual only) */}
+        {/* Tabs */}
         <div className="flex justify-center mb-8 md:mb-10">
           <div className="inline-flex items-center gap-8">
             <button
               type="button"
-              className="cursor-pointer pb-3 text-sm md:text-base font-semibold text-[#009FE8] border-b-2 border-[#009FE8]"
+              onClick={() => {
+                setActiveTab('trend');
+                swiperRef.current?.slideToLoop(0);
+              }}
+              className={`cursor-pointer pb-3 text-sm md:text-base font-semibold transition-colors border-b-2 ${
+                activeTab === 'trend'
+                  ? 'text-[#009FE8] border-[#009FE8]'
+                  : 'text-gray-500 border-transparent hover:text-[#009FE8]'
+              }`}
             >
               Trend &amp; Insight
             </button>
             <button
               type="button"
-              className="cursor-pointer pb-3 text-sm md:text-base font-semibold text-gray-500 hover:text-[#009FE8] transition-colors"
+              onClick={() => {
+                setActiveTab('press');
+                swiperRef.current?.slideToLoop(0);
+              }}
+              className={`cursor-pointer pb-3 text-sm md:text-base font-semibold transition-colors border-b-2 ${
+                activeTab === 'press'
+                  ? 'text-[#009FE8] border-[#009FE8]'
+                  : 'text-gray-500 border-transparent hover:text-[#009FE8]'
+              }`}
             >
               Press Release &amp; Event
             </button>

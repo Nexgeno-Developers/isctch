@@ -8,6 +8,7 @@ import {
   getAllMarketingServices,
   fetchMarketingServicesOverviewData,
   fetchMarketingLatestNews,
+  fetchMarketingPressNews,
 } from '@/lib/api';
 import { getCanonicalUrl } from '@/config/site';
 import CallToAction from '@/components/home/CallToAction';
@@ -37,11 +38,12 @@ export const metadata: Metadata = {
  * and lists all marketing services using server‑side data.
  */
 export default async function MarketingServicesPage() {
-  const [companyData, marketingServices, overview, marketingNews] = await Promise.all([
+  const [companyData, marketingServices, overview, marketingNews, marketingPress] = await Promise.all([
     fetchCompanyData(),
     getAllMarketingServices(),
     fetchMarketingServicesOverviewData(),
     fetchMarketingLatestNews(),
+    fetchMarketingPressNews(),
   ]);
 
   return (
@@ -182,7 +184,7 @@ export default async function MarketingServicesPage() {
       </section>
 
       {/* Latest News Section – marketing themed slider */}
-      <LatestNewsClient items={marketingNews} />
+      <LatestNewsClient trendItems={marketingNews} pressItems={marketingPress} />
 
       {/* Connect with Marketing Experts – reuse technical experts component */}
       <ConnectTechnicalExperts

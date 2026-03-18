@@ -36,6 +36,7 @@ import {
 import {
   getMarketingServicesOverviewData as fakeGetMarketingServicesOverviewData,
   getMarketingLatestNews as fakeGetMarketingLatestNews,
+  getMarketingPressNews as fakeGetMarketingPressNews,
   type MarketingServicesOverview,
   type MarketingNewsItem,
 } from '@/fake-api/marketing-services-overview';
@@ -377,6 +378,23 @@ export async function fetchMarketingLatestNews(): Promise<MarketingNewsItem[]> {
   }
 
   return fakeGetMarketingLatestNews();
+}
+
+/**
+ * Fetches press release & event news for marketing services listing page
+ *
+ * @returns Promise<MarketingNewsItem[]>
+ */
+export async function fetchMarketingPressNews(): Promise<MarketingNewsItem[]> {
+  if (useRealAPI()) {
+    // TODO: Replace with real API call when Laravel backend is ready
+    // const response = await fetch(`${API_CONFIG.baseUrl}${API_CONFIG.endpoints.marketingPressNews}`);
+    // if (!response.ok) throw new Error('Failed to fetch marketing press news');
+    // return response.json();
+    throw new Error('Real API not yet implemented');
+  }
+
+  return fakeGetMarketingPressNews();
 }
 
 /**

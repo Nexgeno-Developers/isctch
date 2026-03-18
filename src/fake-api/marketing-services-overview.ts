@@ -135,3 +135,35 @@ export async function getMarketingLatestNews(): Promise<MarketingNewsItem[]> {
   ];
 }
 
+export async function getMarketingPressNews(): Promise<MarketingNewsItem[]> {
+  // Simulate API delay
+  await new Promise((resolve) => setTimeout(resolve, 80));
+
+  return [
+    {
+      id: 'press-1',
+      title: 'Lamipak Showcases Expanded End-to-End Packaging Solutions',
+      image: '/latest_press_1.jpg',
+      imageAlt: 'Lamipak exhibition booth at industry event',
+      date: 'February 10, 2025',
+      time: '11:00 AM',
+    },
+    {
+      id: 'press-2',
+      title: 'New Smart Packaging Hub Opens in Asia Pacific',
+      image: '/latest_press_2.jpg',
+      imageAlt: 'Modern innovation center lobby',
+      date: 'March 3, 2025',
+      time: '2:30 PM',
+    },
+    {
+      id: 'press-3',
+      title: 'Lamipak Partners with Leading Dairy Brand',
+      image: '/latest_press_3.jpg',
+      imageAlt: 'Business handshake in front of factory',
+      date: 'April 18, 2025',
+      time: '9:45 AM',
+    },
+  ];
+}
+
