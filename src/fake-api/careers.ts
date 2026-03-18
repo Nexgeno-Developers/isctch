@@ -53,6 +53,13 @@ export interface CareersListingData {
     headingHighlight: string;
     paragraphs: string[];
   };
+  verticalFeatures?: Array<{
+    id: string;
+    title: string;
+    description: string;
+    image: string;
+    imageAlt: string;
+  }>;
   jobs: CareerJob[];
   seo: CareerSEO;
 }
@@ -174,6 +181,48 @@ export async function getCareersListingData(): Promise<CareersListingData> {
         'If you’re excited to learn, collaborate, and take ownership, you’ll find a place here to grow your skills and make a real impact—locally and globally.',
       ],
     },
+    verticalFeatures: [
+      {
+        id: 'growth',
+        title: 'Growth & Learning',
+        description:
+          'Access continuous learning opportunities, mentorship, and cross-functional exposure to build skills that grow with your career.',
+        image: '/banner-slider2.jpg',
+        imageAlt: 'Team learning and collaborating',
+      },
+      {
+        id: 'innovation',
+        title: 'Innovation Culture',
+        description:
+          'Work on challenging problems in packaging, sustainability, and digital solutions—where ideas turn into real impact.',
+        image: '/banner-slider3.jpg',
+        imageAlt: 'Innovation in packaging',
+      },
+      {
+        id: 'global',
+        title: 'Global Opportunities',
+        description:
+          'Join international teams and projects across markets, enabling broader perspective and meaningful collaboration.',
+        image: '/banner-slider4.jpg',
+        imageAlt: 'Global operations',
+      },
+      {
+        id: 'ownership',
+        title: 'Ownership & Trust',
+        description:
+          'We empower people to take ownership, move fast, and make decisions—supported by strong teams and clear goals.',
+        image: '/banner-slider5.jpg',
+        imageAlt: 'Ownership and leadership',
+      },
+      {
+        id: 'wellbeing',
+        title: 'People & Wellbeing',
+        description:
+          'A supportive environment that values collaboration, respect, and sustainable ways of working for long-term success.',
+        image: '/banner-slider1.jpg',
+        imageAlt: 'Team wellbeing',
+      },
+    ],
     jobs: JOBS,
     seo: {
       meta_title: 'Career | Lamipak',

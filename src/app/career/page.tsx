@@ -5,6 +5,7 @@ import { getCanonicalUrl } from '@/config/site';
 import CompanyHero from '@/components/company/CompanyHero';
 import Breadcrumbs from '@/components/common/Breadcrumbs';
 import VideoModalClient from '@/components/common/VideoModalClient';
+import VerticalTabsFeatures from '@/components/technical-services/VerticalTabsFeatures';
 import CallToAction from '@/components/home/CallToAction';
 import NewsletterSubscription from '@/components/home/NewsletterSubscription';
 
@@ -147,6 +148,11 @@ export default async function CareerPage() {
             </div>
           </div>
         </section>
+      )}
+
+      {/* Vertical Tabs Features Section (reused from Technical Services) */}
+      {data.verticalFeatures && data.verticalFeatures.length > 0 && (
+        <VerticalTabsFeatures features={data.verticalFeatures} />
       )}
 
       <section id="open-positions" className="bg-gray-50 py-10 md:py-16">
