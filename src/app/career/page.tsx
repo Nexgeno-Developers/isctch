@@ -4,6 +4,7 @@ import { fetchCareersListingData } from '@/lib/api';
 import { getCanonicalUrl } from '@/config/site';
 import CompanyHero from '@/components/company/CompanyHero';
 import Breadcrumbs from '@/components/common/Breadcrumbs';
+import VideoModalClient from '@/components/common/VideoModalClient';
 import CallToAction from '@/components/home/CallToAction';
 import NewsletterSubscription from '@/components/home/NewsletterSubscription';
 
@@ -79,34 +80,20 @@ export default async function CareerPage() {
 
             {/* Right: media */}
             <div className="relative min-h-[320px] lg:min-h-[560px] overflow-hidden">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src={data.heroSplit.mediaImage}
-                alt={data.heroSplit.mediaAlt}
-                className="absolute inset-0 w-full h-full object-cover"
-              />
-              {/* Dark overlay */}
-              <div className="absolute inset-0 bg-[#0E233C] opacity-35" />
-
-              {/* Play button */}
-              {data.heroSplit.mediaLink && (
-                <a
-                  href={data.heroSplit.mediaLink}
-                  className="absolute inset-0 flex items-center justify-center"
-                  aria-label="Play video"
-                >
-                  <span className="w-20 h-20 rounded-full bg-white/40 backdrop-blur-sm flex items-center justify-center">
-                    <span className="w-16 h-16 rounded-full bg-white/50 flex items-center justify-center">
-                      <svg
-                        className="w-8 h-8 text-white ml-1"
-                        viewBox="0 0 24 24"
-                        fill="currentColor"
-                      >
-                        <path d="M8 5v14l11-7z" />
-                      </svg>
-                    </span>
-                  </span>
-                </a>
+              {data.heroSplit.mediaLink ? (
+                <VideoModalClient
+                  videoUrl={data.heroSplit.mediaLink}
+                  posterUrl={data.heroSplit.mediaImage}
+                  posterAlt={data.heroSplit.mediaAlt}
+                  className="absolute inset-0"
+                />
+              ) : (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img
+                  src={data.heroSplit.mediaImage}
+                  alt={data.heroSplit.mediaAlt}
+                  className="absolute inset-0 w-full h-full object-cover"
+                />
               )}
             </div>
           </div>
