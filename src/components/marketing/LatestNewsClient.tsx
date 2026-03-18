@@ -100,12 +100,68 @@ export default function LatestNewsClient({ items }: LatestNewsClientProps) {
                 </div>
 
                 <div className="px-6 pt-5 pb-6 flex-1 flex flex-col">
-                <div className="mt-auto flex items-center justify-between text-xs md:text-sm text-gray-500">
+                  <div className="mt-auto flex items-center justify-between text-xs md:text-sm text-gray-500">
                     <div className="flex items-center gap-1.5">
-                      <span className="w-1.5 h-1.5 rounded-full bg-[#009FE8]" />
+                      {/* Time icon */}
+                      <span className="inline-flex items-center justify-center w-4 h-4 rounded-full bg-[#E7F4FF]">
+                        <svg
+                          className="w-4 h-4 text-[#797979]"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            d="M12 6v6l3 3"
+                            stroke="currentColor"
+                            strokeWidth="1.8"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                          />
+                          <circle
+                            cx="12"
+                            cy="12"
+                            r="8"
+                            stroke="currentColor"
+                            strokeWidth="1.8"
+                          />
+                        </svg>
+                      </span>
                       <span>{item.time}</span>
                     </div>
-                    <span>{item.date}</span>
+                    <div className="flex items-center gap-1.5">
+                      {/* Calendar icon */}
+                      <span className="inline-flex items-center justify-center w-4 h-4 rounded-md bg-[#E7F4FF]">
+                        <svg
+                          className="w-4 h-4 text-[#797979]"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <rect
+                            x="4"
+                            y="5"
+                            width="16"
+                            height="15"
+                            rx="2"
+                            stroke="currentColor"
+                            strokeWidth="1.8"
+                          />
+                          <path
+                            d="M4 9h16"
+                            stroke="currentColor"
+                            strokeWidth="1.8"
+                            strokeLinecap="round"
+                          />
+                          <path
+                            d="M9 4v3M15 4v3"
+                            stroke="currentColor"
+                            strokeWidth="1.8"
+                            strokeLinecap="round"
+                          />
+                        </svg>
+                      </span>
+                      <span>{item.date}</span>
+                    </div>
                   </div>
                   
                   <h3 className="text-lg md:text-xl font-semibold text-[#0E233C] mb-0 leading-snug pt-4">
