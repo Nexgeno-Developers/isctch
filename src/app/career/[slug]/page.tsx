@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import CompanyHero from '@/components/company/CompanyHero';
+import Breadcrumbs from '@/components/common/Breadcrumbs';
 import { fetchCareerJobBySlug, fetchCareersListingData, getAllCareerJobSlugs } from '@/lib/api';
 import { getCanonicalUrl } from '@/config/site';
 import CallToAction from '@/components/home/CallToAction';
@@ -52,8 +53,10 @@ export default async function CareerDetailsPage({ params }: CareerDetailsPagePro
     notFound();
   }
 
+  const latestJobs = listing.jobs.filter((j) => j.slug !== slug).slice(0, 10);
+
   return (
-    <main className="min-h-screen bg-gray-50">
+    <main className="min-h-screen bg-white">
       <CompanyHero
         data={{
           title: job.title,
@@ -61,76 +64,135 @@ export default async function CareerDetailsPage({ params }: CareerDetailsPagePro
         }}
       />
 
-      <section className="bg-gray-50">
-        <div className="container mx-auto px-4 py-6">
-          <Link
-            href="/career"
-            className="inline-flex items-center text-sm md:text-base text-[#009FE8] font-semibold hover:text-[#0077B6] transition-colors"
-          >
-            <span className="mr-2">←</span> Back to career
-          </Link>
+      {/* Breadcrumbs */}
+      <section className="bg-white">
+        <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8 py-4">
+          <Breadcrumbs
+            items={[
+              { label: 'Career', href: '/career' },
+              { label: job.title },
+            ]}
+          />
         </div>
       </section>
 
-      <section className="bg-white py-10 md:py-16">
-        <div className="container mx-auto px-4">
-          <div className="max-w-4xl">
-            <div className="flex flex-wrap gap-3 mb-6">
-              <span className="inline-flex rounded-full bg-[#E7F4FF] text-[#009FE8] px-4 py-2 text-sm font-semibold">
-                {job.jobType}
-              </span>
-              <span className="inline-flex rounded-full bg-gray-100 text-gray-700 px-4 py-2 text-sm font-semibold">
-                {job.department}
-              </span>
-              <span className="inline-flex rounded-full bg-gray-100 text-gray-700 px-4 py-2 text-sm font-semibold">
+      <section className="bg-white">
+        <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8 py-8 md:py-10">
+          <Link
+            href="/career"
+            className="inline-flex items-center text-sm font-semibold text-gray-500 hover:text-[#009FE8] transition-colors"
+          >
+            <span className="mr-2">←</span> Back
+          </Link>
+
+          <div className="mt-5 flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between">
+            <div className="min-w-0">
+              <h1 className="text-2xl md:text-3xl font-semibold text-gray-900">{job.title}</h1>
+              <p className="mt-1 text-sm text-gray-500">
                 {job.location}
-              </span>
+                {job.postedAgo ? `, ${job.postedAgo}` : ''}
+              </p>
+
+              <div className="mt-4 flex flex-wrap gap-x-6 gap-y-2 text-sm text-gray-700">
+                <div className="flex items-center gap-2">
+                  <span className="text-gray-500">Salary:</span>
+                  <span className="font-semibold text-gray-900">{job.salary ?? 'Negotiable'}</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <span className="text-gray-500">Work Exp.:</span>
+                  <span className="font-semibold text-gray-900">{job.experienceLevel}</span>
+                </div>
+              </div>
             </div>
 
-            <p className="text-base md:text-lg text-gray-700 leading-relaxed mb-8">
-              {job.description}
-            </p>
+            <div className="flex flex-wrap gap-3">
+              <button
+                type="button"
+                className="rounded-full bg-gray-100 px-6 py-2.5 text-sm font-medium text-gray-800 hover:bg-gray-200 transition"
+              >
+                Im Interested
+              </button>
 
-            {job.responsibilities.length > 0 && (
-              <div className="mb-10">
-                <h2 className="text-xl md:text-2xl font-bold text-[#0E233C] mb-4">
-                  Responsibilities
-                </h2>
-                <ul className="list-disc pl-6 space-y-2 text-gray-700">
-                  {job.responsibilities.map((item, i) => (
-                    <li key={i}>{item}</li>
-                  ))}
-                </ul>
-              </div>
-            )}
+              {job.applyLinkedInUrl ? (
+                <a
+                  href={job.applyLinkedInUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center gap-2 rounded-full bg-[#0A66C2] px-6 py-2.5 text-sm font-semibold text-white hover:opacity-90 transition"
+                >
+                  Apply Via
+                  <span className="inline-flex h-6 w-6 items-center justify-center rounded-full bg-white/20 text-white font-bold">
+                    in
+                  </span>
+                </a>
+              ) : job.applyEmail ? (
+                <a
+                  href={`mailto:${job.applyEmail}`}
+                  className="rounded-full bg-[#009FE8] px-6 py-2.5 text-sm font-semibold text-white hover:opacity-90 transition"
+                >
+                  Apply Now
+                </a>
+              ) : null}
+            </div>
+          </div>
+        </div>
+      </section>
 
-            {job.requirements.length > 0 && (
-              <div className="mb-10">
-                <h2 className="text-xl md:text-2xl font-bold text-[#0E233C] mb-4">
-                  Requirements
-                </h2>
-                <ul className="list-disc pl-6 space-y-2 text-gray-700">
-                  {job.requirements.map((item, i) => (
-                    <li key={i}>{item}</li>
-                  ))}
-                </ul>
-              </div>
-            )}
+      <section className="bg-white">
+        <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8 pb-12 md:pb-16">
+          <div className="grid grid-cols-1 gap-8 lg:grid-cols-[1fr_360px] lg:gap-10">
+            {/* Left content */}
+            <div className="min-w-0">
+              {job.responsibilities.length > 0 && (
+                <div className="mt-2">
+                  <h2 className="text-base font-semibold text-gray-900">Responsibilities</h2>
+                  <ul className="mt-4 list-disc space-y-2 pl-5 text-sm leading-relaxed text-gray-700">
+                    {job.responsibilities.map((item, i) => (
+                      <li key={i}>{item}</li>
+                    ))}
+                  </ul>
+                </div>
+              )}
 
-            {job.applyEmail && (
-              <div className="rounded-[24px] bg-[#F7F9FB] border border-[#E5EDF5] p-6">
-                <h3 className="text-lg font-semibold text-[#0E233C] mb-2">
-                  Apply for this role
+              {job.requirements.length > 0 && (
+                <div className="mt-10">
+                  <h2 className="text-base font-semibold text-gray-900">Qualifications</h2>
+                  <p className="mt-1 text-xs text-gray-500">
+                    (Education / Knowledge / Working Experience)
+                  </p>
+                  <ul className="mt-4 list-disc space-y-2 pl-5 text-sm leading-relaxed text-gray-700">
+                    {job.requirements.map((item, i) => (
+                      <li key={i}>{item}</li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+            </div>
+
+            {/* Right sidebar */}
+            <aside className="lg:sticky lg:top-6 h-fit">
+              <div className="rounded-3xl bg-gray-50 p-6 md:p-7">
+                <h3 className="text-base font-semibold text-gray-900">
+                  Latest <span className="text-[#009FE8]">Jobs</span>
                 </h3>
-                <p className="text-sm md:text-base text-gray-700 mb-4">
-                  Send your CV to{' '}
-                  <a className="text-[#009FE8] font-semibold" href={`mailto:${job.applyEmail}`}>
-                    {job.applyEmail}
-                  </a>
-                  .
-                </p>
+
+                <div className="mt-5 space-y-5">
+                  {latestJobs.map((j) => (
+                    <Link
+                      key={j.id}
+                      href={`/career/${j.slug}`}
+                      className="block rounded-2xl px-3 py-2 hover:bg-white transition"
+                    >
+                      <p className="text-sm font-semibold text-gray-900">{j.title}</p>
+                      <p className="mt-1 text-xs text-gray-500">
+                        {j.location}
+                        {j.postedAgo ? `, ${j.postedAgo}` : ''}
+                      </p>
+                    </Link>
+                  ))}
+                </div>
               </div>
-            )}
+            </aside>
           </div>
         </div>
       </section>

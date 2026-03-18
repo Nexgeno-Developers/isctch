@@ -22,11 +22,14 @@ export interface CareerJob {
   jobType: string; // e.g. Full-time
   experienceLevel: string; // e.g. "5–10 Years"
   postedDate: string; // e.g. "2026-03-10"
+  postedAgo?: string; // e.g. "14 Hours Ago"
+  salary?: string; // e.g. "Negotiable"
   shortDescription: string;
   description: string;
   responsibilities: string[];
   requirements: string[];
   applyEmail?: string;
+  applyLinkedInUrl?: string;
 }
 
 export interface CareersListingData {
@@ -117,6 +120,8 @@ const JOBS: CareerJob[] = [
     jobType: 'Full-time',
     experienceLevel: '2–5 Years',
     postedDate: '2026-03-10',
+    postedAgo: '14 Hours Ago',
+    salary: 'Negotiable',
     shortDescription:
       'Support go-to-market planning, campaigns, and content creation across key product categories.',
     description:
@@ -134,6 +139,7 @@ const JOBS: CareerJob[] = [
       'Experience with B2B marketing is a plus.',
     ],
     applyEmail: 'hr@lamipak.com',
+    applyLinkedInUrl: 'https://www.linkedin.com',
   },
   {
     id: '2',
@@ -146,6 +152,8 @@ const JOBS: CareerJob[] = [
     jobType: 'Full-time',
     experienceLevel: '5–10 Years',
     postedDate: '2026-03-01',
+    postedAgo: '2 Days Ago',
+    salary: 'Negotiable',
     shortDescription:
       'Drive packaging performance, testing, and customer technical support for aseptic solutions.',
     description:
@@ -163,6 +171,7 @@ const JOBS: CareerJob[] = [
       'Ability to travel occasionally.',
     ],
     applyEmail: 'hr@lamipak.com',
+    applyLinkedInUrl: 'https://www.linkedin.com',
   },
   {
     id: '3',
@@ -175,6 +184,8 @@ const JOBS: CareerJob[] = [
     jobType: 'Full-time',
     experienceLevel: '3–5 Years',
     postedDate: '2026-02-20',
+    postedAgo: '1 Week Ago',
+    salary: 'Negotiable',
     shortDescription:
       'Build and manage customer relationships, identify opportunities, and drive revenue growth.',
     description:
@@ -192,6 +203,7 @@ const JOBS: CareerJob[] = [
       'Willingness to travel locally.',
     ],
     applyEmail: 'hr@lamipak.com',
+    applyLinkedInUrl: 'https://www.linkedin.com',
   },
 ];
 
