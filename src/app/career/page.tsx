@@ -6,6 +6,7 @@ import CompanyHero from '@/components/company/CompanyHero';
 import Breadcrumbs from '@/components/common/Breadcrumbs';
 import VideoModalClient from '@/components/common/VideoModalClient';
 import VerticalTabsFeatures from '@/components/technical-services/VerticalTabsFeatures';
+import ConnectTechnicalExperts from '@/components/technical-services/ConnectTechnicalExperts';
 import CallToAction from '@/components/home/CallToAction';
 import NewsletterSubscription from '@/components/home/NewsletterSubscription';
 
@@ -172,6 +173,55 @@ export default async function CareerPage() {
           )}
           <VerticalTabsFeatures features={data.verticalFeatures} />
         </>
+      )}
+
+      {/* Experts video gallery section (like reference design) */}
+      {data.expertsSection && data.expertsSection.videos.length > 0 && (
+        <section className="bg-white py-12 md:py-16 lg:py-20">
+          <div className="container mx-auto px-4">
+            <div className="text-center max-w-4xl mx-auto mb-10 md:mb-12">
+              <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-[#0E233C] leading-tight">
+                <span className="text-[#009FE8]">{data.expertsSection.heading}</span>{' '}
+                {data.expertsSection.headingHighlight},{' '}
+                {data.expertsSection.headingSuffix}
+              </h2>
+              <p className="text-sm md:text-base text-gray-600 mt-4">
+                {data.expertsSection.description}
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+              {data.expertsSection.videos.map((v) => (
+                <div
+                  key={v.id}
+                  className="bg-[#EDF0F1] rounded-[32px] p-4 md:p-5"
+                >
+                  <div className="relative rounded-[28px] overflow-hidden">
+                    <div className="relative w-full pt-[56.25%]">
+                      <VideoModalClient
+                        videoUrl={v.videoUrl}
+                        posterUrl={v.thumbnail}
+                        posterAlt={v.thumbnailAlt}
+                        className="absolute inset-0"
+                      />
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* Connect section (reused component) */}
+      {data.connectSection && (
+        <ConnectTechnicalExperts
+          heading={data.connectSection.heading}
+          headingHighlight={data.connectSection.headingHighlight}
+          formTitle={data.connectSection.formTitle}
+          illustrationImage={data.connectSection.illustrationImage}
+          illustrationAlt={data.connectSection.illustrationAlt}
+        />
       )}
 
       <section id="open-positions" className="bg-gray-50 py-10 md:py-16">

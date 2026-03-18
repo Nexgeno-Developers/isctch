@@ -65,6 +65,25 @@ export interface CareersListingData {
     headingHighlight: string;
     description: string;
   };
+  expertsSection?: {
+    heading: string;
+    headingHighlight: string;
+    headingSuffix: string;
+    description: string;
+    videos: Array<{
+      id: string;
+      thumbnail: string;
+      thumbnailAlt: string;
+      videoUrl: string;
+    }>;
+  };
+  connectSection?: {
+    heading: string;
+    headingHighlight: string;
+    formTitle: string;
+    illustrationImage: string;
+    illustrationAlt: string;
+  };
   jobs: CareerJob[];
   seo: CareerSEO;
 }
@@ -233,6 +252,40 @@ export async function getCareersListingData(): Promise<CareersListingData> {
       headingHighlight: 'Presentation',
       description:
         'Our values guide our commitment to quality, innovation, and sustainable packaging—creating freshness and safety in every product.',
+    },
+    expertsSection: {
+      heading: 'Behind Every',
+      headingHighlight: 'Solutions',
+      headingSuffix: "There's A Team Of Experts Driving Innovation",
+      description:
+        'Behind every solution is a team of experts creating safe and sustainable packaging for global brands.',
+      videos: [
+        {
+          id: 'experts-1',
+          thumbnail: '/latest_insite_image_1.jpg',
+          thumbnailAlt: 'Team of experts working on innovation',
+          videoUrl: '/video2.mp4',
+        },
+        {
+          id: 'experts-2',
+          thumbnail: '/latest_insite_image_2.jpg',
+          thumbnailAlt: 'Experts driving packaging innovation',
+          videoUrl: '/video2.mp4',
+        },
+        {
+          id: 'experts-3',
+          thumbnail: '/latest_insite_image_3.jpg',
+          thumbnailAlt: 'Innovation in sustainable packaging',
+          videoUrl: '/video2.mp4',
+        },
+      ],
+    },
+    connectSection: {
+      heading: 'Connect with Our Talent Team',
+      headingHighlight: 'Talent Team',
+      formTitle: 'Send Us A Message',
+      illustrationImage: '/connected_image.jpg',
+      illustrationAlt: 'Connect with Lamipak team',
     },
     jobs: JOBS,
     seo: {
