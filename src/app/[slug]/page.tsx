@@ -7,6 +7,8 @@ import Link from 'next/link';
 import Image from 'next/image';
 import CompanyHero from '@/components/company/CompanyHero';
 import Breadcrumbs from '@/components/common/Breadcrumbs';
+import CallToAction from '@/components/home/CallToAction';
+import NewsletterSubscription from '@/components/home/NewsletterSubscription';
 
 interface PageProps {
   params: Promise<{
@@ -351,6 +353,9 @@ export default async function DynamicPage({ params }: PageProps) {
 
             return null;
           })}
+
+          <CallToAction />
+          <NewsletterSubscription />
         </main>
       </>
     );
