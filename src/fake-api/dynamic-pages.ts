@@ -18,6 +18,18 @@ export interface DynamicPageData {
   type: string;
   title: string;
   content: string;
+  seo?: {
+    meta_title: string;
+    meta_description: string;
+    canonical_path?: string; // e.g. '/lamira'
+    og_title?: string;
+    og_description?: string;
+    og_image?: string;
+    twitter_title?: string;
+    twitter_description?: string;
+    twitter_image?: string;
+    twitter_card?: 'summary' | 'summary_large_image' | 'player' | 'app';
+  };
   heroBackgroundImage?: string;
   breadcrumbs?: {
     parentLabel: string;
@@ -103,6 +115,21 @@ const PAGES: DynamicPageData[] = [
     title: 'Lamira',
     content:
       'Lamira is our next‑generation packaging platform, designed to deliver high performance, flexibility, and efficiency across your filling lines. With Lamira, brands can respond faster to market changes while optimizing total cost of ownership.',
+    seo: {
+      meta_title: 'Lamira | Packaging Platform | Lamipak',
+      meta_description:
+        'Discover Lamira, Lamipak’s next‑generation packaging platform engineered for performance, flexibility and total cost efficiency across filling lines.',
+      canonical_path: '/lamira',
+      og_title: 'Lamira | Next‑Generation Packaging Platform',
+      og_description:
+        'Lamira helps brands respond faster to market changes while optimizing total cost of ownership.',
+      og_image: '/about_banner.jpg',
+      twitter_title: 'Lamira | Next‑Generation Packaging Platform',
+      twitter_description:
+        'High‑performance, flexible packaging platform from Lamipak, designed for future‑ready filling lines.',
+      twitter_image: '/about_banner.jpg',
+      twitter_card: 'summary_large_image',
+    },
     heroBackgroundImage: '/about_banner.jpg',
     breadcrumbs: {
       parentLabel: 'Packaging',
@@ -244,6 +271,21 @@ const PAGES: DynamicPageData[] = [
     title: 'Our Green Efforts',
     content:
       'Our Green Efforts initiative brings together responsible sourcing, energy efficiency, and circular packaging design. From renewable materials to expanded recycling partnerships, we work across the value chain to lower environmental impact.',
+    seo: {
+      meta_title: 'Our Green Efforts | Sustainability | Lamipak',
+      meta_description:
+        'Learn how Lamipak drives sustainability through responsible sourcing, energy efficiency and circular packaging design.',
+      canonical_path: '/our-green-efforts',
+      og_title: 'Our Green Efforts | Lamipak Sustainability',
+      og_description:
+        'Discover Lamipak’s initiatives to lower environmental impact across the entire packaging value chain.',
+      og_image: '/banner-slider1.jpg',
+      twitter_title: 'Our Green Efforts | Lamipak Sustainability',
+      twitter_description:
+        'From renewable materials to recycling partnerships, see how Lamipak advances circular packaging.',
+      twitter_image: '/banner-slider1.jpg',
+      twitter_card: 'summary_large_image',
+    },
   },
   {
     slug: 'pick-carton',
@@ -251,6 +293,21 @@ const PAGES: DynamicPageData[] = [
     title: 'Pick Carton. Save Nature.',
     content:
       'Pick Carton is our sustainability concept that encourages brands and consumers to choose smarter, paper‑based carton packaging. By favoring renewable materials and supporting recycling infrastructure, Pick Carton helps protect food and the planet.',
+    seo: {
+      meta_title: 'Pick Carton | Save Nature | Lamipak',
+      meta_description:
+        'Pick Carton, Save Nature is Lamipak’s sustainability concept promoting renewable, recyclable carton packaging for a lower‑impact future.',
+      canonical_path: '/pick-carton',
+      og_title: 'Pick Carton. Save Nature.',
+      og_description:
+        'Choose smarter, paper‑based carton packaging that protects food and the planet.',
+      og_image: '/banner-slider1.jpg',
+      twitter_title: 'Pick Carton | Save Nature | Lamipak',
+      twitter_description:
+        'Discover how Pick Carton helps brands and consumers reduce environmental impact through carton packaging.',
+      twitter_image: '/banner-slider1.jpg',
+      twitter_card: 'summary_large_image',
+    },
     heroBackgroundImage: '/about_banner.jpg',
     breadcrumbs: {
       parentLabel: 'Packaging',
