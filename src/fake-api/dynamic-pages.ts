@@ -22,9 +22,27 @@ export interface DynamicPageData {
     meta_title: string;
     meta_description: string;
     canonical_path?: string; // e.g. '/lamira'
+    keywords?: string[];
+    author?: string;
+    robots?: {
+      index?: boolean;
+      follow?: boolean;
+      nocache?: boolean;
+      googleBot?:
+        | string
+        | {
+            index?: boolean;
+            follow?: boolean;
+            noimageindex?: boolean;
+            maxSnippet?: number;
+            maxImagePreview?: 'none' | 'standard' | 'large';
+            maxVideoPreview?: number;
+          };
+    };
     og_title?: string;
     og_description?: string;
     og_image?: string;
+    og_type?: 'website' | 'article';
     twitter_title?: string;
     twitter_description?: string;
     twitter_image?: string;
@@ -120,10 +138,24 @@ const PAGES: DynamicPageData[] = [
       meta_description:
         'Discover Lamira, Lamipak’s next‑generation packaging platform engineered for performance, flexibility and total cost efficiency across filling lines.',
       canonical_path: '/lamira',
+      keywords: ['lamira', 'lamipak', 'packaging platform', 'sustainable packaging'],
+      author: 'Lamipak',
+      robots: {
+        index: true,
+        follow: true,
+        googleBot: {
+          index: true,
+          follow: true,
+          maxSnippet: -1,
+          maxImagePreview: 'large',
+          maxVideoPreview: -1,
+        },
+      },
       og_title: 'Lamira | Next‑Generation Packaging Platform',
       og_description:
         'Lamira helps brands respond faster to market changes while optimizing total cost of ownership.',
       og_image: '/about_banner.jpg',
+      og_type: 'website',
       twitter_title: 'Lamira | Next‑Generation Packaging Platform',
       twitter_description:
         'High‑performance, flexible packaging platform from Lamipak, designed for future‑ready filling lines.',
@@ -276,10 +308,17 @@ const PAGES: DynamicPageData[] = [
       meta_description:
         'Learn how Lamipak drives sustainability through responsible sourcing, energy efficiency and circular packaging design.',
       canonical_path: '/our-green-efforts',
+      keywords: ['green efforts', 'sustainability', 'lamipak', 'circular packaging'],
+      author: 'Lamipak',
+      robots: {
+        index: true,
+        follow: true,
+      },
       og_title: 'Our Green Efforts | Lamipak Sustainability',
       og_description:
         'Discover Lamipak’s initiatives to lower environmental impact across the entire packaging value chain.',
       og_image: '/banner-slider1.jpg',
+      og_type: 'website',
       twitter_title: 'Our Green Efforts | Lamipak Sustainability',
       twitter_description:
         'From renewable materials to recycling partnerships, see how Lamipak advances circular packaging.',
@@ -298,10 +337,17 @@ const PAGES: DynamicPageData[] = [
       meta_description:
         'Pick Carton, Save Nature is Lamipak’s sustainability concept promoting renewable, recyclable carton packaging for a lower‑impact future.',
       canonical_path: '/pick-carton',
+      keywords: ['pick carton', 'save nature', 'carton packaging', 'lamipak sustainability'],
+      author: 'Lamipak',
+      robots: {
+        index: true,
+        follow: true,
+      },
       og_title: 'Pick Carton. Save Nature.',
       og_description:
         'Choose smarter, paper‑based carton packaging that protects food and the planet.',
       og_image: '/banner-slider1.jpg',
+      og_type: 'website',
       twitter_title: 'Pick Carton | Save Nature | Lamipak',
       twitter_description:
         'Discover how Pick Carton helps brands and consumers reduce environmental impact through carton packaging.',

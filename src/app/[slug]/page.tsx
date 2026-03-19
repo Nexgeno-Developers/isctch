@@ -46,6 +46,9 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   return {
     title,
     description,
+    keywords: seo?.keywords,
+    authors: seo?.author ? [{ name: seo.author }] : undefined,
+    robots: seo?.robots,
     alternates: {
       canonical: canonicalUrl,
     },
@@ -53,7 +56,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       title: seo?.og_title || title,
       description: seo?.og_description || description,
       url: canonicalUrl,
-      type: 'website',
+      type: seo?.og_type || 'website',
       images: seo?.og_image ? [seo.og_image] : undefined,
     },
     twitter: {
