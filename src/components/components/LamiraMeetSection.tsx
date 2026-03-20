@@ -17,8 +17,8 @@ interface LamiraMeetSectionProps {
 
 export default function LamiraMeetSection({ data }: LamiraMeetSectionProps) {
   return (
-    <section className="bg-white py-10 md:py-14">
-      <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
+    <section className="bg-gray-50 py-10 md:py-14">
+      <div className="mx-auto w-full container px-4">
         <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.15fr] gap-10 md:gap-12 items-center">
           <div className="max-w-xl">
             <h2 className="text-3xl md:text-4xl font-extrabold text-[#111827] leading-tight">
