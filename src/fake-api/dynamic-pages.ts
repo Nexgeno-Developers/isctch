@@ -13,6 +13,30 @@
  * without touching the route or page components.
  */
 
+export interface GreenPhotovoltaicProjectBlock {
+  locationLabel: string;
+  /** Icon next to location (default: lightbulb) */
+  locationIcon?: 'lightbulb' | 'sun';
+  title: string;
+  description: string;
+  phases: Array<{
+    id: string;
+    badge: string;
+    metrics: Array<{ label: string; value: string }>;
+    footerNote?: string;
+  }>;
+  summaryMetrics: Array<{
+    id: string;
+    icon: 'lightning' | 'sun' | 'globe' | 'hand' | 'hand_arrows';
+    label: string;
+    value: string;
+  }>;
+  /** Accent for badges, icons, location (e.g. #009CFF) */
+  accentColor?: string;
+  /** Inner card fill (e.g. #EEF2F3) */
+  surfaceCardColor?: string;
+}
+
 export interface DynamicPageData {
   slug: string;
   type: string;
@@ -72,6 +96,35 @@ export interface DynamicPageData {
       imageAlt: string;
     }>;
   };
+  /** Two-column “Advancing our sustainability journey” block (Our Green Efforts) */
+  greenSustainabilityJourneySection?: {
+    headingLineBlue: string;
+    headingLineBlack: string;
+    body: string;
+    image: string;
+    imageAlt: string;
+    /** Default #f8f9fa */
+    backgroundColor?: string;
+    /** First heading line color, default #00AEEF */
+    accentColor?: string;
+  };
+  /** Sustainability vision grid (Our Green Efforts page) */
+  greenSustainabilityVisionSection?: {
+    headingBrand: string;
+    headingRest: string;
+    subtitle: string;
+    cards: Array<{
+      id: string;
+      title: string;
+      icon: 'globe' | 'social' | 'product' | 'business';
+      bullets: Array<{
+        parts: Array<{ text: string; bold?: boolean }>;
+      }>;
+    }>;
+    footerText: string;
+  };
+  /** Photovoltaic / case-study blocks (Our Green Efforts); render in order */
+  greenPhotovoltaicProjectSections?: GreenPhotovoltaicProjectBlock[];
   seo?: {
     meta_title: string;
     meta_description: string;
@@ -342,6 +395,212 @@ const PAGES: DynamicPageData[] = [
     title: 'Our Green Efforts',
     content:
       'Our Green Efforts initiative brings together responsible sourcing, energy efficiency, and circular packaging design. From renewable materials to expanded recycling partnerships, we work across the value chain to lower environmental impact.',
+    heroBackgroundImage: '/about_banner.jpg',
+    breadcrumbs: {
+      parentLabel: 'Home',
+      parentHref: '/',
+    },
+    greenSustainabilityJourneySection: {
+      headingLineBlue: 'Advancing Our',
+      headingLineBlack: 'Sustainability Journey',
+      body:
+        'Lamipak continues to invest in renewable energy and sustainable manufacturing practices to support our broader climate goals. By integrating solar power into our production facilities, we are reducing greenhouse gas emissions, improving energy efficiency, and contributing to a more sustainable packaging industry. Our green efforts are part of a long-term commitment to responsible growth and environmental stewardship.',
+      image: '/banner-slider4.webp',
+      imageAlt: 'Lush green forest canopy framing a bright sky — symbolizing environmental care and renewable growth',
+      backgroundColor: '#f8f9fa',
+      accentColor: '#00AEEF',
+    },
+    greenSustainabilityVisionSection: {
+      headingBrand: 'Lamipak',
+      headingRest: 'Sustainability Vision',
+      subtitle:
+        'Bring Life To Packaging, Achieve Sustainability Across Every Dimension Of Our Business.',
+      cards: [
+        {
+          id: 'env',
+          title: 'ENVIRONMENTAL RESPONSIBILITY',
+          icon: 'globe',
+          bullets: [
+            {
+              parts: [
+                { text: '42% carbon reduction by 2030 and achieve ' },
+                { text: 'net zero', bold: true },
+                { text: ' by 2050.' },
+              ],
+            },
+            {
+              parts: [
+                { text: 'Reduce negative impact on environment to ' },
+                { text: 'protect our planet.', bold: true },
+              ],
+            },
+          ],
+        },
+        {
+          id: 'social',
+          title: 'SOCIAL RESPONSIBILITY',
+          icon: 'social',
+          bullets: [
+            {
+              parts: [{ text: 'Improve employee diversity, equity and inclusion.' }],
+            },
+            {
+              parts: [{ text: 'Launch more social welfare activities.' }],
+            },
+          ],
+        },
+        {
+          id: 'product',
+          title: 'PRODUCT RESPONSIBILITY',
+          icon: 'product',
+          bullets: [
+            {
+              parts: [
+                {
+                  text: 'ECO-Design to reduce carbon emission and promote product recycling.',
+                },
+              ],
+            },
+            {
+              parts: [{ text: 'Research more sustainable product.' }],
+            },
+          ],
+        },
+        {
+          id: 'business',
+          title: 'BUSINESS RESPONSIBILITY',
+          icon: 'business',
+          bullets: [
+            {
+              parts: [
+                {
+                  text: 'Strengthen the management of business ethic and information security protection to achieve zero information incident to ',
+                },
+                { text: 'protect our stakeholders.', bold: true },
+              ],
+            },
+            {
+              parts: [
+                {
+                  text: 'Uphold transparency and responsible governance across our operations.',
+                },
+              ],
+            },
+          ],
+        },
+      ],
+      footerText:
+        'We will stay focused on sustainability in our development and forge ahead toward more ethical business, greener products, a more beautiful environment, and a warmer society.',
+    },
+    greenPhotovoltaicProjectSections: [
+      {
+        locationIcon: 'lightbulb',
+        locationLabel: 'Indonesia',
+        accentColor: '#00A0E3',
+        surfaceCardColor: '#F0F2F5',
+        title: 'Indonesia Photovoltaic Project',
+        description:
+          'Large-Scale Solar Power Installations To Support Greener Manufacturing Across Our Indonesia Facility.',
+        phases: [
+          {
+            id: 'id-phase-1',
+            badge: 'Phase 1',
+            metrics: [
+              { label: 'Installed Capacity', value: '2,868 MW' },
+              { label: 'Power Generation', value: '3.8 GWh' },
+            ],
+          },
+          {
+            id: 'id-phase-2',
+            badge: 'Phase 2',
+            metrics: [
+              { label: 'Installed Capacity', value: '3,200 MW' },
+              { label: 'Power Generation', value: '4.2 GWh' },
+            ],
+            footerNote: 'Completed On July 1, 2025',
+          },
+        ],
+        summaryMetrics: [
+          {
+            id: 'green-electricity',
+            icon: 'lightning',
+            label: 'Total Green Electricity',
+            value: '7.05 GWh',
+          },
+          {
+            id: 'solar-share',
+            icon: 'sun',
+            label: 'On-Site Solar Share',
+            value: '42%',
+          },
+          {
+            id: 'co2-avoided',
+            icon: 'globe',
+            label: 'Estimated CO₂ Avoided',
+            value: '3,200 t',
+          },
+          {
+            id: 'community',
+            icon: 'hand',
+            label: 'Local Community Programs',
+            value: '12',
+          },
+        ],
+      },
+      {
+        locationIcon: 'sun',
+        locationLabel: 'Kunshan, China',
+        accentColor: '#009CFF',
+        surfaceCardColor: '#EEF2F3',
+        title: 'Kunshan Photovoltaic Project',
+        description:
+          'Solar Energy Systems At Our Kunshan Facility To Further Expand Renewable Energy Use.',
+        phases: [
+          {
+            id: 'ks-phase-1',
+            badge: 'Phase 1',
+            metrics: [
+              { label: 'Installed Capacity', value: '9.6 MW' },
+              { label: 'Power Generation', value: '10 GWh' },
+            ],
+          },
+          {
+            id: 'ks-phase-2',
+            badge: 'Phase 2',
+            metrics: [
+              { label: 'Installed Capacity', value: '7.8 MW' },
+              { label: 'Power Generation', value: '6 GWh' },
+            ],
+          },
+        ],
+        summaryMetrics: [
+          {
+            id: 'ks-capacity',
+            icon: 'lightning',
+            label: 'Total Capacity',
+            value: '17.4 MW',
+          },
+          {
+            id: 'ks-generation',
+            icon: 'sun',
+            label: 'Total Generation',
+            value: '16 GWh',
+          },
+          {
+            id: 'ks-coverage',
+            icon: 'globe',
+            label: 'Energy Coverage',
+            value: '~27% Demand',
+          },
+          {
+            id: 'ks-kwh',
+            icon: 'hand_arrows',
+            label: 'KWh/Solar Gen',
+            value: '98,629,959',
+          },
+        ],
+      },
+    ],
     seo: {
       meta_title: 'Our Green Efforts | Sustainability | Lamipak',
       meta_description:

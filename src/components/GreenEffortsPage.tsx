@@ -1,19 +1,55 @@
+import CompanyHero from '@/components/company/CompanyHero';
+import Breadcrumbs from '@/components/common/Breadcrumbs';
+import CallToAction from '@/components/home/CallToAction';
+import NewsletterSubscription from '@/components/home/NewsletterSubscription';
+import GreenSustainabilityJourneySection from '@/components/components/GreenSustainabilityJourneySection';
+import GreenSustainabilityVisionSection from '@/components/components/GreenSustainabilityVisionSection';
+import GreenPhotovoltaicProjectSection from '@/components/components/GreenPhotovoltaicProjectSection';
+import type { DynamicPageData } from '@/fake-api/dynamic-pages';
+
 export interface GreenEffortsPageProps {
-  data: {
-    title: string;
-    content: string;
-    [key: string]: unknown;
-  };
+  data: DynamicPageData;
 }
 
 export default function GreenEffortsPage({ data }: GreenEffortsPageProps) {
   return (
-    <main className="min-h-screen bg-white">
-      <div className="mx-auto w-full max-w-5xl px-4 py-12 md:py-16">
-        <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">{data.title}</h1>
-        <p className="text-base md:text-lg text-gray-700 leading-relaxed">{data.content}</p>
-      </div>
+    <main className="min-h-screen bg-gray-50">
+      <CompanyHero
+        data={{
+          title: data.title,
+          backgroundImage:
+            typeof data.heroBackgroundImage === 'string' ? data.heroBackgroundImage : '/about_banner.jpg',
+        }}
+      />
+
+      <section className="bg-gray-50">
+        <div className="container mx-auto px-4 py-4">
+          <Breadcrumbs
+            items={[
+              {
+                label: data.breadcrumbs?.parentLabel || 'Home',
+                href: data.breadcrumbs?.parentHref || '/',
+              },
+              { label: data.title },
+            ]}
+          />
+        </div>
+      </section>
+
+      {data.greenSustainabilityJourneySection ? (
+        <GreenSustainabilityJourneySection data={data.greenSustainabilityJourneySection} />
+      ) : null}
+
+      {data.greenSustainabilityVisionSection ? (
+        <GreenSustainabilityVisionSection data={data.greenSustainabilityVisionSection} />
+      ) : null}
+
+      {data.greenPhotovoltaicProjectSections?.map((block) => (
+        <GreenPhotovoltaicProjectSection key={block.title + block.locationLabel} data={block} />
+      ))}
+
+      <CallToAction />
+      <NewsletterSubscription />
     </main>
   );
 }
-
