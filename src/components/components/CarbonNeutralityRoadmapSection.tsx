@@ -1,0 +1,110 @@
+import type { DynamicPageData } from '@/fake-api/dynamic-pages';
+
+type SectionData = NonNullable<DynamicPageData['carbonNetZeroRoadmapSection']>;
+
+function IconTarget({ color }: { color: string }) {
+  return (
+    <svg className="h-8 w-8 md:h-9 md:w-9" viewBox="0 0 24 24" fill="none" aria-hidden xmlns="http://www.w3.org/2000/svg">
+      <circle cx="12" cy="12" r="9" stroke={color} strokeWidth="2" />
+      <circle cx="12" cy="12" r="5" stroke={color} strokeWidth="2" />
+      <circle cx="12" cy="12" r="1.5" fill={color} />
+    </svg>
+  );
+}
+
+function IconTrend({ color }: { color: string }) {
+  return (
+    <svg className="h-8 w-8 md:h-9 md:w-9" viewBox="0 0 24 24" fill="none" aria-hidden xmlns="http://www.w3.org/2000/svg">
+      <path d="M4 16l5-6 4 4 6-8" stroke={color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M15 6h4v4" stroke={color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
+function IconLeaf({ color }: { color: string }) {
+  return (
+    <svg className="h-8 w-8 md:h-9 md:w-9" viewBox="0 0 24 24" fill="none" aria-hidden xmlns="http://www.w3.org/2000/svg">
+      <path
+        d="M12 20s-6-4.5-6-11a6.5 6.5 0 0 1 11-4.6C20 9.5 17 14 12 20Z"
+        stroke={color}
+        strokeWidth="2"
+        strokeLinejoin="round"
+      />
+      <path d="M12 20V10" stroke={color} strokeWidth="2" strokeLinecap="round" />
+    </svg>
+  );
+}
+
+const ICONS = {
+  target: IconTarget,
+  trend: IconTrend,
+  leaf: IconLeaf,
+} as const;
+
+export interface CarbonNeutralityRoadmapSectionProps {
+  data: SectionData;
+}
+
+export default function CarbonNeutralityRoadmapSection({ data }: CarbonNeutralityRoadmapSectionProps) {
+  const accent = data.accentColor ?? '#00AEEF';
+  const circleBg = data.iconCircleBackground ?? '#e8ecef';
+  const lineColor = data.connectorLineColor ?? '#d1d5db';
+  const sectionBg = data.sectionBackgroundColor ?? '#f5f6f8';
+  const barBg = data.summaryBarBackground ?? accent;
+
+  return (
+    <section className="py-16 md:py-24" style={{ backgroundColor: sectionBg }}>
+      <div className="container mx-auto max-w-6xl px-4 md:px-6">
+        <h2 className="mb-14 text-center text-3xl font-bold tracking-tight text-gray-900 md:mb-20 md:text-4xl lg:text-[2.5rem]">
+          {data.headingBlack}{' '}
+          <span style={{ color: accent }}>{data.headingBlue}</span>
+        </h2>
+
+        <div className="relative">
+          <div
+            className="pointer-events-none absolute left-[8%] right-[8%] top-10 z-0 hidden h-[2px] md:block lg:left-[12%] lg:right-[12%]"
+            style={{ backgroundColor: lineColor }}
+            aria-hidden
+          />
+
+          <div className="relative z-10 grid gap-14 md:grid-cols-3 md:gap-8 lg:gap-10">
+            {data.milestones.map((m) => {
+              const Icon = ICONS[m.icon];
+              return (
+                <div key={m.id} className="flex flex-col items-center text-center">
+                  <div
+                    className="flex h-20 w-20 shrink-0 items-center justify-center rounded-full md:h-[5.25rem] md:w-[5.25rem]"
+                    style={{ backgroundColor: circleBg }}
+                  >
+                    <Icon color={accent} />
+                  </div>
+                  <p className="mt-5 text-xl font-bold md:text-2xl" style={{ color: accent }}>
+                    {m.year}
+                  </p>
+                  <h3 className="mt-2 text-base font-bold text-gray-900 md:text-lg">{m.title}</h3>
+                  <ul className="mt-4 max-w-[280px] space-y-2.5 text-left text-sm leading-snug text-gray-900 md:text-[0.9375rem]">
+                    {m.bullets.map((line, idx) => (
+                      <li key={idx} className="flex gap-2.5">
+                        <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-gray-900" aria-hidden />
+                        <span>{line}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+
+        <div
+          className="mx-auto mt-14 max-w-4xl rounded-full px-6 py-4 text-center md:mt-16 md:px-10 md:py-5"
+          style={{ backgroundColor: barBg }}
+        >
+          <p className="text-sm font-bold uppercase tracking-wide text-white md:text-base">
+            {data.summaryBarText}
+          </p>
+        </div>
+      </div>
+    </section>
+  );
+}

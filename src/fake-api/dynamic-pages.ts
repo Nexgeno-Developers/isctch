@@ -228,6 +228,45 @@ export interface DynamicPageData {
     cardBackgroundColor?: string;
     sectionBackgroundColor?: string;
   };
+  /** Path to carbon neutrality timeline (2050 roadmap page) */
+  carbonNetZeroRoadmapSection?: {
+    headingBlack: string;
+    headingBlue: string;
+    milestones: Array<{
+      id: string;
+      year: string;
+      title: string;
+      icon: 'target' | 'trend' | 'leaf';
+      bullets: string[];
+    }>;
+    summaryBarText: string;
+    accentColor?: string;
+    iconCircleBackground?: string;
+    connectorLineColor?: string;
+    sectionBackgroundColor?: string;
+    summaryBarBackground?: string;
+  };
+  /** Key sustainability pillars grid (e.g. carbon roadmap page) */
+  carbonNetZeroPillarsSection?: {
+    headingPrefix: string;
+    headingHighlight: string;
+    headingSuffix: string;
+    items: Array<{
+      id: string;
+      title: string;
+      description: string;
+      icon:
+        | 'carbon_verification'
+        | 'efficiency_innovation'
+        | 'renewable_electricity'
+        | 'supply_chain'
+        | 'rd_innovation'
+        | 'cdp_leadership';
+    }>;
+    accentColor?: string;
+    cardBackgroundColor?: string;
+    sectionBackgroundColor?: string;
+  };
   seo?: {
     meta_title: string;
     meta_description: string;
@@ -989,6 +1028,131 @@ const PAGES: DynamicPageData[] = [
       twitter_title: 'NGO Membership Of Lamipak',
       twitter_description:
         'Our NGO partnerships in Europe, China, and New Zealand advance responsible growth.',
+      twitter_image: '/banner-slider2.webp',
+      twitter_card: 'summary_large_image',
+    },
+  },
+  {
+    slug: '2050-carbon-net-zero-roadmap',
+    type: 'carbon-roadmap',
+    title: '2050 Carbon Net Zero Roadmap',
+    content:
+      'Lamipak’s science-based pathway outlines near-, medium-, and long-term targets to cut operational and value-chain emissions on the journey to net zero.',
+    heroBackgroundImage: '/about_banner.jpg',
+    breadcrumbs: {
+      parentLabel: 'Home',
+      parentHref: '/',
+    },
+    carbonNetZeroRoadmapSection: {
+      headingBlack: 'Path To',
+      headingBlue: 'Carbon Neutrality',
+      accentColor: '#00AEEF',
+      iconCircleBackground: '#e8ecef',
+      connectorLineColor: '#d1d5db',
+      sectionBackgroundColor: '#f5f6f8',
+      summaryBarBackground: '#00AEEF',
+      milestones: [
+        {
+          id: 'm-2025',
+          year: '2025',
+          title: 'Near Term Target',
+          icon: 'target',
+          bullets: [
+            'Reduce scope 1 and 2 emissions by 25%',
+            'Reduce scope 3 intensity by 30.4% per ton',
+          ],
+        },
+        {
+          id: 'm-2030',
+          year: '2030',
+          title: 'Medium Term Target',
+          icon: 'trend',
+          bullets: [
+            'Reduce scope 1 and 2 emissions by 42%',
+            'Reduce scope 3 intensity by 51.6% per ton',
+          ],
+        },
+        {
+          id: 'm-2050',
+          year: '2050',
+          title: 'Long Term Target',
+          icon: 'leaf',
+          bullets: [
+            'Reduce scope 1 and 2 emissions by 83%',
+            'Reduce scope 3 intensity by 66.3% per ton',
+            'Reach net zero ghg across the value chain',
+          ],
+        },
+      ],
+      summaryBarText: '2050 NET ZERO ACROSS THE VALUE CHAIN',
+    },
+    carbonNetZeroPillarsSection: {
+      headingPrefix: 'Key',
+      headingHighlight: 'Sustainability',
+      headingSuffix: 'Pillar',
+      accentColor: '#00AEEF',
+      cardBackgroundColor: '#f2f4f6',
+      sectionBackgroundColor: '#ffffff',
+      items: [
+        {
+          id: 'pillar-carbon-verify',
+          icon: 'carbon_verification',
+          title: 'Yearly Carbon Verification',
+          description:
+            'Rigorous third-party auditing to ensure our emission data is accurate, transparent, and meets global standards.',
+        },
+        {
+          id: 'pillar-efficiency',
+          icon: 'efficiency_innovation',
+          title: 'Efficiency & Innovation',
+          description:
+            'Seeking energy saving through technological changes with a target of 3% yearly improvement and operational neutrality.',
+        },
+        {
+          id: 'pillar-renewable',
+          icon: 'renewable_electricity',
+          title: 'Renewable Electricity',
+          description:
+            'Expanding on-site solar panel capacity across Indonesia (2.8MW) and Kunshan (10MW) to reach 100% renewable energy by 2030.',
+        },
+        {
+          id: 'pillar-supply-chain',
+          icon: 'supply_chain',
+          title: 'Supply Chain Reduction',
+          description:
+            'Establishing strategy and collaborating with partners to reduce the carbon footprint of our entire value chain.',
+        },
+        {
+          id: 'pillar-rd',
+          icon: 'rd_innovation',
+          title: 'R&D Innovation',
+          description:
+            'Investing in research to reduce product carbon footprint by 50% through innovative material and structural design.',
+        },
+        {
+          id: 'pillar-cdp',
+          icon: 'cdp_leadership',
+          title: 'CDP Climate Leadership',
+          description:
+            'Striving to achieve and maintain the CDP Climate A List leadership ranking for environmental transparency.',
+        },
+      ],
+    },
+    seo: {
+      meta_title: '2050 Carbon Net Zero Roadmap | Lamipak',
+      meta_description:
+        'Explore Lamipak’s pathway to carbon neutrality: 2025, 2030, and 2050 targets for scope 1, 2, and 3 emissions.',
+      canonical_path: '/2050-carbon-net-zero-roadmap',
+      keywords: ['carbon neutral', 'net zero', 'SBTi', 'roadmap', 'Lamipak', 'GHG'],
+      author: 'Lamipak',
+      robots: { index: true, follow: true },
+      og_title: 'Path To Carbon Neutrality | Lamipak',
+      og_description:
+        'Near-, medium-, and long-term emissions targets on Lamipak’s journey to net zero across the value chain.',
+      og_image: '/banner-slider2.webp',
+      og_type: 'website',
+      twitter_title: '2050 Carbon Net Zero Roadmap | Lamipak',
+      twitter_description: 'Science-aligned milestones for scope 1, 2, and 3 emissions through 2050.',
       twitter_image: '/banner-slider2.webp',
       twitter_card: 'summary_large_image',
     },
