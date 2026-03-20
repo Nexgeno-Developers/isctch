@@ -27,10 +27,7 @@ export default function PickCartoonPage({ data }: PickCartoonPageProps) {
         <div className="container mx-auto px-4 py-4">
           <Breadcrumbs
             items={[
-              {
-                label: data.breadcrumbs?.parentLabel || 'Home',
-                href: data.breadcrumbs?.parentHref || '/',
-              },
+              // Only show current page breadcrumb (remove “Packaging” parent)
               { label: data.title },
             ]}
           />
