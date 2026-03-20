@@ -2,6 +2,7 @@ import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 import type { ComponentType } from 'react';
 import { getCanonicalUrl } from '@/config/site';
+
 import LamiraPage from '@/components/LamiraPage';
 import GreenEffortsPage from '@/components/GreenEffortsPage';
 import CmsPage from '@/components/CmsPage';
@@ -10,16 +11,20 @@ import CertificationsAchievementsPage from '@/components/CertificationsAchieveme
 import NgosPage from '@/components/NgosPage';
 import CarbonNetZeroRoadmapPage from '@/components/CarbonNetZeroRoadmapPage';
 import OurCompanyDynamicPage from '@/components/OurCompanyDynamicPage';
-import { getDynamicPageBySlug, type DynamicPageData } from '@/fake-api/dynamic-pages';
+
+import {
+  getDynamicPageBySlug,
+  type DynamicPageData,
+} from '@/fake-api/dynamic-pages';
 
 interface PageProps {
   params: Promise<{
-    slug: string;
+    slug: string[]; // ✅ FIXED (array for nested routes)
   }>;
 }
 
 const componentMap: Record<string, ComponentType<{ data: DynamicPageData }>> = {
-  lamira: LamiraPage,
+  lamira1: LamiraPage,
   green: GreenEffortsPage,
   certifications: CertificationsAchievementsPage,
   ngos: NgosPage,
@@ -29,13 +34,16 @@ const componentMap: Record<string, ComponentType<{ data: DynamicPageData }>> = {
   'pick-carton': PickCartoonPage,
 };
 
-async function fetchPageData(slug: string) {
-  return getDynamicPageBySlug(slug);
+async function fetchPageData(fullSlug: string) {
+  return getDynamicPageBySlug(fullSlug); // ✅ now accepts full slug
 }
 
+/* ================== SEO ================== */
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
-  const data = await fetchPageData(slug);
+  const fullSlug = slug?.join('/') || ''; // ✅ MAIN FIX
+
+  const data = await fetchPageData(fullSlug);
 
   if (!data) {
     return {
@@ -45,7 +53,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   }
 
   const seo = data.seo;
-  const canonicalPath = seo?.canonical_path || `/${slug}`;
+
+  const canonicalPath = seo?.canonical_path || `/${fullSlug}`;
   const canonicalUrl = getCanonicalUrl(canonicalPath);
 
   const title = seo?.meta_title || data.title;
@@ -77,9 +86,12 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   };
 }
 
+/* ================== PAGE ================== */
 export default async function DynamicPage({ params }: PageProps) {
   const { slug } = await params;
-  const data = await fetchPageData(slug);
+  const fullSlug = slug?.join('/') || ''; // ✅ MAIN FIX
+
+  const data = await fetchPageData(fullSlug);
 
   if (!data) {
     notFound();

@@ -382,8 +382,8 @@ export interface DynamicPageData {
 
 const PAGES: DynamicPageData[] = [
   {
-    slug: 'lamira',
-    type: 'lamira',
+    slug: 'sustainability/lamira/123/534543/e4treger/weget',
+    type: 'lamira1',
     title: 'Lamira',
     content:
       'Lamira is our next‑generation packaging platform, designed to deliver high performance, flexibility, and efficiency across your filling lines. With Lamira, brands can respond faster to market changes while optimizing total cost of ownership.',
