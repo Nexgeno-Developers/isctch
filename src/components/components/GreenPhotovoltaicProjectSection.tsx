@@ -175,8 +175,11 @@ export default function GreenPhotovoltaicProjectSection({ data }: GreenPhotovolt
                   className="flex min-h-[4.5rem] items-center gap-3.5 rounded-[18px] p-4 md:p-5"
                   style={{ backgroundColor: cardSurface }}
                 >
-                  <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-white shadow-sm">
-                    <Icon className="h-6 w-6" style={{ color: accent }} />
+                  <span
+                    className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-white shadow-sm"
+                    style={{ color: accent }}
+                  >
+                    <Icon className="h-6 w-6" />
                   </span>
                   <div className="min-w-0">
                     <p className="text-xs text-gray-800 md:text-sm">{item.label}</p>

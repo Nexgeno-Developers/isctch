@@ -69,7 +69,7 @@ export default function CertificateTilesSection({ data }: CertificateTilesSectio
             const className =
               'flex aspect-square flex-col items-center justify-center rounded-[26px] p-5 shadow-sm transition hover:opacity-95 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 md:rounded-[30px] md:p-7';
 
-            const style: CSSProperties = { backgroundColor: cardBg };
+            const style = { backgroundColor: cardBg };
 
             if (item.href.startsWith('http') || item.href.startsWith('//')) {
               return (
