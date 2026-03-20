@@ -33,8 +33,8 @@ export default function GreenBuildingCertificationsSection({ data }: GreenBuildi
   const iconColor = data.iconCircleColor ?? '#00AEEF';
 
   return (
-    <section className="bg-[#f5f6f8] py-14 md:py-20">
-      <div className="container mx-auto max-w-7xl px-4 md:px-6">
+    <section className="bg-gray-50 py-8 md:py-12">
+      <div className="container mx-auto px-4">
         <header className="mb-10 text-center md:mb-14">
           <p
             className="text-xs font-semibold uppercase tracking-[0.2em] md:text-sm"

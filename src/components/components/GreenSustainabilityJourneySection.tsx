@@ -12,15 +12,15 @@ export default function GreenSustainabilityJourneySection({ data }: GreenSustain
   const accent = data.accentColor ?? '#00AEEF';
 
   return (
-    <section className="py-14 md:py-20 lg:py-24" style={{ backgroundColor: bg }}>
-      <div className="container mx-auto max-w-7xl px-4 md:px-6">
+    <section className="py-8 lg:py-12" style={{ backgroundColor: bg }}>
+      <div className="container mx-auto px-4">
         <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-14 xl:gap-16">
           <div>
-            <h2 className="font-sans text-3xl font-bold leading-tight tracking-tight md:text-4xl lg:text-[2.75rem] lg:leading-[1.15]">
+            <h2 className="text-3xl font-bold leading-tight tracking-tight md:text-4xl lg:text-5xl">
               <span className="block" style={{ color: accent }}>
                 {data.headingLineBlue}
               </span>
-              <span className="mt-1 block font-extrabold text-gray-900">{data.headingLineBlack}</span>
+              <span className="mt-1 block font-bold text-gray-900">{data.headingLineBlack}</span>
             </h2>
             <p className="mt-8 max-w-xl text-base leading-relaxed text-gray-900 md:mt-10 md:text-lg">
               {data.body}

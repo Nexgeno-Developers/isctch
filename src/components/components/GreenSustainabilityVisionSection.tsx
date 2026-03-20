@@ -110,14 +110,14 @@ export interface GreenSustainabilityVisionSectionProps {
 
 export default function GreenSustainabilityVisionSection({ data }: GreenSustainabilityVisionSectionProps) {
   return (
-    <section className="bg-[#f5f6f8] py-14 md:py-20">
-      <div className="container mx-auto max-w-7xl px-4">
+    <section className="bg-gray-50 py-8 md:py-12">
+      <div className="container mx-auto px-4">
         <header className="mb-12 text-center md:mb-14">
-          <h2 className="text-2xl font-semibold tracking-tight text-gray-900 md:text-3xl lg:text-4xl">
+          <h2 className="text-2xl font-bold tracking-tight text-gray-900 md:text-3xl lg:text-5xl">
             <span style={{ color: BRAND_BLUE }}>{data.headingBrand}</span>{' '}
             <span className="font-bold">{data.headingRest}</span>
           </h2>
-          <p className="mx-auto mt-4 max-w-4xl text-sm leading-relaxed text-gray-800 md:text-base">
+          <p className="mx-auto mt-4 max-w-4xl text-sm leading-relaxed text-black md:text-base">
             {data.subtitle}
           </p>
         </header>

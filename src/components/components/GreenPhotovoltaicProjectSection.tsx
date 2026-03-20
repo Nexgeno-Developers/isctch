@@ -120,9 +120,9 @@ export default function GreenPhotovoltaicProjectSection({ data }: GreenPhotovolt
   const LocationIcon = HEADER_ICONS[data.locationIcon ?? 'lightbulb'];
 
   return (
-    <section className="bg-gray-50 py-10 md:py-12">
-      <div className="container mx-auto max-w-6xl px-4">
-        <div className="rounded-[36px] bg-white p-6 shadow-sm md:p-9 lg:p-11">
+    <section className="bg-gray-50 py-10 md:py-12 md:pt-4">
+      <div className="container mx-auto px-4">
+        <div className="rounded-[50px] p-6 bg-white md:p-9 lg:p-11">
           <header className="mb-8 md:mb-10">
             <div className="mb-3 flex items-center gap-2.5" style={{ color: accent }}>
               <LocationIcon className="h-5 w-5 shrink-0 md:h-6 md:w-6" />
@@ -140,8 +140,7 @@ export default function GreenPhotovoltaicProjectSection({ data }: GreenPhotovolt
             {data.phases.map((phase) => (
               <div
                 key={phase.id}
-                className="flex flex-col rounded-[22px] p-5 md:p-7 lg:p-8"
-                style={{ backgroundColor: cardSurface }}
+                className="flex flex-col rounded-[50px] p-5 md:p-7 lg:p-8 bg-[#EDF0F1]"
               >
                 <span
                   className="mb-6 inline-flex w-fit rounded-full px-3.5 py-1.5 text-xs font-semibold text-white md:text-sm"
@@ -172,14 +171,13 @@ export default function GreenPhotovoltaicProjectSection({ data }: GreenPhotovolt
               return (
                 <div
                   key={item.id}
-                  className="flex min-h-[4.5rem] items-center gap-3.5 rounded-[18px] p-4 md:p-5"
-                  style={{ backgroundColor: cardSurface }}
+                  className="flex min-h-[4.5rem] items-center gap-3.5 rounded-[30px] p-4 md:p-5 bg-[#EDF0F1]"
                 >
                   <span
-                    className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-white shadow-sm"
+                    className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl"
                     style={{ color: accent }}
                   >
-                    <Icon className="h-6 w-6" />
+                    <Icon className="h-8 w-8" />
                   </span>
                   <div className="min-w-0">
                     <p className="text-xs text-gray-800 md:text-sm">{item.label}</p>

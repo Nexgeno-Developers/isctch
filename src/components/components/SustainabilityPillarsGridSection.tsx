@@ -129,7 +129,7 @@ export default function SustainabilityPillarsGridSection({ data }: Sustainabilit
 
   return (
     <section className="py-16 md:py-24" style={{ backgroundColor: sectionBg }}>
-      <div className="container mx-auto max-w-7xl px-4 md:px-6">
+      <div className="container mx-auto px-4">
         <h2 className="mb-12 text-center text-3xl font-bold tracking-tight text-gray-900 md:mb-16 md:text-4xl lg:text-[2.5rem]">
           {data.headingPrefix}{' '}
           <span style={{ color: accent }}>{data.headingHighlight}</span> {data.headingSuffix}

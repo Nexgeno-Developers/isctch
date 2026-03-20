@@ -36,10 +36,7 @@ export default function GreenEffortsPage({ data }: GreenEffortsPageProps) {
         </div>
       </section>
 
-      {data.greenSustainabilityJourneySection ? (
-        <GreenSustainabilityJourneySection data={data.greenSustainabilityJourneySection} />
-      ) : null}
-
+     
       {data.greenSustainabilityVisionSection ? (
         <GreenSustainabilityVisionSection data={data.greenSustainabilityVisionSection} />
       ) : null}
@@ -48,7 +45,15 @@ export default function GreenEffortsPage({ data }: GreenEffortsPageProps) {
         <GreenPhotovoltaicProjectSection key={block.title + block.locationLabel} data={block} />
       ))}
 
-      <CallToAction />
+{data.greenSustainabilityJourneySection ? (
+        <GreenSustainabilityJourneySection data={data.greenSustainabilityJourneySection} />
+      ) : null}
+
+
+<div className="bg-gray-50 pt-12">
+<CallToAction />
+</div>
+      
       <NewsletterSubscription />
     </main>
   );
