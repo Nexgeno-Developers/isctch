@@ -99,7 +99,7 @@ export default function VideoModalClient({
               <button
                 type="button"
                 onClick={() => setOpen(false)}
-                className="text-white/80 hover:text-white transition-colors"
+                className="text-white/80 hover:text-white transition-colors cursor-pointer"
                 aria-label="Close"
               >
                 ✕

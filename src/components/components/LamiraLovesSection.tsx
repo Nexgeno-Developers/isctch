@@ -23,7 +23,7 @@ export default function LamiraLovesSection({ data }: LamiraLovesSectionProps) {
     <section className="bg-[#f3f3f3] py-10 md:py-14">
       <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-4xl mx-auto">
-          <h2 className="text-3xl md:text-5xl font-bold text-[#111827] leading-tight">
+          <h2 className="text-3xl md:text-5xl font-bold text-black leading-tight">
             {data.headingPrefix ? `${data.headingPrefix} ` : ''}
             <span className="text-[#00A0E3]">{data.headingHighlight}</span>{' '}
             {data.headingSuffix ? data.headingSuffix : ''}
