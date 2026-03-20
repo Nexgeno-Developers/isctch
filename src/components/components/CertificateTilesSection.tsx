@@ -46,8 +46,8 @@ export default function CertificateTilesSection({ data }: CertificateTilesSectio
   const sectionBg = data.sectionBackgroundColor ?? '#ffffff';
 
   return (
-    <section style={{ backgroundColor: sectionBg }}>
-      <div className="container mx-auto max-w-6xl px-4 py-12 md:px-6 md:py-16">
+    <section className='bg-gray-50 py-8 md:py-12'>
+      <div className="container mx-auto px-4 ">
         <div className="grid grid-cols-2 gap-4 md:grid-cols-4 md:gap-6">
           {data.items.map((item) => {
             const label = item.ctaLabel ?? 'VIEW CERTIFICATE';

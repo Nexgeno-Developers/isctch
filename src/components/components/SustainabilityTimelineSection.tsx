@@ -30,7 +30,7 @@ export default function SustainabilityTimelineSection({ data }: SustainabilityTi
 
   return (
     <section style={{ backgroundColor: bg }}>
-      <div className="container mx-auto max-w-4xl px-4 py-14 md:px-6 md:py-20">
+      <div className="container mx-auto px-4 ">
         <header className="mb-12 md:mb-16">
           <h2 className="text-3xl font-bold tracking-tight md:text-4xl lg:text-[2.5rem]">
             <span style={{ color: accent }}>{data.headingBlue}</span>{' '}
@@ -43,7 +43,7 @@ export default function SustainabilityTimelineSection({ data }: SustainabilityTi
           {data.items.map((item, index) => (
             <li key={item.id}>
               {index > 0 ? <div className="border-t border-gray-200/90" aria-hidden /> : null}
-              <div className="flex gap-5 py-10 md:gap-8 md:py-12">
+              <div className="flex gap-5 py-10 md:gap-8 md:py-6">
                 <div
                   className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full md:h-14 md:w-14"
                   style={{ backgroundColor: accent }}

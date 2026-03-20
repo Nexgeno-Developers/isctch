@@ -37,13 +37,12 @@ export default function GreenBuildingCertificationsSection({ data }: GreenBuildi
       <div className="container mx-auto px-4">
         <header className="mb-10 text-center md:mb-14">
           <p
-            className="text-xs font-semibold uppercase tracking-[0.2em] md:text-sm"
-            style={{ color: eyebrowColor }}
+            className="text-xs font-semibold uppercase tracking-[0.2em] md:text-sm text-[#009FE8]"
           >
             {data.eyebrow}
           </p>
-          <h2 className="mt-3 text-3xl font-bold tracking-tight md:text-4xl lg:text-[2.75rem]">
-            <span style={{ color: headingGreen }}>{data.headingGreen}</span>{' '}
+          <h2 className="mt-3 text-3xl font-bold tracking-tight md:text-4xl lg:text-5xl">
+            <span className='text-[#009FE8]'>{data.headingGreen}</span>{' '}
             <span className="text-gray-900">{data.headingBlack}</span>
           </h2>
         </header>
@@ -52,16 +51,16 @@ export default function GreenBuildingCertificationsSection({ data }: GreenBuildi
           {data.cards.map((card) => (
             <article
               key={card.id}
-              className="overflow-hidden rounded-[28px] bg-white shadow-md shadow-gray-200/60 md:rounded-[32px]"
+              className="overflow-hidden rounded-[50px] bg-white"
             >
-              <div className="relative aspect-[16/10] w-full overflow-hidden p-3 md:p-4">
-                <div className="relative h-full w-full overflow-hidden rounded-[22px] md:rounded-[24px]">
-                  <Image
+              {/* Height auto: remove forced aspect ratio + use normal <img>. */}
+              <div className="w-full overflow-hidden p-3 md:p-4">
+                <div className="overflow-hidden rounded-[50px]">
+                  <img
                     src={card.image}
                     alt={card.imageAlt}
-                    fill
-                    className="object-cover"
-                    sizes="(min-width: 1024px) 45vw, 100vw"
+                    className="block w-full h-auto object-cover"
+                    loading="lazy"
                   />
                 </div>
               </div>
