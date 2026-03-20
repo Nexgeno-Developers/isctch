@@ -101,7 +101,7 @@ export async function getHeaderData(): Promise<HeaderData> {
           },
           {
             id: '1-3',
-            label: 'Vission Mission',
+            label: 'Vision Mission',
             href: '/vision-mission',
           },
           {
