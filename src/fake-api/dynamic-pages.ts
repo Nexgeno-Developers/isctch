@@ -626,13 +626,7 @@ const PAGES: DynamicPageData[] = [
                 { text: 'protect our stakeholders.', bold: true },
               ],
             },
-            {
-              parts: [
-                {
-                  text: 'Uphold transparency and responsible governance across our operations.',
-                },
-              ],
-            },
+            
           ],
         },
       ],
