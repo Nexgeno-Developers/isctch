@@ -51,7 +51,13 @@ function WorldPresenceCard() {
       <div className="h-[220px] relative">
         <div className="absolute inset-0 opacity-10">
           {/* Decorative: lightweight “map” feel via globe icon + dots */}
-          <Image src="/globe.svg" alt="Global map" fill className="object-contain" sizes="100vw" />
+          <Image
+            src="/globe_icon.svg"
+            alt="Global map"
+            fill
+            className="object-contain"
+            sizes="100vw"
+          />
         </div>
 
         <div className="relative z-10 h-full flex items-end justify-center pb-2">

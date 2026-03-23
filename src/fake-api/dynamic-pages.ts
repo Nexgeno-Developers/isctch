@@ -1347,6 +1347,40 @@ const PAGES: DynamicPageData[] = [
       twitter_card: 'summary_large_image',
     },
   },
+
+  {
+    slug: 'governance-management',
+    type: 'governance-management',
+    title: 'Governance Management',
+    content:
+      'Reach out to Lamipak for governance management inquiries, governance policies, and compliance-related support.',
+    heroBackgroundImage: '/about_banner.jpg',
+    seo: {
+      meta_title: 'Governance Management | Lamipak',
+      meta_description:
+        'Contact Lamipak for governance management inquiries, governance policies, and compliance-related support.',
+      canonical_path: '/governance-management',
+      keywords: [
+        'governance management',
+        'Lamipak',
+        'compliance',
+        'policies',
+        'contact',
+      ],
+      author: 'Lamipak',
+      robots: { index: true, follow: true },
+      og_title: 'Governance Management | Lamipak',
+      og_description:
+        'Contact Lamipak for governance management inquiries, governance policies, and compliance-related support.',
+      og_image: '/banner-slider2.webp',
+      og_type: 'website',
+      twitter_title: 'Governance Management | Lamipak',
+      twitter_description:
+        'Contact Lamipak for governance management inquiries, governance policies, and compliance-related support.',
+      twitter_image: '/banner-slider2.webp',
+      twitter_card: 'summary_large_image',
+    },
+  },
 ];
 
 /**
