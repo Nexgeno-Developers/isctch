@@ -7,9 +7,9 @@ export interface NgoAllianceCardsSectionProps {
 }
 
 export default function NgoAllianceCardsSection({ data }: NgoAllianceCardsSectionProps) {
-  const accent = data.accentColor ?? '#00AEEF';
+  const accent = data.accentColor ?? '#EDF0F1';
   const borderStrong = data.highlightBorderColor ?? accent;
-  const cardBg = data.cardBackgroundColor ?? '#f5f5f5';
+  const cardBg = data.cardBackgroundColor ?? '#EDF0F1';
   const sectionBg = data.sectionBackgroundColor ?? '#ffffff';
 
   const labels = {
@@ -23,7 +23,7 @@ export default function NgoAllianceCardsSection({ data }: NgoAllianceCardsSectio
   const titleLabelClass = `${labelClass} mb-3 md:mb-4`;
 
   return (
-    <section className="py-14 md:py-20" style={{ backgroundColor: sectionBg }}>
+    <section className="py-14 md:py-12 bg-gray-50">
       <div className="container mx-auto px-4">
         <div className="grid gap-6 md:grid-cols-3 md:gap-6 lg:gap-8">
           {data.cards.map((card) => {
@@ -34,8 +34,6 @@ export default function NgoAllianceCardsSection({ data }: NgoAllianceCardsSectio
                 className="flex flex-col rounded-[30px] px-8 py-9 md:px-10 md:py-10"
                 style={{
                   backgroundColor: cardBg,
-                  borderWidth: highlighted ? 3 : 0,
-                  borderStyle: highlighted ? 'solid' : undefined,
                   borderColor: highlighted ? borderStrong : undefined,
                 }}
               >

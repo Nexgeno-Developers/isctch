@@ -26,10 +26,7 @@ export default function GreenEffortsPage({ data }: GreenEffortsPageProps) {
         <div className="container mx-auto px-4 py-4">
           <Breadcrumbs
             items={[
-              {
-                label: data.breadcrumbs?.parentLabel || 'Home',
-                href: data.breadcrumbs?.parentHref || '/',
-              },
+             
               { label: data.title },
             ]}
           />

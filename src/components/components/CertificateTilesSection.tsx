@@ -40,7 +40,7 @@ export interface CertificateTilesSectionProps {
 }
 
 export default function CertificateTilesSection({ data }: CertificateTilesSectionProps) {
-  const cardBg = data.cardBackgroundColor ?? '#f0f2f5';
+  const cardBg = data.cardBackgroundColor ?? '#edf0f1';
   const linkColor = data.linkColor ?? '#0096FF';
   const iconColor = data.iconColor ?? '#8b9399';
   const sectionBg = data.sectionBackgroundColor ?? '#ffffff';
@@ -67,7 +67,7 @@ export default function CertificateTilesSection({ data }: CertificateTilesSectio
             );
 
             const className =
-              'flex aspect-square flex-col items-center justify-center rounded-[26px] p-5 shadow-sm transition hover:opacity-95 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 md:rounded-[30px] md:p-7';
+              'flex aspect-square flex-col items-center justify-center rounded-[50px] p-5 transition hover:opacity-95 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 md:rounded-[30px] md:p-7';
 
             const style = { backgroundColor: cardBg };
 

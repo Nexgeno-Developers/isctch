@@ -40,15 +40,15 @@ export default function NgoMembershipMapSection({ data }: NgoMembershipMapSectio
   const sectionBg = data.sectionBackgroundColor ?? '#ffffff';
 
   return (
-    <section className="py-14 md:py-20" style={{ backgroundColor: sectionBg }}>
-      <div className="container mx-auto max-w-6xl px-4 md:px-6">
-        <h2 className="mb-10 text-center text-3xl font-bold tracking-tight md:mb-14 md:text-4xl lg:text-[2.5rem]">
+    <section className="py-14 md:pt-20 md:pb-12 bg-gray-50">
+      <div className="container mx-auto px-4 ">
+        <h2 className="mb-10 text-center text-3xl font-bold tracking-tight md:mb-14 md:text-4xl lg:text-5xl">
           <span style={{ color: accent }}>{data.headingBlue}</span>{' '}
           <span className="text-gray-900">{data.headingBlack}</span>
         </h2>
 
         <div
-          className="relative mx-auto w-full max-w-5xl overflow-visible rounded-2xl bg-white"
+          className="relative mx-auto w-full max-w-5xl overflow-visible"
           style={{ aspectRatio: `${MAP_VIEW_W} / ${MAP_VIEW_H}` }}
         >
           <svg

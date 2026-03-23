@@ -26,10 +26,7 @@ export default function NgosPage({ data }: NgosPageProps) {
         <div className="container mx-auto px-4 py-4">
           <Breadcrumbs
             items={[
-              {
-                label: data.breadcrumbs?.parentLabel || 'Home',
-                href: data.breadcrumbs?.parentHref || '/',
-              },
+           
               { label: data.title },
             ]}
           />
@@ -40,15 +37,19 @@ export default function NgosPage({ data }: NgosPageProps) {
         <NgoMembershipMapSection data={data.ngosMembershipMapSection} />
       ) : null}
 
+{data.ngosAllianceCardsSection ? (
+        <NgoAllianceCardsSection data={data.ngosAllianceCardsSection} />
+      ) : null}
+
       {data.ngosCircularFutureSection ? (
         <NgoCircularFutureSection data={data.ngosCircularFutureSection} />
       ) : null}
 
-      {data.ngosAllianceCardsSection ? (
-        <NgoAllianceCardsSection data={data.ngosAllianceCardsSection} />
-      ) : null}
-
-      <CallToAction />
+     
+<div className="bg-gray-50 pt-12">
+<CallToAction />
+</div>
+    
       <NewsletterSubscription />
     </main>
   );

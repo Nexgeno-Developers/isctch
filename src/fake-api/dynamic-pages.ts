@@ -638,7 +638,7 @@ const PAGES: DynamicPageData[] = [
         locationIcon: 'lightbulb',
         locationLabel: 'Indonesia',
         accentColor: '#00A0E3',
-        surfaceCardColor: '#F0F2F5',
+        surfaceCardColor: '#edf0f1',
         title: 'Indonesia Photovoltaic Project',
         description:
           'Large-Scale Solar Power Installations To Support Greener Manufacturing Across Our Indonesia Facility.',
@@ -869,7 +869,7 @@ const PAGES: DynamicPageData[] = [
     },
     certificationsCertificateTilesSection: {
       sectionBackgroundColor: '#ffffff',
-      cardBackgroundColor: '#f0f2f5',
+      cardBackgroundColor: '#edf0f1',
       linkColor: '#0096FF',
       iconColor: '#8b9399',
       items: [
@@ -966,8 +966,8 @@ const PAGES: DynamicPageData[] = [
       heroHeadingBlack: 'A Circular Future.',
       heroIntro:
         'By Partnering With International Organizations And Industry Platforms, Lamipak Contributes To Strengthening Recycling Systems, Advancing Sustainable Packaging Solutions, And Supporting The Transition To A Circular Economy. These Collaborations Reflect Our Commitment To Shared Responsibility In Protecting The Environment And Building A More Sustainable Packaging Industry.',
-      featureHeadingBlack: 'OUR',
-      featureHeadingBlue: 'PEOPLE AND COMMUNITY',
+      featureHeadingBlack: 'Our',
+      featureHeadingBlue: 'People & Community',
       featureBody:
         'To Strengthen Our Learning And Development Framework, We Provide A Diverse Range Of Training Programs That Empower Employees To Enhance Their Skills And Grow Alongside The Organization. We Place The Long-Term, Sustainable Development Of Our Enterprise At The Forefront, With A Strong Commitment To Maintaining The Highest Safety Standards. The Health And Safety Of Our Employees Remain Our Top Priority, Ensuring A Secure And Supportive Working Environment For Everyone.',
       image: '/banner-slider4.webp',
@@ -975,7 +975,7 @@ const PAGES: DynamicPageData[] = [
     },
     ngosAllianceCardsSection: {
       sectionBackgroundColor: '#ffffff',
-      cardBackgroundColor: '#f5f5f5',
+      cardBackgroundColor: '#EDF0F1',
       accentColor: '#00AEEF',
       highlightBorderColor: '#00AEEF',
       fieldLabels: {
