@@ -25,10 +25,7 @@ export default function CarbonNetZeroRoadmapPage({ data }: CarbonNetZeroRoadmapP
         <div className="container mx-auto px-4 py-4">
           <Breadcrumbs
             items={[
-              {
-                label: data.breadcrumbs?.parentLabel || 'Home',
-                href: data.breadcrumbs?.parentHref || '/',
-              },
+             
               { label: data.title },
             ]}
           />
@@ -43,7 +40,10 @@ export default function CarbonNetZeroRoadmapPage({ data }: CarbonNetZeroRoadmapP
         <SustainabilityPillarsGridSection data={data.carbonNetZeroPillarsSection} />
       ) : null}
 
-      <CallToAction />
+<div className="bg-gray-50 pt-12">
+<CallToAction />
+</div>
+      
       <NewsletterSubscription />
     </main>
   );

@@ -6,7 +6,7 @@ type IconKey = SectionData['items'][number]['icon'];
 
 function IconCarbonVerification({ color }: { color: string }) {
   return (
-    <svg className="h-7 w-7" viewBox="0 0 28 28" fill="none" aria-hidden xmlns="http://www.w3.org/2000/svg">
+    <svg className="h-12 w-12" viewBox="0 0 28 28" fill="none" aria-hidden xmlns="http://www.w3.org/2000/svg">
       <path
         d="M6 18a7 7 0 0 1 12-5M22 14a7 7 0 1 1-12 5"
         stroke={color}
@@ -28,7 +28,7 @@ function IconCarbonVerification({ color }: { color: string }) {
 
 function IconEfficiencyInnovation({ color }: { color: string }) {
   return (
-    <svg className="h-7 w-7" viewBox="0 0 28 28" fill="none" aria-hidden xmlns="http://www.w3.org/2000/svg">
+    <svg className="h-12 w-12" viewBox="0 0 28 28" fill="none" aria-hidden xmlns="http://www.w3.org/2000/svg">
       <circle cx="10" cy="16" r="4" stroke={color} strokeWidth="1.5" />
       <circle cx="17" cy="12" r="3.5" stroke={color} strokeWidth="1.5" />
       <path
@@ -44,7 +44,7 @@ function IconEfficiencyInnovation({ color }: { color: string }) {
 
 function IconRenewableElectricity({ color }: { color: string }) {
   return (
-    <svg className="h-7 w-7" viewBox="0 0 28 28" fill="none" aria-hidden xmlns="http://www.w3.org/2000/svg">
+    <svg className="h-12 w-12" viewBox="0 0 28 28" fill="none" aria-hidden xmlns="http://www.w3.org/2000/svg">
       <path d="M6 20h8V12L6 20Z" stroke={color} strokeWidth="1.5" strokeLinejoin="round" />
       <path d="M16 18h6l-1.5-6L16 18Z" stroke={color} strokeWidth="1.5" strokeLinejoin="round" />
       <circle cx="21" cy="9" r="3" stroke={color} strokeWidth="1.5" />
@@ -55,7 +55,7 @@ function IconRenewableElectricity({ color }: { color: string }) {
 
 function IconSupplyChain({ color }: { color: string }) {
   return (
-    <svg className="h-7 w-7" viewBox="0 0 28 28" fill="none" aria-hidden xmlns="http://www.w3.org/2000/svg">
+    <svg className="h-12 w-12" viewBox="0 0 28 28" fill="none" aria-hidden xmlns="http://www.w3.org/2000/svg">
       <circle cx="14" cy="14" r="7" stroke={color} strokeWidth="1.5" />
       <path d="M10 9h5l1 2h3v5h-9V9Z" stroke={color} strokeWidth="1.5" strokeLinejoin="round" />
       <path
@@ -72,7 +72,7 @@ function IconSupplyChain({ color }: { color: string }) {
 
 function IconRdInnovation({ color }: { color: string }) {
   return (
-    <svg className="h-7 w-7" viewBox="0 0 28 28" fill="none" aria-hidden xmlns="http://www.w3.org/2000/svg">
+    <svg className="h-12 w-12" viewBox="0 0 28 28" fill="none" aria-hidden xmlns="http://www.w3.org/2000/svg">
       <path
         d="M14 4v4M14 4a6 6 0 0 1 5.2 9l1.3 1.3a1 1 0 0 1 0 1.4l-.7.7a1 1 0 0 1-1.4 0L17.2 15"
         stroke={color}
@@ -89,7 +89,7 @@ function IconRdInnovation({ color }: { color: string }) {
 
 function IconCdpLeadership({ color }: { color: string }) {
   return (
-    <svg className="h-7 w-7" viewBox="0 0 28 28" fill="none" aria-hidden xmlns="http://www.w3.org/2000/svg">
+    <svg className="h-12 w-12" viewBox="0 0 28 28" fill="none" aria-hidden xmlns="http://www.w3.org/2000/svg">
       <path
         d="M8 18c1-2.5 2.8-4 6-4s5 1.5 6 4"
         stroke={color}
@@ -128,7 +128,7 @@ export default function SustainabilityPillarsGridSection({ data }: Sustainabilit
   const sectionBg = data.sectionBackgroundColor ?? '#ffffff';
 
   return (
-    <section className="py-16 md:py-24" style={{ backgroundColor: sectionBg }}>
+    <section className="py-8 md:py-12 bg-gray-50">
       <div className="container mx-auto px-4">
         <h2 className="mb-12 text-center text-3xl font-bold tracking-tight text-gray-900 md:mb-16 md:text-4xl lg:text-[2.5rem]">
           {data.headingPrefix}{' '}
@@ -141,10 +141,9 @@ export default function SustainabilityPillarsGridSection({ data }: Sustainabilit
             return (
               <article
                 key={item.id}
-                className="rounded-2xl p-6 md:rounded-[1.35rem] md:p-8"
-                style={{ backgroundColor: cardBg }}
+                className="rounded-[50px] p-6  md:p-8 bg-[#EDF0F1]"
               >
-                <div className="mb-5 flex h-14 w-14 items-center justify-center rounded-full bg-white shadow-sm ring-1 ring-gray-100 md:h-16 md:w-16">
+                <div className="mb-4">
                   <Icon color={accent} />
                 </div>
                 <h3 className="text-base font-semibold text-gray-900 md:text-lg">{item.title}</h3>
