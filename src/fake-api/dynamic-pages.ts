@@ -345,16 +345,33 @@ export interface DynamicPageData {
   };
 
   /** Governance Management - detail sections (image + gray center panel) */
-  governanceDetailSections?: Array<{
-    eyebrow: string;
-    title: string;
-    imageSrc: string;
-    imageAlt: string;
-    centerText: string;
-    buttonText: string;
-    buttonHref: string;
-    paragraphs: string[];
-  }>;
+  governanceDetailSections?: Array<
+    | {
+        layout: 'centerPanel';
+        eyebrow: string;
+        title: string;
+        imageSrc: string;
+        imageAlt: string;
+        centerText: string;
+        buttonText: string;
+        buttonHref: string;
+        paragraphs: string[];
+      }
+    | {
+        layout: 'complianceCards';
+        eyebrow: string;
+        titleBlue: string;
+        title: string;
+        imageSrc: string;
+        imageAlt: string;
+        cards: Array<{
+          id: string;
+          title: string;
+          description: string;
+          iconId: 'supplier' | 'human_rights' | 'environment' | 'workplace';
+        }>;
+      }
+  >;
 
   /** Governance Management - GRC section (Risk & Control cards) */
   governanceGrcSection?: {
@@ -1422,6 +1439,7 @@ const PAGES: DynamicPageData[] = [
     heroBackgroundImage: '/about_banner.jpg',
     governanceDetailSections: [
       {
+        layout: 'centerPanel',
         eyebrow: 'Ethical Standards',
         title: 'Business Integrity & Ethical Conduct',
         imageSrc: '/market_inteligence.jpg',
@@ -1433,6 +1451,44 @@ const PAGES: DynamicPageData[] = [
         paragraphs: [
           'Our code of business conduct requires all employees, managers, and business partners to comply with the laws and regulations of every country in which we operate. we expect the same high standards of integrity from our suppliers, distributors, and service partners.',
           'ethical decision-making is embedded into our daily operations to ensure that business success is achieved responsibly and transparently.',
+        ],
+      },
+      {
+        layout: 'complianceCards',
+        eyebrow: 'Global Standards',
+        titleBlue: 'Responsible Supply Chain &',
+        title: 'Global Compliance',
+        imageSrc: '/market_inteligence.jpg',
+        imageAlt: 'People discussing supplier code of conduct and compliance',
+        cards: [
+          {
+            id: 'supplier-code',
+            title: 'Supplier Code Of Conduct',
+            description:
+              'Clear expectations for business integrity, labor standards, environmental responsibility, and workplace safety across supplier network',
+            iconId: 'supplier',
+          },
+          {
+            id: 'human-rights',
+            title: 'Human Right',
+            description:
+              'We uphold internationally recognized human rights principles and prohibit forced labor, discrimination, and harassment throughout our operations',
+            iconId: 'human_rights',
+          },
+          {
+            id: 'environmental-resp',
+            title: 'Environmental Responsibility',
+            description:
+              'Environmental standards are embedded into our supplier expectations and our own operational practices globally',
+            iconId: 'environment',
+          },
+          {
+            id: 'workplace-safety',
+            title: 'Workplace Safety',
+            description:
+              'Safe working conditions are a non-negotiable requirement for lamipak and all partners across the value chain',
+            iconId: 'workplace',
+          },
         ],
       },
     ],

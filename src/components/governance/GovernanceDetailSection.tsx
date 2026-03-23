@@ -1,6 +1,7 @@
 import Image from 'next/image';
 
-export type GovernanceDetailSectionData = {
+export type GovernanceCenterPanelDetailSectionData = {
+  layout: 'centerPanel';
   eyebrow: string;
   title: string;
   imageSrc: string;
@@ -14,7 +15,7 @@ export type GovernanceDetailSectionData = {
 export default function GovernanceDetailSection({
   data,
 }: {
-  data: GovernanceDetailSectionData;
+  data: GovernanceCenterPanelDetailSectionData;
 }) {
   return (
     <section className="bg-white py-10 md:py-14">

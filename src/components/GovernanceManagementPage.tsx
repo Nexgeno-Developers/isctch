@@ -5,6 +5,7 @@ import NewsletterSubscription from '@/components/home/NewsletterSubscription';
 import GovernanceFrameworkSection from '@/components/governance/GovernanceFrameworkSection';
 import GovernanceFrameworkSecondarySection from '@/components/governance/GovernanceFrameworkSecondarySection';
 import GovernanceDetailSection from '@/components/governance/GovernanceDetailSection';
+import GovernanceComplianceCardsSection from '@/components/governance/GovernanceComplianceCardsSection';
 import GovernanceGrcSection from '@/components/governance/GovernanceGrcSection';
 import type { DynamicPageData } from '@/fake-api/dynamic-pages';
 
@@ -44,7 +45,14 @@ export default function GovernanceManagementPage({
         <GovernanceGrcSection data={data.governanceGrcSection} />
 
         {data.governanceDetailSections?.map((d) => (
-          <GovernanceDetailSection key={d.title} data={d} />
+          d.layout === 'centerPanel' ? (
+            <GovernanceDetailSection key={d.title} data={d} />
+          ) : (
+            <GovernanceComplianceCardsSection
+              key={d.title}
+              data={d}
+            />
+          )
         ))}
      
 
