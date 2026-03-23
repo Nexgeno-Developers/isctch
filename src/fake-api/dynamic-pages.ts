@@ -396,6 +396,15 @@ export interface DynamicPageData {
         title: string;
         paragraphs: string[];
       }
+    | {
+        layout: 'whistleCards';
+        cards: Array<{
+          id: string;
+          title: string;
+          description: string;
+          iconId: 'confidentiality' | 'non_retaliation' | 'fair_investigation';
+        }>;
+      }
   >;
 
   /** Governance Management - GRC section (Risk & Control cards) */
@@ -1571,6 +1580,32 @@ const PAGES: DynamicPageData[] = [
         title: 'Whistleblowing',
         paragraphs: [
           'Lamipak encourages a culture of openness and accountability. employees, partners, and stakeholders are encouraged to report concerns related to misconduct, unethical behavior, or violations of company policies. our reporting channels are designed to ensure:',
+        ],
+      },
+      {
+        layout: 'whistleCards',
+        cards: [
+          {
+            id: 'confidentiality',
+            title: 'Confidentiality',
+            description:
+              'All reports are handled with strict confidentiality to protect the identity of the reporting individual.',
+            iconId: 'confidentiality',
+          },
+          {
+            id: 'non-retaliation',
+            title: 'Non-Retaliation',
+            description:
+              'Individuals who raise concerns in good faith are protected from retaliation or discrimination.',
+            iconId: 'non_retaliation',
+          },
+          {
+            id: 'fair-investigation',
+            title: 'Fair Investigation',
+            description:
+              'All reports are reviewed objectively and investigated through appropriate internal processes to maintain a fair and ethical working environment.',
+            iconId: 'fair_investigation',
+          },
         ],
       },
     ],
