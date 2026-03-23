@@ -4,6 +4,7 @@ import CallToAction from '@/components/home/CallToAction';
 import NewsletterSubscription from '@/components/home/NewsletterSubscription';
 import GovernanceFrameworkSection from '@/components/governance/GovernanceFrameworkSection';
 import GovernanceFrameworkSecondarySection from '@/components/governance/GovernanceFrameworkSecondarySection';
+import GovernanceDetailSection from '@/components/governance/GovernanceDetailSection';
 import type { DynamicPageData } from '@/fake-api/dynamic-pages';
 
 export interface GovernanceManagementPageProps {
@@ -31,13 +32,18 @@ export default function GovernanceManagementPage({
         </div>
       </section>
 
-      <GovernanceFrameworkSection data={data.governanceFrameworkSection} />
+        <GovernanceFrameworkSection data={data.governanceFrameworkSection} />
 
-      <div className="h-1 bg-[#009FE8]" />
+        <div className="h-1 bg-[#009FE8]" />
 
-      <GovernanceFrameworkSecondarySection
-        data={data.governanceFrameworkSecondarySection}
-      />
+        <GovernanceFrameworkSecondarySection
+          data={data.governanceFrameworkSecondarySection}
+        />
+
+        {data.governanceDetailSections?.map((d) => (
+          <GovernanceDetailSection key={d.title} data={d} />
+        ))}
+     
 
       <div className="bg-gray-50 pt-12">
         <CallToAction />

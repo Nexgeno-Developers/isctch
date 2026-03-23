@@ -343,6 +343,18 @@ export interface DynamicPageData {
         | 'whistle';
     }>;
   };
+
+  /** Governance Management - detail sections (image + gray center panel) */
+  governanceDetailSections?: Array<{
+    eyebrow: string;
+    title: string;
+    imageSrc: string;
+    imageAlt: string;
+    centerText: string;
+    buttonText: string;
+    buttonHref: string;
+    paragraphs: string[];
+  }>;
   breadcrumbs?: {
     parentLabel: string;
     parentHref: string;
@@ -1395,6 +1407,22 @@ const PAGES: DynamicPageData[] = [
     content:
       'Reach out to Lamipak for governance management inquiries, governance policies, and compliance-related support.',
     heroBackgroundImage: '/about_banner.jpg',
+    governanceDetailSections: [
+      {
+        eyebrow: 'Ethical Standards',
+        title: 'Business Integrity & Ethical Conduct',
+        imageSrc: '/market_inteligence.jpg',
+        imageAlt: 'Team discussing compliance in a corporate setting',
+        centerText:
+          'Integrity is the foundation of how lamipak operates. we maintain a strict zero-tolerance policy toward corruption, bribery, fraud, and unethical conduct in any form.',
+        buttonText: 'Zero Tolerance Policy',
+        buttonHref: '/contact',
+        paragraphs: [
+          'Our code of business conduct requires all employees, managers, and business partners to comply with the laws and regulations of every country in which we operate. we expect the same high standards of integrity from our suppliers, distributors, and service partners.',
+          'ethical decision-making is embedded into our daily operations to ensure that business success is achieved responsibly and transparently.',
+        ],
+      },
+    ],
     governanceFrameworkSection: {
       eyebrow: 'Lamipak - Corporate Governance',
       title: 'Governance & Management',
