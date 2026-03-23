@@ -2,6 +2,7 @@ import CompanyHero from '@/components/company/CompanyHero';
 import Breadcrumbs from '@/components/common/Breadcrumbs';
 import CallToAction from '@/components/home/CallToAction';
 import NewsletterSubscription from '@/components/home/NewsletterSubscription';
+import ContactUsMessageSection from '@/components/ContactUsMessageSection';
 import type { DynamicPageData } from '@/fake-api/dynamic-pages';
 
 export interface ContactUsPageProps {
@@ -33,7 +34,7 @@ export default function ContactUsPage({ data }: ContactUsPageProps) {
         </div>
       </section>
 
-      
+      <ContactUsMessageSection />
 
       <div className="bg-gray-50 pt-12">
         <CallToAction />
