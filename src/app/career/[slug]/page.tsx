@@ -65,8 +65,8 @@ export default async function CareerDetailsPage({ params }: CareerDetailsPagePro
       />
 
       {/* Breadcrumbs */}
-      <section className="bg-white">
-        <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8 py-4">
+      <section className="bg-gray-50">
+        <div className="container mx-auto px-4 py-4">
           <Breadcrumbs
             items={[
               { label: 'Career', href: '/career' },
@@ -76,18 +76,13 @@ export default async function CareerDetailsPage({ params }: CareerDetailsPagePro
         </div>
       </section>
 
-      <section className="bg-white">
-        <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8 py-8 md:py-10">
-          <Link
-            href="/career"
-            className="inline-flex items-center text-sm font-semibold text-gray-500 hover:text-[#009FE8] transition-colors"
-          >
-            <span className="mr-2">←</span> Back
-          </Link>
+      <section className="bg-gray-50 mt-[-20px] py-12">
+        <div className="container mx-auto w-full px-4">
+         
 
           <div className="mt-5 flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between">
             <div className="min-w-0">
-              <h1 className="text-2xl md:text-3xl font-semibold text-gray-900">{job.title}</h1>
+              <h1 className="text-2xl md:text-3xl font-bold text-black">{job.title}</h1>
               <p className="mt-1 text-sm text-gray-500">
                 {job.location}
                 {job.postedAgo ? `, ${job.postedAgo}` : ''}
@@ -138,8 +133,8 @@ export default async function CareerDetailsPage({ params }: CareerDetailsPagePro
         </div>
       </section>
 
-      <section className="bg-white">
-        <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8 pb-12 md:pb-16">
+      <section className="bg-gray-50 pb-20">
+        <div className="container mx-auto w-full px-4">
           <div className="grid grid-cols-1 gap-8 lg:grid-cols-[1fr_360px] lg:gap-10">
             {/* Left content */}
             <div className="min-w-0">
@@ -171,8 +166,8 @@ export default async function CareerDetailsPage({ params }: CareerDetailsPagePro
 
             {/* Right sidebar */}
             <aside className="lg:sticky lg:top-6 h-fit">
-              <div className="rounded-3xl bg-gray-50 p-6 md:p-7">
-                <h3 className="text-base font-semibold text-gray-900">
+              <div className="rounded-[50px] bg-[#EDF0F2] p-6 md:p-7">
+                <h3 className="text-lg font-bold text-black">
                   Latest <span className="text-[#009FE8]">Jobs</span>
                 </h3>
 
@@ -181,7 +176,7 @@ export default async function CareerDetailsPage({ params }: CareerDetailsPagePro
                     <Link
                       key={j.id}
                       href={`/career/${j.slug}`}
-                      className="block rounded-2xl px-3 py-2 hover:bg-white transition"
+                      className="block rounded-2xl py-2 transition"
                     >
                       <p className="text-sm font-semibold text-gray-900">{j.title}</p>
                       <p className="mt-1 text-xs text-gray-500">
