@@ -242,7 +242,7 @@ export async function getFooterData(): Promise<FooterData> {
         title: 'Connect',
         links: [
           { id: '9', label: 'Insights', href: '/insights' },
-          { id: '10', label: 'Careers', href: '/careers' },
+          { id: '10', label: 'Careers', href: '/career' },
           { id: '11', label: 'Contact', href: '/contact' },
         ],
       },

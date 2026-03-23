@@ -232,7 +232,7 @@ export async function getCareersListingData(): Promise<CareersListingData> {
         'Explore open roles across commercial, marketing, and technical teams. We value ownership, collaboration, and continuous learning.',
     },
     leadershipMessage: {
-      image: '/images/career/leader.jpg',
+      image: '/chairman_image.webp',
       imageAlt: 'Lamipak leader portrait',
       name: 'Danny Oei',
       role: 'Chairman',

@@ -73,14 +73,12 @@ export default function CareerListingClient({
   }, [activeRegion, jobs, qDate, qExperience, qFunction, qLocation, qTitle]);
 
   return (
-    <section id="open-positions" className="bg-white py-10 md:py-16">
+    <section id="open-positions" className="bg-gray-50 py-10 md:py-12">
       <div className="mx-auto px-4 container">
-        {jobsSection?.notice ? (
-          <p className="text-sm text-gray-500">{jobsSection.notice}</p>
-        ) : null}
+       
 
-        <div className="mt-6">
-          <h2 className="text-2xl font-semibold tracking-tight text-gray-900 md:text-4xl">
+        <div className="mt-6 text-center">
+          <h2 className="text-2xl font-bold text-gray-900 md:text-5xl">
             {jobsSection?.heading ?? 'See all open positions and'}{' '}
             <span className="text-[#009FE8]">
               {jobsSection?.headingHighlight ?? 'early career opportunities'}
@@ -102,7 +100,7 @@ export default function CareerListingClient({
                 type="button"
                 onClick={() => setActiveRegion(tab)}
                 className={[
-                  'rounded-full border px-5 py-2 text-sm font-medium transition',
+                  'cursor-pointer rounded-full border px-5 py-2 text-sm font-medium transition',
                   active
                     ? 'border-[#009FE8] text-[#009FE8]'
                     : 'border-gray-200 text-gray-900 hover:border-[#009FE8] hover:text-[#009FE8]',
@@ -115,7 +113,7 @@ export default function CareerListingClient({
         </div>
 
         {/* Filters row */}
-        <div className="mt-6 rounded-3xl bg-gray-50 px-4 py-4 md:px-6">
+        <div className="mt-6 rounded-3xl bg-gray-50 px-4 py-4 md:px-6 bg-white">
           <div className="grid gap-3 md:grid-cols-5">
             <div className="rounded-full bg-white px-4 py-2 shadow-sm ring-1 ring-gray-200">
               <input
@@ -209,17 +207,17 @@ export default function CareerListingClient({
         {/* Results */}
         <div className="mt-8">
           {filtered.length === 0 ? (
-            <div className="rounded-2xl border border-gray-200 bg-white px-6 py-10 text-center">
+            <div className="px-6 text-center">
               <p className="text-sm text-gray-600">No positions match your filters.</p>
             </div>
           ) : (
-            <div className="divide-y divide-gray-200 rounded-3xl border border-gray-100 bg-white">
+            <div className="divide-y divide-gray-200">
               {filtered.map((job, idx) => {
                 const muted = idx % 2 === 1;
                 return (
                   <div
                     key={job.id}
-                    className={['px-5 py-6 md:px-8', muted ? 'bg-white/70' : 'bg-white'].join(
+                    className={['py-6', muted ? '' : ''].join(
                       ' '
                     )}
                   >

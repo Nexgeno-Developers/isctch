@@ -31,7 +31,7 @@ export default function VerticalTabsFeatures({ features }: VerticalTabsFeaturesP
   }
 
   return (
-    <section className="bg-gray-50 py-12 md:py-16 lg:py-20">
+    <section className="bg-gray-50 py-12 md:py-12 lg:py-12">
       <div className="container mx-auto px-4">
         <div className="flex gap-4 md:gap-6 overflow-hidden">
           {features.map((feature, index) => {

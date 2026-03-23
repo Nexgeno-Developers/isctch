@@ -54,7 +54,7 @@ export default async function CareerPage() {
         <section className="bg-gray-50">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-0 items-stretch">
             {/* Left: content */}
-            <div className="flex items-center justify-center p-8 md:p-12 lg:p-16 xl:p-20 bg-white">
+            <div className="flex items-center justify-center p-8 md:p-12 lg:p-16 xl:p-20">
               <div className="max-w-xl">
                 <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-[#0E233C] leading-[1.15] mb-6">
                   {data.heroSplit.heading}{' '}
@@ -103,18 +103,20 @@ export default async function CareerPage() {
         </section>
       )}
 
+
+<CareerListingClient jobs={data.jobs} jobsSection={data.jobsSection} />
      
 
       {/* Leadership message section (like reference design) */}
       {data.leadershipMessage && (
-        <section className="bg-gray-50 py-10 md:py-16">
+        <section className="bg-gray-50 py-10 md:py-12">
           <div className="container mx-auto px-4">
-            <div className="bg-white rounded-[32px] md:rounded-[40px] p-6 md:p-10 lg:p-12 shadow-sm border border-gray-100">
+            <div className="bg-white rounded-[50px] md:rounded-[50px] p-6 md:p-10 lg:p-12">
               <div className="grid grid-cols-1 lg:grid-cols-[380px_1fr] gap-10 lg:gap-14 items-start">
                 {/* Left: photo + name */}
                 <div>
-                  <div className="bg-[#EDF0F1] rounded-[28px] p-4">
-                    <div className="relative w-full overflow-hidden rounded-[24px]">
+                  <div className="">
+                    <div className="relative w-full overflow-hidden rounded-[50px]">
                       {/* eslint-disable-next-line @next/next/no-img-element */}
                       <img
                         src={data.leadershipMessage.image}
@@ -133,7 +135,7 @@ export default async function CareerPage() {
 
                 {/* Right: content */}
                 <div className="max-w-3xl">
-                  <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-[#0E233C] mb-5">
+                  <h2 className="text-2xl md:text-3xl lg:text-5xl font-bold text-[#0E233C] mb-5">
                     {data.leadershipMessage.heading}{' '}
                     <span className="text-[#009FE8]">
                       {data.leadershipMessage.headingHighlight}
@@ -156,10 +158,10 @@ export default async function CareerPage() {
       {data.verticalFeatures && data.verticalFeatures.length > 0 && (
         <>
           {data.verticalFeaturesHeader && (
-            <section className="bg-gray-50 pt-10 md:pt-14">
+            <section className="bg-gray-50 pt-10 md:pt-8">
               <div className="container mx-auto px-4">
                 <div className="text-center max-w-3xl mx-auto">
-                  <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-[#0E233C]">
+                  <h2 className="text-2xl md:text-3xl lg:text-5xl font-bold text-[#0E233C]">
                     <span className="text-[#009FE8]">
                       {data.verticalFeaturesHeader.heading}
                     </span>{' '}
@@ -178,10 +180,10 @@ export default async function CareerPage() {
 
       {/* Experts video gallery section (like reference design) */}
       {data.expertsSection && data.expertsSection.videos.length > 0 && (
-        <section className="bg-white py-12 md:py-16 lg:py-20">
+        <section className="bg-gray-50 py-8 md:py-12 lg:py-12">
           <div className="container mx-auto px-4">
             <div className="text-center max-w-4xl mx-auto mb-10 md:mb-12">
-              <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-[#0E233C] leading-tight">
+              <h2 className="text-2xl md:text-3xl lg:text-5xl font-bold text-[#0E233C] leading-tight">
                 <span className="text-[#009FE8]">{data.expertsSection.heading}</span>{' '}
                 {data.expertsSection.headingHighlight},{' '}
                 {data.expertsSection.headingSuffix}
@@ -195,9 +197,9 @@ export default async function CareerPage() {
               {data.expertsSection.videos.map((v) => (
                 <div
                   key={v.id}
-                  className="bg-[#EDF0F1] rounded-[32px] p-4 md:p-5"
+                  className=""
                 >
-                  <div className="relative rounded-[28px] overflow-hidden">
+                  <div className="relative rounded-[50px] overflow-hidden">
                     <div className="relative w-full pt-[56.25%]">
                       <VideoModalClient
                         videoUrl={v.videoUrl}
@@ -225,9 +227,12 @@ export default async function CareerPage() {
         />
       )}
 
-      <CareerListingClient jobs={data.jobs} jobsSection={data.jobsSection} />
+      
 
-      <CallToAction />
+<div className="bg-gray-50 pt-12">
+<CallToAction />
+</div>
+      
       <NewsletterSubscription />
     </main>
   );
