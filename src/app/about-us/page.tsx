@@ -77,8 +77,12 @@ export default async function AboutUsPage() {
         <CompanyNavigationServer activePath="/about-us" />
 
        
+<CompanyStatistics />
+        {/* <AboutUsQuadrantServer /> */}
 
-        <AboutUsQuadrantServer />
+        <Journey />
+
+        <VideoBanner />
         
       
    <div className="pt-20">
