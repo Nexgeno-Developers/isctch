@@ -55,6 +55,42 @@ export interface CompanyNavigation {
   items: CompanyNavigationItem[];
 }
 
+/** Shared horizontal sub-nav (About us, Vision & Mission, Government, …) */
+export const COMPANY_SUB_NAVIGATION: CompanyNavigation = {
+  items: [
+    {
+      id: '1',
+      icon: 'info',
+      label: 'About us',
+      href: '/about-us',
+    },
+    {
+      id: '2',
+      icon: 'globe',
+      label: 'Vision & Mission',
+      href: '/vision-mission',
+    },
+    {
+      id: '3',
+      icon: 'building',
+      label: 'Government',
+      href: '/governance-management',
+    },
+    {
+      id: '4',
+      icon: 'document',
+      label: 'Media Kit',
+      href: '/our-company/media-kit',
+    },
+    {
+      id: '5',
+      icon: 'heart',
+      label: 'Responsibility',
+      href: '/our-company/responsibility',
+    },
+  ],
+};
+
 export interface AboutUsQuadrantSection {
   topLeft: {
     title: string;
@@ -230,40 +266,7 @@ export async function getCompanyData(): Promise<CompanyData> {
         },
       ],
     },
-    navigation: {
-      items: [
-        {
-          id: '1',
-          icon: 'info',
-          label: 'About us',
-          href: '/about-us',
-        },
-        {
-          id: '2',
-          icon: 'globe',
-          label: 'Vision & Mission',
-          href: '/vision-mission',
-        },
-        {
-          id: '3',
-          icon: 'building',
-          label: 'Government',
-          href: '/governance-management',
-        },
-        {
-          id: '4',
-          icon: 'document',
-          label: 'Media Kit',
-          href: '/our-company/media-kit',
-        },
-        {
-          id: '5',
-          icon: 'heart',
-          label: 'Responsibility',
-          href: '/our-company/responsibility',
-        },
-      ],
-    },
+    navigation: COMPANY_SUB_NAVIGATION,
     aboutUsQuadrant: {
       topLeft: {
         title: 'Lamipak: A Global Leader in Aseptic Carton Packaging',

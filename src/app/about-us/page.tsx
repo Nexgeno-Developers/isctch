@@ -6,6 +6,7 @@ import CompanyStatistics from '@/components/company/CompanyStatistics';
 import Journey from '@/components/company/Journey';
 import CompanyNavigationServer from '@/components/company/CompanyNavigationServer';
 import AboutUsQuadrantServer from '@/components/company/AboutUsQuadrantServer';
+import Breadcrumbs from '@/components/common/Breadcrumbs';
 import VideoBanner from '@/components/home/VideoBanner';
 import CallToAction from '@/components/home/CallToAction';
 import NewsletterSubscription from '@/components/home/NewsletterSubscription';
@@ -68,10 +69,15 @@ export default async function AboutUsPage() {
 
       <main className="min-h-screen bg-gray-50">
         {/* Hero Section */}
-        <CompanyHero data={{ ...companyData.hero, title: 'About Us' }} />
-  {/* Navigation Section */}
+        <CompanyHero data={{ ...companyData.hero, title: 'About Us' }} /> <section className="bg-gray-50">
+          <div className="container mx-auto px-4 py-4">
+            <Breadcrumbs items={[{ label: 'About us' }]} />
+          </div>
+        </section>
         <CompanyNavigationServer activePath="/about-us" />
-        {/* Quadrant Section - Full Width */}
+
+       
+
         <AboutUsQuadrantServer />
         
       

@@ -4,6 +4,7 @@ import { getCanonicalUrl } from '@/config/site';
 import CompanyHero from '@/components/company/CompanyHero';
 import CompanyNavigationServer from '@/components/company/CompanyNavigationServer';
 import VisionMissionServer from '@/components/company/VisionMissionServer';
+import Breadcrumbs from '@/components/common/Breadcrumbs';
 import OurValuesServer from '@/components/company/OurValuesServer';
 import CallToAction from '@/components/home/CallToAction';
 import NewsletterSubscription from '@/components/home/NewsletterSubscription';
@@ -67,11 +68,20 @@ export default async function VisionMissionPage() {
       <main className="min-h-screen bg-gray-50">
         {/* Hero Section */}
         <CompanyHero data={companyData.hero} />
-        
-        {/* Navigation Section */}
+        <section className="bg-gray-50">
+          <div className="container mx-auto px-4 py-4">
+            <Breadcrumbs
+              items={[
+                
+                { label: 'Vision & Mission' },
+              ]}
+            />
+          </div>
+        </section>
         <CompanyNavigationServer activePath="/vision-mission" />
-        
-        {/* Vision & Mission Section */}
+
+       
+
         <VisionMissionServer />
         
         {/* Our Values Section */}

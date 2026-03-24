@@ -1,5 +1,6 @@
 import { Fragment } from 'react';
 import CompanyHero from '@/components/company/CompanyHero';
+import CompanyNavigation from '@/components/company/CompanyNavigation';
 import Breadcrumbs from '@/components/common/Breadcrumbs';
 import CallToAction from '@/components/home/CallToAction';
 import NewsletterSubscription from '@/components/home/NewsletterSubscription';
@@ -11,6 +12,7 @@ import GovernanceGrcSection from '@/components/governance/GovernanceGrcSection';
 import GovernanceSecurityTrustSection from '@/components/governance/GovernanceSecurityTrustSection';
 import GovernanceWhistleblowingSection from './governance/GovernanceWhistleblowingSection';
 import GovernanceWhistleblowingCardsSection from './governance/GovernanceWhistleblowingCardsSection';
+import { COMPANY_SUB_NAVIGATION } from '@/fake-api/company';
 import type { DynamicPageData } from '@/fake-api/dynamic-pages';
 
 export interface GovernanceManagementPageProps {
@@ -36,12 +38,18 @@ export default function GovernanceManagementPage({
               : '/about_banner.jpg',
         }}
       />
-
-      <section className="bg-gray-50">
+        <section className="bg-gray-50">
         <div className="container mx-auto px-4 py-4">
           <Breadcrumbs items={[{ label: data.title }]} />
         </div>
       </section>
+
+      <CompanyNavigation
+        data={COMPANY_SUB_NAVIGATION}
+        activePath="/governance-management"
+      />
+
+    
 
         <GovernanceFrameworkSection data={data.governanceFrameworkSection!} />
 
