@@ -46,25 +46,20 @@ function SocialIconLinkedIn() {
   );
 }
 
-function WorldPresenceCard() {
+function WorldPresenceCard({ mapImage }: { mapImage?: string }) {
   return (
-    <div className="bg-[#0E6B7E] rounded-[40px] overflow-hidden p-6">
-      <div className="h-[220px] relative">
-        <div className="absolute inset-0 opacity-10">
+    <div className="rounded-[50px] overflow-hidden p-6">
+      <div className="relative">
+        <div className="">
           {/* Decorative: lightweight “map” feel via globe icon + dots */}
           <Image
-            src="/globe_icon.svg"
+            src={mapImage ?? '/globe_icon.svg'}
             alt="Global map"
-            fill
-            className="object-contain"
+            width={1000}
+            height={1000}
+            className="object-contain w-full "
             sizes="100vw"
           />
-        </div>
-
-        <div className="relative z-10 h-full flex items-end justify-center pb-2">
-          <div className="bg-white/20 rounded-full px-6 py-2 text-white text-sm font-medium">
-            Global Presence
-          </div>
         </div>
       </div>
     </div>
@@ -83,6 +78,7 @@ export default async function ContactUsMessageRight() {
   const socialInstagram = companyProfile?.instagramUrl;
   const socialX = companyProfile?.xUrl;
   const socialLinkedIn = companyProfile?.linkedinUrl;
+  const googleMapImage = companyProfile?.googleMapImage;
 
   return (
     <aside className="space-y-6">
@@ -134,15 +130,15 @@ export default async function ContactUsMessageRight() {
         </div>
       </div>
 
-      <WorldPresenceCard />
+      <WorldPresenceCard mapImage={googleMapImage} />
 
-      <div className="flex items-center gap-3">
+      <div className="flex items-center justify-center gap-3">
         {socialX && (
           <a
             href={socialX}
             target="_blank"
             rel="noopener noreferrer"
-            className="w-10 h-10 rounded-full bg-white flex items-center justify-center text-[#009FE8] hover:opacity-80 transition-opacity"
+            className="w-10 h-10 rounded-full bg-[#EDF0F1] flex items-center justify-center text-black hover:opacity-80 transition-opacity"
             aria-label="X"
           >
             <SocialIconTwitter />
@@ -153,7 +149,7 @@ export default async function ContactUsMessageRight() {
             href={socialInstagram}
             target="_blank"
             rel="noopener noreferrer"
-            className="w-10 h-10 rounded-full bg-white flex items-center justify-center text-[#009FE8] hover:opacity-80 transition-opacity"
+            className="w-10 h-10 rounded-full bg-[#EDF0F1] flex items-center justify-center text-black hover:opacity-80 transition-opacity"
             aria-label="Instagram"
           >
             <SocialIconInstagram />
@@ -164,7 +160,7 @@ export default async function ContactUsMessageRight() {
             href={socialLinkedIn}
             target="_blank"
             rel="noopener noreferrer"
-            className="w-10 h-10 rounded-full bg-white flex items-center justify-center text-[#009FE8] hover:opacity-80 transition-opacity"
+            className="w-10 h-10 rounded-full bg-[#EDF0F1] flex items-center justify-center text-black hover:opacity-80 transition-opacity"
             aria-label="LinkedIn"
           >
             <SocialIconLinkedIn />

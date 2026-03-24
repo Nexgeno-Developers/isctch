@@ -102,7 +102,14 @@ type CompanyProfileApiResponse = {
     whatsapp?: string | null;
     address?: string | null;
     website?: string | null;
-    google_map?: string | null;
+    google_map?:
+      | string
+      | {
+          id?: number;
+          filename?: string;
+          url?: string | null;
+        }
+      | null;
     meta_title?: string | null;
     meta_description?: string | null;
     is_active?: boolean;
@@ -124,6 +131,7 @@ type CompanyProfile = {
   instagramUrl?: string;
   xUrl?: string;
   linkedinUrl?: string;
+  googleMapImage?: string;
   breadcrumbImage?: string;
 };
 
@@ -176,6 +184,13 @@ async function fetchCompanyProfile(): Promise<CompanyProfile | null> {
         ? raw.logo
         : raw.logo && typeof raw.logo === 'object'
           ? raw.logo.url || undefined
+          : undefined;
+
+    const rawGoogleMapUrl =
+      typeof raw.google_map === 'string'
+        ? raw.google_map
+        : raw.google_map && typeof raw.google_map === 'object'
+          ? raw.google_map.url || undefined
           : undefined;
 
     const supportEmail =
@@ -236,6 +251,7 @@ async function fetchCompanyProfile(): Promise<CompanyProfile | null> {
       instagramUrl,
       xUrl,
       linkedinUrl,
+      googleMapImage: normalizeApiAssetUrl(rawGoogleMapUrl),
       breadcrumbImage: normalizeApiAssetUrl(breadcrumbMeta?.breadcrumb?.url),
     };
   } catch {
@@ -346,22 +362,20 @@ export async function fetchFooterData(): Promise<FooterData> {
 
   const contactLinks = [
     companyProfile.address
-      ? { id: 'api-contact-address', label: companyProfile.address, href: '#' }
+      ? { id: 'api-contact-address', label: `Address: ${companyProfile.address}`, href: '#' }
       : null,
     companyProfile.phone
-      ? { id: 'api-contact-phone', label: companyProfile.phone, href: `tel:${companyProfile.phone}` }
+      ? {
+          id: 'api-contact-phone',
+          label: `Phone: ${companyProfile.phone}`,
+          href: `tel:${companyProfile.phone}`,
+        }
       : null,
     companyProfile.email
-      ? { id: 'api-contact-email', label: companyProfile.email, href: `mailto:${companyProfile.email}` }
-      : null,
-    companyProfile.website
-      ? { id: 'api-contact-website', label: companyProfile.website, href: companyProfile.website }
-      : null,
-    companyProfile.supportEmail
       ? {
-          id: 'api-contact-support-email',
-          label: companyProfile.supportEmail,
-          href: `mailto:${companyProfile.supportEmail}`,
+          id: 'api-contact-email',
+          label: `Email: ${companyProfile.email}`,
+          href: `mailto:${companyProfile.email}`,
         }
       : null,
   ].filter(Boolean) as FooterData['columns'][number]['links'];
