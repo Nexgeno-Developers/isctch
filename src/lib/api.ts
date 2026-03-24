@@ -79,7 +79,78 @@ export type {
   PackagingPageData,
 };
 import { getHeaderData as fakeGetHeaderData, type HeaderData } from '@/fake-api/layout';
-import { getFooterData as fakeGetFooterData, type FooterData } from '@/fake-api/layout';
+import {
+  getFooterData as fakeGetFooterData,
+  type FooterData,
+  type SocialLink,
+} from '@/fake-api/layout';
+
+type CompanyProfileApiResponse = {
+  data?: {
+    id?: number;
+    name?: string | null;
+    logo?:
+      | string
+      | {
+          id?: number;
+          filename?: string;
+          url?: string | null;
+        }
+      | null;
+    email?: string | null;
+    phone?: string | null;
+    whatsapp?: string | null;
+    address?: string | null;
+    website?: string | null;
+    google_map?: string | null;
+    meta_title?: string | null;
+    meta_description?: string | null;
+    is_active?: boolean;
+    meta?: Array<Record<string, unknown>>;
+  };
+};
+
+type CompanyProfile = {
+  name?: string;
+  logo?: string;
+  email?: string;
+  phone?: string;
+  address?: string;
+  website?: string;
+  supportEmail?: string;
+  salesPartnerEmail?: string;
+  technicalSupportEmail?: string;
+  careersEmail?: string;
+  instagramUrl?: string;
+  xUrl?: string;
+  linkedinUrl?: string;
+  breadcrumbImage?: string;
+};
+
+const COMPANY_API_BASE_URL =
+  process.env.COMPANY_API_BASE_URL ||
+  'https://backend-lamipak.webtesting.pw/api';
+
+const COMPANY_PROFILE_ENDPOINT =
+  process.env.COMPANY_PROFILE_ENDPOINT || '/v1/companies/1';
+
+const COMPANY_API_DOMAIN =
+  process.env.COMPANY_API_DOMAIN || 'https://backend-lamipak.webtesting.pw';
+
+function buildCompanyApiUrl(endpoint: string): string {
+  const base = COMPANY_API_BASE_URL.replace(/\/+$/, '');
+  const path = endpoint.startsWith('/') ? endpoint : `/${endpoint}`;
+  return `${base}${path}`;
+}
+
+function normalizeApiAssetUrl(url?: string | null): string | undefined {
+  if (!url) return undefined;
+  if (/^https?:\/\//i.test(url)) return url;
+
+  const domain = COMPANY_API_DOMAIN.replace(/\/+$/, '');
+  const path = url.startsWith('/') ? url : `/${url}`;
+  return `${domain}${path}`;
+}
 
 /**
  * Checks if we should use the real API or fake API
@@ -87,6 +158,94 @@ import { getFooterData as fakeGetFooterData, type FooterData } from '@/fake-api/
 const useRealAPI = (): boolean => {
   return Boolean(API_CONFIG.baseUrl);
 };
+
+async function fetchCompanyProfile(): Promise<CompanyProfile | null> {
+  try {
+    const response = await fetch(buildCompanyApiUrl(COMPANY_PROFILE_ENDPOINT), {
+      cache: 'no-store',
+    });
+
+    if (!response.ok) return null;
+
+    const payload = (await response.json()) as CompanyProfileApiResponse;
+    const raw = payload?.data;
+    if (!raw || raw.is_active === false) return null;
+
+    const rawLogoUrl =
+      typeof raw.logo === 'string'
+        ? raw.logo
+        : raw.logo && typeof raw.logo === 'object'
+          ? raw.logo.url || undefined
+          : undefined;
+
+    const supportEmail =
+      raw.meta?.find(
+        (item) => !!item && typeof item === 'object' && typeof item.support_email === 'string',
+      )?.support_email as string | undefined;
+
+    const breadcrumbMeta = raw.meta?.find(
+      (item) =>
+        !!item &&
+        typeof item === 'object' &&
+        !!item.breadcrumb &&
+        typeof item.breadcrumb === 'object',
+    ) as { breadcrumb?: { url?: string | null } } | undefined;
+
+    const salesPartnerEmail =
+      raw.meta?.find(
+        (item) =>
+          !!item && typeof item === 'object' && typeof item.sales_partner_email === 'string',
+      )?.sales_partner_email as string | undefined;
+
+    const technicalSupportEmail =
+      raw.meta?.find(
+        (item) =>
+          !!item && typeof item === 'object' && typeof item.technical_support_email === 'string',
+      )?.technical_support_email as string | undefined;
+
+    const careersEmail =
+      raw.meta?.find(
+        (item) => !!item && typeof item === 'object' && typeof item.careers_email === 'string',
+      )?.careers_email as string | undefined;
+
+    const instagramUrl =
+      raw.meta?.find(
+        (item) => !!item && typeof item === 'object' && typeof item.instagram_url === 'string',
+      )?.instagram_url as string | undefined;
+
+    const xUrl =
+      raw.meta?.find((item) => !!item && typeof item === 'object' && typeof item.x_url === 'string')
+        ?.x_url as string | undefined;
+
+    const linkedinUrl =
+      raw.meta?.find(
+        (item) => !!item && typeof item === 'object' && typeof item.linkedin_url === 'string',
+      )?.linkedin_url as string | undefined;
+
+    return {
+      name: raw.name || undefined,
+      logo: normalizeApiAssetUrl(rawLogoUrl),
+      email: raw.email || undefined,
+      phone: raw.phone || undefined,
+      address: raw.address || undefined,
+      website: raw.website || undefined,
+      supportEmail,
+      salesPartnerEmail,
+      technicalSupportEmail,
+      careersEmail,
+      instagramUrl,
+      xUrl,
+      linkedinUrl,
+      breadcrumbImage: normalizeApiAssetUrl(breadcrumbMeta?.breadcrumb?.url),
+    };
+  } catch {
+    return null;
+  }
+}
+
+export async function fetchCompanyProfileData(): Promise<CompanyProfile | null> {
+  return fetchCompanyProfile();
+}
 
 /**
  * Fetches homepage data
@@ -140,7 +299,20 @@ export async function fetchHeaderData(): Promise<HeaderData> {
     throw new Error('Real API not yet implemented');
   }
   
-  return fakeGetHeaderData();
+  const fallback = await fakeGetHeaderData();
+  const companyProfile = await fetchCompanyProfile();
+  if (!companyProfile) {
+    return fallback;
+  }
+
+  return {
+    ...fallback,
+    logo: {
+      ...fallback.logo,
+      text: companyProfile.name || fallback.logo.text,
+      image: companyProfile.logo || fallback.logo.image,
+    },
+  };
 }
 
 /**
@@ -157,7 +329,93 @@ export async function fetchFooterData(): Promise<FooterData> {
     throw new Error('Real API not yet implemented');
   }
   
-  return fakeGetFooterData();
+  const fallback = await fakeGetFooterData();
+  const companyProfile = await fetchCompanyProfile();
+  if (!companyProfile) {
+    return fallback;
+  }
+
+  const contactSummary = [
+    companyProfile.address,
+    companyProfile.phone,
+    companyProfile.email,
+    companyProfile.website,
+  ]
+    .filter(Boolean)
+    .join(' | ');
+
+  const contactLinks = [
+    companyProfile.address
+      ? { id: 'api-contact-address', label: companyProfile.address, href: '#' }
+      : null,
+    companyProfile.phone
+      ? { id: 'api-contact-phone', label: companyProfile.phone, href: `tel:${companyProfile.phone}` }
+      : null,
+    companyProfile.email
+      ? { id: 'api-contact-email', label: companyProfile.email, href: `mailto:${companyProfile.email}` }
+      : null,
+    companyProfile.website
+      ? { id: 'api-contact-website', label: companyProfile.website, href: companyProfile.website }
+      : null,
+    companyProfile.supportEmail
+      ? {
+          id: 'api-contact-support-email',
+          label: companyProfile.supportEmail,
+          href: `mailto:${companyProfile.supportEmail}`,
+        }
+      : null,
+  ].filter(Boolean) as FooterData['columns'][number]['links'];
+
+  const mappedColumns =
+    contactLinks.length > 0
+      ? fallback.columns.map((column) =>
+          column.title === 'Contact'
+            ? {
+                ...column,
+                links: contactLinks,
+              }
+            : column,
+        )
+      : fallback.columns;
+
+  const socialLinks: SocialLink[] = [
+    companyProfile.instagramUrl
+      ? {
+          id: 'api-social-instagram',
+          platform: 'Instagram',
+          href: companyProfile.instagramUrl,
+          icon: 'instagram',
+        }
+      : null,
+    companyProfile.xUrl
+      ? {
+          id: 'api-social-x',
+          platform: 'X',
+          href: companyProfile.xUrl,
+          icon: 'twitter',
+        }
+      : null,
+    companyProfile.linkedinUrl
+      ? {
+          id: 'api-social-linkedin',
+          platform: 'LinkedIn',
+          href: companyProfile.linkedinUrl,
+          icon: 'linkedin',
+        }
+      : null,
+  ].filter(Boolean) as SocialLink[];
+
+  return {
+    ...fallback,
+    logo: {
+      ...fallback.logo,
+      text: companyProfile.name || fallback.logo.text,
+      image: companyProfile.logo || fallback.logo.image,
+    },
+    description: contactSummary || fallback.description,
+    columns: mappedColumns,
+    socialLinks: socialLinks.length > 0 ? socialLinks : fallback.socialLinks,
+  };
 }
 
 /**
@@ -362,12 +620,23 @@ export async function fetchCompanyData(): Promise<CompanyData> {
 
   // Source company content through dynamic page API payload.
   const dynamicCompanyPage = await fakeGetDynamicPageBySlug('our-company');
-  if (dynamicCompanyPage?.ourCompanyData) {
-    return dynamicCompanyPage.ourCompanyData;
+  const baseCompanyData =
+    dynamicCompanyPage?.ourCompanyData ?? (await fakeGetCompanyData());
+
+  const companyProfile = await fetchCompanyProfile();
+  if (!companyProfile) {
+    return baseCompanyData;
   }
 
-  // Safety fallback for local development.
-  return fakeGetCompanyData();
+  return {
+    ...baseCompanyData,
+    hero: {
+      ...baseCompanyData.hero,
+      title: companyProfile.name || baseCompanyData.hero.title,
+      backgroundImage:
+        companyProfile.breadcrumbImage || baseCompanyData.hero.backgroundImage,
+    },
+  };
 }
 
 /**

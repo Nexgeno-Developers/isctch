@@ -8,6 +8,70 @@
 
 import { getAllCategories } from './categories';
 
+type CompanyProfileApiResponse = {
+  data?: {
+    name?: string | null;
+    logo?:
+      | string
+      | {
+          id?: number;
+          filename?: string;
+          url?: string | null;
+        }
+      | null;
+    is_active?: boolean;
+  };
+};
+
+const COMPANY_API_BASE_URL =
+  process.env.COMPANY_API_BASE_URL ||
+  'https://backend-lamipak.webtesting.pw/api';
+const COMPANY_PROFILE_ENDPOINT =
+  process.env.COMPANY_PROFILE_ENDPOINT || '/v1/companies/1';
+const COMPANY_API_DOMAIN =
+  process.env.COMPANY_API_DOMAIN || 'https://backend-lamipak.webtesting.pw';
+
+function buildCompanyApiUrl(endpoint: string): string {
+  const base = COMPANY_API_BASE_URL.replace(/\/+$/, '');
+  const path = endpoint.startsWith('/') ? endpoint : `/${endpoint}`;
+  return `${base}${path}`;
+}
+
+function normalizeApiAssetUrl(url?: string | null): string | undefined {
+  if (!url) return undefined;
+  if (/^https?:\/\//i.test(url)) return url;
+  const domain = COMPANY_API_DOMAIN.replace(/\/+$/, '');
+  const path = url.startsWith('/') ? url : `/${url}`;
+  return `${domain}${path}`;
+}
+
+async function fetchCompanyBranding(): Promise<{ name?: string; logo?: string } | null> {
+  try {
+    const response = await fetch(buildCompanyApiUrl(COMPANY_PROFILE_ENDPOINT), {
+      cache: 'no-store',
+    });
+    if (!response.ok) return null;
+
+    const payload = (await response.json()) as CompanyProfileApiResponse;
+    const raw = payload?.data;
+    if (!raw || raw.is_active === false) return null;
+
+    const rawLogoUrl =
+      typeof raw.logo === 'string'
+        ? raw.logo
+        : raw.logo && typeof raw.logo === 'object'
+          ? raw.logo.url || undefined
+          : undefined;
+
+    return {
+      name: raw.name || undefined,
+      logo: normalizeApiAssetUrl(rawLogoUrl),
+    };
+  } catch {
+    return null;
+  }
+}
+
 export interface NavigationItem {
   id: string;
   label: string;
@@ -76,11 +140,13 @@ export async function getHeaderData(): Promise<HeaderData> {
     href: `/products/category/${category.slug}`,
   }));
 
-  // Mock data - in real implementation, this would fetch from API
+  const branding = await fetchCompanyBranding();
+
+  // Mock data + dynamic branding override
   return {
     logo: {
-      text: 'LAMIPAK',
-      image: '/logo.png',
+      text: branding?.name,
+      image: branding?.logo,
       href: '/',
     },
     navigation: [
@@ -176,11 +242,13 @@ export async function getFooterData(): Promise<FooterData> {
   // Simulate API delay
   await new Promise((resolve) => setTimeout(resolve, 100));
 
-  // Mock data - in real implementation, this would fetch from API
+  const branding = await fetchCompanyBranding();
+
+  // Mock data + dynamic branding override
   return {
     logo: {
-      text: 'LAMIPAK',
-      image: '/footer-logo.png',
+      text: branding?.name || 'LAMIPAK',
+      image: branding?.logo || '/footer-logo.png',
       href: '/',
     },
     description: 'Engineering the future of aseptic liquid packaging. Precision, sterility, and scale built for global leaders.',

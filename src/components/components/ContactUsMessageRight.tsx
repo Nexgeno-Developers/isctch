@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import { fetchCompanyProfileData } from '@/lib/api';
 
 function IconLocation() {
   return (
@@ -70,7 +71,19 @@ function WorldPresenceCard() {
   );
 }
 
-export default function ContactUsMessageRight() {
+export default async function ContactUsMessageRight() {
+  const companyProfile = await fetchCompanyProfileData();
+  const headquartersAddress = companyProfile?.address || 'Head Office, Mumbai, India';
+  const headquartersPhone = companyProfile?.phone || '02134567890';
+  const companyWebsite = companyProfile?.website;
+  const salesPartnerEmail = companyProfile?.salesPartnerEmail || 'sales@lamipak.com';
+  const technicalSupportEmail =
+    companyProfile?.technicalSupportEmail || 'tech.support@lamipak.com';
+  const careersEmail = companyProfile?.careersEmail || 'hr@lamipak.com';
+  const socialInstagram = companyProfile?.instagramUrl;
+  const socialX = companyProfile?.xUrl;
+  const socialLinkedIn = companyProfile?.linkedinUrl;
+
   return (
     <aside className="space-y-6">
       <div className="bg-[#EDF0F1] rounded-[50px] p-6 md:p-7">
@@ -81,19 +94,22 @@ export default function ContactUsMessageRight() {
             <div className="text-[#009FE8] mt-0.5">
               <IconLocation />
             </div>
-            <div className="text-sm text-black leading-relaxed">
-              123 Sustainable Way, Industrial District,
-              <br />
-              Shanghai, China
-            </div>
+            <div className="text-sm text-black leading-relaxed">{headquartersAddress}</div>
           </div>
 
           <div className="flex items-start gap-3">
             <div className="text-[#009FE8] mt-0.5">
               <IconPhone />
             </div>
-            <div className="text-sm text-black">+86 21 0000 0000</div>
+            <div className="text-sm text-black">{headquartersPhone}</div>
           </div>
+          {companyWebsite && (
+            <div className="text-sm text-black">
+              <a href={companyWebsite} target="_blank" rel="noopener noreferrer" className="underline">
+                {companyWebsite}
+              </a>
+            </div>
+          )}
         </div>
       </div>
 
@@ -103,17 +119,17 @@ export default function ContactUsMessageRight() {
         <div className="space-y-4">
           <div>
             <p className="text-xs md:text-sm font-bold tracking-wide text-black mb-2">SALES & PARTNERSHIPS</p>
-            <p className="text-sm text-black">sales@lamipak.com</p>
+            <p className="text-sm text-black">{salesPartnerEmail}</p>
           </div>
 
           <div>
             <p className="text-xs md:text-sm font-bold tracking-wide text-black mb-2">TECHNICAL SUPPORT</p>
-            <p className="text-sm text-black">tech.support@lamipak.com</p>
+            <p className="text-sm text-black">{technicalSupportEmail}</p>
           </div>
 
           <div>
             <p className="text-xs md:text-sm font-bold tracking-wide text-black mb-2">CAREERS</p>
-            <p className="text-sm text-black">hr@lamipak.com</p>
+            <p className="text-sm text-black">{careersEmail}</p>
           </div>
         </div>
       </div>
@@ -121,27 +137,39 @@ export default function ContactUsMessageRight() {
       <WorldPresenceCard />
 
       <div className="flex items-center gap-3">
-        <a
-          href="#"
-          className="w-10 h-10 rounded-full bg-white flex items-center justify-center text-[#009FE8] hover:opacity-80 transition-opacity"
-          aria-label="Twitter"
-        >
-          <SocialIconTwitter />
-        </a>
-        <a
-          href="#"
-          className="w-10 h-10 rounded-full bg-white flex items-center justify-center text-[#009FE8] hover:opacity-80 transition-opacity"
-          aria-label="Instagram"
-        >
-          <SocialIconInstagram />
-        </a>
-        <a
-          href="#"
-          className="w-10 h-10 rounded-full bg-white flex items-center justify-center text-[#009FE8] hover:opacity-80 transition-opacity"
-          aria-label="LinkedIn"
-        >
-          <SocialIconLinkedIn />
-        </a>
+        {socialX && (
+          <a
+            href={socialX}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="w-10 h-10 rounded-full bg-white flex items-center justify-center text-[#009FE8] hover:opacity-80 transition-opacity"
+            aria-label="X"
+          >
+            <SocialIconTwitter />
+          </a>
+        )}
+        {socialInstagram && (
+          <a
+            href={socialInstagram}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="w-10 h-10 rounded-full bg-white flex items-center justify-center text-[#009FE8] hover:opacity-80 transition-opacity"
+            aria-label="Instagram"
+          >
+            <SocialIconInstagram />
+          </a>
+        )}
+        {socialLinkedIn && (
+          <a
+            href={socialLinkedIn}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="w-10 h-10 rounded-full bg-white flex items-center justify-center text-[#009FE8] hover:opacity-80 transition-opacity"
+            aria-label="LinkedIn"
+          >
+            <SocialIconLinkedIn />
+          </a>
+        )}
       </div>
     </aside>
   );
