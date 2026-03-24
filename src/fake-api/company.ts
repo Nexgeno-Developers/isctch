@@ -62,32 +62,39 @@ export const COMPANY_SUB_NAVIGATION: CompanyNavigation = {
       id: '1',
       icon: 'info',
       label: 'About us',
-      href: '/about-us',
+      href: '/our-company',
     },
     {
       id: '2',
+      icon: 'globe',
+      label: 'Introduction',
+      href: '/introduction',
+    },
+    
+    {
+      id: '3',
       icon: 'globe',
       label: 'Vision & Mission',
       href: '/vision-mission',
     },
     {
-      id: '3',
+      id: '4',
       icon: 'building',
-      label: 'Government',
+      label: 'Governance',
       href: '/governance-management',
     },
-    {
-      id: '4',
-      icon: 'document',
-      label: 'Media Kit',
-      href: '/media-kit',
-    },
-    {
-      id: '5',
-      icon: 'heart',
-      label: 'Responsibility',
-      href: '/responsibility',
-    },
+    // {
+    //   id: '4',
+    //   icon: 'document',
+    //   label: 'Media Kit',
+    //   href: '/media-kit',
+    // },
+    // {
+    //   id: '5',
+    //   icon: 'heart',
+    //   label: 'Responsibility',
+    //   href: '/responsibility',
+    // },
   ],
 };
 

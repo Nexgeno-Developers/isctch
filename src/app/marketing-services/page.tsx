@@ -72,7 +72,7 @@ export default async function MarketingServicesPage() {
 
             {/* Right – Heading + description from API */}
             <div className="text-center lg:text-left">
-              <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6 md:mb-6 leading-[70px]">
+              <h2 className="text-3xl md:text-4xl lg:text-5xl text-black font-bold mb-6 md:mb-6 leading-[70px]">
                 {overview.heading}
               </h2>
               <p className="text-base md:text-lg text-black leading-relaxed mb-4 md:mb-6">
@@ -84,7 +84,7 @@ export default async function MarketingServicesPage() {
           {/* Stats strip – heading/subheading driven by API */}
           <div className="bg-gray-50 pt-20">
             <div className="text-center mb-8">
-              <h3 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6 md:mb-2 text-center">
+              <h3 className="text-3xl md:text-4xl text-black lg:text-5xl font-bold mb-6 md:mb-2 text-center">
                 {overview.statsHeading}
               </h3>
               <p className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6 md:mb-6 text-[#009FE8] text-center">
@@ -126,7 +126,7 @@ export default async function MarketingServicesPage() {
 
       {/* Marketing services listing – "What Are You Looking For?" heading from API */}
       <section className="bg-gray-50">
-        <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6 md:mb-8 leading-[70px] text-center">
+        <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6 md:mb-8 leading-[70px] text-black text-center">
           {overview.listingHeading.replace(overview.listingHeadingHighlight, '').trim()}{' '}
           <span className="text-[#009FE8]">
             {overview.listingHeadingHighlight}

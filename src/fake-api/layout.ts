@@ -88,38 +88,6 @@ export async function getHeaderData(): Promise<HeaderData> {
         id: '1',
         label: 'About Us',
         href: '/about-us',
-        children: [
-          {
-            id: '1-1',
-            label: 'Our Facotry',
-            href: '/our-factory',
-          },
-          {
-            id: '1-2',
-            label: 'Our Company',
-            href: '/about-us',
-          },
-          {
-            id: '1-3',
-            label: 'Vision Mission',
-            href: '/vision-mission',
-          },
-          {
-            id: '1-4',
-            label: 'Government',
-            href: '/governance-management',
-          },
-          {
-            id: '1-5',
-            label: 'Media Kit',
-            href: '/media-kit',
-          },
-          {
-            id: '1-6',
-            label: 'Responsibility',
-            href: '/responsibility',
-          },
-        ],
       },
       {
         id: '2',
@@ -221,29 +189,29 @@ export async function getFooterData(): Promise<FooterData> {
         id: '1',
         title: 'Quick Links',
         links: [
-          { id: '1', label: 'Solutions', href: '/solutions' },
-          { id: '2', label: 'Industries', href: '/industries' },
-          { id: '3', label: 'Sustainability', href: '/sustainability' },
-          { id: '4', label: 'About', href: '/about' },
+          { id: '1', label: 'Solutions', href: '/' },
+          { id: '2', label: 'Industries', href: '/' },
+          { id: '3', label: 'Sustainability', href: '/' },
+          { id: '4', label: 'About Us', href: '/about-us' },
         ],
       },
       {
         id: '2',
         title: 'Legal',
         links: [
-          { id: '5', label: 'Terms & Condition', href: '/terms' },
-          { id: '6', label: 'Privacy Policy', href: '/privacy' },
-          { id: '7', label: 'Downloads', href: '/downloads' },
-          { id: '8', label: 'Blogs', href: '/blog' },
+          { id: '5', label: 'Terms & Condition', href: '/' },
+          { id: '6', label: 'Privacy Policy', href: '/' },
+          { id: '7', label: 'Downloads', href: '/' },
+          { id: '8', label: 'Blogs', href: '/' },
         ],
       },
       {
         id: '3',
         title: 'Connect',
         links: [
-          { id: '9', label: 'Insights', href: '/insights' },
+          { id: '9', label: 'Insights', href: '/' },
           { id: '10', label: 'Careers', href: '/career' },
-          { id: '11', label: 'Contact', href: '/contact' },
+          { id: '11', label: 'Contact Us', href: '/contact-us' },
         ],
       },
       {

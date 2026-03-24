@@ -35,7 +35,7 @@ export default async function Header() {
 
           {/* Desktop Navigation + CTA (Right side) */}
           <div className="hidden md:flex items-center gap-6 lg:gap-12 ml-auto">
-            <nav className="flex items-center space-x-[30px] lg:space-x-[70px]">
+            <nav className="flex items-center space-x-[30px] lg:space-x-[40px]">
               {headerData.navigation.map((item) => (
                 <NavigationDropdown key={item.id} item={item} />
               ))}

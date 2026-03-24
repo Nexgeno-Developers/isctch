@@ -1797,20 +1797,20 @@ export async function getDynamicPageBySlug(
     };
   }
 
-  if (slug === 'our-factory') {
+  if (slug === 'introduction') {
     const companyData = await fakeGetCompanyData();
     const companySeo = companyData.seo;
 
     return {
       slug,
       type: 'our-factory',
-      title: 'Our Factory',
+      title: 'Introduction',
       content: companySeo.meta_description,
       ourCompanyData: companyData,
       seo: {
         meta_title: companySeo.meta_title,
         meta_description: companySeo.meta_description,
-        canonical_path: '/our-factory',
+        canonical_path: '/introduction',
         keywords: undefined,
         author: undefined,
         robots: { index: true, follow: true },

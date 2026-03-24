@@ -12,6 +12,7 @@ export interface OurCompanyDynamicPageProps {
 
 export default function OurCompanyDynamicPage({ data }: OurCompanyDynamicPageProps) {
   const companyData = data.ourCompanyData;
+  const activeCompanyPath = `/${data.slug}`;
 
   if (!companyData) return null;
 
@@ -22,7 +23,7 @@ export default function OurCompanyDynamicPage({ data }: OurCompanyDynamicPagePro
           ? getCanonicalUrl(data.seo.canonical_path)
           : companyData.seo.canonical_url
             ? getCanonicalUrl(companyData.seo.canonical_url)
-            : getCanonicalUrl('/about-us'),
+            : getCanonicalUrl('/our-company'),
       }
     : null;
 
@@ -38,7 +39,7 @@ export default function OurCompanyDynamicPage({ data }: OurCompanyDynamicPagePro
       <main className="min-h-screen bg-gray-50">
         <CompanyHero data={{ ...companyData.hero, title: 'About Us' }} />
 
-        <CompanyNavigation data={companyData.navigation} activePath="/about-us" />
+        <CompanyNavigation data={companyData.navigation} activePath={activeCompanyPath} />
 
         {companyData.aboutUsQuadrant ? <AboutUsQuadrant data={companyData.aboutUsQuadrant} /> : null}
 

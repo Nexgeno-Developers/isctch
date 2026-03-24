@@ -47,10 +47,10 @@ export default function CompanyNavigation({ data, activePath }: CompanyNavigatio
       <div className="container mx-auto px-4">
         <div className="flex flex-wrap justify-between">
           {data.items.map((item) => {
-            // Check if current path matches item href, or if on /about-us and item is "About us" (/our-company)
-            const isActive = activePath === item.href || 
+            const isActive =
+              activePath === item.href ||
               (activePath === '/about-us' && item.href === '/our-company') ||
-              (activePath === '/our-company' && item.href === '/our-company');
+              (activePath === '/our-factory' && item.href === '/introduction');
             return (
               <Link
                 key={item.id}
