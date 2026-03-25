@@ -142,6 +142,26 @@ export type SustainableSolutionsSectionData = {
   items: SustainableSolutionItem[];
 };
 
+export type LamiStrawIconId = 'u' | 'telescope' | 'i' | 'flow';
+
+export type LamiStrawCardItem = {
+  id: string;
+  title: string;
+  description: string;
+  readMoreLabel: string;
+  href?: string;
+  iconId: LamiStrawIconId;
+  image?: string;
+  imageAlt?: string;
+};
+
+export type LamiStrawLandingSectionData = {
+  eyebrow: string;
+  title: string;
+  descriptionLines: string[];
+  cards: LamiStrawCardItem[];
+};
+
 export type PageBuilderSection =
   | { type: 'hero'; data: HeroSectionData }
   | { type: 'heroWithBreadcrumbs'; data: HeroWithBreadcrumbsSectionData }
@@ -149,6 +169,7 @@ export type PageBuilderSection =
   | { type: 'categoryShowcase'; data: CategoryShowcaseSectionData }
   | { type: 'rollFedCatalog'; data: RollFedCatalogSectionData }
   | { type: 'sustainableSolutions'; data: SustainableSolutionsSectionData }
+  | { type: 'lamiStrawLanding'; data: LamiStrawLandingSectionData }
   | { type: 'productGrid'; data: ProductGridSectionData }
   | { type: 'productDetails'; data: ProductDetailsSectionData }
   | { type: 'customBanner'; data: CustomBannerSectionData };
@@ -510,6 +531,89 @@ export async function getSubCategoryPage(
                 image: '/product_image_3.jpg',
                 imageAlt: 'LamiPristine sustainable packaging',
                 href: '/products/lamisleeve-aseptic-packaging',
+              },
+            ],
+          },
+        },
+      ],
+    };
+  }
+
+  if (subCategory === 'lamistraw') {
+    return {
+      slug: `${mainCategory}/${subCategory}`,
+      title: 'LamiStraw',
+      seo: {
+        meta_title: 'LamiStraw | Lamipak',
+        meta_description:
+          'LamiPak paper straw alternatives: sustainable, consumer-friendly, and designed for modern aseptic beverages.',
+        canonical_path: `/${mainCategory}/${subCategory}`,
+      },
+      sections: [
+        {
+          type: 'heroWithBreadcrumbs',
+          data: {
+            title: 'LamiStraw',
+            backgroundImage: '/banner-slider1.jpg',
+            breadcrumbs: [
+              { label: 'Packaging', href: '/packaging' },
+              { label: 'LamiStraw' },
+            ],
+          },
+        },
+        {
+          type: 'lamiStrawLanding',
+          data: {
+            eyebrow: 'LamiPak Paper Straws',
+            title: 'The Sustainable Alternative To Plastic Straws',
+            descriptionLines: [
+              "Lamipak’s sustainable paper straw is a revolutionary product developed as the best alternative to plastic straws. With the alarming rise in discarded waste, there has never been a more critical time to switch to environmentally friendly alternatives like our biodegradable paper straws.",
+              'As a leading provider of paper straws for aseptic packaging, Lamipak offers high-quality paper based straws that are fully functional and reliable. Our recyclable paper straws are specifically designed as paper straws for aseptic carton packs, ensuring that your transition to eco-friendly paper straws never compromises the consumer experience. Join us in implementing paper straws solutions that protect our oceans and provide a cleaner future.',
+            ],
+            cards: [
+              {
+                id: 'u-shape',
+                title: 'U-Shape Straw',
+                description:
+                  'The U-Shape Straw is a flexible, U-curved paper straw specifically designed for beverage cartons. Features a sturdy build and a water-based curved section.',
+                readMoreLabel: 'Read More →',
+                href: '/products/u-shape-straw',
+                iconId: 'u',
+                image: '/accessories_img_2.jpg',
+                imageAlt: 'U-Shape Straw',
+              },
+              {
+                id: 'telescopic',
+                title: 'Telescopic Straw',
+                description:
+                  'The Telescopic Straw is designed with an extendable tube structure that adapts seamlessly to various packaging sizes, offering enhanced flexibility and convenience.',
+                readMoreLabel: 'Read More →',
+                href: '/products/telescopic-straw',
+                iconId: 'telescope',
+                image: '/accessories_img_1.jpg',
+                imageAlt: 'Telescopic Straw',
+              },
+              {
+                id: 'i-shape',
+                title: 'I-Shape Straw',
+                description:
+                  'The I-Shape Straw features a standard straight tube design engineered for superior mechanical strength and strong puncture resistance, ensuring comfort and reliable performance.',
+                readMoreLabel: 'Read More →',
+                href: '/products/telescopic-straw',
+                iconId: 'i',
+                image: '/accessories_img_3.jpg',
+                imageAlt: 'I-Shape Straw',
+              },
+              {
+                id: 'lamiflow',
+                title: 'LamiFlow Straw',
+                description:
+                  'LamiFlow Straw redefines the drinking experience with its innovative flow-molded design, replacing the conventional single aperture to deliver liquid through multiple directions.',
+                readMoreLabel: 'Read More →',
+                href: '/products/telescopic-straw',
+                iconId: 'flow',
+                image: '/accessories_img_3.jpg',
+                imageAlt: 'LamiFlow Straw',
               },
             ],
           },
