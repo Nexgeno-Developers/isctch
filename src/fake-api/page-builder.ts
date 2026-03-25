@@ -99,10 +99,27 @@ export type CategoryShowcaseSectionData = {
   items: CategoryShowcaseItem[];
 };
 
+export type RollFedCatalogProduct = {
+  id: string;
+  title: string;
+  sizes: string;
+  image?: string;
+};
+
+export type RollFedCatalogSectionData = {
+  eyebrow?: string;
+  intro: string;
+  standardTitle: string;
+  standardProducts: RollFedCatalogProduct[];
+  premiumTitle: string;
+  premiumProducts: RollFedCatalogProduct[];
+};
+
 export type PageBuilderSection =
   | { type: 'hero'; data: HeroSectionData }
   | { type: 'subcategoryGrid'; data: SubCategoryGridSectionData }
   | { type: 'categoryShowcase'; data: CategoryShowcaseSectionData }
+  | { type: 'rollFedCatalog'; data: RollFedCatalogSectionData }
   | { type: 'productGrid'; data: ProductGridSectionData }
   | { type: 'productDetails'; data: ProductDetailsSectionData }
   | { type: 'customBanner'; data: CustomBannerSectionData };
@@ -247,6 +264,89 @@ export async function getSubCategoryPage(
   subCategory: PageBuilderSubCategory,
 ): Promise<PageBuilderPageData | null> {
   if (!isSupportedMainCategory(mainCategory)) return null;
+
+  if (subCategory === 'roll-fed') {
+    const standardProducts: RollFedCatalogProduct[] = [
+      {
+        id: 'brick-slim',
+        title: 'Brick Slim',
+        sizes: '80ml, 125ml, 200ml, 250ml, 500ml, 1000ml, 1500ml, 2000ml',
+        image: '/product_image_3.jpg',
+      },
+      {
+        id: 'brick-base',
+        title: 'Brick Base',
+        sizes: '100ml, 200ml, 250ml, 500ml, 1000ml',
+        image: '/product_image_3.jpg',
+      },
+      {
+        id: 'brick-mid',
+        title: 'Brick Mid',
+        sizes: '200ml',
+        image: '/product_image_3.jpg',
+      },
+      {
+        id: 'lamiwedge',
+        title: 'LamiWedge',
+        sizes: '125ml, 200ml',
+        image: '/product_image_3.jpg',
+      },
+      {
+        id: 'lamipillow',
+        title: 'LamiPillow',
+        sizes: '70ml, 100ml, 200ml, 220ml, 250ml, 600ml, 1000ml',
+        image: '/product_image_3.jpg',
+      },
+      {
+        id: 'lamitriangle',
+        title: 'LamiTriangle',
+        sizes: '20ml, 65ml, 80ml, 150ml, 200ml',
+        image: '/product_image_3.jpg',
+      },
+    ];
+
+    const premiumProducts: RollFedCatalogProduct[] = [
+      { id: 'lamileaf-slim', title: 'LamiLeaf Slim', sizes: '125ml, 200ml', image: '/product_image_3.jpg' },
+      { id: 'lamidiamond', title: 'LamiDiamond', sizes: '200ml, 250ml, 1000ml', image: '/product_image_3.jpg' },
+      { id: 'lamisquare', title: 'LamiSquare', sizes: '1000ml', image: '/product_image_3.jpg' },
+      { id: 'lamiedge', title: 'LamiEdge', sizes: '500ml, 1000ml', image: '/product_image_3.jpg' },
+      { id: 'lamileaf-base', title: 'LamiLeaf Base', sizes: '250ml', image: '/product_image_3.jpg' },
+      { id: 'lamigemina', title: 'LamiGemina', sizes: '1000ml', image: '/product_image_3.jpg' },
+      { id: 'lami-gemina-leaf', title: 'Lami Gemina Leaf', sizes: '1000ml', image: '/product_image_3.jpg' },
+      { id: 'lamiultra', title: 'LamiUltra', sizes: '180ml', image: '/product_image_3.jpg' },
+    ];
+
+    return {
+      slug: `${mainCategory}/${subCategory}`,
+      title: 'Roll-Fed',
+      seo: {
+        meta_title: 'Roll-Fed | Lamipak',
+        meta_description: 'Roll-fed packaging systems with standard and premium product families.',
+        canonical_path: `/${mainCategory}/${subCategory}`,
+      },
+      sections: [
+        {
+          type: 'hero',
+          data: {
+            title: 'Roll-Fed',
+            backgroundImage: '/banner-slider1.jpg',
+          },
+        },
+        {
+          type: 'rollFedCatalog',
+          data: {
+            eyebrow: 'Roll-Fed',
+            intro:
+              'Lamipak’s roll-fed packaging system is the most efficient solution for today’s beverage industry. Designed for high compatibility with various filling machines, this format offers competitive production costs without compromising food safety. With aseptic lamination technology that ensures long-lasting freshness, Lamipak Roll-fed sets a new standard for brands prioritizing sustainability, logistical efficiency, and retail.',
+            standardTitle: 'Standard Products',
+            standardProducts,
+            premiumTitle: 'Premium Products',
+            premiumProducts,
+          },
+        },
+      ],
+    };
+  }
 
   const category = await getCategoryBySlug(subCategory);
   if (!category) return null;
