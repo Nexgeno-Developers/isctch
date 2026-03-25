@@ -12,6 +12,7 @@ import { RollFedCatalogSection } from '@/components/sections/RollFedCatalogSecti
 import { SustainableSolutionsSection } from '@/components/sections/SustainableSolutionsSection';
 import { HeroWithBreadcrumbsSection } from '@/components/sections/HeroWithBreadcrumbsSection';
 import { LamiStrawLandingSection } from '@/components/sections/LamiStrawLandingSection';
+import { OnePackOneCodeLandingSection } from '@/components/sections/OnePackOneCodeLandingSection';
 
 const sectionMap: Partial<
   Record<PageBuilderSection['type'], (props: { data: any; pageContext?: PageBuilderContext }) => ReactElement | null>
@@ -23,6 +24,7 @@ const sectionMap: Partial<
   heroWithBreadcrumbs: ({ data }) => <HeroWithBreadcrumbsSection data={data} />,
   sustainableSolutions: ({ data }) => <SustainableSolutionsSection data={data} />,
   lamiStrawLanding: ({ data }) => <LamiStrawLandingSection data={data} />,
+  onePackOneCodeLanding: ({ data }) => <OnePackOneCodeLandingSection data={data} />,
   productGrid: ({ data, pageContext }) => <ProductGridSection data={data} pageContext={pageContext} />,
   productDetails: ({ data }) => <ProductDetailsSection data={data} />,
   customBanner: ({ data }) => <CustomBannerSection data={data} />,

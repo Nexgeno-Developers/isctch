@@ -162,6 +162,42 @@ export type LamiStrawLandingSectionData = {
   cards: LamiStrawCardItem[];
 };
 
+export type OnePackOneCodeTabId = 'digital' | 'lottery' | 'marketing' | 'loyalty' | 'traceability';
+
+export type OnePackOneCodeTab = {
+  id: OnePackOneCodeTabId;
+  label: string;
+};
+
+export type OnePackOneCodeAccordionItem = {
+  id: string;
+  title: string;
+  content: string;
+};
+
+export type OnePackOneCodeFeature = {
+  id: string;
+  number: string;
+  title: string;
+  bullets: string[];
+  image?: string;
+};
+
+export type OnePackOneCodeLandingSectionData = {
+  breadcrumbs: BreadcrumbItemData[];
+  tabs: OnePackOneCodeTab[];
+  activeTabId: OnePackOneCodeTabId;
+  hero: {
+    backgroundImage?: string;
+  };
+  accessPoints: {
+    title: string;
+    description: string;
+    items: OnePackOneCodeAccordionItem[];
+  };
+  features: OnePackOneCodeFeature[];
+};
+
 export type PageBuilderSection =
   | { type: 'hero'; data: HeroSectionData }
   | { type: 'heroWithBreadcrumbs'; data: HeroWithBreadcrumbsSectionData }
@@ -170,6 +206,7 @@ export type PageBuilderSection =
   | { type: 'rollFedCatalog'; data: RollFedCatalogSectionData }
   | { type: 'sustainableSolutions'; data: SustainableSolutionsSectionData }
   | { type: 'lamiStrawLanding'; data: LamiStrawLandingSectionData }
+  | { type: 'onePackOneCodeLanding'; data: OnePackOneCodeLandingSectionData }
   | { type: 'productGrid'; data: ProductGridSectionData }
   | { type: 'productDetails'; data: ProductDetailsSectionData }
   | { type: 'customBanner'; data: CustomBannerSectionData };
@@ -294,6 +331,16 @@ export async function getMainCategoryPage(
                 'Bespoke technical integration services for unique line layouts, pilot trials, and co-development from concept to commercial scale.',
               ctaLabel: 'Talk to us',
               href: '/contact-us',
+              iconId: 'innovation',
+            },
+            {
+              id: 'one-pack-one-code',
+              code: 'LAMI-04',
+              title: 'OnePack OneCode',
+              description:
+                'Digital co-printing and traceability solutions that connect brands with consumers using one smart code.',
+              ctaLabel: 'Explore',
+              href: '/packaging/one-pack-one-code',
               iconId: 'innovation',
             },
           ],
@@ -614,6 +661,87 @@ export async function getSubCategoryPage(
                 iconId: 'flow',
                 image: '/accessories_img_3.jpg',
                 imageAlt: 'LamiFlow Straw',
+              },
+            ],
+          },
+        },
+      ],
+    };
+  }
+
+  if (subCategory === 'one-pack-one-code') {
+    return {
+      slug: `${mainCategory}/${subCategory}`,
+      title: 'One Pack One Code',
+      seo: {
+        meta_title: 'One Pack One Code | Lamipak',
+        meta_description:
+          'Digital co-printing and traceability solutions for aseptic packaging — connecting brands with consumers through one code.',
+        canonical_path: `/${mainCategory}/${subCategory}`,
+      },
+      sections: [
+        {
+          type: 'heroWithBreadcrumbs',
+          data: {
+            title: 'One Pack One Code',
+            backgroundImage: '/banner-slider2.webp',
+            breadcrumbs: [
+              { label: 'Packaging', href: '/packaging' },
+              { label: 'One Pack One Code' },
+            ],
+          },
+        },
+        {
+          type: 'onePackOneCodeLanding',
+          data: {
+            breadcrumbs: [
+              { label: 'Packaging', href: '/packaging' },
+              { label: 'One Pack One Code' },
+            ],
+            tabs: [
+              { id: 'digital', label: 'Digital Co-Printing' },
+              { id: 'lottery', label: 'Lottery Activities' },
+              { id: 'marketing', label: 'Marketing/Brand Promotion' },
+              { id: 'loyalty', label: 'Loyalty/Rewards' },
+              { id: 'traceability', label: 'Traceability' },
+            ],
+            activeTabId: 'lottery',
+            hero: {
+              backgroundImage: '/banner-slider2.webp',
+            },
+            accessPoints: {
+              title: 'Universal Access Points',
+              description:
+                'Flexible code placement allows for seamless integration without compromising brand aesthetics.',
+              items: [
+                { id: 'tap', title: 'Under the tap', content: 'Place the code under the tap for quick consumer scanning.' },
+                { id: 'cap', title: 'Under the cap', content: 'Keep the code accessible while maintaining a clean look.' },
+                { id: 'back', title: 'On the back', content: 'Use the back area for QR and campaign routing.' },
+                { id: 'label-cap', title: 'On the cap', content: 'Print on the cap for reliable scan performance.' },
+              ],
+            },
+            features: [
+              {
+                id: 'digital',
+                number: '01',
+                title: 'Digital Co-Printing',
+                bullets: [
+                  'Our high-speed digital printing technology allows for unique identification across single packs.',
+                  'Highly-resilient variable data and customization at scale.',
+                  'Seamless integration with existing production workflows.',
+                ],
+                image: '/product_image_1.jpg',
+              },
+              {
+                id: 'lottery',
+                number: '02',
+                title: 'LOTTERY',
+                bullets: [
+                  'Engage consumers with instant-win campaigns and participating codes.',
+                  'Boost brand interaction through controlled redemption flows.',
+                  'Track participation and performance across regions.',
+                ],
+                image: '/product_image_2.jpg',
               },
             ],
           },
