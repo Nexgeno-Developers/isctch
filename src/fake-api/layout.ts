@@ -161,11 +161,11 @@ export async function getHeaderData(): Promise<HeaderData> {
         href: '/products',
         children: industryChildren,
       },
-      {
-        id: '3',
-        label: 'Insights',
-        href: '/insights',
-      },
+      // {
+      //   id: '3',
+      //   label: 'Insights',
+      //   href: '/insights',
+      // },
       {
         id: '4',
         label: 'Services',
@@ -183,11 +183,11 @@ export async function getHeaderData(): Promise<HeaderData> {
           },
         ],
       },
-      {
-        id: '5',
-        label: 'Innovations',
-        href: '/innovation',
-      },
+      // {
+      //   id: '5',
+      //   label: 'Innovations',
+      //   href: '/innovation',
+      // },
       {
         id: '6',
         label: 'Sustainability',
@@ -228,7 +228,7 @@ export async function getHeaderData(): Promise<HeaderData> {
     ],
     cta: {
       text: 'Contact Us',
-      href: '/contact',
+      href: '/contact-us',
     },
   };
 }

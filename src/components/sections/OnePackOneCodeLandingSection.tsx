@@ -9,20 +9,25 @@ import NewsletterSubscription from '../home/NewsletterSubscription';
 import ConnectTechnicalExperts from '@/components/technical-services/ConnectTechnicalExperts';
 
 function TabIcon({ id }: { id: OnePackOneCodeTabId }) {
-  const common = 'stroke="currentColor" fill="none" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"';
-
   if (id === 'digital') {
     return (
-      <svg className="w-5 h-5" viewBox="0 0 24 24" aria-hidden>
-        <rect x="3" y="7" width="6" height="10" rx="1.5" {...{}} {...{}} />
-        <path d="M11 9h10M11 13h10M11 17h6" {...{}} {...{}} />
+      <svg className="w-12 h-12" viewBox="0 0 24 24" aria-hidden>
+        <rect x="3" y="7" width="6" height="10" rx="1.5" stroke="currentColor" fill="none" strokeWidth="1.8" strokeLinecap="round" />
+        <path
+          d="M11 9h10M11 13h10M11 17h6"
+          stroke="currentColor"
+          fill="none"
+          strokeWidth="1.8"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
       </svg>
     );
   }
 
   if (id === 'lottery') {
     return (
-      <svg className="w-5 h-5" viewBox="0 0 24 24" aria-hidden>
+      <svg className="w-12 h-12" viewBox="0 0 24 24" aria-hidden>
         <path d="M7 7h10v10H7z" stroke="currentColor" fill="none" strokeWidth="1.8" strokeLinejoin="round" />
         <path d="M9 10h6M9 13h4" stroke="currentColor" fill="none" strokeWidth="1.8" strokeLinecap="round" />
       </svg>
@@ -31,7 +36,7 @@ function TabIcon({ id }: { id: OnePackOneCodeTabId }) {
 
   if (id === 'marketing') {
     return (
-      <svg className="w-5 h-5" viewBox="0 0 24 24" aria-hidden>
+      <svg className="w-12 h-12" viewBox="0 0 22 22" aria-hidden>
         <path d="M10 14l11-5-11-5v10z" stroke="currentColor" fill="none" strokeWidth="1.8" strokeLinejoin="round" />
         <path d="M3 12h7" stroke="currentColor" fill="none" strokeWidth="1.8" strokeLinecap="round" />
       </svg>
@@ -40,14 +45,14 @@ function TabIcon({ id }: { id: OnePackOneCodeTabId }) {
 
   if (id === 'loyalty') {
     return (
-      <svg className="w-5 h-5" viewBox="0 0 24 24" aria-hidden>
+      <svg className="w-8 h-8" viewBox="0 0 24 24" aria-hidden>
         <path d="M12 2l3.1 6.6 7.3 1.1-5.3 5.1 1.3 7.2L12 18.8 5.6 22l1.3-7.2L1.6 9.7l7.3-1.1L12 2z" stroke="currentColor" fill="none" strokeWidth="1.6" strokeLinejoin="round" />
       </svg>
     );
   }
 
   return (
-    <svg className="w-5 h-5" viewBox="0 0 24 24" aria-hidden>
+    <svg className="w-10 h-10" viewBox="0 0 24 24" aria-hidden>
       <circle cx="12" cy="12" r="8" stroke="currentColor" fill="none" strokeWidth="1.8" />
       <path d="M12 8v4l3 2" stroke="currentColor" fill="none" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
@@ -144,7 +149,7 @@ function FeatureBlock({
               alt={feature.title}
               width={800}
               height={600}
-              className="w-full object-contain"
+              className="w-full object-contain rounded-[50px]"
               priority={false}
             />
           ) : (
@@ -162,39 +167,65 @@ export function OnePackOneCodeLandingSection({
   data: OnePackOneCodeLandingSectionData;
 }) {
   const [activeTab, setActiveTab] = useState<OnePackOneCodeTabId>(data.activeTabId);
+  const rawTitle = data.breadcrumbs?.[data.breadcrumbs.length - 1]?.label ?? 'One Pack One Code';
+  const { leftTitle, rightTitle } = (() => {
+    // Keep the same "OnePack OneCode" visual even if the API title changes.
+    const normalized = rawTitle.replace(/\s+/g, ' ').trim();
+    if (/one\s*pack/i.test(normalized) && /one\s*code/i.test(normalized)) {
+      return { leftTitle: 'OnePack', rightTitle: 'OneCode' };
+    }
+
+    const words = normalized.split(' ').filter(Boolean);
+    if (words.length >= 2) {
+      return { leftTitle: words.slice(0, -1).join(''), rightTitle: words[words.length - 1] };
+    }
+    return { leftTitle: normalized, rightTitle: '' };
+  })();
 
   return (
     <>
-    <section className="bg-white">
-      <div className="container mx-auto px-4 pt-6">
+    <section className="bg-gray-50 pt-20">
+      <div className="container mx-auto px-4">
+        <div className="text-center">
+          <h1 className="text-[26px] md:text-4xl font-extrabold tracking-tight text-black">
+            <span>{leftTitle}</span>
+            {rightTitle ? (
+              <span className="relative inline-block text-[#009FE8] ml-2">
+                {rightTitle}
+                <span
+                  className="absolute -top-3 -right-4 h-3 w-3 rounded-full bg-[#009FE8]"
+                  aria-hidden
+                />
+              </span>
+            ) : null}
+          </h1>
+        </div>
+
         {/* Tabs */}
-        <div className="mt-6">
-          <div className="flex items-stretch justify-center gap-2 md:gap-4 overflow-x-auto pb-2 scrollbar-hide">
-            {data.tabs.map((tab) => {
-              const isActive = tab.id === activeTab;
-              return (
-                <button
-                  key={tab.id}
-                  type="button"
-                  onClick={() => setActiveTab(tab.id)}
-                  className={`flex items-center justify-center gap-3 px-4 py-3 rounded-[14px] min-w-[170px] md:min-w-[210px] ring-1 ring-[#D6EEF9] transition-all ${
-                    isActive ? 'bg-[#0D72B8] text-white ring-[#0D72B8]' : 'bg-[#ffffff] text-[#0A4A7A]'
-                  }`}
-                  aria-current={isActive}
-                >
-                  <span className={`${isActive ? 'text-white' : 'text-[#009FE8]'}`}>
-                    <TabIcon id={tab.id} />
-                  </span>
-                  <span className="text-[12px] md:text-sm font-bold text-center leading-tight">{tab.label}</span>
-                </button>
-              );
-            })}
-          </div>
+        <div className="mt-8 grid grid-cols-2 sm:grid-cols-5 gap-3 md:gap-4">
+          {data.tabs.map((tab) => {
+            const isActive = tab.id === activeTab;
+            return (
+              <button
+                key={tab.id}
+                type="button"
+                onClick={() => setActiveTab(tab.id)}
+                className={`w-full flex flex-col items-center justify-center gap-3 py-8 px-3 rounded-[20px] transition-colors ${
+                  isActive ? 'bg-white' : 'bg-white'
+                }`}
+                aria-current={isActive}
+              >
+                <span className="text-[#009FE8]">
+                  <TabIcon id={tab.id} />
+                </span>
+                <span className="text-[11px] md:text-xs font-bold text-black/90 uppercase tracking-wider text-center leading-tight break-words">
+                  {tab.label}
+                </span>
+              </button>
+            );
+          })}
         </div>
       </div>
-
-      {/* Full-width hero video block like home page */}
-      
 
       {/* Access points + features */}
       <div className="container w-full px-4 mx-auto">

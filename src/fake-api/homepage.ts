@@ -249,7 +249,7 @@ export async function getHomepageData(): Promise<HomepageData> {
           titleHighlight: 'PRECISION STILL WINS.',
           ctaText: 'EXPLORE SOLUTIONS',
           ctaLink: '/solutions',
-          backgroundImage: '/banner-slider1.jpg',
+          backgroundImage: '/banner-slide-1.webp',
         },
         {
           id: '2',
@@ -258,7 +258,7 @@ export async function getHomepageData(): Promise<HomepageData> {
           titleHighlight: 'SUSTAINABLE FUTURE.',
           ctaText: 'DISCOVER MORE',
           ctaLink: '/solutions',
-          backgroundImage: '/banner-slider2.webp',
+          backgroundImage: '/banner-slide-2.webp',
         },
         {
           id: '3',
@@ -267,7 +267,7 @@ export async function getHomepageData(): Promise<HomepageData> {
           titleHighlight: 'PERFECTION.',
           ctaText: 'LEARN MORE',
           ctaLink: '/solutions',
-          backgroundImage: '/banner-slider3.webp',
+          backgroundImage: '/banner-slide-3.webp',
         },
         {
           id: '4',
