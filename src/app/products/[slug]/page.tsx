@@ -148,7 +148,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
                   <a
                     href={productData.technicalSheetUrl}
                     download
-                    className="inline-flex items-center text-[#009FE8] text-lg md:text-xl font-bold uppercase tracking-wider hover:text-white transition-colors group"
+                    className="inline-flex items-center text-[#009FE8] text-lg md:text-[32px] font-bold uppercase tracking-wider hover:text-white transition-colors group"
                   >
                     {productData.technicalSheetText || 'DOWNLOAD TECHNICAL SHEET'}
                     <svg

@@ -107,7 +107,7 @@ export function LamiStrawLandingSection({
   return (
     <section className="bg-white py-10 md:py-16">
       <div className="container mx-auto px-4">
-        <div className="max-w-4xl mx-auto text-center">
+        <div className=" mx-auto text-center">
           <p className="text-[#009FE8] text-xs md:text-sm font-semibold tracking-wider uppercase mb-5">
             {data.eyebrow}
           </p>
@@ -122,7 +122,7 @@ export function LamiStrawLandingSection({
         </div>
 
         <div className="mt-10 md:mt-14">
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-8 max-w-6xl mx-auto">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-8 mx-auto">
             {data.cards.map((card) => (
               <StrawCard key={card.id} card={card} />
             ))}

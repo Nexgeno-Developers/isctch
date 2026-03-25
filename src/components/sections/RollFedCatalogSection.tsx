@@ -59,7 +59,9 @@ export function RollFedCatalogSection({ data }: { data: RollFedCatalogSectionDat
     <>
     <section className="bg-gray-50 py-10 md:py-14">
       <div className="container mx-auto px-4">
-       
+      <p className="text-[#009FE8] text-xs md:text-sm font-semibold tracking-wider uppercase mb-5">
+        {data.eyebrow}
+      </p>
         <p className="text-center text-black text-sm md:text-base leading-relaxed  mx-auto">
           {data.intro}
         </p>

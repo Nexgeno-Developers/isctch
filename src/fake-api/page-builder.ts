@@ -646,8 +646,7 @@ export async function getSubCategoryPage(
         {
           type: 'sustainableSolutions',
           data: {
-            intro:
-              'Lamipak is committed to sustainable packaging and engineered solutions designed to protect product quality while reducing environmental impact.',
+            intro: `At Lamipak, we are committed to sustainability, continuously investing in eco-friendly innovations to reduce environmental impact. Our diverse portfolio of sustainable packaging solutions includes high-performance sustainable aseptic packaging such as LamiNatural, LamiPure, and LamiPristine. To further support your transition to green packaging, our range is complemented by eco-friendly packaging materials and components like Waterpak, sustainable inks (Temperature & Metallic), and advanced environmentally friendly packaging closure systems like LamiCap. Partner with Lamipak to integrate innovative sustainable packaging solutions into your supply chain and meet the rising demand for responsible, recyclable packaging solutions.`,
             items: [
               {
                 id: 'laminatural',
