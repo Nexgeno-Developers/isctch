@@ -72,7 +72,7 @@ function ShowcaseCard({ item }: { item: CategoryShowcaseItem }) {
   const inner = (
     <>
       <div className="flex items-start justify-between gap-3 mb-4">
-        <span className={isHighlight ? 'text-white' : 'text-[#009FE8]'}>
+        <span className={isHighlight ? 'text-black' : 'text-[#009FE8]'}>
           <Icon />
         </span>
         <div className="flex flex-col items-end gap-1">
@@ -87,7 +87,7 @@ function ShowcaseCard({ item }: { item: CategoryShowcaseItem }) {
               {item.badge}
             </span>
           ) : item.code ? (
-            <span className={`text-xs font-medium tracking-wide ${isHighlight ? 'text-white/80' : 'text-gray-400'}`}>
+            <span className={`text-xs font-medium tracking-wide ${isHighlight ? 'text-black' : 'text-gray-400'}`}>
               {item.code}
             </span>
           ) : null}
@@ -95,15 +95,15 @@ function ShowcaseCard({ item }: { item: CategoryShowcaseItem }) {
       </div>
       <h3
         className={`text-lg md:text-xl font-bold uppercase tracking-tight mb-3 leading-snug ${
-          isHighlight ? 'text-white' : 'text-black'
+          isHighlight ? 'text-black' : 'text-black'
         }`}
       >
         {item.title}
       </h3>
-      <p className={`text-sm leading-relaxed flex-1 ${isHighlight ? 'text-white/90' : 'text-[#4A4A4A]'}`}>
+      <p className={`text-sm leading-relaxed flex-1 ${isHighlight ? 'text-black' : 'text-black'}`}>
         {item.description}
       </p>
-      <div className={`mt-5 pt-2 text-sm font-bold uppercase tracking-wider ${isHighlight ? 'text-white' : 'text-[#009FE8]'}`}>
+      <div className={`text-sm font-bold uppercase tracking-wider ${isHighlight ? 'text-[#009FE8]' : 'text-[#009FE8]'}`}>
         {item.ctaLabel}
         <span className="inline-block ml-1" aria-hidden>
           →
@@ -112,10 +112,10 @@ function ShowcaseCard({ item }: { item: CategoryShowcaseItem }) {
     </>
   );
 
-  const cardClass = `flex flex-col h-full min-h-[280px] rounded-2xl p-6 md:p-7 text-left transition-shadow duration-300 ${
+  const cardClass = `flex flex-col h-full min-h-[260px] rounded-[50px] bg-[#EDF0F1] p-6 md:p-7 text-left transition-shadow duration-300 ${
     isHighlight
-      ? 'bg-[#009FE8] shadow-lg shadow-[#009FE8]/25'
-      : 'bg-white border border-gray-100 shadow-sm hover:shadow-md'
+      ? ''
+      : 'bg-[#EDF0F1]'
   }`;
 
   if (item.external) {
@@ -144,46 +144,17 @@ export function CategoryShowcaseSection({ data }: { data: CategoryShowcaseSectio
   };
 
   return (
-    <section className="bg-[#F8F9FA] py-12 md:py-16 lg:py-20">
-      <div className="container mx-auto px-4 max-w-6xl">
+    <section className="bg-gray-50 py-12 md:py-16 lg:py-20">
+      <div className="container mx-auto px-4">
         {(data.headline || data.intro) && (
-          <div className="text-center max-w-3xl mx-auto mb-10 md:mb-14">
-            {data.eyebrow && (
-              <p className="text-[#009FE8] text-xs md:text-sm font-semibold uppercase tracking-[0.2em] mb-3">
-                {data.eyebrow}
-              </p>
-            )}
-            {data.headline && (
-              <h1 className="text-2xl md:text-4xl lg:text-[2.5rem] font-bold text-black tracking-tight mb-4">
-                {data.headline}
-              </h1>
-            )}
-            {data.intro && <p className="text-[#4A4A4A] text-base md:text-lg leading-relaxed">{data.intro}</p>}
+          <div className="text-center  mx-auto mb-10 md:mb-14">
+           
+           
+            {data.intro && <p className="text-black text-base md:text-base leading-relaxed">{data.intro}</p>}
           </div>
         )}
 
-        <div className="flex justify-end gap-2 mb-4 md:mb-6">
-          <button
-            type="button"
-            onClick={() => scrollBy(-1)}
-            className="h-10 w-10 rounded-lg border border-[#009FE8]/40 bg-white text-[#009FE8] flex items-center justify-center hover:bg-[#009FE8]/5 transition-colors"
-            aria-label="Previous"
-          >
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M15 18l-6-6 6-6" />
-            </svg>
-          </button>
-          <button
-            type="button"
-            onClick={() => scrollBy(1)}
-            className="h-10 w-10 rounded-lg border border-[#009FE8]/40 bg-white text-[#009FE8] flex items-center justify-center hover:bg-[#009FE8]/5 transition-colors"
-            aria-label="Next"
-          >
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M9 18l6-6-6-6" />
-            </svg>
-          </button>
-        </div>
+       
 
         <div
           ref={scrollerRef}

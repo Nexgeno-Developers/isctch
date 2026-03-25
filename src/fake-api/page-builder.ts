@@ -334,11 +334,11 @@ export async function getMainCategoryPage(
     },
     sections: [
       {
-        type: 'hero',
+        type: 'heroWithBreadcrumbs',
         data: {
           title: 'Packaging',
-          subtitle: undefined,
           backgroundImage: '/banner-slider1.jpg',
+          breadcrumbs: [{ label: 'Packaging' }],
         },
       },
       {
@@ -347,7 +347,7 @@ export async function getMainCategoryPage(
           eyebrow: 'Solutions',
           headline: 'Packaging that fits your line',
           intro:
-            'From high-speed roll-fed systems to sustainable straw alternatives, Lamipak delivers engineered packaging formats, closures, and technical support — all from one partner.',
+            'Lamipak offers a comprehensive range of aseptic packaging solutions designed to protect product quality, extend shelf life, and support efficient production. From beverages and dairy to culinary and specialty foods, our innovative carton packaging combines performance, flexibility, and sustainable packaging solutions to help brands deliver safe, high-quality products to consumers worldwide.',
           items: [
             {
               id: 'roll-fed',
