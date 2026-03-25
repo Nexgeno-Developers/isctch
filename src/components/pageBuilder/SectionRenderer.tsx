@@ -13,6 +13,7 @@ import { SustainableSolutionsSection } from '@/components/sections/SustainableSo
 import { HeroWithBreadcrumbsSection } from '@/components/sections/HeroWithBreadcrumbsSection';
 import { LamiStrawLandingSection } from '@/components/sections/LamiStrawLandingSection';
 import { OnePackOneCodeLandingSection } from '@/components/sections/OnePackOneCodeLandingSection';
+import { WaterpakLandingSection } from '@/components/sections/WaterpakLandingSection';
 
 const sectionMap: Partial<
   Record<PageBuilderSection['type'], (props: { data: any; pageContext?: PageBuilderContext }) => ReactElement | null>
@@ -25,6 +26,7 @@ const sectionMap: Partial<
   sustainableSolutions: ({ data }) => <SustainableSolutionsSection data={data} />,
   lamiStrawLanding: ({ data }) => <LamiStrawLandingSection data={data} />,
   onePackOneCodeLanding: ({ data }) => <OnePackOneCodeLandingSection data={data} />,
+  waterpakLanding: ({ data }) => <WaterpakLandingSection data={data} />,
   productGrid: ({ data, pageContext }) => <ProductGridSection data={data} pageContext={pageContext} />,
   productDetails: ({ data }) => <ProductDetailsSection data={data} />,
   customBanner: ({ data }) => <CustomBannerSection data={data} />,

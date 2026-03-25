@@ -206,6 +206,28 @@ export type OnePackOneCodeLandingSectionData = {
   features: OnePackOneCodeFeature[];
 };
 
+export type WaterpakLandingSectionData = {
+  title: string;
+  image: string;
+  descriptionLines: string[];
+  sizeFormatTitle: string;
+  sizeFormatText: string;
+  availableInTitle: string;
+  availableIn: Array<{
+    id: string;
+    label: string;
+    href: string;
+  }>;
+  availableInDescription: string;
+  connectSection?: {
+    heading: string;
+    headingHighlight: string;
+    formTitle: string;
+    illustrationImage: string;
+    illustrationAlt: string;
+  };
+};
+
 export type PageBuilderSection =
   | { type: 'hero'; data: HeroSectionData }
   | { type: 'heroWithBreadcrumbs'; data: HeroWithBreadcrumbsSectionData }
@@ -215,6 +237,7 @@ export type PageBuilderSection =
   | { type: 'sustainableSolutions'; data: SustainableSolutionsSectionData }
   | { type: 'lamiStrawLanding'; data: LamiStrawLandingSectionData }
   | { type: 'onePackOneCodeLanding'; data: OnePackOneCodeLandingSectionData }
+  | { type: 'waterpakLanding'; data: WaterpakLandingSectionData }
   | { type: 'productGrid'; data: ProductGridSectionData }
   | { type: 'productDetails'; data: ProductDetailsSectionData }
   | { type: 'customBanner'; data: CustomBannerSectionData };
@@ -328,7 +351,7 @@ export async function getMainCategoryPage(
               description:
                 'Specifically engineered for still and sparkling water — lightweight structures, clarity, and shelf appeal for bottled water brands.',
               ctaLabel: 'Technical specs',
-              href: '/packaging/specialty-packaging',
+              href: '/packaging/waterpak',
               iconId: 'water',
             },
             {
@@ -793,6 +816,63 @@ export async function getSubCategoryPage(
                 image: '/product_image_1.jpg',
               },
             ],
+          },
+        },
+      ],
+    };
+  }
+
+  if (subCategory === 'waterpak') {
+    return {
+      slug: `${mainCategory}/${subCategory}`,
+      title: 'WaterPak',
+      seo: {
+        meta_title: 'WaterPak | Lamipak',
+        meta_description:
+          'WaterPak packaging solutions for still and sparkling water — engineered for clarity, lightweight structure, and retail shelf appeal.',
+        canonical_path: `/${mainCategory}/${subCategory}`,
+      },
+      sections: [
+        {
+          type: 'heroWithBreadcrumbs',
+          data: {
+            title: 'Waterpak',
+            backgroundImage: '/banner-slider1.jpg',
+            breadcrumbs: [
+              { label: 'Packaging', href: '/packaging' },
+              { label: 'Waterpak' },
+            ],
+          },
+        },
+        {
+          type: 'waterpakLanding',
+          data: {
+            title: 'WaterPak',
+            image: '/product_image_2.jpg',
+            descriptionLines: [
+              'WaterPak redefines hydration by offering a premium alternative packaging for bottled water that prioritizes both purity and consumer trust, while standing out for its clean look and shelf impact.',
+              'As a leader in aseptic-ready packaging, WaterPak utilizes high-performance barrier technology to protect product quality and keep taste consistent, helping brands deliver confidence in every sip.',
+              'Select the format that fits your line and market needs for fast adoption and dependable production.',
+            ],
+            sizeFormatTitle: 'Size Format',
+            sizeFormatText:
+              'Be sure to select in roll-fed format, sleeve-fed format, and sustainable product formats — with design and barrier options optimized for your specific hydration product.',
+            availableInTitle: 'WaterPak is Available In',
+            availableIn: [
+              { id: 'sleeve-fed', label: 'Sleeve-fed', href: '/packaging/sleeve-fed' },
+              { id: 'roll-fed', label: 'roll-fed', href: '/packaging/roll-fed' },
+              { id: 'one-pack-one-code', label: 'OnePack OneCode', href: '/packaging/one-pack-one-code' },
+              { id: 'sustainable-product', label: 'Sustainable product', href: '/packaging/sustainable-solutions' },
+            ],
+            availableInDescription:
+              'WaterPak offers exceptional flexibility, available in roll-fed, sleeve-fed, and sustainable product formats to support your brand’s economic commitments. Choose your preferred format and optimize your production line for consistency, quality integrity, and environmental responsibility.',
+            connectSection: {
+              heading: 'Connect with Our Technical Experts',
+              headingHighlight: 'Technical Experts',
+              formTitle: 'Send Us A Message',
+              illustrationImage: '/connected_image.jpg',
+              illustrationAlt: 'Connect with Technical Experts',
+            },
           },
         },
       ],
