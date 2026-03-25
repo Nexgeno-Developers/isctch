@@ -228,6 +228,28 @@ export type WaterpakLandingSectionData = {
   };
 };
 
+export type MetallicLnkLandingSectionData = {
+  title: string;
+  image: string;
+  descriptionLines: string[];
+  sizeFormatTitle: string;
+  sizeFormatText: string;
+  productFeaturesTitle: string;
+  productFeaturesPills: Array<{
+    id: string;
+    label: string;
+    href: string;
+  }>;
+  productFeaturesDescription: string;
+  connectSection?: {
+    heading: string;
+    headingHighlight: string;
+    formTitle: string;
+    illustrationImage: string;
+    illustrationAlt: string;
+  };
+};
+
 export type PageBuilderSection =
   | { type: 'hero'; data: HeroSectionData }
   | { type: 'heroWithBreadcrumbs'; data: HeroWithBreadcrumbsSectionData }
@@ -238,6 +260,7 @@ export type PageBuilderSection =
   | { type: 'lamiStrawLanding'; data: LamiStrawLandingSectionData }
   | { type: 'onePackOneCodeLanding'; data: OnePackOneCodeLandingSectionData }
   | { type: 'waterpakLanding'; data: WaterpakLandingSectionData }
+  | { type: 'metallicLnkLanding'; data: MetallicLnkLandingSectionData }
   | { type: 'productGrid'; data: ProductGridSectionData }
   | { type: 'productDetails'; data: ProductDetailsSectionData }
   | { type: 'customBanner'; data: CustomBannerSectionData };
@@ -353,6 +376,16 @@ export async function getMainCategoryPage(
               ctaLabel: 'Technical specs',
               href: '/packaging/waterpak',
               iconId: 'water',
+            },
+            {
+              id: 'metallic-lnk',
+              code: 'LAMI-06',
+              title: 'Metallic Ink',
+              description:
+                'Premium metallic co-printing effect for high-end bottle and beverage packaging, designed for consistent adhesion and shelf impact.',
+              ctaLabel: 'Technical specs',
+              href: '/packaging/metallic-lnk',
+              iconId: 'innovation',
             },
             {
               id: 'innovation-hub',
@@ -866,6 +899,60 @@ export async function getSubCategoryPage(
             ],
             availableInDescription:
               'WaterPak offers exceptional flexibility, available in roll-fed, sleeve-fed, and sustainable product formats to support your brand’s economic commitments. Choose your preferred format and optimize your production line for consistency, quality integrity, and environmental responsibility.',
+            connectSection: {
+              heading: 'Connect with Our Technical Experts',
+              headingHighlight: 'Technical Experts',
+              formTitle: 'Send Us A Message',
+              illustrationImage: '/connected_image.jpg',
+              illustrationAlt: 'Connect with Technical Experts',
+            },
+          },
+        },
+      ],
+    };
+  }
+
+  if (subCategory === 'metallic-lnk') {
+    return {
+      slug: `${mainCategory}/${subCategory}`,
+      title: 'Metallic Ink',
+      seo: {
+        meta_title: 'Metallic Ink | Lamipak',
+        meta_description:
+          'Metallic ink co-printing effect for premium bottle and beverage packaging — designed for consistent adhesion and shelf impact.',
+        canonical_path: `/${mainCategory}/${subCategory}`,
+      },
+      sections: [
+        {
+          type: 'heroWithBreadcrumbs',
+          data: {
+            title: 'Metallic Ink',
+            backgroundImage: '/banner-slider1.jpg',
+            breadcrumbs: [
+              { label: 'Packaging', href: '/packaging' },
+              { label: 'Metallic Ink' },
+            ],
+          },
+        },
+        {
+          type: 'metallicLnkLanding',
+          data: {
+            title: 'Metallic Ink',
+            image: '/product_image_1.jpg',
+            descriptionLines: [
+              'Metallic ink dispersing technology enables premium co-printing effects, creating a refined look and feel while reducing waste.',
+              'Through exceptional design flexibility, it reduces material costs while offering a sustainable and versatile packaging solution with complex patterns and high-resolution finishing.',
+            ],
+            sizeFormatTitle: 'Size Format',
+            sizeFormatText: 'Can be used in roll-fed format and sleeve-fed format',
+            productFeaturesTitle: 'Product Features',
+            productFeaturesPills: [
+              { id: 'sleeve-fed', label: 'Sleeve-fed', href: '/packaging/sleeve-fed' },
+              { id: 'roll-fed', label: 'Roll-fed', href: '/packaging/roll-fed' },
+              { id: 'one-pack-one-code', label: 'OnePack OneCode', href: '/packaging/one-pack-one-code' },
+            ],
+            productFeaturesDescription:
+              'Deliver a premium and exclusive feel to your brand with a luxurious shimmering effect on every corner of your packaging. This feature is fully compatible with both roll-fed and sleeve-fed formats, offering complete flexibility for your production lines.',
             connectSection: {
               heading: 'Connect with Our Technical Experts',
               headingHighlight: 'Technical Experts',

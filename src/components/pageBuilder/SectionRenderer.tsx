@@ -14,6 +14,7 @@ import { HeroWithBreadcrumbsSection } from '@/components/sections/HeroWithBreadc
 import { LamiStrawLandingSection } from '@/components/sections/LamiStrawLandingSection';
 import { OnePackOneCodeLandingSection } from '@/components/sections/OnePackOneCodeLandingSection';
 import { WaterpakLandingSection } from '@/components/sections/WaterpakLandingSection';
+import { MetallicLnkLandingSection } from '@/components/sections/MetallicLnkLandingSection';
 
 const sectionMap: Partial<
   Record<PageBuilderSection['type'], (props: { data: any; pageContext?: PageBuilderContext }) => ReactElement | null>
@@ -27,6 +28,7 @@ const sectionMap: Partial<
   lamiStrawLanding: ({ data }) => <LamiStrawLandingSection data={data} />,
   onePackOneCodeLanding: ({ data }) => <OnePackOneCodeLandingSection data={data} />,
   waterpakLanding: ({ data }) => <WaterpakLandingSection data={data} />,
+  metallicLnkLanding: ({ data }) => <MetallicLnkLandingSection data={data} />,
   productGrid: ({ data, pageContext }) => <ProductGridSection data={data} pageContext={pageContext} />,
   productDetails: ({ data }) => <ProductDetailsSection data={data} />,
   customBanner: ({ data }) => <CustomBannerSection data={data} />,
