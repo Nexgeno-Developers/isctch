@@ -40,6 +40,8 @@ function ProductGrid({
 }) {
   return (
     <section className="mt-10 md:mt-12">
+     
+      
       <h2 className="text-center text-[#009FE8] text-sm md:text-[24px] font-bold mb-6 md:mb-8">
         {title}
       </h2>
