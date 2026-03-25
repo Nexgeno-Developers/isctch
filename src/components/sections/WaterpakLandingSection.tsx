@@ -24,7 +24,7 @@ export function WaterpakLandingSection({ data }: { data: WaterpakLandingSectionD
           </div>
 
           <div className="space-y-6">
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-black leading-tight">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-black leading-tight">
               {data.title}
             </h2>
 
@@ -40,13 +40,11 @@ export function WaterpakLandingSection({ data }: { data: WaterpakLandingSectionD
               <h3 className="text-base md:text-lg font-bold text-black">{data.sizeFormatTitle}</h3>
               <p className="mt-3 text-sm md:text-base text-black leading-relaxed">{data.sizeFormatText}</p>
             </div>
-          </div>
-        </div>
 
-        <div className="mt-16 mx-auto text-center">
-          <h3 className="text-lg md:text-xl font-bold text-black">{data.availableInTitle}</h3>
+            <div className="mx-auto">
+          <h3 className="text-base md:text-lg font-bold text-black pb-2">{data.availableInTitle}</h3>
 
-          <div className="mt-4 flex flex-wrap gap-3 justify-center">
+          <div className="pt-2 flex flex-wrap gap-3 justify-start">
             {data.availableIn.map((it) => (
               <Link
                 key={it.id}
@@ -60,6 +58,10 @@ export function WaterpakLandingSection({ data }: { data: WaterpakLandingSectionD
 
           <p className="mt-4 text-sm md:text-base text-black leading-relaxed">{data.availableInDescription}</p>
         </div>
+          </div>
+        </div>
+
+       
       </div>
 
       {data.connectSection && (
