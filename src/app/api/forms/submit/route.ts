@@ -21,6 +21,7 @@ const BACKEND_FIELD_MAP: Record<FormType, Record<string, string>> = {
     name: 'firstName',
     email: 'emailAddress',
     phone: 'phoneNumber',
+    message: 'message',
   },
   contact: {
     name: 'firstName',
@@ -143,6 +144,7 @@ function buildPayload(
     const lastName = normalizeString(typed.lastName);
     const email = normalizeString(typed.emailAddress);
     const { raw: phoneRaw, digits: phoneDigits } = normalizePhone(normalizeString(typed.phoneNumber));
+    const message = normalizeString(typed.message);
     const name = [firstName, lastName].filter(Boolean).join(' ').trim();
 
     if (!firstName) fieldErrors.firstName = 'First name is required.';
@@ -160,6 +162,10 @@ function buildPayload(
       }
     }
 
+    if (message) {
+      addMaxLengthError(fieldErrors, 'message', 'Message', message, MAX_MESSAGE_LENGTH);
+    }
+
     if (Object.keys(fieldErrors).length) return { fieldErrors };
 
     const payload: Record<string, unknown> = {
@@ -170,6 +176,10 @@ function buildPayload(
 
     if (phoneDigits) {
       payload.phone = phoneDigits;
+    }
+
+    if (message) {
+      payload.message = message;
     }
 
     return {
