@@ -1,11 +1,11 @@
 'use client';
 
-import { useMemo, useState } from 'react';
-import Link from 'next/link';
+import { useState } from 'react';
 import type { OnePackOneCodeLandingSectionData, OnePackOneCodeTabId } from '@/fake-api/page-builder';
 import VideoModalBanner from '../home/VideoModalBanner';
 import CallToAction from '../home/CallToAction';
 import NewsletterSubscription from '../home/NewsletterSubscription';
+import ConnectTechnicalExperts from '@/components/technical-services/ConnectTechnicalExperts';
 
 function TabIcon({ id }: { id: OnePackOneCodeTabId }) {
   const common = 'stroke="currentColor" fill="none" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"';
@@ -157,10 +157,6 @@ export function OnePackOneCodeLandingSection({
 }) {
   const [activeTab, setActiveTab] = useState<OnePackOneCodeTabId>(data.activeTabId);
 
-  const activeLabel = useMemo(() => {
-    return data.tabs.find((t) => t.id === activeTab)?.label;
-  }, [activeTab, data.tabs]);
-
   return (
     <>
     <section className="bg-white">
@@ -210,11 +206,22 @@ export function OnePackOneCodeLandingSection({
       />
 
     </section>
-<div className='bg-gray-50 pt-24'>
-<CallToAction />
-</div>
-   
-    <NewsletterSubscription />
+
+    {data.connectSection && (
+      <ConnectTechnicalExperts
+        heading={data.connectSection.heading}
+        headingHighlight={data.connectSection.headingHighlight}
+        formTitle={data.connectSection.formTitle}
+        illustrationImage={data.connectSection.illustrationImage}
+        illustrationAlt={data.connectSection.illustrationAlt}
+      />
+    )}
+
+      <div className="bg-gray-50 pt-12">
+        <CallToAction />
+      </div>
+
+      <NewsletterSubscription />
 
     </>
   );

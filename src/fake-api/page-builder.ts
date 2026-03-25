@@ -196,6 +196,13 @@ export type OnePackOneCodeLandingSectionData = {
     description: string;
     items: OnePackOneCodeAccordionItem[];
   };
+  connectSection?: {
+    heading: string;
+    headingHighlight: string;
+    formTitle: string;
+    illustrationImage: string;
+    illustrationAlt: string;
+  };
   features: OnePackOneCodeFeature[];
 };
 
@@ -710,6 +717,13 @@ export async function getSubCategoryPage(
             hero: {
               backgroundImage: '/banner-slider2.webp',
               videoUrl: '/video2.mp4',
+            },
+            connectSection: {
+              heading: 'Connect with Our Technical Experts',
+              headingHighlight: 'Technical Experts',
+              formTitle: 'Send Us A Message',
+              illustrationImage: '/connected_image.jpg',
+              illustrationAlt: 'Connect with Technical Experts',
             },
             accessPoints: {
               title: 'Universal Access Points',
