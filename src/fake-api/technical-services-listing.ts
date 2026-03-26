@@ -132,7 +132,7 @@ export function getTechnicalServicesListingData(): TechnicalServicesListingData 
           thumbnailAlt: 'LamiPremium Service',
           videoUrl: 'https://www.youtube.com/watch?v=zB6zq2zb7Oc',
           ctaText: 'Discover More',
-          ctaLink: '/technical-services/lami-premium'
+          ctaLink: '/'
         },
         {
           id: '3',
@@ -142,7 +142,7 @@ export function getTechnicalServicesListingData(): TechnicalServicesListingData 
           thumbnailAlt: 'LamiPartner Service',
           videoUrl: 'https://www.youtube.com/watch?v=owZIf_Opcyw',
           ctaText: 'Discover More',
-          ctaLink: '/technical-services/lami-partner'
+          ctaLink: '/'
         }
       ]
     },

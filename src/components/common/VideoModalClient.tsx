@@ -5,6 +5,8 @@ import { useEffect, useId, useState } from 'react';
 type VideoModalClientProps = {
   /** Video URL: mp4/webm or YouTube/Vimeo embed link */
   videoUrl: string;
+  /** Optional modal title text */
+  modalTitle?: string;
   /** Optional: poster/thumbnail behind play button */
   posterUrl?: string;
   posterAlt?: string;
@@ -17,6 +19,7 @@ const isProbablyWebm = (url: string) => /\.webm(\?|#|$)/i.test(url);
 
 export default function VideoModalClient({
   videoUrl,
+  modalTitle = 'Video',
   posterUrl,
   posterAlt = '',
   className,
@@ -94,7 +97,7 @@ export default function VideoModalClient({
           <div className="relative z-[101] w-full max-w-5xl rounded-2xl bg-black overflow-hidden shadow-2xl">
             <div className="flex items-center justify-between px-4 py-3 bg-[#0E233C]">
               <p id={titleId} className="text-white text-sm font-semibold">
-                Video
+                {modalTitle}
               </p>
               <button
                 type="button"

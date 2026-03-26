@@ -160,6 +160,7 @@ export default async function TechnicalServicesPage() {
                 <div className="rounded-[50px] relative aspect-video bg-gray-100 overflow-hidden">
                   <VideoModalClient
                     videoUrl={toYouTubeEmbedUrl(card.videoUrl)}
+                    modalTitle={`${card.title} Video`}
                     posterUrl={getYouTubeThumbnail(card.videoUrl) || card.thumbnail}
                     posterAlt={card.thumbnailAlt}
                     className="absolute inset-0"
