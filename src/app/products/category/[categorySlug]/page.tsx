@@ -123,7 +123,7 @@ export default async function CategoryProductsPage({ params }: CategoryPageProps
               <div className="absolute inset-0 bg-gray-800" />
             )}
             {/* Dark Blue Overlay */}
-            <div className="absolute inset-0 bg-[#0e233ce8] opacity-90" />
+            <div className="absolute inset-0 bg-[#0e233c52] opacity-90" />
             {/* Blur Effect */}
             <div className="absolute inset-0 backdrop-blur-sm" />
           </div>

@@ -346,7 +346,7 @@ export async function getMainCategoryPage(
         type: 'heroWithBreadcrumbs',
         data: {
           title: 'Packaging',
-          backgroundImage: '/banner-slider1.jpg',
+          backgroundImage: '/packaging_banner.webp',
           breadcrumbs: [{ label: 'Packaging' }],
         },
       },
