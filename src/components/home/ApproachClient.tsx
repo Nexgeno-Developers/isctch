@@ -130,8 +130,16 @@ export default function ApproachClient({ data }: ApproachClientProps) {
 
             {/* CTA Button */}
             <div className="mt-8">
-              <Link
+              {/* <Link
                 href={`${data.ctaLink}?${new URLSearchParams(answers).toString()}`}
+                className={`inline-flex items-center text-[#009FE8] font-semibold text-lg transition-all ${
+                  allQuestionsAnswered
+                    ? 'opacity-100 hover:text-[#007bb5]'
+                    : 'opacity-50 cursor-not-allowed pointer-events-none'
+                }`}
+              > */}
+                <Link
+                href='/'
                 className={`inline-flex items-center text-[#009FE8] font-semibold text-lg transition-all ${
                   allQuestionsAnswered
                     ? 'opacity-100 hover:text-[#007bb5]'

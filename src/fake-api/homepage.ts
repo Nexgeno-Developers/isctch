@@ -455,7 +455,7 @@ export async function getHomepageData(): Promise<HomepageData> {
     },
     videoBanner: {
       title: 'Innovation in aseptic packaging',
-      videoUrl: '/video2.mp4', // or .gif for GIF files
+      videoUrl: 'https://www.youtube.com/watch?v=2Tpppx-X0z0',
       ctaText: 'View how we help global brands',
       ctaLink: '/about-us',
     },
@@ -563,8 +563,8 @@ export async function getHomepageData(): Promise<HomepageData> {
       cards: [
         {
           id: '1',
-          title: 'CDP A Grade',
-          description: 'Recognized by CDP for leadership in environmental transparency and climate action across our global operations.',
+          title: 'Pick Carton, Save Nature',
+          description: 'At Lamipak, sustainability is not a side initiative. It is a commitment built into every carton we produce.',
           icon: 'A+',
           iconShape: 'square',
           link: '/sustainability/cdp-a-grade',
@@ -572,8 +572,8 @@ export async function getHomepageData(): Promise<HomepageData> {
         },
         {
           id: '2',
-          title: 'LEED Platinum',
-          description: 'Our manufacturing facilities achieve LEED Platinum certification — the highest standard in sustainable building design.',
+          title: 'LAMIRA',
+          description: 'Lamira was born in the pristine forests of Finland, a place known for its pure landscapes, rich biodiversity...',
           icon: 'star',
           iconShape: 'circle',
           link: '/sustainability/leed-platinum',
@@ -581,8 +581,8 @@ export async function getHomepageData(): Promise<HomepageData> {
         },
         {
           id: '3',
-          title: 'Our Commitment',
-          description: 'Active partnerships with environmental NGOs to drive circular economy initiatives and reduce packaging waste globally.',
+          title: 'Our Green Efforts',
+          description: 'At Lamipak, sustainability guides our operations. Through renewable energy and responsible production...',
           icon: 'checkmark',
           iconShape: 'shield',
           link: '/sustainability/our-commitment',
@@ -590,8 +590,8 @@ export async function getHomepageData(): Promise<HomepageData> {
         },
         {
           id: '4',
-          title: 'Carbon Neutral',
-          description: 'Achieving carbon neutrality across all operations through renewable energy and carbon offset programs.',
+          title: 'Certifications & Achievements',
+          description: 'Sustainability is a key part of our long-term strategy. We have taken important steps to reduce our environmental impact...',
           icon: 'checkmark',
           iconShape: 'circle',
           link: '/sustainability/carbon-neutral',
@@ -599,8 +599,17 @@ export async function getHomepageData(): Promise<HomepageData> {
         },
         {
           id: '5',
-          title: 'Zero Waste',
-          description: 'Implementing zero-waste initiatives at all facilities to minimize environmental impact and maximize resource efficiency.',
+          title: 'NGOs',
+          description: 'At Lamipak, sustainability is a shared responsibility. By collaborating with industry partners, recycling alliances...',
+          icon: 'star',
+          iconShape: 'square',
+          link: '/sustainability/zero-waste',
+          ctaText: 'Learn More',
+        },
+        {
+          id: '6',
+          title: '2050 Carbon Net Zero RoadmaP',
+          description: '2050 NET ZERO ACROSS THE VALUE CHAIN',
           icon: 'star',
           iconShape: 'square',
           link: '/sustainability/zero-waste',
@@ -653,7 +662,7 @@ export async function getHomepageData(): Promise<HomepageData> {
           imageAlt: 'Industrial facility with recycling machinery',
           imagePosition: 'top',
           isHighlighted: false,
-          link: '/innovation/one-pack-one-code',
+          link: '/',
           ctaText: 'Learn More',
         },
         {
@@ -665,7 +674,7 @@ export async function getHomepageData(): Promise<HomepageData> {
           imageAlt: 'Milk cartons with blue patterns',
           imagePosition: 'bottom',
           isHighlighted: true,
-          link: '/innovation/digital-packaging',
+          link: '/',
           ctaText: 'Learn More',
         },
         {
@@ -677,7 +686,7 @@ export async function getHomepageData(): Promise<HomepageData> {
           imageAlt: 'Bottling line in factory',
           imagePosition: 'top',
           isHighlighted: false,
-          link: '/innovation/consumer-connection',
+          link: '/',
           ctaText: 'Learn More',
         },
         {
@@ -689,7 +698,7 @@ export async function getHomepageData(): Promise<HomepageData> {
           imageAlt: 'Sustainable packaging solutions',
           imagePosition: 'top',
           isHighlighted: false,
-          link: '/innovation/sustainable-solutions',
+          link: '/',
           ctaText: 'Learn More',
         },
         {
@@ -701,7 +710,7 @@ export async function getHomepageData(): Promise<HomepageData> {
           imageAlt: 'Smart packaging technology',
           imagePosition: 'bottom',
           isHighlighted: true,
-          link: '/innovation/smart-packaging',
+          link: '/',
           ctaText: 'Learn More',
         },
       ],
@@ -714,7 +723,7 @@ export async function getHomepageData(): Promise<HomepageData> {
           title: 'Lamipak Showcases Expanded End-to-End Packaging Solutions at Gulfood Manufacturing 2025',
           image: '/latest_press_1.jpg',
           imageAlt: 'Lamipak exhibition booth at Gulfood Manufacturing 2025',
-          link: '/press-release/gulfood-manufacturing-2025',
+          link: '/',
         },
         {
           id: '2',
@@ -722,7 +731,7 @@ export async function getHomepageData(): Promise<HomepageData> {
           title: 'Lamipak Introduces New Fresh Milk Packaging Solutions',
           image: '/latest_press_2.jpg',
           imageAlt: 'Fresh milk packaging solutions',
-          link: '/press-release/fresh-milk-packaging',
+          link: '/',
         },
         {
           id: '3',
@@ -730,7 +739,7 @@ export async function getHomepageData(): Promise<HomepageData> {
           title: 'Lamipak Receives Certificate of Appreciation from PT. Lami Packaging Indonesia',
           image: '/latest_press_3.jpg',
           imageAlt: 'Certificate of appreciation',
-          link: '/press-release/certificate-appreciation',
+          link: '/',
         },
         
       ],

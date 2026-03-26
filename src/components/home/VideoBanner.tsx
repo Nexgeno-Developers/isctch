@@ -9,6 +9,40 @@ interface VideoBannerProps {
   videoOnly?: boolean; // If true, hides text and CTA, shows only video
 }
 
+function parseYouTubeId(url: string): string | null {
+  try {
+    const u = new URL(url);
+    if (u.hostname === 'youtu.be') {
+      const id = u.pathname.split('/').filter(Boolean)[0];
+      return id || null;
+    }
+
+    if (u.hostname.includes('youtube.com')) {
+      // /watch?v=ID
+      const v = u.searchParams.get('v');
+      if (v) return v;
+
+      // /embed/ID
+      const parts = u.pathname.split('/').filter(Boolean);
+      const embedIdx = parts.findIndex((p) => p === 'embed');
+      if (embedIdx >= 0 && parts[embedIdx + 1]) return parts[embedIdx + 1];
+    }
+  } catch {
+    // ignore
+  }
+
+  return null;
+}
+
+function getYouTubeEmbedSrc(videoUrl: string): { id: string; src: string } | null {
+  const id = parseYouTubeId(videoUrl);
+  if (!id) return null;
+
+  // Keep it simple: use embed with autoplay on click.
+  const src = `https://www.youtube.com/embed/${id}?autoplay=1&controls=1&rel=0&playsinline=1`;
+  return { id, src };
+}
+
 /**
  * Video Banner Component (Client Component)
  * 
@@ -26,33 +60,101 @@ export default function VideoBanner({ videoOnly = false }: VideoBannerProps = {}
     loadData();
   }, []);
 
+  // Keep hook order stable across renders (avoid early return before calling hooks).
+  useEffect(() => {
+    const youtube = data?.videoUrl ? getYouTubeEmbedSrc(data.videoUrl) : null;
+    if (!isVideoPlaying || !youtube) return;
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setIsVideoPlaying(false);
+    };
+    window.addEventListener('keydown', onKeyDown);
+    return () => window.removeEventListener('keydown', onKeyDown);
+  }, [isVideoPlaying, data?.videoUrl]);
+
   if (!data) return null;
+
+  const youtube = data.videoUrl ? getYouTubeEmbedSrc(data.videoUrl) : null;
+
+  const backgroundInnerEl = (() => {
+    if (!data.videoUrl) return <div className="w-full h-full bg-gray-800" />;
+    if (youtube) {
+      return (
+        <img
+          src={`https://img.youtube.com/vi/${youtube.id}/hqdefault.jpg`}
+          alt=""
+          className="absolute inset-0 w-full h-full object-cover"
+        />
+      );
+    }
+    if (data.videoUrl.endsWith('.gif')) {
+      return <img src={data.videoUrl} alt="" className="absolute inset-0 w-full h-full object-cover" />;
+    }
+
+    return (
+      <video
+        src={data.videoUrl}
+        autoPlay
+        loop
+        muted
+        playsInline
+        className="absolute inset-0 w-full h-full object-cover"
+      />
+    );
+  })();
+
+  const playerEl = (() => {
+    if (!isVideoPlaying || !data.videoUrl) return null;
+    if (youtube) {
+      return (
+        <div
+          className="fixed inset-0 z-[100] bg-black/70 backdrop-blur-sm flex items-center justify-center p-4"
+          role="dialog"
+          aria-modal="true"
+        >
+          <div className="relative w-full max-w-5xl aspect-video bg-black rounded-[18px] overflow-hidden">
+            <button
+              type="button"
+              onClick={() => setIsVideoPlaying(false)}
+              className="cursor-pointer z-10 absolute top-[10px] right-3 h-10 w-10 rounded-full bg-white/90 text-black flex items-center justify-center hover:bg-white transition-colors"
+              aria-label="Close video"
+            >
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+
+            <iframe
+              src={youtube.src}
+              title="YouTube video"
+              className="absolute inset-0 w-full h-full"
+              allow="autoplay; encrypted-media; picture-in-picture"
+              allowFullScreen={true}
+              frameBorder={0}
+            ></iframe>
+          </div>
+        </div>
+      );
+    }
+
+    return (
+      <div className="absolute inset-0 z-20">
+        <video
+          src={data.videoUrl}
+          autoPlay
+          controls
+          className="w-full h-full object-cover"
+          onEnded={() => setIsVideoPlaying(false)}
+        />
+      </div>
+    );
+  })();
 
   return (
     <section className="relative min-h-[70dvh] h-[100dvh] md:h-screen md:min-h-0 overflow-hidden">
       {/* Background Video/GIF - Autoplay - Hidden when video is playing */}
       {!isVideoPlaying && (
         <div className="absolute inset-0">
-          {data.videoUrl ? (
-            data.videoUrl.endsWith('.gif') ? (
-              <img
-                src={data.videoUrl}
-                alt=""
-                className="absolute inset-0 w-full h-full object-cover"
-              />
-            ) : (
-              <video
-                src={data.videoUrl}
-                autoPlay
-                loop
-                muted
-                playsInline
-                className="absolute inset-0 w-full h-full object-cover"
-              />
-            )
-          ) : (
-            <div className="w-full h-full bg-gray-800" />
-          )}
+          {backgroundInnerEl}
           {/* Dark Overlay */}
           <div className="absolute inset-0 bg-[#0E233C8C]" />
           {/* Blur Effect */}
@@ -61,17 +163,7 @@ export default function VideoBanner({ videoOnly = false }: VideoBannerProps = {}
       )}
 
       {/* Video Player - Shows when play button is clicked */}
-      {isVideoPlaying && data.videoUrl && (
-        <div className="absolute inset-0 z-20">
-          <video
-            src={data.videoUrl}
-            autoPlay
-            controls
-            className="w-full h-full object-cover"
-            onEnded={() => setIsVideoPlaying(false)}
-          />
-        </div>
-      )}
+      {playerEl}
 
       {/* Content - Hidden when video is playing */}
       {!isVideoPlaying && !videoOnly && (
