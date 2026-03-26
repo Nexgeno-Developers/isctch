@@ -6,8 +6,6 @@
  * with actual fetch calls to the API_CONFIG endpoints.
  */
 
-import { getAllCategories } from './categories';
-
 type CompanyProfileApiResponse = {
   data?: {
     name?: string | null;
@@ -130,17 +128,26 @@ export async function getHeaderData(): Promise<HeaderData> {
   // Simulate API delay
   await new Promise((resolve) => setTimeout(resolve, 100));
 
-  // Fetch all categories for Industries dropdown
-  const categories = await getAllCategories();
-  
-  // Convert categories to navigation items
-  const industryChildren: NavigationItem[] = categories.map((category) => ({
-    id: category.id,
-    label: category.name,
-    href: `/products/category/${category.slug}`,
-  }));
-
   const branding = await fetchCompanyBranding();
+
+  const productMenuChildren: NavigationItem[] = [
+    { id: 'p-roll-fed', label: 'Roll Fed', href: '/packaging/roll-fed' },
+    { id: 'p-sleeve-fed', label: 'Sleeve Fed', href: '/packaging/sleeve-fed' },
+    { id: 'p-cap-solutions', label: 'Cap Solutions', href: '/packaging/cap-solutions' },
+    {
+      id: 'p-sustainable-solutions',
+      label: 'Sustainable Solutions',
+      href: '/packaging/sustainable-solutions',
+    },
+    { id: 'p-waterpak', label: 'Waterpak', href: '/packaging/waterpak' },
+    { id: 'p-metallic-lnk', label: 'Metallic Ink', href: '/packaging/metallic-lnk' },
+    {
+      id: 'p-one-pack-one-code',
+      label: 'One Pack One Code',
+      href: '/packaging/one-pack-one-code',
+    },
+    { id: 'p-lamistraw', label: 'LamiStraw', href: '/packaging/lamistraw' },
+  ];
 
   // Mock data + dynamic branding override
   return {
@@ -158,8 +165,8 @@ export async function getHeaderData(): Promise<HeaderData> {
       {
         id: '2',
         label: 'Products',
-        href: '/products',
-        children: industryChildren,
+        href: '/packaging',
+        children: productMenuChildren,
       },
       // {
       //   id: '3',

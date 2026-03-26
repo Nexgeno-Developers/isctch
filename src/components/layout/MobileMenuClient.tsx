@@ -34,26 +34,35 @@ function MobileNavItem({ item, onClose }: MobileNavItemProps) {
 
   return (
     <li className="rounded-2xl bg-white/[0.04] ring-1 ring-white/[0.06] overflow-hidden">
-      <button
-        type="button"
-        id={`${panelId}-trigger`}
-        aria-expanded={isExpanded}
-        aria-controls={`${panelId}-panel`}
-        onClick={() => setIsExpanded(!isExpanded)}
-        className="w-full flex items-center justify-between gap-3 min-h-[52px] px-4 py-3 text-left text-white/95 hover:bg-white/[0.06] active:bg-white/[0.1] transition-colors text-[15px] font-semibold tracking-wide"
-      >
-        <span>{item.label}</span>
-        <span
-          className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[#009FE8]/20 text-[#00d4ff] transition-transform duration-200 ${
-            isExpanded ? 'rotate-180' : ''
-          }`}
-          aria-hidden
+      <div className="flex items-stretch min-h-[52px]">
+        <Link
+          href={item.href}
+          className="flex flex-1 items-center px-4 py-3 text-left text-white/95 hover:bg-white/[0.06] active:bg-white/[0.1] transition-colors text-[15px] font-semibold tracking-wide min-w-0"
+          onClick={onClose}
         >
-          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-          </svg>
-        </span>
-      </button>
+          {item.label}
+        </Link>
+        <button
+          type="button"
+          id={`${panelId}-trigger`}
+          aria-expanded={isExpanded}
+          aria-controls={`${panelId}-panel`}
+          aria-label={isExpanded ? `Collapse ${item.label} submenu` : `Expand ${item.label} submenu`}
+          onClick={() => setIsExpanded(!isExpanded)}
+          className="flex h-auto w-12 shrink-0 items-center justify-center text-[#00d4ff] hover:bg-white/[0.06] active:bg-white/[0.1] transition-colors border-l border-white/[0.08]"
+        >
+          <span
+            className={`flex h-9 w-9 items-center justify-center rounded-full bg-[#009FE8]/20 transition-transform duration-200 ${
+              isExpanded ? 'rotate-180' : ''
+            }`}
+            aria-hidden
+          >
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+            </svg>
+          </span>
+        </button>
+      </div>
       <div
         id={`${panelId}-panel`}
         role="region"

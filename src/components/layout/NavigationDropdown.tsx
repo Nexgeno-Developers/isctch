@@ -51,7 +51,7 @@ export default function NavigationDropdown({ item }: NavigationDropdownProps) {
       <div className="absolute top-full left-0 w-full h-3 bg-transparent pointer-events-none group-hover:pointer-events-auto" />
 
       {/* Dropdown Menu - CSS hover based */}
-      <div className="absolute top-full left-0 mt-0 pt-3 min-w-[220px] bg-transparent z-50 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 pointer-events-none group-hover:pointer-events-auto">
+      <div className="absolute top-full left-0 mt-0 pt-3 min-w-[260px] max-w-[min(100vw-2rem,320px)] bg-transparent z-50 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 pointer-events-none group-hover:pointer-events-auto">
         {/* Arrow indicator */}
         {/* <div className="absolute top-0 left-6 w-4 h-4 bg-white border-l border-t border-gray-100 rotate-45" /> */}
         
