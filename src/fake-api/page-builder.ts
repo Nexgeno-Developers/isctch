@@ -556,28 +556,28 @@ export async function getSubCategoryPage(
         slug: 'brick-slim',
         title: 'LSBA1',
         sizes: '125ml, 150ml, 180ml, 200ml, 250ml',
-        image: '/product_image_3.jpg',
+        image: '/sleeve_product1.webp',
       },
       {
         id: 'lsba3',
         slug: 'brick-base',
         title: 'LSBA3',
         sizes: '500ml, 750ml, 1000ml',
-        image: '/product_image_3.jpg',
+        image: '/sleeve_product2.webp',
       },
       {
         id: 'lsba7',
         slug: 'brick-mid',
         title: 'LSBA7',
         sizes: '150ml, 200ml, 250ml, 300ml, 330ml, 350ml',
-        image: '/product_image_3.jpg',
+        image: '/sleeve_product3.webp',
       },
       {
         id: 'lsba12',
         slug: 'lamiwedge',
         title: 'LSBA12',
         sizes: '80ml, 90ml, 100ml, 110ml, 125ml, 150ml, 160ml, 180ml, 200ml',
-        image: '/product_image_3.jpg',
+        image: '/sleeve_product4.webp',
       },
     ];
 
@@ -595,7 +595,7 @@ export async function getSubCategoryPage(
           type: 'heroWithBreadcrumbs',
           data: {
             title: 'Sleeve-Fed',
-            backgroundImage: '/banner-slider1.jpg',
+            backgroundImage: '/seelve_banner.webp',
             breadcrumbs: [
               { label: 'Packaging', href: '/packaging' },
               { label: 'Sleeve-Fed' },

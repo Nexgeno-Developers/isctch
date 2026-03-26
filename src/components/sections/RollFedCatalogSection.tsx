@@ -15,10 +15,9 @@ function ProductCard({ product }: { product: RollFedCatalogProduct }) {
           <Image
             src={product.image}
             alt={product.title}
-            width={500}
-            height={500}
-            sizes="(max-width: 768px) 112px, 128px "
-            className="object-contain rounded-[50px]"
+            width={800}
+            height={800}
+            className="object-contain w-[70%] mx-auto rounded-[50px]"
             priority={false}
           />
         ) : (
@@ -26,7 +25,7 @@ function ProductCard({ product }: { product: RollFedCatalogProduct }) {
         )}
       </div>
       <h3 className="mt-6 text-lg font-bold text-black">{product.title}</h3>
-      <p className="mt-1 text-sm text-black leading-relaxed pb-5">{product.sizes}</p>
+      <p className="mt-1 text-sm text-black leading-relaxed pb-0">{product.sizes}</p>
     </Link>
   );
 }
@@ -59,7 +58,7 @@ export function RollFedCatalogSection({ data }: { data: RollFedCatalogSectionDat
     <>
     <section className="bg-gray-50 py-10 md:py-14">
       <div className="container mx-auto px-4">
-      <p className="text-[#009FE8] text-xs md:text-sm font-semibold tracking-wider uppercase mb-5">
+      <p className="text-[#009FE8] text-xs md:text-sm font-semibold text-center tracking-wider uppercase mb-5">
         {data.eyebrow}
       </p>
         <p className="text-center text-black text-sm md:text-base leading-relaxed  mx-auto">
