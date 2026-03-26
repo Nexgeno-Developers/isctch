@@ -28,7 +28,7 @@ export default async function Header() {
           >
             Events
           </Link> */}
-          <Link
+          {/* <Link
             href="/"
             className="text-[13px] font-semibold text-white"
           >
@@ -39,7 +39,7 @@ export default async function Header() {
             className="text-[13px] font-semibold text-white"
           >
             Supplier Portal
-          </Link>
+          </Link> */}
           {/* <Link
             href="/career"
             className="text-[12px] font-semibold hover:text-white transition-colors"

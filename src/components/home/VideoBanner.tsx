@@ -160,7 +160,7 @@ export default function VideoBanner({ videoOnly = false }: VideoBannerProps = {}
                 {data.preTitleBlack ? <span className="text-black">{data.preTitleBlack}</span> : null}
               </h2>
               {data.preDescription ? (
-                <p className="mt-4 text-sm md:text-base text-black/70 leading-relaxed max-w-5xl mx-auto">
+                <p className="mt-4 text-sm md:text-base text-black leading-relaxed max-w-5xl mx-auto">
                   {data.preDescription}
                 </p>
               ) : null}

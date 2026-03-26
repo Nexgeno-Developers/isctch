@@ -113,7 +113,7 @@ export default function WorkInSustainabilityClient({ data }: WorkInSustainabilit
           className="work-sustainability-swiper"
         >
           {data.cards.map((card) => (
-            <SwiperSlide key={card.id}>
+            <SwiperSlide key={card.id} className="h-auto">
               <WorkCard card={card} />
             </SwiperSlide>
           ))}
@@ -124,6 +124,11 @@ export default function WorkInSustainabilityClient({ data }: WorkInSustainabilit
           __html: `
             .work-sustainability-swiper {
               padding-bottom: 2rem;
+            }
+
+            .work-sustainability-swiper .swiper-slide {
+              height: auto;
+              display: flex;
             }
 
             .work-sustainability-swiper .swiper-pagination {
@@ -159,7 +164,7 @@ export default function WorkInSustainabilityClient({ data }: WorkInSustainabilit
  */
 function WorkCard({ card }: { card: SustainabilityWorkCard }) {
   return (
-    <div className="bg-[#EDF0F1] rounded-[28px] p-4 md:p-5 h-full">
+    <div className="bg-[#EDF0F1] rounded-[28px] p-4 md:p-5 h-full flex flex-col min-h-[390px]">
       <div className="relative w-full aspect-[16/9] rounded-[18px] overflow-hidden">
         <Image
           src={card.image}
@@ -170,12 +175,12 @@ function WorkCard({ card }: { card: SustainabilityWorkCard }) {
         />
       </div>
 
-      <div className="pt-4 px-0 pb-2">
+      <div className="pt-4 px-0 pb-2 flex flex-col flex-1">
         <h3 className="text-2xl md:text-[26px] mt-2 font-bold text-black mb-3 leading-tight">
           {card.title}
         </h3>
 
-        <p className="text-black text-sm md:text-base mb-4 leading-relaxed">
+        <p className="text-black text-sm md:text-base mb-4 leading-relaxed flex-1">
           {card.description}
         </p>
 
