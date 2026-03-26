@@ -536,8 +536,8 @@ export async function getHomepageData(): Promise<HomepageData> {
         {
           id: '1',
           title: 'LamiNatural',
-          label: 'Bio-Based Materials',
-          description: 'Plant-derived polymer packaging with full aseptic barrier performance and reduced carbon footprint.',
+          label: 'Responsibly sourced paperboard',
+          description: 'Sustainable aseptic carton packaging made from renewable materials and responsibly sourced paperboard, offering strong barrier protection for food and beverages while reducing environmental impact carbon footprint.',
           image: '/LamiNatural1.webp', // Replace with actual LamiNatural product image
           imageAlt: 'LamiNatural - Green carton package with leaf design',
           link: '/',
@@ -546,8 +546,8 @@ export async function getHomepageData(): Promise<HomepageData> {
         {
           id: '2',
           title: 'LamiPure',
-          label: 'Bio-Based Materials',
-          description: 'Plant-derived polymer packaging with full aseptic barrier performance and reduced carbon footprint.',
+          label: 'Aluminum foil-free technology',
+          description: 'LamiPure delivers aluminum foil-free aseptic carton packaging with bio-based materials, supporting sustainable packaging solutions while reducing carbon emissions for food and beverage products.',
           image: '/LamiNatural2.webp', // Replace with actual LamiPure product image
           imageAlt: 'LamiPure - White carton package with blue water pattern',
           link: '/',
@@ -556,8 +556,8 @@ export async function getHomepageData(): Promise<HomepageData> {
         {
           id: '3',
           title: 'Papers',
-          label: 'Bio-Based Materials',
-          description: 'Plant-derived polymer packaging with full aseptic barrier performance and reduced carbon footprint.',
+          label: 'Sustainable Paper Straws',
+          description: 'Eco-friendly paper straws designed to replace plastic, made from renewable materials with food-grade safety and reliable performance.',
           image: '/LamiNatural3.webp', // Replace with actual Papers product image
           imageAlt: 'Papers - Paper straws in blue liquid',
           link: '/',
