@@ -173,14 +173,14 @@ export async function getCompanyData(): Promise<CompanyData> {
   return {
     hero: {
       title: 'About Us',
-      backgroundImage: '/about_banner.jpg', // You'll need to add this image
+      backgroundImage: '/about_banner1.webp', // You'll need to add this image
     },
     statistics: [
       {
         id: '1',
         icon: '/employee.svg', // Two people icon
-        value: '1900+',
-        label: 'Employees',
+        value: '50%',
+        label: 'Employee annual growth',
       },
       {
         id: '2',
@@ -191,13 +191,13 @@ export async function getCompanyData(): Promise<CompanyData> {
       {
         id: '3',
         icon: '/customer.svg', // Customers icon
-        value: '340+',
-        label: 'Customers',
+        value: '24%',
+        label: 'Customer Growth',
       },
       {
         id: '4',
         icon: '/growth_icon.svg', // Growth arrow icon
-        value: '8%',
+        value: '29%',
         label: 'Annual Growth Rate',
       },
       {
@@ -210,7 +210,7 @@ export async function getCompanyData(): Promise<CompanyData> {
         id: '6',
         icon: '/factory_icon.svg', // Factory icon
         value: '2',
-        label: 'Dual Factory Strength China + India',
+        label: 'Dual Factory Strength China + Indonesia',
       },
     ],
     journey: {
@@ -219,58 +219,43 @@ export async function getCompanyData(): Promise<CompanyData> {
       milestones: [
         {
           year: '2007',
-          image: '/journey_images.jpg',
+          image: '/journey_07.webp',
           imageAlt: 'LamiPak was established',
           caption: 'LamiPak was established',
         },
         {
           year: '2015',
-          image: '/journey_images.jpg',
+          image: '/journey_15.webp',
           imageAlt: 'Major expansion milestone',
           caption: 'Major expansion milestone',
         },
-        {
-          year: '2018',
-          image: '/journey_images.jpg',
-          imageAlt: 'International market entry',
-          caption: 'International market entry',
-        },
+      
         {
           year: '2019',
-          image: '/journey_images.jpg',
+          image: '/journey_19.webp',
           imageAlt: 'New product line launch',
           caption: 'New product line launch',
         },
+        
         {
           year: '2020',
-          image: '/journey_images.jpg',
-          imageAlt: 'Digital transformation initiative',
-          caption: 'Digital transformation initiative',
-        },
-        {
-          year: '2021',
-          image: '/journey_images.jpg',
+          image: '/journey_20.webp',
           imageAlt: 'Sustainability commitment',
           caption: 'Sustainability commitment',
         },
         {
           year: '2022',
-          image: '/journey_images.jpg',
+          image: '/journey_22.webp',
           imageAlt: 'Global expansion',
           caption: 'Global expansion',
         },
         {
           year: '2023',
-          image: '/journey_images.jpg',
+          image: '/journey_23.webp',
           imageAlt: 'Innovation center opening',
           caption: 'Innovation center opening',
         },
-        {
-          year: '2024',
-          image: '/journey_images.jpg',
-          imageAlt: 'Future vision',
-          caption: 'Future vision',
-        },
+       
       ],
     },
     navigation: COMPANY_SUB_NAVIGATION,
@@ -330,35 +315,35 @@ export async function getCompanyData(): Promise<CompanyData> {
         {
           id: '2',
           title: 'Taking Ownership',
-          image: '/our_values_images.jpg',
+          image: '/taking_ownership.webp',
           imageAlt: 'Team collaboration',
           caption: 'We take full responsibility for our actions and decisions, ensuring accountability and excellence in everything we do.',
         },
         {
           id: '3',
           title: 'Embracing Diversity',
-          image: '/our_values_images.jpg',
+          image: '/embracing_diversity.webp',
           imageAlt: 'Diverse team',
           caption: 'We celebrate and leverage the unique perspectives and talents of our diverse workforce to drive innovation.',
         },
         {
           id: '4',
           title: 'Collaborating Together',
-          image: '/our_values_images.jpg',
+          image: '/collaborating_together.webp',
           imageAlt: 'Team collaboration',
           caption: 'We believe in the power of teamwork and collaboration to achieve greater results than any individual could alone.',
         },
         {
           id: '5',
           title: 'Striving For Knowledge',
-          image: '/our_values_images.jpg',
+          image: '/striving_knowledge.webp',
           imageAlt: 'Learning and development',
           caption: 'We continuously seek to learn, grow, and improve, staying at the forefront of industry knowledge and innovation.',
         },
         {
           id: '6',
           title: 'Daring To Explore',
-          image: '/our_values_images.jpg',
+          image: '/daring_explore.webp',
           imageAlt: 'Innovation and exploration',
           caption: 'We embrace challenges and explore new possibilities, pushing boundaries to create breakthrough solutions.',
         },

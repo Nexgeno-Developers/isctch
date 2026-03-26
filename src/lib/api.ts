@@ -114,6 +114,12 @@ type CompanyProfileApiResponse = {
     meta_description?: string | null;
     is_active?: boolean;
     meta?: Array<Record<string, unknown>>;
+    breadcrumb?: string | { url?: string | null } | null;
+    breadcrumb_image?: string | { url?: string | null } | null;
+    banner?: string | { url?: string | null } | null;
+    banner_image?: string | { url?: string | null } | null;
+    hero_image?: string | { url?: string | null } | null;
+    about_banner?: string | { url?: string | null } | null;
   };
 };
 
@@ -158,6 +164,16 @@ function normalizeApiAssetUrl(url?: string | null): string | undefined {
   const domain = COMPANY_API_DOMAIN.replace(/\/+$/, '');
   const path = url.startsWith('/') ? url : `/${url}`;
   return `${domain}${path}`;
+}
+
+function extractMediaUrl(value: unknown): string | undefined {
+  if (!value) return undefined;
+  if (typeof value === 'string') return value;
+  if (typeof value === 'object' && value !== null) {
+    const urlValue = (value as { url?: unknown }).url;
+    if (typeof urlValue === 'string') return urlValue;
+  }
+  return undefined;
 }
 
 /**
@@ -206,6 +222,34 @@ async function fetchCompanyProfile(): Promise<CompanyProfile | null> {
         typeof item.breadcrumb === 'object',
     ) as { breadcrumb?: { url?: string | null } } | undefined;
 
+    const metaBannerItem = raw.meta?.find(
+      (item) =>
+        !!item &&
+        typeof item === 'object' &&
+        ('breadcrumb' in item ||
+          'breadcrumb_image' in item ||
+          'banner' in item ||
+          'banner_image' in item ||
+          'hero_image' in item ||
+          'about_banner' in item),
+    ) as Record<string, unknown> | undefined;
+
+    const rawHeroBannerUrl =
+      extractMediaUrl(raw.breadcrumb) ||
+      extractMediaUrl(raw.breadcrumb_image) ||
+      extractMediaUrl(raw.banner) ||
+      extractMediaUrl(raw.banner_image) ||
+      extractMediaUrl(raw.hero_image) ||
+      extractMediaUrl(raw.about_banner) ||
+      extractMediaUrl(metaBannerItem?.breadcrumb) ||
+      extractMediaUrl(metaBannerItem?.breadcrumb_image) ||
+      extractMediaUrl(metaBannerItem?.banner) ||
+      extractMediaUrl(metaBannerItem?.banner_image) ||
+      extractMediaUrl(metaBannerItem?.hero_image) ||
+      extractMediaUrl(metaBannerItem?.about_banner) ||
+      breadcrumbMeta?.breadcrumb?.url ||
+      undefined;
+
     const salesPartnerEmail =
       raw.meta?.find(
         (item) =>
@@ -252,7 +296,7 @@ async function fetchCompanyProfile(): Promise<CompanyProfile | null> {
       xUrl,
       linkedinUrl,
       googleMapImage: normalizeApiAssetUrl(rawGoogleMapUrl),
-      breadcrumbImage: normalizeApiAssetUrl(breadcrumbMeta?.breadcrumb?.url),
+      breadcrumbImage: normalizeApiAssetUrl(rawHeroBannerUrl),
     };
   } catch {
     return null;
@@ -633,9 +677,10 @@ export async function fetchCompanyData(): Promise<CompanyData> {
   }
 
   // Source company content through dynamic page API payload.
+  // For About Us hero we want the exact banner + title from `fake-api/company.ts`.
   const dynamicCompanyPage = await fakeGetDynamicPageBySlug('our-company');
-  const baseCompanyData =
-    dynamicCompanyPage?.ourCompanyData ?? (await fakeGetCompanyData());
+  const localCompanyData = await fakeGetCompanyData();
+  const baseCompanyData = dynamicCompanyPage?.ourCompanyData ?? localCompanyData;
 
   const companyProfile = await fetchCompanyProfile();
   if (!companyProfile) {
@@ -646,9 +691,8 @@ export async function fetchCompanyData(): Promise<CompanyData> {
     ...baseCompanyData,
     hero: {
       ...baseCompanyData.hero,
-      title: companyProfile.name || baseCompanyData.hero.title,
-      backgroundImage:
-        companyProfile.breadcrumbImage || baseCompanyData.hero.backgroundImage,
+      title: localCompanyData.hero.title,
+      backgroundImage: localCompanyData.hero.backgroundImage,
     },
   };
 }
