@@ -533,7 +533,7 @@ const PAGES: DynamicPageData[] = [
       twitter_image: '/about_banner.jpg',
       twitter_card: 'summary_large_image',
     },
-    heroBackgroundImage: '/about_banner.jpg',
+    heroBackgroundImage: '/pick_cartoon_banner.webp',
     breadcrumbs: {
       parentLabel: 'Packaging',
       parentHref: '/',
@@ -547,7 +547,7 @@ const PAGES: DynamicPageData[] = [
         'Lamira was born in the pristine forests of finland, a place known for its pure landscapes, rich biodiversity, and deep connection to nature. from these forests, Lamira began a journey to become a protector of the natural world and a guide for sustainable thinking.',
         'Lamira is known as the eternal guardian, a timeless character who symbolizes the responsibility we all share in caring for our environment. with a friendly personality and a sense of curiosity, Lamira inspires people to see sustainability not as a challenge, but as an opportunity for creativity and progress.',
       ],
-      image: '/banner-slider1.jpg',
+      image: '/lamira_right_image.webp',
       imageAlt: 'Lamira tree and sustainable innovation network visual',
     },
     lamiraSpecialAbilitiesSection: {
@@ -585,7 +585,7 @@ const PAGES: DynamicPageData[] = [
           title: 'Nature Exploration',
           description:
             "From forests and oceans to deserts and mountains, Lamira enjoys discovering the beauty and diversity of earth's landscapes.",
-          image: '/banner-slider2.jpg',
+          image: '/what_lamira_1.webp',
           imageAlt: 'People exploring nature trail',
         },
         {
@@ -593,7 +593,7 @@ const PAGES: DynamicPageData[] = [
           title: 'Creative DIY Projects',
           description:
             'Lamira enjoys building and creating using materials found in nature, encouraging resourcefulness and responsible use of resources.',
-          image: '/banner-slider3.jpg',
+          image: '/what_lamira_2.webp',
           imageAlt: 'Creative DIY projects with craft materials',
         },
         {
@@ -601,13 +601,13 @@ const PAGES: DynamicPageData[] = [
           title: 'Forest Councils',
           description:
             "Lamira often gathers animal and plant friends to discuss how to make their shared home more beautiful, balanced, and resilient.",
-          image: '/journey_images.jpg',
+          image: '/what_lamira_1.webp',
           imageAlt: 'Forest friends council discussion',
         },
       ],
     },
     lamiraSharedGuideSection: {
-      image: '/about_banner.jpg',
+      image: '/share_left_1.webp',
       imageAlt: 'Lamira shared guide tree in network',
       headingPrefix: 'A Shared Guide',
       headingHighlight: 'For The Future',
@@ -622,32 +622,32 @@ const PAGES: DynamicPageData[] = [
       items: [
         {
           id: 'moment-1',
-          image: '/services_image_1.jpg',
+          image: '/moments_21.webp',
           imageAlt: 'Social moment image 1',
         },
         {
           id: 'moment-2',
-          image: '/services_image_2.jpg',
+          image: '/moments_22.webp',
           imageAlt: 'Social moment image 2',
         },
         {
           id: 'moment-3',
-          image: '/journey_images.jpg',
+          image: '/moments_23.webp',
           imageAlt: 'Social moment image 3',
         },
         {
           id: 'moment-4',
-          image: '/about_us_image_1.jpg',
+          image: '/moments_24.webp',
           imageAlt: 'Social moment image 4',
         },
         {
           id: 'moment-5',
-          image: '/about_us_image_2.jpg',
+          image: '/moments_25.webp',
           imageAlt: 'Social moment image 5',
         },
         {
           id: 'moment-6',
-          image: '/sales_images.jpg',
+          image: '/moments_26.webp',
           imageAlt: 'Social moment image 6',
         },
       ],
@@ -659,17 +659,17 @@ const PAGES: DynamicPageData[] = [
     title: 'Our Green Efforts',
     content:
       'Our Green Efforts initiative brings together responsible sourcing, energy efficiency, and circular packaging design. From renewable materials to expanded recycling partnerships, we work across the value chain to lower environmental impact.',
-    heroBackgroundImage: '/about_banner.jpg',
+    heroBackgroundImage: '/pick_cartoon_banner.webp',
     breadcrumbs: {
       parentLabel: 'Home',
       parentHref: '/',
     },
     greenSustainabilityJourneySection: {
-      headingLineBlue: 'Advancing Our',
-      headingLineBlack: 'Sustainability Journey',
+      headingLineBlue: '',
+      headingLineBlack: 'Advancing Our Sustainability Journey',
       body:
         'Lamipak continues to invest in renewable energy and sustainable manufacturing practices to support our broader climate goals. By integrating solar power into our production facilities, we are reducing greenhouse gas emissions, improving energy efficiency, and contributing to a more sustainable packaging industry. Our green efforts are part of a long-term commitment to responsible growth and environmental stewardship.',
-      image: '/banner-slider4.webp',
+      image: '/our_green_left_image.webp',
       imageAlt: 'Lush green forest canopy framing a bright sky — symbolizing environmental care and renewable growth',
       backgroundColor: '#f8f9fa',
       accentColor: '#00AEEF',
@@ -888,7 +888,7 @@ const PAGES: DynamicPageData[] = [
     title: 'Certifications & Achievements',
     content:
       'Lamipak’s manufacturing sites pursue rigorous green building standards including LEED certification, reflecting our commitment to sustainable facilities and responsible operations.',
-    heroBackgroundImage: '/about_banner.jpg',
+    heroBackgroundImage: '/pick_cartoon_banner.webp',
     breadcrumbs: {
       parentLabel: 'Home',
       parentHref: '/',
@@ -904,7 +904,7 @@ const PAGES: DynamicPageData[] = [
       cards: [
         {
           id: 'china-kunshan',
-          image: '/banner-slider2.webp',
+          image: '/certificte_image_1.webp',
           imageAlt: 'Aerial view of Lamipak China factory with rooftop solar panels',
           factoryTitle: 'Lamipak (China) Factory',
           location: 'Kunshan, China',
@@ -913,13 +913,12 @@ const PAGES: DynamicPageData[] = [
           description:
             'Our Kunshan facility was designed and operated to meet the highest LEED performance standards for energy, water, indoor environmental quality, and sustainable site development. Rooftop solar and efficient building systems reduce operational carbon intensity while supporting a healthier workplace for our teams.',
           badgeImages: [
-            { src: '/our_values_images.jpg', alt: 'LEED Platinum recognition' },
-            { src: '/creative_images.jpg', alt: 'Green building certification badge' },
+            { src: '/platinum.webp', alt: 'LEED Platinum recognition' },
           ],
         },
         {
           id: 'indonesia-cikande',
-          image: '/banner-slider3.webp',
+          image: '/certificte_image_2.webp',
           imageAlt: 'Aerial view of Lamipak Indonesia factory with solar installations',
           factoryTitle: 'Lamipak Indonesia Factory',
           location: 'Cikande, Indonesia',
@@ -928,8 +927,8 @@ const PAGES: DynamicPageData[] = [
           description:
             'The Cikande plant integrates renewable energy and resource-efficient design to achieve LEED Gold certification, aligning operations with Lamipak’s global sustainability vision and local environmental stewardship in Indonesia.',
           badgeImages: [
-            { src: '/sales_images.jpg', alt: 'LEED Gold certificate' },
-            { src: '/market_inteligence.jpg', alt: 'U.S. Green Building Council LEED Gold seal' },
+            { src: '/awards_image_1.webp', alt: 'LEED Gold certificate' },
+            { src: '/awards_image_2.webp', alt: 'U.S. Green Building Council LEED Gold seal' },
           ],
         },
       ],
@@ -1037,7 +1036,7 @@ const PAGES: DynamicPageData[] = [
     title: 'NGOs',
     content:
       'Lamipak works with NGOs and partners across Europe, China, and New Zealand to advance environmental stewardship, responsible packaging, and community engagement.',
-    heroBackgroundImage: '/about_banner.jpg',
+    heroBackgroundImage: '/pick_cartoon_banner.webp',
     breadcrumbs: {
       parentLabel: 'Home',
       parentHref: '/',
@@ -1087,7 +1086,7 @@ const PAGES: DynamicPageData[] = [
       featureHeadingBlue: 'People & Community',
       featureBody:
         'To Strengthen Our Learning And Development Framework, We Provide A Diverse Range Of Training Programs That Empower Employees To Enhance Their Skills And Grow Alongside The Organization. We Place The Long-Term, Sustainable Development Of Our Enterprise At The Forefront, With A Strong Commitment To Maintaining The Highest Safety Standards. The Health And Safety Of Our Employees Remain Our Top Priority, Ensuring A Secure And Supportive Working Environment For Everyone.',
-      image: '/banner-slider4.webp',
+      image: '/our_green_left_image.webp',
       imageAlt: 'Forest canopy forming a heart shape toward the sky — circular future and care for nature',
     },
     ngosAllianceCardsSection: {
@@ -1154,7 +1153,7 @@ const PAGES: DynamicPageData[] = [
     title: '2050 Carbon Net Zero Roadmap',
     content:
       'Lamipak’s science-based pathway outlines near-, medium-, and long-term targets to cut operational and value-chain emissions on the journey to net zero.',
-    heroBackgroundImage: '/about_banner.jpg',
+    heroBackgroundImage: '/pick_cartoon_banner.webp',
     breadcrumbs: {
       parentLabel: 'Home',
       parentHref: '/',
@@ -1301,7 +1300,7 @@ const PAGES: DynamicPageData[] = [
       twitter_image: '/banner-slider1.jpg',
       twitter_card: 'summary_large_image',
     },
-    heroBackgroundImage: '/about_banner.jpg',
+    heroBackgroundImage: '/pick_cartoon_banner.webp',
     breadcrumbs: {
       parentLabel: 'Packaging',
       parentHref: '/',
@@ -1315,25 +1314,25 @@ const PAGES: DynamicPageData[] = [
         items: [
           {
             id: 'pick-footprint-1',
-            image: '/banner-slider2.jpg',
+            image: '/pick_cartoon_left.webp',
             imageAlt: 'Sustainability footprint example 1',
             title: '',
             description:
-              'At Lamipak, sustainability is not a side initiative, it is a commitment built into every carton we produce. Our sustainability concept, Pick Carton, Save Nature, represents our mission to deliver packaging solutions that protect food, reduce environmental impact, and support a circular future.',
+              'At Lamipak, sustainability is not a side initiative. It is a commitment built into every carton we produce. Our sustainability concept, Pick Carton, Save Nature, represents our mission to deliver packaging solutions that protect food, reduce environmental impact, and support a circular future.',
           },
           {
             id: 'pick-footprint-2',
-            image: '/banner-slider3.jpg',
+            image: '/pick_cartoon_right.webp',
             imageAlt: 'Sustainability footprint example 2',
             title: '',
             description:
-              'Carton packaging is primarily made from paperboard sourced from responsibly managed forests, a renewable resource that can be replenished when managed sustainably. Compared with packaging made mostly from fossil-based materials, paper-based cartons help reduce carbon emissions and dependence on non-renewable resources.',
+              'Carton packaging is primarily made from paperboard sourced from responsibly managed forests, a renewable resource that can be replenished when managed sustainably. Compared with packaging made mostly from fossil-based materials, paper-based cartons help reduce carbon emissions and dependence on non-renewable resources. ',
           },
         ],
       },
       {
         type: 'image_quote_banner',
-        backgroundImage: '/banner-slider1.jpg',
+        backgroundImage: '/pick_cartoon_cta_1.webp',
         backgroundAlt: 'Nature background',
         text: 'By Choosing Carton Packaging, Brands And Consumers Are Choosing A Smarter Way To Package Beverages And Food While Protecting The Planet.',
       },
@@ -1346,7 +1345,7 @@ const PAGES: DynamicPageData[] = [
         items: [
           {
             id: 'pick-renewable',
-            image: '/banner-slider2.jpg',
+            image: '/why_cartoon_1.webp',
             imageAlt: 'Renewable materials',
             title: 'Renewable materials',
             description:
@@ -1354,7 +1353,7 @@ const PAGES: DynamicPageData[] = [
           },
           {
             id: 'pick-footprint',
-            image: '/banner-slider3.jpg',
+            image: '/why_cartoon_2.webp',
             imageAlt: 'Lower carbon footprint',
             title: 'Lower carbon footprint',
             description:
@@ -1362,7 +1361,7 @@ const PAGES: DynamicPageData[] = [
           },
           {
             id: 'pick-transportation',
-            image: '/banner-slider1.jpg',
+            image: '/why_cartoon_3.webp',
             imageAlt: 'Efficient transportation',
             title: 'Efficient transportation',
             description:
@@ -1372,7 +1371,7 @@ const PAGES: DynamicPageData[] = [
       },
       {
         type: 'impact_product_banner',
-        backgroundImage: '/banner-slider1.jpg',
+        backgroundImage: '/pick_cartoon_cta_2.webp',
         backgroundAlt: 'Green field background',
         productImage: '/banner-slider2.jpg',
         productAlt: 'Carton packs',
@@ -1395,30 +1394,28 @@ const PAGES: DynamicPageData[] = [
         cards: [
           {
             id: 'pick-climate-impact',
-            valueHighlight: '66-77%',
-            valueRest: 'Lower',
-            title: 'Climate Impact',
-            descriptionEmphasis: '66% To 77% Lower Climate Impact Than Plastic Bottles',
+            valueHighlight: '',
+            valueRest: '',
+            title: '66–77% lower climate impact',
             description:
-              'Independent Life Cycle Assessments show that carton packages can have in certain dairy product categories.',
+              'Independent life cycle assessments show that carton packages can have 66% to 77% lower climate impact than plastic bottles in certain dairy product categories.',
           },
           {
             id: 'pick-renewable-content',
-            valueHighlight: 'Up To 90%',
+            valueHighlight: '',
             valueRest: '',
-            title: 'Renewable Content',
-            descriptionEmphasis: 'As High As 90%',
+            title: 'Up to 90% renewable content',
+         
             description:
-              'Innovations in carton packaging have increased renewable material content, helping reduce carbon footprint compared with conventional packaging formats.',
+              'Innovations in carton packaging have increased renewable material content to as high as 90%, helping reduce carbon footprint compared with conventional packaging formats.',
           },
           {
             id: 'pick-recycled-globally',
-            valueHighlight: '1.3 Million',
-            valueRest: 'Tonnes',
-            title: 'Recycled Globally',
-            descriptionEmphasis: '1.3 Million Tonnes Of Beverage Cartons',
+            valueHighlight: '',
+            valueRest: '',
+            title: '1.3 million tonnes recycled globally',
             description:
-              'More than were collected for recycling worldwide in 2024, demonstrating the growing role cartons play in the circular economy.',
+              'More than 1.3 million tonnes of beverage cartons were collected for recycling worldwide in 2024, demonstrating the growing role cartons play in the circular economy',
           },
         ],
         footnote:
@@ -1430,7 +1427,7 @@ const PAGES: DynamicPageData[] = [
         image: '/journey_image.jpg',
         imageAlt: 'The recycling journey',
         description:
-          'Lamipak Believes That The Future Of Packaging Must Be Circular. Our Pick Carton, Save Nature Sustainability Campaign Highlights Our Commitment To Developing Packaging Solutions That Support Responsible Sourcing, Lower Carbon Impact, And Improved Recycling Systems.',
+          'Lamipak believes that the future of packaging must be circular. Our Pick Carton, Save Nature sustainability campaign highlights our commitment to developing packaging solutions that support responsible sourcing, lower carbon impact, and improved recycling systems. By choosing cartons, businesses help reduce reliance on fossil-based materials, improve logistics efficiency, and support packaging that can be recovered and recycled into new materials. Together with partners across the value chain, we are working to ensure that every carton delivers more than product protection. It delivers measurable environmental progress.',
         ctaText: 'Join The Movement Pick Carton. Save Nature.',
         ctaLink: '/contact',
       },
@@ -1438,7 +1435,7 @@ const PAGES: DynamicPageData[] = [
   },
  
   {
-    slug: 'contact',
+    slug: 'contact-us',
     type: 'contact-us',
     title: 'Contact Us',
     content:
@@ -1448,7 +1445,7 @@ const PAGES: DynamicPageData[] = [
       meta_title: 'Contact Us - Get in Touch | Lamipak',
       meta_description:
         'Reach out to Lamipak for inquiries, partnerships, and support.',
-      canonical_path: '/contact',
+      canonical_path: '/contact-us',
       keywords: ['contact', 'Lamipak', 'packaging', 'partnerships', 'support'],
       author: 'Lamipak',
       robots: { index: true, follow: true },
@@ -1876,7 +1873,8 @@ export async function getDynamicPageBySlug(
   // Simulate API delay
   await new Promise((resolve) => setTimeout(resolve, 80));
 
-  const page = PAGES.find((p) => p.slug === slug);
+  const normalizedSlug = slug === 'contact' ? 'contact-us' : slug;
+  const page = PAGES.find((p) => p.slug === normalizedSlug);
   return page ?? null;
 }
 
