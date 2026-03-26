@@ -147,8 +147,8 @@ export interface SustainabilityWorkCard {
   id: string;
   title: string;
   description: string;
-  icon: 'A+' | 'star' | 'checkmark';
-  iconShape: 'square' | 'circle' | 'shield';
+  image: string;
+  imageAlt: string;
   link: string;
   ctaText: string;
 }
@@ -570,46 +570,51 @@ export async function getHomepageData(): Promise<HomepageData> {
       cards: [
         {
           id: '1',
-          title: 'Pick Carton, Save Nature',
-          description: 'At Lamipak, sustainability is not a side initiative. It is a commitment built into every carton we produce.',
-          icon: 'A+',
-          iconShape: 'square',
+          title: 'CDP A Grade',
+          description:
+            'Recognized by CDP for leadership in environmental transparency and climate action across our global operations.',
+          image: '/latest_press_1.jpg',
+          imageAlt: 'CDP sustainability recognition',
           link: '/pick-carton',
           ctaText: 'Learn More',
         },
         {
           id: '2',
-          title: 'LAMIRA',
-          description: 'Lamira was born in the pristine forests of Finland, a place known for its pure landscapes, rich biodiversity...',
-          icon: 'star',
-          iconShape: 'circle',
-          link: '/lamira',
+          title: 'LEED Platinum',
+          description:
+            'Our manufacturing facilities achieve LEED Platinum certification - the highest standard in sustainable building design.',
+          image: '/latest_press_2.jpg',
+          imageAlt: 'LEED Platinum sustainability certification',
+          link: '/certifications-achievements',
           ctaText: 'Learn More',
         },
         {
           id: '3',
-          title: 'Our Green Efforts',
-          description: 'At Lamipak, sustainability guides our operations. Through renewable energy and responsible production...',
-          icon: 'checkmark',
-          iconShape: 'shield',
-          link: '/our-green-efforts',
+          title: 'Our Commitment',
+          description:
+            'Active partnerships with environmental NGOs to drive circular economy initiatives and reduce packaging waste globally.',
+          image: '/latest_press_3.jpg',
+          imageAlt: 'Our sustainability commitment with partners',
+          link: '/ngos',
           ctaText: 'Learn More',
         },
         {
           id: '4',
           title: 'Certifications & Achievements',
-          description: 'Sustainability is a key part of our long-term strategy. We have taken important steps to reduce our environmental impact...',
-          icon: 'checkmark',
-          iconShape: 'circle',
+          description:
+            'Sustainability is a key part of our long-term strategy with measurable milestones across operations and certifications.',
+          image: '/banner-slider2.webp',
+          imageAlt: 'Certifications and achievements in sustainability',
           link: '/certifications-achievements',
           ctaText: 'Learn More',
         },
         {
           id: '5',
           title: 'NGOs',
-          description: 'At Lamipak, sustainability is a shared responsibility. By collaborating with industry partners, recycling alliances...',
-          icon: 'star',
-          iconShape: 'square',
+          description:
+            'By collaborating with industry partners and recycling alliances, we accelerate responsible packaging transitions.',
+          image: '/banner-slider3.webp',
+          imageAlt: 'NGO and sustainability collaboration',
           link: '/ngos',
           ctaText: 'Learn More',
         },
@@ -617,8 +622,8 @@ export async function getHomepageData(): Promise<HomepageData> {
           id: '6',
           title: '2050 Carbon Net Zero RoadmaP',
           description: '2050 NET ZERO ACROSS THE VALUE CHAIN',
-          icon: 'star',
-          iconShape: 'square',
+          image: '/banner-slider4.webp',
+          imageAlt: '2050 carbon net zero roadmap',
           link: '/2050-carbon-net-zero-roadmap',
           ctaText: 'Learn More',
         },
