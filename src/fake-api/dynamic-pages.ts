@@ -659,17 +659,17 @@ const PAGES: DynamicPageData[] = [
     title: 'Our Green Efforts',
     content:
       'Our Green Efforts initiative brings together responsible sourcing, energy efficiency, and circular packaging design. From renewable materials to expanded recycling partnerships, we work across the value chain to lower environmental impact.',
-    heroBackgroundImage: '/about_banner.jpg',
+    heroBackgroundImage: '/pick_cartoon_banner.webp',
     breadcrumbs: {
       parentLabel: 'Home',
       parentHref: '/',
     },
     greenSustainabilityJourneySection: {
-      headingLineBlue: 'Advancing Our',
-      headingLineBlack: 'Sustainability Journey',
+      headingLineBlue: '',
+      headingLineBlack: 'Advancing Our Sustainability Journey',
       body:
         'Lamipak continues to invest in renewable energy and sustainable manufacturing practices to support our broader climate goals. By integrating solar power into our production facilities, we are reducing greenhouse gas emissions, improving energy efficiency, and contributing to a more sustainable packaging industry. Our green efforts are part of a long-term commitment to responsible growth and environmental stewardship.',
-      image: '/banner-slider4.webp',
+      image: '/our_green_left_image.webp',
       imageAlt: 'Lush green forest canopy framing a bright sky — symbolizing environmental care and renewable growth',
       backgroundColor: '#f8f9fa',
       accentColor: '#00AEEF',
@@ -888,7 +888,7 @@ const PAGES: DynamicPageData[] = [
     title: 'Certifications & Achievements',
     content:
       'Lamipak’s manufacturing sites pursue rigorous green building standards including LEED certification, reflecting our commitment to sustainable facilities and responsible operations.',
-    heroBackgroundImage: '/about_banner.jpg',
+    heroBackgroundImage: '/pick_cartoon_banner.webp',
     breadcrumbs: {
       parentLabel: 'Home',
       parentHref: '/',
@@ -904,7 +904,7 @@ const PAGES: DynamicPageData[] = [
       cards: [
         {
           id: 'china-kunshan',
-          image: '/banner-slider2.webp',
+          image: '/certificte_image_1.webp',
           imageAlt: 'Aerial view of Lamipak China factory with rooftop solar panels',
           factoryTitle: 'Lamipak (China) Factory',
           location: 'Kunshan, China',
@@ -913,13 +913,12 @@ const PAGES: DynamicPageData[] = [
           description:
             'Our Kunshan facility was designed and operated to meet the highest LEED performance standards for energy, water, indoor environmental quality, and sustainable site development. Rooftop solar and efficient building systems reduce operational carbon intensity while supporting a healthier workplace for our teams.',
           badgeImages: [
-            { src: '/our_values_images.jpg', alt: 'LEED Platinum recognition' },
-            { src: '/creative_images.jpg', alt: 'Green building certification badge' },
+            { src: '/platinum.webp', alt: 'LEED Platinum recognition' },
           ],
         },
         {
           id: 'indonesia-cikande',
-          image: '/banner-slider3.webp',
+          image: '/certificte_image_2.webp',
           imageAlt: 'Aerial view of Lamipak Indonesia factory with solar installations',
           factoryTitle: 'Lamipak Indonesia Factory',
           location: 'Cikande, Indonesia',
@@ -928,8 +927,8 @@ const PAGES: DynamicPageData[] = [
           description:
             'The Cikande plant integrates renewable energy and resource-efficient design to achieve LEED Gold certification, aligning operations with Lamipak’s global sustainability vision and local environmental stewardship in Indonesia.',
           badgeImages: [
-            { src: '/sales_images.jpg', alt: 'LEED Gold certificate' },
-            { src: '/market_inteligence.jpg', alt: 'U.S. Green Building Council LEED Gold seal' },
+            { src: '/awards_image_1.webp', alt: 'LEED Gold certificate' },
+            { src: '/awards_image_2.webp', alt: 'U.S. Green Building Council LEED Gold seal' },
           ],
         },
       ],
@@ -1037,7 +1036,7 @@ const PAGES: DynamicPageData[] = [
     title: 'NGOs',
     content:
       'Lamipak works with NGOs and partners across Europe, China, and New Zealand to advance environmental stewardship, responsible packaging, and community engagement.',
-    heroBackgroundImage: '/about_banner.jpg',
+    heroBackgroundImage: '/pick_cartoon_banner.webp',
     breadcrumbs: {
       parentLabel: 'Home',
       parentHref: '/',
@@ -1087,7 +1086,7 @@ const PAGES: DynamicPageData[] = [
       featureHeadingBlue: 'People & Community',
       featureBody:
         'To Strengthen Our Learning And Development Framework, We Provide A Diverse Range Of Training Programs That Empower Employees To Enhance Their Skills And Grow Alongside The Organization. We Place The Long-Term, Sustainable Development Of Our Enterprise At The Forefront, With A Strong Commitment To Maintaining The Highest Safety Standards. The Health And Safety Of Our Employees Remain Our Top Priority, Ensuring A Secure And Supportive Working Environment For Everyone.',
-      image: '/banner-slider4.webp',
+      image: '/our_green_left_image.webp',
       imageAlt: 'Forest canopy forming a heart shape toward the sky — circular future and care for nature',
     },
     ngosAllianceCardsSection: {
@@ -1154,7 +1153,7 @@ const PAGES: DynamicPageData[] = [
     title: '2050 Carbon Net Zero Roadmap',
     content:
       'Lamipak’s science-based pathway outlines near-, medium-, and long-term targets to cut operational and value-chain emissions on the journey to net zero.',
-    heroBackgroundImage: '/about_banner.jpg',
+    heroBackgroundImage: '/pick_cartoon_banner.webp',
     breadcrumbs: {
       parentLabel: 'Home',
       parentHref: '/',

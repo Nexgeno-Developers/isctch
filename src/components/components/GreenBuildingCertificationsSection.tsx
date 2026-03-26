@@ -89,17 +89,18 @@ export default function GreenBuildingCertificationsSection({ data }: GreenBuildi
                 <p className="text-sm leading-relaxed text-black md:text-base">{card.description}</p>
 
                 {card.badgeImages && card.badgeImages.length > 0 ? (
-                  <div className="flex flex-wrap items-center gap-3 border-t border-gray-100 pt-5">
+                  <div className="flex flex-wrap items-center gap-3 pt-5">
                     {card.badgeImages.map((badge) => (
                       <div
                         key={badge.src + badge.alt}
-                        className="relative h-12 w-[4.5rem] shrink-0 overflow-hidden rounded-lg bg-gray-50 sm:h-14 sm:w-24"
+                        className="relative  shrink-0 overflow-hidden rounded-lg "
                       >
                         <Image
                           src={badge.src}
                           alt={badge.alt}
-                          fill
-                          className="object-contain p-1"
+                          width={200}
+                          height={200}
+                          className="object-contain p-1 w-[100px]"
                           sizes="96px"
                         />
                       </div>
