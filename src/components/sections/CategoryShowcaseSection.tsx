@@ -56,6 +56,36 @@ function IconInnovation() {
   );
 }
 
+function IconSustainable() {
+  return (
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden>
+      <path d="M20 4c-6 0-12 5-12 12v4h4c7 0 12-6 8-16z" />
+      <path d="M8 16c2-2 5-3 8-3" />
+    </svg>
+  );
+}
+
+function IconMetallic() {
+  return (
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden>
+      <path d="M12 2l8 4v12l-8 4-8-4V6l8-4z" />
+      <path d="M8 8l4 2 4-2" />
+      <path d="M8 16l4-2 4 2" />
+      <path d="M12 6v12" />
+    </svg>
+  );
+}
+
+function IconCode() {
+  return (
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden>
+      <path d="M8 9l-3 3 3 3" />
+      <path d="M16 9l3 3-3 3" />
+      <path d="M10 19l4-14" />
+    </svg>
+  );
+}
+
 const iconById: Record<NonNullable<CategoryShowcaseItem['iconId']>, () => ReactElement> = {
   roll: IconRoll,
   sleeve: IconSleeve,
@@ -63,6 +93,9 @@ const iconById: Record<NonNullable<CategoryShowcaseItem['iconId']>, () => ReactE
   straw: IconStraw,
   water: IconWater,
   innovation: IconInnovation,
+  sustainable: IconSustainable,
+  metallic: IconMetallic,
+  code: IconCode,
 };
 
 function ShowcaseCard({ item }: { item: CategoryShowcaseItem }) {
@@ -72,7 +105,7 @@ function ShowcaseCard({ item }: { item: CategoryShowcaseItem }) {
   const inner = (
     <>
       <div className="flex items-start justify-between gap-3 mb-4">
-        <span className={isHighlight ? 'text-black' : 'text-[#009FE8]'}>
+        <span className={isHighlight ? 'text-[#009FE8]' : 'text-[#009FE8]'}>
           <Icon />
         </span>
         <div className="flex flex-col items-end gap-1">
@@ -87,7 +120,9 @@ function ShowcaseCard({ item }: { item: CategoryShowcaseItem }) {
               {item.badge}
             </span>
           ) : item.code ? (
-            <span className={`text-xs font-medium tracking-wide ${isHighlight ? 'text-black' : 'text-gray-400'}`}>
+            <span
+              className={`text-xs font-medium tracking-wide ${isHighlight ? 'text-black' : 'text-black'}`}
+            >
               {item.code}
             </span>
           ) : null}
@@ -100,10 +135,14 @@ function ShowcaseCard({ item }: { item: CategoryShowcaseItem }) {
       >
         {item.title}
       </h3>
-      <p className={`text-sm leading-relaxed flex-1 ${isHighlight ? 'text-black' : 'text-black'}`}>
+      <p className={`text-sm leading-relaxed flex-1 mb-5 ${isHighlight ? 'text-black' : 'text-black'}`}>
         {item.description}
       </p>
-      <div className={`text-sm font-bold uppercase tracking-wider ${isHighlight ? 'text-[#009FE8]' : 'text-[#009FE8]'}`}>
+      <div
+        className={`text-sm font-bold uppercase tracking-wider ${
+          isHighlight ? 'text-[#009FE8]' : 'text-[#009FE8]'
+        }`}
+      >
         {item.ctaLabel}
         <span className="inline-block ml-1" aria-hidden>
           →
@@ -112,10 +151,10 @@ function ShowcaseCard({ item }: { item: CategoryShowcaseItem }) {
     </>
   );
 
-  const cardClass = `flex flex-col h-full min-h-[260px] rounded-[50px] bg-[#EDF0F1] p-6 md:p-7 text-left transition-shadow duration-300 ${
+  const cardClass = `flex flex-col h-full min-h-[260px] rounded-[50px] p-6 md:p-7 text-left transition-shadow duration-300 ${
     isHighlight
-      ? ''
-      : 'bg-[#EDF0F1]'
+      ? 'bg-[#EDF0F1] text-black '
+      : 'bg-[#EDF0F1] text-black'
   }`;
 
   if (item.external) {

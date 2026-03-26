@@ -85,7 +85,16 @@ export type CustomBannerSectionData = {
 };
 
 /** Main category “showcase” grid (Lamipak packaging hub style) */
-export type CategoryShowcaseIconId = 'roll' | 'sleeve' | 'cap' | 'straw' | 'water' | 'innovation';
+export type CategoryShowcaseIconId =
+  | 'roll'
+  | 'sleeve'
+  | 'cap'
+  | 'straw'
+  | 'water'
+  | 'innovation'
+  | 'sustainable'
+  | 'metallic'
+  | 'code';
 
 export type CategoryShowcaseItem = {
   id: string;
@@ -354,9 +363,9 @@ export async function getMainCategoryPage(
               code: 'LAMI-01',
               title: 'Roll-fed',
               description:
-                'Optimized for high-speed filling lines with consistent web control, barrier performance, and formats tuned for dairy, juice, and liquid foods.',
+                'Optimized for high-speed filling lines, our roll-fed aseptic material offers superior barrier properties and shelf-life stability.',
               ctaLabel: 'Technical specs',
-              href: '/packaging/aseptic-packaging',
+              href: '/packaging/roll-fed',
               iconId: 'roll',
             },
             {
@@ -364,7 +373,7 @@ export async function getMainCategoryPage(
               code: 'LAMI-02',
               title: 'Sleeve-fed',
               description:
-                'Versatile pre-formed sleeves designed for flexible changeovers, strong seals, and reliable performance across multiple SKU profiles.',
+                'Versatile pre-formed sleeves designed for flexible manufacturing environments, providing rapid changeover capabilities.',
               ctaLabel: 'Technical specs',
               href: '/packaging/sleeve-fed',
               iconId: 'sleeve',
@@ -374,19 +383,19 @@ export async function getMainCategoryPage(
               code: 'LAMI-03',
               title: 'Cap Solutions',
               description:
-                'Precision-engineered closures ensuring leak-proof delivery, consumer-friendly opening, and compatibility with your filling environment.',
+                'Precision-engineered closures ensuring leak-proof sealing and intuitive opening experiences for end consumers.',
               ctaLabel: 'Technical specs',
               href: '/packaging/cap-solutions',
               iconId: 'cap',
             },
             {
-              id: 'sustainable-straws',
+              id: 'straws',
               badge: 'BIO-BASED',
-              title: 'Sustainable straws',
+              title: 'Straws',
               description:
-                'Paper and bio-plastic straw alternatives engineered for drinking comfort, compliance, and sustainability storytelling on-pack.',
+                'Paper and bio-plastic straw alternatives that integrate seamlessly with our drink packaging formats without compromising user experience.',
               ctaLabel: 'Impact report',
-              href: '/packaging/sustainable-solutions',
+              href: '/packaging/lamistraw',
               variant: 'highlight',
               iconId: 'straw',
             },
@@ -395,40 +404,40 @@ export async function getMainCategoryPage(
               code: 'LAMI-05',
               title: 'Waterpak',
               description:
-                'Specifically engineered for still and sparkling water — lightweight structures, clarity, and shelf appeal for bottled water brands.',
+                'Specifically engineered for still water, providing a low-carbon alternative to PET bottles with exceptional freshness retention.',
               ctaLabel: 'Technical specs',
               href: '/packaging/waterpak',
               iconId: 'water',
             },
             {
-              id: 'metallic-lnk',
-              code: 'LAMI-06',
-              title: 'Metallic Ink',
+              id: 'sustainable-solutions',
+              code: 'LAMI-07',
+              title: 'Sustainable',
               description:
-                'Premium metallic co-printing effect for high-end bottle and beverage packaging, designed for consistent adhesion and shelf impact.',
+                'Crafted with an outer bio-based polymer coating and unbleached paperboard, LamiNatural boasts a significantly lower carbon footprint throughout...',
               ctaLabel: 'Technical specs',
-              href: '/packaging/metallic-lnk',
-              iconId: 'innovation',
+              href: '/packaging/sustainable-solutions',
+              iconId: 'sustainable',
             },
             {
-              id: 'innovation-hub',
-              code: 'Custom',
-              title: 'Innovation hub',
+              id: 'metallic-lnk',
+              code: 'LAMI-08',
+              title: 'Metallic Ink',
               description:
-                'Bespoke technical integration services for unique line layouts, pilot trials, and co-development from concept to commercial scale.',
-              ctaLabel: 'Talk to us',
-              href: '/contact-us',
-              iconId: 'innovation',
+                "Lamipak's metallic ink solutions provide a premium visual finish while maintaining strict food-grade safety standards for aseptic carton packaging.",
+              ctaLabel: 'Technical specs',
+              href: '/packaging/metallic-lnk',
+              iconId: 'metallic',
             },
             {
               id: 'one-pack-one-code',
-              code: 'LAMI-04',
-              title: 'OnePack OneCode',
+              code: 'LAMI-09',
+              title: 'One Pack One Code',
               description:
-                'Digital co-printing and traceability solutions that connect brands with consumers using one smart code.',
-              ctaLabel: 'Explore',
+                'Digital co-printing, traceability, and consumer engagement through a single code on-pack — connecting brands with shoppers while supporting compliance and loyalty.',
+              ctaLabel: 'Technical specs',
               href: '/packaging/one-pack-one-code',
-              iconId: 'innovation',
+              iconId: 'code',
             },
           ],
         },

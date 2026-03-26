@@ -130,23 +130,24 @@ export async function getHeaderData(): Promise<HeaderData> {
 
   const branding = await fetchCompanyBranding();
 
+  /** Order matches /packaging category showcase grid */
   const productMenuChildren: NavigationItem[] = [
-    { id: 'p-roll-fed', label: 'Roll Fed', href: '/packaging/roll-fed' },
-    { id: 'p-sleeve-fed', label: 'Sleeve Fed', href: '/packaging/sleeve-fed' },
+    { id: 'p-roll-fed', label: 'Roll-fed', href: '/packaging/roll-fed' },
+    { id: 'p-sleeve-fed', label: 'Sleeve-fed', href: '/packaging/sleeve-fed' },
     { id: 'p-cap-solutions', label: 'Cap Solutions', href: '/packaging/cap-solutions' },
+    { id: 'p-straws', label: 'Straws', href: '/packaging/lamistraw' },
+    { id: 'p-waterpak', label: 'Waterpak', href: '/packaging/waterpak' },
     {
       id: 'p-sustainable-solutions',
       label: 'Sustainable Solutions',
       href: '/packaging/sustainable-solutions',
     },
-    { id: 'p-waterpak', label: 'Waterpak', href: '/packaging/waterpak' },
     { id: 'p-metallic-lnk', label: 'Metallic Ink', href: '/packaging/metallic-lnk' },
     {
       id: 'p-one-pack-one-code',
       label: 'One Pack One Code',
       href: '/packaging/one-pack-one-code',
     },
-    { id: 'p-lamistraw', label: 'LamiStraw', href: '/packaging/lamistraw' },
   ];
 
   // Mock data + dynamic branding override
