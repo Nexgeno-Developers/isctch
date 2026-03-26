@@ -149,7 +149,7 @@ function ShowcaseCard({ item }: { item: CategoryShowcaseItem }) {
   );
 
   const cardClass = `block h-full min-h-[280px] rounded-[14px] overflow-hidden bg-[#EDF0F1] text-left ${
-    isHighlight ? 'ring-2 ring-[#009FE8]/30' : ''
+    isHighlight ? '' : ''
   }`;
 
   if (item.external) {
