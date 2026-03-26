@@ -14,6 +14,11 @@ export type GovernanceComplianceCardsSectionData = {
   title: string;
   imageSrc: string;
   imageAlt: string;
+  /**
+   * Optional description paragraphs shown under the image.
+   * When omitted, we fallback to auto-generated text from `cards`.
+   */
+  description?: string[];
   cards: Array<{
     id: string;
     title: string;
@@ -90,6 +95,14 @@ export default function GovernanceComplianceCardsSection({
 }: {
   data: GovernanceComplianceCardsSectionData;
 }) {
+  const fallbackDescriptionParagraphs = [
+    'As a global supplier to the food and beverage industry, Lamipak recognizes its responsibility to promote ethical and responsible practices across its supplier value chain.',
+    'Our Supplier Code of Conduct establishes clear expectations for business integrity, labor standards, environmental responsibility, and workplace safety.',
+    'We also uphold internationally recognized human rights principles and maintain a workplace environment that prohibits forced labor, discrimination, harassment, and unsafe working conditions.',
+  ];
+
+  const descriptionParagraphs = data.description?.length ? data.description : fallbackDescriptionParagraphs;
+
   return (
     <section className="bg-gray-50 py-8 md:py-12">
       <div className="container mx-auto px-4">
@@ -113,6 +126,11 @@ export default function GovernanceComplianceCardsSection({
                 className="w-full object-cover rounded-[50px]"
                 priority
               />
+              <div className="mt-8 text-black/70 text-sm md:text-base leading-relaxed space-y-4">
+                {descriptionParagraphs.map((p, idx) => (
+                  <p key={`${data.eyebrow}-desc-${idx}`}>{p}</p>
+                ))}
+              </div>
             </div>
 
             <div className="space-y-4">

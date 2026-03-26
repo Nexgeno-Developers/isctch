@@ -364,6 +364,7 @@ export interface DynamicPageData {
         title: string;
         imageSrc: string;
         imageAlt: string;
+        description?: string[];
         cards: Array<{
           id: string;
           title: string;
@@ -1494,6 +1495,11 @@ const PAGES: DynamicPageData[] = [
         title: 'Global Compliance',
         imageSrc: '/responsible_image.jpg',
         imageAlt: 'People discussing supplier code of conduct and compliance',
+        description: [
+          'As a global supplier to the food and beverage industry, Lamipak recognizes its responsibility to promote ethical and responsible practices throughout its value chain.',
+          'Our Supplier Code of Conduct establishes clear expectations for business integrity, labor standards, environmental responsibility, and workplace safety. We work closely with suppliers and partners to ensure alignment with these principles.',
+          'We also uphold internationally recognized human rights principles and maintain a workplace environment that prohibits forced labor, discrimination, harassment, and unsafe working conditions.',
+        ],
         cards: [
           {
             id: 'supplier-code',
