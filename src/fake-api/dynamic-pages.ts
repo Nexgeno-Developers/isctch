@@ -533,7 +533,7 @@ const PAGES: DynamicPageData[] = [
       twitter_image: '/about_banner.jpg',
       twitter_card: 'summary_large_image',
     },
-    heroBackgroundImage: '/about_banner.jpg',
+    heroBackgroundImage: '/pick_cartoon_banner.webp',
     breadcrumbs: {
       parentLabel: 'Packaging',
       parentHref: '/',
@@ -547,7 +547,7 @@ const PAGES: DynamicPageData[] = [
         'Lamira was born in the pristine forests of finland, a place known for its pure landscapes, rich biodiversity, and deep connection to nature. from these forests, Lamira began a journey to become a protector of the natural world and a guide for sustainable thinking.',
         'Lamira is known as the eternal guardian, a timeless character who symbolizes the responsibility we all share in caring for our environment. with a friendly personality and a sense of curiosity, Lamira inspires people to see sustainability not as a challenge, but as an opportunity for creativity and progress.',
       ],
-      image: '/banner-slider1.jpg',
+      image: '/lamira_right_image.webp',
       imageAlt: 'Lamira tree and sustainable innovation network visual',
     },
     lamiraSpecialAbilitiesSection: {
@@ -585,7 +585,7 @@ const PAGES: DynamicPageData[] = [
           title: 'Nature Exploration',
           description:
             "From forests and oceans to deserts and mountains, Lamira enjoys discovering the beauty and diversity of earth's landscapes.",
-          image: '/banner-slider2.jpg',
+          image: '/what_lamira_1.webp',
           imageAlt: 'People exploring nature trail',
         },
         {
@@ -593,7 +593,7 @@ const PAGES: DynamicPageData[] = [
           title: 'Creative DIY Projects',
           description:
             'Lamira enjoys building and creating using materials found in nature, encouraging resourcefulness and responsible use of resources.',
-          image: '/banner-slider3.jpg',
+          image: '/what_lamira_2.webp',
           imageAlt: 'Creative DIY projects with craft materials',
         },
         {
@@ -601,13 +601,13 @@ const PAGES: DynamicPageData[] = [
           title: 'Forest Councils',
           description:
             "Lamira often gathers animal and plant friends to discuss how to make their shared home more beautiful, balanced, and resilient.",
-          image: '/journey_images.jpg',
+          image: '/what_lamira_1.webp',
           imageAlt: 'Forest friends council discussion',
         },
       ],
     },
     lamiraSharedGuideSection: {
-      image: '/about_banner.jpg',
+      image: '/share_left_1.webp',
       imageAlt: 'Lamira shared guide tree in network',
       headingPrefix: 'A Shared Guide',
       headingHighlight: 'For The Future',
@@ -622,32 +622,32 @@ const PAGES: DynamicPageData[] = [
       items: [
         {
           id: 'moment-1',
-          image: '/services_image_1.jpg',
+          image: '/moments_21.webp',
           imageAlt: 'Social moment image 1',
         },
         {
           id: 'moment-2',
-          image: '/services_image_2.jpg',
+          image: '/moments_22.webp',
           imageAlt: 'Social moment image 2',
         },
         {
           id: 'moment-3',
-          image: '/journey_images.jpg',
+          image: '/moments_23.webp',
           imageAlt: 'Social moment image 3',
         },
         {
           id: 'moment-4',
-          image: '/about_us_image_1.jpg',
+          image: '/moments_24.webp',
           imageAlt: 'Social moment image 4',
         },
         {
           id: 'moment-5',
-          image: '/about_us_image_2.jpg',
+          image: '/moments_25.webp',
           imageAlt: 'Social moment image 5',
         },
         {
           id: 'moment-6',
-          image: '/sales_images.jpg',
+          image: '/moments_26.webp',
           imageAlt: 'Social moment image 6',
         },
       ],
@@ -1301,7 +1301,7 @@ const PAGES: DynamicPageData[] = [
       twitter_image: '/banner-slider1.jpg',
       twitter_card: 'summary_large_image',
     },
-    heroBackgroundImage: '/about_banner.jpg',
+    heroBackgroundImage: '/pick_cartoon_banner.webp',
     breadcrumbs: {
       parentLabel: 'Packaging',
       parentHref: '/',
@@ -1315,25 +1315,25 @@ const PAGES: DynamicPageData[] = [
         items: [
           {
             id: 'pick-footprint-1',
-            image: '/banner-slider2.jpg',
+            image: '/pick_cartoon_left.webp',
             imageAlt: 'Sustainability footprint example 1',
             title: '',
             description:
-              'At Lamipak, sustainability is not a side initiative, it is a commitment built into every carton we produce. Our sustainability concept, Pick Carton, Save Nature, represents our mission to deliver packaging solutions that protect food, reduce environmental impact, and support a circular future.',
+              'At Lamipak, sustainability is not a side initiative. It is a commitment built into every carton we produce. Our sustainability concept, Pick Carton, Save Nature, represents our mission to deliver packaging solutions that protect food, reduce environmental impact, and support a circular future.',
           },
           {
             id: 'pick-footprint-2',
-            image: '/banner-slider3.jpg',
+            image: '/pick_cartoon_right.webp',
             imageAlt: 'Sustainability footprint example 2',
             title: '',
             description:
-              'Carton packaging is primarily made from paperboard sourced from responsibly managed forests, a renewable resource that can be replenished when managed sustainably. Compared with packaging made mostly from fossil-based materials, paper-based cartons help reduce carbon emissions and dependence on non-renewable resources.',
+              'Carton packaging is primarily made from paperboard sourced from responsibly managed forests, a renewable resource that can be replenished when managed sustainably. Compared with packaging made mostly from fossil-based materials, paper-based cartons help reduce carbon emissions and dependence on non-renewable resources. ',
           },
         ],
       },
       {
         type: 'image_quote_banner',
-        backgroundImage: '/banner-slider1.jpg',
+        backgroundImage: '/pick_cartoon_cta_1.webp',
         backgroundAlt: 'Nature background',
         text: 'By Choosing Carton Packaging, Brands And Consumers Are Choosing A Smarter Way To Package Beverages And Food While Protecting The Planet.',
       },
@@ -1346,7 +1346,7 @@ const PAGES: DynamicPageData[] = [
         items: [
           {
             id: 'pick-renewable',
-            image: '/banner-slider2.jpg',
+            image: '/why_cartoon_1.webp',
             imageAlt: 'Renewable materials',
             title: 'Renewable materials',
             description:
@@ -1354,7 +1354,7 @@ const PAGES: DynamicPageData[] = [
           },
           {
             id: 'pick-footprint',
-            image: '/banner-slider3.jpg',
+            image: '/why_cartoon_2.webp',
             imageAlt: 'Lower carbon footprint',
             title: 'Lower carbon footprint',
             description:
@@ -1362,7 +1362,7 @@ const PAGES: DynamicPageData[] = [
           },
           {
             id: 'pick-transportation',
-            image: '/banner-slider1.jpg',
+            image: '/why_cartoon_3.webp',
             imageAlt: 'Efficient transportation',
             title: 'Efficient transportation',
             description:
@@ -1372,7 +1372,7 @@ const PAGES: DynamicPageData[] = [
       },
       {
         type: 'impact_product_banner',
-        backgroundImage: '/banner-slider1.jpg',
+        backgroundImage: '/pick_cartoon_cta_2.webp',
         backgroundAlt: 'Green field background',
         productImage: '/banner-slider2.jpg',
         productAlt: 'Carton packs',
@@ -1395,30 +1395,28 @@ const PAGES: DynamicPageData[] = [
         cards: [
           {
             id: 'pick-climate-impact',
-            valueHighlight: '66-77%',
-            valueRest: 'Lower',
-            title: 'Climate Impact',
-            descriptionEmphasis: '66% To 77% Lower Climate Impact Than Plastic Bottles',
+            valueHighlight: '',
+            valueRest: '',
+            title: '66–77% lower climate impact',
             description:
-              'Independent Life Cycle Assessments show that carton packages can have in certain dairy product categories.',
+              'Independent life cycle assessments show that carton packages can have 66% to 77% lower climate impact than plastic bottles in certain dairy product categories.',
           },
           {
             id: 'pick-renewable-content',
-            valueHighlight: 'Up To 90%',
+            valueHighlight: '',
             valueRest: '',
-            title: 'Renewable Content',
-            descriptionEmphasis: 'As High As 90%',
+            title: 'Up to 90% renewable content',
+         
             description:
-              'Innovations in carton packaging have increased renewable material content, helping reduce carbon footprint compared with conventional packaging formats.',
+              'Innovations in carton packaging have increased renewable material content to as high as 90%, helping reduce carbon footprint compared with conventional packaging formats.',
           },
           {
             id: 'pick-recycled-globally',
-            valueHighlight: '1.3 Million',
-            valueRest: 'Tonnes',
-            title: 'Recycled Globally',
-            descriptionEmphasis: '1.3 Million Tonnes Of Beverage Cartons',
+            valueHighlight: '',
+            valueRest: '',
+            title: '1.3 million tonnes recycled globally',
             description:
-              'More than were collected for recycling worldwide in 2024, demonstrating the growing role cartons play in the circular economy.',
+              'More than 1.3 million tonnes of beverage cartons were collected for recycling worldwide in 2024, demonstrating the growing role cartons play in the circular economy',
           },
         ],
         footnote:
@@ -1430,7 +1428,7 @@ const PAGES: DynamicPageData[] = [
         image: '/journey_image.jpg',
         imageAlt: 'The recycling journey',
         description:
-          'Lamipak Believes That The Future Of Packaging Must Be Circular. Our Pick Carton, Save Nature Sustainability Campaign Highlights Our Commitment To Developing Packaging Solutions That Support Responsible Sourcing, Lower Carbon Impact, And Improved Recycling Systems.',
+          'Lamipak believes that the future of packaging must be circular. Our Pick Carton, Save Nature sustainability campaign highlights our commitment to developing packaging solutions that support responsible sourcing, lower carbon impact, and improved recycling systems. By choosing cartons, businesses help reduce reliance on fossil-based materials, improve logistics efficiency, and support packaging that can be recovered and recycled into new materials. Together with partners across the value chain, we are working to ensure that every carton delivers more than product protection. It delivers measurable environmental progress.',
         ctaText: 'Join The Movement Pick Carton. Save Nature.',
         ctaLink: '/contact',
       },
