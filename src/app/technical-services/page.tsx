@@ -69,10 +69,11 @@ export default async function TechnicalServicesPage() {
       </section>
 
       {/* Technical Support Service Section */}
-      <section className="bg-gray-50 pb-12 ">
+      <section className="bg-gray-50 py-20">
+        <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-0 items-center">
           {/* Left Column - Text Content */}
-          <div className="container mx-auto px-4 lg:px-16 xl:px-24 pt-20">
+          <div className="pr-[40px]">
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-[#0e233c] mb-6">
               {listingData.introSection.heading}
             </h2>
@@ -88,9 +89,10 @@ export default async function TechnicalServicesPage() {
             <img
               src={listingData.introSection.image}
               alt={listingData.introSection.imageAlt}
-              className="w-full h-full object-cover"
+              className="w-full h-full object-cover rounded-[50px]"
             />
           </div>
+        </div>
         </div>
       </section>
 
