@@ -16,6 +16,8 @@ import { OnePackOneCodeLandingSection } from '@/components/sections/OnePackOneCo
 import { WaterpakLandingSection } from '@/components/sections/WaterpakLandingSection';
 import { MetallicLnkLandingSection } from '@/components/sections/MetallicLnkLandingSection';
 import { OpticapLandingSection } from '@/components/sections/OpticapLandingSection';
+import CallToAction from '@/components/home/CallToAction';
+import NewsletterSubscription from '@/components/home/NewsletterSubscription';
 
 const sectionMap: Partial<
   Record<PageBuilderSection['type'], (props: { data: any; pageContext?: PageBuilderContext }) => ReactElement | null>
@@ -43,6 +45,13 @@ export function SectionRenderer({
   section: PageBuilderSection;
   pageContext: PageBuilderContext;
 }): ReactElement | null {
+  if (section.type === 'callToAction') {
+    return <CallToAction />;
+  }
+  if (section.type === 'newsletterSubscription') {
+    return <NewsletterSubscription />;
+  }
+
   const Component = sectionMap[section.type];
   if (!Component) return null;
   return Component({ data: section.data, pageContext });

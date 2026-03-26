@@ -295,7 +295,9 @@ export type PageBuilderSection =
   | { type: 'opticapLanding'; data: OpticapLandingSectionData }
   | { type: 'productGrid'; data: ProductGridSectionData }
   | { type: 'productDetails'; data: ProductDetailsSectionData }
-  | { type: 'customBanner'; data: CustomBannerSectionData };
+  | { type: 'customBanner'; data: CustomBannerSectionData }
+  | { type: 'callToAction' }
+  | { type: 'newsletterSubscription' };
 
 export type PageBuilderPageData = {
   slug: string;
@@ -442,12 +444,8 @@ export async function getMainCategoryPage(
           ],
         },
       },
-      {
-        type: 'customBanner',
-        data: {
-          text: 'Need help choosing the right packaging? Contact our technical team.',
-        },
-      },
+      { type: 'callToAction' },
+      { type: 'newsletterSubscription' },
     ],
   };
 }
