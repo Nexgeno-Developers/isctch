@@ -57,9 +57,9 @@ export default async function Header() {
                 <Image
                   src={headerData.logo.image}
                   alt={headerData.logo.text || 'Logo'}
-                  width={200}
+                  width={300}
                   height={56}
-                  className="w-[200px] h-auto object-left"
+                  className="w-[110px] h-auto object-left"
                   sizes="200px"
                   priority
                 />
