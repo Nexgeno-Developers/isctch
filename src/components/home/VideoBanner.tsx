@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { useState, useEffect } from 'react';
 import { fetchHomepageData } from '@/lib/api';
 import type { VideoBannerData } from '@/fake-api/homepage';
@@ -175,7 +176,7 @@ export default function VideoBanner({ videoOnly = false }: VideoBannerProps = {}
         <div className="absolute inset-0">
           {backgroundInnerEl}
           {/* Dark Overlay */}
-          <div className="absolute inset-0 bg-[#0E233C8C]" />
+          <div className="absolute inset-0 bg-[#0e233c3d]" />
           {/* Blur Effect */}
           {/* <div className="absolute inset-0 backdrop-blur-sm" /> */}
         </div>
@@ -191,16 +192,16 @@ export default function VideoBanner({ videoOnly = false }: VideoBannerProps = {}
           <div className="flex-1 flex items-center justify-center">
             <button
               onClick={() => setIsVideoPlaying(true)}
-              className="cursor-pointer w-20 h-20 md:w-24 md:h-24 rounded-full bg-white bg-opacity-90 hover:bg-opacity-100 flex items-center justify-center transition-all group shadow-lg"
+              className="cursor-pointer w-20 h-20 md:w-24 md:h-24 rounded-full flex items-center justify-center transition-all group "
               aria-label="Play video"
             >
-              <svg
-                className="w-8 h-8 md:w-10 md:h-10 text-gray-800 ml-1 group-hover:scale-110 transition-transform"
-                fill="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path d="M8 5v14l11-7z" />
-              </svg>
+              <Image
+                src="/play_icon_image.png"
+                alt=""
+                width={100}
+                height={100}
+                className="group-hover:scale-110 transition-transform w-[80px]"
+              />
             </button>
           </div>
 
@@ -213,16 +214,16 @@ export default function VideoBanner({ videoOnly = false }: VideoBannerProps = {}
         <div className="relative z-10 h-full flex items-center justify-center">
           <button
             onClick={() => setIsVideoPlaying(true)}
-            className="cursor-pointer w-20 h-20 md:w-24 md:h-24 rounded-full bg-white bg-opacity-90 hover:bg-opacity-100 flex items-center justify-center transition-all group shadow-lg"
+            className="cursor-pointer w-20 h-20 md:w-24 md:h-24 rounded-full flex items-center justify-center transition-all group shadow-lg"
             aria-label="Play video"
           >
-            <svg
-              className="w-8 h-8 md:w-10 md:h-10 text-gray-800 ml-1 group-hover:scale-110 transition-transform"
-              fill="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path d="M8 5v14l11-7z" />
-            </svg>
+            <Image
+              src="/play_icon_image.png"
+              alt=""
+              width={100}
+              height={100}
+              className="group-hover:scale-110 transition-transform w-[80px]"
+            />
           </button>
         </div>
       )}

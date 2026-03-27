@@ -66,9 +66,7 @@ function PlayOverlayButton() {
       className="h-12 w-12 rounded-full bg-white/90 text-black flex items-center justify-center shadow-lg"
       aria-label="Play video"
     >
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
-        <path d="M8 5v14l11-7z" />
-      </svg>
+      <Image src="/play_icon_image.png" alt="" width={20} height={20} aria-hidden />
     </button>
   );
 }

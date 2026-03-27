@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useId, useState } from 'react';
+import Image from 'next/image';
 
 type VideoModalClientProps = {
   /** Video URL: mp4/webm or YouTube/Vimeo embed link */
@@ -64,14 +65,14 @@ export default function VideoModalClient({
         <span className="absolute inset-0 flex items-center justify-center">
           <span className="w-20 h-20 rounded-full bg-white/40 backdrop-blur-sm flex items-center justify-center">
             <span className="w-16 h-16 rounded-full bg-white/50 flex items-center justify-center">
-              <svg
-                className="w-8 h-8 text-white ml-1"
-                viewBox="0 0 24 24"
-                fill="currentColor"
-                aria-hidden="true"
-              >
-                <path d="M8 5v14l11-7z" />
-              </svg>
+              <Image
+                src="/play_icon_image.png"
+                alt=""
+                width={32}
+                height={32}
+                className="w-8 h-8"
+                aria-hidden
+              />
             </span>
           </span>
         </span>

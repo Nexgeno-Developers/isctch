@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useMemo, useRef, useState } from 'react';
+import Image from 'next/image';
 
 export default function VideoModalBanner({
   videoUrl,
@@ -57,7 +58,7 @@ export default function VideoModalBanner({
           ) : (
             <div className="absolute inset-0 w-full h-full bg-gray-800" />
           )}
-          <div className="absolute inset-0 bg-[#0E233C8C]" />
+          <div className="absolute inset-0 bg-[#0e233c3d]" />
           <div className="absolute inset-0 backdrop-blur-sm" />
         </div>
 
@@ -65,17 +66,17 @@ export default function VideoModalBanner({
           <button
             type="button"
             onClick={() => setIsOpen(true)}
-            className="cursor-pointer w-20 h-20 md:w-24 md:h-24 rounded-full bg-white bg-opacity-90 hover:bg-opacity-100 flex items-center justify-center transition-all group shadow-lg"
+            className="cursor-pointer w-20 h-20 md:w-24 md:h-24 rounded-full flex items-center justify-center transition-all group "
             aria-label="Play video"
           >
-            <svg
-              className="w-8 h-8 md:w-10 md:h-10 text-gray-800 ml-1 group-hover:scale-110 transition-transform"
-              fill="currentColor"
-              viewBox="0 0 24 24"
+            <Image
+              src="/play_icon_image.png"
+              alt=""
+              width={100}
+              height={100}
+              className="group-hover:scale-110 transition-transform w-[80px]"
               aria-hidden
-            >
-              <path d="M8 5v14l11-7z" />
-            </svg>
+            />
           </button>
         </div>
       </section>
