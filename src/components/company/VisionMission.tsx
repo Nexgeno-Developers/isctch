@@ -40,9 +40,9 @@ export default function VisionMission({ data }: VisionMissionProps) {
   };
 
   return (
-    <section className="relative w-full min-h-[800px] md:min-h-[900px] overflow-hidden">
+    <section className="relative w-full lg:min-h-[800px] min-h-[400px] md:min-h-[900px] overflow-hidden">
       {/* Background Image */}
-      <div className="absolute inset-0">
+      <div className="absolute inset-0 lg:block hidden">
         {data.backgroundImage ? (
           <Image
             src={data.backgroundImage}
@@ -56,23 +56,21 @@ export default function VisionMission({ data }: VisionMissionProps) {
         )}
       </div>
 
-      Blue Gradient Overlay - Bottom Half
-      
       {/* Content */}
-      <div className="relative z-10 h-full pt-[800px] flex flex-col">
+      <div className="relative z-10 h-full lg:pt-[800px] pt-[00px] flex flex-col">
         {/* Upper Section - Empty space for image visibility */}
         <div className="flex-1" />
 
         {/* Lower Section - Content Overlay */}
-        <div className="relative pb-8 md:pb-12 lg:pb-16 pt-8 md:pt-12 lg:pt-16">
-          <div className="container mx-auto bg-[#009FE8CC] p-[60px] rounded-[50px] backdrop-blur-[35px]">
+        <div className="relative pb-4 md:pb-12 lg:pb-16 pt-8 md:pt-12 lg:pt-16">
+          <div className="container w-[92%] mx-auto bg-[#009FE8CC] lg:p-[60px] px-[15px] py-[30px] rounded-[50px] lg:backdrop-blur-[35px]">
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 md:gap-8 lg:gap-10">
               {/* Left Column - Tagline and Description */}
               <div className="lg:col-span-1 flex flex-col justify-center">
-                <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4 md:mb-6 leading-tight">
+                <h2 className="text-[22px] md:text-4xl lg:text-5xl font-bold text-white mb-4 md:mb-6 leading-tight">
                   {data.tagline}
                 </h2>
-                <p className="text-base md:text-lg text-white/90 leading-relaxed">
+                <p className="text-[14px] md:text-lg text-white/90 leading-relaxed">
                   {data.description}
                 </p>
               </div>

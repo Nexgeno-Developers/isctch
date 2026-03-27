@@ -72,7 +72,7 @@ export default async function VisionMissionPage() {
       {companyData.visionMission ? <VisionMission data={companyData.visionMission} /> : null}
       {companyData.ourValues ? <OurValues data={companyData.ourValues} /> : null}
 
-      <div className="pt-12 bg-gray-50">
+      <div className="pt-0 md:pt-12 bg-gray-50">
         <CallToAction />
       </div>
       <NewsletterSubscription />

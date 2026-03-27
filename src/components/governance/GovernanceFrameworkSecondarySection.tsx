@@ -176,7 +176,7 @@ export default function GovernanceFrameworkSecondarySection({
               {resolved.eyebrow}
             </div>
 
-            <h2 className="mt-4 text-3xl md:text-5xl font-bold text-black leading-tight">
+            <h2 className="mt-4 text-[22px] md:text-5xl font-bold text-black leading-tight">
               {resolved.title}
             </h2>
 

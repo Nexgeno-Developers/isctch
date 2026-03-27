@@ -24,14 +24,14 @@ export default function OurValues({ data }: OurValuesProps) {
   }
 
   return (
-    <section className="py-12 md:py-16 lg:py-20 bg-gray-50">
+    <section className="py-10 md:py-16 lg:py-20 bg-gray-50">
       <div className="container mx-auto px-4">
         {/* Heading */}
         <div className="text-center mb-8 md:mb-12">
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-[#009FE8] mb-4">
+          <h2 className="text-[22px] md:text-4xl lg:text-5xl font-bold text-[#009FE8] mb-4">
             {data.heading}
           </h2>
-          <p className="text-base md:text-lg text-black max-w-3xl mx-auto">
+          <p className="text-[14px] md:text-lg text-black max-w-3xl mx-auto">
             {data.description}
           </p>
         </div>
@@ -47,14 +47,14 @@ export default function OurValues({ data }: OurValuesProps) {
                   <button
                     key={value.id}
                     onClick={() => setSelectedValueId(value.id)}
-                    className={`cursor-pointer w-full text-left py-5 px-0 border-b border-gray-200 transition-colors ${
+                    className={`cursor-pointer w-full text-left lg:py-5 py-3 px-0 border-b border-gray-200 transition-colors ${
                       isSelected
                         ? 'text-[#009FE8]'
                         : 'text-black hover:text-black'
                     }`}
                   >
                     <div className="flex items-center justify-between">
-                      <span className="text-lg md:text-xl font-medium">
+                      <span className="text-base md:text-xl font-medium">
                         {value.title}
                       </span>
                       {isSelected && (
@@ -98,8 +98,8 @@ export default function OurValues({ data }: OurValuesProps) {
             </div>
 
             {/* Caption */}
-            <div className="bg-gray-100 rounded-lg p-4 md:p-6 mt-[-110px] relative z-10">
-              <p className="text-sm md:text-base text-black leading-relaxed">
+            <div className="bg-gray-100 rounded-lg p-4 md:p-6 lg:mt-[-110px] mt-[-30px] relative z-10">
+              <p className="text-[14px] md:text-base text-black leading-relaxed">
                 {selectedValue.caption}
               </p>
             </div>
