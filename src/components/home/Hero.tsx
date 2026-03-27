@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import Image from 'next/image';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import type { Hero } from '@/fake-api/homepage';
 
 interface HeroProps {
@@ -14,6 +14,8 @@ export default function Hero({ data }: HeroProps) {
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
   const [imagesLoaded, setImagesLoaded] = useState(false);
   const [failedSlideIds, setFailedSlideIds] = useState<Record<string, boolean>>({});
+  const categoryScrollerRef = useRef<HTMLDivElement | null>(null);
+  const categoryButtonRefs = useRef<Record<number, HTMLButtonElement | null>>({});
 
   const slides = data.slides;
   const totalSlides = slides.length;
@@ -71,6 +73,19 @@ export default function Hero({ data }: HeroProps) {
   };
 
   const currentSlideData = slides[currentSlide];
+
+  useEffect(() => {
+    const container = categoryScrollerRef.current;
+    const activeButton = categoryButtonRefs.current[currentSlide];
+    if (!container || !activeButton) return;
+
+    // Keep active pill visible with safe left padding (avoid clipping on edge).
+    const nextLeft = activeButton.offsetLeft - 19;
+    container.scrollTo({
+      left: Math.max(0, nextLeft),
+      behavior: 'smooth',
+    });
+  }, [currentSlide]);
 
   return (
     <section className="relative h-auto md:h-screen md:min-h-[max(100dvh,600px)] overflow-hidden">
@@ -159,10 +174,16 @@ export default function Hero({ data }: HeroProps) {
 
             {/* Categories + Right-side arrows */}
             <div className="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4 min-w-0">
-              <div className="flex items-center gap-3 sm:gap-2 md:gap-3 overflow-x-auto pb-2 scrollbar-hide flex-1 min-w-0 -mx-1 px-1">
+              <div
+                ref={categoryScrollerRef}
+                className="flex items-center gap-3 sm:gap-2 md:gap-3 overflow-x-auto pb-2 scrollbar-hide flex-1 min-w-0 pl-1 pr-2"
+              >
                 {data.categories.map((category) => (
                   <button
                     key={category.id}
+                    ref={(el) => {
+                      categoryButtonRefs.current[category.slideIndex] = el;
+                    }}
                     onClick={(e) => handleCategoryClick(category.slideIndex, e)}
                     className={`flex-shrink-0 px-3 py-[6px] rounded-full border text-sm md:text-[14px] font-light transition-all whitespace-nowrap cursor-pointer ${
                       currentSlide === category.slideIndex
