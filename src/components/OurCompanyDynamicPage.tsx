@@ -52,7 +52,7 @@ export default function OurCompanyDynamicPage({ data }: OurCompanyDynamicPagePro
             data={companyData.aboutUsQuadrant}
             videoBetween={
               data.slug === 'introduction' ? (
-                <div className="pt-12">
+                <div className="pt-6 md:pt-12">
                   <VideoBanner videoOnly={true} />
                 </div>
               ) : null
@@ -60,7 +60,7 @@ export default function OurCompanyDynamicPage({ data }: OurCompanyDynamicPagePro
           />
         ) : null}
 
-        <div className="pt-20">
+        <div className="pt-10 md:pt-20">
           <CallToAction />
         </div>
         <NewsletterSubscription />

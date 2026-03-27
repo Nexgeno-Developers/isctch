@@ -84,7 +84,7 @@ export default async function MarketingServicesPage() {
           </div>
 
           {/* Stats strip – heading/subheading driven by API */}
-          <div className="bg-gray-50 pt-20">
+          <div className="bg-gray-50 pt-10 md:pt-20">
             <div className="text-center mb-8">
               <h3 className="text-3xl md:text-4xl text-black lg:text-5xl font-bold mb-6 md:mb-2 text-center">
                 {overview.statsHeading}

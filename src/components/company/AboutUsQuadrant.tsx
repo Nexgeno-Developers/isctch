@@ -26,10 +26,10 @@ export default function AboutUsQuadrant({ data, videoBetween }: AboutUsQuadrantP
   return (
     <section className="w-full bg-gray-50">
       {/* Top Row (Lamipak: A Global Leader...) */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 pb-10">
-        <div className="flex items-center justify-center p-8 md:p-12 lg:p-16 xl:p-16">
+      <div className="grid grid-cols-1 lg:grid-cols-2 pb-8 md:pb-10">
+        <div className="flex items-center justify-center p-5 md:p-12 lg:p-16 xl:p-16">
           <div className="max-w-2xl">
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6 md:mb-8 leading-[60px]">
+            <h2 className="text-[22px] md:text-4xl lg:text-5xl font-bold mb-4 md:mb-8 leading-tight md:leading-[60px]">
               <span className="text-[#009FE8]">{data.topLeft.titleHighlight}</span>
               <span className="text-black">
                 {data.topLeft.title.replace(data.topLeft.titleHighlight, '').trim()}
@@ -38,7 +38,7 @@ export default function AboutUsQuadrant({ data, videoBetween }: AboutUsQuadrantP
             {data.topLeft.paragraphs.map((paragraph, index) => (
               <p
                 key={index}
-                className={`text-base text-black leading-relaxed ${
+                className={`text-[14px] md:text-base text-black leading-relaxed ${
                   index < data.topLeft.paragraphs.length - 1 ? 'mb-4 md:mb-6' : ''
                 }`}
               >
@@ -70,7 +70,7 @@ export default function AboutUsQuadrant({ data, videoBetween }: AboutUsQuadrantP
       {videoBetween ? <div className="bg-gray-50">{videoBetween}</div> : null}
 
       {/* Bottom Row (Leading the Future...) */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 pt-20">
+      <div className="grid grid-cols-1 lg:grid-cols-2 pt-10 md:pt-20">
         <div className="relative w-full">
           {data.bottomLeft.image ? (
             <div className="relative w-full">
@@ -88,9 +88,9 @@ export default function AboutUsQuadrant({ data, videoBetween }: AboutUsQuadrantP
           )}
         </div>
 
-        <div className="flex items-center justify-center p-8 md:p-12 lg:p-16 xl:p-16">
+        <div className="flex items-center justify-center p-5 md:p-12 lg:p-16 xl:p-16">
           <div className="max-w-2xl">
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6 md:mb-8 leading-[60px]">
+            <h2 className="text-[22px] md:text-4xl lg:text-5xl font-bold mb-4 md:mb-8 leading-tight md:leading-[60px]">
               <span className="text-black">
                 {data.bottomRight.title.split(data.bottomRight.titleHighlight)[0]}
               </span>
@@ -99,7 +99,7 @@ export default function AboutUsQuadrant({ data, videoBetween }: AboutUsQuadrantP
             {data.bottomRight.paragraphs.map((paragraph, index) => (
               <p
                 key={index}
-                className={`text-base text-black leading-relaxed ${
+                className={`text-[14px] md:text-base text-black leading-relaxed ${
                   index < data.bottomRight.paragraphs.length - 1 ? 'mb-4 md:mb-6' : ''
                 }`}
               >
