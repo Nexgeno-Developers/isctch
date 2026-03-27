@@ -31,7 +31,7 @@ export default function ProductSustainabilitySeriesClient({ data }: ProductSusta
     <section className="bg-gray-50 py-8 md:py-12">
       <div className="container mx-auto px-4">
         {/* Background Image Container */}
-        <div className="relative rounded-[50px] overflow-hidden p-8 md:p-12 lg:p-16">
+        <div className="relative rounded-[32px] md:rounded-[50px] overflow-hidden p-5 md:p-12 lg:p-16">
           {/* Background Image */}
           <div className="absolute inset-0">
             <img
@@ -43,8 +43,8 @@ export default function ProductSustainabilitySeriesClient({ data }: ProductSusta
           {/* Content Wrapper */}
           <div className="relative z-10">
           {/* Section Title and Navigation */}
-          <div className="flex items-center justify-between mb-8 md:mb-12">
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white">
+          <div className="flex items-center justify-between mb-4 md:mb-12">
+            <h2 className="text-[22px] md:text-4xl lg:text-5xl font-bold text-white">
               Product Sustainability Series
             </h2>
 
@@ -122,7 +122,7 @@ export default function ProductSustainabilitySeriesClient({ data }: ProductSusta
               bulletClass: 'swiper-pagination-bullet-sustainability-series',
               bulletActiveClass: 'swiper-pagination-bullet-active-sustainability-series',
             }}
-            className="product-sustainability-series-swiper"
+            className="product-sustainability-series-swiper md:p-0 p-0"
           >
             {data.products.map((product) => (
               <SwiperSlide key={product.id}>
@@ -187,26 +187,26 @@ function ProductCard({ product }: { product: SustainabilityProductCard }) {
       </div>
 
       {/* Content */}
-      <div className="p-4 md:p-6">
+      <div className="px-2 py-4 md:p-6">
         {/* Label */}
-        <span className="inline-block text-[#009FE8] text-sm md:text-base font-medium mb-3">
+        <span className="inline-block text-[#009FE8] text-[12px] md:text-base font-medium mb-3">
           {product.label}
         </span>
 
         {/* Title */}
-        <h3 className="text-2xl md:text-3xl font-bold text-black mb-4">
+        <h3 className="text-[18px] md:text-3xl font-bold text-black lg:mb-4 mb-1">
           {product.title}
         </h3>
 
         {/* Description */}
-        <p className="text-black text-base  mb-6 leading-relaxed line-clamp-4">
+        <p className="text-black text-[14px] md:text-base lg:mb-6 mb-3 leading-relaxed line-clamp-4">
           {product.description}
         </p>
 
         {/* CTA Link */}
         <Link
           href={product.link}
-          className="inline-flex items-center text-[#009FE8] text-base md:text-lg font-medium hover:text-[#0077B6] transition-colors group"
+          className="inline-flex items-center text-[#009FE8] text-[14px] md:text-lg font-medium hover:text-[#0077B6] transition-colors group"
         >
           {product.ctaText}
           <svg

@@ -14,10 +14,10 @@ export default async function CommercialServices() {
   const data = homepageData.commercialServices;
 
   return (
-    <section className="bg-[#f8f8f8] pt-16 md:pt-24 pb-12">
+    <section className="bg-[#f8f8f8] pt-10 md:pt-24 pb-8">
       <div className="container mx-auto px-4">
         {/* Section Title */}
-        <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-center mb-8 md:mb-12">
+        <h2 className="text-[22px] md:text-4xl lg:text-5xl font-bold text-center mb-4 md:mb-12">
           <span className="text-[#009FE8]">Lamipak</span>{' '}
           <span className="text-black">Commercial Services</span>
         </h2>
@@ -40,21 +40,21 @@ function ServiceCard({ card }: { card: CommercialServiceCard }) {
   return (
     <div className="bg-white rounded-[25px]  overflow-hidden transition-shadow duration-300">
       {/* Image */}
-      <div className="relative h-64 md:h-80 overflow-hidden rounded-t-[25px]">
+      <div className="relative aspect-[16/10] md:h-80 md:aspect-auto overflow-hidden rounded-t-[25px]">
         <Image
           src={card.image}
           alt={card.imageAlt}
           fill
           className="object-cover"
-          sizes="(max-width: 768px) 100vw, 50vw"
+          sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 50vw"
         />
       </div>
 
       {/* Content */}
       <div className="p-6 md:p-8">
         {/* Title with Icon */}
-        <div className="flex items-center justify-between mb-4">
-          <h3 className="text-2xl md:text-3xl font-bold text-[#009FE8]">
+        <div className="flex items-center justify-between mb-2">
+          <h3 className="text-[18px] md:text-3xl font-bold text-[#009FE8]">
             {card.title}
           </h3>
           {/* Icon */}
@@ -72,7 +72,7 @@ function ServiceCard({ card }: { card: CommercialServiceCard }) {
         </div>
 
         {/* Description */}
-        <p className="text-black text-base mb-6 leading-relaxed">
+        <p className="text-black text-[14px] md:text-base mb-6 leading-relaxed">
           {card.description}
         </p>
 

@@ -73,7 +73,7 @@ export default function Hero({ data }: HeroProps) {
   const currentSlideData = slides[currentSlide];
 
   return (
-    <section className="relative h-[100dvh] md:h-screen min-h-[max(100dvh,600px)] overflow-hidden">
+    <section className="relative h-auto md:h-screen md:min-h-[max(100dvh,600px)] overflow-hidden">
       {/* Background Image with Overlay */}
       <div className="absolute inset-0">
         {slides.map((slide, index) => (
@@ -110,10 +110,10 @@ export default function Hero({ data }: HeroProps) {
       </div>
 
       {/* Content */}
-      <div className="relative z-10 h-full flex flex-col">
-        <div className="container mx-auto px-4 flex-1 flex flex-col min-h-0">
+      <div className="relative z-10 flex flex-col md:h-full">
+        <div className="container mx-auto px-4 flex flex-col min-h-0 md:h-full">
           {/* Push hero text to the bottom */}
-          <div className="mt-auto pb-8 sm:pb-10 md:pb-14 pt-20 sm:pt-24 md:pt-0">
+          <div className="mt-auto pb-8 sm:pb-10 md:pb-14 pt-28 sm:pt-32 md:pt-0">
             {/* Category Label */}
             {/* <div className="mb-3">
               <span className="text-white text-sm md:text-base font-medium tracking-wider uppercase">
@@ -123,13 +123,13 @@ export default function Hero({ data }: HeroProps) {
 
             {/* Main Headline */}
             <div className="lg:max-w-5xl">
-              <h1 className="text-3xl sm:text-3xl md:text-4xl lg:text-5xl font-bold leading-tight [overflow-wrap:anywhere] lg:mb-0 mb-3">
+              <h1 className="text-[24px] sm:text-3xl md:text-4xl lg:text-5xl font-bold leading-tight [overflow-wrap:anywhere] lg:mb-0 mb-3">
                 <span className="text-white">{currentSlideData.title}</span>
                 <br />
                 <span className="text-[#009FE8]">{currentSlideData.titleHighlight}</span>
               </h1>
 
-              <p className="lg:text-base text-sm text-white lg:py-[20px] pt-0 pb-0 lg:!leading-[32px] !leading-[24px]  lg:pr-[200px] lg:line-clamp-4 line-clamp-3">
+              <p className="text-[14px] lg:text-base text-white lg:py-[20px] pt-0 pb-0 lg:!leading-[32px] !leading-[22px] lg:pr-[200px] lg:line-clamp-4 line-clamp-3">
                 {currentSlideData.description}
               </p>
             </div>

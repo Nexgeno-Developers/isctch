@@ -202,10 +202,10 @@ export default function VideoBanner({ videoOnly = false }: VideoBannerProps = {}
   return (
     <>
       {!videoOnly && (data.preTitleBlue || data.preTitleBlack || data.preDescription) && (
-        <section className="bg-gray-50 py-8 md:py-10">
+        <section className="bg-gray-50 pt-4 pb-8 md:py-10">
           <div className="container mx-auto px-4">
-            <div className="p-6 md:p-10 text-center">
-              <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold leading-tight">
+            <div className="md:p-10 text-center">
+              <h2 className="text-[22px] md:text-3xl lg:text-4xl font-bold leading-tight">
                 {data.preTitleBlue ? <span className="text-[#009FE8]">{data.preTitleBlue}</span> : null}{' '}
                 {data.preTitleBlack ? <span className="text-black">{data.preTitleBlack}</span> : null}
               </h2>
@@ -219,7 +219,7 @@ export default function VideoBanner({ videoOnly = false }: VideoBannerProps = {}
         </section>
       )}
 
-      <section className="relative min-h-[70dvh] h-[100dvh] md:h-screen md:min-h-0 overflow-hidden">
+      <section className="relative lg:min-h-[420px] min-h-[200px] h-auto md:h-screen md:min-h-0 overflow-hidden">
       {/* Background Video/GIF - Autoplay - Hidden when video is playing */}
       {!isVideoPlaying && (
         <div className="absolute inset-0">
@@ -236,7 +236,7 @@ export default function VideoBanner({ videoOnly = false }: VideoBannerProps = {}
 
       {/* Content - Hidden when video is playing */}
       {!isVideoPlaying && !videoOnly && (
-        <div className="relative z-10 h-full flex flex-col items-center px-4">
+        <div className="relative z-10 lg:min-h-[420px] min-h-[200px] md:h-full flex flex-col items-center px-4">
           {/* Play Button */}
           <div className="flex-1 flex items-center justify-center">
             <button
@@ -252,7 +252,7 @@ export default function VideoBanner({ videoOnly = false }: VideoBannerProps = {}
                 alt=""
                 width={100}
                 height={100}
-                className="group-hover:scale-110 transition-transform w-[100px]"
+                className="group-hover:scale-110 transition-transform lg:w-[100px] w-[60px]"
               />
             </button>
           </div>
@@ -263,7 +263,7 @@ export default function VideoBanner({ videoOnly = false }: VideoBannerProps = {}
 
       {/* Play Button Only - When videoOnly is true */}
       {!isVideoPlaying && videoOnly && (
-        <div className="relative z-10 h-full flex items-center justify-center">
+        <div className="relative z-10 min-h-[420px] md:h-full flex items-center justify-center">
           <button
             onClick={() => {
               setPlayerReady(false);
@@ -277,7 +277,7 @@ export default function VideoBanner({ videoOnly = false }: VideoBannerProps = {}
               alt=""
               width={100}
               height={100}
-              className="group-hover:scale-110 transition-transform w-[100px]"
+              className="group-hover:scale-110 transition-transform lg:w-[100px] w-[60px]"
             />
           </button>
         </div>

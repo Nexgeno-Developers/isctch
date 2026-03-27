@@ -12,7 +12,7 @@ export default async function NewsletterSubscription() {
 
   return (
     <section 
-      className="relative py-16 md:py-24 overflow-hidden"
+      className="relative py-10 md:py-24 overflow-hidden"
       style={{
         backgroundImage: 'url(/newsletter_bg.png)',
         backgroundSize: 'cover',
@@ -29,12 +29,12 @@ export default async function NewsletterSubscription() {
       <div className="relative z-10 container mx-auto px-4">
         <div className=" mx-auto text-center">
           {/* Headline */}
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4">
+          <h2 className="text-[20px] md:text-4xl lg:text-5xl font-bold text-white mb-4">
             {data.headline}
           </h2>
 
           {/* Subtitle */}
-          <p className="text-white text-base md:text-lg mb-8 md:mb-12">
+          <p className="text-white text-[14px] md:text-lg mb-4 md:mb-12">
             {data.subtitle}
           </p>
 

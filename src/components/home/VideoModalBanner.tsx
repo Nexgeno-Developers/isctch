@@ -76,7 +76,7 @@ export default function VideoModalBanner({
               alt=""
               width={100}
               height={100}
-              className="group-hover:scale-110 transition-transform w-[100px]"
+              className="group-hover:scale-110 transition-transform lg:w-[100px] w-[60px]"
               aria-hidden
             />
           </button>

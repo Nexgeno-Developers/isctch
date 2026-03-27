@@ -28,11 +28,11 @@ export default function WorkInSustainabilityClient({ data }: WorkInSustainabilit
   const shouldLoop = data.cards.length > 3;
 
   return (
-    <section className="py-8 md:py-12 bg-gray-50">
+    <section className="py-0 md:py-12 bg-gray-50">
       <div className="container mx-auto px-4">
         {/* Header with Title and Navigation */}
-        <div className="flex items-center justify-between mb-8 md:mb-12">
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-[#009FE8]">
+        <div className="flex items-center justify-between mb-4 md:mb-12">
+          <h2 className="text-[22px] md:text-4xl lg:text-5xl font-bold text-[#009FE8]">
             Sustainability
           </h2>
 
@@ -41,11 +41,11 @@ export default function WorkInSustainabilityClient({ data }: WorkInSustainabilit
             <div className="flex items-center gap-3">
               <button
                 onClick={() => swiperRef.current?.slidePrev()}
-                className="cursor-pointer w-12 h-12 rounded-full border-2 border-[#009FE8] bg-white hover:bg-[#009FE8] flex items-center justify-center transition-all group shadow-lg"
+                className="cursor-pointer lg:w-12 lg:h-12 w-8 h-8 rounded-full lg:border-2 border-1 border-[#009FE8] bg-white hover:bg-[#009FE8] flex items-center justify-center transition-all group shadow-lg"
                 aria-label="Previous sustainability work"
               >
                 <svg
-                  className="w-6 h-6 text-[#009FE8] group-hover:text-white transition-colors"
+                  className="lg:w-6 lg:h-6 w-4 h-4 text-[#009FE8] group-hover:text-white transition-colors"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -61,11 +61,11 @@ export default function WorkInSustainabilityClient({ data }: WorkInSustainabilit
 
               <button
                 onClick={() => swiperRef.current?.slideNext()}
-                className="cursor-pointer w-12 h-12 rounded-full border-2 border-[#009FE8] bg-white hover:bg-[#009FE8] flex items-center justify-center transition-all group shadow-lg"
+                className="cursor-pointer lg:w-12 lg:h-12 w-8 h-8 rounded-full lg:border-2 border-1 border-[#009FE8] bg-white hover:bg-[#009FE8] flex items-center justify-center transition-all group shadow-lg"
                 aria-label="Next sustainability work"
               >
                 <svg
-                  className="w-6 h-6 text-[#009FE8] group-hover:text-white transition-colors"
+                  className="lg:w-6 lg:h-6 w-4 h-4 text-[#009FE8] group-hover:text-white transition-colors"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -164,7 +164,7 @@ export default function WorkInSustainabilityClient({ data }: WorkInSustainabilit
  */
 function WorkCard({ card }: { card: SustainabilityWorkCard }) {
   return (
-    <div className="bg-[#EDF0F1] rounded-[28px] p-4 md:p-5 h-full flex flex-col min-h-[390px]">
+    <div className="bg-[#EDF0F1] rounded-[28px] p-4 md:p-5 h-full flex flex-col min-h-[340px] md:min-h-[390px]">
       <div className="relative w-full aspect-[16/9] rounded-[18px] overflow-hidden">
         <Image
           src={card.image}
@@ -176,11 +176,11 @@ function WorkCard({ card }: { card: SustainabilityWorkCard }) {
       </div>
 
       <div className="pt-4 px-0 pb-2 flex flex-col flex-1">
-        <h3 className="text-2xl md:text-[26px] mt-2 font-bold text-black mb-3 leading-tight">
+        <h3 className="text-[18px] md:text-[26px] mt-2 font-bold text-black mb-3 leading-tight">
           {card.title}
         </h3>
 
-        <p className="text-black text-sm md:text-base mb-4 leading-relaxed flex-1">
+        <p className="text-black text-sm md:text-base lg:mb-4 mb-0 leading-relaxed flex-1">
           {card.description}
         </p>
 

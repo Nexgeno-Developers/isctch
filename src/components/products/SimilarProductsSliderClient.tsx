@@ -60,11 +60,11 @@ export default function SimilarProductsSliderClient({
           <button
             onClick={handlePrev}
             disabled={isBeginning && !shouldLoop}
-            className="cursor-pointer swiper-button-prev-similar w-12 h-12 rounded-full border-2 border-[#009FE8] bg-white hover:bg-[#009FE8] flex items-center justify-center transition-all group disabled:opacity-50 disabled:cursor-not-allowed"
+            className="cursor-pointer swiper-button-prev-similar lg:w-12 lg:h-12 w-8 h-8 rounded-full lg:border-2 border-1 border-[#009FE8] bg-white hover:bg-[#009FE8] flex items-center justify-center transition-all group disabled:opacity-50 disabled:cursor-not-allowed"
             aria-label="Previous products"
           >
             <svg
-              className="w-6 h-6 text-[#009FE8] group-hover:text-white transition-colors"
+              className="lg:w-6 lg:h-6 w-4 h-4 text-[#009FE8] group-hover:text-white transition-colors"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -81,11 +81,11 @@ export default function SimilarProductsSliderClient({
           <button
             onClick={handleNext}
             disabled={isEnd && !shouldLoop}
-            className="cursor-pointer swiper-button-next-similar w-12 h-12 rounded-full border-2 border-[#009FE8] bg-white hover:bg-[#009FE8] flex items-center justify-center transition-all group disabled:opacity-50 disabled:cursor-not-allowed shadow-lg"
+            className="cursor-pointer swiper-button-next-similar lg:w-12 lg:h-12 w-8 h-8 rounded-full lg:border-2 border-1 border-[#009FE8] bg-white hover:bg-[#009FE8] flex items-center justify-center transition-all group disabled:opacity-50 disabled:cursor-not-allowed shadow-lg"
             aria-label="Next products"
           >
             <svg
-              className="w-6 h-6 text-[#009FE8] group-hover:text-white transition-colors"
+              className="lg:w-6 lg:h-6 w-4 h-4 text-[#009FE8] group-hover:text-white transition-colors"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"

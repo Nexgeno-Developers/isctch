@@ -77,7 +77,7 @@ export default async function HomePage() {
         {/* <InnovationInPackaging /> */}
         <LatestPressRelease />
         <FAQ />
-        <div className="bg-gray-50 pt-12">
+        <div className="bg-gray-50 lg:pt-12 pt-4">
         <CallToAction />
         </div>
         

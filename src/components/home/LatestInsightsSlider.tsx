@@ -46,12 +46,12 @@ export function Navigation({ cards }: { cards: InsightCard[] }) {
     <div className="flex items-center gap-3">
       <button
         onClick={prevSlide}
-        className="w-12 h-12 rounded-full border-2 border-[#009FE8] bg-white hover:bg-[#009FE8] flex items-center justify-center transition-all group disabled:opacity-50 disabled:cursor-not-allowed"
+        className="lg:w-12 lg:h-12 w-8 h-8 rounded-full lg:border-2 border-1 border-[#009FE8] bg-white hover:bg-[#009FE8] flex items-center justify-center transition-all group disabled:opacity-50 disabled:cursor-not-allowed"
         aria-label="Previous insights"
         disabled={cards.length <= cardsPerView}
       >
         <svg
-          className="w-6 h-6 text-[#009FE8] group-hover:text-white transition-colors"
+          className="lg:w-6 lg:h-6 w-4 h-4 text-[#009FE8] group-hover:text-white transition-colors"
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"
@@ -67,12 +67,12 @@ export function Navigation({ cards }: { cards: InsightCard[] }) {
 
       <button
         onClick={nextSlide}
-        className="w-12 h-12 rounded-full border-2 border-[#009FE8] bg-white hover:bg-[#009FE8] flex items-center justify-center transition-all group disabled:opacity-50 disabled:cursor-not-allowed"
+        className="lg:w-12 lg:h-12 w-8 h-8 rounded-full lg:border-2 border-1 border-[#009FE8] bg-white hover:bg-[#009FE8] flex items-center justify-center transition-all group disabled:opacity-50 disabled:cursor-not-allowed"
         aria-label="Next insights"
         disabled={cards.length <= cardsPerView}
       >
         <svg
-          className="w-6 h-6 text-[#009FE8] group-hover:text-white transition-colors"
+          className="lg:w-6 lg:h-6 w-4 h-4 text-[#009FE8] group-hover:text-white transition-colors"
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"

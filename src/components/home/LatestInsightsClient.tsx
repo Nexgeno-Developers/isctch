@@ -31,8 +31,8 @@ export default function LatestInsightsClient({ data }: LatestInsightsClientProps
     <section className="py-8 md:py-12 bg-gray-50">
       <div className="container mx-auto px-4">
         {/* Header with Title and Navigation */}
-        <div className="flex items-center justify-between mb-8 md:mb-12">
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold">
+        <div className="flex items-center justify-between mb-6 md:mb-12">
+          <h2 className="text-[22px] md:text-4xl lg:text-5xl font-bold">
             <span className="text-black">Latest</span>{' '}
             <span className="text-[#009FE8]">Insights</span>
           </h2>
@@ -42,12 +42,12 @@ export default function LatestInsightsClient({ data }: LatestInsightsClientProps
             <div className="flex items-center gap-3">
               <button
                 onClick={() => swiperRef.current?.slidePrev()}
-                className="cursor-pointer  w-12 h-12 rounded-full border-2 border-[#009FE8] bg-white hover:bg-[#009FE8] flex items-center justify-center 
+                className="cursor-pointer  lg:w-12 lg:h-12 w-8 h-8 rounded-full lg:border-2 border-1 border-[#009FE8] bg-white hover:bg-[#009FE8] flex items-center justify-center 
                 transition-all group"
                 aria-label="Previous insights"
               >
                 <svg
-                  className="w-6 h-6 text-[#009FE8] group-hover:text-white transition-colors"
+                  className="lg:w-6 lg:h-6 w-4 h-4 text-[#009FE8] group-hover:text-white transition-colors"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -63,11 +63,11 @@ export default function LatestInsightsClient({ data }: LatestInsightsClientProps
 
               <button
                 onClick={() => swiperRef.current?.slideNext()}
-                className="cursor-pointer w-12 h-12 rounded-full border-2 border-[#009FE8] bg-white hover:bg-[#009FE8] flex items-center justify-center transition-all group shadow-lg"
+                className="cursor-pointer lg:w-12 lg:h-12 w-8 h-8 rounded-full lg:border-2 border-1 border-[#009FE8] bg-white hover:bg-[#009FE8] flex items-center justify-center transition-all group shadow-lg"
                 aria-label="Next insights"
               >
                 <svg
-                  className="w-6 h-6 text-[#009FE8] group-hover:text-white transition-colors"
+                  className="lg:w-6 lg:h-6 w-4 h-4 text-[#009FE8] group-hover:text-white transition-colors"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -122,7 +122,7 @@ export default function LatestInsightsClient({ data }: LatestInsightsClientProps
               >
                 <div className="rounded-[50px] overflow-hidden transition-shadow duration-300 h-full bg-[#009FE8] p-[15px]">
                   {/* Image */}
-                  <div className="relative h-64 md:h-72 overflow-hidden rounded-t-[50px]">
+                  <div className="relative aspect-[16/10] md:h-72 md:aspect-auto overflow-hidden rounded-t-[50px]">
                     <Image
                       src={card.image}
                       alt={card.imageAlt}
@@ -145,7 +145,7 @@ export default function LatestInsightsClient({ data }: LatestInsightsClientProps
                     </div>
 
                     {/* Title */}
-                    <h3 className="text-xl md:text-2xl lg:text-3xl font-bold text-white leading-tight">
+                    <h3 className="text-[18px] md:text-2xl lg:text-3xl font-bold text-white leading-tight">
                       {card.title}
                     </h3>
                   </div>

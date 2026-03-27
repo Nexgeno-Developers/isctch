@@ -46,7 +46,7 @@ export default function NewsletterForm({ placeholder, buttonText }: NewsletterFo
 
   return (
     <form className="w-full max-w-2xl mx-auto" onSubmit={handleSubmit} noValidate>
-      <div className="relative flex flex-col gap-2 sm:flex-row sm:items-center bg-white rounded-[50px] overflow-hidden p-2 sm:p-[10px]">
+      <div className="relative flex flex-col gap-2 sm:flex-row sm:items-center bg-white lg:rounded-[50px] rounded-[20px] overflow-hidden p-2 sm:p-[10px]">
         {/* Email Input */}
         <input
           type="email"

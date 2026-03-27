@@ -57,14 +57,14 @@ export default function ApproachClient({ data }: ApproachClientProps) {
             </div>
 
             {/* Title */}
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 leading-16">
+            <h2 className="text-[22px] md:text-4xl lg:text-5xl font-bold mb-4 leading-tight md:leading-16">
               <span className="text-black">{data.title}</span> 
              
                <span className="text-[#009FE8]"> {data.titleHighlight}</span>
             </h2>
 
             {/* Subtitle */}
-            <p className="text-black mb-8 text-lg">
+            <p className="text-black mb-8 text-[14px] md:text-lg leading-relaxed">
               {data.subtitle}
             </p>
 
@@ -103,7 +103,7 @@ export default function ApproachClient({ data }: ApproachClientProps) {
             {/* Current Question - Show Only One */}
             {currentQuestion && (
               <div className="mb-8">
-                <h3 className="text-xl font-semibold text-black mb-4">
+                <h3 className="lg:text-xl text-base font-semibold text-black mb-4">
                   Question {currentQuestionIndex + 1}: {currentQuestion.question}{' '}
                   <span className="text-sm font-thin">Question {currentQuestionIndex + 1} of {data.questions.length}</span>
                 </h3>
@@ -140,7 +140,7 @@ export default function ApproachClient({ data }: ApproachClientProps) {
               > */}
                 <Link
                 href='/'
-                className={`inline-flex items-center text-[#009FE8] font-semibold text-lg transition-all ${
+                className={`inline-flex items-center text-[#009FE8] font-semibold lg:text-lg text-base transition-all ${
                   allQuestionsAnswered
                     ? 'opacity-100 hover:text-[#007bb5]'
                     : 'opacity-50 cursor-not-allowed pointer-events-none'

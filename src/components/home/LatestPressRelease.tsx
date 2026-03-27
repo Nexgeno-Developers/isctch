@@ -19,8 +19,8 @@ export default async function LatestPressRelease() {
     <section className=" bg-gray-50 py-8 md:py-12">
       <div className="container mx-auto px-4">
         {/* Header */}
-        <div className="mb-8 md:mb-12">
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold">
+        <div className="mb-4 md:mb-12">
+          <h2 className="text-[22px] md:text-4xl lg:text-5xl font-bold">
             <span className="text-black">Latest</span>{' '}
             <span className="text-[#009FE8]">Press Release</span>
           </h2>
@@ -45,7 +45,7 @@ function PressReleaseCard({ card, imagePosition }: { card: PressReleaseCard; ima
     <div className="bg-[#EDF0F1] rounded-[50px] overflow-hidden duration-300 h-full flex flex-col">
       {/* Image - Top Section (for 2nd card) */}
       {imagePosition === 'top' && (
-        <div className="relative h-48 rounded-[50px] md:h-56 overflow-hidden">
+        <div className="relative aspect-[16/10] md:h-56 md:aspect-auto rounded-[50px] overflow-hidden">
           <Image
             src={card.image}
             alt={card.imageAlt}
@@ -57,7 +57,7 @@ function PressReleaseCard({ card, imagePosition }: { card: PressReleaseCard; ima
       )}
 
       {/* Content Section */}
-      <div className="px-8 py-12 flex-1 flex flex-col">
+      <div className="px-6 md:px-8 py-8 md:py-12 flex-1 flex flex-col">
         {/* Category */}
         <div className="mb-3">
           <span className="text-sm md:text-[14px] font-[400] text-[#000]">
@@ -66,7 +66,7 @@ function PressReleaseCard({ card, imagePosition }: { card: PressReleaseCard; ima
         </div>
 
         {/* Title */}
-        <h3 className="text-xl md:text-2xl font-semibold mb-4 flex-1 text-black">
+        <h3 className="text-[18px] md:text-2xl font-semibold mb-4 flex-1 text-black">
           {card.title}
         </h3>
 
@@ -94,7 +94,7 @@ function PressReleaseCard({ card, imagePosition }: { card: PressReleaseCard; ima
 
       {/* Image - Bottom Section (for 1st and 3rd cards) */}
       {imagePosition === 'bottom' && (
-        <div className="relative h-48 md:h-56 rounded-[50px] overflow-hidden">
+        <div className="relative aspect-[16/10] md:h-56 md:aspect-auto rounded-[50px] overflow-hidden">
           <Image
             src={card.image}
             alt={card.imageAlt}

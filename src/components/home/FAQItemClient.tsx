@@ -14,18 +14,18 @@ export default function FAQItemClient({ item }: FAQItemClientProps) {
     <div className="border-b border-gray-200 last:border-b-0">
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="cursor-pointer w-full py-6 flex items-center justify-between text-left group"
+        className="cursor-pointer w-full py-4 md:py-6 flex items-center justify-between text-left group"
         aria-expanded={isOpen}
       >
         {/* Question Text */}
-        <span className="text-lg md:text-xl font-medium text-black pr-4 flex-1">
+        <span className="text-base md:text-xl font-medium text-black pr-4 flex-1">
           {item.question}
         </span>
 
         {/* Plus/Minus Icon */}
-        <div className="flex-shrink-0 w-8 h-8 rounded-full bg-[#009FE8] flex items-center justify-center transition-transform group-hover:scale-110">
+        <div className="flex-shrink-0 lg:w-8 lg:h-8 w-6 h-6 rounded-full bg-[#009FE8] flex items-center justify-center transition-transform group-hover:scale-110">
           <svg
-            className={`w-5 h-5 text-white transition-transform duration-300 ${
+            className={`lg:w-5 lg:h-5 w-4 h-4 text-white transition-transform duration-300 ${
               isOpen ? 'rotate-45' : ''
             }`}
             fill="none"
@@ -44,7 +44,7 @@ export default function FAQItemClient({ item }: FAQItemClientProps) {
 
       {/* Answer */}
       {isOpen && (
-        <div className="pb-6 pl-0 pr-12">
+        <div className="pb-6 pl-0 lg:pr-12">
           {item.answer
             .split(/\n+/)
             .map((p) => p.trim())
@@ -52,7 +52,7 @@ export default function FAQItemClient({ item }: FAQItemClientProps) {
             .map((paragraph, idx, arr) => (
               <p
                 key={`${item.id}-p-${idx}`}
-                className={`text-black text-base leading-relaxed ${idx > 0 ? 'mt-4' : ''}`}
+                className={`text-black lg:text-base text-sm leading-relaxed ${idx > 0 ? 'mt-4' : ''}`}
               >
                 {paragraph}
               </p>
