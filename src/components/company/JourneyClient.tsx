@@ -35,11 +35,11 @@ export default function JourneyClient({ data }: JourneyClientProps) {
   const yearParts = splitYear(selectedYear);
 
   return (
-    <section className="py-16 md:py-24 bg-gray-50">
+    <section className="py-10 md:py-24 bg-gray-50">
       <div className="container mx-auto px-4">
         {/* Section Title */}
         <div className="text-center mb-12 md:mb-16">
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold">
+          <h2 className="text-[24px] md:text-4xl lg:text-5xl font-bold">
             <span className="text-[#009FE8]">{data.titleHighlight}</span>{' '}
             <span className="text-black">
               {data.title.replace(data.titleHighlight, '').trim()}
@@ -107,7 +107,7 @@ export default function JourneyClient({ data }: JourneyClientProps) {
 
           {/* Right Side - Image */}
           <div className="relative w-full">
-            <div className="relative rounded-[50px]">
+            <div className="relative rounded-[28px] md:rounded-[50px]">
               {selectedMilestone.image ? (
                 <div className="relative w-full">
                   <Image
@@ -115,13 +115,13 @@ export default function JourneyClient({ data }: JourneyClientProps) {
                     alt={selectedMilestone.imageAlt}
                     width={1200}
                     height={800}
-                    className="w-full h-auto object-cover transition-opacity duration-300 rounded-[50px]"
+                    className="w-full h-auto object-cover transition-opacity duration-300 rounded-[28px] md:rounded-[50px]"
                     priority={selectedYear === data.milestones[0]?.year}
                   />
                   {/* Caption Overlay */}
                   <div className="absolute bottom-4 left-4 right-4 md:bottom-[-30px] md:left-6 md:right-6">
-                    <div className="bg-gray-100 bg-opacity-90 backdrop-blur-sm rounded-[15px] text-center p-4 md:p-5 w-[70%] mx-auto">
-                      <p className="text-black text-base md:text-lg font-medium">
+                    <div className="bg-gray-100 bg-opacity-90 backdrop-blur-sm rounded-[15px] text-center p-3 md:p-5 w-[88%] md:w-[70%] mx-auto">
+                      <p className="text-black text-[14px] md:text-lg font-medium">
                         {selectedMilestone.caption}
                       </p>
                     </div>

@@ -107,15 +107,15 @@ export default function CompanyStatistics({ statistics }: CompanyStatisticsProps
   };
 
   return (
-    <section id="company-statistics" className="py-8 md:py-12 bg-gray-50">
+    <section id="company-statistics" className="py-4 md:py-12 bg-gray-50">
       <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-8">
           {statistics.map((stat) => (
             <div
               key={stat.id}
-              className="bg-[#EDF0F1] rounded-[50px] p-8 md:p-10 duration-300 flex flex-col text-start"
+              className="bg-[#EDF0F1] rounded-[28px] md:rounded-[50px] p-4 md:p-10 duration-300 flex flex-col text-start"
             >
-              <div className="mb-6 w-12 h-12 flex items-center justify-start">
+              <div className="mb-4 md:mb-6 w-12 h-12 flex items-center justify-start">
                 {stat.icon ? (
                   <Image
                     src={stat.icon}
@@ -131,14 +131,14 @@ export default function CompanyStatistics({ statistics }: CompanyStatisticsProps
                 )}
               </div>
 
-              <div className="mb-4">
-                <span className="text-4xl md:text-5xl lg:text-6xl font-bold text-[#000]">
+              <div className="mb-1 md:mb-4">
+                <span className="text-[28px] md:text-5xl lg:text-6xl font-bold text-[#000]">
                   {formatValue(stat)}
                 </span>
               </div>
 
               <div>
-                <p className="text-lg md:text-xl text-black font-medium">
+                <p className="text-[14px] md:text-xl text-black font-medium leading-relaxed">
                   {stat.label}
                 </p>
               </div>

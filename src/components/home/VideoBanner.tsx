@@ -219,7 +219,7 @@ export default function VideoBanner({ videoOnly = false }: VideoBannerProps = {}
         </section>
       )}
 
-      <section className="relative lg:min-h-[420px] min-h-[200px] h-auto md:h-screen md:min-h-0 overflow-hidden">
+      <section className="relative min-h-[200px] h-[200px] md:h-screen md:min-h-0 overflow-hidden">
       {/* Background Video/GIF - Autoplay - Hidden when video is playing */}
       {!isVideoPlaying && (
         <div className="absolute inset-0">
@@ -236,7 +236,7 @@ export default function VideoBanner({ videoOnly = false }: VideoBannerProps = {}
 
       {/* Content - Hidden when video is playing */}
       {!isVideoPlaying && !videoOnly && (
-        <div className="relative z-10 lg:min-h-[420px] min-h-[200px] md:h-full flex flex-col items-center px-4">
+        <div className="relative z-10 lg:min-h-[200px] min-h-[200px] md:h-full flex flex-col items-center px-4">
           {/* Play Button */}
           <div className="flex-1 flex items-center justify-center">
             <button
@@ -263,7 +263,7 @@ export default function VideoBanner({ videoOnly = false }: VideoBannerProps = {}
 
       {/* Play Button Only - When videoOnly is true */}
       {!isVideoPlaying && videoOnly && (
-        <div className="relative z-10 min-h-[420px] md:h-full flex items-center justify-center">
+        <div className="relative z-10 min-h-[200px] md:h-full flex items-center justify-center">
           <button
             onClick={() => {
               setPlayerReady(false);

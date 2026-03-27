@@ -85,7 +85,7 @@ export default async function AboutUsPage() {
 
         <VideoBanner videoOnly={true} />
 
-        <div className="pt-20">
+        <div className="pt-10 md:pt-20">
           <CallToAction />
         </div>
 

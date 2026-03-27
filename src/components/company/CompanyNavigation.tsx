@@ -18,24 +18,24 @@ export default function CompanyNavigation({ data, activePath }: CompanyNavigatio
     switch (iconType) {
       case 'info':
         return (
-         <Image src="/about_us_icon.svg" alt="Info" width={80} height={80} />
+         <Image src="/about_us_icon.svg" alt="Info" className='lg:w-20 w-8 lg:h-20 h-8' width={80} height={80} />
          
         );
       case 'globe':
         return (
-           <Image src="/vission_mission_icon.svg" alt="Info" width={80} height={80} />
+           <Image src="/vission_mission_icon.svg" alt="Info" className='lg:w-20 w-8 lg:h-20 h-8' width={80} height={80} />
         );
       case 'building':
         return (
-          <Image src="/goverment_icon.svg" alt="Info" width={80} height={80} />
+          <Image src="/goverment_icon.svg" alt="Info" className='lg:w-20 w-8 lg:h-20 h-8' width={80} height={80} />
         );
       case 'document':
         return (
-          <Image src="/media_kit_icon.svg" alt="Info" width={80} height={80} />
+          <Image src="/media_kit_icon.svg" alt="Info" className='lg:w-20 w-8 lg:h-20 h-8' width={80} height={80} />
         );
       case 'heart':
         return (
-          <Image src="/responsibility_icon.svg" alt="Info" width={80} height={80} />
+          <Image src="/responsibility_icon.svg" className='lg:w-20 w-8 lg:h-20 h-8' alt="Info" width={80} height={80} />
         );
       default:
         return null;
@@ -43,9 +43,9 @@ export default function CompanyNavigation({ data, activePath }: CompanyNavigatio
   };
 
   return (
-    <section className="py-12 md:py-16 bg-gray-50">
+    <section className="py-8 md:py-16 bg-gray-50">
       <div className="container mx-auto px-4">
-        <div className="flex flex-wrap justify-between">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-5 md:gap-8 lg:gap-6">
           {data.items.map((item) => {
             const isActive =
               activePath === item.href ||
@@ -55,10 +55,10 @@ export default function CompanyNavigation({ data, activePath }: CompanyNavigatio
               <Link
                 key={item.id}
                 href={item.href}
-                className="flex flex-col items-center group transition-transform hover:scale-105"
+                className="flex flex-col items-center group transition-transform hover:scale-105 min-w-0"
               >
                 {/* Circular Icon Container */}
-                <div className={`w-20 h-20 md:w-[180px] md:h-[180px] rounded-full flex items-center justify-center mb-3 transition-colors ${
+                <div className={`w-20 h-20 md:w-[180px] md:h-[180px] rounded-full flex items-center justify-center mb-2 md:mb-3 transition-colors ${
                   isActive
                     ? 'bg-[#009FE8]'
                     : 'bg-[#EDF0F1] '
@@ -69,7 +69,7 @@ export default function CompanyNavigation({ data, activePath }: CompanyNavigatio
                 </div>
                 
                 {/* Label */}
-                <span className={`text-sm md:text-[20px] font-medium text-center transition-colors ${
+                <span className={`text-[14px] md:text-[20px] font-medium text-center transition-colors leading-tight ${
                   isActive ? 'text-[#009FE8] font-semibold' : 'text-black'
                 }`}>
                   {item.label}
