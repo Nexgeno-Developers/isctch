@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import { fetchHeaderData } from '@/lib/api';
 import MobileMenu from './MobileMenu';
 import NavigationDropdown from './NavigationDropdown';
@@ -53,10 +54,14 @@ export default async function Header() {
           <Link href={headerData.logo.href} className="flex items-center min-w-0 shrink">
             {headerData.logo.image ? (
               <div className="flex items-center gap-3 min-w-0">
-                <img
+                <Image
                   src={headerData.logo.image}
                   alt={headerData.logo.text || 'Logo'}
-                  className="h-9 sm:h-11 md:h-24 w-auto max-h-24 max-w-[min(200px,55vw)] object-contain object-left"
+                  width={200}
+                  height={56}
+                  className="w-[200px] h-auto object-left"
+                  sizes="200px"
+                  priority
                 />
                 
               </div>
