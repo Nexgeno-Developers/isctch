@@ -114,10 +114,10 @@ export default function Hero({ data }: HeroProps) {
               />
             )}
             {/* Gradient Overlay */}
-            {/* <div
+            <div
               className="absolute inset-0 bg-gradient-to-r from-[#0E233C]/50 via-[#0C2F56]/50 to-[#087BFF]/10"
              
-            /> */}
+            />
             {/* Blur Effect - Reduced */}
             {/* <div className="absolute inset-0 backdrop-blur-[2px]" /> */}
           </div>
