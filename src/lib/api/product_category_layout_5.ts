@@ -1,10 +1,12 @@
-type ProductCategoryLayout3ApiResponse = {
+type ProductCategoryLayout5ApiResponse = {
   data?: {
     slug: string;
     title: string;
     layout?: string;
     meta?: {
       banner_images?: { url?: string };
+      /** Optional detail / product image in the content block below the top banner. */
+      hero_image?: { url?: string };
       short_summary_description?: string;
       hero_title?: string;
       hero_subtitle?: string;
@@ -53,13 +55,20 @@ export async function fetcProductCategoryLayout5Page(slug: string) {
     );
     if (!res.ok) return null;
 
-    const { data } = (await res.json()) as ProductCategoryLayout3ApiResponse;
+    const { data } = (await res.json()) as ProductCategoryLayout5ApiResponse;
     if (!data || data.layout !== 'product_category_detail_5') return null;
 
     const heroTitle = data.meta?.hero_title || data.title;
     const heroSubtitle = data.meta?.hero_subtitle || '';
     const heroDescription = stripHtml(data.meta?.hero_description);
     const featureDescription = data.meta?.short_summary_description || heroSubtitle;
+    const bannerTopUrl = data.meta?.banner_images?.url || undefined;
+    const heroContentImageUrl = data.meta?.hero_image?.url || undefined;
+    /** Top strip: CMS banner. Falls back to hero_image only if no banner. */
+    const topBackgroundUrl = bannerTopUrl || heroContentImageUrl;
+    /** Opticap block: prefer dedicated hero image, else same as banner. */
+    const opticapImageUrl =
+      heroContentImageUrl || bannerTopUrl || undefined;
 
     return {
       slug: data.slug,
@@ -73,8 +82,8 @@ export async function fetcProductCategoryLayout5Page(slug: string) {
           {
             type: 'heroWithBreadcrumbs',
             data: {
-              title: data.title,
-              backgroundImage: data.meta?.banner_images?.url || undefined,
+              title: heroTitle,
+              backgroundImage: topBackgroundUrl,
               breadcrumbs: [{ label: data.title }],
             },
           },
@@ -82,7 +91,7 @@ export async function fetcProductCategoryLayout5Page(slug: string) {
             type: 'opticapLanding',
             data: {
               title: heroTitle,
-              image: data.meta?.banner_images?.url || '/cap-solution_left-image.webp',
+              image: opticapImageUrl || '/cap-solution_left-image.webp',
               descriptionLines: [heroDescription || heroSubtitle].filter(Boolean),
               sizeFormatTitle: 'Size Format',
               sizeFormatText: heroSubtitle,
