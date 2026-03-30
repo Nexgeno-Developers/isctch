@@ -78,9 +78,10 @@ export type {
   CareerJob,
   PackagingPageData,
 };
-import { getHeaderData as fakeGetHeaderData, type HeaderData } from '@/fake-api/layout';
 import {
+  getHeaderData as fakeGetHeaderData,
   getFooterData as fakeGetFooterData,
+  type HeaderData,
   type FooterData,
   type SocialLink,
 } from '@/fake-api/layout';
@@ -379,26 +380,15 @@ export async function fetchPageData(slug: string): Promise<PageData | null> {
  * @returns Promise<HeaderData>
  */
 export async function fetchHeaderData(): Promise<HeaderData> {
-  if (useRealAPI()) {
-    // TODO: Replace with real API call when Laravel backend is ready
-    // const response = await fetch(`${API_CONFIG.baseUrl}${API_CONFIG.endpoints.header}`);
-    // if (!response.ok) throw new Error('Failed to fetch header data');
-    // return response.json();
-    throw new Error('Real API not yet implemented');
-  }
-  
   const fallback = await fakeGetHeaderData();
   const companyProfile = await fetchCompanyProfile();
-  if (!companyProfile) {
-    return fallback;
-  }
 
   return {
     ...fallback,
     logo: {
       ...fallback.logo,
-      text: companyProfile.name || fallback.logo.text,
-      image: companyProfile.logo || fallback.logo.image,
+      text: companyProfile?.name || fallback.logo.text,
+      image: companyProfile?.logo || fallback.logo.image,
     },
   };
 }

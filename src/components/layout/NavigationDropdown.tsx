@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import type { NavigationItem } from '@/fake-api/layout';
+import type { NavigationItem } from '@/lib/api/header';
 
 interface NavigationDropdownProps {
   item: NavigationItem;

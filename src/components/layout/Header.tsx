@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import { fetchHeaderData } from '@/lib/api';
+import { fetchHeaderData } from '@/lib/api/header';
 import MobileMenu from './MobileMenu';
 import NavigationDropdown from './NavigationDropdown';
 
@@ -91,7 +91,7 @@ export default async function Header() {
 
           {/* Mobile Menu */}
           <div className="md:hidden">
-            <MobileMenu />
+            <MobileMenu navigation={headerData.navigation} cta={headerData.cta} />
           </div>
         </div>
       </div>

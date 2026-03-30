@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { useState, useEffect, useId } from 'react';
-import type { NavigationItem } from '@/fake-api/layout';
+import type { NavigationItem } from '@/lib/api/header';
 
 interface MobileMenuClientProps {
   navigation: NavigationItem[];
