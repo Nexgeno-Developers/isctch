@@ -487,14 +487,9 @@ export async function fetchFooterData(): Promise<FooterData> {
  */
 export async function fetchProductData(slug: string): Promise<ProductData | null> {
   if (useRealAPI()) {
-    // TODO: Replace with real API call when Laravel backend is ready
-    // const response = await fetch(`${API_CONFIG.baseUrl}${API_CONFIG.endpoints.product(slug)}`);
-    // if (!response.ok) {
-    //   if (response.status === 404) return null;
-    //   throw new Error('Failed to fetch product data');
-    // }
-    // return response.json();
-    throw new Error('Real API not yet implemented');
+    // Real product endpoint is not implemented yet.
+    // Keep product pages functional by falling back to local product data.
+    return fakeGetProductData(slug);
   }
   
   return fakeGetProductData(slug);
