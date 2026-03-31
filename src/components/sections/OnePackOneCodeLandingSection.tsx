@@ -167,22 +167,10 @@ function FeatureBlock({
 export function OnePackOneCodeLandingSection({
   data,
 }: {
-  data: OnePackOneCodeLandingSectionData;
+  data: OnePackOneCodeLandingSectionData & { title?: string };
 }) {
-  const rawTitle = data.breadcrumbs?.[data.breadcrumbs.length - 1]?.label ?? 'One Pack One Code';
-  const { leftTitle, rightTitle } = (() => {
-    // Keep the same "OnePack OneCode" visual even if the API title changes.
-    const normalized = rawTitle.replace(/\s+/g, ' ').trim();
-    if (/one\s*pack/i.test(normalized) && /one\s*code/i.test(normalized)) {
-      return { leftTitle: 'OnePack', rightTitle: 'OneCode' };
-    }
-
-    const words = normalized.split(' ').filter(Boolean);
-    if (words.length >= 2) {
-      return { leftTitle: words.slice(0, -1).join(''), rightTitle: words[words.length - 1] };
-    }
-    return { leftTitle: normalized, rightTitle: '' };
-  })();
+  // Title comes from layout 4 API (product_category_detail_4)
+  const titleText = data.title || 'One Pack One Code';
 
   return (
     <>
@@ -202,8 +190,7 @@ export function OnePackOneCodeLandingSection({
 
       <div className="relative z-10 h-full flex items-center justify-center text-center px-4">
         <h1 className="text-[26px] md:text-5xl font-extrabold tracking-tight text-white leading-tight">
-          <span>{leftTitle}</span>
-          {rightTitle ? <span className="ml-2 text-[#009FE8]">{rightTitle}</span> : null}
+          {titleText}
         </h1>
       </div>
     </section>
@@ -257,15 +244,13 @@ export function OnePackOneCodeLandingSection({
       {data.hero.videoUrl ? <ProductCategoryVideoEmbed videoUrl={data.hero.videoUrl} /> : null}
     </section>
 
-    {data.connectSection && (
-      <ConnectTechnicalExperts
-        heading={data.connectSection.heading}
-        headingHighlight={data.connectSection.headingHighlight}
-        formTitle={data.connectSection.formTitle}
-        illustrationImage={data.connectSection.illustrationImage}
-        illustrationAlt={data.connectSection.illustrationAlt}
-      />
-    )}
+    <ConnectTechnicalExperts
+      heading=""
+      headingHighlight=""
+      formTitle={data.connectSection?.formTitle || 'Send Us A Message'}
+      illustrationImage={data.connectSection?.illustrationImage || '/connected_image.jpg'}
+      illustrationAlt={data.connectSection?.illustrationAlt || 'Connect with Technical Experts'}
+    />
 
       <div className="bg-gray-50 pt-12">
         <CallToAction />
