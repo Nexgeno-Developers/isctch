@@ -7,6 +7,7 @@ import VideoModalBanner from '../home/VideoModalBanner';
 import CallToAction from '../home/CallToAction';
 import NewsletterSubscription from '../home/NewsletterSubscription';
 import ConnectTechnicalExperts from '@/components/technical-services/ConnectTechnicalExperts';
+import { ProductCategoryVideoEmbed } from '@/components/sections/ProductCategoryVideoEmbed';
 
 function TabIcon({ id }: { id: OnePackOneCodeTabId }) {
   if (id === 'digital') {
@@ -232,10 +233,13 @@ export function OnePackOneCodeLandingSection({
         </div>
       </div>
 
-      <VideoModalBanner
-        videoUrl={data.hero.videoUrl || '/video2.mp4'}
-        backgroundImage={data.hero.backgroundImage}
-      />
+    
+
+    <section className="container mx-auto px-4 pb-24">
+      {data.hero.videoUrl ? (
+        <ProductCategoryVideoEmbed videoUrl={data.hero.videoUrl} />
+      ) : null}
+    </section>
 
     </section>
 
