@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useRef, useState } from 'react';
 import Image from 'next/image';
+import { getYouTubeEmbedUrl } from '@/lib/youtubeEmbed';
 
 export default function VideoModalBanner({
   videoUrl,
@@ -14,18 +15,35 @@ export default function VideoModalBanner({
   const [playerReady, setPlayerReady] = useState(false);
   const videoRef = useRef<HTMLVideoElement | null>(null);
 
+  const youtubeEmbedUrl = useMemo(() => {
+    return videoUrl ? getYouTubeEmbedUrl(videoUrl) : null;
+  }, [videoUrl]);
+
+  const isYoutube = Boolean(youtubeEmbedUrl);
+
+  const youtubeSrc = useMemo(() => {
+    // Match "layout 1" video behavior: use the same embed URL without extra query params.
+    return youtubeEmbedUrl;
+  }, [youtubeEmbedUrl]);
+
   useEffect(() => {
     if (!isOpen) return;
+    if (isYoutube) {
+      setPlayerReady(true);
+      return;
+    }
+
     setPlayerReady(false);
     // Autoplay when modal opens
     const v = videoRef.current;
     if (!v) return;
     const p = v.play();
     if (p) p.catch(() => undefined);
-  }, [isOpen]);
+  }, [isOpen, isYoutube]);
 
   useEffect(() => {
     if (isOpen) return;
+    if (isYoutube) return;
     // Stop video when modal closes
     const v = videoRef.current;
     if (!v) return;
@@ -107,20 +125,32 @@ export default function VideoModalBanner({
               </svg>
             </button>
 
-            <video
-              ref={videoRef}
-              src={videoUrl}
-              controls
-              autoPlay
-              playsInline
-              preload="auto"
-              onCanPlay={() => setPlayerReady(true)}
-              className="w-full h-auto max-h-[80vh] bg-black rounded-[18px] border border-white/20 shadow-[0_20px_80px_rgba(0,0,0,0.45)]"
-            />
-            {!playerReady && (
-              <div className="absolute inset-0 flex items-center justify-center rounded-[18px] bg-black/55">
-                <div className="h-10 w-10 rounded-full border-2 border-white/40 border-t-white animate-spin" />
-              </div>
+            {youtubeSrc ? (
+              <iframe
+                title="Video"
+                src={youtubeSrc}
+                className="w-full h-auto max-h-[80vh] bg-black rounded-[18px] border border-white/20 shadow-[0_20px_80px_rgba(0,0,0,0.45)]"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+              />
+            ) : (
+              <>
+                <video
+                  ref={videoRef}
+                  src={videoUrl}
+                  controls
+                  autoPlay
+                  playsInline
+                  preload="auto"
+                  onCanPlay={() => setPlayerReady(true)}
+                  className="w-full h-auto max-h-[80vh] bg-black rounded-[18px] border border-white/20 shadow-[0_20px_80px_rgba(0,0,0,0.45)]"
+                />
+                {!playerReady && (
+                  <div className="absolute inset-0 flex items-center justify-center rounded-[18px] bg-black/55">
+                    <div className="h-10 w-10 rounded-full border-2 border-white/40 border-t-white animate-spin" />
+                  </div>
+                )}
+              </>
             )}
           </div>
         </div>

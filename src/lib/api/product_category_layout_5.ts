@@ -88,7 +88,15 @@ export async function fetcProductCategoryLayout5Page(slug: string) {
     if (!res.ok) return null;
 
     const { data } = (await res.json()) as ProductCategoryLayout5ApiResponse;
-    if (!data || data.layout !== 'product_category_detail_5') return null;
+    // Backend sometimes returns legacy layout name `product_category_detail_3`
+    // for pages that still use the same UI sections.
+    if (
+      !data ||
+      (data.layout !== 'product_category_detail_5' &&
+        data.layout !== 'product_category_detail_3')
+    ) {
+      return null;
+    }
 
     const meta = data.meta || {};
     const heroTitle = meta.hero_title || data.title;
