@@ -1,3 +1,11 @@
+type MetaProductCategory = {
+  id: number;
+  title: string;
+  slug: string;
+  short_summary_icon?: { url?: string };
+  short_summary_description?: string;
+};
+
 type ProductCategoryLayout5ApiResponse = {
   data?: {
     slug: string;
@@ -5,12 +13,16 @@ type ProductCategoryLayout5ApiResponse = {
     layout?: string;
     meta?: {
       banner_images?: { url?: string };
-      /** Optional detail / product image in the content block below the top banner. */
       hero_image?: { url?: string };
+      short_summary_icon?: { url?: string };
       short_summary_description?: string;
       hero_title?: string;
       hero_subtitle?: string;
       hero_description?: string;
+      info_title?: string;
+      info_description?: string;
+      product_categories?: MetaProductCategory[];
+      video_url?: string;
     };
     seo?: {
       title?: string;
@@ -43,6 +55,26 @@ function buildPageApiPath(slug: string) {
     .join('/');
 }
 
+function slugToHref(slug: string) {
+  const s = slug.replace(/^\/+|\/+$/g, '');
+  return s ? `/${s}/` : '/';
+}
+
+function breadcrumbsForPage(slug: string, title: string) {
+  const segments = slug.split('/').filter(Boolean);
+  if (segments.length <= 1) {
+    return [{ label: title }];
+  }
+  const hub = segments[0];
+  return [
+    { label: 'Packaging', href: `/${hub}/` },
+    { label: title },
+  ];
+}
+
+/**
+ * product_category_detail_5 → single UI: OpticapLandingSection + hero.
+ */
 export async function fetcProductCategoryLayout5Page(slug: string) {
   const baseUrl = process.env.COMPANY_API_BASE_URL;
   if (!baseUrl) return null;
@@ -58,17 +90,32 @@ export async function fetcProductCategoryLayout5Page(slug: string) {
     const { data } = (await res.json()) as ProductCategoryLayout5ApiResponse;
     if (!data || data.layout !== 'product_category_detail_5') return null;
 
-    const heroTitle = data.meta?.hero_title || data.title;
-    const heroSubtitle = data.meta?.hero_subtitle || '';
-    const heroDescription = stripHtml(data.meta?.hero_description);
-    const featureDescription = data.meta?.short_summary_description || heroSubtitle;
-    const bannerTopUrl = data.meta?.banner_images?.url || undefined;
-    const heroContentImageUrl = data.meta?.hero_image?.url || undefined;
-    /** Top strip: CMS banner. Falls back to hero_image only if no banner. */
+    const meta = data.meta || {};
+    const heroTitle = meta.hero_title || data.title;
+    const heroSubtitle = meta.hero_subtitle || '';
+    const heroDescriptionHtml = meta.hero_description?.trim() || '';
+    const heroDescriptionPlain = stripHtml(meta.hero_description);
+    const infoDescriptionHtml = meta.info_description?.trim() || '';
+
+    const bannerTopUrl = meta.banner_images?.url || undefined;
+    const heroContentImageUrl = meta.hero_image?.url || undefined;
     const topBackgroundUrl = bannerTopUrl || heroContentImageUrl;
-    /** Opticap block: prefer dedicated hero image, else same as banner. */
-    const opticapImageUrl =
-      heroContentImageUrl || bannerTopUrl || undefined;
+    const mainImageUrl = heroContentImageUrl || bannerTopUrl || undefined;
+
+    const productFeaturesPills = (meta.product_categories || []).map((item) => ({
+      id: String(item.id),
+      label: item.title,
+      href: slugToHref(item.slug),
+    }));
+
+    const descriptionLines = heroDescriptionHtml
+      ? []
+      : [heroDescriptionPlain || meta.short_summary_description || ''].filter(Boolean);
+
+    const videoUrl =
+      meta.video_url?.trim() ||
+      process.env.NEXT_PUBLIC_PRODUCT_CATEGORY_VIDEO_URL?.trim() ||
+      undefined;
 
     return {
       slug: data.slug,
@@ -84,20 +131,23 @@ export async function fetcProductCategoryLayout5Page(slug: string) {
             data: {
               title: heroTitle,
               backgroundImage: topBackgroundUrl,
-              breadcrumbs: [{ label: data.title }],
+              breadcrumbs: breadcrumbsForPage(data.slug, data.title),
             },
           },
           {
             type: 'opticapLanding',
             data: {
               title: heroTitle,
-              image: opticapImageUrl || '/cap-solution_left-image.webp',
-              descriptionLines: [heroDescription || heroSubtitle].filter(Boolean),
+              image: mainImageUrl,
+              descriptionLines,
+              descriptionHtml: heroDescriptionHtml || undefined,
               sizeFormatTitle: 'Size Format',
-              sizeFormatText: heroSubtitle,
-              productFeaturesTitle: 'Product Features',
-              productFeaturesPills: [],
-              productFeaturesDescription: featureDescription || '',
+              sizeFormatText: heroDescriptionHtml ? '' : heroSubtitle,
+              productFeaturesTitle: meta.info_title,
+              productFeaturesPills,
+              productFeaturesDescription: stripHtml(meta.info_description) || '',
+              productFeaturesDescriptionHtml: infoDescriptionHtml || undefined,
+              videoUrl,
             },
           },
         ],
@@ -107,4 +157,3 @@ export async function fetcProductCategoryLayout5Page(slug: string) {
     return null;
   }
 }
-

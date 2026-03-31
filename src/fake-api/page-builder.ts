@@ -265,6 +265,8 @@ export type OpticapLandingSectionData = {
   title: string;
   image: string;
   descriptionLines: string[];
+  /** CMS HTML (e.g. hero_description); when set, used instead of descriptionLines. */
+  descriptionHtml?: string;
   sizeFormatTitle: string;
   sizeFormatText: string;
   productFeaturesTitle: string;
@@ -274,6 +276,9 @@ export type OpticapLandingSectionData = {
     href: string;
   }>;
   productFeaturesDescription: string;
+  /** CMS HTML for info_description. */
+  productFeaturesDescriptionHtml?: string;
+  videoUrl?: string;
   connectSection?: {
     heading: string;
     headingHighlight: string;
@@ -919,7 +924,7 @@ export async function getSubCategoryPage(
           },
         },
         {
-          type: 'waterpakLanding',
+          type: 'opticapLanding',
           data: {
             title: 'WaterPak',
             image: '/waterpak_image_left.webp',
@@ -930,14 +935,14 @@ export async function getSubCategoryPage(
             sizeFormatTitle: 'Size Format',
             sizeFormatText:
               'Can be used in Roll-fed format, Sleeve-fed format, and Sustainable product',
-            availableInTitle: 'WaterPak is Available In',
-            availableIn: [
-              { id: 'sleeve-fed', label: 'Sleeve Fed', href: '/aseptic-pakaging-solutions/sleeve-fed/' },
-              { id: 'roll-fed', label: 'Roll Fed', href: '/aseptic-pakaging-solutions/roll-fed/' },
-              { id: 'one-pack-one-code', label: 'OnePack OneCode', href: '/aseptic-pakaging-solutions/one-pack-one-code/' },
-              { id: 'sustainable-product', label: 'Sustainable product', href: '/aseptic-pakaging-solutions/sustainable-solutions/' },
+            productFeaturesTitle: 'WaterPak is Available In',
+            productFeaturesPills: [
+              { id: 'sleeve-fed', label: 'Sleeve Fed', href: '/sleeve-fed/' },
+              { id: 'roll-fed', label: 'Roll Fed', href: '/roll-fed/' },
+              { id: 'one-pack-one-code', label: 'OnePack OneCode', href: '/one-pack-one-code/' },
+              { id: 'sustainable-product', label: 'Sustainable product', href: '/sustainable-solutions/' },
             ],
-            availableInDescription:
+            productFeaturesDescription:
               'WaterPak offers exceptional flexibility, available in Roll-Fed, Sleeve-Fed, and Sustainable Product formats to support your brand&apos;s eco-commitment. Enhance your packaging further with OnePack OneCode integration to strengthen digital consumer engagement, making WaterPak a smart choice that prioritizes quality integrity and environmental responsibility.',
             connectSection: {
               heading: 'Connect with Our Technical Experts',
@@ -975,7 +980,7 @@ export async function getSubCategoryPage(
           },
         },
         {
-          type: 'metallicLnkLanding',
+          type: 'opticapLanding',
           data: {
             title: 'Metallic Ink',
             image: '/waterpak_image_left_2.webp',
@@ -986,9 +991,9 @@ export async function getSubCategoryPage(
             sizeFormatText: 'can be used in Roll-fed format and Sleeve-fed format',
             productFeaturesTitle: 'Product Features',
             productFeaturesPills: [
-              { id: 'sleeve-fed', label: 'Sleeve Fed', href: '/aseptic-pakaging-solutions/sleeve-fed/' },
-              { id: 'roll-fed', label: 'Roll Fed', href: '/aseptic-pakaging-solutions/roll-fed/' },
-              { id: 'one-pack-one-code', label: 'OnePack OneCode', href: '/aseptic-pakaging-solutions/one-pack-one-code/' },
+              { id: 'sleeve-fed', label: 'Sleeve Fed', href: '/sleeve-fed/' },
+              { id: 'roll-fed', label: 'Roll Fed', href: '/roll-fed/' },
+              { id: 'one-pack-one-code', label: 'OnePack OneCode', href: '/one-pack-one-code/' },
             ],
             productFeaturesDescription:
               'Deliver a premium and exclusive feel to your brand with Metallic Ink, providing a luxurious shimmering effect on every corner of your packaging. This feature is fully compatible with both Roll-Fed and Sleeve-Fed formats, offering complete flexibility for your production lines. Elevate your shelf presence and strengthen consumer interaction through OnePack OneCode technology integration, setting a new standard for elegant and innovative packaging.',
@@ -1041,12 +1046,12 @@ export async function getSubCategoryPage(
             sizeFormatText: 'can be used in Roll-fed format, Sleeve-fed format, and Sustainable product',
             productFeaturesTitle: 'Product Features',
             productFeaturesPills: [
-              { id: 'sleeve-fed', label: 'Sleeve Fed', href: '/aseptic-pakaging-solutions/sleeve-fed/' },
-              { id: 'roll-fed', label: 'Roll Fed', href: '/aseptic-pakaging-solutions/roll-fed/' },
-              { id: 'one-pack-one-code', label: 'OnePack OneCode', href: '/aseptic-pakaging-solutions/one-pack-one-code/' },
-              { id: 'waterpak', label: 'Waterpak', href: '/aseptic-pakaging-solutions/waterpak/' },
-              { id: 'metallic-lnk', label: 'Metallic Ink', href: '/aseptic-pakaging-solutions/metallic-lnk/' },
-              { id: 'sustainable-product', label: 'Sustainable Product', href: '/aseptic-pakaging-solutions/sustainable-solutions/' },
+              { id: 'sleeve-fed', label: 'Sleeve Fed', href: '/sleeve-fed/' },
+              { id: 'roll-fed', label: 'Roll Fed', href: '/roll-fed/' },
+              { id: 'one-pack-one-code', label: 'OnePack OneCode', href: '/one-pack-one-code/' },
+              { id: 'waterpak', label: 'Waterpak', href: '/aseptic-packaging-solutions/waterpak/' },
+              { id: 'metallic-lnk', label: 'Metallic Ink', href: '/aseptic-packaging-solutions/metallic-lnk/' },
+              { id: 'sustainable-product', label: 'Sustainable Product', href: '/sustainable-solutions/' },
             ],
             productFeaturesDescription:
               'Opticap27 can be seamlessly implemented across Roll-fed, Sleeve-fed, and WaterPak packaging formats, while fully supporting Sustainable Product variants for your green business vision. Add premium visual value with Metallic Ink accents and optimize digital connectivity through OnePackOneCode integration—making Opticap27 a crucial component for packaging that is safer, more functional, and truly modern.',
