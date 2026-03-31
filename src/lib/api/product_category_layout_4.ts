@@ -104,6 +104,7 @@ export async function fetcProductCategoryLayout4Page(slug: string) {
     ] as const;
 
     const heroNames = meta.hero_items?.name || [];
+    const heroIcons = meta.hero_items?.icon || [];
     const defaultLabels: Record<(typeof tabOrder)[number], string> = {
       digital: 'Digital Co-Printing',
       lottery: 'Lottery Activities',
@@ -115,6 +116,7 @@ export async function fetcProductCategoryLayout4Page(slug: string) {
     const tabs = tabOrder.map((id, idx) => ({
       id,
       label: heroNames[idx] || defaultLabels[id],
+      iconUrl: heroIcons[idx]?.url,
     }));
 
     const infoTitles = meta.info_items?.title || [];

@@ -178,6 +178,8 @@ export type OnePackOneCodeTabId = 'digital' | 'lottery' | 'marketing' | 'loyalty
 export type OnePackOneCodeTab = {
   id: OnePackOneCodeTabId;
   label: string;
+  /** Optional icon from backend (hero_items.icon[].url). */
+  iconUrl?: string;
 };
 
 export type OnePackOneCodeAccordionItem = {
