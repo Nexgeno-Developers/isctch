@@ -25,7 +25,7 @@ type ProductLayoutApiResponse = {
       }>;
       relation_type?: string;
       relation_featured?: string;
-      sizes_formats?: string;
+      sizes_formats?: unknown;
       features_items?: {
         image?: Array<Media>;
         title?: string[];
@@ -76,15 +76,40 @@ function mediaUrl(media?: Media) {
   return typeof url === 'string' && url.trim() ? url : undefined;
 }
 
-function parseSizesFormats(raw?: string) {
-  if (!raw) return [] as string[];
-  try {
-    const parsed = JSON.parse(raw) as { variants?: unknown };
-    if (!Array.isArray(parsed.variants)) return [];
-    return parsed.variants.filter((v): v is string => typeof v === 'string' && !!v.trim());
-  } catch {
-    return [];
-  }
+function parseSizesFormats(raw: unknown): {
+  variants: string[];
+  imagesByVariant: Record<string, string>;
+} {
+  if (!raw) return { variants: [], imagesByVariant: {} };
+
+  const parsed: unknown =
+    typeof raw === 'string'
+      ? (() => {
+          try {
+            return JSON.parse(raw);
+          } catch {
+            return null;
+          }
+        })()
+      : raw;
+
+  if (!parsed || typeof parsed !== 'object') return { variants: [], imagesByVariant: {} };
+
+  const obj = parsed as { variants?: unknown; image?: unknown };
+  const variants = Array.isArray(obj.variants)
+    ? obj.variants.filter((v): v is string => typeof v === 'string' && !!v.trim())
+    : [];
+
+  const images = Array.isArray(obj.image) ? obj.image : [];
+  const imagesByVariant: Record<string, string> = {};
+
+  variants.forEach((variant, index) => {
+    const media = images[index] as Media;
+    const url = mediaUrl(media);
+    if (url) imagesByVariant[variant] = url;
+  });
+
+  return { variants, imagesByVariant };
 }
 
 function parseSpecifications(raw?: string) {
@@ -138,7 +163,7 @@ function mapApiDataToProduct(data: NonNullable<ProductLayoutApiResponse['data']>
   const shortSummaryImage = mediaUrl(meta.short_summary_image);
 
   const industries = meta.product_info_items?.industry || [];
-  const sizes = parseSizesFormats(meta.sizes_formats);
+  const sizeFormats = parseSizesFormats(meta.sizes_formats);
   const parsedSpecifications = parseSpecifications(meta.specifications);
 
   const featureTitles = meta.features_items?.title || [];
@@ -164,7 +189,9 @@ function mapApiDataToProduct(data: NonNullable<ProductLayoutApiResponse['data']>
     // For API-driven products we only show the main image; no application tabs.
     applicationImages: undefined,
     applications: undefined,
-    sizes: sizes.length ? sizes : undefined,
+    sizes: sizeFormats.variants.length ? sizeFormats.variants : undefined,
+    sizeFormatImages:
+      Object.keys(sizeFormats.imagesByVariant).length > 0 ? sizeFormats.imagesByVariant : undefined,
     quickSpecifications: parsedSpecifications.length ? parsedSpecifications : undefined,
     productVideo: meta.video_url?.trim() || undefined,
     compatibilityDescription: stripHtml(meta.compatibility_description) || undefined,
