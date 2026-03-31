@@ -90,11 +90,10 @@ export function RollFedCatalogSection({ data }: { data: RollFedCatalogSectionPro
           <ProductGrid title={data.premiumTitle} products={data.premiumProducts} />
         )}
       </div>
-    </section>
 
     {data.videoUrl ? <ProductCategoryVideoEmbed videoUrl={data.videoUrl} /> : null}
 
-    
+    </section>
 
     <CallToAction />
     <NewsletterSubscription />
