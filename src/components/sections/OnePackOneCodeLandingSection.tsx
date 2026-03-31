@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import type { OnePackOneCodeLandingSectionData, OnePackOneCodeTabId } from '@/fake-api/page-builder';
 import Image from 'next/image';
+import Link from 'next/link';
 import VideoModalBanner from '../home/VideoModalBanner';
 import CallToAction from '../home/CallToAction';
 import NewsletterSubscription from '../home/NewsletterSubscription';
@@ -57,6 +58,73 @@ function TabIcon({ id }: { id: OnePackOneCodeTabId }) {
       <circle cx="12" cy="12" r="8" stroke="currentColor" fill="none" strokeWidth="1.8" />
       <path d="M12 8v4l3 2" stroke="currentColor" fill="none" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
+  );
+}
+
+function HeroBreadcrumbs({
+  items,
+}: {
+  items: OnePackOneCodeLandingSectionData['breadcrumbs'];
+}) {
+  const safeItems = items || [];
+
+  return (
+    <nav
+      className="flex items-center gap-2 text-sm md:text-base"
+      aria-label="Breadcrumb"
+    >
+      <Link
+        href="/"
+        className="text-black hover:text-black transition-colors"
+        aria-label="Home"
+      >
+        <svg
+          className="w-5 h-5"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
+          />
+        </svg>
+      </Link>
+
+      {safeItems.map((item, index) => {
+        const isLast = index === safeItems.length - 1;
+        return (
+          <span key={`${item.label}-${index}`} className="flex items-center gap-2">
+            <svg
+              className="w-4 h-4 text-black"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M9 5l7 7-7 7"
+              />
+            </svg>
+
+            {item.href && !isLast ? (
+              <Link
+                href={item.href}
+                className="text-black hover:text-black transition-colors"
+              >
+                {item.label}
+              </Link>
+            ) : (
+              <span className="text-black">{item.label}</span>
+            )}
+          </span>
+        );
+      })}
+    </nav>
   );
 }
 
@@ -183,22 +251,38 @@ export function OnePackOneCodeLandingSection({
 
   return (
     <>
-    <section className="bg-gray-50 lg:pt-20 pt-10">
-      <div className="container mx-auto px-4">
-        <div className="text-center">
-          <h1 className="text-[26px] md:text-5xl font-extrabold tracking-tight text-black">
-            <span>{leftTitle}</span>
-            {rightTitle ? (
-              <span className="relative inline-block text-[#009FE8] ml-2">
-                {rightTitle}
-              
-              </span>
-            ) : null}
-          </h1>
-        </div>
+    <section className="relative overflow-hidden bg-[#0c1f45] h-[260px] md:h-[420px]">
+      <div className="absolute inset-0">
+        {data.hero.backgroundImage ? (
+          <img
+            src={data.hero.backgroundImage}
+            alt=""
+            className="absolute inset-0 w-full h-full object-cover"
+          />
+        ) : (
+          <div className="absolute inset-0 w-full h-full bg-gray-800" />
+        )}
+        <div className="absolute inset-0 bg-[#0e233c52] opacity-90" />
+      </div>
 
+      <div className="relative z-10 h-full flex items-center justify-center text-center px-4">
+        <h1 className="text-[26px] md:text-5xl font-extrabold tracking-tight text-white leading-tight">
+          <span>{leftTitle}</span>
+          {rightTitle ? <span className="ml-2 text-[#009FE8]">{rightTitle}</span> : null}
+        </h1>
+      </div>
+    </section>
+
+    <section className="bg-white">
+      <div className="container mx-auto px-4 py-4">
+        <HeroBreadcrumbs items={data.breadcrumbs} />
+      </div>
+    </section>
+
+    <section className="bg-gray-50 pb-12">
+      <div className="container mx-auto px-4">
         {/* Tabs */}
-        <div className="mt-8 pb-6 grid grid-cols-2 sm:grid-cols-5 gap-3 md:gap-4">
+        <div className="mt-10 pb-6 grid grid-cols-2 sm:grid-cols-5 gap-3 md:gap-4">
           {data.tabs.map((tab) => {
             const isActive = tab.id === activeTab;
             return (
@@ -235,10 +319,7 @@ export function OnePackOneCodeLandingSection({
 
     
 
-      {data.hero.videoUrl ? (
-        <ProductCategoryVideoEmbed videoUrl={data.hero.videoUrl} />
-      ) : null}
-
+      {data.hero.videoUrl ? <ProductCategoryVideoEmbed videoUrl={data.hero.videoUrl} /> : null}
     </section>
 
     {data.connectSection && (

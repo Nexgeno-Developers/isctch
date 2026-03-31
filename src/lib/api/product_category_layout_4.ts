@@ -50,6 +50,19 @@ function buildPageApiPath(slug: string) {
     .join('/');
 }
 
+function breadcrumbsForPage(slug: string, title: string) {
+  const segments = slug.split('/').filter(Boolean);
+  if (segments.length <= 1) {
+    return [{ label: title }];
+  }
+
+  const hub = segments[0];
+  return [
+    { label: 'Packaging', href: `/${hub}/` },
+    { label: title },
+  ];
+}
+
 function extractBulletTextFromHtml(html?: string) {
   if (!html) return [];
 
@@ -136,7 +149,7 @@ export async function fetcProductCategoryLayout4Page(slug: string) {
           {
             type: 'onePackOneCodeLanding',
             data: {
-              breadcrumbs: [{ label: data.title }],
+              breadcrumbs: breadcrumbsForPage(data.slug, data.title),
               tabs,
               activeTabId: 'digital',
               hero: {
