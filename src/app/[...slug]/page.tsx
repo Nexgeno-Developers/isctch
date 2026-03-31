@@ -17,6 +17,7 @@ import { PageBuilder } from '@/components/pageBuilder/PageBuilder';
 import { fetchProductCategoriesPage } from '@/lib/api/product_categories';
 import { fetcProductCategoryLayout5Page } from '@/lib/api/product_category_layout_5';
 import { fetcProductCategoryLayout1Page } from '@/lib/api/product_category_layout_1';
+import { fetcProductCategoryLayout2Page } from '@/lib/api/product_category_layout_2';
 import { fetcProductCategoryLayout4Page } from '@/lib/api/product_category_layout_4';
 import { buildApiMetadata } from '@/components/seo/buildApiMetadata';
 import { getSubCategoryPage } from '@/fake-api/page-builder';
@@ -89,6 +90,15 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       slug: layout4Page.slug,
       title: layout4Page.title,
       seo: layout4Page.seo,
+    });
+  }
+
+  const layout2Page = await fetcProductCategoryLayout2Page(fullSlug);
+  if (layout2Page) {
+    return buildApiMetadata({
+      slug: layout2Page.slug,
+      title: layout2Page.title,
+      seo: layout2Page.seo,
     });
   }
 
@@ -198,6 +208,19 @@ export default async function DynamicPage({ params }: PageProps) {
         pageContext={{
           mainCategory: PACKAGING_MAIN,
           subCategory: layout4Page.slug,
+        }}
+      />
+    );
+  }
+
+  const layout2Page = await fetcProductCategoryLayout2Page(fullSlug);
+  if (layout2Page) {
+    return (
+      <PageBuilder
+        pageData={layout2Page.pageData as any}
+        pageContext={{
+          mainCategory: PACKAGING_MAIN,
+          subCategory: layout2Page.slug,
         }}
       />
     );
