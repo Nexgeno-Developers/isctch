@@ -88,7 +88,7 @@ export default function ProductSpecificationsClient({ product }: ProductSpecific
                 onSwiper={(s) => {
                   swiperRef.current = s;
                 }}
-                className="w-full"
+                className="w-full product-image-swiper"
               >
                 {slides.map((url, idx) => (
                   <SwiperSlide key={`${url}-${idx}`}>
@@ -104,6 +104,18 @@ export default function ProductSpecificationsClient({ product }: ProductSpecific
                   </SwiperSlide>
                 ))}
               </Swiper>
+
+              {/* Hide Swiper's default nav buttons; we use custom ones above. */}
+              <style
+                dangerouslySetInnerHTML={{
+                  __html: `
+                    .product-image-swiper .swiper-button-next,
+                    .product-image-swiper .swiper-button-prev {
+                      display: none !important;
+                    }
+                  `,
+                }}
+              />
 
               {/* Swiper navigation buttons */}
               <button
