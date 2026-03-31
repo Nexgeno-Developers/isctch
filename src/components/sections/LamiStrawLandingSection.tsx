@@ -6,6 +6,7 @@ import type { LamiStrawIconId, LamiStrawLandingSectionData } from '@/fake-api/pa
 import type { ReactElement } from 'react';
 import NewsletterSubscription from '../home/NewsletterSubscription';
 import CallToAction from '../home/CallToAction';
+import { ProductCategoryVideoEmbed } from './ProductCategoryVideoEmbed';
 
 function IconBase({ children }: { children: React.ReactNode }) {
   return (
@@ -137,8 +138,10 @@ export function LamiStrawLandingSection({
           </div>
         </div>
       </div>
-    </section>
 
+    {data.videoUrl ? <ProductCategoryVideoEmbed videoUrl={data.videoUrl} /> : null}
+
+    </section>
 
     <CallToAction />
     <NewsletterSubscription />

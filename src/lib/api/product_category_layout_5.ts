@@ -88,13 +88,7 @@ export async function fetcProductCategoryLayout5Page(slug: string) {
     if (!res.ok) return null;
 
     const { data } = (await res.json()) as ProductCategoryLayout5ApiResponse;
-    // Backend sometimes returns legacy layout name `product_category_detail_3`
-    // for pages that still use the same UI sections.
-    if (
-      !data ||
-      (data.layout !== 'product_category_detail_5' &&
-        data.layout !== 'product_category_detail_3')
-    ) {
+    if (!data || data.layout !== 'product_category_detail_5') {
       return null;
     }
 
