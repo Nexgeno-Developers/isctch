@@ -1,8 +1,26 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import type { RollFedCatalogProduct, RollFedCatalogSectionData } from '@/fake-api/page-builder';
+import { ProductCategoryVideoEmbed } from '@/components/sections/ProductCategoryVideoEmbed';
 import CallToAction from '../home/CallToAction';
 import NewsletterSubscription from '../home/NewsletterSubscription';
+
+type RollFedCatalogProduct = {
+  id: string;
+  slug: string;
+  title: string;
+  sizes: string;
+  image?: string;
+};
+
+type RollFedCatalogSectionPropsData = {
+  eyebrow?: string;
+  intro: string;
+  videoUrl?: string;
+  standardTitle: string;
+  standardProducts: RollFedCatalogProduct[];
+  premiumTitle: string;
+  premiumProducts: RollFedCatalogProduct[];
+};
 
 function ProductCard({ product }: { product: RollFedCatalogProduct }) {
   return (
@@ -54,7 +72,7 @@ function ProductGrid({
   );
 }
 
-export function RollFedCatalogSection({ data }: { data: RollFedCatalogSectionData }) {
+export function RollFedCatalogSection({ data }: { data: RollFedCatalogSectionPropsData }) {
   return (
     <>
     <section className="bg-gray-50 py-10 md:py-14">
@@ -66,12 +84,19 @@ export function RollFedCatalogSection({ data }: { data: RollFedCatalogSectionDat
           {data.intro}
         </p>
 
+
         <ProductGrid title={data.standardTitle} products={data.standardProducts} />
         {data.premiumTitle && data.premiumProducts.length > 0 && (
           <ProductGrid title={data.premiumTitle} products={data.premiumProducts} />
         )}
       </div>
     </section>
+
+    <section className='container mx-auto px-4 pb-24'>
+    {data.videoUrl ? <ProductCategoryVideoEmbed videoUrl={data.videoUrl} /> : null}
+
+    </section>
+    
 
     <CallToAction />
     <NewsletterSubscription />

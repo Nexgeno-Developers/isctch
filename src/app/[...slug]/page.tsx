@@ -16,6 +16,7 @@ import GovernanceManagementPage from '@/components/GovernanceManagementPage';
 import { PageBuilder } from '@/components/pageBuilder/PageBuilder';
 import { fetchProductCategoriesPage } from '@/lib/api/product_categories';
 import { fetcProductCategoryLayout5Page } from '@/lib/api/product_category_layout_5';
+import { fetcProductCategoryLayout1Page } from '@/lib/api/product_category_layout_1';
 import { buildApiMetadata } from '@/components/seo/buildApiMetadata';
 import { getSubCategoryPage } from '@/fake-api/page-builder';
 
@@ -69,6 +70,15 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       slug: layout5Page.slug,
       title: layout5Page.title,
       seo: layout5Page.seo,
+    });
+  }
+
+  const layout1Page = await fetcProductCategoryLayout1Page(fullSlug);
+  if (layout1Page) {
+    return buildApiMetadata({
+      slug: layout1Page.slug,
+      title: layout1Page.title,
+      seo: layout1Page.seo,
     });
   }
 
@@ -152,6 +162,19 @@ export default async function DynamicPage({ params }: PageProps) {
         pageContext={{
           mainCategory: PACKAGING_MAIN,
           subCategory: layout5Page.slug,
+        }}
+      />
+    );
+  }
+
+  const layout1Page = await fetcProductCategoryLayout1Page(fullSlug);
+  if (layout1Page) {
+    return (
+      <PageBuilder
+        pageData={layout1Page.pageData as any}
+        pageContext={{
+          mainCategory: PACKAGING_MAIN,
+          subCategory: layout1Page.slug,
         }}
       />
     );
