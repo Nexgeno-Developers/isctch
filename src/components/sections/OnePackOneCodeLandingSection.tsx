@@ -235,11 +235,9 @@ export function OnePackOneCodeLandingSection({
 
     
 
-    <section className="container mx-auto px-4 pb-24">
       {data.hero.videoUrl ? (
         <ProductCategoryVideoEmbed videoUrl={data.hero.videoUrl} />
       ) : null}
-    </section>
 
     </section>
 

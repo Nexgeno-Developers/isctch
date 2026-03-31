@@ -8,7 +8,7 @@ export function ProductCategoryVideoEmbed({ videoUrl }: Props) {
   return (
     <div className="mt-12 w-full mx-auto">
       {embedUrl ? (
-        <div className="relative w-full aspect-video rounded-2xl overflow-hidden bg-black/5 ring-1 ring-black/10 shadow-sm">
+        <div className="relative w-full aspect-video overflow-hidden">
           <iframe
             title="Video"
             src={embedUrl}

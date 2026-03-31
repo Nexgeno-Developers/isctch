@@ -92,10 +92,8 @@ export function RollFedCatalogSection({ data }: { data: RollFedCatalogSectionPro
       </div>
     </section>
 
-    <section className='container mx-auto px-4 pb-24'>
     {data.videoUrl ? <ProductCategoryVideoEmbed videoUrl={data.videoUrl} /> : null}
 
-    </section>
     
 
     <CallToAction />
