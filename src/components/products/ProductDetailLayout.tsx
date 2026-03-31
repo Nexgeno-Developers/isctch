@@ -47,8 +47,8 @@ export default function ProductDetailLayout({
             ) : (
               <div className="absolute inset-0 bg-gray-800" />
             )}
-            <div className="absolute inset-0 bg-[#0e233c52] opacity-90" />
-            <div className="absolute inset-0 backdrop-blur-sm" />
+            {/* <div className="absolute inset-0 bg-[#0e233c52] opacity-90" />
+            <div className="absolute inset-0 backdrop-blur-sm" /> */}
           </div>
 
           <div className="relative z-10 h-full flex flex-col">
