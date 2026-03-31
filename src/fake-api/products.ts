@@ -52,6 +52,7 @@ export interface ProductData {
   applicationImages?: Record<string, string>; // Images for each application (e.g., { 'DAIRY': '/image1.jpg', 'JUICE': '/image2.jpg' })
   productVideo?: string; // Product video URL (e.g., '/product-dt-video-new.gif')
   sizes?: string[]; // Available sizes (e.g., ['200ml', '250ml', '500ml', '1000ml'])
+  sizeFormatImages?: Record<string, string>; // Map size label -> image URL (API sizes_formats)
   quickSpecifications?: Array<{
     label: string;
     value: string;
