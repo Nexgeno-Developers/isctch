@@ -7,6 +7,8 @@ import ProductAccessories from './ProductAccessories';
 import SimilarProducts from './SimilarProducts';
 import TechnicalConsultationCTA from './TechnicalConsultationCTA';
 import NewsletterSubscription from '@/components/home/NewsletterSubscription';
+import { ProductCategoryVideoEmbed } from '@/components/sections/ProductCategoryVideoEmbed';
+import { getYouTubeEmbedUrl } from '@/lib/youtubeEmbed';
 
 interface ProductDetailLayoutProps {
   product: ProductData;
@@ -47,8 +49,8 @@ export default function ProductDetailLayout({
             ) : (
               <div className="absolute inset-0 bg-gray-800" />
             )}
-            <div className="absolute inset-0 bg-[#0e233c52] opacity-90" />
-            <div className="absolute inset-0 backdrop-blur-sm" />
+            {/* <div className="absolute inset-0 bg-[#0e233c52] opacity-90" />
+            <div className="absolute inset-0 backdrop-blur-sm" /> */}
           </div>
 
           <div className="relative z-10 h-full flex flex-col">
@@ -108,24 +110,28 @@ export default function ProductDetailLayout({
         {product.productVideo && (
           <section className="bg-gray-50 pt-4 pb-4 md:pt-8 md:pb-12">
             <div className="container mx-auto px-4">
-              <div className="relative w-full aspect-video rounded-[25px] overflow-hidden bg-gray-100">
-                {product.productVideo.endsWith('.gif') ? (
-                  <img
-                    src={product.productVideo}
-                    alt={`${product.title} video`}
-                    className="w-full h-full object-cover"
-                  />
-                ) : (
-                  <video
-                    src={product.productVideo}
-                    autoPlay
-                    loop
-                    muted
-                    playsInline
-                    className="w-full h-full object-cover"
-                  />
-                )}
-              </div>
+              {getYouTubeEmbedUrl(product.productVideo) ? (
+                <ProductCategoryVideoEmbed videoUrl={product.productVideo} />
+              ) : (
+                <div className="relative w-full aspect-video rounded-[25px] overflow-hidden bg-gray-100">
+                  {product.productVideo.endsWith('.gif') ? (
+                    <img
+                      src={product.productVideo}
+                      alt={`${product.title} video`}
+                      className="w-full h-full object-cover"
+                    />
+                  ) : (
+                    <video
+                      src={product.productVideo}
+                      autoPlay
+                      loop
+                      muted
+                      playsInline
+                      className="w-full h-full object-cover"
+                    />
+                  )}
+                </div>
+              )}
             </div>
           </section>
         )}

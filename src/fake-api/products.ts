@@ -56,6 +56,7 @@ export interface ProductData {
     label: string;
     value: string;
   }>;
+  compatibilityDescription?: string; // Plain text from API compatibility_description
   compatibleWith?: string[]; // Compatible systems/equipment
   applications?: string[]; // Application categories (e.g., ['DAIRY', 'JUICE', 'PLANT-BASED', 'LIQUID FOODS'])
   productFeatures?: Array<{

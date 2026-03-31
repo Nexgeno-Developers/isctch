@@ -80,31 +80,39 @@ export default function ProductSpecifications({ product }: ProductSpecifications
             )}
 
             {/* Compatible With */}
-            {product.compatibleWith && product.compatibleWith.length > 0 && (
+            {(product.compatibilityDescription ||
+              (product.compatibleWith && product.compatibleWith.length > 0)) && (
               <div>
                 <h3 className="text-xl md:text-2xl font-semibold text-black mb-4">
                   Compatible With
                 </h3>
-                <ul className="space-y-2">
-                  {product.compatibleWith.map((item, index) => (
-                    <li key={index} className="flex items-start">
-                      <svg
-                        className="w-5 h-5 text-[#009FE8] mr-2 flex-shrink-0 mt-1"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M5 13l4 4L19 7"
-                        />
-                      </svg>
-                      <span className="text-base md:text-lg text-black">{item}</span>
-                    </li>
-                  ))}
-                </ul>
+                {product.compatibilityDescription && (
+                  <p className="text-base md:text-lg text-black mb-4 leading-relaxed">
+                    {product.compatibilityDescription}
+                  </p>
+                )}
+                {product.compatibleWith && product.compatibleWith.length > 0 && (
+                  <ul className="space-y-2">
+                    {product.compatibleWith.map((item, index) => (
+                      <li key={index} className="flex items-start">
+                        <svg
+                          className="w-5 h-5 text-[#009FE8] mr-2 flex-shrink-0 mt-1"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M5 13l4 4L19 7"
+                          />
+                        </svg>
+                        <span className="text-base md:text-lg text-black">{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                )}
               </div>
             )}
           </div>

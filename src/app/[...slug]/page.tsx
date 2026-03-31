@@ -21,6 +21,7 @@ import { fetcProductCategoryLayout2Page } from '@/lib/api/product_category_layou
 import { fetcProductCategoryLayout3Page } from '@/lib/api/product_category_layout_3';
 import { fetcProductCategoryLayout4Page } from '@/lib/api/product_category_layout_4';
 import { fetchProductData } from '@/lib/api';
+import { fetchProductLayoutPage } from '@/lib/api/product_layout_products';
 import { buildApiMetadata } from '@/components/seo/buildApiMetadata';
 import { getSubCategoryPage } from '@/fake-api/page-builder';
 import ProductDetailLayout from '@/components/products/ProductDetailLayout';
@@ -115,6 +116,42 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   }
   
   const productSlug = slug?.[slug.length - 1];
+  const productApiPage = await fetchProductLayoutPage(fullSlug);
+  if (productApiPage) {
+    const canonicalUrl = productApiPage.seo.canonical_url
+      ? getCanonicalUrl(productApiPage.seo.canonical_url)
+      : getCanonicalUrl(`/${fullSlug}`);
+
+    return {
+      title: productApiPage.seo.meta_title,
+      description: productApiPage.seo.meta_description,
+      alternates: {
+        canonical: canonicalUrl,
+      },
+      openGraph: {
+        title: productApiPage.seo.og_title || productApiPage.seo.meta_title,
+        description: productApiPage.seo.og_description || productApiPage.seo.meta_description,
+        images: productApiPage.seo.og_image ? [productApiPage.seo.og_image] : [productApiPage.image],
+        url: canonicalUrl,
+        type: 'website',
+      },
+      twitter: {
+        card:
+          (productApiPage.seo.twitter_card as
+            | 'summary_large_image'
+            | 'summary'
+            | 'player'
+            | 'app') || 'summary_large_image',
+        title: productApiPage.seo.twitter_title || productApiPage.seo.meta_title,
+        description:
+          productApiPage.seo.twitter_description || productApiPage.seo.meta_description,
+        images: productApiPage.seo.twitter_image
+          ? [productApiPage.seo.twitter_image]
+          : [productApiPage.image],
+      },
+    };
+  }
+
   if (productSlug) {
     const productData = await fetchProductData(productSlug);
     if (productData) {
@@ -256,6 +293,11 @@ export default async function DynamicPage({ params }: PageProps) {
         }}
       />
     );
+  }
+
+  const productApiPage = await fetchProductLayoutPage(fullSlug);
+  if (productApiPage) {
+    return <ProductDetailLayout product={productApiPage} slugPath={fullSlug} />;
   }
 
   const layout2Page = await fetcProductCategoryLayout2Page(fullSlug);
