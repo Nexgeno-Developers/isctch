@@ -16,6 +16,7 @@ type ProductLayoutApiResponse = {
       product_info_description?: string;
       compatibility_description?: string;
       specifications?: string;
+      video_url?: string;
       product_info_items?: {
         industry?: string[];
       };
@@ -165,6 +166,7 @@ function mapApiDataToProduct(data: NonNullable<ProductLayoutApiResponse['data']>
     applications: undefined,
     sizes: sizes.length ? sizes : undefined,
     quickSpecifications: parsedSpecifications.length ? parsedSpecifications : undefined,
+    productVideo: meta.video_url?.trim() || undefined,
     compatibilityDescription: stripHtml(meta.compatibility_description) || undefined,
     productFeatures: featureTitles
       .map((featureTitle, index) => ({
