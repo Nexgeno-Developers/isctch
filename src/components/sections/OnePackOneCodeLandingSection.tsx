@@ -4,8 +4,6 @@ import { useState } from 'react';
 import type { OnePackOneCodeLandingSectionData } from '@/lib/api/product_category_layout_4';
 import Image from 'next/image';
 import Link from 'next/link';
-import CallToAction from '../home/CallToAction';
-import NewsletterSubscription from '../home/NewsletterSubscription';
 import ConnectTechnicalExperts from '@/components/technical-services/ConnectTechnicalExperts';
 import { ProductCategoryVideoEmbed } from '@/components/sections/ProductCategoryVideoEmbed';
 
@@ -252,11 +250,7 @@ export function OnePackOneCodeLandingSection({
       illustrationAlt={data.connectSection?.illustrationAlt || 'Connect with Technical Experts'}
     />
 
-      <div className="bg-gray-50 pt-12">
-        <CallToAction />
-      </div>
-
-      <NewsletterSubscription />
+      {/* CTA + Newsletter are rendered by PageBuilder sections */}
 
     </>
   );

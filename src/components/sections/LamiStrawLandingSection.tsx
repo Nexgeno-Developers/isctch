@@ -4,8 +4,6 @@ import Link from 'next/link';
 import Image from 'next/image';
 import type { LamiStrawIconId, LamiStrawLandingSectionData } from '@/lib/api/product_category_layout_3';
 import type { ReactElement } from 'react';
-import NewsletterSubscription from '../home/NewsletterSubscription';
-import CallToAction from '../home/CallToAction';
 import { ProductCategoryVideoEmbed } from './ProductCategoryVideoEmbed';
 
 function IconBase({ children }: { children: React.ReactNode }) {
@@ -142,9 +140,6 @@ export function LamiStrawLandingSection({
     {data.videoUrl ? <ProductCategoryVideoEmbed videoUrl={data.videoUrl} /> : null}
 
     </section>
-
-    <CallToAction />
-    <NewsletterSubscription />
     </>
   );
 }
