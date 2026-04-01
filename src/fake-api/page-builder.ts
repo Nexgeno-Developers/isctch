@@ -171,6 +171,7 @@ export type LamiStrawLandingSectionData = {
   title: string;
   descriptionLines: string[];
   cards: LamiStrawCardItem[];
+  videoUrl?: string;
 };
 
 export type OnePackOneCodeTabId = 'digital' | 'lottery' | 'marketing' | 'loyalty' | 'traceability';
