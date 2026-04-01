@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import Image from 'next/image';
-import type { LamiStrawIconId, LamiStrawLandingSectionData } from '@/fake-api/page-builder';
+import type { LamiStrawIconId, LamiStrawLandingSectionData } from '@/lib/api/product_category_layout_3';
 import type { ReactElement } from 'react';
 import NewsletterSubscription from '../home/NewsletterSubscription';
 import CallToAction from '../home/CallToAction';

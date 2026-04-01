@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import type { OpticapLandingSectionData } from '@/fake-api/page-builder';
+import type { OpticapLandingSectionData } from '@/lib/api/product_category_layout_5';
 import ConnectTechnicalExperts from '@/components/technical-services/ConnectTechnicalExperts';
 import { ProductCategoryVideoEmbed } from '@/components/sections/ProductCategoryVideoEmbed';
 import CallToAction from '../home/CallToAction';

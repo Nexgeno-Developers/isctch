@@ -37,6 +37,45 @@ type ProductCategoryLayout4ApiResponse = {
   };
 };
 
+export type OnePackOneCodeTabId = 'digital' | 'lottery' | 'marketing' | 'loyalty' | 'traceability';
+
+export type OnePackOneCodeTab = {
+  id: OnePackOneCodeTabId;
+  label: string;
+  iconUrl?: string;
+};
+
+export type OnePackOneCodeFeature = {
+  id: string;
+  number: string;
+  title: string;
+  bullets: string[];
+  image?: string;
+};
+
+export type OnePackOneCodeLandingSectionData = {
+  breadcrumbs: Array<{ label: string; href?: string }>;
+  tabs: OnePackOneCodeTab[];
+  activeTabId: OnePackOneCodeTabId;
+  hero: {
+    backgroundImage?: string;
+    videoUrl?: string;
+  };
+  accessPoints: {
+    title: string;
+    description: string;
+    items: Array<{ id: string; title: string; content: string }>;
+  };
+  connectSection?: {
+    heading: string;
+    headingHighlight: string;
+    formTitle: string;
+    illustrationImage: string;
+    illustrationAlt: string;
+  };
+  features: OnePackOneCodeFeature[];
+};
+
 function stripHtml(value?: string) {
   if (!value) return '';
   return value.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();

@@ -42,6 +42,31 @@ type ProductCategoryLayout5ApiResponse = {
   };
 };
 
+export type OpticapLandingSectionData = {
+  title: string;
+  image: string;
+  descriptionLines: string[];
+  descriptionHtml?: string;
+  sizeFormatTitle: string;
+  sizeFormatText: string;
+  productFeaturesTitle: string;
+  productFeaturesPills: Array<{
+    id: string;
+    label: string;
+    href: string;
+  }>;
+  productFeaturesDescription: string;
+  productFeaturesDescriptionHtml?: string;
+  videoUrl?: string;
+  connectSection?: {
+    heading: string;
+    headingHighlight: string;
+    formTitle: string;
+    illustrationImage: string;
+    illustrationAlt: string;
+  };
+};
+
 function stripHtml(value?: string) {
   if (!value) return '';
   return value.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();

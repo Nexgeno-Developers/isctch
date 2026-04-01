@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import type { OnePackOneCodeLandingSectionData } from '@/fake-api/page-builder';
+import type { OnePackOneCodeLandingSectionData } from '@/lib/api/product_category_layout_4';
 import Image from 'next/image';
 import Link from 'next/link';
 import CallToAction from '../home/CallToAction';
