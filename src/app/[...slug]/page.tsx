@@ -24,6 +24,8 @@ import { fetchProductData } from '@/lib/api';
 import { fetchProductLayoutPage } from '@/lib/api/product_layout_products';
 import { fetchSustainabilityLayout1Page } from '@/lib/api/sustainability_layout_1';
 import { fetchSustainabilityLayout2Page } from '@/lib/api/sustainability_layout_2';
+import { fetchMarketingServicesLayoutPage } from '@/lib/api/marketing_services_layout';
+import MarketingServicesLayoutPage from '@/components/pages/MarketingServicesLayoutPage';
 import { buildApiMetadata } from '@/components/seo/buildApiMetadata';
 import { getSubCategoryPage } from '@/fake-api/page-builder';
 import ProductDetailLayout from '@/components/products/ProductDetailLayout';
@@ -41,7 +43,7 @@ interface PageProps {
 
 const PACKAGING_MAIN = 'packaging' as const;
 
-const componentMap: Record<string, ComponentType<{ data: DynamicPageData }>> = {
+const componentMap: Record<string, ComponentType<any>> = {
   lamira: LamiraPage,
   green: GreenEffortsPage,
   certifications: CertificationsAchievementsPage,
@@ -132,6 +134,15 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       slug: sustainability2Page.slug,
       title: sustainability2Page.title,
       seo: sustainability2Page.seo,
+    });
+  }
+
+  const marketingServicesLayout = await fetchMarketingServicesLayoutPage(fullSlug);
+  if (marketingServicesLayout) {
+    return buildApiMetadata({
+      slug: marketingServicesLayout.slug,
+      title: marketingServicesLayout.title,
+      seo: marketingServicesLayout.seo || {},
     });
   }
   
@@ -313,6 +324,11 @@ export default async function DynamicPage({ params }: PageProps) {
         }}
       />
     );
+  }
+
+  const marketingServicesLayout = await fetchMarketingServicesLayoutPage(fullSlug);
+  if (marketingServicesLayout) {
+    return <MarketingServicesLayoutPage data={marketingServicesLayout.page} />;
   }
 
   const productApiPage = await fetchProductLayoutPage(fullSlug);

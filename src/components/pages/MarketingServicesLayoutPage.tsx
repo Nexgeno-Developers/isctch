@@ -1,0 +1,191 @@
+import CallToAction from '@/components/home/CallToAction';
+import NewsletterSubscription from '@/components/home/NewsletterSubscription';
+import { HeroWithBreadcrumbsSection } from '@/components/sections/HeroWithBreadcrumbsSection';
+import Image from 'next/image';
+import Link from 'next/link';
+
+export type MarketingHighlight = {
+  id: string;
+  icon?: string;
+  value?: string;
+  title: string;
+};
+
+export type MarketingServiceListItem = {
+  id: string;
+  title: string;
+  description?: string;
+  image?: string;
+  imageAlt?: string;
+  href: string;
+};
+
+export type MarketingServicesLayoutPageData = {
+  title: string;
+  heroBackgroundImage?: string;
+  heroTitle: string;
+  heroDescriptionHtml?: string;
+  introImage?: string;
+  introImageAlt?: string;
+  highlightsTitle?: string;
+  highlights: MarketingHighlight[];
+  servicesHeading?: string;
+  services: MarketingServiceListItem[];
+};
+
+export default function MarketingServicesLayoutPage({
+  data,
+}: {
+  data: MarketingServicesLayoutPageData;
+}) {
+  return (
+    <main className="min-h-screen bg-gray-50">
+      <HeroWithBreadcrumbsSection
+        data={{
+          title: data.title,
+          backgroundImage: data.heroBackgroundImage,
+          breadcrumbs: [{ label: data.title }],
+        }}
+      />
+
+      {/* Landing (intro + highlights) */}
+      <section className="bg-gray-50 py-12 md:py-16 lg:py-20">
+        <div className="container mx-auto px-4">
+          <div className="grid grid-cols-1 lg:grid-cols-[40%_50%] gap-[80px] items-center">
+            <div className="w-full">
+              {data.introImage ? (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img
+                  src={data.introImage}
+                  alt={data.introImageAlt || data.heroTitle}
+                  className="w-full h-auto object-cover rounded-[32px]"
+                />
+              ) : null}
+            </div>
+
+            <div className="text-center lg:text-left">
+              <h2 className="text-3xl md:text-4xl lg:text-5xl text-black font-bold mb-6 md:mb-6 leading-[70px]">
+                {data.heroTitle}
+              </h2>
+              {data.heroDescriptionHtml ? (
+                <div
+                  className="text-base text-black leading-relaxed mb-4 md:mb-6"
+                  dangerouslySetInnerHTML={{ __html: data.heroDescriptionHtml }}
+                />
+              ) : null}
+            </div>
+          </div>
+
+          {(data.highlightsTitle || data.highlights.length > 0) && (
+            <div className="bg-gray-50 pt-10 md:pt-20">
+              {data.highlightsTitle && (
+                <div className="text-center mb-8">
+                  <h3 className="text-3xl md:text-4xl text-black lg:text-5xl font-bold mb-6 md:mb-2 text-center">
+                    {data.highlightsTitle}
+                  </h3>
+                </div>
+              )}
+
+              {data.highlights.length > 0 && (
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
+                  {data.highlights.map((stat) => (
+                    <div
+                      key={stat.id}
+                      className="bg-[#EDF0F1] rounded-[50px] p-8 md:p-10 duration-300 flex flex-col text-start"
+                    >
+                      {stat.icon ? (
+                        <div className="mb-6 w-12 h-12 flex items-center justify-start">
+                          <Image
+                            src={stat.icon}
+                            alt={stat.title}
+                            width={64}
+                            height={64}
+                            className="w-full h-full object-contain"
+                          />
+                        </div>
+                      ) : null}
+
+                      {stat.value ? (
+                        <p className="text-3xl md:text-4xl lg:text-5xl font-bold text-[#000] mb-2">
+                          {stat.value}
+                        </p>
+                      ) : null}
+
+                      <p className="text-lg md:text-xl text-black font-medium">
+                        {stat.title}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          )}
+        </div>
+      </section>
+
+      {/* Services list (full width split rows) */}
+      {data.services.length > 0 && (
+        <section className="bg-gray-50 pb-8 md:pb-14">
+          <div className="container mx-auto px-4">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6 md:mb-8 text-black text-center">
+              Are You Looking For?
+            </h2>
+          </div>
+
+          <div className="bg-gray-50">
+            {data.services.map((item, index) => {
+              const isEven = index % 2 === 0;
+              return (
+                <div key={item.id}>
+                  <div
+                    className={`grid grid-cols-1 md:grid-cols-2 gap-0 items-stretch ${
+                      !isEven
+                        ? 'md:[&>div:first-child]:order-2 md:[&>div:last-child]:order-1'
+                        : ''
+                    }`}
+                  >
+                    <div className="flex items-center justify-center p-8 md:p-12 lg:p-16 xl:p-16">
+                      <div className="max-w-xl">
+                        <h3 className="text-lg md:text-xl lg:text-[36px] font-bold text-[#0E233C] mb-3">
+                          {item.title}
+                        </h3>
+                        {item.description ? (
+                          <p className="text-base text-black leading-relaxed mb-4 md:mb-6">
+                            {item.description}
+                          </p>
+                        ) : null}
+                        <Link
+                          href={item.href}
+                          className="inline-flex items-center text-sm md:text-[16px] font-bold text-[#009FE8] hover:text-[#0077B6] transition-colors"
+                        >
+                          Find out more <span className="ml-2 text-lg leading-none">→</span>
+                        </Link>
+                      </div>
+                    </div>
+
+                    <div className="relative min-h-[320px] md:min-h-[520px]">
+                      {item.image ? (
+                        // eslint-disable-next-line @next/next/no-img-element
+                        <img
+                          src={item.image}
+                          alt={item.imageAlt || item.title}
+                          className="absolute inset-0 w-full h-full object-cover"
+                        />
+                      ) : (
+                        <div className="absolute inset-0 bg-gray-200" />
+                      )}
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </section>
+      )}
+
+      <CallToAction />
+      <NewsletterSubscription />
+    </main>
+  );
+}
+
