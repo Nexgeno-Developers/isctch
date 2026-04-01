@@ -21,9 +21,9 @@ export default async function NewsletterSubscription() {
       }}
     >
       {/* Dark Blue Overlay */}
-      {/* <div className="absolute inset-0 bg-[#0E233CE5]" /> */}
+      <div className="absolute inset-0 bg-[#0E233CE5]" />
       {/* Blur Effect */}
-      {/* <div className="absolute inset-0 backdrop-blur-sm" /> */}
+      <div className="absolute inset-0 backdrop-blur-sm" />
 
       {/* Content */}
       <div className="relative z-10 container mx-auto px-4">
