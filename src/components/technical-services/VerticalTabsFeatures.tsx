@@ -53,15 +53,15 @@ export default function VerticalTabsFeatures({ features }: VerticalTabsFeaturesP
                   <div className="absolute inset-0 bg-[#EDF0F1]" />
                 ) : (
                   <div className="absolute inset-0">
-                    <Image
+                    {/* <Image
                       src={feature.image}
                       alt={feature.imageAlt}
                       fill
                       className="object-cover"
                       sizes="(max-width: 768px) 16.66vw, (max-width: 1024px) 16.66vw, 16.66vw"
-                    />
+                    /> */}
                     {/* Blue Overlay */}
-                    <div className="absolute inset-0 bg-[#0E233C] opacity-80" />
+                    <div className="absolute inset-0 bg-[#009FE8] opacity-80" />
                   </div>
                 )}
 

@@ -30,6 +30,8 @@ import { fetchMarketingServiceDetailLayoutPage } from '@/lib/api/marketing_servi
 import MarketingServiceDetailLayoutPage from '@/components/pages/MarketingServiceDetailLayoutPage';
 import { fetchTechnicalServicesLayoutPage } from '../../lib/api/technical_services_layout';
 import TechnicalServicesLayoutPage from '../../components/pages/TechnicalServicesLayoutPage';
+import { fetchTechnicalServiceDetailLayoutPage } from '../../lib/api/technical_service_detail_layout';
+import TechnicalServiceDetailLayoutPage from '../../components/pages/TechnicalServiceDetailLayoutPage';
 import { buildApiMetadata } from '@/components/seo/buildApiMetadata';
 import { getSubCategoryPage } from '@/fake-api/page-builder';
 import ProductDetailLayout from '@/components/products/ProductDetailLayout';
@@ -168,6 +170,15 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     });
   }
   
+  const technicalServiceDetailLayout = await fetchTechnicalServiceDetailLayoutPage(fullSlug);
+  if (technicalServiceDetailLayout) {
+    return buildApiMetadata({
+      slug: technicalServiceDetailLayout.slug,
+      title: technicalServiceDetailLayout.title,
+      seo: technicalServiceDetailLayout.seo || {},
+    });
+  }
+
   const productSlug = slug?.[slug.length - 1];
   const productApiPage = await fetchProductLayoutPage(fullSlug);
   if (productApiPage) {
@@ -361,6 +372,11 @@ export default async function DynamicPage({ params }: PageProps) {
   const technicalServicesLayout = await fetchTechnicalServicesLayoutPage(fullSlug);
   if (technicalServicesLayout) {
     return <TechnicalServicesLayoutPage data={technicalServicesLayout.page} />;
+  }
+
+  const technicalServiceDetailLayout = await fetchTechnicalServiceDetailLayoutPage(fullSlug);
+  if (technicalServiceDetailLayout) {
+    return <TechnicalServiceDetailLayoutPage data={technicalServiceDetailLayout.page} />;
   }
 
   const productApiPage = await fetchProductLayoutPage(fullSlug);
