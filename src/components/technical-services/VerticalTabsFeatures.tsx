@@ -48,18 +48,22 @@ export default function VerticalTabsFeatures({ features }: VerticalTabsFeaturesP
                     : 'w-[12%]'
                 }`}
               >
-                {/* Background Image */}
-                <div className="absolute inset-0">
-                  <Image
-                    src={feature.image}
-                    alt={feature.imageAlt}
-                    fill
-                    className="object-cover"
-                    sizes="(max-width: 768px) 16.66vw, (max-width: 1024px) 16.66vw, 16.66vw"
-                  />
-                  {/* Blue Overlay */}
-                  <div className="absolute inset-0 bg-[#0E233C] opacity-80" />
-                </div>
+                {/* Background */}
+                {isHovered ? (
+                  <div className="absolute inset-0 bg-[#EDF0F1]" />
+                ) : (
+                  <div className="absolute inset-0">
+                    <Image
+                      src={feature.image}
+                      alt={feature.imageAlt}
+                      fill
+                      className="object-cover"
+                      sizes="(max-width: 768px) 16.66vw, (max-width: 1024px) 16.66vw, 16.66vw"
+                    />
+                    {/* Blue Overlay */}
+                    <div className="absolute inset-0 bg-[#0E233C] opacity-80" />
+                  </div>
+                )}
 
                 {/* Content */}
                 <div className={`relative z-10 h-full flex flex-col transition-all duration-500 ${
@@ -67,13 +71,25 @@ export default function VerticalTabsFeatures({ features }: VerticalTabsFeaturesP
                 }`}>
                   {isHovered ? (
                     /* Expanded View - Full Details */
-                    <div className="flex-1 flex flex-col justify-end">
-                      <h3 className="text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-4">
+                    <div className="flex-1 flex flex-col">
+                      <div className="relative w-full aspect-[4/3] rounded-[18px] overflow-hidden bg-gray-200">
+                        <Image
+                          src={feature.image}
+                          alt={feature.imageAlt}
+                          fill
+                          className="object-cover"
+                          sizes="(max-width: 768px) 90vw, (max-width: 1024px) 40vw, 30vw"
+                        />
+                      </div>
+
+                      <div className="mt-6 flex-1 flex flex-col">
+                      <h3 className="text-xl md:text-2xl lg:text-3xl font-bold text-black mb-3">
                         {feature.title}
                       </h3>
-                      <p className="text-white text-base md:text-lg leading-relaxed">
+                      <p className="text-black text-base md:text-base leading-relaxed">
                         {feature.description}
                       </p>
+                      </div>
                     </div>
                   ) : (
                     /* Compact View - Vertical Text */
