@@ -5,10 +5,10 @@ import NewsletterSubscription from '@/components/home/NewsletterSubscription';
 import NgoMembershipMapSection from '@/components/components/NgoMembershipMapSection';
 import NgoCircularFutureSection from '@/components/components/NgoCircularFutureSection';
 import NgoAllianceCardsSection from '@/components/components/NgoAllianceCardsSection';
-import type { DynamicPageData } from '@/fake-api/dynamic-pages';
+import type { NgosPageData } from '@/lib/api/sustainability_layout_5';
 
 export interface NgosPageProps {
-  data: DynamicPageData;
+  data: NgosPageData;
 }
 
 export default function NgosPage({ data }: NgosPageProps) {
@@ -18,18 +18,15 @@ export default function NgosPage({ data }: NgosPageProps) {
         data={{
           title: data.title,
           backgroundImage:
-            typeof data.heroBackgroundImage === 'string' ? data.heroBackgroundImage : '/about_banner.jpg',
+            typeof data.heroBackgroundImage === 'string'
+              ? data.heroBackgroundImage
+              : '/about_banner.jpg',
         }}
       />
 
       <section className="bg-gray-50">
         <div className="container mx-auto px-4 py-4">
-          <Breadcrumbs
-            items={[
-           
-              { label: data.title },
-            ]}
-          />
+          <Breadcrumbs items={[{ label: data.title }]} />
         </div>
       </section>
 
@@ -37,7 +34,7 @@ export default function NgosPage({ data }: NgosPageProps) {
         <NgoMembershipMapSection data={data.ngosMembershipMapSection} />
       ) : null}
 
-{data.ngosAllianceCardsSection ? (
+      {data.ngosAllianceCardsSection ? (
         <NgoAllianceCardsSection data={data.ngosAllianceCardsSection} />
       ) : null}
 
@@ -45,11 +42,10 @@ export default function NgosPage({ data }: NgosPageProps) {
         <NgoCircularFutureSection data={data.ngosCircularFutureSection} />
       ) : null}
 
-     
-<div className="bg-gray-50 pt-12">
-<CallToAction />
-</div>
-    
+      <div className="bg-gray-50 pt-12">
+        <CallToAction />
+      </div>
+
       <NewsletterSubscription />
     </main>
   );

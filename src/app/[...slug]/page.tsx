@@ -26,6 +26,7 @@ import { fetchSustainabilityLayout1Page } from '@/lib/api/sustainability_layout_
 import { fetchSustainabilityLayout2Page } from '@/lib/api/sustainability_layout_2';
 import { fetchSustainabilityLayout3Page } from '@/lib/api/sustainability_layout_3';
 import { fetchSustainabilityLayout4Page } from '@/lib/api/sustainability_layout_4';
+import { fetchSustainabilityLayout5Page } from '@/lib/api/sustainability_layout_5';
 import { fetchMarketingServicesLayoutPage } from '@/lib/api/marketing_services_layout';
 import MarketingServicesLayoutPage from '@/components/pages/MarketingServicesLayoutPage';
 import { fetchMarketingServiceDetailLayoutPage } from '@/lib/api/marketing_service_detail_layout';
@@ -205,6 +206,15 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       slug: sustainability4Page.slug,
       title: sustainability4Page.title,
       seo: sustainability4Page.seo,
+    });
+  }
+
+  const sustainability5Page = await fetchSustainabilityLayout5Page(fullSlug);
+  if (sustainability5Page) {
+    return buildApiMetadata({
+      slug: sustainability5Page.slug,
+      title: sustainability5Page.title,
+      seo: sustainability5Page.seo,
     });
   }
 
@@ -520,6 +530,11 @@ export default async function DynamicPage({ params }: PageProps) {
   if (sustainability4Page) {
     return <CertificationsAchievementsPage data={sustainability4Page.pageData} />;
   }
+
+  const sustainability5Page = await fetchSustainabilityLayout5Page(fullSlug);
+  if (sustainability5Page) {
+    return <NgosPage data={sustainability5Page.pageData} />;
+  }
   
   const productSlug = slug?.[slug.length - 1];
   if (productSlug) {
@@ -583,6 +598,23 @@ export default async function DynamicPage({ params }: PageProps) {
             data.certificationsSustainabilityTimelineSection as any,
           certificationsCertificateTilesSection:
             data.certificationsCertificateTilesSection as any,
+        }}
+      />
+    );
+  }
+
+  if (data.type === 'ngos') {
+    return (
+      <NgosPage
+        data={{
+          title: data.title,
+          heroBackgroundImage:
+            typeof data.heroBackgroundImage === 'string'
+              ? data.heroBackgroundImage
+              : '/about_banner.jpg',
+          ngosMembershipMapSection: data.ngosMembershipMapSection as any,
+          ngosAllianceCardsSection: data.ngosAllianceCardsSection as any,
+          ngosCircularFutureSection: data.ngosCircularFutureSection as any,
         }}
       />
     );

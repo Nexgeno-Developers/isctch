@@ -1,7 +1,7 @@
 import Image from 'next/image';
-import type { DynamicPageData } from '@/fake-api/dynamic-pages';
+import type { NgoCircularFutureSectionData } from '@/lib/api/sustainability_layout_5';
 
-type SectionData = NonNullable<DynamicPageData['ngosCircularFutureSection']>;
+type SectionData = NgoCircularFutureSectionData;
 
 export interface NgoCircularFutureSectionProps {
   data: SectionData;

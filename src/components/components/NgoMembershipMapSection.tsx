@@ -1,6 +1,7 @@
-import type { DynamicPageData } from '@/fake-api/dynamic-pages';
+import type { NgoMembershipMapSectionData } from '@/lib/api/sustainability_layout_5';
 import Image from 'next/image';
-type SectionData = NonNullable<DynamicPageData['ngosMembershipMapSection']>;
+
+type SectionData = NgoMembershipMapSectionData;
 
 const MAP_VIEW_W = 1000;
 const MAP_VIEW_H = 520;
