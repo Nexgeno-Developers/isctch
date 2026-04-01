@@ -93,8 +93,10 @@ export function OpticapLandingSection({ data }: { data: OpticapLandingSectionDat
             </div>
           </div>
 
-          {data.videoUrl ? <ProductCategoryVideoEmbed videoUrl={data.videoUrl} /> : null}
+          
         </div>
+
+        {data.videoUrl ? <ProductCategoryVideoEmbed videoUrl={data.videoUrl} /> : null}
 
         <div className="mt-10">
           <ConnectTechnicalExperts
