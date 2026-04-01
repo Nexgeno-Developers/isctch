@@ -25,6 +25,7 @@ import { fetchProductLayoutPage } from '@/lib/api/product_layout_products';
 import { fetchSustainabilityLayout1Page } from '@/lib/api/sustainability_layout_1';
 import { fetchSustainabilityLayout2Page } from '@/lib/api/sustainability_layout_2';
 import { fetchSustainabilityLayout3Page } from '@/lib/api/sustainability_layout_3';
+import { fetchSustainabilityLayout4Page } from '@/lib/api/sustainability_layout_4';
 import { fetchMarketingServicesLayoutPage } from '@/lib/api/marketing_services_layout';
 import MarketingServicesLayoutPage from '@/components/pages/MarketingServicesLayoutPage';
 import { fetchMarketingServiceDetailLayoutPage } from '@/lib/api/marketing_service_detail_layout';
@@ -195,6 +196,15 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       slug: sustainability3Page.slug,
       title: sustainability3Page.title,
       seo: sustainability3Page.seo,
+    });
+  }
+
+  const sustainability4Page = await fetchSustainabilityLayout4Page(fullSlug);
+  if (sustainability4Page) {
+    return buildApiMetadata({
+      slug: sustainability4Page.slug,
+      title: sustainability4Page.title,
+      seo: sustainability4Page.seo,
     });
   }
 
@@ -505,6 +515,11 @@ export default async function DynamicPage({ params }: PageProps) {
   if (sustainability3Page) {
     return <GreenEffortsPage data={sustainability3Page.pageData} />;
   }
+
+  const sustainability4Page = await fetchSustainabilityLayout4Page(fullSlug);
+  if (sustainability4Page) {
+    return <CertificationsAchievementsPage data={sustainability4Page.pageData} />;
+  }
   
   const productSlug = slug?.[slug.length - 1];
   if (productSlug) {
@@ -549,6 +564,25 @@ export default async function DynamicPage({ params }: PageProps) {
             ? [{ htmlItems: [] }]
             : undefined,
           greenSustainabilityJourneySection: data.greenSustainabilityJourneySection as any,
+        }}
+      />
+    );
+  }
+
+  if (data.type === 'certifications') {
+    return (
+      <CertificationsAchievementsPage
+        data={{
+          title: data.title,
+          heroBackgroundImage:
+            typeof data.heroBackgroundImage === 'string'
+              ? data.heroBackgroundImage
+              : '/about_banner.jpg',
+          certificationsGreenBuildingSection: data.certificationsGreenBuildingSection as any,
+          certificationsSustainabilityTimelineSection:
+            data.certificationsSustainabilityTimelineSection as any,
+          certificationsCertificateTilesSection:
+            data.certificationsCertificateTilesSection as any,
         }}
       />
     );

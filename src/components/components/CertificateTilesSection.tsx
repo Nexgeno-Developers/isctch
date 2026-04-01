@@ -1,7 +1,7 @@
 import Link from 'next/link';
-import type { DynamicPageData } from '@/fake-api/dynamic-pages';
+import type { CertificateTilesSectionData } from '@/lib/api/sustainability_layout_4';
 
-type SectionData = NonNullable<DynamicPageData['certificationsCertificateTilesSection']>;
+type SectionData = CertificateTilesSectionData;
 
 function CertificateIcon({ color }: { color: string }) {
   return (

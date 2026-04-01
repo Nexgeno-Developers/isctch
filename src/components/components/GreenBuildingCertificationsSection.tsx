@@ -1,7 +1,7 @@
 import Image from 'next/image';
-import type { DynamicPageData } from '@/fake-api/dynamic-pages';
+import type { GreenBuildingCertificationsSectionData } from '@/lib/api/sustainability_layout_4';
 
-type SectionData = NonNullable<DynamicPageData['certificationsGreenBuildingSection']>;
+type SectionData = GreenBuildingCertificationsSectionData;
 
 function RibbonBadgeIcon({ className, color }: { className?: string; color: string }) {
   return (

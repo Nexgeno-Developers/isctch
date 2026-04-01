@@ -1,6 +1,6 @@
-import type { DynamicPageData } from '@/fake-api/dynamic-pages';
+import type { SustainabilityTimelineSectionData } from '@/lib/api/sustainability_layout_4';
 
-type SectionData = NonNullable<DynamicPageData['certificationsSustainabilityTimelineSection']>;
+type SectionData = SustainabilityTimelineSectionData;
 
 function CheckCircleIcon() {
   return (
