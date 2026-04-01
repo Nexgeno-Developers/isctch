@@ -24,6 +24,7 @@ import { fetchProductData } from '@/lib/api';
 import { fetchProductLayoutPage } from '@/lib/api/product_layout_products';
 import { fetchSustainabilityLayout1Page } from '@/lib/api/sustainability_layout_1';
 import { fetchSustainabilityLayout2Page } from '@/lib/api/sustainability_layout_2';
+import { fetchSustainabilityLayout3Page } from '@/lib/api/sustainability_layout_3';
 import { fetchMarketingServicesLayoutPage } from '@/lib/api/marketing_services_layout';
 import MarketingServicesLayoutPage from '@/components/pages/MarketingServicesLayoutPage';
 import { fetchMarketingServiceDetailLayoutPage } from '@/lib/api/marketing_service_detail_layout';
@@ -185,6 +186,15 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       slug: sustainability2Page.slug,
       title: sustainability2Page.title,
       seo: sustainability2Page.seo,
+    });
+  }
+
+  const sustainability3Page = await fetchSustainabilityLayout3Page(fullSlug);
+  if (sustainability3Page) {
+    return buildApiMetadata({
+      slug: sustainability3Page.slug,
+      title: sustainability3Page.title,
+      seo: sustainability3Page.seo,
     });
   }
 
@@ -490,6 +500,11 @@ export default async function DynamicPage({ params }: PageProps) {
   if (sustainability2Page) {
     return <LamiraPage data={sustainability2Page.pageData} />;
   }
+
+  const sustainability3Page = await fetchSustainabilityLayout3Page(fullSlug);
+  if (sustainability3Page) {
+    return <GreenEffortsPage data={sustainability3Page.pageData} />;
+  }
   
   const productSlug = slug?.[slug.length - 1];
   if (productSlug) {
@@ -518,6 +533,25 @@ export default async function DynamicPage({ params }: PageProps) {
 
   if (!data) {
     notFound();
+  }
+
+  if (data.type === 'green') {
+    return (
+      <GreenEffortsPage
+        data={{
+          title: data.title,
+          heroBackgroundImage:
+            typeof data.heroBackgroundImage === 'string'
+              ? data.heroBackgroundImage
+              : '/about_banner.jpg',
+          greenSustainabilityVisionSection: data.greenSustainabilityVisionSection as any,
+          greenPhotovoltaicProjectSections: data.greenPhotovoltaicProjectSections
+            ? [{ htmlItems: [] }]
+            : undefined,
+          greenSustainabilityJourneySection: data.greenSustainabilityJourneySection as any,
+        }}
+      />
+    );
   }
 
   const Component = componentMap[data.type] || CmsPage;

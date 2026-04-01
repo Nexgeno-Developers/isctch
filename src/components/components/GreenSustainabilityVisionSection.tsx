@@ -1,6 +1,6 @@
-import type { DynamicPageData } from '@/fake-api/dynamic-pages';
+import type { GreenSustainabilityVisionSectionData } from '@/lib/api/sustainability_layout_3';
 
-type SectionData = NonNullable<DynamicPageData['greenSustainabilityVisionSection']>;
+type SectionData = GreenSustainabilityVisionSectionData;
 
 const BRAND_BLUE = '#00A0E3';
 

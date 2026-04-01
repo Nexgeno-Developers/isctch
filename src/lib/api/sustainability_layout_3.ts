@@ -1,0 +1,236 @@
+export interface GreenEffortsPageData {
+  title: string;
+  heroBackgroundImage: string;
+  greenSustainabilityVisionSection?: GreenSustainabilityVisionSectionData;
+  greenPhotovoltaicProjectSections?: GreenPhotovoltaicProjectSectionData[];
+  greenSustainabilityJourneySection?: GreenSustainabilityJourneySectionData;
+}
+
+export interface GreenSustainabilityVisionSectionData {
+  headingBrand: string;
+  headingRest: string;
+  subtitle: string;
+  cards: Array<{
+    id: string;
+    title: string;
+    icon: 'globe' | 'social' | 'product' | 'business';
+    bullets: Array<{
+      parts: Array<{ text: string; bold?: boolean }>;
+    }>;
+  }>;
+  footerText: string;
+}
+
+export interface GreenPhotovoltaicProjectSectionData {
+  htmlItems: string[];
+}
+
+export interface GreenSustainabilityJourneySectionData {
+  headingLineBlue: string;
+  headingLineBlack: string;
+  body: string;
+  image: string;
+  imageAlt: string;
+  backgroundColor?: string;
+  accentColor?: string;
+}
+
+type Sustainability3ApiResponse = {
+  data?: {
+    slug: string;
+    title: string;
+    content?: string;
+    is_active?: boolean;
+    layout?: string;
+    meta?: {
+      breadcrumb_image?: { id?: number; filename?: string; url?: string };
+      hero_title?: string;
+      hero_description_intro?: string;
+      hero_items?: {
+        itration?: string[];
+        image?: Array<{ id?: number; filename?: string; url?: string }>;
+        title?: string[];
+        description?: string[];
+      };
+      hero_description_footer?: string;
+      project_items?: string;
+      sustainability_journey_title?: string;
+      sustainability_journey_image?: string;
+      sustainability_journey_description?: string;
+    };
+    seo?: Record<string, unknown>;
+  };
+};
+
+function stripHtml(value?: string | null): string {
+  if (!value) return '';
+  return value.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
+}
+
+function buildPageApiPath(slug: string) {
+  return slug
+    .split('/')
+    .filter(Boolean)
+    .map((part) => encodeURIComponent(part))
+    .join('/');
+}
+
+function safeJsonParse<T>(value: string | undefined): T | null {
+  if (!value) return null;
+  try {
+    return JSON.parse(value) as T;
+  } catch {
+    return null;
+  }
+}
+
+function parseHtmlDescriptionToBullets(
+  html: string,
+): Array<{ parts: Array<{ text: string; bold?: boolean }> }> {
+  const paragraphs = html.match(/<p[^>]*>[\s\S]*?<\/p>/gi);
+  if (!paragraphs) {
+    const cleaned = stripHtml(html);
+    return cleaned ? [{ parts: [{ text: cleaned }] }] : [];
+  }
+
+  return paragraphs
+    .map((p) => {
+      const parts: Array<{ text: string; bold?: boolean }> = [];
+      const tagContent = p.replace(/<\/?p[^>]*>/gi, '');
+      const segments = tagContent.split(
+        /(<strong[^>]*>[\s\S]*?<\/strong>|<b[^>]*>[\s\S]*?<\/b>)/gi,
+      );
+
+      for (const seg of segments) {
+        if (!seg) continue;
+        const strongMatch = /^<(?:strong|b)[^>]*>([\s\S]*?)<\/(?:strong|b)>/i.exec(seg);
+        if (strongMatch) {
+          const text = stripHtml(strongMatch[1]);
+          if (text) parts.push({ text, bold: true });
+        } else {
+          const text = stripHtml(seg);
+          if (text) parts.push({ text });
+        }
+      }
+
+      if (parts.length === 0) return null;
+      return { parts };
+    })
+    .filter(Boolean) as Array<{ parts: Array<{ text: string; bold?: boolean }> }>;
+}
+
+const ICON_MAP = ['globe', 'social', 'product', 'business'] as const;
+
+export async function fetchSustainabilityLayout3Page(slug: string): Promise<{
+  slug: string;
+  title: string;
+  seo: Record<string, unknown>;
+  pageData: GreenEffortsPageData;
+} | null> {
+  const baseUrl = process.env.COMPANY_API_BASE_URL;
+  if (!baseUrl) return null;
+
+  try {
+    const apiSlugPath = buildPageApiPath(slug);
+    const res = await fetch(`${baseUrl}/v1/page/${apiSlugPath}`, { cache: 'no-store' });
+    if (!res.ok) return null;
+
+    const { data } = (await res.json()) as Sustainability3ApiResponse;
+    if (!data || data.layout !== 'sustainability_3' || data.is_active === false) return null;
+
+    const meta = data.meta || {};
+    const seo = (data.seo || {}) as Record<string, unknown>;
+
+    const heroItems = meta.hero_items;
+    const heroTitles = heroItems?.title || [];
+    const heroDescriptions = heroItems?.description || [];
+
+    const visionCards = heroTitles
+      .map((title, idx) => {
+        const icon = ICON_MAP[idx] || 'globe';
+        const htmlDesc = heroDescriptions[idx] || '';
+        const bullets = parseHtmlDescriptionToBullets(htmlDesc);
+        if (!bullets.length) return null;
+        return {
+          id: `vision-card-${idx}`,
+          title: title.toUpperCase(),
+          icon: icon as (typeof ICON_MAP)[number],
+          bullets,
+        };
+      })
+      .filter(Boolean) as GreenSustainabilityVisionSectionData['cards'];
+
+    const visionSection: GreenSustainabilityVisionSectionData | undefined = visionCards.length
+      ? {
+          headingBrand: 'Lamipak',
+          headingRest:
+            meta.hero_title?.replace(/^Lamipak\s*/i, '') || 'Sustainability Vision',
+          subtitle:
+            meta.hero_description_intro ||
+            'Bring Life To Packaging, Achieve Sustainability Across Every Dimension Of Our Business.',
+          cards: visionCards,
+          footerText: stripHtml(meta.hero_description_footer || ''),
+        }
+      : undefined;
+
+    const parsedProjectItems = safeJsonParse<{ itration?: string[]; content?: string[] }>(
+      meta.project_items,
+    );
+    const projectHtmlItems = parsedProjectItems?.content?.filter(Boolean) || [];
+
+    const photovoltaicSection: GreenPhotovoltaicProjectSectionData | undefined =
+      projectHtmlItems.length ? { htmlItems: projectHtmlItems } : undefined;
+
+    const journeyImageId = meta.sustainability_journey_image;
+    const heroImages = heroItems?.image || [];
+    let journeyImage = '/our_green_left_image.webp';
+    if (journeyImageId) {
+      const matchedImage = heroImages.find(
+        (img) => String(img.id) === String(journeyImageId),
+      );
+      if (matchedImage?.url) {
+        journeyImage = matchedImage.url;
+      }
+    }
+
+    const journeyTitle = meta.sustainability_journey_title || '';
+    const journeyHeadingParts = journeyTitle.split(/\s+/);
+    const midPoint = Math.ceil(journeyHeadingParts.length / 2);
+    const headingLineBlue = journeyHeadingParts.slice(0, midPoint).join(' ');
+    const headingLineBlack = journeyHeadingParts.slice(midPoint).join(' ');
+
+    const journeySection: GreenSustainabilityJourneySectionData | undefined =
+      meta.sustainability_journey_description
+        ? {
+            headingLineBlue,
+            headingLineBlack,
+            body: stripHtml(meta.sustainability_journey_description),
+            image: journeyImage,
+            imageAlt: journeyTitle || 'Sustainability journey',
+            backgroundColor: '#f8f9fa',
+            accentColor: '#00AEEF',
+          }
+        : undefined;
+
+    const breadcrumbImage = meta.breadcrumb_image?.url || '/pick_cartoon_banner.webp';
+
+    const pageData: GreenEffortsPageData = {
+      title: data.title,
+      heroBackgroundImage: breadcrumbImage,
+      greenSustainabilityVisionSection: visionSection,
+      greenPhotovoltaicProjectSections: photovoltaicSection
+        ? [photovoltaicSection]
+        : undefined,
+      greenSustainabilityJourneySection: journeySection,
+    };
+
+    return {
+      slug: data.slug,
+      title: data.title,
+      seo,
+      pageData,
+    };
+  } catch {
+    return null;
+  }
+}

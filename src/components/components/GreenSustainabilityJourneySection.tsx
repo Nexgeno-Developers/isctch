@@ -1,7 +1,7 @@
 import Image from 'next/image';
-import type { DynamicPageData } from '@/fake-api/dynamic-pages';
+import type { GreenSustainabilityJourneySectionData } from '@/lib/api/sustainability_layout_3';
 
-type SectionData = NonNullable<DynamicPageData['greenSustainabilityJourneySection']>;
+type SectionData = GreenSustainabilityJourneySectionData;
 
 export interface GreenSustainabilityJourneySectionProps {
   data: SectionData;
