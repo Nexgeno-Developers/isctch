@@ -4,10 +4,10 @@ import CallToAction from '@/components/home/CallToAction';
 import NewsletterSubscription from '@/components/home/NewsletterSubscription';
 import CarbonNeutralityRoadmapSection from '@/components/components/CarbonNeutralityRoadmapSection';
 import SustainabilityPillarsGridSection from '@/components/components/SustainabilityPillarsGridSection';
-import type { DynamicPageData } from '@/fake-api/dynamic-pages';
+import type { CarbonNetZeroRoadmapPageData } from '@/lib/api/sustainability_layout_6';
 
 export interface CarbonNetZeroRoadmapPageProps {
-  data: DynamicPageData;
+  data: CarbonNetZeroRoadmapPageData;
 }
 
 export default function CarbonNetZeroRoadmapPage({ data }: CarbonNetZeroRoadmapPageProps) {
@@ -17,18 +17,15 @@ export default function CarbonNetZeroRoadmapPage({ data }: CarbonNetZeroRoadmapP
         data={{
           title: data.title,
           backgroundImage:
-            typeof data.heroBackgroundImage === 'string' ? data.heroBackgroundImage : '/about_banner.jpg',
+            typeof data.heroBackgroundImage === 'string'
+              ? data.heroBackgroundImage
+              : '/about_banner.jpg',
         }}
       />
 
       <section className="bg-gray-50">
         <div className="container mx-auto px-4 py-4">
-          <Breadcrumbs
-            items={[
-             
-              { label: data.title },
-            ]}
-          />
+          <Breadcrumbs items={[{ label: data.title }]} />
         </div>
       </section>
 
@@ -40,10 +37,10 @@ export default function CarbonNetZeroRoadmapPage({ data }: CarbonNetZeroRoadmapP
         <SustainabilityPillarsGridSection data={data.carbonNetZeroPillarsSection} />
       ) : null}
 
-<div className="bg-gray-50 pt-12">
-<CallToAction />
-</div>
-      
+      <div className="bg-gray-50 pt-12">
+        <CallToAction />
+      </div>
+
       <NewsletterSubscription />
     </main>
   );

@@ -1,7 +1,7 @@
 import type { ComponentType } from 'react';
-import type { DynamicPageData } from '@/fake-api/dynamic-pages';
+import type { CarbonNetZeroPillarsSectionData } from '@/lib/api/sustainability_layout_6';
 
-type SectionData = NonNullable<DynamicPageData['carbonNetZeroPillarsSection']>;
+type SectionData = CarbonNetZeroPillarsSectionData;
 type IconKey = SectionData['items'][number]['icon'];
 
 function IconCarbonVerification({ color }: { color: string }) {

@@ -1,6 +1,6 @@
-import type { DynamicPageData } from '@/fake-api/dynamic-pages';
+import type { CarbonNetZeroRoadmapSectionData } from '@/lib/api/sustainability_layout_6';
 
-type SectionData = NonNullable<DynamicPageData['carbonNetZeroRoadmapSection']>;
+type SectionData = CarbonNetZeroRoadmapSectionData;
 
 function IconTarget({ color }: { color: string }) {
   return (
@@ -100,9 +100,11 @@ export default function CarbonNeutralityRoadmapSection({ data }: CarbonNeutralit
           className="mx-auto mt-14 max-w-xl rounded-full px-2 py-4 text-center md:mt-12 md:px-4 md:py-5"
           style={{ backgroundColor: barBg }}
         >
-          <p className="text-sm font-bold uppercase tracking-wide text-white md:text-[22px] ">
-            {data.summaryBarText}
-          </p>
+          <a href={data.summaryBarUrl} target="_blank" rel="noopener noreferrer" className="block">
+            <p className="text-sm font-bold uppercase tracking-wide text-white md:text-[22px]">
+              {data.summaryBarText}
+            </p>
+          </a>
         </div>
       </div>
     </section>

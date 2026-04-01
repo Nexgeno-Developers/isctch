@@ -27,6 +27,7 @@ import { fetchSustainabilityLayout2Page } from '@/lib/api/sustainability_layout_
 import { fetchSustainabilityLayout3Page } from '@/lib/api/sustainability_layout_3';
 import { fetchSustainabilityLayout4Page } from '@/lib/api/sustainability_layout_4';
 import { fetchSustainabilityLayout5Page } from '@/lib/api/sustainability_layout_5';
+import { fetchSustainabilityLayout6Page } from '@/lib/api/sustainability_layout_6';
 import { fetchMarketingServicesLayoutPage } from '@/lib/api/marketing_services_layout';
 import MarketingServicesLayoutPage from '@/components/pages/MarketingServicesLayoutPage';
 import { fetchMarketingServiceDetailLayoutPage } from '@/lib/api/marketing_service_detail_layout';
@@ -215,6 +216,15 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       slug: sustainability5Page.slug,
       title: sustainability5Page.title,
       seo: sustainability5Page.seo,
+    });
+  }
+
+  const sustainability6Page = await fetchSustainabilityLayout6Page(fullSlug);
+  if (sustainability6Page) {
+    return buildApiMetadata({
+      slug: sustainability6Page.slug,
+      title: sustainability6Page.title,
+      seo: sustainability6Page.seo,
     });
   }
 
@@ -535,6 +545,11 @@ export default async function DynamicPage({ params }: PageProps) {
   if (sustainability5Page) {
     return <NgosPage data={sustainability5Page.pageData} />;
   }
+
+  const sustainability6Page = await fetchSustainabilityLayout6Page(fullSlug);
+  if (sustainability6Page) {
+    return <CarbonNetZeroRoadmapPage data={sustainability6Page.pageData} />;
+  }
   
   const productSlug = slug?.[slug.length - 1];
   if (productSlug) {
@@ -615,6 +630,22 @@ export default async function DynamicPage({ params }: PageProps) {
           ngosMembershipMapSection: data.ngosMembershipMapSection as any,
           ngosAllianceCardsSection: data.ngosAllianceCardsSection as any,
           ngosCircularFutureSection: data.ngosCircularFutureSection as any,
+        }}
+      />
+    );
+  }
+
+  if (data.type === 'carbon-roadmap') {
+    return (
+      <CarbonNetZeroRoadmapPage
+        data={{
+          title: data.title,
+          heroBackgroundImage:
+            typeof data.heroBackgroundImage === 'string'
+              ? data.heroBackgroundImage
+              : '/about_banner.jpg',
+          carbonNetZeroRoadmapSection: data.carbonNetZeroRoadmapSection as any,
+          carbonNetZeroPillarsSection: data.carbonNetZeroPillarsSection as any,
         }}
       />
     );
