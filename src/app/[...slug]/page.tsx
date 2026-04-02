@@ -71,7 +71,6 @@ const componentMap: Record<string, ComponentType<any>> = {
   lamira: LamiraPage,
   green: GreenEffortsPage,
   certifications: CertificationsAchievementsPage,
-  ngos: NgosPage,
   'our-company': OurCompanyDynamicPage,
   'our-factory': OurCompanyDynamicPage,
   'carbon-roadmap': CarbonNetZeroRoadmapPage,
@@ -734,23 +733,6 @@ export default async function DynamicPage({ params }: PageProps) {
             data.certificationsSustainabilityTimelineSection as any,
           certificationsCertificateTilesSection:
             data.certificationsCertificateTilesSection as any,
-        }}
-      />
-    );
-  }
-
-  if (data.type === 'ngos') {
-    return (
-      <NgosPage
-        data={{
-          title: data.title,
-          heroBackgroundImage:
-            typeof data.heroBackgroundImage === 'string'
-              ? data.heroBackgroundImage
-              : '/about_banner.jpg',
-          ngosMembershipMapSection: data.ngosMembershipMapSection as any,
-          ngosAllianceCardsSection: data.ngosAllianceCardsSection as any,
-          ngosCircularFutureSection: data.ngosCircularFutureSection as any,
         }}
       />
     );

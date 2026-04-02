@@ -10,8 +10,9 @@ export interface NgosPageData {
 export interface NgoMembershipMapSectionData {
   headingBlue: string;
   headingBlack: string;
-  mapImage: string;
-  mapImageAlt: string;
+  /** CMS `meta.membership_map.url` */
+  mapImage?: string;
+  mapImageAlt?: string;
   accentColor?: string;
   leaderLineColor?: string;
   dotColor?: string;
@@ -119,7 +120,10 @@ export async function fetchSustainabilityLayout5Page(slug: string): Promise<{
       headingBlue: membershipHeading.blue,
       headingBlack: membershipHeading.black,
       mapImage: meta.membership_map?.url || '/ngo_image.webp',
-      mapImageAlt: meta.membership_title || 'NGO Membership Map',
+      mapImageAlt:
+        meta.membership_map?.filename?.replace(/[-_]+/g, ' ').trim() ||
+        meta.membership_title ||
+        'NGO membership map',
       accentColor: '#00AEEF',
     };
 
