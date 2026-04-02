@@ -3,13 +3,15 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { useState, useEffect } from 'react';
-import { fetchHomepageData } from '@/lib/api';
+import { fetchHomepageData } from '@/lib/api/home';
 import type { VideoBannerData } from '@/fake-api/homepage';
 
 interface VideoBannerProps {
   videoOnly?: boolean; // If true, hides text and CTA, shows only video
   /** Optional: override video URL instead of homepage video */
   videoUrl?: string;
+  /** Server-fetched homepage video banner (avoids a duplicate client fetch) */
+  prefetchedData?: VideoBannerData;
 }
 
 function parseYouTubeId(url: string): string | null {
@@ -51,8 +53,12 @@ function getYouTubeEmbedSrc(videoUrl: string): { id: string; src: string } | nul
  * 
  * Fetches homepage data and renders the video banner with play functionality.
  */
-export default function VideoBanner({ videoOnly = false, videoUrl }: VideoBannerProps = {}) {
-  const [data, setData] = useState<VideoBannerData | null>(null);
+export default function VideoBanner({
+  videoOnly = false,
+  videoUrl,
+  prefetchedData,
+}: VideoBannerProps = {}) {
+  const [data, setData] = useState<VideoBannerData | null>(prefetchedData ?? null);
   const [isVideoPlaying, setIsVideoPlaying] = useState(false);
   const [playerReady, setPlayerReady] = useState(false);
   const [youtubeThumbVariant, setYoutubeThumbVariant] = useState<'maxresdefault' | 'sddefault' | 'hqdefault'>(
@@ -61,6 +67,10 @@ export default function VideoBanner({ videoOnly = false, videoUrl }: VideoBanner
 
   useEffect(() => {
     async function loadData() {
+      if (prefetchedData) {
+        setData(prefetchedData);
+        return;
+      }
       if (videoUrl) {
         setData({
           title: '',
@@ -74,7 +84,7 @@ export default function VideoBanner({ videoOnly = false, videoUrl }: VideoBanner
       setData(homepageData.videoBanner);
     }
     loadData();
-  }, [videoUrl]);
+  }, [videoUrl, prefetchedData]);
 
   useEffect(() => {
     // Reset to best quality when video changes

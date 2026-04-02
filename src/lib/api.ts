@@ -7,7 +7,6 @@
  */
 
 import { API_CONFIG } from '@/config/api';
-import { getHomepageData as fakeGetHomepageData, type HomepageData } from '@/fake-api/homepage';
 import { getPageData as fakeGetPageData, type PageData } from '@/fake-api/pages';
 import { 
   getProductData as fakeGetProductData, 
@@ -332,23 +331,6 @@ async function fetchCompanyProfile(): Promise<CompanyProfile | null> {
 
 export async function fetchCompanyProfileData(): Promise<CompanyProfile | null> {
   return fetchCompanyProfile();
-}
-
-/**
- * Fetches homepage data
- * 
- * @returns Promise<HomepageData>
- */
-export async function fetchHomepageData(): Promise<HomepageData> {
-  if (useRealAPI()) {
-    // TODO: Replace with real API call when Laravel backend is ready
-    // const response = await fetch(`${API_CONFIG.baseUrl}${API_CONFIG.endpoints.homepage}`);
-    // if (!response.ok) throw new Error('Failed to fetch homepage data');
-    // return response.json();
-    throw new Error('Real API not yet implemented');
-  }
-  
-  return fakeGetHomepageData();
 }
 
 /**

@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { fetchHomepageData } from '@/lib/api';
+import { fetchHomepageData } from '@/lib/api/home';
 import InnovationSliderInteractive, { Cards } from './InnovationSliderInteractive';
 
 /**

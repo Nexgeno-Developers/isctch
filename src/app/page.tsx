@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { fetchHomepageData } from '@/lib/api';
+import { fetchHomepageData } from '@/lib/api/home';
 import { getCanonicalUrl } from '@/config/site';
 import Hero from '@/components/home/Hero';
 import VideoBanner from '@/components/home/VideoBanner';
@@ -68,7 +68,7 @@ export default async function HomePage() {
         <Hero data={homepageData.hero} />
         
         <Approach />
-        <VideoBanner />
+        <VideoBanner prefetchedData={homepageData.videoBanner} />
         <CommercialServices />
         <LatestInsights />
         <ProductSustainabilitySeries />

@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { fetchHomepageData } from '@/lib/api';
+import { fetchHomepageData } from '@/lib/api/home';
 import type { PressReleaseCard } from '@/fake-api/homepage';
 
 /**

@@ -1,4 +1,4 @@
-import { fetchHomepageData } from '@/lib/api';
+import { fetchHomepageData } from '@/lib/api/home';
 import WorkInSustainabilityClient from './WorkInSustainabilityClient';
 
 /**
