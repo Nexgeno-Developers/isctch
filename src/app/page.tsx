@@ -8,7 +8,7 @@ import CommercialServices from '@/components/home/CommercialServices';
 import LatestInsights from '@/components/home/LatestInsights';
 import ProductSustainabilitySeries from '@/components/home/ProductSustainabilitySeries';
 import WorkInSustainability from '@/components/home/WorkInSustainability';
-import InnovationInPackaging from '@/components/home/InnovationInPackaging';
+// import InnovationInPackaging from '@/components/home/InnovationInPackaging';
 import LatestPressRelease from '@/components/home/LatestPressRelease';
 import CallToAction from '@/components/home/CallToAction';
 import NewsletterSubscription from '@/components/home/NewsletterSubscription';

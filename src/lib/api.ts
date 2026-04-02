@@ -80,10 +80,8 @@ export type {
 };
 import {
   getHeaderData as fakeGetHeaderData,
-  getFooterData as fakeGetFooterData,
   type HeaderData,
   type FooterData,
-  type SocialLink,
 } from '@/fake-api/layout';
 
 type CompanyProfileApiResponse = {
@@ -393,90 +391,14 @@ export async function fetchHeaderData(): Promise<HeaderData> {
   };
 }
 
-function mergeFooterSocialLinks(fallback: SocialLink[], profile: CompanyProfile | null): SocialLink[] {
-  if (!profile) return fallback;
-
-  const overrideByIcon: Partial<Record<string, string | undefined>> = {
-    x: profile.xUrl,
-    twitter: profile.xUrl,
-    linkedin: profile.linkedinUrl,
-    facebook: profile.facebookUrl,
-    instagram: profile.instagramUrl,
-    youtube: profile.youtubeUrl,
-    tiktok: profile.tiktokUrl,
-    vimeo: profile.vimeoUrl,
-  };
-
-  return fallback.map((link) => {
-    const key = link.icon || '';
-    const next = overrideByIcon[key];
-    return next ? { ...link, href: next } : link;
-  });
-}
-
 /**
  * Fetches footer data
  * 
  * @returns Promise<FooterData>
  */
 export async function fetchFooterData(): Promise<FooterData> {
-  if (useRealAPI()) {
-    // TODO: Replace with real API call when Laravel backend is ready
-    // const response = await fetch(`${API_CONFIG.baseUrl}${API_CONFIG.endpoints.footer}`);
-    // if (!response.ok) throw new Error('Failed to fetch footer data');
-    // return response.json();
-    throw new Error('Real API not yet implemented');
-  }
-  
-  const fallback = await fakeGetFooterData();
-  const companyProfile = await fetchCompanyProfile();
-  if (!companyProfile) {
-    return fallback;
-  }
-
-  const contactLinks = [
-    companyProfile.address
-      ? { id: 'api-contact-address', label: `Address: ${companyProfile.address}`, href: '#' }
-      : null,
-    companyProfile.phone
-      ? {
-          id: 'api-contact-phone',
-          label: `Phone: ${companyProfile.phone}`,
-          href: `tel:${companyProfile.phone}`,
-        }
-      : null,
-    companyProfile.email
-      ? {
-          id: 'api-contact-email',
-          label: `Email: ${companyProfile.email}`,
-          href: `mailto:${companyProfile.email}`,
-        }
-      : null,
-  ].filter(Boolean) as FooterData['columns'][number]['links'];
-
-  const mappedColumns =
-    contactLinks.length > 0
-      ? fallback.columns.map((column) =>
-          column.title === 'Contact'
-            ? {
-                ...column,
-                links: contactLinks,
-              }
-            : column,
-        )
-      : fallback.columns;
-
-  return {
-    ...fallback,
-    logo: {
-      ...fallback.logo,
-      text: companyProfile.name || fallback.logo.text,
-      image: companyProfile.logo || fallback.logo.image,
-    },
-    description: fallback.description,
-    columns: mappedColumns,
-    socialLinks: mergeFooterSocialLinks(fallback.socialLinks ?? [], companyProfile),
-  };
+  const footerModule = await import('@/lib/api/footer');
+  return footerModule.fetchFooterData();
 }
 
 /**

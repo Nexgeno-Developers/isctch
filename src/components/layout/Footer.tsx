@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { fetchFooterData } from '@/lib/api';
+import { fetchFooterData } from '@/lib/api/footer';
 import { FooterSocialIcon } from '@/components/layout/FooterSocialIcon';
 
 /**
