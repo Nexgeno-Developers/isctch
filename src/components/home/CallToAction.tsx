@@ -30,7 +30,7 @@ export default async function CallToAction() {
             <div className="flex-shrink-0">
               <Link
                 href={data.ctaLink}
-                className="inline-flex items-center text-[#009FE8] text-[14px] md:text-lg font-semibold uppercase tracking-wider hover:opacity-80 transition-opacity group"
+                className="inline-flex items-center rounded-full bg-[#009FE8] text-[#fff] text-[14px] md:text-base py-2 px-5 font-semibold tracking-wider hover:opacity-80 transition-opacity group"
               >
                 {data.ctaText}
                 <svg
