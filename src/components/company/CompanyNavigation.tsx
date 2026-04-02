@@ -25,6 +25,16 @@ export default function CompanyNavigation({ data, activePath }: CompanyNavigatio
         return (
            <Image src="/vission_mission_icon.svg" alt="Info" className='lg:w-20 w-8 lg:h-20 h-8' width={80} height={80} />
         );
+      case 'vision':
+        return (
+          <Image
+            src="/hand-holding-heart 1.svg"
+            alt="Vision & Mission"
+            className="lg:w-20 w-8 lg:h-20 h-8"
+            width={80}
+            height={80}
+          />
+        );
       case 'building':
         return (
           <Image src="/goverment_icon.svg" alt="Info" className='lg:w-20 w-8 lg:h-20 h-8' width={80} height={80} />
@@ -47,10 +57,9 @@ export default function CompanyNavigation({ data, activePath }: CompanyNavigatio
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-5 md:gap-8 lg:gap-6">
           {data.items.map((item) => {
-            const isActive =
-              activePath === item.href ||
-              (activePath === '/about-us' && item.href === '/our-company') ||
-              (activePath === '/our-factory' && item.href === '/introduction');
+            const normalizedActive = (activePath || '').replace(/\/+$/, '') || '/';
+            const normalizedHref = (item.href || '').replace(/\/+$/, '') || '/';
+            const isActive = normalizedActive === normalizedHref;
             return (
               <Link
                 key={item.id}

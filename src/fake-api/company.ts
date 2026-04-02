@@ -73,7 +73,7 @@ export const COMPANY_SUB_NAVIGATION: CompanyNavigation = {
     
     {
       id: '3',
-      icon: 'globe',
+      icon: 'vision',
       label: 'Vision & Mission',
       href: '/vision-mission',
     },

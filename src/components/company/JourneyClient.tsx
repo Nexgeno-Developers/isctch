@@ -35,7 +35,7 @@ export default function JourneyClient({ data }: JourneyClientProps) {
   const yearParts = splitYear(selectedYear);
 
   return (
-    <section className="py-10 md:py-24 bg-gray-50">
+    <section className="py-10 md:pt-10 lg:pb-[120px] bg-gray-50">
       <div className="container mx-auto px-4">
         {/* Section Title */}
         <div className="text-center mb-12 md:mb-16">
