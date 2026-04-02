@@ -162,7 +162,7 @@ export default function GreenSustainabilityVisionSection({ data }: GreenSustaina
           })}
         </div>
 
-        <p className="mx-auto mt-12 max-w-4xl text-center text-sm leading-relaxed text-gray-500 md:mt-14 md:text-base">
+        <p className="mx-auto mt-12 max-w-4xl text-center text-sm leading-relaxed text-black md:mt-14 md:text-base">
           {data.footerText}
         </p>
       </div>
