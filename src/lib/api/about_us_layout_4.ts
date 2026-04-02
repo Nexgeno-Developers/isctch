@@ -172,8 +172,8 @@ export async function fetchAboutUsLayout4Page(slug: string) {
       eyebrow: meta.hero_subtitle || data.title,
       title: meta.hero_title || data.title,
       description: stripHtml(meta.hero_description) || '',
-      primaryCta: { text: 'Read more', href: '#governance-framework' },
-      secondaryCta: { text: 'Explore', href: '#governance-framework' },
+      primaryCta: { text: 'Explore our  framework', href: '#governance-framework' },
+      secondaryCta: { text: 'Speak Up', href: '#governance-framework' },
       cards: frameworkIconIds
         .map((iconId, idx) => {
           const title = (heroCardTitles[idx] || '').trim();
@@ -234,7 +234,7 @@ export async function fetchAboutUsLayout4Page(slug: string) {
         imageSrc: mediaUrl(meta.ethical_banner) || '',
         imageAlt: meta.ethical_title,
         centerText: stripHtml(meta.ethical_tagline) || '',
-        buttonText: 'Read more',
+        buttonText: 'Zero Tolerance Policy',
         buttonHref: meta.ethical_url || '#',
         paragraphs: paragraphsFromHtml(meta.ethical_description),
       });

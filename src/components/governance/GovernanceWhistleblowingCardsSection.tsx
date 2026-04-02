@@ -48,7 +48,7 @@ function renderCardIcon(iconId: GovernanceWhistleblowingCardsIconId, iconUrl?: s
         alt=""
         width={34}
         height={34}
-        className="w-[34px] h-[34px] object-contain"
+        className="w-[50px] h-[50px] object-contain"
       />
     );
   }

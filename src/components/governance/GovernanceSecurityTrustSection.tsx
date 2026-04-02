@@ -107,7 +107,6 @@ export default function GovernanceSecurityTrustSection({
           </div>
 
           <h2 className="mt-2 text-[24px] md:text-5xl font-bold leading-tight">
-            <span className="text-[#009FE8]">{data.titleBlue}</span>{' '}
             <span className="text-black">{data.title}</span>
           </h2>
 
@@ -124,22 +123,23 @@ export default function GovernanceSecurityTrustSection({
               {data.cards.map((card) => (
                 <div
                   key={card.id}
-                  className="bg-[#EDF0F1] rounded-[28px] md:rounded-[50px] px-5 py-4"
+                  className="bg-[#EDF0F1] rounded-[28px] md:rounded-[50px] p-4 md:p-5 flex items-center gap-4"
                 >
-                  <div className="flex items-center gap-3">
+                  <div className="flex items-center justify-center text-[#009FE8] shrink-0">
                     <div className="text-[#009FE8] mt-0.5">
                       {renderCardIcon(card.iconId, card.iconUrl)}
                     </div>
+                    </div>
 
                     <div>
-                      <p className="text-sm md:text-base font-bold text-black">
+                      <p className="text-[14px] md:text-lg font-bold text-black leading-snug">
                         {card.title}
                       </p>
                       <p className="text-[12px] md:text-sm text-black mt-1 leading-snug">
                         {card.description}
                       </p>
                     </div>
-                  </div>
+                  
                 </div>
               ))}
             </div>

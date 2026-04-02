@@ -124,7 +124,6 @@ export default function GovernanceComplianceCardsSection({
           </div>
 
           <h2 className="mt-2 text-[24px] md:text-5xl font-bold leading-tight">
-            <span className="text-[#009FE8]">{data.titleBlue}</span>{' '}
             <span className="text-black">{data.title}</span>
           </h2>
 
@@ -149,22 +148,23 @@ export default function GovernanceComplianceCardsSection({
               {data.cards.map((card) => (
                 <div
                   key={card.id}
-                  className="bg-[#EEF2F3] rounded-[28px] md:rounded-[50px] px-6 py-4"
+                  className="bg-[#EDF0F1] rounded-[28px] md:rounded-[50px] p-4 md:p-5 flex items-center gap-4"
                 >
-                  <div className="flex items-center gap-3">
+                  <div className="flex items-center justify-center text-[#009FE8] shrink-0">
                     <div className="mt-0.5 shrink-0">
                       {renderCardIcon(card.iconId, card.iconUrl)}
                     </div>
+                    </div>
 
                     <div>
-                      <p className="text-sm md:text-base font-bold text-black">
+                      <p className="text-[14px] md:text-lg font-bold text-black leading-snug">
                         {card.title}
                       </p>
                       <p className="text-[12px] md:text-sm text-black mt-1 leading-snug">
                         {card.description}
                       </p>
                     </div>
-                  </div>
+                  
                 </div>
               ))}
             </div>
