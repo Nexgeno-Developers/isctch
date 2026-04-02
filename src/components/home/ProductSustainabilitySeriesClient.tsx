@@ -34,10 +34,13 @@ export default function ProductSustainabilitySeriesClient({ data }: ProductSusta
         <div className="relative rounded-[32px] md:rounded-[50px] overflow-hidden p-5 md:p-12 lg:p-16">
           {/* Background Image */}
           <div className="absolute inset-0">
-            <img
+            <Image
               src="/product_section_bg_home.webp"
               alt="Product Section Background"
-              className="absolute inset-0 w-full h-full object-cover"
+              fill
+              className="object-cover"
+              sizes="100vw"
+              priority={false}
             />
           </div>
           {/* Content Wrapper */}

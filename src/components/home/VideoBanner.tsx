@@ -1,6 +1,5 @@
 'use client';
 
-import Link from 'next/link';
 import Image from 'next/image';
 import { useState, useEffect } from 'react';
 import { fetchHomepageData } from '@/lib/api/home';
@@ -48,6 +47,36 @@ function getYouTubeEmbedSrc(videoUrl: string): { id: string; src: string } | nul
   return { id, src };
 }
 
+type YoutubeThumbQuality = 'maxresdefault' | 'sddefault' | 'hqdefault';
+
+/**
+ * Poster for YouTube: remount via `key={videoUrl}` on the parent resets quality to maxres
+ * (avoids setState in an effect when the URL changes).
+ */
+function YouTubeThumbnailBackground({ videoUrl }: { videoUrl: string }) {
+  const youtube = getYouTubeEmbedSrc(videoUrl);
+  const [variant, setVariant] = useState<YoutubeThumbQuality>('maxresdefault');
+
+  if (!youtube) return null;
+
+  return (
+    <Image
+      src={`https://img.youtube.com/vi/${youtube.id}/${variant}.jpg`}
+      alt=""
+      fill
+      className="object-cover"
+      sizes="100vw"
+      onError={() => {
+        setVariant((current) => {
+          if (current === 'maxresdefault') return 'sddefault';
+          if (current === 'sddefault') return 'hqdefault';
+          return current;
+        });
+      }}
+    />
+  );
+}
+
 /**
  * Video Banner Component (Client Component)
  * 
@@ -61,9 +90,6 @@ export default function VideoBanner({
   const [data, setData] = useState<VideoBannerData | null>(prefetchedData ?? null);
   const [isVideoPlaying, setIsVideoPlaying] = useState(false);
   const [playerReady, setPlayerReady] = useState(false);
-  const [youtubeThumbVariant, setYoutubeThumbVariant] = useState<'maxresdefault' | 'sddefault' | 'hqdefault'>(
-    'maxresdefault',
-  );
 
   useEffect(() => {
     async function loadData() {
@@ -85,11 +111,6 @@ export default function VideoBanner({
     }
     loadData();
   }, [videoUrl, prefetchedData]);
-
-  useEffect(() => {
-    // Reset to best quality when video changes
-    setYoutubeThumbVariant('maxresdefault');
-  }, [data?.videoUrl]);
 
   useEffect(() => {
     // Warm up YouTube hosts to reduce modal startup delay.
@@ -128,21 +149,13 @@ export default function VideoBanner({
     if (!data.videoUrl) return <div className="w-full h-full bg-gray-800" />;
     if (youtube) {
       return (
-        <img
-          src={`https://img.youtube.com/vi/${youtube.id}/${youtubeThumbVariant}.jpg`}
-          alt=""
-          className="absolute inset-0 w-full h-full object-cover"
-          onError={() => {
-            setYoutubeThumbVariant((current) => {
-              if (current === 'maxresdefault') return 'sddefault';
-              if (current === 'sddefault') return 'hqdefault';
-              return current;
-            });
-          }}
-        />
+        <div className="absolute inset-0">
+          <YouTubeThumbnailBackground key={data.videoUrl} videoUrl={data.videoUrl} />
+        </div>
       );
     }
     if (data.videoUrl.endsWith('.gif')) {
+      /* eslint-disable-next-line @next/next/no-img-element -- GIF `src` may be any origin; not all hosts are in `images.remotePatterns`. */
       return <img src={data.videoUrl} alt="" className="absolute inset-0 w-full h-full object-cover" />;
     }
 
