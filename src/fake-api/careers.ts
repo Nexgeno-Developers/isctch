@@ -94,14 +94,12 @@ export interface CareersListingData {
     notice: string;
     heading: string;
     headingHighlight: string;
-    headingSuffix: string;
-    regions: Array<'All' | 'North America' | 'Latin America' | 'EMEA' | 'Asia Pacific'>;
-    filters: {
-      titlePlaceholder: string;
-      locationPlaceholder: string;
-      functionPlaceholder: string;
-      experiencePlaceholder: string;
-      datePlaceholder: string;
+    headingSuffix?: string;
+    /** Outbound “Apply” targets (shown for every listing row) */
+    socialApplyLinks?: {
+      instagram?: string;
+      linkedin?: string;
+      facebook?: string;
     };
   };
   jobs: CareerJob[];
@@ -330,14 +328,11 @@ export async function getCareersListingData(): Promise<CareersListingData> {
         'We will never ask for personal information unrelated to the job application process, such as bank or credit card data, and never charge any fees to apply to any jobs.',
       heading: 'See all open positions and',
       headingHighlight: 'early career opportunities',
-      headingSuffix: 'or search by region :',
-      regions: ['All', 'North America', 'Latin America', 'EMEA', 'Asia Pacific'],
-      filters: {
-        titlePlaceholder: 'Title',
-        locationPlaceholder: 'Location',
-        functionPlaceholder: 'All',
-        experiencePlaceholder: 'Experience Level',
-        datePlaceholder: 'Date',
+      headingSuffix: 'and connect with us on social media.',
+      socialApplyLinks: {
+        instagram: 'https://www.instagram.com/lamipak/',
+        linkedin: 'https://www.linkedin.com/company/lamipak/',
+        facebook: 'https://www.facebook.com/lamipak/',
       },
     },
     jobs: JOBS,

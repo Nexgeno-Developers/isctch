@@ -60,7 +60,8 @@ function buildCompanyApiUrl(endpoint: string): string | null {
 function normalizeApiAssetUrl(url?: string | null): string | undefined {
   if (!url) return undefined;
   if (/^https?:\/\//i.test(url)) return url;
-  const domain = COMPANY_API_DOMAIN.replace(/\/+$/, '');
+  const domain = COMPANY_API_DOMAIN?.trim()?.replace(/\/+$/, '');
+  if (!domain) return undefined;
   const path = url.startsWith('/') ? url : `/${url}`;
   return `${domain}${path}`;
 }

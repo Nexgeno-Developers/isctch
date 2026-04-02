@@ -1,10 +1,15 @@
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 import type { ComponentType } from 'react';
+import { cache } from 'react';
 import { getCanonicalUrl } from '@/config/site';
 
 import type { ProductCategory } from '@/lib/api';
-import { getCategoryBySlug, getProductsByCategory } from '@/lib/api';
+import {
+  fetchCareersListingData,
+  getCategoryBySlug,
+  getProductsByCategory,
+} from '@/lib/api';
 import LamiraPage from '@/components/LamiraPage';
 import GreenEffortsPage from '@/components/GreenEffortsPage';
 import CmsPage from '@/components/CmsPage';
@@ -58,6 +63,9 @@ import {
   getDynamicPageBySlug,
   type DynamicPageData,
 } from '@/fake-api/dynamic-pages';
+import CareerLandingPage from '@/components/CareerLandingPage';
+
+const getCareersListingCached = cache(async () => fetchCareersListingData());
 
 interface PageProps {
   params: Promise<{
@@ -87,6 +95,22 @@ async function fetchPageData(fullSlug: string) {
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
   const fullSlug = slug?.join('/') || ''; // ✅ MAIN FIX
+
+  if (fullSlug === 'career') {
+    const data = await getCareersListingCached();
+    const canonicalUrl = getCanonicalUrl('/career');
+    return {
+      title: data.seo.meta_title,
+      description: data.seo.meta_description,
+      alternates: { canonical: canonicalUrl },
+      openGraph: {
+        title: data.seo.meta_title,
+        description: data.seo.meta_description,
+        url: canonicalUrl,
+        type: 'website',
+      },
+    };
+  }
 
   const industryLayout = await fetchProductIndustryDetailLayoutPage(fullSlug);
   if (industryLayout) {
@@ -485,6 +509,11 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 export default async function DynamicPage({ params }: PageProps) {
   const { slug } = await params;
   const fullSlug = slug?.join('/') || ''; // ✅ MAIN FIX
+
+  if (fullSlug === 'career') {
+    const data = await getCareersListingCached();
+    return <CareerLandingPage data={data} />;
+  }
 
   const industryLayout = await fetchProductIndustryDetailLayoutPage(fullSlug);
   if (industryLayout) {
