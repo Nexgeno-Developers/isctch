@@ -28,6 +28,7 @@ type TechnicalServicesApiResponse = {
         id?: number;
         title?: string;
         slug?: string;
+        short_summary_icon?: Media;
         short_summary_image?: Media;
         short_summary_title?: string;
         short_summary_description?: string;
@@ -301,7 +302,8 @@ export async function fetchTechnicalServicesLayoutPage(slug: string) {
             id: String(block.id ?? `op-${idx}`),
             title,
             description: stripHtml(block.short_summary_description) || '',
-            image: mediaUrl(block.short_summary_image) || '',
+            image:
+              mediaUrl(block.short_summary_image) || mediaUrl(block.short_summary_icon) || '',
             imageAlt: title,
             ctaText: 'Discover More',
             ctaLink: slugToHref(blockSlug),
