@@ -89,13 +89,13 @@ export default function TechnicalServiceDetailLayoutPage({
                 <RichText
                   as="div"
                   html={data.introDescriptionHtml}
-                  className="text-lg md:text-xl text-black leading-relaxed"
+                  className="text-base md:text-base text-black leading-relaxed"
                 />
               ) : (
                 <RichText
                   as="div"
                   html={data.introDescription}
-                  className="text-lg md:text-xl text-black leading-relaxed"
+                  className="text-base md:text-base text-black leading-relaxed"
                 />
               )}
             </div>
@@ -108,7 +108,11 @@ export default function TechnicalServiceDetailLayoutPage({
         <VerticalTabsFeatures features={data.detailedFeatures} />
       ) : null}
 
+      <section className="bg-gray-50 pt-4 lg:pt-12">
       <VideoBanner videoOnly={true} />
+      </section>
+
+     
 
       {/* Operational blocks (from meta.page_blocks) */}
       {data.operationalBlocks.length > 0 ? (

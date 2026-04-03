@@ -67,7 +67,7 @@ export default function VerticalTabsFeatures({ features }: VerticalTabsFeaturesP
 
                 {/* Content */}
                 <div className={`relative z-10 h-full flex flex-col transition-all duration-500 ${
-                  isHovered ? 'p-6 md:p-8 lg:p-10' : 'p-4'
+                  isHovered ? 'p-4 md:p-4 lg:p-6' : 'p-4'
                 }`}>
                   {isHovered ? (
                     /* Expanded View - Full Details */
@@ -83,7 +83,7 @@ export default function VerticalTabsFeatures({ features }: VerticalTabsFeaturesP
                       </div>
 
                       <div className="mt-6 flex-1 flex flex-col">
-                      <h3 className="text-xl md:text-2xl lg:text-3xl font-bold text-black mb-3">
+                      <h3 className="text-lg md:text-xl lg:text-2xl font-bold text-black mb-3">
                         {feature.title}
                       </h3>
                       <p className="text-black text-base md:text-base leading-relaxed">

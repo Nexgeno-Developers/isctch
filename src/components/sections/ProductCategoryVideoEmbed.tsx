@@ -6,7 +6,7 @@ export function ProductCategoryVideoEmbed({ videoUrl }: Props) {
   const embedUrl = getYouTubeEmbedUrl(videoUrl);
 
   return (
-    <div className="mt-20 w-full mx-auto">
+    <div className="w-full mx-auto">
       {embedUrl ? (
         <div className="relative w-full aspect-video overflow-hidden">
           <iframe

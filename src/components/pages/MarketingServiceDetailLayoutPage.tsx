@@ -19,7 +19,7 @@ export default function MarketingServiceDetailLayoutPage({
 }) {
   const connect = {
     formTitle: 'Send Us A Message',
-    illustrationImage: '/contact.png',
+    illustrationImage: '/connected_image.jpg',
     illustrationAlt: 'Connect with experts',
   };
 
@@ -121,7 +121,7 @@ export default function MarketingServiceDetailLayoutPage({
 
       {/* Video */}
       {data.videoUrl ? (
-        <section className="bg-gray-50 py-4 md:pb-8">
+        <section className="bg-gray-50 py-4">
           <div className="">
             <ProductCategoryVideoEmbed videoUrl={data.videoUrl} />
           </div>
