@@ -147,13 +147,14 @@ export default function TechnicalServiceDetailLayoutPage({
                   href={item.href}
                   className="group bg-white rounded-[20px] p-4 md:p-5 transition-shadow duration-300 flex flex-col h-full"
                 >
-                  <div className="relative w-full aspect-[16/10] overflow-hidden rounded-2xl bg-gray-100">
+                  <div className="relative w-full h-[430px] overflow-hidden rounded-2xl">
                     {item.image ? (
                       <Image
                         src={item.image}
                         alt={item.imageAlt || item.title}
-                        fill
-                        className="object-cover"
+                        height={1000}
+                        width={1000}
+                        className="object-contain h-full object-top w-full"
                         sizes="(max-width: 768px) 100vw, 50vw"
                       />
                     ) : (

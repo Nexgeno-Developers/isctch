@@ -42,7 +42,7 @@ export default function VerticalTabsFeatures({ features }: VerticalTabsFeaturesP
                 key={feature.id}
                 onMouseEnter={() => setHoveredIndex(index)}
                 onMouseLeave={() => setHoveredIndex(0)}
-                className={`rounded-[25px] overflow-hidden transition-all duration-500 ease-in-out cursor-pointer relative h-[500px] md:h-[600px] flex-shrink-0 ${
+                className={`rounded-[25px] overflow-hidden transition-all duration-500 ease-in-out cursor-pointer relative h-[400px] md:h-[550px] flex-shrink-0 ${
                   isHovered 
                     ? 'w-[30%] z-10 shadow-2xl' 
                     : 'w-[12%]'
@@ -86,7 +86,7 @@ export default function VerticalTabsFeatures({ features }: VerticalTabsFeaturesP
                       <h3 className="text-lg md:text-xl lg:text-2xl font-bold text-black mb-3">
                         {feature.title}
                       </h3>
-                      <p className="text-black text-base md:text-base leading-relaxed">
+                      <p className="text-black text-base md:text-base leading-relaxed line-clamp-4">
                         {feature.description}
                       </p>
                       </div>

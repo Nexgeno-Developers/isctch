@@ -313,7 +313,7 @@ export default async function TechnicalServicesLayoutPage({
                       alt={card.imageAlt}
                       width={800}
                       height={600}
-                      className="w-full h-auto object-cover"
+                      className="w-full h-[230px] object-cover object-top"
                       sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw"
                     />
                   </div>
@@ -325,7 +325,7 @@ export default async function TechnicalServicesLayoutPage({
                     <RichText
                       as="div"
                       html={card.description}
-                      className="text-black mb-2 flex-1 leading-relaxed"
+                      className="text-black mb-2 flex-1 leading-relaxed line-clamp-3"
                     />
                     <Link
                       href={card.ctaLink}
