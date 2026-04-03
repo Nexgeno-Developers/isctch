@@ -57,7 +57,10 @@ export type TechnicalServiceDetailPageData = {
     id: string;
     title: string;
     description: string;
+    /** Hero image (`short_summary_image`, or `short_summary_icon` if no photo). */
     image?: string;
+    /** Shown beside title when both image and icon exist (`short_summary_icon` + `short_summary_image`). */
+    iconUrl?: string;
     imageAlt?: string;
     href: string;
   }>;
@@ -139,13 +142,16 @@ export async function fetchTechnicalServiceDetailLayoutPage(slug: string) {
           const title = (block.short_summary_title || block.title || '').trim();
           const href = block.slug ? slugToHref(block.slug) : '';
           if (!title || !href) return null;
-          const cardImage =
-            mediaUrl(block.short_summary_image) || mediaUrl(block.short_summary_icon);
+          const cover = mediaUrl(block.short_summary_image);
+          const icon = mediaUrl(block.short_summary_icon);
+          const cardImage = cover || icon;
+          const iconForRow = cover && icon ? icon : undefined;
           return {
             id: String(block.id ?? `b-${idx}`),
             title,
             description: stripHtml(block.short_summary_description) || '',
             image: cardImage,
+            iconUrl: iconForRow,
             imageAlt: title,
             href,
           };

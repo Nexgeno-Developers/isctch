@@ -10,6 +10,22 @@ import ConnectTechnicalExperts from '@/components/technical-services/ConnectTech
 import type { TechnicalServiceDetailPageData } from '@/lib/api/technical_service_detail_layout';
 import { RichText } from '@/components/common/RichText';
 
+function OperationalSectionHeading({ text }: { text: string }) {
+  const trimmed = text.trim();
+  const m = trimmed.match(/^(.+?)\s+(Success)$/i);
+  if (m) {
+    return (
+      <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-center">
+        <span className="text-[#009FE8]">{m[1]}</span>{' '}
+        <span className="text-black">{m[2]}</span>
+      </h2>
+    );
+  }
+  return (
+    <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-center text-black">{trimmed}</h2>
+  );
+}
+
 export default function TechnicalServiceDetailLayoutPage({
   data,
 }: {
@@ -116,61 +132,40 @@ export default function TechnicalServiceDetailLayoutPage({
 
       {/* Operational blocks (from meta.page_blocks) */}
       {data.operationalBlocks.length > 0 ? (
-        <section className="bg-gray-50 py-12 md:py-16 lg:py-20">
+        <section className="bg-gray-50 pt-12 pb-4 md:py-16 md:pt-16 md:pb-8 lg:pt-20 lg:pb-8">
           <div className="container mx-auto px-4">
-            <div className="text-center mb-8 md:mb-12">
-              <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-black">
-                {data.operationalTitle || 'Driving Operational Success'}
-              </h2>
+            <div className="mb-10 md:mb-14">
+              <OperationalSectionHeading
+                text={data.operationalTitle || 'Driving Operational Success'}
+              />
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
               {data.operationalBlocks.map((item) => (
                 <Link
                   key={item.id}
                   href={item.href}
-                  className="bg-white rounded-[50px] overflow-hidden transition-all duration-300 flex flex-col h-full p-[15px] hover:shadow-md"
+                  className="group bg-white rounded-[20px] p-4 md:p-5 transition-shadow duration-300 flex flex-col h-full"
                 >
-                  <div className="relative w-full h-auto overflow-hidden bg-gray-100 rounded-[50px]">
+                  <div className="relative w-full aspect-[16/10] overflow-hidden rounded-2xl bg-gray-100">
                     {item.image ? (
                       <Image
                         src={item.image}
                         alt={item.imageAlt || item.title}
-                        width={800}
-                        height={600}
-                        className="w-full h-auto object-cover"
-                        sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                        fill
+                        className="object-cover"
+                        sizes="(max-width: 768px) 100vw, 50vw"
                       />
                     ) : (
-                      <div className="w-full aspect-[4/3] bg-gray-200" />
+                      <div className="absolute inset-0 bg-gray-200" />
                     )}
                   </div>
 
-                  <div className="pl-[15px] pr-[15px] pt-[25px] pb-[15px] flex-1 flex flex-col">
-                    <h3 className="text-xl md:text-2xl font-bold text-[#009FE8] mb-4">
+                  <div className="flex items-center justify-center gap-3 pt-6 md:pt-8 pb-2 px-2">
+                    
+                    <h3 className="text-lg md:text-xl font-bold text-black text-center">
                       {item.title}
                     </h3>
-                    <RichText
-                      as="div"
-                      html={item.description}
-                      className="text-black mb-2 flex-1 leading-relaxed"
-                    />
-                    <div className="inline-flex items-center text-[#009FE8] font-medium hover:text-[#0077B6] transition-colors group">
-                      Discover More
-                      <svg
-                        className="w-5 h-5 ml-2 transform group-hover:translate-x-1 transition-transform"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M17 8l4 4m0 0l-4 4m4-4H3"
-                        />
-                      </svg>
-                    </div>
                   </div>
                 </Link>
               ))}
