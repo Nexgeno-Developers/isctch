@@ -6,8 +6,6 @@ import { RichText } from '@/components/common/RichText';
 import IndustriesFeaturedCarousel from '@/components/industries/IndustriesFeaturedCarousel';
 
 export default function ProductIndustriesLayoutPage({ data }: { data: ProductIndustriesPageData }) {
-  const insightsBg = data.insights?.image || '/technical_bg.jpg';
-
   return (
     <main className="min-h-screen bg-[#f8f8f8]">
       {/* Hero */}
@@ -81,7 +79,7 @@ export default function ProductIndustriesLayoutPage({ data }: { data: ProductInd
         <section className="relative overflow-hidden py-14 md:py-20">
           <div className="pointer-events-none absolute inset-0">
             <Image
-              src={insightsBg}
+              src="/technical_bg.jpg"
               alt=""
               fill
               className="object-cover"
