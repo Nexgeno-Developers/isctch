@@ -49,18 +49,20 @@ export default function PickCartoonPage({ data }: PickCartoonPageProps) {
                   {section.items.map((item) => (
                     <div key={item.id}>
                       <div className="relative overflow-hidden rounded-[50px] bg-gray-100">
-                        <div className="relative w-full pt-[70%]">
-                          <Image
-                            src={item.image}
-                            alt={item.imageAlt || data.title}
-                            fill
-                            className="object-cover"
-                            sizes="(max-width: 768px) 100vw, 50vw"
-                          />
-                        </div>
+                        {item.image && (
+                          <div className="relative w-full pt-[70%]">
+                            <Image
+                              src={item.image}
+                              alt={item.imageAlt || data.title}
+                              fill
+                              className="object-cover"
+                              sizes="(max-width: 768px) 100vw, 50vw"
+                            />
+                          </div>
+                        )}
                       </div>
 
-                      
+
                       <RichText
                         as="div"
                         html={item.description}
@@ -79,16 +81,18 @@ export default function PickCartoonPage({ data }: PickCartoonPageProps) {
             <section key={idx} className="bg-gray-50 py-10 md:py-12">
               <div className="container mx-auto px-4">
                 <div className="relative overflow-hidden rounded-[50px] ">
-                  <div className="absolute inset-0">
-                    <Image
-                      src={section.backgroundImage}
-                      alt={section.backgroundAlt || ''}
-                      fill
-                      className="object-cover"
-                      sizes="(max-width: 768px) 100vw, 1200px"
-                    />
-                    <div className="absolute inset-0 bg-black/40" />
-                  </div>
+                  {section.backgroundImage && (
+                    <div className="absolute inset-0">
+                      <Image
+                        src={section.backgroundImage}
+                        alt={section.backgroundAlt || ''}
+                        fill
+                        className="object-cover"
+                        sizes="(max-width: 768px) 100vw, 1200px"
+                      />
+                      <div className="absolute inset-0 bg-black/40" />
+                    </div>
+                  )}
 
                   <div className="relative px-6  md:px-12 md:pt-[120px] md:pb-[120px] ">
                     <p className="mx-auto max-w-5xl text-center text-sm md:text-[32px] font-semibold leading-relaxed text-white">
@@ -124,15 +128,17 @@ export default function PickCartoonPage({ data }: PickCartoonPageProps) {
                     >
                       <div className="px-5 pt-5">
                         <div className="relative w-full overflow-hidden rounded-[50px] bg-gray-100">
-                          <div className="relative w-full pt-[58%]">
-                            <Image
-                              src={item.image}
-                              alt={item.imageAlt || item.title}
-                              fill
-                              className="object-cover"
-                              sizes="(max-width: 768px) 100vw, 33vw"
-                            />
-                          </div>
+                          {item.image && (
+                            <div className="relative w-full pt-[58%]">
+                              <Image
+                                src={item.image}
+                                alt={item.imageAlt || item.title}
+                                fill
+                                className="object-cover"
+                                sizes="(max-width: 768px) 100vw, 33vw"
+                              />
+                            </div>
+                          )}
                         </div>
                       </div>
                       <div className="px-5 pb-6 pt-4">
@@ -157,13 +163,15 @@ export default function PickCartoonPage({ data }: PickCartoonPageProps) {
               <div className="container mx-auto px-4">
                 <div className="relative px-6  md:px-12 md:pt-[120px] md:pb-[120px] rounded-[50px]">
                   <div className="absolute inset-0 rounded-[50px]">
-                    <Image
-                      src={section.backgroundImage}
-                      alt={section.backgroundAlt || ''}
-                      fill
-                      className="object-cover rounded-[50px]"
-                      sizes="(max-width: 768px) 100vw, 1200px"
-                    />
+                    {section.backgroundImage && (
+                      <Image
+                        src={section.backgroundImage}
+                        alt={section.backgroundAlt || ''}
+                        fill
+                        className="object-cover rounded-[50px]"
+                        sizes="(max-width: 768px) 100vw, 1200px"
+                      />
+                    )}
                     <div className="absolute inset-0 bg-black/35 rounded-[50px]" />
                     <div className="absolute inset-0 bg-gradient-to-r from-black/55 via-black/25 to-transparent rounded-[50px]" />
                   </div>
@@ -192,11 +200,8 @@ export default function PickCartoonPage({ data }: PickCartoonPageProps) {
                 <div className="text-center max-w-4xl mx-auto">
                   <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-2 md:mb-2 text-black" dangerouslySetInnerHTML={{ __html: section.heading }} />
 
-                  {(section.introBold || section.introText) && (
-                    <p className="mt-3 text-xs md:text-base text-black leading-relaxed">
-                      {section.introBold ? (
-                        <span className="font-semibold">{section.introBold} </span>
-                      ) : null}
+                  {(section.introText) && (
+                    <p className="mt-3 text-base text-black mb-6 leading-relaxed">
                       {section.introText}
                     </p>
                   )}
@@ -208,12 +213,7 @@ export default function PickCartoonPage({ data }: PickCartoonPageProps) {
                       key={card.id}
                       className="rounded-[50px] bg-[#EDF0F1] px-6 py-8 text-center"
                     >
-                      <div className="text-xl md:text-2xl font-extrabold text-black">
-                        {card.value}
-                      </div>
-                      <div className="mt-1 text-xl md:text-2xl font-extrabold text-black">
-                        {card.title}
-                      </div>
+                      <div className="mt-1 text-xl md:text-2xl font-extrabold text-black" dangerouslySetInnerHTML={{ __html: card.title }} />
 
                       <p className="mt-4 text-xs md:text-base text-black leading-relaxed">
                         {card.descriptionEmphasis ? (
@@ -239,20 +239,23 @@ export default function PickCartoonPage({ data }: PickCartoonPageProps) {
           return (
             <section key={idx} className="bg-gray-50 py-12 md:py-12">
               <div className="container mx-auto px-4">
-                <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-2 md:mb-10 text-black text-center">
-                  {section.heading}
-                </h2>
+                <h2
+                  className="text-3xl md:text-4xl lg:text-5xl font-bold mb-2 md:mb-10 text-black text-center"
+                  dangerouslySetInnerHTML={{ __html: section.heading }}
+                />
 
                 <div className="mt-6 overflow-hidden rounded-[50px] border border-gray-100 bg-gray-50">
                   <div className="relative w-full overflow-hidden">
-                    <Image
-                      src={section.image}
-                      alt={section.imageAlt || section.heading}
-                      width={1600}
-                      height={1200}
-                      className="h-auto w-full object-cover"
-                      priority
-                    />
+                    {section.image && (
+                      <Image
+                        src={section.image}
+                        alt={section.imageAlt || section.heading}
+                        width={1600}
+                        height={1200}
+                        className="h-auto w-full object-cover"
+                        priority
+                      />
+                    )}
                   </div>
                 </div>
 
@@ -271,13 +274,7 @@ export default function PickCartoonPage({ data }: PickCartoonPageProps) {
                       {section.ctaText}
                     </Link>
                   </div>
-                ) : (
-                  <div className="mt-4 text-center">
-                    <span className="text-[#009FE8] text-xs md:text-sm font-semibold">
-                      {section.ctaText}
-                    </span>
-                  </div>
-                )}
+                ) : null}
               </div>
             </section>
           );
