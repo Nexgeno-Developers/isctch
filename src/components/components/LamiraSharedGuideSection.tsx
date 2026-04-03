@@ -1,5 +1,4 @@
 import Image from 'next/image';
-import { formatBoldText } from '@/lib/htmlText';
 import { RichText } from '@/components/common/RichText';
 
 export interface LamiraSharedGuideSectionData {
