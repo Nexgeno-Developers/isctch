@@ -62,6 +62,9 @@ export type PilotPlantAgileHighlight = {
 
 export type PilotPlantEcosystemStep = {
   id: string;
+  /** Hero image for card top (dairy / process visual) */
+  image?: string;
+  imageAlt: string;
   step: string;
   phase: string;
   title: string;
@@ -182,6 +185,8 @@ const DEFAULT_PAGE: PilotPlantPageData = {
   ecosystemSteps: [
     {
       id: 'e1',
+      image: '/about_banner.jpg',
+      imageAlt: 'Dairy products — ideation',
       step: '01',
       phase: 'IDEATION',
       title: 'Recipe Concept',
@@ -189,6 +194,8 @@ const DEFAULT_PAGE: PilotPlantPageData = {
     },
     {
       id: 'e2',
+      image: '/about_banner.jpg',
+      imageAlt: 'Dairy products — pilot fill',
       step: '02',
       phase: 'PILOT FILL',
       title: 'Technical Trial',
@@ -196,6 +203,8 @@ const DEFAULT_PAGE: PilotPlantPageData = {
     },
     {
       id: 'e3',
+      image: '/about_banner.jpg',
+      imageAlt: 'Dairy products — validation',
       step: '03',
       phase: 'VALIDATION',
       title: 'Audit Stage',
@@ -203,6 +212,8 @@ const DEFAULT_PAGE: PilotPlantPageData = {
     },
     {
       id: 'e4',
+      image: '/about_banner.jpg',
+      imageAlt: 'Dairy products — industrial',
       step: '04',
       phase: 'INDUSTRIAL',
       title: 'Mass Rollout',
