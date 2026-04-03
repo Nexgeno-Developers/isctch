@@ -59,6 +59,8 @@ import { fetchProductIndustryDetailLayoutPage } from '@/lib/api/product_industry
 import ProductIndustryDetailLayoutPageSection from '@/components/sections/ProductIndustryDetailLayoutPageSection';
 import { fetchProductIndustriesLayoutPage } from '@/lib/api/product_industries_layout';
 import ProductIndustriesLayoutPage from '@/components/pages/ProductIndustriesLayoutPage';
+import { fetchRAndDCentreLayoutPage } from '@/lib/api/r_and_d_centre_layout';
+import RAndDCentreLayoutPage from '@/components/pages/RAndDCentreLayoutPage';
 
 import {
   getDynamicPageBySlug,
@@ -101,6 +103,15 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       slug: productIndustriesLayout.slug,
       title: productIndustriesLayout.title,
       seo: productIndustriesLayout.seo || {},
+    });
+  }
+
+  const rAndDCentreLayout = await fetchRAndDCentreLayoutPage(fullSlug);
+  if (rAndDCentreLayout) {
+    return buildApiMetadata({
+      slug: rAndDCentreLayout.slug,
+      title: rAndDCentreLayout.title,
+      seo: rAndDCentreLayout.seo || {},
     });
   }
 
@@ -514,6 +525,11 @@ export default async function DynamicPage({ params }: PageProps) {
   const productIndustriesLayout = await fetchProductIndustriesLayoutPage(fullSlug);
   if (productIndustriesLayout) {
     return <ProductIndustriesLayoutPage data={productIndustriesLayout.page} />;
+  }
+
+  const rAndDCentreLayout = await fetchRAndDCentreLayoutPage(fullSlug);
+  if (rAndDCentreLayout) {
+    return <RAndDCentreLayoutPage data={rAndDCentreLayout.page} />;
   }
 
   const industryLayout = await fetchProductIndustryDetailLayoutPage(fullSlug);
