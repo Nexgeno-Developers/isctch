@@ -35,7 +35,7 @@ export default function ProductIndustriesLayoutPage({ data }: { data: ProductInd
             </p>
           ) : null}
         </div>
-      </section>
+      </section>   
 
       {/* Industrial Segments */}
       {data.industries.length > 0 ? (
