@@ -9,8 +9,7 @@ export interface CertificationsAchievementsPageData {
 
 export interface GreenBuildingCertificationsSectionData {
   eyebrow: string;
-  headingGreen: string;
-  headingBlack: string;
+  heading: string;
   eyebrowColor?: string;
   headingGreenColor?: string;
   pillColor?: string;
@@ -196,9 +195,8 @@ export async function fetchSustainabilityLayout4Page(slug: string): Promise<{
     const greenBuildingSection: GreenBuildingCertificationsSectionData | undefined =
       greenBuildingCards.length
         ? {
-            eyebrow: meta.hero_title || 'PROTECTING ENVIRONMENT',
-            headingGreen: greenBuildingHeading.blue,
-            headingBlack: greenBuildingHeading.black,
+            eyebrow: formatBoldText(meta.hero_title || 'PROTECTING ENVIRONMENT'),
+            heading: formatBoldText(meta.hero_subtitle || 'Green Building Certifications'),
             eyebrowColor: '#00AEEF',
             headingGreenColor: '#009FE8',
             pillColor: '#009CFF',

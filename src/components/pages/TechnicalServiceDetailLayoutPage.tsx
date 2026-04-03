@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
+import { formatBoldText } from '@/lib/htmlText';
 
 import Breadcrumbs from '@/components/common/Breadcrumbs';
 import VideoBanner from '@/components/home/VideoBanner';

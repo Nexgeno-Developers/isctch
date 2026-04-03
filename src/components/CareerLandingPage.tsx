@@ -1,5 +1,6 @@
 import Link from 'next/link';
-import type { CareerLandingPageData, CareerJob } from '@/lib/api/career_layout';
+import { formatBoldText } from '@/lib/htmlText';
+import type { CareerLandingPageData } from '@/lib/api/career_layout';
 import CompanyHero from '@/components/company/CompanyHero';
 import Breadcrumbs from '@/components/common/Breadcrumbs';
 import VideoModalClient from '@/components/common/VideoModalClient';
@@ -34,7 +35,7 @@ export default function CareerLandingPage({ data }: CareerLandingPageProps) {
           <div className="grid grid-cols-1 items-stretch gap-0 lg:grid-cols-2">
             <div className="flex items-center justify-center p-8 md:p-12 lg:p-16 xl:p-20">
               <div className="max-w-xl">
-                <h2 className="mb-6 text-3xl font-bold leading-[1.15] text-[#0E233C] md:text-4xl lg:text-5xl" dangerouslySetInnerHTML={{ __html: data.heroSplit.heading }} />
+                <h2 className="mb-6 text-3xl font-bold leading-[1.15] text-black md:text-4xl lg:text-5xl" dangerouslySetInnerHTML={{ __html: formatBoldText(data.heroSplit.heading) }} />
 
                 <p className="mt-8 text-base font-semibold text-[#0E233C] md:text-lg">
                   {data.heroSplit.emphasis}
@@ -100,7 +101,7 @@ export default function CareerLandingPage({ data }: CareerLandingPageProps) {
                 </div>
 
                 <div className="max-w-3xl">
-                  <h2 className="mb-5 text-2xl font-bold text-[#0E233C] md:text-3xl lg:text-5xl" dangerouslySetInnerHTML={{ __html: data.leadershipMessage.heading }} />
+                  <h2 className="mb-5 text-2xl font-bold text-black md:text-3xl lg:text-5xl" dangerouslySetInnerHTML={{ __html: formatBoldText(data.leadershipMessage.heading) }} />
                   <div className="space-y-5 text-sm leading-relaxed text-black md:text-base">
                     {data.leadershipMessage.paragraphs.map((p, i) => (
                       <p key={i}>{p}</p>
@@ -119,7 +120,7 @@ export default function CareerLandingPage({ data }: CareerLandingPageProps) {
             <section className="bg-gray-50 pt-10 md:pt-8">
               <div className="container mx-auto px-4">
                 <div className="mx-auto max-w-3xl text-center">
-                  <h2 className="text-2xl font-bold text-[#0E233C] md:text-3xl lg:text-5xl" dangerouslySetInnerHTML={{ __html: data.verticalFeaturesHeader.heading }} />
+                  <h2 className="text-2xl font-bold text-black md:text-3xl lg:text-5xl" dangerouslySetInnerHTML={{ __html: formatBoldText(data.verticalFeaturesHeader.heading)}} />
                   <p className="mt-3 text-sm text-gray-600 md:text-base">
                     {data.verticalFeaturesHeader.description}
                   </p>
@@ -135,7 +136,7 @@ export default function CareerLandingPage({ data }: CareerLandingPageProps) {
         <section className="bg-gray-50 py-8 md:py-12 lg:py-12">
           <div className="container mx-auto px-4">
             <div className="mx-auto mb-10 max-w-4xl text-center md:mb-12">
-              <h2 className="text-2xl font-bold leading-tight text-[#0E233C] md:text-3xl lg:text-5xl" dangerouslySetInnerHTML={{ __html: data.expertsSection.heading }} />
+              <h2 className="text-2xl font-bold leading-tight text-black md:text-3xl lg:text-5xl" dangerouslySetInnerHTML={{ __html: formatBoldText(data.expertsSection.heading) }} />
               <p className="mt-4 text-sm text-gray-600 md:text-base">
                 {data.expertsSection.description}
               </p>

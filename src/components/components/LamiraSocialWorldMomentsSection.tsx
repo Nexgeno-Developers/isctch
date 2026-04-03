@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import { formatBoldText } from '@/lib/htmlText';
 
 export interface LamiraSocialWorldMomentsSectionData {
   heading: string;

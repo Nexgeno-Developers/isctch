@@ -108,7 +108,7 @@ export async function fetchAboutUsLayout3Page(slug: string) {
     };
 
     const page: AboutUsLayout3PageData = {
-      title: data.title,
+      title: formatBoldText(data.title),
       heroBackgroundImage: meta.breadcrumb_image?.url || undefined,
       visionMission,
       ourValues,
@@ -116,7 +116,7 @@ export async function fetchAboutUsLayout3Page(slug: string) {
 
     return {
       slug: data.slug,
-      title: data.title,
+      title: formatBoldText(data.title),
       seo: (data.seo || {}) as any,
       page,
       summary: stripHtml(data.content || data.title),

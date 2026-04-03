@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
+import { formatBoldText } from '@/lib/htmlText';
 import CompanyHero from '@/components/company/CompanyHero';
 import Breadcrumbs from '@/components/common/Breadcrumbs';
 import CallToAction from '@/components/home/CallToAction';
@@ -41,7 +42,7 @@ export default function PickCartoonPage({ data }: PickCartoonPageProps) {
             <section key={idx} className="bg-gray-50 py-12 md:pt-20">
               <div className="container mx-auto px-4">
                 <div className="text-center">
-                  <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6 md:mb-8 text-black" dangerouslySetInnerHTML={{ __html: section.heading }} />
+                  <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6 md:mb-8 text-black" dangerouslySetInnerHTML={{ __html: formatBoldText(section.heading) }} />
                 </div>
 
                 <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-16">
@@ -105,7 +106,7 @@ export default function PickCartoonPage({ data }: PickCartoonPageProps) {
             <section key={idx} className="bg-gray-50 py-12 md:py-12">
               <div className="container mx-auto px-4">
                 <div className="text-center max-w-4xl mx-auto">
-                  <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-2 md:mb-2 text-black" dangerouslySetInnerHTML={{ __html: section.heading }} />
+                  <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-2 md:mb-2 text-black" dangerouslySetInnerHTML={{ __html: formatBoldText(section.heading) }} />
                   {section.description ? (
                     <RichText
                       as="div"

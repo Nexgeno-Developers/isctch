@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import { formatBoldText } from '@/lib/htmlText';
 import type { TechnicalServiceData } from '@/fake-api/technical-services';
 
 interface OperationalSuccessProps {

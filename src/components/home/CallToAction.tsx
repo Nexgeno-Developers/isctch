@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { formatBoldText } from '@/lib/htmlText';
 import { fetchHomepageData } from '@/lib/api/home';
 import { RichText } from '@/components/common/RichText';
 

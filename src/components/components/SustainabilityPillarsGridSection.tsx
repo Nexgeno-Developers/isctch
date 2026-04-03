@@ -1,3 +1,4 @@
+import { formatBoldText } from '@/lib/htmlText';
 import { RichText } from '@/components/common/RichText';
 import type { ComponentType } from 'react';
 import type { CarbonNetZeroPillarsSectionData } from '@/lib/api/sustainability_layout_6';

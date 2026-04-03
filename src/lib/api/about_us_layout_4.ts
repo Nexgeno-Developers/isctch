@@ -379,7 +379,7 @@ export async function fetchAboutUsLayout4Page(slug: string) {
     }
 
     const page: AboutUsLayout4PageData = {
-      title: data.title,
+      title: formatBoldText(data.title),
       heroBackgroundImage: heroBg,
       governanceFrameworkSection,
       governanceFrameworkSecondarySection,
@@ -389,7 +389,7 @@ export async function fetchAboutUsLayout4Page(slug: string) {
 
     return {
       slug: data.slug,
-      title: data.title,
+      title: formatBoldText(data.title),
       seo: (data.seo || {}) as any,
       page,
       summary: stripHtml(data.content || data.title),

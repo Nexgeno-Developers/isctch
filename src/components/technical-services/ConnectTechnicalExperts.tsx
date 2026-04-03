@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
+import { formatBoldText } from '@/lib/htmlText';
 import { submitForm } from '@/lib/forms/client';
 
 type FormState = {

@@ -9,8 +9,7 @@ export interface GreenEffortsPageData {
 }
 
 export interface GreenSustainabilityVisionSectionData {
-  headingBrand: string;
-  headingRest: string;
+  heading: string;
   subtitle: string;
   cards: Array<{
     id: string;

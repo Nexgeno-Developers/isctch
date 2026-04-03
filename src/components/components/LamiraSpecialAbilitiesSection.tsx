@@ -1,3 +1,4 @@
+import { formatBoldText } from '@/lib/htmlText';
 import VideoModalClient from '@/components/common/VideoModalClient';
 
 export interface LamiraSpecialAbilitiesSectionData {

@@ -1,3 +1,4 @@
+import { formatBoldText } from '@/lib/htmlText';
 import { RichText } from '@/components/common/RichText';
 
 export interface LamiraLovesSectionData {

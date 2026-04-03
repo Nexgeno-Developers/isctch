@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
+import { formatBoldText } from '@/lib/htmlText';
 
 import VideoModalClient from '@/components/common/VideoModalClient';
 import CallToAction from '@/components/home/CallToAction';
@@ -88,9 +89,7 @@ export default async function TechnicalServicesLayoutPage({
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-0 items-center">
             <div className="pr-[40px]">
-              <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-[#0e233c] mb-6">
-                {data.introSection.heading}
-              </h2>
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-black mb-6" dangerouslySetInnerHTML={{ __html: data.introSection.heading }} />
               {data.introSection.paragraphs.map((paragraph, index) => (
                 <p
                   key={index}

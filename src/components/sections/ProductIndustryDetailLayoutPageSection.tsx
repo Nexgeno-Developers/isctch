@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
+import { formatBoldText } from '@/lib/htmlText';
 import LatestInsights from '@/components/home/LatestInsights';
 import ContactSustainability from '@/components/products/ContactSustainability';
 import TechnicalConsultationCTA from '@/components/products/TechnicalConsultationCTA';

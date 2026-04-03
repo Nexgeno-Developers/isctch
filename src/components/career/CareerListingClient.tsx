@@ -1,5 +1,6 @@
 'use client';
 
+import { formatBoldText } from '@/lib/htmlText';
 import type { CareerLandingPageData, CareerJob } from '@/lib/api/career_layout';
 
 function formatPostedDate(iso: string) {
@@ -41,7 +42,6 @@ function SocialApplyLinks({ links }: { links: SocialLinks | undefined }) {
 }
 
 export default function CareerListingClient({
-  jobs,
   jobsSection,
 }: {
   jobs: CareerJob[];

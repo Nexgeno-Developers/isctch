@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
+import { formatBoldText } from '@/lib/htmlText';
 
 import type { ProductIndustriesPageData } from '@/lib/api/product_industries_layout';
 import { RichText } from '@/components/common/RichText';
