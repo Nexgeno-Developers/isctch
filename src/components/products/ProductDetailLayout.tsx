@@ -108,18 +108,21 @@ export default function ProductDetailLayout({
         </section>
 
         <ProductSpecifications product={product} />
-<div className="container mx-auto px-4 rounded-[50px]  md:pb-12 pb-4 md:pt-8 pt-4">
-        {productVideoUrl ? (
-          <VideoBanner
-            prefetchedData={{
-              title: '',
-              preTitle: '',
-              ctaText: '',
-              ctaLink: '',
-              videoUrl: productVideoUrl,
-            }}
-          />
-        ) : null}
+
+        <div className="container mx-auto px-4 pb-4 pt-4 md:pb-12 md:pt-8">
+          {productVideoUrl ? (
+            <div className="overflow-hidden rounded-[50px]">
+              <VideoBanner
+                prefetchedData={{
+                  title: '',
+                  preTitle: '',
+                  ctaText: '',
+                  ctaLink: '',
+                  videoUrl: productVideoUrl,
+                }}
+              />
+            </div>
+          ) : null}
         </div>
 
         {product.productFeatures && product.productFeatures.length > 0 && (
