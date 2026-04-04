@@ -1,5 +1,5 @@
 import { formatBoldText } from '@/lib/htmlText';
-import type { FAQData, FAQItem } from '@/fake-api/homepage';
+import type { FAQData, FAQItem } from '@/lib/api/home';
 import FAQItemClient from './FAQItemClient';
 
 interface FAQClientProps {

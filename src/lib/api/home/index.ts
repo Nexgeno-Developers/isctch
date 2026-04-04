@@ -1,87 +1,224 @@
 import { cache } from 'react';
 import { formatBoldText } from '@/lib/htmlText';
-import { getHomepageData } from '@/fake-api/homepage';
-import type {
-  CommercialServiceCard,
-  CommercialServicesData,
-  FAQData,
-  FAQItem,
-  Hero,
-  HeroSlide,
-  HomepageData,
-  ProductSustainabilityData,
-  SustainabilityProductCard,
-  SustainabilityWorkCard,
-  VideoBannerData,
-  WorkInSustainabilityData,
-} from '@/fake-api/homepage';
 
-export type { HomepageData } from '@/fake-api/homepage';
+// ==================== Types ====================
 
-/**
- * When unset or not `1`, `/v1/page/home` is fetched and merged (same host as COMPANY_API_BASE_URL).
- * Set `HOME_PAGE_USE_FAKE_ONLY=1` to skip the network and use only `fake-api/homepage` stubs.
- */
-function shouldMergeHomeFromApi(): boolean {
-  return process.env.HOME_PAGE_USE_FAKE_ONLY !== '1';
-}
+export type MediaRef = { id?: number; filename?: string; url?: string | null };
 
-/**
- * Homepage data: fake/local fallbacks from `getHomepageData()`, merged with the real `/v1/page/home`
- * response when enabled. Cached per request for parallel server components.
- */
-export const fetchHomepageData = cache(async (): Promise<HomepageData> => {
-  const base = await getHomepageData();
-  if (!shouldMergeHomeFromApi()) {
-    return base;
-  }
-  return mergeHomepageFromApi(base);
-});
+export type HeroSlide = {
+  id: string;
+  category: string;
+  title: string;
+  description: string;
+  ctaText: string;
+  ctaLink: string;
+  backgroundImage: string;
+};
 
-const COMPANY_API_BASE_URL =
-  process.env.COMPANY_API_BASE_URL || 'https://backend-lamipak.webtesting.pw/api';
+export type Hero = {
+  slides: HeroSlide[];
+  categories: Array<{
+    id: string;
+    label: string;
+    href: string;
+    slideIndex: number;
+  }>;
+  videoUrl?: string;
+};
 
-const HOME_AUTOFETCH =
-  'services,marketing_services,technical_services,sustainable_products,sustainabilities';
+export type CommercialServiceCard = {
+  id: string;
+  title: string;
+  description: string;
+  image: string;
+  imageAlt: string;
+  ctaText: string;
+  ctaLink: string;
+  iconUrl?: string;
+  icon: 'gear' | 'megaphone';
+};
 
-const HOME_REVALIDATE_SECONDS = 300;
+export type CommercialServicesData = {
+  cards: CommercialServiceCard[];
+};
 
-const HERO_CTA_ROTATION = [
-  'EXPLORE SOLUTIONS',
-  'DISCOVER MORE',
-  'LEARN MORE',
-  'GET STARTED',
-  'EXPLORE NOW',
-  'EXPLORE NOW',
-  'EXPLORE NOW',
-  'EXPLORE NOW',
-] as const;
+export type VideoBannerData = {
+  title: string;
+  preTitle: string;
+  preDescription?: string;
+  videoUrl?: string;
+  ctaText: string;
+  ctaLink: string;
+};
 
-type MediaRef = { id?: number; filename?: string; url?: string | null };
+export type SustainabilityProductCard = {
+  id: string;
+  title: string;
+  label: string;
+  description: string;
+  image: string;
+  imageAlt: string;
+  link: string;
+  ctaText: string;
+};
 
-type HomePageApiResponse = {
-  data?: {
-    id?: number;
-    slug?: string;
-    layout?: string;
-    meta?: HomeMetaApi;
-    seo?: {
-      title?: string | null;
-      description?: string | null;
-      canonical_url?: string | null;
-      schema?: unknown;
-    };
-    autofetch?: HomeAutofetchApi;
+export type ProductSustainabilityData = {
+  products: SustainabilityProductCard[];
+};
+
+export type SustainabilityWorkCard = {
+  id: string;
+  title: string;
+  description: string;
+  image: string;
+  imageAlt: string;
+  link: string;
+  ctaText: string;
+};
+
+export type WorkInSustainabilityData = {
+  cards: SustainabilityWorkCard[];
+};
+
+export type FAQItem = {
+  id: string;
+  question: string;
+  answer: string;
+};
+
+export type FAQData = {
+  items: FAQItem[];
+};
+
+export type HomepageData = {
+  hero: Hero;
+  videoBanner: VideoBannerData;
+  commercialServices: CommercialServicesData;
+  productSustainability: ProductSustainabilityData;
+  workInSustainability: WorkInSustainabilityData;
+  faq: FAQData;
+  latestPressRelease: LatestPressReleaseData;
+  latestInsights: LatestInsightsData;
+  approach: ApproachData;
+  innovationInPackaging: InnovationInPackagingData;
+  callToAction: CallToActionData;
+  newsletterSubscription: NewsletterSubscriptionData;
+  seo?: {
+    meta_title: string;
+    meta_description: string;
+    canonical_url?: string;
+    schema?: unknown;
   };
 };
 
-type HomeMetaApi = {
-  banner_items?: BannerItemsApi;
-  global_beverage_title?: string;
-  global_beverage_description?: string;
-  global_beverage_video_url?: string;
-  faqs_items?: FaqsItemsApi;
+// Types for sections not yet driven by CMS (fallback stubs)
+export type Service = {
+  id: string;
+  title: string;
+  description: string;
+  icon?: string;
 };
+
+export type Product = {
+  id: string;
+  name: string;
+  description: string;
+  price: number;
+  image?: string;
+};
+
+export type Testimonial = {
+  id: string;
+  name: string;
+  role: string;
+  company: string;
+  content: string;
+  avatar?: string;
+};
+
+export type QuestionOption = {
+  id: string;
+  label: string;
+  value: string;
+};
+
+export type Question = {
+  id: string;
+  question: string;
+  options: QuestionOption[];
+};
+
+export type ApproachData = {
+  title: string;
+  subtitle: string;
+  image: string;
+  imageAlt: string;
+  questions: Question[];
+  ctaText: string;
+  ctaLink: string;
+};
+
+export type InsightCard = {
+  id: string;
+  title: string;
+  category: string;
+  date: string;
+  image: string;
+  imageAlt: string;
+  link: string;
+};
+
+export type LatestInsightsData = {
+  cards: InsightCard[];
+};
+
+export type InnovationCard = {
+  id: string;
+  title: string;
+  time: string;
+  date: string;
+  image: string;
+  imageAlt: string;
+  imagePosition: 'top' | 'bottom';
+  isHighlighted?: boolean;
+  link: string;
+  ctaText: string;
+};
+
+export type InnovationInPackagingData = {
+  cards: InnovationCard[];
+  exploreMoreLink: string;
+};
+
+export type PressReleaseCard = {
+  id: string;
+  category: string;
+  title: string;
+  image: string;
+  imageAlt: string;
+  link: string;
+};
+
+export type LatestPressReleaseData = {
+  cards: PressReleaseCard[];
+};
+
+export type CallToActionData = {
+  heading: string;
+  description: string;
+  ctaText: string;
+  ctaLink: string;
+};
+
+export type NewsletterSubscriptionData = {
+  headline: string;
+  subtitle: string;
+  placeholder: string;
+  buttonText: string;
+  backgroundImage: string;
+};
+
+// ==================== API Types ====================
 
 type BannerItemsApi = {
   itration?: unknown[];
@@ -99,6 +236,14 @@ type FaqsItemsApi = {
   description?: string[];
 };
 
+type HomeMetaApi = {
+  banner_items?: BannerItemsApi;
+  global_beverage_title?: string;
+  global_beverage_description?: string;
+  global_beverage_video_url?: string;
+  faqs_items?: FaqsItemsApi;
+};
+
 type ServiceAutofetchItem = {
   id?: number;
   title?: string;
@@ -107,6 +252,7 @@ type ServiceAutofetchItem = {
   short_summary_image?: MediaRef;
   short_summary_title?: string;
   short_summary_description?: string;
+  short_summary_video_url?: string;
 };
 
 type SustainableProductAutofetchItem = {
@@ -126,13 +272,35 @@ type SustainabilityLinkItem = {
 };
 
 type HomeAutofetchApi = {
-  /** Combined commercial service cards (preferred when present). */
   services?: ServiceAutofetchItem[];
-  marketing_services?: ServiceAutofetchItem;
-  technical_services?: ServiceAutofetchItem;
+  marketing_services?: ServiceAutofetchItem[];
+  technical_services?: ServiceAutofetchItem[];
   sustainable_products?: SustainableProductAutofetchItem[];
   sustainabilities?: SustainabilityLinkItem[];
 };
+
+type HomePageApiResponse = {
+  data?: {
+    id?: number;
+    slug?: string;
+    layout?: string;
+    title?: string;
+    meta?: HomeMetaApi;
+    seo?: {
+      title?: string | null;
+      description?: string | null;
+      canonical_url?: string | null;
+      schema?: unknown;
+    };
+    autofetch?: HomeAutofetchApi;
+  };
+};
+
+// ==================== Helpers ====================
+
+const COMPANY_API_BASE_URL = process.env.COMPANY_API_BASE_URL || 'https://backend-lamipak.webtesting.pw/api';
+const HOME_AUTOFETCH = 'services,sustainable_products,sustainabilities';
+const HOME_REVALIDATE_SECONDS = 300;
 
 function buildApiUrl(path: string): string {
   const base = COMPANY_API_BASE_URL.replace(/\/+$/, '');
@@ -168,27 +336,6 @@ function faqAnswerFromHtml(html: string): string {
     .trim();
 }
 
-function splitHeroTitle(full: string): { title: string } {
-  const idx = full.indexOf(',');
-  if (idx === -1) {
-    return { title: full.trim() };
-  }
-  const rest = full.slice(idx + 1).trim();
-  return {
-    title: `${full.slice(0, idx + 1).trim()} <span class="text-[#009FE8]">${rest}</span>`,
-  };
-}
-
-function splitGlobalBeverageTitle(full: string): { preTitleBlue: string; preTitleBlack: string } {
-  const trimmed = full.trim();
-  if (!trimmed) return { preTitleBlue: '', preTitleBlack: '' };
-  const match = trimmed.match(/^(.+?)(\s+WITH\s+.+)$/i);
-  if (match) {
-    return { preTitleBlue: match[1].trim(), preTitleBlack: match[2].trim() };
-  }
-  return { preTitleBlue: trimmed, preTitleBlack: '' };
-}
-
 function sanitizeYoutubeWatchUrl(url: string): string {
   try {
     const u = new URL(url.trim());
@@ -220,7 +367,166 @@ function normalizeNavHref(url?: string): string {
   }
 }
 
-function mapBannerItemsToHero(banner: BannerItemsApi | undefined, baseHero: Hero): Hero | null {
+function slugToHref(slug?: string): string {
+  if (!slug) return '/';
+  const cleaned = slug.replace(/^\/+|\/+$/g, '');
+  return cleaned ? `/${cleaned}/` : '/';
+}
+
+function inferServiceIconFallback(svc: ServiceAutofetchItem): 'gear' | 'megaphone' {
+  const s = `${svc.slug || ''} ${svc.title || ''} ${svc.short_summary_title || ''}`.toLowerCase();
+  if (s.includes('technical')) return 'gear';
+  return 'megaphone';
+}
+
+function commercialServiceSortRank(slug: string): number {
+  const s = slug.toLowerCase();
+  if (s.includes('technical-support')) return 0;
+  if (s.includes('marketing-support')) return 1;
+  return 2;
+}
+
+function deriveProductLabel(description: string, title: string): string {
+  const d = description.trim();
+  if (!d) return title;
+  const sentence = d.split(/(?<=[.!?])\s+/)[0]?.trim() || d;
+  return sentence.length > 100 ? `${sentence.slice(0, 97)}…` : sentence;
+}
+
+// ==================== Fallback Data ====================
+
+const FALLBACK_APPROACH: ApproachData = {
+  title: 'We engineer the future of <span class="text-[#009FE8]">aseptic packaging.</span>',
+  subtitle: 'Answer three questions and discover your optimal packaging system.',
+  image: '/approcah_image.jpg',
+  imageAlt: 'Professional examining aseptic packaging in laboratory',
+  questions: [
+    {
+      id: '1',
+      question: 'What product are you packaging?',
+      options: [
+        { id: '1-1', label: 'Dairy', value: 'dairy' },
+        { id: '1-2', label: 'Juice', value: 'juice' },
+        { id: '1-3', label: 'Plant-Based', value: 'plant-based' },
+        { id: '1-4', label: 'Liquid Food', value: 'liquid-food' },
+        { id: '1-5', label: 'Nutritional', value: 'nutritional' },
+        { id: '1-6', label: 'Pharma', value: 'pharma' },
+      ],
+    },
+    {
+      id: '2',
+      question: 'What production scale?',
+      options: [
+        { id: '2-1', label: 'Startup', value: 'startup' },
+        { id: '2-2', label: 'Regional', value: 'regional' },
+        { id: '2-3', label: 'Global Scale', value: 'global-scale' },
+        { id: '2-4', label: 'High-Speed Line', value: 'high-speed-line' },
+      ],
+    },
+    {
+      id: '3',
+      question: 'What is your target market region?',
+      options: [
+        { id: '3-1', label: 'Asia Pacific', value: 'asia-pacific' },
+        { id: '3-2', label: 'Europe', value: 'europe' },
+        { id: '3-3', label: 'North America', value: 'north-america' },
+        { id: '3-4', label: 'Middle East & Africa', value: 'middle-east-africa' },
+        { id: '3-5', label: 'Latin America', value: 'latin-america' },
+      ],
+    },
+  ],
+  ctaText: 'DISCOVER YOUR SYSTEM',
+  ctaLink: '/solutions',
+};
+
+const FALLBACK_INSIGHTS: LatestInsightsData = {
+  cards: [
+    {
+      id: '1',
+      title: 'Global Dairy Market Outlook',
+      category: 'INDUSTRY',
+      date: 'NOV 2025',
+      image: '/latest_insite_image_1.jpg',
+      imageAlt: 'Global Dairy Market Outlook - White carton packages with green leaf design',
+      link: '/',
+    },
+    {
+      id: '2',
+      title: 'Smart Packaging & Traceability',
+      category: 'INDUSTRY',
+      date: 'NOV 2025',
+      image: '/latest_insite_image_2.jpg',
+      imageAlt: 'Smart Packaging & Traceability - Laboratory with blue liquid containers',
+      link: '/',
+    },
+    {
+      id: '3',
+      title: 'Circular Economy in Packaging',
+      category: 'INDUSTRY',
+      date: 'NOV 2025',
+      image: '/latest_insite_image_3.jpg',
+      imageAlt: 'Circular Economy in Packaging - Person examining plastic pouch in laboratory',
+      link: '/',
+    },
+    {
+      id: '4',
+      title: 'Smart Packaging & Traceability',
+      category: 'INDUSTRY',
+      date: 'NOV 2025',
+      image: '/latest_insite_image_2.jpg',
+      imageAlt: 'Smart Packaging & Traceability - Laboratory with blue liquid containers',
+      link: '/',
+    },
+  ],
+};
+
+const FALLBACK_PRESS_RELEASES: LatestPressReleaseData = {
+  cards: [
+    {
+      id: '1',
+      category: 'Dairy Systems',
+      title: 'Lamipak Showcases Expanded End-to-End Packaging Solutions at Gulfood Manufacturing 2025',
+      image: '/latest_press_1.jpg',
+      imageAlt: 'Lamipak exhibition booth at Gulfood Manufacturing 2025',
+      link: '/',
+    },
+    {
+      id: '2',
+      category: 'Dairy Systems',
+      title: 'Lamipak Introduces New Fresh Milk Packaging Solutions',
+      image: '/latest_press_2.jpg',
+      imageAlt: 'Fresh milk packaging solutions',
+      link: '/',
+    },
+    {
+      id: '3',
+      category: 'Dairy Systems',
+      title: 'Lamipak Receives Certificate of Appreciation from PT. Lami Packaging Indonesia',
+      image: '/latest_press_3.jpg',
+      imageAlt: 'Certificate of appreciation',
+      link: '/',
+    },
+  ],
+};
+
+const FALLBACK_CTA: CallToActionData = {
+  heading: 'Still Have <span class="text-[#009FE8]">Questions?</span>',
+  description: 'Our Lamipak team is ready to walk you through any technical details.',
+  ctaText: 'Contact Us',
+  ctaLink: '/contact',
+};
+
+const FALLBACK_NEWSLETTER: NewsletterSubscriptionData = {
+  headline: 'Stay Ahead in Aseptic Engineering.',
+  subtitle: 'Get the Latest Insights Delivered to Your Inbox.',
+  placeholder: 'Enter your email',
+  buttonText: 'SUBSCRIBE',
+  backgroundImage: '/newsletter-bg.jpg',
+};
+
+// ==================== Mappers ====================
+
+function mapBannerItemsToHero(banner: BannerItemsApi | undefined, videoUrl?: string): Hero | null {
   if (!banner?.desktop_banner?.length) return null;
 
   const banners = banner.desktop_banner;
@@ -236,14 +542,13 @@ function mapBannerItemsToHero(banner: BannerItemsApi | undefined, baseHero: Hero
     if (!bg) continue;
 
     const fullTitle = titles[i] ?? '';
-    const { title } = splitHeroTitle(fullTitle);
 
     slides.push({
       id: String(banners[i]?.id ?? i + 1),
       category: labels[i]?.trim() || 'LAMIPAK',
-      title,
+      title: formatBoldText(fullTitle),
       description: subtitles[i]?.trim() ?? '',
-      ctaText: HERO_CTA_ROTATION[i % HERO_CTA_ROTATION.length],
+      ctaText: 'EXPLORE SOLUTIONS',
       ctaLink: normalizeNavHref(navUrls[i]),
       backgroundImage: bg,
     });
@@ -261,27 +566,11 @@ function mapBannerItemsToHero(banner: BannerItemsApi | undefined, baseHero: Hero
   return {
     slides,
     categories,
-    videoUrl: baseHero.videoUrl,
+    videoUrl,
   };
 }
 
-function inferServiceIconFallback(svc: ServiceAutofetchItem): 'gear' | 'megaphone' {
-  const s = `${svc.slug || ''} ${svc.title || ''} ${svc.short_summary_title || ''}`.toLowerCase();
-  if (s.includes('technical')) return 'gear';
-  return 'megaphone';
-}
-
-function commercialServiceSortRank(slug: string): number {
-  const s = slug.toLowerCase();
-  if (s.includes('technical-support')) return 0;
-  if (s.includes('marketing-support')) return 1;
-  return 2;
-}
-
-function mapServiceToCard(
-  svc: ServiceAutofetchItem,
-  icon: 'gear' | 'megaphone',
-): CommercialServiceCard | null {
+function mapServiceToCard(svc: ServiceAutofetchItem, icon: 'gear' | 'megaphone'): CommercialServiceCard | null {
   const id = svc.id;
   const slug = svc.slug?.trim();
   if (id == null && !slug) return null;
@@ -293,59 +582,42 @@ function mapServiceToCard(
 
   return {
     id: String(id ?? slug),
-    title: (svc.short_summary_title || svc.title || '').trim() || 'Service',
-    description: (svc.short_summary_description || '').trim(),
+    title: formatBoldText((svc.short_summary_title || svc.title || '').trim() || 'Service'),
+    description: formatBoldText((svc.short_summary_description || '').trim()),
     image: imageUrl,
-    imageAlt: (svc.title || svc.short_summary_title || 'Service').trim(),
+    imageAlt: formatBoldText((svc.title || svc.short_summary_title || 'Service').trim()),
     ctaText: 'Read More',
-    ctaLink: slug ? `/${slug.replace(/^\/+/, '')}` : '/services',
+    ctaLink: slugToHref(slug),
     ...(iconFromApi ? { iconUrl: iconFromApi } : {}),
     icon,
   };
 }
 
 function mapCommercialServices(autofetch: HomeAutofetchApi | undefined): CommercialServicesData | null {
-  const fromArray = autofetch?.services;
-  if (fromArray?.length) {
-    const sorted = [...fromArray].sort(
-      (a, b) => commercialServiceSortRank(a.slug || '') - commercialServiceSortRank(b.slug || ''),
-    );
-    const cards: CommercialServiceCard[] = [];
-    for (const svc of sorted) {
-      const c = mapServiceToCard(svc, inferServiceIconFallback(svc));
-      if (c) cards.push(c);
-    }
-    if (cards.length) return { cards };
-  }
+  const allServices = [
+    ...(autofetch?.services || []),
+    ...(autofetch?.marketing_services || []),
+    ...(autofetch?.technical_services || []),
+  ];
 
-  const tech = autofetch?.technical_services;
-  const mkt = autofetch?.marketing_services;
+  if (!allServices.length) return null;
+
+  const sorted = [...allServices].sort(
+    (a, b) => commercialServiceSortRank(a.slug || '') - commercialServiceSortRank(b.slug || ''),
+  );
+
   const cards: CommercialServiceCard[] = [];
-
-  if (tech) {
-    const c = mapServiceToCard(tech, 'gear');
-    if (c) cards.push(c);
-  }
-  if (mkt) {
-    const c = mapServiceToCard(mkt, 'megaphone');
+  for (const svc of sorted) {
+    const c = mapServiceToCard(svc, inferServiceIconFallback(svc));
     if (c) cards.push(c);
   }
 
-  if (!cards.length) return null;
-  return { cards };
+  return cards.length ? { cards } : null;
 }
 
-function deriveProductLabel(description: string, title: string): string {
-  const d = description.trim();
-  if (!d) return title;
-  const sentence = d.split(/(?<=[.!?])\s+/)[0]?.trim() || d;
-  return sentence.length > 100 ? `${sentence.slice(0, 97)}…` : sentence;
-}
-
-function mapSustainableProducts(
-  items: SustainableProductAutofetchItem[] | undefined,
-): SustainabilityProductCard[] {
+function mapSustainableProducts(items: SustainableProductAutofetchItem[] | undefined): SustainabilityProductCard[] {
   if (!items?.length) return [];
+
   return items
     .map((p) => {
       const id = p.id;
@@ -358,49 +630,39 @@ function mapSustainableProducts(
 
       return {
         id: String(id),
-        title,
+        title: formatBoldText(title),
         label: deriveProductLabel(description, title),
-        description,
+        description: formatBoldText(description),
         image,
-        imageAlt: title,
-        link: `/${slug.replace(/^\/+/, '')}`,
+        imageAlt: formatBoldText(title),
+        link: slugToHref(slug),
         ctaText: 'Read More',
-      } satisfies SustainabilityProductCard;
+      };
     })
     .filter(Boolean) as SustainabilityProductCard[];
 }
 
-function mapSustainabilityWorkCards(
-  items: SustainabilityLinkItem[] | undefined,
-  fallback: WorkInSustainabilityData,
-): SustainabilityWorkCard[] | null {
+function mapSustainabilityWorkCards(items: SustainabilityLinkItem[] | undefined): SustainabilityWorkCard[] | null {
   if (!items?.length) return null;
-
-  const fakeCards = fallback.cards;
 
   return items.map((item, index) => {
     const slug = item.slug?.trim() || '';
-    const tail = slug.split('/').filter(Boolean).pop() || '';
-    const fakeMatch =
-      fakeCards.find((c) => {
-        const linkTail = c.link.replace(/^\//, '').split('/').filter(Boolean).pop() || '';
-        return tail && (c.link.includes(tail) || linkTail === tail);
-      }) || fakeCards[index % fakeCards.length];
-
-    const title = (item.title || fakeMatch.title).trim();
+    const title = (item.title || '').trim();
     const apiImage = item.short_summary_image?.url?.trim();
     const apiDescription = (item.short_summary_description || '').trim();
 
+    if (!title || !apiImage) return null;
+
     return {
       id: String(item.id ?? index + 1),
-      title,
-      description: apiDescription || fakeMatch.description,
-      image: apiImage || fakeMatch.image,
-      imageAlt: title,
-      link: slug ? `/${slug.replace(/^\/+/, '')}` : fakeMatch.link,
-      ctaText: fakeMatch.ctaText,
+      title: formatBoldText(title),
+      description: formatBoldText(apiDescription),
+      image: apiImage,
+      imageAlt: formatBoldText(title),
+      link: slugToHref(slug),
+      ctaText: 'Learn More',
     };
-  });
+  }).filter(Boolean) as SustainabilityWorkCard[];
 }
 
 function mapFaqs(faqs: FaqsItemsApi | undefined): FAQItem[] | null {
@@ -425,53 +687,46 @@ function mapFaqs(faqs: FaqsItemsApi | undefined): FAQItem[] | null {
   return out.length ? out : null;
 }
 
-function mapVideoBanner(meta: HomeMetaApi | undefined, base: VideoBannerData): VideoBannerData | null {
+function mapVideoBanner(meta: HomeMetaApi | undefined): VideoBannerData | null {
   if (!meta?.global_beverage_video_url?.trim()) return null;
 
   const videoUrl = sanitizeYoutubeWatchUrl(meta.global_beverage_video_url);
-  const { preTitleBlue, preTitleBlack } = splitGlobalBeverageTitle(
-    meta.global_beverage_title?.trim() || '',
-  );
-  const preDescription = (meta.global_beverage_description || '').trim();
-
-  const combinedPreTitle = [preTitleBlue, preTitleBlack].filter(Boolean).join(' ');
+  const preTitle = formatBoldText(meta.global_beverage_title?.trim() || '');
+  const preDescription = formatBoldText(meta.global_beverage_description?.trim() || '');
 
   return {
-    ...base,
-    title: base.title,
-    preTitle: combinedPreTitle || base.preTitle,
-    preDescription: preDescription || base.preDescription,
+    title: '',
+    preTitle,
+    preDescription,
     videoUrl,
-    ctaText: base.ctaText,
-    ctaLink: base.ctaLink,
+    ctaText: 'View how we help global brands',
+    ctaLink: '/about-us',
   };
 }
 
-/**
- * Fetches `/v1/page/home` with autofetch and merges real sections into fake homepage data.
- * Sections without API content keep `base` values.
- */
-export async function mergeHomepageFromApi(base: HomepageData): Promise<HomepageData> {
+// ==================== Main Fetch ====================
+
+export const fetchHomepageData = cache(async (): Promise<HomepageData | null> => {
   try {
     const url = buildApiUrl(
       `/v1/page/home?autofetch=${encodeURIComponent(HOME_AUTOFETCH)}`,
     );
     const response = await fetch(url, { next: { revalidate: HOME_REVALIDATE_SECONDS } });
 
-    if (!response.ok) return base;
+    if (!response.ok) return null;
 
     const payload = (await response.json()) as HomePageApiResponse;
     const data = payload.data;
-    if (!data || data.layout !== 'home') return base;
+    if (!data || data.layout !== 'home') return null;
 
     const meta = data.meta;
     const autofetch = data.autofetch ?? {};
 
     const heroMapped = meta?.banner_items
-      ? mapBannerItemsToHero(meta.banner_items, base.hero)
+      ? mapBannerItemsToHero(meta.banner_items)
       : null;
 
-    const videoMapped = mapVideoBanner(meta, base.videoBanner);
+    const videoMapped = mapVideoBanner(meta);
 
     const commercialMapped = mapCommercialServices(autofetch);
 
@@ -479,39 +734,38 @@ export async function mergeHomepageFromApi(base: HomepageData): Promise<Homepage
     const productMapped: ProductSustainabilityData | null =
       products.length > 0 ? { products } : null;
 
-    const workCards = mapSustainabilityWorkCards(autofetch.sustainabilities, base.workInSustainability);
+    const workCards = mapSustainabilityWorkCards(autofetch.sustainabilities);
     const workMapped: WorkInSustainabilityData | null =
       workCards && workCards.length > 0 ? { cards: workCards } : null;
 
     const faqItems = mapFaqs(meta?.faqs_items);
     const faqMapped: FAQData | null = faqItems ? { items: faqItems } : null;
 
-    const baseSeo = base.seo;
-    const seoMerged =
-      data.seo?.title || data.seo?.description || data.seo?.canonical_url
-        ? {
-            ...(baseSeo ?? {
-              meta_title: 'Lamipak',
-              meta_description: '',
-              canonical_url: '/',
-            }),
-            meta_title: data.seo?.title ?? baseSeo?.meta_title ?? 'Lamipak',
-            meta_description: data.seo?.description ?? baseSeo?.meta_description ?? '',
-            canonical_url: data.seo?.canonical_url ?? baseSeo?.canonical_url ?? '/',
-          }
-        : baseSeo;
+    const seoMerged = data.seo?.title || data.seo?.description
+      ? {
+          meta_title: data.seo?.title ?? '',
+          meta_description: data.seo?.description ?? '',
+          canonical_url: data.seo?.canonical_url ?? '/',
+          schema: data.seo?.schema,
+        }
+      : undefined;
 
     return {
-      ...base,
-      hero: heroMapped ?? base.hero,
-      videoBanner: videoMapped ?? base.videoBanner,
-      commercialServices: commercialMapped ?? base.commercialServices,
-      productSustainability: productMapped ?? base.productSustainability,
-      workInSustainability: workMapped ?? base.workInSustainability,
-      faq: faqMapped ?? base.faq,
+      hero: heroMapped ?? { slides: [], categories: [] },
+      videoBanner: videoMapped ?? { title: '', preTitle: '', ctaText: '', ctaLink: '/' },
+      commercialServices: commercialMapped ?? { cards: [] },
+      productSustainability: productMapped ?? { products: [] },
+      workInSustainability: workMapped ?? { cards: [] },
+      faq: faqMapped ?? { items: [] },
+      latestPressRelease: FALLBACK_PRESS_RELEASES,
+      latestInsights: FALLBACK_INSIGHTS,
+      approach: FALLBACK_APPROACH,
+      innovationInPackaging: { cards: [], exploreMoreLink: '/' },
+      callToAction: FALLBACK_CTA,
+      newsletterSubscription: FALLBACK_NEWSLETTER,
       seo: seoMerged,
     };
   } catch {
-    return base;
+    return null;
   }
-}
+});

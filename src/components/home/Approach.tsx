@@ -9,6 +9,7 @@ import ApproachClient from './ApproachClient';
  */
 export default async function Approach() {
   const homepageData = await fetchHomepageData();
+  if (!homepageData) return null;
 
   return <ApproachClient data={homepageData.approach} />;
 }

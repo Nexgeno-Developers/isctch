@@ -6,7 +6,7 @@ import Image from 'next/image';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Pagination, Navigation } from 'swiper/modules';
 import type { Swiper as SwiperType } from 'swiper';
-import type { WorkInSustainabilityData, SustainabilityWorkCard } from '@/fake-api/homepage';
+import type { WorkInSustainabilityData, SustainabilityWorkCard } from '@/lib/api/home';
 
 // Import Swiper styles
 import 'swiper/css';

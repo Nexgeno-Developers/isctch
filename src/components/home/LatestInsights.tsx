@@ -9,6 +9,7 @@ import LatestInsightsClient from './LatestInsightsClient';
  */
 export default async function LatestInsights() {
   const homepageData = await fetchHomepageData();
+  if (!homepageData) return null;
 
   return <LatestInsightsClient data={homepageData.latestInsights} />;
 }

@@ -1,4 +1,4 @@
-import type { Service } from '@/fake-api/homepage';
+import type { Service } from '@/lib/api/home';
 import { RichText } from '@/components/common/RichText';
 
 interface ServicesProps {

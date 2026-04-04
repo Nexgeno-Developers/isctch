@@ -10,6 +10,7 @@ import InnovationSliderInteractive, { Cards } from './InnovationSliderInteractiv
  */
 export default async function InnovationInPackaging() {
   const homepageData = await fetchHomepageData();
+  if (!homepageData) return null;
   const data = homepageData.innovationInPackaging;
 
   return (

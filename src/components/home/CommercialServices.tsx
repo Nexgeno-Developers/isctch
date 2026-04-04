@@ -2,7 +2,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { formatBoldText } from '@/lib/htmlText';
 import { fetchHomepageData } from '@/lib/api/home';
-import type { CommercialServiceCard } from '@/fake-api/homepage';
+import type { CommercialServiceCard } from '@/lib/api/home';
 
 /**
  * Commercial Services Component (Server Component)
@@ -12,6 +12,7 @@ import type { CommercialServiceCard } from '@/fake-api/homepage';
  */
 export default async function CommercialServices() {
   const homepageData = await fetchHomepageData();
+  if (!homepageData) return null;
   const data = homepageData.commercialServices;
 
   return (

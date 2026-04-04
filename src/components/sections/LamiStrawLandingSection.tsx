@@ -87,23 +87,23 @@ function StrawCard({
           </h3>
 
           <p className="lg:mt-4 mt-2 text-sm md:text-base text-black leading-relaxed">
-        {card.description}
-      </p>
+            {card.description}
+          </p>
 
-      {card.href && (
-        <div className="mt-4">
-          <Link
-            href={card.href}
-            className="text-[#009FE8] text-xs md:text-sm font-semibold inline-flex items-center hover:opacity-80 transition-opacity"
-          >
-            {card.readMoreLabel}
-          </Link>
-        </div>
-      )}
+          {card.href && (
+            <div className="mt-4">
+              <Link
+                href={card.href}
+                className="text-[#009FE8] text-xs md:text-sm font-semibold inline-flex items-center hover:opacity-80 transition-opacity"
+              >
+                {card.readMoreLabel}
+              </Link>
+            </div>
+          )}
         </div>
       </div>
 
-      
+
     </div>
   );
 }
@@ -126,41 +126,41 @@ export function LamiStrawLandingSection({
           <h1 className="text-[22px] md:text-4xl font-bold text-black leading-tight"
             dangerouslySetInnerHTML={{ __html: formatBoldText(data.title) }} />
 
-          <div className="mt-5 text-sm md:text-base text-black leading-relaxed space-y-4">
-            {data.descriptionLines.map((line, idx) => (
-              <p key={idx}>{line}</p>
-            ))}
+            <div className="mt-5 text-sm md:text-base text-black leading-relaxed space-y-4">
+              {data.descriptionLines.map((line, idx) => (
+                <p key={idx}>{line}</p>
+              ))}
+            </div>
           </div>
-        </div>
 
-        <div className="mt-10 md:mt-14">
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-8 mx-auto">
-            {data.cards.map((card) => (
-              <StrawCard key={card.id} card={card} />
-            ))}
+          <div className="mt-10 md:mt-14">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-8 mx-auto">
+              {data.cards.map((card) => (
+                <StrawCard key={card.id} card={card} />
+              ))}
+            </div>
           </div>
         </div>
+      </section>
+
+      <div className="pb-10 md:pb-24 pt-2 md:pt-4">
+        {videoUrl ? (
+          <VideoBanner
+            prefetchedData={{
+              title: '',
+              preTitle: '',
+              ctaText: '',
+              ctaLink: '',
+              videoUrl,
+            }}
+          />
+        ) : null}
       </div>
-    </section>
 
-<div className="pb-10 md:pb-24 pt-2 md:pt-4">
-{videoUrl ? (
-        <VideoBanner
-          prefetchedData={{
-            title: '',
-            preTitle: '',
-            ctaText: '',
-            ctaLink: '',
-            videoUrl,
-          }}
-        />
-      ) : null}
-</div>
-      
-      
 
-    <CallToAction />
-    <NewsletterSubscription />
+
+      <CallToAction />
+      <NewsletterSubscription />
     </>
   );
 }

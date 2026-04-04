@@ -7,7 +7,7 @@ import { formatBoldText } from '@/lib/htmlText';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Pagination, Navigation } from 'swiper/modules';
 import type { Swiper as SwiperType } from 'swiper';
-import type { LatestInsightsData } from '@/fake-api/homepage';
+import type { LatestInsightsData } from '@/lib/api/home';
 
 // Import Swiper styles
 import 'swiper/css';

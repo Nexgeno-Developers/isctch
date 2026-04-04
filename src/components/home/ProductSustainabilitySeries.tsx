@@ -8,6 +8,7 @@ import ProductSustainabilitySeriesClient from './ProductSustainabilitySeriesClie
  */
 export default async function ProductSustainabilitySeries() {
   const homepageData = await fetchHomepageData();
+  if (!homepageData) return null;
   const data = homepageData.productSustainability;
 
   return <ProductSustainabilitySeriesClient data={data} />;

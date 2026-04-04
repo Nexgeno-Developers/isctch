@@ -2,7 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { formatBoldText } from '@/lib/htmlText';
 import { fetchHomepageData } from '@/lib/api/home';
-import type { PressReleaseCard } from '@/fake-api/homepage';
+import type { PressReleaseCard } from '@/lib/api/home';
 
 /**
  * Latest Press Release Component (Server Component)
@@ -11,7 +11,9 @@ import type { PressReleaseCard } from '@/fake-api/homepage';
  */
 export default async function LatestPressRelease() {
   const homepageData = await fetchHomepageData();
+  if (!homepageData) return null;
   const data = homepageData.latestPressRelease;
+  if (!data || !data.cards.length) return null;
 
   const cardsPerView = 3;
   const visibleCards = data.cards.slice(0, cardsPerView);

@@ -9,6 +9,7 @@ import WorkInSustainabilityClient from './WorkInSustainabilityClient';
  */
 export default async function WorkInSustainability() {
   const homepageData = await fetchHomepageData();
+  if (!homepageData) return null;
 
   return <WorkInSustainabilityClient data={homepageData.workInSustainability} />;
 }
