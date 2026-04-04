@@ -28,15 +28,17 @@ export function breadcrumbsFromSlugPath(
   }
 
   if (segments.length === 1) {
-    return [{ label: title || segments[0] }];
+    return [{ label: title || humanizeUrlSegmentLabel(segments[0]) }];
   }
 
   const items: Array<{ label: string; href?: string }> = [];
   for (let i = 0; i < segments.length - 1; i++) {
     const path = `/${segments.slice(0, i + 1).join('/')}/`;
-    items.push({ label: segments[i], href: path });
+    items.push({ label: humanizeUrlSegmentLabel(segments[i]), href: path });
   }
 
-  items.push({ label: title || segments[segments.length - 1] });
+  items.push({
+    label: title || humanizeUrlSegmentLabel(segments[segments.length - 1]),
+  });
   return items;
 }
