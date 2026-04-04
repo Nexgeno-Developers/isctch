@@ -10,7 +10,9 @@ import { RichText } from '@/components/common/RichText';
  */
 export default async function CallToAction() {
   const homepageData = await fetchHomepageData();
+  if (!homepageData) return null;
   const data = homepageData.callToAction;
+  if (!data) return null;
 
   return (
     <section className="bg-gray-50 lg:pb-24 pb-10">

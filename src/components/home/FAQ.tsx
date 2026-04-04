@@ -9,6 +9,7 @@ import FAQClient from './FAQClient';
  */
 export default async function FAQ() {
   const homepageData = await fetchHomepageData();
+  if (!homepageData) return null;
 
   return <FAQClient data={homepageData.faq} />;
 }

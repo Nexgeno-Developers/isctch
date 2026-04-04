@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import type { FAQItem } from '@/fake-api/homepage';
+import type { FAQItem } from '@/lib/api/home';
 
 interface FAQItemClientProps {
   item: FAQItem;

@@ -3,7 +3,7 @@
 import Image from 'next/image';
 import { useState, useEffect } from 'react';
 import { fetchHomepageData } from '@/lib/api/home';
-import type { VideoBannerData } from '@/fake-api/homepage';
+import type { VideoBannerData } from '@/lib/api/home';
 import { formatBoldText } from '@/lib/htmlText';
 
 interface VideoBannerProps {
@@ -116,7 +116,7 @@ export default function VideoBanner({
         return;
       }
       const homepageData = await fetchHomepageData();
-      setData(homepageData.videoBanner);
+      setData(homepageData?.videoBanner ?? null);
     }
     loadData();
   }, [videoUrl, prefetchedData]);

@@ -8,6 +8,7 @@ import NewsletterForm from './NewsletterForm';
  */
 export default async function NewsletterSubscription() {
   const homepageData = await fetchHomepageData();
+  if (!homepageData) return null;
   const data = homepageData.newsletterSubscription;
 
   return (

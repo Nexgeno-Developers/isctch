@@ -19,6 +19,7 @@ import FAQ from '@/components/home/FAQ';
  */
 export async function generateMetadata(): Promise<Metadata> {
   const homepageData = await fetchHomepageData();
+  if (!homepageData) return { title: 'Lamipak' };
   
   const seo = homepageData.seo || {
     meta_title: 'Lamipak - Your Platform',
@@ -45,10 +46,9 @@ export async function generateMetadata(): Promise<Metadata> {
  * and passes section data to child components.
  */
 export default async function HomePage() {
-  // Single API call to fetch all homepage sections
   const homepageData = await fetchHomepageData();
+  if (!homepageData) return null;
 
-  // Prepare schema data with canonical URL
   const schemaData = homepageData.seo?.schema ? {
     ...homepageData.seo.schema,
     url: homepageData.seo.canonical_url 
