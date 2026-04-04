@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { formatBoldText } from '@/lib/htmlText';
+// import { formatBoldText } from '@/lib/htmlText';
 
 
 import type {
@@ -104,25 +104,28 @@ function LaboratoryZoneRow({ item }: { item: RAndDLaboratoryZoneItem }) {
     <div className="flex flex-col gap-5 border-b border-black/[0.08] py-9 last:border-b-0 md:flex-row md:items-start md:gap-10 md:py-11">
       <div className="flex shrink-0 justify-center md:w-[72px] md:justify-start md:pt-1">
         {item.iconUrl ? (
-          // eslint-disable-next-line @next/next/no-img-element -- CMS icons
-          <img src={item.iconUrl} alt="" className="h-[52px] w-[52px] object-contain opacity-90" aria-hidden />
+          <Image
+            src={item.iconUrl}
+            alt=""
+            width={52}
+            height={52}
+            className="h-[52px] w-[52px] object-contain opacity-90"
+            aria-hidden
+          />
         ) : (
           <LaboratoryZoneIcon />
         )}
       </div>
       <div className="min-w-0 flex-1 text-left">
-        <h3 className="text-base font-bold uppercase tracking-[0.06em] text-black md:text-lg">
-          {item.title}
-        </h3>
-        <p className="mt-3 text-sm leading-relaxed text-black/75 md:text-base">{item.description}</p>
+        <h3 className="text-base font-bold uppercase tracking-[0.06em] text-black md:text-lg" dangerouslySetInnerHTML={{ __html: item.title }}></h3>
+        <p className="mt-3 text-sm leading-relaxed text-black/75 md:text-base" dangerouslySetInnerHTML={{ __html: item.description }}></p>
         <div className="mt-5 flex flex-wrap gap-2">
           {item.tags.map((tag) => (
             <span
               key={`${item.id}-${tag}`}
               className="rounded-full border border-gray-300 bg-white px-3 py-1.5 text-xs font-medium text-black/80 shadow-[0_1px_0_rgba(0,0,0,0.04)]"
-            >
-              {tag}
-            </span>
+              dangerouslySetInnerHTML={{ __html: tag }}
+            ></span>
           ))}
         </div>
       </div>
@@ -130,28 +133,33 @@ function LaboratoryZoneRow({ item }: { item: RAndDLaboratoryZoneItem }) {
   );
 }
 
-function LifecycleTestingCard({ card }: { card: RAndDCentreLifecycleCard }) {
+function LifecycleTestingCard({ card, index }: { card: RAndDCentreLifecycleCard; index: number }) {
   return (
     <article className="relative flex h-full flex-col overflow-hidden rounded-[22px] border border-black/[0.06] bg-[#E4E7EA] p-6 shadow-sm md:p-8">
       <div className="pointer-events-none absolute inset-x-0 top-0 h-[3px] bg-[#009FE8]" />
       <div className="mb-5 flex h-12 w-12 items-center justify-start">
         {card.iconUrl ? (
-          // eslint-disable-next-line @next/next/no-img-element -- CMS icons
-          <img src={card.iconUrl} alt="" className="max-h-12 max-w-12 object-contain" aria-hidden />
+          <Image
+            src={card.iconUrl}
+            alt=""
+            width={48}
+            height={48}
+            className="max-h-12 max-w-12 object-contain"
+            aria-hidden
+          />
         ) : (
-          <LifecycleLineIcon variant={card.iconVariant} />
+          <LifecycleLineIcon variant={index} />
         )}
       </div>
-      <h3 className="text-lg font-bold leading-snug text-[#0E233C] md:text-xl">{card.title}</h3>
-      <p className="mt-3 flex-1 text-sm leading-relaxed text-black/70 md:text-base">{card.description}</p>
+      <h3 className="text-lg font-bold leading-snug text-[#0E233C] md:text-xl" dangerouslySetInnerHTML={{ __html: card.title }} />
+      <p className="mt-3 flex-1 text-sm leading-relaxed text-black/70 md:text-base" dangerouslySetInnerHTML={{ __html: card.description }} />
       <div className="mt-6 flex flex-wrap gap-2">
         {card.tags.map((tag) => (
           <span
             key={`${card.id}-${tag}`}
             className="rounded-full border border-black/[0.06] bg-[#F0F1F3] px-3 py-1.5 text-xs font-medium text-black/75"
-          >
-            {tag}
-          </span>
+            dangerouslySetInnerHTML={{ __html: tag }}
+          ></span>
         ))}
       </div>
     </article>
@@ -196,8 +204,7 @@ function StatCard({ card, index }: { card: RAndDCentreStatCard; index: number })
     <div className="flex items-start gap-5 rounded-[20px] bg-[#EDF0F1] px-6 py-6 md:px-8 md:py-8">
       <div className="flex h-12 w-12 shrink-0 items-center justify-center">
         {card.iconUrl ? (
-          // eslint-disable-next-line @next/next/no-img-element -- CMS SVG/webp
-          <img src={card.iconUrl} alt="" className="max-h-12 max-w-12 object-contain" aria-hidden />
+          <Image src={card.iconUrl} alt="" width={48} height={48} className="max-h-12 max-w-12 object-contain" aria-hidden />
         ) : (
           <StatIconFallback index={index} />
         )}
@@ -286,10 +293,10 @@ export default function RAndDCentreLayoutPage({ data }: { data: RAndDCentrePageD
       {/* End-to-end testing — full packaging lifecycle */}
       <section className="bg-[#F5F6F7] py-16 md:py-20 lg:py-24">
         <div className="container mx-auto max-w-7xl px-4">
-          <h2 className="mb-12 text-center text-3xl font-bold leading-tight md:mb-16 md:text-4xl lg:text-5xl" dangerouslySetInnerHTML={{ __html: data.lifecycleSection.title }} />
+          <h2 className="mb-12 text-center text-3xl font-bold leading-tight md:mb-16 md:text-4xl lg:text-5xl text-black" dangerouslySetInnerHTML={{ __html: data.lifecycleSection.title }} />
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-7 lg:grid-cols-3 lg:gap-8">
-            {data.lifecycleSection.cards.map((card) => (
-              <LifecycleTestingCard key={card.id} card={card} />
+            {data.lifecycleSection.cards.map((card, idx) => (
+              <LifecycleTestingCard key={card.id} card={card} index={idx} />
             ))}
           </div>
         </div>
