@@ -144,7 +144,10 @@ export default function ProductDetailLayout({
           <ProductAccessories accessories={product.accessories} />
         )}
 
-        <SimilarProducts currentProductSlug={product.slug} />
+        <SimilarProducts
+          currentProductSlug={product.slug}
+          relatedProductCards={product.relatedProductCards}
+        />
         <TechnicalConsultationCTA data={product.technicalConsultation} />
         <NewsletterSubscription />
       </main>

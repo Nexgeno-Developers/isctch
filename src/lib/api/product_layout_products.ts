@@ -155,10 +155,60 @@ function toProductSeo(data: ProductLayoutApiResponse['data'], fallbackSlug: stri
   };
 }
 
+function parseRelatedProducts(
+  raw: unknown,
+  currentProductId: number | string | undefined,
+): ProductData[] {
+  if (!Array.isArray(raw)) return [];
+
+  const seen = new Set<string>();
+  const out: ProductData[] = [];
+
+  for (const item of raw) {
+    if (!item || typeof item !== 'object') continue;
+    const o = item as {
+      id?: number | string;
+      title?: string;
+      slug?: string;
+      short_summary_image?: Media;
+      short_summary_description?: string;
+    };
+    if (currentProductId !== undefined && String(o.id) === String(currentProductId)) continue;
+    if (!o.slug?.trim() || !o.title?.trim()) continue;
+
+    const path = o.slug.replace(/^\/+|\/+$/g, '');
+    if (seen.has(path)) continue;
+    seen.add(path);
+
+    const slug = path.split('/').filter(Boolean).pop() || path;
+    const image = mediaUrl(o.short_summary_image) || '/simimalr_product_1.jpg';
+    const desc = stripHtml(o.short_summary_description);
+
+    out.push({
+      id: String(o.id ?? slug),
+      slug,
+      productPath: path,
+      title: formatBoldText(o.title.trim()),
+      description: formatBoldText(desc) || formatBoldText(o.title.trim()),
+      shortDescription: desc ? formatBoldText(desc) : undefined,
+      image,
+      imageAlt: formatBoldText(o.title.trim()),
+      seo: {
+        meta_title: o.title.trim(),
+        meta_description: desc || o.title.trim(),
+        canonical_url: `/${path}`,
+      },
+    });
+  }
+
+  return out;
+}
+
 function mapApiDataToProduct(data: NonNullable<ProductLayoutApiResponse['data']>, requestedSlug: string): ProductData {
   const meta = data.meta || {};
   const apiSlug = data.slug || requestedSlug;
   const slug = apiSlug.split('/').filter(Boolean).pop() || requestedSlug;
+  const fullPath = apiSlug.replace(/^\/+|\/+$/g, '');
   const title = data.title || slug;
   const heroBackgroundImage = mediaUrl(meta.breadcrumb_image);
   const shortSummaryImage = mediaUrl(meta.short_summary_image);
@@ -174,11 +224,16 @@ function mapApiDataToProduct(data: NonNullable<ProductLayoutApiResponse['data']>
   const accessoryTitles = meta.accessories_items?.title || [];
   const accessoryImages = meta.accessories_items?.image || [];
 
+  // Always parse from API (empty array if missing). Do not leave undefined — that would make
+  // SimilarProducts fall back to loading every mock slug, which is not the API list.
+  const relatedProductCards = parseRelatedProducts(data.autofetch?.related_products, data.id);
+
   // "Compatible With" uses only compatibility_description (see ProductSpecifications).
   // Do not duplicate features_items or relation_industries as a checklist here.
   return {
     id: String(data.id || slug),
     slug,
+    productPath: fullPath,
     title: formatBoldText(title),
     description:
       formatBoldText(stripHtml(meta.product_info_description)) || formatBoldText(stripHtml(data.content)) || formatBoldText(stripHtml(meta.short_summary_description)),
@@ -219,6 +274,7 @@ function mapApiDataToProduct(data: NonNullable<ProductLayoutApiResponse['data']>
       ctaLink: '/technical-services',
     },
     seo: toProductSeo(data, slug),
+    relatedProductCards,
   };
 }
 

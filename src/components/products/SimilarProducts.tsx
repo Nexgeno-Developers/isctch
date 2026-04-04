@@ -5,15 +5,40 @@ import type { ProductData } from '@/fake-api/products';
 
 interface SimilarProductsProps {
   currentProductSlug?: string;
+  /** From API `autofetch.related_products` (see `fetchProductLayoutPage`). When set, skips listing all products. */
+  relatedProductCards?: ProductData[];
 }
 
 /**
  * Similar Products Component (Server Component)
- * 
- * Fetches all products and displays them in a slider, excluding the current product.
- * All data is fetched server-side from the API.
+ *
+ * Prefer `relatedProductCards` from the product page API when present.
+ * Otherwise fetches all product slugs and displays them (excluding the current product).
  */
-export default async function SimilarProducts({ currentProductSlug }: SimilarProductsProps) {
+export default async function SimilarProducts({
+  currentProductSlug,
+  relatedProductCards,
+}: SimilarProductsProps) {
+  if (relatedProductCards !== undefined) {
+    if (relatedProductCards.length === 0) {
+      return null;
+    }
+
+    return (
+      <section className="bg-gray-50 py-8 md:py-12">
+        <div className="container mx-auto px-4">
+          <div className="flex items-center justify-between mb-8 md:mb-12 relative">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold">
+              <span className="text-black">Similar Products</span>
+            </h2>
+          </div>
+
+          <SimilarProductsSliderClient products={relatedProductCards} />
+        </div>
+      </section>
+    );
+  }
+
   // Fetch all product slugs
   const slugs = await getAllProductSlugs();
   

@@ -82,6 +82,10 @@ export interface ProductData {
   benefits?: string[];
   content?: string; // HTML content
   relatedProducts?: string[]; // Array of product slugs
+  /** Full site path for links (no leading slash), e.g. aseptic-pakaging-solutions/roll-fed/standard/lamitriangle. When set, Similar Products and other links use `/${productPath}` instead of `/products/${slug}`. */
+  productPath?: string;
+  /** Similar products from API `autofetch.related_products` (set by `fetchProductLayoutPage`; always an array, possibly empty). When omitted (mock catalog), Similar Products falls back to listing all slugs. */
+  relatedProductCards?: ProductData[];
   accessories?: Array<{
     id: string;
     name: string;

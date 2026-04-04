@@ -7,6 +7,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Pagination } from 'swiper/modules';
 import type { Swiper as SwiperType } from 'swiper';
 import type { ProductData } from '@/fake-api/products';
+import { hasBoldPattern } from '@/lib/htmlText';
 
 // Import Swiper styles
 import 'swiper/css';
@@ -14,6 +15,21 @@ import 'swiper/css/pagination';
 
 interface SimilarProductsSliderClientProps {
   products: ProductData[];
+}
+
+function SimilarProductSummary({ text }: { text?: string }) {
+  const d = text?.trim();
+  if (!d || d === '-') return null;
+  const rich = hasBoldPattern(d) || d.includes('<');
+  if (rich) {
+    return (
+      <p
+        className="text-sm text-gray-600 line-clamp-2 mb-2 leading-relaxed [&_span]:text-[#009FE8]"
+        dangerouslySetInnerHTML={{ __html: d }}
+      />
+    );
+  }
+  return <p className=" text-sm text-gray-600 line-clamp-2 mb-2 leading-relaxed">{d}</p>;
 }
 
 /**
@@ -31,6 +47,9 @@ export default function SimilarProductsSliderClient({
   if (!products || products.length === 0) {
     return null;
   }
+
+  const hrefForProduct = (product: ProductData) =>
+    product.productPath ? `/${product.productPath}` : `/products/${product.slug}`;
 
   const handleSlideChange = (swiper: SwiperType) => {
     setIsBeginning(swiper.isBeginning);
@@ -163,6 +182,8 @@ export default function SimilarProductsSliderClient({
                   {product.title}
                 </h3>
 
+                <SimilarProductSummary text={product.shortDescription} />
+
                 {/* Volume Range */}
                 {product.sizes && product.sizes.length > 0 && (
                   <p className="text-sm text-gray-600 flex items-center gap-2">
@@ -187,13 +208,13 @@ export default function SimilarProductsSliderClient({
                 {/* Action Links */}
                 <div className="flex items-center gap-4 pt-2 justify-between pt-3">
                   <Link
-                    href={`/products/${product.slug}`}
+                    href={hrefForProduct(product)}
                     className="text-sm font-medium text-[#009FE8] hover:text-[#0077B6] transition-colors"
                   >
                     Compare
                   </Link>
                   <Link
-                    href={`/products/${product.slug}`}
+                    href={hrefForProduct(product)}
                     className="text-sm font-medium text-[#009FE8] hover:text-[#0077B6] transition-colors"
                   >
                     Request Sample
