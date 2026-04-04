@@ -4,7 +4,7 @@ import CallToAction from '@/components/home/CallToAction';
 import NewsletterSubscription from '@/components/home/NewsletterSubscription';
 import { HeroWithBreadcrumbsSection } from '@/components/sections/HeroWithBreadcrumbsSection';
 import type { MarketingServiceDetailPageData } from '@/lib/api/marketing_service_detail_layout';
-import { ProductCategoryVideoEmbed } from '@/components/sections/ProductCategoryVideoEmbed';
+import VideoBanner from '@/components/home/VideoBanner';
 import ConnectTechnicalExperts from '@/components/technical-services/ConnectTechnicalExperts';
 import { RichText } from '@/components/common/RichText';
 
@@ -119,13 +119,17 @@ export default function MarketingServiceDetailLayoutPage({
         </section>
       )}
 
-      {/* Video */}
+      {/* Video — same UX as homepage VideoBanner (background + modal play) */}
       {data.videoUrl ? (
-        <section className="bg-gray-50 py-4">
-          <div className="">
-            <ProductCategoryVideoEmbed videoUrl={data.videoUrl} />
-          </div>
-        </section>
+        <VideoBanner
+          prefetchedData={{
+            title: '',
+            preTitle: '',
+            ctaText: '',
+            ctaLink: '',
+            videoUrl: data.videoUrl,
+          }}
+        />
       ) : null}
 
       {/* Brand journey */}

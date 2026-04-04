@@ -33,6 +33,7 @@ type MarketingServiceDetailApiResponse = {
 };
 
 import { formatBoldText } from '@/lib/htmlText';
+import { cleanVideoUrlFromApi } from '@/lib/cleanVideoUrl';
 
 function buildPageApiPath(slug: string) {
   return slug
@@ -142,7 +143,7 @@ export async function fetchMarketingServiceDetailLayoutPage(slug: string) {
         introImageAlt: formatBoldText(meta.short_summary_title || data.title),
         heroDescriptionHtml: meta.hero_description || undefined,
         highlights,
-        videoUrl: meta.video_url?.trim() || undefined,
+        videoUrl: cleanVideoUrlFromApi(meta.video_url) || undefined,
         brandJourneyTitle: formatBoldText(meta.brand_journey_title || '') || undefined,
         brandJourneyItems,
       };
