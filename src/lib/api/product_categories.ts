@@ -1,4 +1,5 @@
 import { formatBoldText } from '@/lib/htmlText';
+import { breadcrumbsFromSlugPath } from '@/lib/breadcrumbsFromSlugPath';
 
 type ProductCategoryItem = {
   id: number;
@@ -54,6 +55,9 @@ export async function fetchProductCategoriesPage(slug: string) {
     const { data } = (await res.json()) as ProductCategoriesApiResponse;
     if (!data || data.layout !== 'product_categories') return null;
 
+    const clean = slug.replace(/^\/+|\/+$/g, '');
+    const breadcrumbTitle = (data.title || '').replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
+
     const pageData = {
       slug: data.slug,
       title: formatBoldText(data.title),
@@ -63,7 +67,7 @@ export async function fetchProductCategoriesPage(slug: string) {
           data: {
             title: formatBoldText(data.title),
             backgroundImage: data.meta?.banner_images?.url || undefined,
-            breadcrumbs: [{ label: formatBoldText(data.title) }],
+            breadcrumbs: breadcrumbsFromSlugPath(clean, breadcrumbTitle),
           },
         },
         {

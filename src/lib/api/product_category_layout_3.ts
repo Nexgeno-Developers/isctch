@@ -1,4 +1,5 @@
 import { decodeHtmlEntities, formatBoldText } from '@/lib/htmlText';
+import { breadcrumbsFromSlugPath } from '@/lib/breadcrumbsFromSlugPath';
 
 export type LamiStrawIconId = 'u' | 'telescope' | 'i' | 'flow';
 
@@ -101,16 +102,6 @@ function splitToParagraphs(html?: string | null): string[] {
     .filter(Boolean);
 }
 
-function breadcrumbsForPage(slug: string, title: string) {
-  const segments = slug.split('/').filter(Boolean);
-  if (segments.length <= 1) return [{ label: title }];
-  const hub = segments[0];
-  return [
-    { label: 'Packaging', href: `/${hub}/` },
-    { label: title },
-  ];
-}
-
 function iconIdForIndex(idx: number): LamiStrawIconId {
   const order: LamiStrawIconId[] = ['u', 'telescope', 'i', 'flow'];
   return order[idx % order.length];
@@ -191,7 +182,7 @@ export async function fetcProductCategoryLayout3Page(slug: string) {
               // Page `title` from API (e.g. "LamiStraw"); do not prefer meta.hero_title here so the banner matches the CMS title.
               title: data.title,
               backgroundImage: meta.banner_images?.url || undefined,
-              breadcrumbs: breadcrumbsForPage(data.slug, data.title),
+              breadcrumbs: breadcrumbsFromSlugPath(slug, data.title),
             },
           },
           {

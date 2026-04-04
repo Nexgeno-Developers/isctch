@@ -68,6 +68,7 @@ export type OpticapLandingSectionData = {
 };
 
 import { formatBoldText } from '@/lib/htmlText';
+import { breadcrumbsFromSlugPath } from '@/lib/breadcrumbsFromSlugPath';
 
 function stripHtml(value?: string) {
   if (!value) return '';
@@ -85,18 +86,6 @@ function buildPageApiPath(slug: string) {
 function slugToHref(slug: string) {
   const s = slug.replace(/^\/+|\/+$/g, '');
   return s ? `/${s}/` : '/';
-}
-
-function breadcrumbsForPage(slug: string, title: string) {
-  const segments = slug.split('/').filter(Boolean);
-  if (segments.length <= 1) {
-    return [{ label: title }];
-  }
-  const hub = segments[0];
-  return [
-    { label: 'Packaging', href: `/${hub}/` },
-    { label: title },
-  ];
 }
 
 /**
@@ -160,7 +149,7 @@ export async function fetcProductCategoryLayout5Page(slug: string) {
             data: {
               title: heroTitle,
               backgroundImage: topBackgroundUrl,
-              breadcrumbs: breadcrumbsForPage(data.slug, data.title),
+              breadcrumbs: breadcrumbsFromSlugPath(slug, data.title),
             },
           },
           {

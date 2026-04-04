@@ -14,6 +14,7 @@ export type SustainableSolutionsSectionData = {
 };
 
 import { formatBoldText } from '@/lib/htmlText';
+import { breadcrumbsFromSlugPath } from '@/lib/breadcrumbsFromSlugPath';
 
 type ProductCategoryLayout2ApiResponse = {
   data?: {
@@ -82,18 +83,6 @@ function buildPageApiPath(slug: string) {
     .filter(Boolean)
     .map((part) => encodeURIComponent(part))
     .join('/');
-}
-
-function breadcrumbsForPage(slug: string, title: string) {
-  const segments = slug.split('/').filter(Boolean);
-  if (segments.length <= 1) {
-    return [{ label: title }];
-  }
-  const hub = segments[0];
-  return [
-    { label: 'Packaging', href: `/${hub}/` },
-    { label: title },
-  ];
 }
 
 function toArray<T>(value: T | T[] | null | undefined): T[] {
@@ -209,7 +198,7 @@ export async function fetcProductCategoryLayout2Page(slug: string) {
       data: {
         title: formatBoldText(meta.hero_title || data.title),
         backgroundImage: meta.banner_images?.url || undefined,
-        breadcrumbs: breadcrumbsForPage(data.slug, data.title),
+        breadcrumbs: breadcrumbsFromSlugPath(slug, data.title),
       },
     });
 

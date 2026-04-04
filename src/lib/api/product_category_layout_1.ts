@@ -39,6 +39,7 @@ type ProductCategoryLayout1ApiResponse = {
 };
 
 import { formatBoldText } from '@/lib/htmlText';
+import { breadcrumbsFromSlugPath } from '@/lib/breadcrumbsFromSlugPath';
 
 function stripHtml(value?: string) {
   if (!value) return '';
@@ -92,7 +93,7 @@ export async function fetcProductCategoryLayout1Page(slug: string) {
             data: {
               title: formatBoldText(data.title),
               backgroundImage: data.meta?.banner_images?.url || undefined,
-              breadcrumbs: [{ label: formatBoldText(data.title) }],
+              breadcrumbs: breadcrumbsFromSlugPath(slug, stripHtml(data.title)),
             },
           },
           {

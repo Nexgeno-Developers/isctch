@@ -77,6 +77,7 @@ export type OnePackOneCodeLandingSectionData = {
 };
 
 import { formatBoldText } from '@/lib/htmlText';
+import { breadcrumbsFromSlugPath } from '@/lib/breadcrumbsFromSlugPath';
 
 function stripHtml(value?: string) {
   if (!value) return '';
@@ -89,19 +90,6 @@ function buildPageApiPath(slug: string) {
     .filter(Boolean)
     .map((part) => encodeURIComponent(part))
     .join('/');
-}
-
-function breadcrumbsForPage(slug: string, title: string) {
-  const segments = slug.split('/').filter(Boolean);
-  if (segments.length <= 1) {
-    return [{ label: title }];
-  }
-
-  const hub = segments[0];
-  return [
-    { label: 'Packaging', href: `/${hub}/` },
-    { label: title },
-  ];
 }
 
 function extractBulletTextFromHtml(html?: string) {
@@ -192,7 +180,7 @@ export async function fetcProductCategoryLayout4Page(slug: string) {
           {
             type: 'onePackOneCodeLanding',
             data: {
-              breadcrumbs: breadcrumbsForPage(data.slug, data.title),
+              breadcrumbs: breadcrumbsFromSlugPath(slug, data.title),
               tabs,
               activeTabId: 'digital',
               hero: {
