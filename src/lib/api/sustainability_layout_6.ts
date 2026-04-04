@@ -1,24 +1,21 @@
-export interface CarbonNetZeroRoadmapPageData {
+import { formatBoldText } from '@/lib/htmlText';
+
+export type CarbonNetZeroRoadmapPageData = {
   title: string;
-  heroBackgroundImage: string;
+  heroBackgroundImage?: string;
   carbonNetZeroRoadmapSection?: CarbonNetZeroRoadmapSectionData;
   carbonNetZeroPillarsSection?: CarbonNetZeroPillarsSectionData;
-}
+};
 
-export interface CarbonNetZeroRoadmapSectionData {
-  headingBlack: string;
-  headingBlue: string;
+export type CarbonNetZeroRoadmapSectionData = {
+  heading: string;
   milestones: Array<{
     id: string;
     year: string;
     title: string;
-    /** Inline SVG / PNG from CMS when present */
     iconImageUrl?: string;
-    /** Fallback built-in icon when no `iconImageUrl` */
     icon?: 'target' | 'trend' | 'leaf';
-    /** Plain bullet lines when CMS did not send HTML */
     bullets?: string[];
-    /** Raw HTML from CMS (e.g. `<ul>` with Tailwind classes) */
     descriptionHtml?: string;
   }>;
   summaryBarText: string;
@@ -28,9 +25,9 @@ export interface CarbonNetZeroRoadmapSectionData {
   connectorLineColor?: string;
   sectionBackgroundColor?: string;
   summaryBarBackground?: string;
-}
+};
 
-export interface CarbonNetZeroPillarsSectionData {
+export type CarbonNetZeroPillarsSectionData = {
   heading: string;
   items: Array<{
     id: string;
@@ -48,7 +45,7 @@ export interface CarbonNetZeroPillarsSectionData {
   accentColor?: string;
   cardBackgroundColor?: string;
   sectionBackgroundColor?: string;
-}
+};
 
 type MediaRef = { id?: number; filename?: string; url?: string };
 
@@ -62,26 +59,28 @@ type RepeaterBlock = {
 
 type Sustainability6ApiResponse = {
   data?: {
+    id?: number;
     slug: string;
+    language?: string;
     title: string;
     content?: string;
     is_active?: boolean;
     layout?: string;
+    company_id?: number;
     meta?: {
       breadcrumb_image?: MediaRef;
       path_title?: string;
-      /** Object from CMS (repeater) or legacy JSON string */
       path_items?: string | RepeaterBlock;
       sustainability_section_title?: string;
       sustainability_section_items?: string | RepeaterBlock;
       Net_Zero_Target_text?: string;
       Net_Zero_Target_url?: string;
+      short_summary_image?: MediaRef;
+      short_summary_description?: string;
     };
     seo?: Record<string, unknown>;
   };
 };
-
-import { formatBoldText } from '@/lib/htmlText';
 
 function buildPageApiPath(slug: string) {
   return slug
@@ -133,12 +132,6 @@ function hasHtmlTags(s: string): boolean {
   return /<[^>]+>/.test(s);
 }
 
-function splitHeading(title: string): { first: string; rest: string } {
-  const parts = title.trim().split(/\s+/);
-  if (parts.length <= 1) return { first: title.trim(), rest: '' };
-  return { first: parts[0], rest: parts.slice(1).join(' ') };
-}
-
 const ROADMAP_ICONS: Array<'target' | 'trend' | 'leaf'> = ['target', 'trend', 'leaf'];
 
 const PILLAR_ICONS: CarbonNetZeroPillarsSectionData['items'][number]['icon'][] = [
@@ -170,8 +163,6 @@ export async function fetchSustainabilityLayout6Page(slug: string): Promise<{
     const meta = data.meta || {};
     const seo = (data.seo || {}) as Record<string, unknown>;
 
-    const pathHeading = splitHeading(meta.path_title || 'Path To Carbon Neutrality');
-
     const pathItems = parseRepeaterBlock(meta.path_items);
     const pathYears = pathItems?.year || [];
     const pathTitles = pathItems?.title || [];
@@ -200,22 +191,19 @@ export async function fetchSustainabilityLayout6Page(slug: string): Promise<{
       };
     });
 
-    const roadmapSection: CarbonNetZeroRoadmapSectionData = {
-      headingBlack: pathHeading.first,
-      headingBlue: pathHeading.rest,
-      milestones,
-      summaryBarText: formatBoldText(meta.Net_Zero_Target_text || '2050 NET ZERO ACROSS THE VALUE CHAIN'),
-      summaryBarUrl: meta.Net_Zero_Target_url,
-      accentColor: '#00AEEF',
-      iconCircleBackground: '#e8ecef',
-      connectorLineColor: '#d1d5db',
-      sectionBackgroundColor: '#f5f6f8',
-      summaryBarBackground: '#00AEEF',
-    };
-
-    const pillarHeading = splitHeading(
-      meta.sustainability_section_title || 'Key Sustainability Pillar',
-    );
+    const roadmapSection: CarbonNetZeroRoadmapSectionData | undefined = milestones.length
+      ? {
+          heading: formatBoldText(meta.path_title || data.title),
+          milestones,
+          summaryBarText: formatBoldText(meta.Net_Zero_Target_text || ''),
+          summaryBarUrl: meta.Net_Zero_Target_url,
+          accentColor: '#00AEEF',
+          iconCircleBackground: '#e8ecef',
+          connectorLineColor: '#d1d5db',
+          sectionBackgroundColor: '#f5f6f8',
+          summaryBarBackground: '#00AEEF',
+        }
+      : undefined;
 
     const pillarItems = parseRepeaterBlock(meta.sustainability_section_items);
     const pillarTitles = pillarItems?.title || [];
@@ -224,7 +212,7 @@ export async function fetchSustainabilityLayout6Page(slug: string): Promise<{
 
     const pillars = pillarTitles.map((title, idx) => ({
       id: `pillar-${idx}`,
-      title,
+      title: formatBoldText(title),
       description: pillarDescriptions[idx] || '',
       iconImageUrl: iconEntryUrl(pillarIcons[idx]),
       icon: (PILLAR_ICONS[idx] ?? 'carbon_verification') as (typeof PILLAR_ICONS)[number],
@@ -232,7 +220,7 @@ export async function fetchSustainabilityLayout6Page(slug: string): Promise<{
 
     const pillarsSection: CarbonNetZeroPillarsSectionData | undefined = pillars.length
       ? {
-          heading: formatBoldText(`${pillarHeading.first} ${pillarHeading.rest}`.trim()),
+          heading: formatBoldText(meta.sustainability_section_title || data.title),
           items: pillars,
           accentColor: '#00AEEF',
           cardBackgroundColor: '#f2f4f6',
@@ -240,23 +228,14 @@ export async function fetchSustainabilityLayout6Page(slug: string): Promise<{
         }
       : undefined;
 
-    const breadcrumbImage = meta.breadcrumb_image?.url || '/pick_cartoon_banner.webp';
-
-    const displayTitle = normalizePageTitle(data.title);
-
     const pageData: CarbonNetZeroRoadmapPageData = {
-      title: displayTitle,
-      heroBackgroundImage: breadcrumbImage,
+      title: normalizePageTitle(data.title),
+      heroBackgroundImage: meta.breadcrumb_image?.url,
       carbonNetZeroRoadmapSection: roadmapSection,
       carbonNetZeroPillarsSection: pillarsSection,
     };
 
-    return {
-      slug: data.slug,
-      title: displayTitle,
-      seo,
-      pageData,
-    };
+    return { slug: data.slug, title: normalizePageTitle(data.title), seo, pageData };
   } catch {
     return null;
   }

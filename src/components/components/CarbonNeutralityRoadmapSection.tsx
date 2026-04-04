@@ -56,10 +56,7 @@ export default function CarbonNeutralityRoadmapSection({ data }: CarbonNeutralit
   return (
     <section className="py-12 md:pt-24 md:pb-12 bg-gray-50">
       <div className="container mx-auto px-4">
-        <h2 className="mb-14 text-center text-3xl font-bold tracking-tight text-black md:mb-20 md:text-4xl lg:text-5xl">
-          {data.headingBlack}{' '}
-          <span style={{ color: accent }}>{data.headingBlue}</span>
-        </h2>
+        <h2 className="mb-14 text-center text-3xl font-bold tracking-tight text-black md:mb-20 md:text-4xl lg:text-5xl" dangerouslySetInnerHTML={{ __html: data.heading }} />
 
         <div className="relative">
           <div
