@@ -1,9 +1,8 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { formatBoldText } from '@/lib/htmlText';
-
 import type { ProductIndustriesPageData } from '@/lib/api/product_industries_layout';
 import { RichText } from '@/components/common/RichText';
+import Breadcrumbs from '@/components/common/Breadcrumbs';
 import IndustriesFeaturedCarousel from '@/components/industries/IndustriesFeaturedCarousel';
 
 export default function ProductIndustriesLayoutPage({ data }: { data: ProductIndustriesPageData }) {
@@ -34,7 +33,13 @@ export default function ProductIndustriesLayoutPage({ data }: { data: ProductInd
             </p>
           ) : null}
         </div>
-      </section>   
+      </section>
+
+      <section className="bg-[#f8f8f8]">
+        <div className="container mx-auto px-4 py-4">
+          <Breadcrumbs items={[{ label: data.title }]} />
+        </div>
+      </section>
 
       {/* Industrial Segments */}
       {data.industries.length > 0 ? (

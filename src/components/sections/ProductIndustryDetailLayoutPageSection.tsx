@@ -7,6 +7,8 @@ import TechnicalConsultationCTA from '@/components/products/TechnicalConsultatio
 import CategoryGlobalImpact from '@/components/products/CategoryGlobalImpact';
 import type { ProductIndustryDetailPageData } from '@/lib/api/product_industry_detail_layout';
 import { RichText } from '@/components/common/RichText';
+import Breadcrumbs from '@/components/common/Breadcrumbs';
+import { plainTextFromMaybeHtml } from '@/lib/htmlText';
 
 export default function ProductIndustryDetailLayoutPageSection({
   data,
@@ -45,6 +47,17 @@ export default function ProductIndustryDetailLayoutPageSection({
               ) : null}
             </div>
           </div>
+        </div>
+      </section>
+
+      <section className="bg-gray-50">
+        <div className="container mx-auto px-4 py-4">
+          <Breadcrumbs
+            items={[
+              { label: 'Industries', href: '/industries' },
+              { label: plainTextFromMaybeHtml(data.title) },
+            ]}
+          />
         </div>
       </section>
 

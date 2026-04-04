@@ -3,10 +3,12 @@ import Link from 'next/link';
 import { formatBoldText } from '@/lib/htmlText';
 
 import VideoModalClient from '@/components/common/VideoModalClient';
+import Breadcrumbs from '@/components/common/Breadcrumbs';
 import CallToAction from '@/components/home/CallToAction';
 import ConnectTechnicalExperts from '@/components/technical-services/ConnectTechnicalExperts';
 import type { TechnicalServicesLayoutPageData } from '@/lib/api/technical_services_layout';
 import { RichText } from '@/components/common/RichText';
+import { plainTextFromMaybeHtml } from '@/lib/htmlText';
 
 function getYouTubeId(inputUrl: string): string | null {
   try {
@@ -81,6 +83,14 @@ export default async function TechnicalServicesLayoutPage({
               </h1>
             </div>
           </div>
+        </div>
+      </section>
+
+      <section className="bg-gray-50">
+        <div className="container mx-auto px-4 py-4">
+          <Breadcrumbs
+            items={[{ label: plainTextFromMaybeHtml(data.heroTitle) || 'Technical support services' }]}
+          />
         </div>
       </section>
 

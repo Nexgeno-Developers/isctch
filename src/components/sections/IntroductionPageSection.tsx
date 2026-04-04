@@ -1,5 +1,6 @@
 import CompanyHero from '@/components/company/CompanyHero';
 import CompanyNavigationServer from '@/components/company/CompanyNavigationServer';
+import Breadcrumbs from '@/components/common/Breadcrumbs';
 import AboutUsQuadrant from '@/components/company/AboutUsQuadrant';
 import VideoBanner from '@/components/home/VideoBanner';
 import CallToAction from '@/components/home/CallToAction';
@@ -21,6 +22,16 @@ export function IntroductionPageSection({
           backgroundImage: data.heroBackgroundImage || '',
         }}
       />
+
+      <section className="bg-gray-50">
+        <div className="container mx-auto px-4 py-4">
+          <Breadcrumbs
+            items={[
+              { label: data.title },
+            ]}
+          />
+        </div>
+      </section>
 
       <CompanyNavigationServer activePath={activePath || '/introduction'} />
 

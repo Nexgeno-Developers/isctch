@@ -76,3 +76,9 @@ export function stripAndFormatText(value?: string): string {
   const stripped = value.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
   return formatBoldText(stripped);
 }
+
+/** Plain label for breadcrumbs (strips tags / entities, no rich formatting). */
+export function plainTextFromMaybeHtml(input?: string | null): string {
+  if (!input) return '';
+  return normalizeText(input.replace(/<[^>]+>/g, ' '));
+}
