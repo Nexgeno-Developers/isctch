@@ -202,7 +202,7 @@ export default function VideoBanner({
     if (youtube) {
       return (
         <div
-          className="fixed inset-0 z-[100] flex items-center justify-center bg-black/40 p-4 backdrop-blur-[2px]"
+          className="fixed inset-0 z-[100] flex items-center justify-center bg-black/65 p-4 backdrop-blur-[5px]"
           role="dialog"
           aria-modal="true"
         >
@@ -277,18 +277,12 @@ export default function VideoBanner({
       )}
 
       <section className="relative min-h-[200px] h-[200px] md:h-screen md:min-h-0 overflow-hidden">
-      {/* Background Video/GIF - Autoplay - Hidden when video is playing */}
-      {!isVideoPlaying && (
-        <div className="absolute inset-0">
-          {backgroundInnerEl}
-          {/* Dark Overlay */}
-          {/* <div className="absolute inset-0 bg-[#0e233c3d]" /> */}
-          {/* Blur Effect */}
-          {/* <div className="absolute inset-0 backdrop-blur-sm" /> */}
-        </div>
-      )}
+      {/* Background video always mounted so it keeps playing behind the lightbox */}
+      <div className="absolute inset-0 z-0">
+        {backgroundInnerEl}
+      </div>
 
-      {/* Video Player - Shows when play button is clicked */}
+      {/* Modal (YouTube) or inline player (file video) — sits above background */}
       {playerEl}
 
       {/* Content - Hidden when video is playing */}
