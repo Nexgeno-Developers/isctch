@@ -6,7 +6,7 @@ import Link from 'next/link';
 import LatestNewsClient, { type MarketingNewsItem } from '@/components/marketing/LatestNewsClient';
 import { fetchMarketingLatestNews, fetchMarketingPressNews } from '@/lib/api';
 import { RichText } from '@/components/common/RichText';
-
+import { formatBoldText } from '@/lib/htmlText';
 export type MarketingHighlight = {
   id: string;
   icon?: string;
@@ -72,9 +72,9 @@ export default async function MarketingServicesLayoutPage({
             </div>
 
             <div className="text-center lg:text-left">
-              <h2 className="text-3xl md:text-4xl lg:text-5xl text-black font-bold mb-6 md:mb-6 leading-[70px]">
-                {data.heroTitle}
-              </h2>
+              <h2 className="text-3xl md:text-4xl lg:text-5xl text-black font-bold mb-6 md:mb-6 leading-[70px]" 
+                dangerouslySetInnerHTML={{ __html: formatBoldText(data.heroTitle) }} />
+             
               {data.heroDescriptionHtml ? (
                 <RichText
                   as="div"
@@ -89,9 +89,9 @@ export default async function MarketingServicesLayoutPage({
             <div className="bg-gray-50 pt-10 md:pt-20">
               {data.highlightsTitle && (
                 <div className="text-center mb-8">
-                  <h3 className="text-3xl md:text-4xl text-black lg:text-5xl font-bold mb-6 md:mb-2 text-center">
-                    {data.highlightsTitle}
-                  </h3>
+                  <h3 className="text-3xl md:text-4xl text-black lg:text-5xl font-bold mb-6 md:mb-2 text-center leading-[65px]"
+                    dangerouslySetInnerHTML={{ __html: formatBoldText(data.highlightsTitle) }} />
+                  
                 </div>
               )}
 
@@ -155,9 +155,9 @@ export default async function MarketingServicesLayoutPage({
                   >
                     <div className="flex items-center justify-center p-8 md:p-12 lg:p-16 xl:p-16">
                       <div className="max-w-xl">
-                        <h3 className="text-lg md:text-xl lg:text-[36px] font-bold text-[#0E233C] mb-3">
-                          {item.title}
-                        </h3>
+                        <h3 className="text-lg md:text-xl lg:text-[36px] font-bold text-[#0E233C] mb-3"
+                          dangerouslySetInnerHTML={{ __html: formatBoldText(item.title) }} />
+                       
                         {item.description ? (
                           <RichText
                             as="div"

@@ -120,7 +120,7 @@ export default function TechnicalServiceDetailLayoutPage({
         <section className="bg-gray-50 pt-12 pb-4 md:py-16 md:pt-16 md:pb-8 lg:pt-20 lg:pb-8">
           <div className="container mx-auto px-4">
             <div className="mb-10 md:mb-14">
-              <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-center" dangerouslySetInnerHTML={{ __html: data.operationalTitle || 'Driving Operational Success' }} />
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-center" dangerouslySetInnerHTML={{ __html: formatBoldText(data.operationalTitle || 'Driving Operational Success') }} />
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">

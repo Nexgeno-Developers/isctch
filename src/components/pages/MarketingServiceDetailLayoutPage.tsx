@@ -7,6 +7,8 @@ import type { MarketingServiceDetailPageData } from '@/lib/api/marketing_service
 import VideoBanner from '@/components/home/VideoBanner';
 import ConnectTechnicalExperts from '@/components/technical-services/ConnectTechnicalExperts';
 import { RichText } from '@/components/common/RichText';
+import { formatBoldText } from '@/lib/htmlText';
+
 
 export default function MarketingServiceDetailLayoutPage({
   data,
@@ -42,9 +44,8 @@ export default function MarketingServiceDetailLayoutPage({
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
           <div className="flex items-center">
             <div className="">
-              <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-[#0E233C] mb-4 leading-snug">
-                {data.introTitle}
-              </h2>
+              <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-[#0E233C] mb-4 leading-snug"
+                dangerouslySetInnerHTML={{ __html: formatBoldText(data.introTitle) }} />
               {data.heroDescriptionHtml ? (
                 <RichText
                   as="div"
@@ -137,9 +138,10 @@ export default function MarketingServiceDetailLayoutPage({
         <section className="bg-gray-50 pt-10 md:pt-16">
           <div className="container mx-auto px-4">
             {data.brandJourneyTitle ? (
-              <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-black mb-8 text-center">
-                {data.brandJourneyTitle}
-              </h2>
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-black mb-8 text-center"
+                
+                 dangerouslySetInnerHTML={{ __html: formatBoldText(data.brandJourneyTitle) }} />
+           
             ) : null}
 
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 md:gap-5">
