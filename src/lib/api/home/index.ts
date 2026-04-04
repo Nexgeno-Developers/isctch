@@ -299,7 +299,7 @@ type HomePageApiResponse = {
 // ==================== Helpers ====================
 
 const COMPANY_API_BASE_URL = process.env.COMPANY_API_BASE_URL || 'https://backend-lamipak.webtesting.pw/api';
-const HOME_AUTOFETCH = 'services,marketing_services,technical_services,sustainable_products,sustainabilities';
+const HOME_AUTOFETCH = 'services,sustainable_products,sustainabilities';
 const HOME_REVALIDATE_SECONDS = 300;
 
 function buildApiUrl(path: string): string {
@@ -392,6 +392,137 @@ function deriveProductLabel(description: string, title: string): string {
   const sentence = d.split(/(?<=[.!?])\s+/)[0]?.trim() || d;
   return sentence.length > 100 ? `${sentence.slice(0, 97)}…` : sentence;
 }
+
+// ==================== Fallback Data ====================
+
+const FALLBACK_APPROACH: ApproachData = {
+  title: 'We engineer the future of <span class="text-[#009FE8]">aseptic packaging.</span>',
+  subtitle: 'Answer three questions and discover your optimal packaging system.',
+  image: '/approcah_image.jpg',
+  imageAlt: 'Professional examining aseptic packaging in laboratory',
+  questions: [
+    {
+      id: '1',
+      question: 'What product are you packaging?',
+      options: [
+        { id: '1-1', label: 'Dairy', value: 'dairy' },
+        { id: '1-2', label: 'Juice', value: 'juice' },
+        { id: '1-3', label: 'Plant-Based', value: 'plant-based' },
+        { id: '1-4', label: 'Liquid Food', value: 'liquid-food' },
+        { id: '1-5', label: 'Nutritional', value: 'nutritional' },
+        { id: '1-6', label: 'Pharma', value: 'pharma' },
+      ],
+    },
+    {
+      id: '2',
+      question: 'What production scale?',
+      options: [
+        { id: '2-1', label: 'Startup', value: 'startup' },
+        { id: '2-2', label: 'Regional', value: 'regional' },
+        { id: '2-3', label: 'Global Scale', value: 'global-scale' },
+        { id: '2-4', label: 'High-Speed Line', value: 'high-speed-line' },
+      ],
+    },
+    {
+      id: '3',
+      question: 'What is your target market region?',
+      options: [
+        { id: '3-1', label: 'Asia Pacific', value: 'asia-pacific' },
+        { id: '3-2', label: 'Europe', value: 'europe' },
+        { id: '3-3', label: 'North America', value: 'north-america' },
+        { id: '3-4', label: 'Middle East & Africa', value: 'middle-east-africa' },
+        { id: '3-5', label: 'Latin America', value: 'latin-america' },
+      ],
+    },
+  ],
+  ctaText: 'DISCOVER YOUR SYSTEM',
+  ctaLink: '/solutions',
+};
+
+const FALLBACK_INSIGHTS: LatestInsightsData = {
+  cards: [
+    {
+      id: '1',
+      title: 'Global Dairy Market Outlook',
+      category: 'INDUSTRY',
+      date: 'NOV 2025',
+      image: '/latest_insite_image_1.jpg',
+      imageAlt: 'Global Dairy Market Outlook - White carton packages with green leaf design',
+      link: '/',
+    },
+    {
+      id: '2',
+      title: 'Smart Packaging & Traceability',
+      category: 'INDUSTRY',
+      date: 'NOV 2025',
+      image: '/latest_insite_image_2.jpg',
+      imageAlt: 'Smart Packaging & Traceability - Laboratory with blue liquid containers',
+      link: '/',
+    },
+    {
+      id: '3',
+      title: 'Circular Economy in Packaging',
+      category: 'INDUSTRY',
+      date: 'NOV 2025',
+      image: '/latest_insite_image_3.jpg',
+      imageAlt: 'Circular Economy in Packaging - Person examining plastic pouch in laboratory',
+      link: '/',
+    },
+    {
+      id: '4',
+      title: 'Smart Packaging & Traceability',
+      category: 'INDUSTRY',
+      date: 'NOV 2025',
+      image: '/latest_insite_image_2.jpg',
+      imageAlt: 'Smart Packaging & Traceability - Laboratory with blue liquid containers',
+      link: '/',
+    },
+  ],
+};
+
+const FALLBACK_PRESS_RELEASES: LatestPressReleaseData = {
+  cards: [
+    {
+      id: '1',
+      category: 'Dairy Systems',
+      title: 'Lamipak Showcases Expanded End-to-End Packaging Solutions at Gulfood Manufacturing 2025',
+      image: '/latest_press_1.jpg',
+      imageAlt: 'Lamipak exhibition booth at Gulfood Manufacturing 2025',
+      link: '/',
+    },
+    {
+      id: '2',
+      category: 'Dairy Systems',
+      title: 'Lamipak Introduces New Fresh Milk Packaging Solutions',
+      image: '/latest_press_2.jpg',
+      imageAlt: 'Fresh milk packaging solutions',
+      link: '/',
+    },
+    {
+      id: '3',
+      category: 'Dairy Systems',
+      title: 'Lamipak Receives Certificate of Appreciation from PT. Lami Packaging Indonesia',
+      image: '/latest_press_3.jpg',
+      imageAlt: 'Certificate of appreciation',
+      link: '/',
+    },
+  ],
+};
+
+const FALLBACK_CTA: CallToActionData = {
+  heading: 'Still Have <span class="text-[#009FE8]">Questions?</span>',
+  description: 'Our Lamipak team is ready to walk you through any technical details.',
+  ctaText: 'Contact Us',
+  ctaLink: '/contact',
+};
+
+const FALLBACK_NEWSLETTER: NewsletterSubscriptionData = {
+  headline: 'Stay Ahead in Aseptic Engineering.',
+  subtitle: 'Get the Latest Insights Delivered to Your Inbox.',
+  placeholder: 'Enter your email',
+  buttonText: 'SUBSCRIBE',
+  backgroundImage: '/newsletter-bg.jpg',
+};
 
 // ==================== Mappers ====================
 
@@ -626,12 +757,12 @@ export const fetchHomepageData = cache(async (): Promise<HomepageData | null> =>
       productSustainability: productMapped ?? { products: [] },
       workInSustainability: workMapped ?? { cards: [] },
       faq: faqMapped ?? { items: [] },
-      latestPressRelease: { cards: [] },
-      latestInsights: { cards: [] },
-      approach: { title: '', subtitle: '', image: '', imageAlt: '', questions: [], ctaText: '', ctaLink: '/' },
+      latestPressRelease: FALLBACK_PRESS_RELEASES,
+      latestInsights: FALLBACK_INSIGHTS,
+      approach: FALLBACK_APPROACH,
       innovationInPackaging: { cards: [], exploreMoreLink: '/' },
-      callToAction: { heading: '', description: '', ctaText: '', ctaLink: '/contact' },
-      newsletterSubscription: { headline: '', subtitle: '', placeholder: '', buttonText: '', backgroundImage: '' },
+      callToAction: FALLBACK_CTA,
+      newsletterSubscription: FALLBACK_NEWSLETTER,
       seo: seoMerged,
     };
   } catch {
