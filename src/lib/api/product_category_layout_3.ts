@@ -1,5 +1,6 @@
 import { decodeHtmlEntities, formatBoldText } from '@/lib/htmlText';
 import { breadcrumbsFromSlugPath } from '@/lib/breadcrumbsFromSlugPath';
+import { cleanVideoUrlFromApi } from '@/lib/cleanVideoUrl';
 
 export type LamiStrawIconId = 'u' | 'telescope' | 'i' | 'flow';
 
@@ -155,7 +156,7 @@ export async function fetcProductCategoryLayout3Page(slug: string) {
           };
         })
         .filter(Boolean) as LamiStrawCardItem[],
-      videoUrl: meta.video_url?.trim() || undefined,
+      videoUrl: cleanVideoUrlFromApi(meta.video_url) || undefined,
     };
 
     // Skip the section if it would render empty.

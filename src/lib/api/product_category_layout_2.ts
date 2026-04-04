@@ -15,6 +15,7 @@ export type SustainableSolutionsSectionData = {
 
 import { formatBoldText } from '@/lib/htmlText';
 import { breadcrumbsFromSlugPath } from '@/lib/breadcrumbsFromSlugPath';
+import { cleanVideoUrlFromApi } from '@/lib/cleanVideoUrl';
 
 type ProductCategoryLayout2ApiResponse = {
   data?: {
@@ -154,7 +155,7 @@ function buildSustainableSectionData(params: {
   return {
     intro: intro || undefined,
     items,
-    videoUrl: meta?.video_url?.trim() || undefined,
+    videoUrl: cleanVideoUrlFromApi(meta?.video_url) || undefined,
   };
 }
 

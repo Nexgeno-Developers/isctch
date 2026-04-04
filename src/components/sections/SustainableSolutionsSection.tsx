@@ -1,14 +1,16 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import type { SustainableSolutionsSectionData } from '@/lib/api/product_category_layout_2';
-import { ProductCategoryVideoEmbed } from './ProductCategoryVideoEmbed';
+import VideoBanner from '@/components/home/VideoBanner';
 import { RichText } from '@/components/common/RichText';
+import { cleanVideoUrlFromApi } from '@/lib/cleanVideoUrl';
 
 export function SustainableSolutionsSection({
   data,
 }: {
   data: SustainableSolutionsSectionData;
 }) {
+  const videoUrl = cleanVideoUrlFromApi(data.videoUrl);
   const intro = data.intro ?? '';
   const introHasHtml = /<[^>]+>/.test(intro);
 
@@ -102,13 +104,20 @@ export function SustainableSolutionsSection({
           )}
 
         </div>
-
-        {data.videoUrl ? <ProductCategoryVideoEmbed videoUrl={data.videoUrl} /> : null}
-
       </section>
-
-
-
+<div className="pb-10 md:pb-24">
+      {videoUrl ? (
+        <VideoBanner
+          prefetchedData={{
+            title: '',
+            preTitle: '',
+            ctaText: '',
+            ctaLink: '',
+            videoUrl,
+          }}
+        />
+      ) : null}
+      </div>
     </>
   );
 }

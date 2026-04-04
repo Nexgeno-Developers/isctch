@@ -4,7 +4,8 @@ import type { LamiStrawIconId, LamiStrawLandingSectionData } from '@/lib/api/pro
 import type { ReactElement } from 'react';
 import CallToAction from '../home/CallToAction';
 import NewsletterSubscription from '../home/NewsletterSubscription';
-import { ProductCategoryVideoEmbed } from './ProductCategoryVideoEmbed';
+import VideoBanner from '@/components/home/VideoBanner';
+import { cleanVideoUrlFromApi } from '@/lib/cleanVideoUrl';
 
 function IconBase({ children }: { children: React.ReactNode }) {
   return (
@@ -111,6 +112,8 @@ export function LamiStrawLandingSection({
 }: {
   data: LamiStrawLandingSectionData;
 }) {
+  const videoUrl = cleanVideoUrlFromApi(data.videoUrl);
+
   return (
     <>
     <section className="bg-gray-50 py-10 md:py-20">
@@ -136,10 +139,23 @@ export function LamiStrawLandingSection({
           </div>
         </div>
       </div>
-
-    {data.videoUrl ? <ProductCategoryVideoEmbed videoUrl={data.videoUrl} /> : null}
-
     </section>
+
+<div className="pb-10 md:pb-24 pt-2 md:pt-4">
+{videoUrl ? (
+        <VideoBanner
+          prefetchedData={{
+            title: '',
+            preTitle: '',
+            ctaText: '',
+            ctaLink: '',
+            videoUrl,
+          }}
+        />
+      ) : null}
+</div>
+      
+      
 
     <CallToAction />
     <NewsletterSubscription />

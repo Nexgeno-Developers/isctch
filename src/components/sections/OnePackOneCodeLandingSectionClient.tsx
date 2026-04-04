@@ -5,7 +5,8 @@ import type { OnePackOneCodeLandingSectionData } from '@/lib/api/product_categor
 import Image from 'next/image';
 import Link from 'next/link';
 import ConnectTechnicalExperts from '@/components/technical-services/ConnectTechnicalExperts';
-import { ProductCategoryVideoEmbed } from '@/components/sections/ProductCategoryVideoEmbed';
+import VideoBanner from '@/components/home/VideoBanner';
+import { cleanVideoUrlFromApi } from '@/lib/cleanVideoUrl';
 
 function HeroBreadcrumbs({
   items,
@@ -142,6 +143,7 @@ export default function OnePackOneCodeLandingSectionClient({
   data: OnePackOneCodeLandingSectionData & { title?: string };
 }) {
   const titleText = data.title || 'One Pack One Code';
+  const videoUrl = cleanVideoUrlFromApi(data.hero.videoUrl);
 
   return (
     <>
@@ -201,9 +203,22 @@ export default function OnePackOneCodeLandingSectionClient({
             ))}
           </div>
         </div>
-
-        {data.hero.videoUrl ? <ProductCategoryVideoEmbed videoUrl={data.hero.videoUrl} /> : null}
       </section>
+
+<div className="pb-4 md:pb-12 md:pt-12 pt-4">
+{videoUrl ? (
+        <VideoBanner
+          prefetchedData={{
+            title: '',
+            preTitle: '',
+            ctaText: '',
+            ctaLink: '',
+            videoUrl,
+          }}
+        />
+      ) : null}
+</div>
+      
 
       <ConnectTechnicalExperts
         heading=""

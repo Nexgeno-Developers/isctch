@@ -78,6 +78,7 @@ export type OnePackOneCodeLandingSectionData = {
 
 import { formatBoldText } from '@/lib/htmlText';
 import { breadcrumbsFromSlugPath } from '@/lib/breadcrumbsFromSlugPath';
+import { cleanVideoUrlFromApi } from '@/lib/cleanVideoUrl';
 
 function stripHtml(value?: string) {
   if (!value) return '';
@@ -122,7 +123,7 @@ export async function fetcProductCategoryLayout4Page(slug: string) {
 
     const meta = data.meta || {};
     const heroImage = meta.banner_images?.url || undefined;
-    const videoUrl = meta.video_url;
+    const videoUrl = cleanVideoUrlFromApi(meta.video_url) || undefined;
 
     const tabOrder = [
       'digital',
