@@ -61,6 +61,12 @@ import { fetchProductIndustriesLayoutPage } from '@/lib/api/product_industries_l
 import ProductIndustriesLayoutPage from '@/components/pages/ProductIndustriesLayoutPage';
 import { fetchRAndDCentreLayoutPage } from '@/lib/api/r_and_d_centre_layout';
 import RAndDCentreLayoutPage from '@/components/pages/RAndDCentreLayoutPage';
+import { fetchNpdLayoutPage } from '@/lib/api/npd_layout';
+import NpdLayoutPage from '@/components/pages/NpdLayoutPage';
+import { fetchPilotPlantLayoutPage } from '@/lib/api/pilot_plant_layout';
+import PilotPlantLayoutPage from '@/components/pages/PilotPlantLayoutPage';
+import { fetchInnovationsLayoutPage } from '@/lib/api/innovations_layout';
+import InnovationsLayoutPage from '@/components/pages/InnovationsLayoutPage';
 
 import {
   getDynamicPageBySlug,
@@ -97,12 +103,31 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const { slug } = await params;
   const fullSlug = slug?.join('/') || ''; // ✅ MAIN FIX
 
-  const productIndustriesLayout = await fetchProductIndustriesLayoutPage(fullSlug);
-  if (productIndustriesLayout) {
+  /* Dedicated pages must run before generic `/v1/page/{slug}` fetches (e.g. industries) */
+  const npdLayout = await fetchNpdLayoutPage(fullSlug);
+  if (npdLayout) {
     return buildApiMetadata({
-      slug: productIndustriesLayout.slug,
-      title: productIndustriesLayout.title,
-      seo: productIndustriesLayout.seo || {},
+      slug: npdLayout.slug,
+      title: npdLayout.title,
+      seo: npdLayout.seo || {},
+    });
+  }
+
+  const pilotPlantLayout = await fetchPilotPlantLayoutPage(fullSlug);
+  if (pilotPlantLayout) {
+    return buildApiMetadata({
+      slug: pilotPlantLayout.slug,
+      title: pilotPlantLayout.title,
+      seo: pilotPlantLayout.seo || {},
+    });
+  }
+
+  const innovationsLayout = await fetchInnovationsLayoutPage(fullSlug);
+  if (innovationsLayout) {
+    return buildApiMetadata({
+      slug: innovationsLayout.slug,
+      title: innovationsLayout.title,
+      seo: innovationsLayout.seo || {},
     });
   }
 
@@ -112,6 +137,15 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       slug: rAndDCentreLayout.slug,
       title: rAndDCentreLayout.title,
       seo: rAndDCentreLayout.seo || {},
+    });
+  }
+
+  const productIndustriesLayout = await fetchProductIndustriesLayoutPage(fullSlug);
+  if (productIndustriesLayout) {
+    return buildApiMetadata({
+      slug: productIndustriesLayout.slug,
+      title: productIndustriesLayout.title,
+      seo: productIndustriesLayout.seo || {},
     });
   }
 
@@ -522,14 +556,29 @@ export default async function DynamicPage({ params }: PageProps) {
   const { slug } = await params;
   const fullSlug = slug?.join('/') || ''; // ✅ MAIN FIX
 
-  const productIndustriesLayout = await fetchProductIndustriesLayoutPage(fullSlug);
-  if (productIndustriesLayout) {
-    return <ProductIndustriesLayoutPage data={productIndustriesLayout.page} />;
+  const npdLayout = await fetchNpdLayoutPage(fullSlug);
+  if (npdLayout) {
+    return <NpdLayoutPage data={npdLayout.page} />;
+  }
+
+  const pilotPlantLayout = await fetchPilotPlantLayoutPage(fullSlug);
+  if (pilotPlantLayout) {
+    return <PilotPlantLayoutPage data={pilotPlantLayout.page} />;
+  }
+
+  const innovationsLayout = await fetchInnovationsLayoutPage(fullSlug);
+  if (innovationsLayout) {
+    return <InnovationsLayoutPage data={innovationsLayout.page} />;
   }
 
   const rAndDCentreLayout = await fetchRAndDCentreLayoutPage(fullSlug);
   if (rAndDCentreLayout) {
     return <RAndDCentreLayoutPage data={rAndDCentreLayout.page} />;
+  }
+
+  const productIndustriesLayout = await fetchProductIndustriesLayoutPage(fullSlug);
+  if (productIndustriesLayout) {
+    return <ProductIndustriesLayoutPage data={productIndustriesLayout.page} />;
   }
 
   const industryLayout = await fetchProductIndustryDetailLayoutPage(fullSlug);
