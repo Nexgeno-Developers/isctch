@@ -23,7 +23,7 @@ export default function ProductIndustriesLayoutPage({ data }: { data: ProductInd
           )}
           <div className="absolute inset-0 bg-[#0e233c]/45" />
         </div>
-        <div className="relative z-10 container mx-auto max-w-5xl px-4 text-center">
+        <div className="relative z-10 container mx-auto px-4 text-center">
           <h1 className="text-2xl font-bold uppercase tracking-tight text-white md:text-4xl lg:text-5xl">
             {data.title}
           </h1>

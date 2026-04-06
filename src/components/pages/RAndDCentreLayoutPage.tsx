@@ -9,6 +9,7 @@ import type {
   RAndDCentreStatCard,
   RAndDLaboratoryZoneItem,
 } from '@/lib/api/r_and_d_centre_layout';
+import Breadcrumbs from '@/components/common/Breadcrumbs';
 import { RichText } from '@/components/common/RichText';
 import CallToAction from '@/components/home/CallToAction';
 import NewsletterSubscription from '@/components/home/NewsletterSubscription';
@@ -135,8 +136,8 @@ function LaboratoryZoneRow({ item }: { item: RAndDLaboratoryZoneItem }) {
 
 function LifecycleTestingCard({ card, index }: { card: RAndDCentreLifecycleCard; index: number }) {
   return (
-    <article className="relative flex h-full flex-col overflow-hidden rounded-[22px] border border-black/[0.06] bg-[#E4E7EA] p-6 shadow-sm md:p-8">
-      <div className="pointer-events-none absolute inset-x-0 top-0 h-[3px] bg-[#009FE8]" />
+    <article className="relative flex h-full flex-col overflow-hidden rounded-[50px] bg-[#EDF0F1] p-6 md:p-8">
+      
       <div className="mb-5 flex h-12 w-12 items-center justify-start">
         {card.iconUrl ? (
           <Image
@@ -157,7 +158,7 @@ function LifecycleTestingCard({ card, index }: { card: RAndDCentreLifecycleCard;
         {card.tags.map((tag) => (
           <span
             key={`${card.id}-${tag}`}
-            className="rounded-full border border-black/[0.06] bg-[#F0F1F3] px-3 py-1.5 text-xs font-medium text-black/75"
+            className="rounded-full  bg-[#CFD6D8] px-3 py-1.5 text-xs font-medium text-black"
             dangerouslySetInnerHTML={{ __html: tag }}
           ></span>
         ))}
@@ -236,20 +237,26 @@ export default function RAndDCentreLayoutPage({ data }: { data: RAndDCentrePageD
           <div className="absolute inset-0 bg-gradient-to-b from-black/45 via-black/35 to-black/50" />
         </div>
         <div className="relative z-10 mx-auto max-w-4xl px-4 text-center">
-          <p className="mb-4 text-xs font-semibold uppercase tracking-[0.25em] text-white/95 md:text-sm">
+          <p className="mb-4 text-xs font-semibold uppercase text-white md:text-sm">
             {data.heroEyebrow}
           </p>
           <h1 className="text-2xl font-bold uppercase leading-tight tracking-tight text-white md:text-4xl lg:text-5xl xl:text-[3.25rem]">
             {data.heroTitle}
           </h1>
-          <p className="mx-auto mt-8 max-w-3xl text-base leading-relaxed text-white/95 md:text-lg">
+          <p className="mx-auto mt-8 max-w-3xl text-base leading-relaxed text-white md:text-lg">
             {data.heroDescription}
           </p>
         </div>
       </section>
 
+      <section className="bg-gray-50">
+        <div className="container mx-auto px-4 py-4">
+          <Breadcrumbs items={[{ label: data.title }]} />
+        </div>
+      </section>
+
       {/* Intro + stats */}
-      <section className="py-14 md:py-20 lg:py-24">
+      <section className="bg-gray-50 py-14 md:py-20 lg:py-24">
         <div className="container mx-auto  px-4">
           <div className="grid grid-cols-1 items-start gap-12 lg:grid-cols-2 lg:gap-16 xl:gap-24">
             <div>
@@ -291,9 +298,9 @@ export default function RAndDCentreLayoutPage({ data }: { data: RAndDCentrePageD
       </section>
 
       {/* End-to-end testing — full packaging lifecycle */}
-      <section className="bg-[#F5F6F7] py-16 md:py-20 lg:py-24">
+      <section className="bg-gray-50">
         <div className="container mx-auto px-4">
-          <h2 className="mb-12 text-center text-3xl font-bold leading-tight md:mb-16 md:text-4xl lg:text-5xl text-black" dangerouslySetInnerHTML={{ __html: data.lifecycleSection.title }} />
+          <h2 className="mb-12 text-center text-3xl font-bold leading-tight md:mb-10 md:text-4xl lg:text-5xl text-black" dangerouslySetInnerHTML={{ __html: data.lifecycleSection.title }} />
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-7 lg:grid-cols-3 lg:gap-8">
             {data.lifecycleSection.cards.map((card, idx) => (
               <LifecycleTestingCard key={card.id} card={card} index={idx} />
@@ -303,12 +310,12 @@ export default function RAndDCentreLayoutPage({ data }: { data: RAndDCentrePageD
       </section>
 
       {/* Specialized laboratory zones */}
-      <section className="bg-[#FAFAFA] py-16 md:py-20 lg:py-24">
-        <div className="container mx-auto max-w-5xl px-4">
+      <section className="bg-gray-50 py-16 md:py-20 lg:py-20">
+        <div className="container mx-auto px-4">
           <div className="mb-10 text-center md:mb-14">
-            <h2 className="text-2xl font-bold uppercase leading-tight tracking-tight text-black md:text-3xl lg:text-[2rem] lg:leading-snug" dangerouslySetInnerHTML={{ __html: data.laboratoryZonesSection.title }} />
+            <h2 className="text-2xl font-bold  leading-tight tracking-tight text-black md:text-3xl lg:text-5xl lg:leading-snug" dangerouslySetInnerHTML={{ __html: data.laboratoryZonesSection.title }} />
             {data.laboratoryZonesSection.subtitle ? (
-              <p className="mt-4 text-[11px] font-semibold uppercase tracking-[0.22em] text-black/50 md:text-xs">
+              <p className="mt-4 text-black md:text-base">
                 {data.laboratoryZonesSection.subtitle}
               </p>
             ) : null}
@@ -325,14 +332,15 @@ export default function RAndDCentreLayoutPage({ data }: { data: RAndDCentrePageD
       <section className="relative overflow-hidden py-20 md:py-28 lg:py-32">
         <div className="pointer-events-none absolute inset-0">
           <Image
-            src={data.bottomCtaSection.backgroundImage || '/technical_bg.jpg'}
+            src='/technical_bg.jpg'
             alt=""
-            fill
-            className="object-cover"
-            sizes="100vw"
+            height={1500}
+            width={1500}
+            className="object-cover w-full h-full"
+            sizes=""
             priority={false}
           />
-          <div className="absolute inset-0 bg-[#0a1a2e]/58" aria-hidden />
+          <div className="absolute inset-0 bg-[#0a1a2e]/40" aria-hidden />
           <div
             className="absolute inset-0 opacity-[0.16]"
             style={{
@@ -364,7 +372,7 @@ export default function RAndDCentreLayoutPage({ data }: { data: RAndDCentrePageD
         </div>
       </section>
 
-      <div className="bg-gray-50 lg:pt-12 pt-4">
+      <div className="bg-gray-50 lg:pt-24 pt-4">
         <CallToAction />
         </div>
         
