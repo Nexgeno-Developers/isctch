@@ -4,7 +4,7 @@ type Props = Pick<PilotPlantPageData, 'heroBackgroundImage' | 'heroTitle'>;
 
 export default function PilotPlantHero({ heroBackgroundImage, heroTitle }: Props) {
   return (
-    <section className="relative overflow-hidden pt-[140px] pb-0 md:pt-[200px] md:pb-0 lg:pt-[220px]">
+    <section className="relative lg:pt-[220px] pt-[120px] lg:pb-[150px] pb-[44px] overflow-hidden">
       <div className="absolute inset-0 bottom-[3px]">
         {heroBackgroundImage ? (
           // eslint-disable-next-line @next/next/no-img-element
@@ -23,7 +23,6 @@ export default function PilotPlantHero({ heroBackgroundImage, heroTitle }: Props
           {heroTitle}
         </h1>
       </div>
-      <div className="relative z-10 h-[3px] w-full bg-[#009FE8]" aria-hidden />
     </section>
   );
 }
