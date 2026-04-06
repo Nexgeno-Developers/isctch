@@ -124,7 +124,7 @@ function LaboratoryZoneRow({ item }: { item: RAndDLaboratoryZoneItem }) {
           {item.tags.map((tag) => (
             <span
               key={`${item.id}-${tag}`}
-              className="rounded-full border border-gray-300 bg-white px-3 py-1.5 text-xs font-medium text-black/80 shadow-[0_1px_0_rgba(0,0,0,0.04)]"
+              className="rounded-full border border-gray-300 px-3 py-1.5 text-xs font-medium text-black"
               dangerouslySetInnerHTML={{ __html: tag }}
             ></span>
           ))}
