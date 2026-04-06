@@ -1,5 +1,7 @@
 import Link from 'next/link';
 import Breadcrumbs from '@/components/common/Breadcrumbs';
+import CallToAction from '@/components/home/CallToAction';
+import NewsletterSubscription from '@/components/home/NewsletterSubscription';
 import type { InsightsHubData } from '@/lib/api/insights_layout';
 import { InsightCard } from '@/components/insights/InsightCard';
 import { InsightsPageHero } from '@/components/insights/InsightsPageHero';
@@ -98,6 +100,9 @@ export default function InsightsHubPage({ data }: { data: InsightsHubData }) {
           <ViewAllButton href={data.newsletterViewAllHref} label="View all newsletters" />
         </div>
       </section>
+
+      <CallToAction />
+      <NewsletterSubscription />
     </main>
   );
 }
