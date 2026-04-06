@@ -73,7 +73,7 @@ export function InsightsListingWithFilters({
                   <button
                     type="button"
                     onClick={() => setSub('all')}
-                    className={`w-full rounded-lg px-3 py-2.5 text-left text-sm font-medium transition-colors ${
+                    className={`cursor-pointer w-full rounded-lg px-3 py-2.5 text-left text-sm font-medium transition-colors ${
                       sub === 'all'
                         ? 'bg-[#009FE8] text-white shadow-sm'
                         : 'text-black hover:bg-gray-100'
@@ -87,7 +87,7 @@ export function InsightsListingWithFilters({
                     <button
                       type="button"
                       onClick={() => setSub(c)}
-                      className={`w-full rounded-lg px-3 py-2.5 text-left text-sm font-medium transition-colors ${
+                      className={`cursor-pointer w-full rounded-lg px-3 py-2.5 text-left text-sm font-medium transition-colors ${
                         sub === c
                           ? 'bg-[#009FE8] text-white shadow-sm'
                           : 'text-black hover:bg-gray-100'

@@ -20,7 +20,7 @@ export default function InsightsArticleDetailPage({ data }: { data: InsightsArti
         titleTag="div"
       />
 
-      <section className="border-b border-gray-200 bg-gray-50">
+      <section className="bg-gray-50">
         <div className="container mx-auto px-4 py-4">
           <Breadcrumbs
             items={[

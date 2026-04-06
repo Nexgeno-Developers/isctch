@@ -1,5 +1,7 @@
 import type { InsightsListingData } from '@/lib/api/insights_listing_layout';
 import Breadcrumbs from '@/components/common/Breadcrumbs';
+import CallToAction from '@/components/home/CallToAction';
+import NewsletterSubscription from '@/components/home/NewsletterSubscription';
 import { InsightCard } from '@/components/insights/InsightCard';
 import { InsightsListingWithFilters } from '@/components/insights/InsightsListingWithFilters';
 import { InsightsPageHero } from '@/components/insights/InsightsPageHero';
@@ -18,7 +20,7 @@ export default function InsightsListingPage({ data }: { data: InsightsListingDat
     <main className="min-h-screen bg-gray-50">
       <InsightsPageHero titleHtml={data.title} backgroundImage={data.heroBackgroundImage} />
 
-      <section className="border-b border-gray-200 bg-gray-50">
+      <section className="bg-gray-50">
         <div className="container mx-auto px-4 py-4">
           <Breadcrumbs
             items={[
@@ -31,12 +33,7 @@ export default function InsightsListingPage({ data }: { data: InsightsListingDat
 
       <section className="py-12 md:py-16">
         <div className="container mx-auto px-4">
-          {data.subtitle ? (
-            <p className="mx-auto mb-10 max-w-2xl text-center text-sm md:mb-12 md:text-base text-gray-600">
-              {data.subtitle}
-            </p>
-          ) : null}
-
+          
           {isArticles ? (
             <InsightsListingWithFilters
               items={data.items}
@@ -52,6 +49,9 @@ export default function InsightsListingPage({ data }: { data: InsightsListingDat
           )}
         </div>
       </section>
+
+      <CallToAction />
+      <NewsletterSubscription />
     </main>
   );
 }
