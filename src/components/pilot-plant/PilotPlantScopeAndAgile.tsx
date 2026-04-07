@@ -1,12 +1,14 @@
 import type { PilotPlantPageData } from '@/lib/api/pilot_plant_layout';
 import { PilotPlantScopeIcon } from '@/components/pilot-plant/scopeIcons';
 import { formatBoldText } from '@/lib/htmlText';
+import { RichText } from '@/components/common/RichText';
 type Props = Pick<
   PilotPlantPageData,
   | 'scopeLabel'
   | 'scopeTitleBlue'
   | 'scopeTitleBlack'
   | 'scopeGrid'
+  | 'agileHtml'
   | 'agileEyebrow'
   | 'agileTitle'
   | 'agileBody'
@@ -18,6 +20,7 @@ export default function PilotPlantScopeAndAgile({
   scopeTitleBlue,
   scopeTitleBlack,
   scopeGrid,
+  agileHtml,
   agileEyebrow,
   agileTitle,
   agileBody,
@@ -62,17 +65,12 @@ export default function PilotPlantScopeAndAgile({
           </div>
 
           <div className="rounded-[50px] bg-[#009FE8] p-8 text-white md:p-10 lg:p-12">
-            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-white/90 md:text-sm">{agileEyebrow}</p>
-            <h3 className="mt-4 text-2xl font-bold leading-tight md:text-3xl lg:text-4xl">{agileTitle}</h3>
-            <p className="mt-6 text-base leading-relaxed text-white/95 md:text-base">{agileBody}</p>
-            <div className="mt-8 space-y-6">
-              {agileHighlights.map((h, i) => (
-                <div key={i}>
-                  <p className="font-bold text-white pb-0 mb-0">{h.title}</p>
-                  <p className="mt-1 text-sm leading-relaxed text-white/90 md:text-base">{h.description}</p>
-                </div>
-              ))}
-            </div>
+            
+              <RichText
+                html={agileHtml}
+                className="text-white/95 [&_h6]:text-xs [&_h6]:font-semibold [&_h6]:uppercase [&_h6]:tracking-[0.2em] [&_h6]:text-white/90 [&_h3]:mt-4 [&_h3]:text-2xl [&_h3]:font-bold [&_h3]:leading-tight [&_h3]:text-white md:[&_h3]:text-3xl lg:[&_h3]:text-4xl [&_p]:mt-6 [&_p]:text-base [&_p]:leading-relaxed [&_p]:text-white/95 md:[&_p]:text-base [&_strong]:text-white [&_br]:leading-[1.9] [&_a]:underline [&_a:hover]:opacity-90"
+              />
+            
           </div>
         </div>
       </div>

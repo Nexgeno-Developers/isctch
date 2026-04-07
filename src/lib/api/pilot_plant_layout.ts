@@ -141,6 +141,8 @@ export type PilotPlantPageData = {
   scopeTitleBlue: string;
   scopeTitleBlack: string;
   scopeGrid: PilotPlantScopeGridItem[];
+  /** Raw HTML from CMS editor (application_versatility_description). */
+  agileHtml?: string;
   agileEyebrow: string;
   agileTitle: string;
   agileBody: string;
@@ -171,6 +173,7 @@ const EMPTY_PAGE: PilotPlantPageData = {
   scopeTitleBlue: '',
   scopeTitleBlack: '',
   scopeGrid: [],
+  agileHtml: '',
   agileEyebrow: '',
   agileTitle: '',
   agileBody: '',
@@ -216,15 +219,20 @@ function parseApplicationVersatilityDescription(html?: string | null): {
   const eyebrow = clean(raw.match(/<h6[^>]*>([\s\S]*?)<\/h6>/i)?.[1] ?? undefined);
   const title = clean(raw.match(/<h3[^>]*>([\s\S]*?)<\/h3>/i)?.[1] ?? undefined);
   const firstP = raw.match(/<p[^>]*>([\s\S]*?)<\/p>/i)?.[1] ?? '';
-  const body = clean(htmlToPlainText(firstP)) || undefined;
+  // Keep the main body as the intro copy (exclude any highlight `<strong>` blocks).
+  const introOnly = firstP.split(/<strong\b/i)[0] ?? '';
+  const body = introOnly.replace(/\r\n/g, '\n').trim() || undefined;
 
   // Extract `<strong>Title</strong><br>Body.` pairs from the whole HTML.
   const highlights: PilotPlantAgileHighlight[] = [];
-  const re = /<strong[^>]*>([\s\S]*?)<\/strong>\s*<br\s*\/?>\s*([^<]+)/gi;
+  // Capture everything after the `<strong>` block up to the next `<strong>` or end of the paragraph.
+  // This preserves extra `<br><br>...` lines like "Lorem ispum".
+  const re =
+    /<strong[^>]*>([\s\S]*?)<\/strong>(?:\s*<br\s*\/?>\s*)+([\s\S]*?)(?=<strong\b|<\/p>)/gi;
   let m: RegExpExecArray | null;
   while ((m = re.exec(raw))) {
     const hTitle = clean(htmlToPlainText(m[1])) || '';
-    const hDesc = clean(htmlToPlainText(m[2])) || '';
+    const hDesc = m[2].replace(/\r\n/g, '\n').trim() || '';
     if (hTitle && hDesc) highlights.push({ title: hTitle, description: hDesc });
     if (highlights.length >= 6) break;
   }
@@ -340,6 +348,7 @@ function mapApiToPage(api: NonNullable<PilotPlantApiResponse['data']>): PilotPla
   }
 
   const descParsed = parseApplicationVersatilityDescription(meta.application_versatility_description);
+  base.agileHtml = meta.application_versatility_description || '';
   if (descParsed.eyebrow) base.agileEyebrow = descParsed.eyebrow;
   if (descParsed.title) base.agileTitle = descParsed.title;
   if (descParsed.body) base.agileBody = descParsed.body;
