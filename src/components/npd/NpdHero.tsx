@@ -17,7 +17,7 @@ export default function NpdHero({ heroBackgroundImage, title }: Props) {
         ) : (
           <div className="absolute inset-0 bg-[#1a3a52]" />
         )}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/35 to-black/45" />
+        {/* <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/35 to-black/45" /> */}
       </div>
       <div className="relative z-10 mx-auto max-w-5xl px-4 text-center">
         <h1
