@@ -152,21 +152,6 @@ function htmlToPlainText(html?: string | null): string {
   return normalizeText(html.replace(/<[^>]+>/g, ' '));
 }
 
-/** Split `before *highlight*` from CMS hero_title for intro headings. */
-function splitHeroTitleForIntro(raw: string): { black: string; blue: string } {
-  const t = raw.trim();
-  const start = t.indexOf('*');
-  if (start === -1) return { black: t, blue: '' };
-  const end = t.indexOf('*', start + 1);
-  if (end === -1) {
-    return { black: t.slice(0, start).trim(), blue: t.slice(start + 1).trim() };
-  }
-  return {
-    black: t.slice(0, start).trim(),
-    blue: t.slice(start + 1, end).trim(),
-  };
-}
-
 function normalizeEcosystemDescription(s?: string | null): string {
   const t = (s ?? '').replace(/\r\n/g, ' ').replace(/\n/g, ' ');
   return normalizeText(t);
@@ -203,12 +188,6 @@ function mapInnovationDetail1ToPage(api: NonNullable<NpdApiResponse['data']>): N
 
   const heroTitleRaw = clean(meta.hero_title);
   if (heroTitleRaw) base.heroTitle = heroTitleRaw;
-
-  const introFromHero = heroTitleRaw ? splitHeroTitleForIntro(heroTitleRaw) : null;
-  if (introFromHero && (introFromHero.black || introFromHero.blue)) {
-    base.introHeadingBlack = introFromHero.black || base.introHeadingBlack;
-    base.introHeadingBlue = introFromHero.blue || base.introHeadingBlue;
-  }
 
   const fromHeroDesc = htmlToPlainText(meta.hero_description);
   const fromShort = clean(meta.short_summary_description);
@@ -248,7 +227,17 @@ function mapLegacyNpdToPage(api: NonNullable<NpdApiResponse['data']>): NpdPageDa
   if (heroBg) base.heroBackgroundImage = heroBg;
 
   base.title = clean(api.title) || base.title;
-  base.heroTitle = clean(meta.hero_title) || base.heroTitle;
+
+  const legacyHeroTitle = clean(meta.hero_title);
+  if (legacyHeroTitle) {
+    base.heroTitle = legacyHeroTitle;
+  } else {
+    const ib = clean(meta.intro_heading_black);
+    const iblue = clean(meta.intro_heading_blue);
+    if (ib && iblue) base.heroTitle = `${ib} *${iblue}*`;
+    else if (ib) base.heroTitle = ib;
+    else if (iblue) base.heroTitle = `*${iblue}*`;
+  }
 
   base.introHeadingBlack = clean(meta.intro_heading_black) || base.introHeadingBlack;
   base.introHeadingBlue = clean(meta.intro_heading_blue) || base.introHeadingBlue;

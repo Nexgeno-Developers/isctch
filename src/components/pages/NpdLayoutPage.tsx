@@ -17,7 +17,7 @@ export default function NpdLayoutPage({ data }: { data: NpdPageData }) {
 
   return (
     <main className="min-h-screen bg-white">
-      <NpdHero heroBackgroundImage={data.heroBackgroundImage} heroTitle={data.heroTitle} />
+      <NpdHero heroBackgroundImage={data.heroBackgroundImage} title={data.title} />
 
       <section className="bg-gray-50">
         <div className="container mx-auto px-4 py-4">
@@ -26,8 +26,7 @@ export default function NpdLayoutPage({ data }: { data: NpdPageData }) {
       </section>
 
       <NpdIntroSection
-        introHeadingBlack={data.introHeadingBlack}
-        introHeadingBlue={data.introHeadingBlue}
+        heroTitle={data.heroTitle}
         introBody={data.introBody}
         introImage={data.introImage}
         introImageAlt={data.introImageAlt}

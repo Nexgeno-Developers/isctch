@@ -2,11 +2,11 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 import type { NpdPageData } from '@/lib/api/npd_layout';
+import { formatBoldText } from '@/lib/htmlText';
 
 type Props = Pick<
   NpdPageData,
-  | 'introHeadingBlack'
-  | 'introHeadingBlue'
+  | 'heroTitle'
   | 'introBody'
   | 'introImage'
   | 'introImageAlt'
@@ -15,8 +15,7 @@ type Props = Pick<
 >;
 
 export default function NpdIntroSection({
-  introHeadingBlack,
-  introHeadingBlue,
+  heroTitle,
   introBody,
   introImage,
   introImageAlt,
@@ -28,10 +27,10 @@ export default function NpdIntroSection({
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-2 lg:gap-16 xl:gap-20">
           <div className="order-2 lg:order-1">
-            <h2 className="text-3xl font-bold leading-tight text-black md:text-4xl lg:text-5xl lg:leading-snug">
-              <span className="text-black">{introHeadingBlack}</span>{' '}
-              <span className="text-[#009FE8]">{introHeadingBlue}</span>
-            </h2>
+            <h2
+              className="text-3xl font-bold leading-tight text-black md:text-4xl lg:text-5xl lg:leading-snug [&_span]:font-bold"
+              dangerouslySetInnerHTML={{ __html: formatBoldText(heroTitle) }}
+            />
             <p className="mt-6 text-base leading-relaxed text-black md:text-base">{introBody}</p>
             <div className="mt-10 flex gap-4">
               <Link

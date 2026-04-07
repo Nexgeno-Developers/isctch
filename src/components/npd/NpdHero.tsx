@@ -1,9 +1,9 @@
 import type { NpdPageData } from '@/lib/api/npd_layout';
 import { formatBoldText } from '@/lib/htmlText';
 
-type Props = Pick<NpdPageData, 'heroBackgroundImage' | 'heroTitle'>;
+type Props = Pick<NpdPageData, 'heroBackgroundImage' | 'title'>;
 
-export default function NpdHero({ heroBackgroundImage, heroTitle }: Props) {
+export default function NpdHero({ heroBackgroundImage, title }: Props) {
   return (
     <section className="relative overflow-hidden pt-[140px] pb-20 md:pt-[200px] md:pb-28 lg:pt-[220px] lg:pb-32">
       <div className="absolute inset-0">
@@ -22,7 +22,7 @@ export default function NpdHero({ heroBackgroundImage, heroTitle }: Props) {
       <div className="relative z-10 mx-auto max-w-5xl px-4 text-center">
         <h1
           className="text-2xl font-bold uppercase leading-tight tracking-wide text-white md:text-4xl lg:text-5xl xl:text-6xl"
-          dangerouslySetInnerHTML={{ __html: formatBoldText(heroTitle) }}
+          dangerouslySetInnerHTML={{ __html: formatBoldText(title) }}
         />
       </div>
     </section>
