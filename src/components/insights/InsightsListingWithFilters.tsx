@@ -86,9 +86,9 @@ export function InsightsListingWithFilters({
                   className="w-full rounded-2xl border-2 border-[#E5F2FA] bg-[#fff] py-3 pl-4 pr-4 text-sm text-[#0E233C]  placeholder:text-gray-400 transition focus:border-[#009FE8] focus:bg-white focus:outline-none focus:ring-4 focus:ring-[#009FE8]/15"
                 />
               </div>
-              <p className="mt-2 text-right text-xs tabular-nums text-black/40">
+              {/* <p className="mt-2 text-right text-xs tabular-nums text-black/40">
                 Showing <span className="font-semibold text-[#0E233C]/80">{filtered.length}</span> of {items.length}
-              </p>
+              </p> */}
 
               {categoryOptions.length > 0 ? (
                 <>
@@ -97,7 +97,7 @@ export function InsightsListingWithFilters({
                     aria-hidden
                   />
 
-                  <div className="flex items-start gap-2">
+                  {/* <div className="flex items-start gap-2">
                     <span
                       className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-[#0E233C]/[0.06] text-[#0E233C]"
                       aria-hidden
@@ -115,26 +115,30 @@ export function InsightsListingWithFilters({
                       <p className="text-xs font-bold uppercase tracking-[0.14em] text-[#009FE8]">Subcategory</p>
                       <p className="mt-0.5 text-[11px] leading-tight text-black/45">Narrow by topic</p>
                     </div>
-                  </div>
+                  </div> */}
 
                   <ul className="mt-4 max-h-[min(55vh,400px)] space-y-2 overflow-y-auto overscroll-contain pr-1 [scrollbar-width:thin]">
                     <li>
                       <button
                         type="button"
                         onClick={() => setSub('all')}
-                        className={`group flex w-full items-center justify-between gap-2 rounded-2xl border-2 px-3.5 py-3 text-left text-sm font-semibold transition-all duration-200 ${
+                        className={`border-2 px-3.5 py-3 cursor-pointer flex w-full items-center border-transparent justify-between !text-black gap-2 bg-[#f8fcfe] rounded-2xl  text-left text-sm font-semibold transition-none ${
                           sub === 'all'
-                            ? 'border-[#009FE8] bg-[#009FE8] text-white shadow-[0_6px_20px_-4px_rgba(0,159,232,0.45)]'
-                            : 'border-transparent bg-[#F8FCFE] text-[#0E233C] hover:border-[#B7D7EA]/80 hover:bg-white hover:shadow-sm'
+                            ? 'border-[#009FE8] !bg-[#009FE8] !text-white'
+                            : 'text-[#0E233C] '
                         }`}
                       >
                         <span>All</span>
                         {sub === 'all' ? (
-                          <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-white/20">
-                            <svg className="h-3.5 w-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
-                            </svg>
-                          </span>
+                          <svg
+                            className="h-4 w-4 shrink-0 text-white"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                            aria-hidden
+                          >
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
+                          </svg>
                         ) : null}
                       </button>
                     </li>
@@ -143,19 +147,23 @@ export function InsightsListingWithFilters({
                         <button
                           type="button"
                           onClick={() => setSub(c)}
-                          className={`cursor-pointer group flex w-full items-center justify-between gap-2 rounded-2xl border-2 px-3.5 py-3 text-left text-sm font-semibold transition-all duration-200 ${
+                          className={`flex w-full cursor-pointer items-center justify-between gap-2 rounded-2xl border-2 px-3.5 py-3 text-left text-sm font-semibold transition-none ${
                             sub === c
-                              ? 'border-[#009FE8] bg-[#009FE8] text-white shadow-[0_6px_20px_-4px_rgba(0,159,232,0.45)]'
+                              ? 'border-[#009FE8] bg-[#009FE8] text-white '
                               : 'border-transparent bg-[#F8FCFE] text-[#0E233C]'
                           }`}
                         >
                           <span className="min-w-0 break-words">{c}</span>
                           {sub === c ? (
-                            <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-white/20">
-                              <svg className="h-3.5 w-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
-                              </svg>
-                            </span>
+                            <svg
+                              className="h-4 w-4 shrink-0 text-white"
+                              fill="none"
+                              stroke="currentColor"
+                              viewBox="0 0 24 24"
+                              aria-hidden
+                            >
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
+                            </svg>
                           ) : null}
                         </button>
                       </li>

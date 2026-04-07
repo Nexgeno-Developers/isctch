@@ -38,7 +38,7 @@ export function InsightCard({
         )}
       </div>
 
-      <div className="mt-4 flex flex-1 flex-col pt-4 pb-4">
+      <div className="mt-4 flex flex-1 flex-col pt-4 pb-4 px-3">
         <h3
           className="text-base md:text-[20px] font-bold text-[#009FE8] leading-snug"
           dangerouslySetInnerHTML={{ __html: item.title }}
