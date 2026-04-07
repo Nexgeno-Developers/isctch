@@ -5,7 +5,7 @@ import type { InnovationsFeatureCard } from '@/lib/api/innovations_layout';
 
 export default function InnovationsFeatureCards({ cards }: { cards: InnovationsFeatureCard[] }) {
   return (
-    <section className="bg-white pb-16 md:pb-24 lg:pb-28">
+    <section className="bg-gray-50">
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-3 lg:gap-10">
           {cards.map((card) => (

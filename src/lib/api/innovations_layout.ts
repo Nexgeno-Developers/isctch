@@ -1,4 +1,5 @@
 import { cache } from 'react';
+import { normalizeText } from '@/lib/htmlText';
 
 type Media = { url?: string | null } | null | undefined;
 
@@ -9,7 +10,19 @@ type InnovationsApiResponse = {
     layout?: string;
     meta?: {
       breadcrumb_image?: Media;
+      breadcrumb_title?: string;
       hero_title?: string;
+      hero_image?: Media;
+      hero_description?: string;
+      page_blocks?: Array<{
+        id?: number | string;
+        title?: string;
+        slug?: string;
+        short_summary_image?: Media;
+        short_summary_icon?: Media;
+        short_summary_title?: string;
+        short_summary_description?: string;
+      }>;
       intro_heading_black?: string;
       intro_heading_blue?: string;
       intro_body?: string;
@@ -47,61 +60,13 @@ export type InnovationsPageData = {
   featureCards: InnovationsFeatureCard[];
 };
 
-const DEFAULT_PAGE: InnovationsPageData = {
-  title: 'Innovations',
-  heroBackgroundImage: '/about_banner.jpg',
-  heroTitle: 'END-TO-END BEVERAGE INNOVATION & DEVELOPMENT SOLUTIONS',
-  introHeadingBlack: 'Your Complete Innovation-',
-  introHeadingBlue: 'To-Execution Partner',
-  introBody:
-    'Lamipak Provides Integrated Solutions That Bridge The Gap From Innovative Ideas To Market-Ready Beverages, Ensuring High Performance, Quality, And Efficiency At Every Step.',
-  featureCards: [
-    {
-      id: 'npd',
-      image: '/about_banner.jpg',
-      imageAlt: 'Laboratory interior for new product development',
-      title: 'New Product Development (NPD)',
-      description:
-        "Turn Your Beverage Ideas Into Market-Ready Products With Lamipak's Expert Packaging Solutions, Technical Support, And Data-Driven Insights.",
-      bullets: [
-        'Market Research & Concept Development',
-        'Aseptic Packaging Expertise',
-        'Sustainable Packaging Solutions',
-      ],
-      ctaText: 'Explore NPD',
-      ctaHref: '/npd2',
-    },
-    {
-      id: 'pilot',
-      image: '/about_banner.jpg',
-      imageAlt: 'Innovation center building',
-      title: 'Pilot Plant',
-      description:
-        'Test, Refine, And Validate Your Product In Cutting-Edge Pilot Facilities Designed To Simulate Real-World Manufacturing And Ensure Scalability.',
-      bullets: [
-        'Recipe Development & Prototyping',
-        'Aseptic Packaging Validation',
-        'Pilot-Scale Production Support',
-      ],
-      ctaText: 'Explore Pilot Plant',
-      ctaHref: '/pilot-plant',
-    },
-    {
-      id: 'R&D Center',
-      image: '/about_banner.jpg',
-      imageAlt: 'Innovation center building',
-      title: 'R&D Center',
-      description:
-        'Test, Refine, And Validate Your Product In Cutting-Edge Pilot Facilities Designed To Simulate Real-World Manufacturing And Ensure Scalability.',
-      bullets: [
-        'Recipe Development & Prototyping',
-        'Aseptic Packaging Validation',
-        'Pilot-Scale Production Support',
-      ],
-      ctaText: 'Explore Pilot Plant',
-      ctaHref: '/pilot-plant',
-    },
-  ],
+const EMPTY_PAGE: InnovationsPageData = {
+  title: '',
+  heroTitle: '',
+  introHeadingBlack: '',
+  introHeadingBlue: '',
+  introBody: '',
+  featureCards: [],
 };
 
 function mediaUrl(media?: Media) {
@@ -114,42 +79,94 @@ function clean(s?: string | null) {
   return t || undefined;
 }
 
+function htmlToPlainText(html?: string | null): string {
+  if (!html) return '';
+  return normalizeText(html.replace(/<[^>]+>/g, ' '));
+}
+
+function splitStarTitle(raw?: string | null): { black: string; blue: string } | null {
+  const t = (raw ?? '').trim();
+  if (!t) return null;
+  const start = t.indexOf('*');
+  if (start === -1) return { black: t, blue: '' };
+  const end = t.indexOf('*', start + 1);
+  if (end === -1) return { black: t.slice(0, start).trim(), blue: t.slice(start + 1).trim() };
+  return { black: t.slice(0, start).trim(), blue: t.slice(start + 1, end).trim() };
+}
+
 function mapApiToPage(api: NonNullable<InnovationsApiResponse['data']>): InnovationsPageData {
   const meta = api.meta || {};
-  const base = { ...DEFAULT_PAGE };
+  const base: InnovationsPageData = { ...EMPTY_PAGE };
 
   const heroBg = mediaUrl(meta.breadcrumb_image);
   if (heroBg) base.heroBackgroundImage = heroBg;
 
-  base.title = clean(api.title) || base.title;
-  base.heroTitle = clean(meta.hero_title) || base.heroTitle;
-  base.introHeadingBlack = clean(meta.intro_heading_black) || base.introHeadingBlack;
-  base.introHeadingBlue = clean(meta.intro_heading_blue) || base.introHeadingBlue;
-  base.introBody = clean(meta.intro_body) || base.introBody;
+  base.title = clean(api.title) ?? '';
+  // Hero should remain plain text in current design.
+  base.heroTitle = clean(meta.breadcrumb_title) || clean(meta.hero_title) || base.title;
 
-  const cards = meta.feature_cards;
-  if (cards?.length) {
-    const mapped = cards
-      .map((c, idx) => {
-        const title = clean(c.title);
-        const description = clean(c.description);
-        if (!title || !description) return null;
-        const bullets = (c.bullets || []).map((b) => clean(b)).filter(Boolean) as string[];
-        const ctaText = clean(c.cta_text);
-        const ctaUrl = clean(c.cta_url);
+  const split = splitStarTitle(meta.hero_title);
+  if (split) {
+    base.introHeadingBlack = split.black || '';
+    base.introHeadingBlue = split.blue || '';
+  } else {
+    base.introHeadingBlack = clean(meta.intro_heading_black) ?? '';
+    base.introHeadingBlue = clean(meta.intro_heading_blue) ?? '';
+  }
+  base.introBody =
+    clean(meta.hero_description) ||
+    clean(meta.intro_body) ||
+    htmlToPlainText(meta.hero_description) ||
+    '';
+
+  // Feature cards from CMS: page_blocks (preferred)
+  if (meta.page_blocks?.length) {
+    const mapped: InnovationsFeatureCard[] = meta.page_blocks
+      .map((b, idx) => {
+        const title = clean(b.short_summary_title) || clean(b.title);
+        const description = clean(b.short_summary_description);
+        const slug = clean(b.slug);
+        if (!title || !description || !slug) return null;
+        const image = mediaUrl(b.short_summary_image) || mediaUrl(b.short_summary_icon);
         return {
-          id: `fc-${idx + 1}`,
-          image: mediaUrl(c.image),
+          id: String(b.id ?? `block-${idx + 1}`),
+          image,
           imageAlt: title,
           title,
           description,
-          bullets,
-          ctaText: ctaText || 'Learn more',
-          ctaHref: ctaUrl || '/contact-us',
+          bullets: [],
+          ctaText: 'Explore',
+          ctaHref: `/${slug.replace(/^\/+/, '')}`,
         };
       })
       .filter(Boolean) as InnovationsFeatureCard[];
     if (mapped.length) base.featureCards = mapped;
+  } else {
+    // Legacy support: feature_cards
+    const cards = meta.feature_cards;
+    if (cards?.length) {
+      const mapped = cards
+        .map((c, idx) => {
+          const title = clean(c.title);
+          const description = clean(c.description);
+          if (!title || !description) return null;
+          const bullets = (c.bullets || []).map((b) => clean(b)).filter(Boolean) as string[];
+          const ctaText = clean(c.cta_text);
+          const ctaUrl = clean(c.cta_url);
+          return {
+            id: `fc-${idx + 1}`,
+            image: mediaUrl(c.image),
+            imageAlt: title,
+            title,
+            description,
+            bullets,
+            ctaText: ctaText || 'Learn more',
+            ctaHref: ctaUrl || '/contact-us',
+          };
+        })
+        .filter(Boolean) as InnovationsFeatureCard[];
+      if (mapped.length) base.featureCards = mapped;
+    }
   }
 
   return base;
@@ -157,33 +174,24 @@ function mapApiToPage(api: NonNullable<InnovationsApiResponse['data']>): Innovat
 
 export const fetchInnovationsLayoutPage = cache(async (slug: string) => {
   const cleanSlug = slug.replace(/^\/+|\/+$/g, '');
-  if (cleanSlug !== 'innovations') return null;
+  if (!cleanSlug) return null;
 
   const baseUrl = process.env.COMPANY_API_BASE_URL;
-  if (baseUrl) {
-    try {
-      const res = await fetch(`${baseUrl}/v1/page/innovations`, { cache: 'no-store' });
-      if (res.ok) {
-        const payload = (await res.json()) as InnovationsApiResponse;
-        const data = payload.data;
-        if (data && data.layout === 'innovations') {
-          return {
-            slug: data.slug,
-            title: data.title,
-            seo: data.seo || {},
-            page: mapApiToPage(data),
-          };
-        }
-      }
-    } catch {
-      /* static defaults */
-    }
-  }
+  if (!baseUrl) return null;
 
-  return {
-    slug: 'innovations',
-    title: DEFAULT_PAGE.title,
-    seo: {} as Record<string, unknown>,
-    page: { ...DEFAULT_PAGE },
-  };
+  try {
+    const res = await fetch(`${baseUrl}/v1/page/${encodeURIComponent(cleanSlug)}`, { cache: 'no-store' });
+    if (!res.ok) return null;
+    const payload = (await res.json()) as InnovationsApiResponse;
+    const data = payload.data;
+    if (!data || data.layout !== 'innovation') return null;
+    return {
+      slug: data.slug,
+      title: data.title,
+      seo: data.seo || {},
+      page: mapApiToPage(data),
+    };
+  } catch {
+    return null;
+  }
 });
