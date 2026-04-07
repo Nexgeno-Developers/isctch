@@ -445,7 +445,6 @@ export const fetchPilotPlantLayoutPage = cache(async (slug: string) => {
   const baseUrl = process.env.COMPANY_API_BASE_URL;
   if (baseUrl) {
     try {
-      // Route slug and CMS slug can differ; configure via env when needed.
       const apiSlug = (process.env.PILOT_PLANT_PAGE_SLUG || cleanSlug).trim();
       const res = await fetch(`${baseUrl}/v1/page/${encodeURIComponent(apiSlug)}`, { cache: 'no-store' });
       if (res.ok) {
@@ -461,14 +460,9 @@ export const fetchPilotPlantLayoutPage = cache(async (slug: string) => {
         }
       }
     } catch {
-      /* static defaults */
+      /* fall through */
     }
   }
 
-  return {
-    slug: 'pilot-plant',
-    title: '',
-    seo: {} as Record<string, unknown>,
-    page: { ...EMPTY_PAGE },
-  };
+  return null;
 });
