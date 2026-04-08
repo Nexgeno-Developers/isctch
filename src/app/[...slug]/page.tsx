@@ -42,6 +42,7 @@ interface PageProps {
   params: Promise<{
     slug: string[];
   }>;
+  searchParams?: Promise<Record<string, string | string[] | undefined>>;
 }
 
 const PACKAGING_MAIN = 'packaging' as const;
@@ -61,16 +62,19 @@ const componentMap: Record<string, ComponentType<any>> = {
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
   const fullSlug = slug?.join('/') || '';
-
-  const resolved = await resolveDynamicPage(fullSlug);
+  const resolved = await resolveDynamicPage(fullSlug, 1);
   return resolved.metadata;
 }
 
-export default async function DynamicPage({ params }: PageProps) {
+export default async function DynamicPage({ params, searchParams }: PageProps) {
   const { slug } = await params;
   const fullSlug = slug?.join('/') || '';
+  const search = await searchParams;
+  const pageParam = Array.isArray(search?.page) ? search?.page[0] : search?.page;
+  const page = pageParam ? Number(pageParam) : 1;
+  const safePage = Number.isFinite(page) && page > 0 ? page : 1;
 
-  const resolved = await resolveDynamicPage(fullSlug);
+  const resolved = await resolveDynamicPage(fullSlug, safePage);
 
   switch (resolved.kind) {
     case 'api-layout': {

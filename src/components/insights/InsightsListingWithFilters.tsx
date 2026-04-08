@@ -1,7 +1,9 @@
 'use client';
 
+import Link from 'next/link';
 import { useMemo, useState } from 'react';
 import type { InsightItem } from '@/lib/api/insights_layout';
+import type { InsightsListingFilterLink } from '@/lib/api/insights_listing_layout';
 import { InsightCard } from '@/components/insights/InsightCard';
 
 function stripHtmlToLower(s: string): string {
@@ -16,15 +18,25 @@ export function InsightsListingWithFilters({
   items,
   variant,
   filterSubcategories,
+  filterLinks,
+  allFilterLabel,
+  allFilterHref,
+  allFilterActive,
 }: {
   items: InsightItem[];
   variant: 'articles' | 'webinar' | 'newsletter';
   filterSubcategories?: string[];
+  filterLinks?: InsightsListingFilterLink[];
+  allFilterLabel?: string;
+  allFilterHref?: string;
+  allFilterActive?: boolean;
 }) {
   const [query, setQuery] = useState('');
   const [sub, setSub] = useState<string>('all');
+  const useLinks = (filterLinks?.length || allFilterHref) ? true : false;
 
   const categoryOptions = useMemo(() => {
+    if (useLinks) return [];
     if (filterSubcategories?.length) return filterSubcategories;
     const fromItems = [
       ...new Set(items.map((i) => i.subcategory?.trim()).filter(Boolean) as string[]),
@@ -34,7 +46,7 @@ export function InsightsListingWithFilters({
 
   const filtered = useMemo(() => {
     return items.filter((item) => {
-      if (sub !== 'all') {
+      if (!useLinks && sub !== 'all') {
         const cat = item.subcategory?.trim();
         if (cat !== sub) return false;
       }
@@ -44,7 +56,7 @@ export function InsightsListingWithFilters({
       const desc = stripHtmlToLower(item.description);
       return title.includes(q) || desc.includes(q);
     });
-  }, [items, query, sub]);
+  }, [items, query, sub, useLinks]);
 
   return (
     <div className="flex flex-col gap-10 lg:flex-row lg:items-start lg:gap-10 xl:gap-12">
@@ -90,7 +102,65 @@ export function InsightsListingWithFilters({
                 Showing <span className="font-semibold text-[#0E233C]/80">{filtered.length}</span> of {items.length}
               </p> */}
 
-              {categoryOptions.length > 0 ? (
+              {useLinks ? (
+                <>
+                  <div
+                    className="my-6 h-px bg-gradient-to-r from-transparent via-[#B7D7EA]/60 to-transparent"
+                    aria-hidden
+                  />
+
+                  <ul className="mt-4 max-h-[min(55vh,400px)] space-y-2 overflow-y-auto overscroll-contain pr-1 [scrollbar-width:thin]">
+                    <li>
+                      <Link
+                        href={allFilterHref || '#'}
+                        className={`border-2 px-3.5 py-3 cursor-pointer flex w-full items-center border-transparent justify-between !text-black gap-2 bg-[#f8fcfe] rounded-2xl  text-left text-sm font-semibold transition-none ${
+                          allFilterActive
+                            ? 'border-[#009FE8] !bg-[#009FE8] !text-white'
+                            : 'text-[#0E233C] '
+                        }`}
+                      >
+                        <span>{allFilterLabel || 'All'}</span>
+                        {allFilterActive ? (
+                          <svg
+                            className="h-4 w-4 shrink-0 text-white"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                            aria-hidden
+                          >
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
+                          </svg>
+                        ) : null}
+                      </Link>
+                    </li>
+                    {(filterLinks || []).map((c) => (
+                      <li key={c.href}>
+                        <Link
+                          href={c.href}
+                          className={`flex w-full cursor-pointer items-center justify-between gap-2 rounded-2xl border-2 px-3.5 py-3 text-left text-sm font-semibold transition-none ${
+                            c.active
+                              ? 'border-[#009FE8] bg-[#009FE8] text-white '
+                              : 'border-transparent bg-[#F8FCFE] text-[#0E233C]'
+                          }`}
+                        >
+                          <span className="min-w-0 break-words">{c.label}</span>
+                          {c.active ? (
+                            <svg
+                              className="h-4 w-4 shrink-0 text-white"
+                              fill="none"
+                              stroke="currentColor"
+                              viewBox="0 0 24 24"
+                              aria-hidden
+                            >
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
+                            </svg>
+                          ) : null}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </>
+              ) : categoryOptions.length > 0 ? (
                 <>
                   <div
                     className="my-6 h-px bg-gradient-to-r from-transparent via-[#B7D7EA]/60 to-transparent"

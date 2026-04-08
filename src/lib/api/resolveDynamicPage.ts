@@ -107,12 +107,17 @@ const CATEGORY_NOT_FOUND_METADATA: Metadata = {
   description: 'The requested category could not be found.',
 };
 
-const INSIGHTS_LAYOUT_BY_SLUG: Record<string, 'insights' | 'insights_listing'> = {
-  insights: 'insights',
-  'insights/articles': 'insights_listing',
-  'insights/webinars': 'insights_listing',
-  'insights/newsletter': 'insights_listing',
-};
+function isInsightsHubPath(cleanSlug: string): boolean {
+  return cleanSlug === 'insights';
+}
+
+function isInsightsListingPath(cleanSlug: string): boolean {
+  return (
+    cleanSlug.startsWith('insights/articles') ||
+    cleanSlug.startsWith('insights/webinars') ||
+    cleanSlug.startsWith('insights/newsletter')
+  );
+}
 
 function buildApiLayoutMetadata(payload: {
   slug: string;
@@ -273,6 +278,7 @@ function buildDynamicMetadata(data: DynamicPageData, fullSlug: string): Metadata
 async function resolveApiLayout(
   layout: string,
   fullSlug: string,
+  page: number,
 ): Promise<ResolvedDynamicPage | null> {
   // Add new CMS layouts here (blog, post, post_category) to keep routing centralized.
   switch (layout) {
@@ -319,13 +325,13 @@ async function resolveApiLayout(
       };
     }
     case 'insights_listing': {
-      const page = await fetchInsightsListingPage(fullSlug);
-      if (!page) return null;
+      const listing = await fetchInsightsListingPage(fullSlug, page);
+      if (!listing) return null;
       return {
         kind: 'api-layout',
         layout,
-        payload: page,
-        metadata: buildApiLayoutMetadata(page),
+        payload: listing,
+        metadata: buildApiLayoutMetadata(listing),
       };
     }
     case 'insights': {
@@ -594,7 +600,7 @@ async function resolveApiLayout(
 }
 
 export const resolveDynamicPage = cache(
-  async (fullSlug: string): Promise<ResolvedDynamicPage> => {
+  async (fullSlug: string, page: number = 1): Promise<ResolvedDynamicPage> => {
     const cleanSlug = fullSlug.replace(/^\/+|\/+$/g, '');
     const segments = cleanSlug ? cleanSlug.split('/').filter(Boolean) : [];
 
@@ -625,14 +631,32 @@ export const resolveDynamicPage = cache(
 
     const probe = await probePageLayout(cleanSlug);
     if (probe?.layout) {
-      const resolved = await resolveApiLayout(probe.layout, cleanSlug);
+      const resolved = await resolveApiLayout(probe.layout, cleanSlug, page);
       if (resolved) return resolved;
     }
 
-    const insightsLayout = INSIGHTS_LAYOUT_BY_SLUG[cleanSlug];
-    if (insightsLayout) {
-      const resolved = await resolveApiLayout(insightsLayout, cleanSlug);
-      if (resolved) return resolved;
+    if (isInsightsHubPath(cleanSlug)) {
+      const hub = await fetchInsightsHubPage(cleanSlug);
+      if (hub) {
+        return {
+          kind: 'api-layout',
+          layout: 'insights',
+          payload: hub,
+          metadata: buildApiLayoutMetadata(hub),
+        };
+      }
+    }
+
+    if (isInsightsListingPath(cleanSlug)) {
+      const listing = await fetchInsightsListingPage(cleanSlug, page);
+      if (listing) {
+        return {
+          kind: 'api-layout',
+          layout: 'insights_listing',
+          payload: listing,
+          metadata: buildApiLayoutMetadata(listing),
+        };
+      }
     }
 
     if (cleanSlug === 'vision-mission') {
