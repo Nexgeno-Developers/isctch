@@ -80,6 +80,7 @@ type CategoryNode = {
   name?: string;
   title?: string;
   slug?: string;
+  breadcrumb_image?: CategoryMedia;
   parent_id?: number | string;
   children?: CategoryNode[] | null;
 };
@@ -365,6 +366,8 @@ function mapCategoryToListing(
   base.title = formatBoldText(categoryTitle);
   base.breadcrumbLabel = stripHtml(categoryTitle) || base.breadcrumbLabel;
   base.paginationPath = `/${cleanSlug}`;
+  const heroFromCategory = mediaUrl(category.breadcrumb_image);
+  if (heroFromCategory) base.heroBackgroundImage = heroFromCategory;
 
   const parent = payload.parent ?? null;
   const root = parent || category;

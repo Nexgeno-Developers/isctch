@@ -53,8 +53,7 @@ export function InsightsListingWithFilters({
       const q = query.trim().toLowerCase();
       if (!q) return true;
       const title = stripHtmlToLower(item.title);
-      const desc = stripHtmlToLower(item.description);
-      return title.includes(q) || desc.includes(q);
+      return title.includes(q);
     });
   }, [items, query, sub, useLinks]);
 
@@ -93,7 +92,7 @@ export function InsightsListingWithFilters({
                   type="search"
                   value={query}
                   onChange={(e) => setQuery(e.target.value)}
-                  placeholder="Type keywords…"
+                  placeholder="Search by title…"
                   autoComplete="off"
                   className="w-full rounded-2xl border-2 border-[#E5F2FA] bg-[#fff] py-3 pl-4 pr-4 text-sm text-[#0E233C]  placeholder:text-gray-400 transition focus:border-[#009FE8] focus:bg-white focus:outline-none focus:ring-4 focus:ring-[#009FE8]/15"
                 />
