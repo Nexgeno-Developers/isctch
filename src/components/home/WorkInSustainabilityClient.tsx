@@ -28,12 +28,24 @@ export default function WorkInSustainabilityClient({ data }: WorkInSustainabilit
   const shouldLoop = data.cards.length > 3;
 
   return (
-    <section className="py-0 md:py-12 bg-gray-50">
-      <div className="container mx-auto px-4">
+    <section className="relative mt-12 mb-12 py-12 md:py-24 bg-gray-50 overflow-hidden">
+      <div className="absolute inset-0 z-0 pointer-events-none" aria-hidden>
+        <Image
+          src="/sustanibility_bg_image.webp"
+          alt=""
+          fill
+          className="object-cover object-center"
+          sizes="100vw"
+          priority={false}
+        />
+        {/* Soften background for readability */}
+        <div className="absolute inset-0" />
+      </div>
+      <div className="relative z-10 container mx-auto px-4">
         {/* Header with Title and Navigation */}
         <div className="flex items-center justify-between mb-4 md:mb-12">
-          <h2 className="text-[22px] md:text-4xl lg:text-5xl font-bold text-[#009FE8]">
-            Sustainability
+          <h2 className="text-[22px] md:text-4xl lg:text-5xl font-bold text-white">
+          Our Contributions <span className="text-[#009FE8]">Sustainability</span>
           </h2>
 
           {/* Navigation Arrows */}
