@@ -113,15 +113,19 @@ export default async function TechnicalServicesLayoutPage({
             </div>
 
             <div className="relative w-full h-full">
-              <Image
-                src={data.introSection.image}
-                alt={data.introSection.imageAlt}
-                width={600}
-                height={600}
-                className="object-cover rounded-[50px] w-full"
-                sizes="(max-width: 1024px) 100vw, 50vw"
-                priority={false}
-              />
+              {data.introSection.image ? (
+                <Image
+                  src={data.introSection.image}
+                  alt={data.introSection.imageAlt}
+                  width={600}
+                  height={600}
+                  className="object-cover rounded-[50px] w-full"
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                  priority={false}
+                />
+              ) : (
+                <div className="w-full h-[360px] rounded-[50px] bg-gradient-to-br from-[#B7D7EA]/40 to-[#009FE8]/20" />
+              )}
             </div>
           </div>
         </div>
@@ -210,7 +214,7 @@ export default async function TechnicalServicesLayoutPage({
         <section className="bg-gray-50 py-4 md:py-8 lg:pt-12">
           <div className="container mx-auto px-4">
             <div className="bg-white rounded-[50px] p-6 md:p-16 lg:p-20">
-              <h2 className="text-center text-3xl md:text-4xl lg:text-5xl font-bold mb-8 md:mb-10" dangerouslySetInnerHTML={{ __html: formatBoldText(data.serviceDifferentiation.heading) }} />
+              <h2 className="text-center text-3xl md:text-4xl lg:text-5xl font-bold mb-8 md:mb-10 text-black" dangerouslySetInnerHTML={{ __html: formatBoldText(data.serviceDifferentiation.heading) }} />
               
 
               <div className="overflow-x-auto">
@@ -301,14 +305,18 @@ export default async function TechnicalServicesLayoutPage({
                   className="bg-white rounded-[50px] overflow-hidden transition-all duration-300 flex flex-col h-full p-[15px]"
                 >
                   <div className="relative w-full h-auto overflow-hidden bg-gray-100 rounded-[50px]">
-                    <Image
-                      src={card.image}
-                      alt={card.imageAlt}
-                      width={800}
-                      height={600}
-                      className="w-full h-[230px] object-cover object-top"
-                      sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw"
-                    />
+                    {card.image ? (
+                      <Image
+                        src={card.image}
+                        alt={card.imageAlt}
+                        width={800}
+                        height={600}
+                        className="w-full h-[230px] object-cover object-top"
+                        sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                      />
+                    ) : (
+                      <div className="h-[230px] w-full bg-gradient-to-br from-[#B7D7EA]/40 to-[#009FE8]/20" />
+                    )}
                   </div>
 
                   <div className="pl-[15px] pr-[15px] pt-[25px] pb-[15px] flex-1 flex flex-col">

@@ -15,21 +15,31 @@ type TechnicalServiceDetailApiResponse = {
       hero_image?: Media;
       hero_description?: string;
       information_items?: {
-        image?: Array<Media>;
-        title?: Array<string>;
-        description?: Array<string>;
+        image?: Array<Media> | Media;
+        title?: Array<string> | string;
+        description?: Array<string> | string;
       };
       video_url?: string;
       operational_title?: string;
-      page_blocks?: Array<{
-        id?: number;
-        title?: string;
-        slug?: string;
-        short_summary_icon?: Media;
-        short_summary_image?: Media;
-        short_summary_title?: string;
-        short_summary_description?: string;
-      }>;
+      page_blocks?:
+        | {
+            id?: number;
+            title?: string;
+            slug?: string;
+            short_summary_icon?: Media;
+            short_summary_image?: Media;
+            short_summary_title?: string;
+            short_summary_description?: string;
+          }
+        | Array<{
+            id?: number;
+            title?: string;
+            slug?: string;
+            short_summary_icon?: Media;
+            short_summary_image?: Media;
+            short_summary_title?: string;
+            short_summary_description?: string;
+          }>;
     };
     seo?: Record<string, unknown>;
   };
@@ -98,6 +108,15 @@ function stripHtml(value?: string) {
   return value.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
 }
 
+function toArray<T>(value: T | T[] | null | undefined): T[] {
+  if (!value) return [];
+  return Array.isArray(value) ? value : [value];
+}
+
+function asString(value: unknown): string {
+  return typeof value === 'string' ? value : '';
+}
+
 function slugToHref(slug: string) {
   const s = slug.replace(/^\/+|\/+$/g, '');
   return s ? `/${s}/` : '/';
@@ -114,43 +133,54 @@ export async function fetchTechnicalServiceDetailLayoutPage(slug: string) {
       if (!res.ok) continue;
 
       const { data } = (await res.json()) as TechnicalServiceDetailApiResponse;
-      if (!data || data.layout !== 'technical_service_detail') continue;
+      const layout = data?.layout?.trim?.() || data?.layout;
+      if (!data || !layout || !layout.toString().startsWith('technical_service_detail')) continue;
 
       const meta = data.meta || {};
       const heroBg = mediaUrl(meta.breadcrumb_image) || undefined;
       const title = (meta.hero_title || meta.short_summary_title || data.title || '').trim() || data.title;
 
-      const infoImages = meta.information_items?.image || [];
-      const infoTitles = meta.information_items?.title || [];
-      const infoDescs = meta.information_items?.description || [];
+      const infoImages = toArray(meta.information_items?.image);
+      const infoTitles = toArray(meta.information_items?.title);
+      const infoDescs = toArray(meta.information_items?.description);
       const detailedFeatures = infoTitles
         .map((t, idx) => {
           const image = mediaUrl(infoImages[idx]) || '';
-          const title = (t || '').trim();
+          const title = asString(t).trim();
           if (!title || !image) return null;
           return {
             id: `f-${idx}`,
             title: formatBoldText(title),
-            description: formatBoldText((infoDescs[idx] || '').trim()),
+            description: formatBoldText(asString(infoDescs[idx]).trim()),
             image,
             imageAlt: formatBoldText(title),
           };
         })
         .filter(Boolean) as TechnicalServiceDetailPageData['detailedFeatures'];
 
-      const blocks = (meta.page_blocks || [])
+      const blocks = toArray(meta.page_blocks)
         .map((block, idx) => {
-          const title = (block.short_summary_title || block.title || '').trim();
-          const href = block.slug ? slugToHref(block.slug) : '';
+          if (!block || typeof block !== 'object') return null;
+          const typed = block as {
+            id?: number;
+            title?: string;
+            slug?: string;
+            short_summary_icon?: Media;
+            short_summary_image?: Media;
+            short_summary_title?: string;
+            short_summary_description?: string;
+          };
+          const title = asString(typed.short_summary_title || typed.title).trim();
+          const href = typed.slug ? slugToHref(typed.slug) : '';
           if (!title || !href) return null;
-          const cover = mediaUrl(block.short_summary_image);
-          const icon = mediaUrl(block.short_summary_icon);
+          const cover = mediaUrl(typed.short_summary_image);
+          const icon = mediaUrl(typed.short_summary_icon);
           const cardImage = cover || icon;
           const iconForRow = cover && icon ? icon : undefined;
           return {
-            id: String(block.id ?? `b-${idx}`),
+            id: String(typed.id ?? `b-${idx}`),
             title: formatBoldText(title),
-            description: formatBoldText(stripHtml(block.short_summary_description) || ''),
+            description: formatBoldText(stripHtml(typed.short_summary_description) || ''),
             image: cardImage,
             iconUrl: iconForRow,
             imageAlt: formatBoldText(title),

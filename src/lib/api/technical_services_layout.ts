@@ -68,7 +68,7 @@ export type TechnicalServicesLayoutPageData = {
   introSection: {
     heading: string;
     paragraphs: string[];
-    image: string;
+    image?: string;
     imageAlt: string;
   };
   upgradeSection: {
@@ -111,7 +111,7 @@ export type TechnicalServicesLayoutPageData = {
       id: string;
       title: string;
       description: string;
-      image: string;
+      image?: string;
       imageAlt: string;
       ctaText: string;
       ctaLink: string;
@@ -221,7 +221,7 @@ export async function fetchTechnicalServicesLayoutPage(slug: string) {
       const paragraphs =
         introParagraphs.length > 0 ? introParagraphs : introFallback ? [introFallback] : [];
 
-      const introImage = mediaUrl(meta.hero_image) || mediaUrl(meta.short_summary_image) || '';
+      const introImage = mediaUrl(meta.hero_image) || mediaUrl(meta.short_summary_image) || undefined;
 
       const upgradeHeading = meta.upgrade_expand_title || '';
       const upgradeHighlight = pickHeadingHighlight(upgradeHeading);
@@ -300,7 +300,7 @@ export async function fetchTechnicalServicesLayoutPage(slug: string) {
             title: formatBoldText(title),
             description: formatBoldText(stripHtml(block.short_summary_description) || ''),
             image:
-              mediaUrl(block.short_summary_image) || mediaUrl(block.short_summary_icon) || '',
+              mediaUrl(block.short_summary_image) || mediaUrl(block.short_summary_icon) || undefined,
             imageAlt: formatBoldText(title),
             ctaText: formatBoldText('Discover More'),
             ctaLink: slugToHref(blockSlug),
