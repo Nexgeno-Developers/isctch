@@ -26,7 +26,7 @@ export function SustainableSolutionsSection({
   return (
 
     <>
-      <section className="bg-gray-50 pt-12 md:pt-20">
+      <section className="bg-gray-50 pt-8 md:pt-20">
         <div className="container mx-auto px-4">
           {intro && (
             <>
@@ -54,7 +54,7 @@ export function SustainableSolutionsSection({
 
       {data.items.length > 0 ? (
         <>
-          <div className="h-[50px] w-full bg-gray-50" aria-hidden />
+          <div className="lg:h-[50px] h-[0px] w-full bg-gray-50" aria-hidden />
           {data.items.map((item, idx) => {
             const reverse = idx % 2 === 1;
 
@@ -67,7 +67,7 @@ export function SustainableSolutionsSection({
                         reverse ? 'lg:grid-cols-[45%_55%]' : ''
                       }`}
                     >
-                      <div className={reverse ? 'lg:order-2' : ''}>
+                      <div className={reverse ? 'lg:order-2 order-2' : 'lg:order-2 order-2'}>
                         <h3 className="text-[#009FE8] text-lg md:text-[32px] font-bold tracking-wide lg:mb-4 mb-2">
                           {item.title}
                         </h3>
@@ -89,7 +89,7 @@ export function SustainableSolutionsSection({
                         )}
                       </div>
 
-                      <div className={reverse ? 'lg:order-1' : ''}>
+                      <div className={reverse ? 'lg:order-1 order-1' : 'lg:order-2 order-1'}>
                         <div className="relative w-full">
                           {item.image ? (
                             <Image
@@ -108,7 +108,7 @@ export function SustainableSolutionsSection({
                     </div>
                   </div>
                 </section>
-                <div className="h-[70px] w-full bg-white" aria-hidden />
+                <div className="lg:h-[70px] h-[30px] w-full bg-white" aria-hidden />
               </Fragment>
             );
           })}

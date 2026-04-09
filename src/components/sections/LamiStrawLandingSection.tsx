@@ -10,7 +10,7 @@ import { formatBoldText } from '@/lib/htmlText';
 
 function IconBase({ children }: { children: React.ReactNode }) {
   return (
-    <div className="lg:h-40 lg:w-40 rounded-[20px] p-[10px] bg-[#B7D7EA] flex items-center justify-center">
+    <div className="lg:h-40 lg:w-40 w-full rounded-[20px] p-[10px] bg-[#B7D7EA] flex items-center justify-center">
       {children}
     </div>
   );
@@ -74,7 +74,7 @@ function StrawCard({
               alt={card.imageAlt || card.title}
               width={300}
               height={300}
-              className="h-full w-full object-contain p-[0px] rounded-[20px]"
+              className="lg:h-full lg:w-full h-[180px] w-full object-contain p-[0px] rounded-[20px]"
               priority={false}
             />
           ) : (

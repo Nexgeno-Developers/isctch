@@ -147,7 +147,7 @@ export default function OnePackOneCodeLandingSectionClient({
 
   return (
     <>
-      <section className="relative overflow-hidden bg-[#0c1f45] h-[260px] md:h-[420px]">
+      <section className="relative overflow-hidden bg-[#0c1f45] h-[200px] md:h-[420px]">
         <div className="absolute inset-0">
           {data.hero.backgroundImage ? (
             // eslint-disable-next-line @next/next/no-img-element
@@ -159,7 +159,7 @@ export default function OnePackOneCodeLandingSectionClient({
         </div>
 
         <div className="relative z-10 h-full flex items-center justify-center text-center px-4">
-          <h1 className="text-[26px] md:text-5xl font-extrabold tracking-tight text-white leading-tight">
+          <h1 className="lg:pt-0 pt-[100px] text-[22px] md:text-5xl font-extrabold tracking-tight text-white leading-tight">
             {titleText}
           </h1>
         </div>
@@ -170,13 +170,13 @@ export default function OnePackOneCodeLandingSectionClient({
           <HeroBreadcrumbs items={data.breadcrumbs} />
         </div>
 
-      <section className="bg-gray-50 pb-0 pt-12">
+      <section className="bg-gray-50 pb-0 lg:pt-12 pt-8">
         <div className="container mx-auto px-4">
-          <div className="mt-10 pb-6 grid grid-cols-2 sm:grid-cols-5 gap-3 md:gap-4">
+          <div className="lg:mt-10 mt-0 pb-6 grid grid-cols-2 sm:grid-cols-5 gap-3 md:gap-4">
             {data.tabs.map((tab) => (
               <div
                 key={tab.id}
-                className="w-full flex flex-col items-center justify-center gap-3 py-8 px-3 rounded-[20px] bg-white"
+                className="w-full flex flex-col items-center justify-center gap-3 lg:py-8 py-4 px-3 rounded-[20px] bg-white"
               >
                 {tab.iconUrl ? (
                   <Image
@@ -184,7 +184,7 @@ export default function OnePackOneCodeLandingSectionClient({
                     alt={tab.label}
                     width={120}
                     height={120}
-                    className="h-[100px] w-[100px] object-contain"
+                    className="lg:h-[100px] lg:w-[100px] h-[70px] w-[70px] object-contain"
                     priority={false}
                   />
                 ) : null}
@@ -225,13 +225,15 @@ export default function OnePackOneCodeLandingSectionClient({
       ) : null}
 </div>
       
-
-      <ConnectTechnicalExperts
+<div className="py-6 md:py-0">
+<ConnectTechnicalExperts
         heading=""
         formTitle={data.connectSection?.formTitle || 'Send Us A Message'}
         illustrationImage={data.connectSection?.illustrationImage || '/connected_image.jpg'}
         illustrationAlt={data.connectSection?.illustrationAlt || 'Connect with Technical Experts'}
       />
+</div>
+     
     </>
   );
 }

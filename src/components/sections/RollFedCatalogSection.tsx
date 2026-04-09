@@ -39,7 +39,7 @@ function ProductCard({ product }: { product: RollFedCatalogProduct }) {
             alt={product.title}
             width={800}
             height={800}
-            className="object-contain w-[70%] mx-auto rounded-[50px]"
+            className="object-contain lg:w-[70%] w-[100%] mx-auto rounded-[50px]"
             priority={false}
           />
         ) : (
@@ -63,7 +63,7 @@ function ProductGrid({
     <section className="mt-10 md:mt-12">
 
 
-      <h2 className="text-center text-[#009FE8] text-sm md:text-[24px] font-bold mb-6 md:mb-8">
+      <h2 className="text-center text-[#009FE8] text-[20px] md:text-[24px] font-bold mb-4 md:mb-8">
         {title}
       </h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 md:gap-6">
@@ -96,7 +96,7 @@ export function RollFedCatalogSection({ data }: { data: RollFedCatalogSectionPro
         </div>
       </section>
 
-      <div className="pb-10 md:pb-24 md:pt-8 pt-4 mt-5">
+      <div className="pb-10 md:pb-24 md:pt-8 pt-0 lg:mt-5 mt-0">
         {videoUrl ? (
           <VideoBanner
             prefetchedData={{
