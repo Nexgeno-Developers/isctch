@@ -23,7 +23,7 @@ export function OpticapLandingSection({ data }: { data: OpticapLandingSectionDat
 
   return (
     <>
-      <section className="bg-gray-50 py-10 md:pt-20">
+      <section className="bg-gray-50 pt-10 md:pt-20">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 lg:grid-cols-[42%_58%] gap-10 items-start">
             <div className="flex justify-start lg:justify-center">
@@ -110,7 +110,7 @@ export function OpticapLandingSection({ data }: { data: OpticapLandingSectionDat
           </div>
         ) : null}
 
-        <div className="mt-10">
+        <div className="">
           <ConnectTechnicalExperts
             heading=""
             formTitle={connect.formTitle}
