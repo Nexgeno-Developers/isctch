@@ -175,6 +175,14 @@ function buildPostHref(baseSlug: string, rawSlug: string | undefined, fallbackId
   return base ? `/${base}/${slug}` : `/${slug}`;
 }
 
+function resolveCanonicalSlug(cleanSlug: string, autoSlugs?: string[] | null): string {
+  const normalized = (autoSlugs || [])
+    .map((s) => normalizeSlugPath(s))
+    .filter(Boolean);
+  if (normalized.includes(cleanSlug)) return cleanSlug;
+  return normalized[0] || cleanSlug;
+}
+
 function mapRelated(
   raw: RelatedApi,
   idx: number,
@@ -391,50 +399,65 @@ export function isInsightsArticleDetailPath(slug: string): boolean {
   return parts.length >= 3 && parts[0] === 'insights' && parts[1] === 'articles';
 }
 
+export const fetchPostDetailPage = cache(async (slug: string) => {
+  const cleanSlug = slug.replace(/^\/+|\/+$/g, '');
+  const parts = cleanSlug.split('/').filter(Boolean);
+  const postSlug = parts[parts.length - 1];
+  if (!postSlug) return null;
+
+  const baseUrl = process.env.COMPANY_API_BASE_URL;
+  if (!baseUrl) return null;
+
+  try {
+    const res = await fetch(`${baseUrl}/v1/posts/${encodeURIComponent(postSlug)}`, {
+      cache: 'no-store',
+    });
+    if (res.ok) {
+      const payload = (await res.json()) as PostDetailApiResponse;
+      const data = payload.data;
+      if (data && data.layout === 'default_post_detail' && data.is_active !== false) {
+        const canonicalSlug = resolveCanonicalSlug(cleanSlug, data.auto_slug);
+        const page = mapPostToPage(data, canonicalSlug);
+        const seo = { ...(data.seo || {}) } as Record<string, any>;
+        if (!seo.description && page.summary) {
+          seo.description = page.summary;
+        }
+        if (!seo.title && data.title) {
+          seo.title = data.title;
+        }
+        const heroImage = mediaUrl(data.featured_image);
+        if (!seo.og_image && heroImage) {
+          seo.og_image = { url: heroImage };
+        }
+        if (!seo.twitter_image && heroImage) {
+          seo.twitter_image = { url: heroImage };
+        }
+        return {
+          slug: canonicalSlug,
+          title: stripHtml(clean(data.title)) || 'Article',
+          seo,
+          page,
+        };
+      }
+    }
+  } catch {
+    /* fall through */
+  }
+
+  return null;
+});
+
 export const fetchInsightsArticleDetailPage = cache(async (slug: string) => {
   const cleanSlug = slug.replace(/^\/+|\/+$/g, '');
   if (!isInsightsArticleDetailPath(cleanSlug)) return null;
 
   const parts = cleanSlug.split('/').filter(Boolean);
   const articleSlug = parts.slice(2).join('/') || parts[2] || 'article';
-  const postSlug = parts[parts.length - 1] || articleSlug;
 
   const baseUrl = process.env.COMPANY_API_BASE_URL;
   if (baseUrl) {
-    try {
-      const res = await fetch(`${baseUrl}/v1/posts/${encodeURIComponent(postSlug)}`, {
-        cache: 'no-store',
-      });
-      if (res.ok) {
-        const payload = (await res.json()) as PostDetailApiResponse;
-        const data = payload.data;
-        if (data && data.layout === 'default_post_detail' && data.is_active !== false) {
-          const page = mapPostToPage(data, cleanSlug);
-          const seo = { ...(data.seo || {}) } as Record<string, any>;
-          if (!seo.description && page.summary) {
-            seo.description = page.summary;
-          }
-          if (!seo.title && data.title) {
-            seo.title = data.title;
-          }
-          const heroImage = mediaUrl(data.featured_image);
-          if (!seo.og_image && heroImage) {
-            seo.og_image = { url: heroImage };
-          }
-          if (!seo.twitter_image && heroImage) {
-            seo.twitter_image = { url: heroImage };
-          }
-          return {
-            slug: cleanSlug,
-            title: stripHtml(clean(data.title)) || 'Article',
-            seo,
-            page,
-          };
-        }
-      }
-    } catch {
-      /* fall through */
-    }
+    const post = await fetchPostDetailPage(cleanSlug);
+    if (post) return post;
 
     try {
       const apiSlugPath = buildPageApiPath(cleanSlug);

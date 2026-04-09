@@ -21,6 +21,13 @@ function primaryCategory(categories?: Array<{ label: string; href?: string }>) {
   return categories?.[0];
 }
 
+function titleFromSegment(segment: string) {
+  return segment
+    .replace(/[-_]+/g, ' ')
+    .replace(/\b\w/g, (c) => c.toUpperCase())
+    .trim();
+}
+
 function buildHeroTitleHtml(data: InsightsArticleDetailPageData): string {
   if (!data.titleAccent) return data.titleMain;
   return `${data.titleMain} <span class="text-[#9fdbff]">${data.titleAccent}</span>`;
@@ -32,6 +39,11 @@ export default function InsightsArticleDetailPage({ data }: { data: InsightsArti
   const primaryCat = primaryCategory(data.categories);
   const breadcrumbParentLabel = data.breadcrumbParentLabel || primaryCat?.label || 'Articles';
   const breadcrumbParentHref = data.breadcrumbParentHref || primaryCat?.href || '/insights/articles';
+  const rootSegment = breadcrumbParentHref
+    ? breadcrumbParentHref.replace(/^\/+|\/+$/g, '').split('/')[0]
+    : 'insights';
+  const breadcrumbRootLabel = titleFromSegment(rootSegment || 'insights');
+  const breadcrumbRootHref = `/${rootSegment || 'insights'}`;
 
   return (
     <main className="min-h-screen bg-[#f5f7f8]">
@@ -45,7 +57,7 @@ export default function InsightsArticleDetailPage({ data }: { data: InsightsArti
         <div className="container mx-auto px-4 py-4">
           <Breadcrumbs
             items={[
-              { label: 'Insights', href: '/insights' },
+              { label: breadcrumbRootLabel, href: breadcrumbRootHref },
               { label: breadcrumbParentLabel, href: breadcrumbParentHref },
               { label: data.breadcrumbLabel },
             ]}

@@ -37,6 +37,7 @@ import { fetchInsightsHubPage } from '@/lib/api/insights_layout';
 import { fetchInsightsListingPage } from '@/lib/api/insights_listing_layout';
 import {
   fetchInsightsArticleDetailPage,
+  fetchPostDetailPage,
   isInsightsArticleDetailPath,
 } from '@/lib/api/insights_article_detail_layout';
 import { fetchAboutUsLayout1Page } from '@/lib/api/about_us_layout_1';
@@ -330,7 +331,7 @@ async function resolveApiLayout(
       };
     }
     case 'default_post_detail': {
-      const page = await fetchInsightsArticleDetailPage(fullSlug);
+      const page = await fetchPostDetailPage(fullSlug);
       if (!page) return null;
       return {
         kind: 'api-layout',
@@ -706,6 +707,16 @@ export const resolveDynamicPage = cache(
           metadata: buildApiLayoutMetadata(detail),
         };
       }
+    }
+
+    const postDetail = await fetchPostDetailPage(cleanSlug);
+    if (postDetail) {
+      return {
+        kind: 'api-layout',
+        layout: 'insights_article_detail',
+        payload: postDetail,
+        metadata: buildApiLayoutMetadata(postDetail),
+      };
     }
 
     if (cleanSlug === 'vision-mission') {
