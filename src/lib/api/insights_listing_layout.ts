@@ -22,6 +22,9 @@ export type InsightsListingData = {
   title: string;
   /** Plain text for the last breadcrumb segment. */
   breadcrumbLabel: string;
+  /** Optional parent breadcrumb (e.g. Insights / Media). */
+  breadcrumbParentLabel?: string;
+  breadcrumbParentHref?: string;
   /** Hero banner image (e.g. CMS `meta.banner_images.url`). */
   heroBackgroundImage?: string;
   subtitle?: string;
@@ -240,6 +243,13 @@ function normalizeSlugPath(slug: string): string {
   return slug.replace(/^\/+|\/+$/g, '');
 }
 
+function titleFromSegment(segment: string): string {
+  return segment
+    .replace(/[-_]+/g, ' ')
+    .replace(/\b\w/g, (c) => c.toUpperCase())
+    .trim();
+}
+
 function slugToHref(slug?: string | null): string | undefined {
   if (!slug) return undefined;
   const cleanSlug = normalizeSlugPath(slug);
@@ -248,6 +258,14 @@ function slugToHref(slug?: string | null): string | undefined {
 
 function categoryLabel(node?: CategoryNode | null): string {
   return clean(node?.title) || clean(node?.name) || '';
+}
+
+function inferKindFromCategoryNode(node?: CategoryNode | null): InsightsListingKind {
+  const slug = normalizeSlugPath(node?.slug || '').toLowerCase();
+  const label = categoryLabel(node).toLowerCase();
+  if (slug.includes('webinar') || label.includes('webinar')) return 'webinars';
+  if (slug.includes('newsletter') || label.includes('newsletter')) return 'newsletter';
+  return 'articles';
 }
 
 function toNumber(value: number | string | null | undefined, fallback: number): number {
@@ -374,6 +392,9 @@ function mapCategoryToListing(
   const parent = payload.parent ?? null;
   const root = parent || category;
   const rootSlug = normalizeSlugPath(root.slug || cleanSlug);
+  const rootSegment = rootSlug.split('/')[0] || 'insights';
+  base.breadcrumbParentLabel = titleFromSegment(rootSegment);
+  base.breadcrumbParentHref = `/${rootSegment}`;
 
   const allLabel = categoryLabel(root) || 'All';
   const allHref = slugToHref(root.slug) || `/${rootSlug}`;
@@ -450,8 +471,7 @@ function buildPageApiPath(slug: string) {
 
 export const fetchInsightsListingPage = cache(async (slug: string, page: number = 1) => {
   const cleanSlug = slug.replace(/^\/+|\/+$/g, '');
-  const kind = inferKindFromSlug(cleanSlug) || LISTING_ROUTES[cleanSlug];
-  if (!kind) return null;
+  const kindFromSlug = inferKindFromSlug(cleanSlug) || LISTING_ROUTES[cleanSlug];
 
   const baseUrl = process.env.COMPANY_API_BASE_URL;
   if (baseUrl) {
@@ -464,6 +484,7 @@ export const fetchInsightsListingPage = cache(async (slug: string, page: number 
       if (res.ok) {
         const payload = (await res.json()) as CategoryListingApiResponse;
         if (payload.layout === 'default_category_listing') {
+          const kind = kindFromSlug ?? inferKindFromCategoryNode(payload.category);
           const listing = mapCategoryToListing(payload, kind, cleanSlug, page);
           if (listing) {
             return {
@@ -486,6 +507,7 @@ export const fetchInsightsListingPage = cache(async (slug: string, page: number 
         const payload = (await res.json()) as ListingApiResponse;
         const data = payload.data;
         if (data && data.layout === 'insights_listing') {
+          const kind = kindFromSlug || 'articles';
           return {
             slug: data.slug || cleanSlug,
             title: data.title || TITLES[kind],
@@ -501,7 +523,8 @@ export const fetchInsightsListingPage = cache(async (slug: string, page: number 
     return null;
   }
 
-  const def = DEFAULT_LISTINGS[kind];
+  if (!kindFromSlug) return null;
+  const def = DEFAULT_LISTINGS[kindFromSlug];
   return {
     slug: cleanSlug,
     title: def.title,

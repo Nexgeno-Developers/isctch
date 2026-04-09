@@ -16,6 +16,15 @@ function cardVariant(kind: InsightsListingData['kind']): 'articles' | 'webinar' 
 export default function InsightsListingPage({ data }: { data: InsightsListingData }) {
   const variant = cardVariant(data.kind);
   const isArticles = data.kind === 'articles';
+  const breadcrumbItems = [
+    data.breadcrumbParentLabel
+      ? {
+          label: data.breadcrumbParentLabel,
+          href: data.breadcrumbParentHref,
+        }
+      : { label: 'Insights', href: '/insights' },
+    { label: data.breadcrumbLabel },
+  ].filter(Boolean) as Array<{ label: string; href?: string }>;
   const pagination = data.pagination;
   const currentPage = pagination?.currentPage ?? 1;
   const lastPage = pagination?.lastPage ?? 1;
@@ -31,12 +40,7 @@ export default function InsightsListingPage({ data }: { data: InsightsListingDat
 
       <section className="bg-gray-50">
         <div className="container mx-auto px-4 py-4">
-          <Breadcrumbs
-            items={[
-              { label: 'Insights', href: '/insights' },
-              { label: data.breadcrumbLabel },
-            ]}
-          />
+          <Breadcrumbs items={breadcrumbItems} />
         </div>
       </section>
 

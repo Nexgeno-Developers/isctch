@@ -119,6 +119,7 @@ function isInsightsListingPath(cleanSlug: string): boolean {
     cleanSlug.startsWith('insights/articles') ||
     cleanSlug.startsWith('insights/webinars') ||
     cleanSlug.startsWith('insights/webinar') ||
+    cleanSlug.startsWith('media/') ||
     cleanSlug.startsWith('insights/newsletter')
   );
 }
@@ -672,6 +673,18 @@ export const resolveDynamicPage = cache(
     }
 
     if (isInsightsListingPath(cleanSlug)) {
+      const listing = await fetchInsightsListingPage(cleanSlug, page);
+      if (listing) {
+        return {
+          kind: 'api-layout',
+          layout: 'insights_listing',
+          payload: listing,
+          metadata: buildApiLayoutMetadata(listing),
+        };
+      }
+    }
+
+    if (segments.length >= 2) {
       const listing = await fetchInsightsListingPage(cleanSlug, page);
       if (listing) {
         return {
