@@ -332,7 +332,7 @@ export default function RAndDCentreLayoutPage({ data }: { data: RAndDCentrePageD
       <section className="relative overflow-hidden py-20 md:py-28 lg:py-32">
         <div className="pointer-events-none absolute inset-0">
           <Image
-            src='/technical_bg.jpg'
+            src={data.bottomCtaSection.backgroundImage || '/technical_bg.jpg'}
             alt=""
             height={1500}
             width={1500}
@@ -360,15 +360,17 @@ export default function RAndDCentreLayoutPage({ data }: { data: RAndDCentrePageD
           <p className="mt-6 text-base leading-relaxed text-white/95 md:text-lg">
             {data.bottomCtaSection.description}
           </p>
-          <Link
-            href={data.bottomCtaSection.ctaHref}
-            className="mt-10 inline-flex items-center text-sm font-semibold uppercase tracking-[0.12em] text-white transition hover:text-white/85 md:text-base"
-          >
-            {data.bottomCtaSection.ctaText}
-            <span className="ml-2 font-normal" aria-hidden>
-              →
-            </span>
-          </Link>
+          {data.bottomCtaSection.ctaText && data.bottomCtaSection.ctaHref ? (
+            <Link
+              href={data.bottomCtaSection.ctaHref}
+              className="mt-10 inline-flex items-center text-sm font-semibold uppercase tracking-[0.12em] text-white transition hover:text-white/85 md:text-base"
+            >
+              {data.bottomCtaSection.ctaText}
+              <span className="ml-2 font-normal" aria-hidden>
+                →
+              </span>
+            </Link>
+          ) : null}
         </div>
       </section>
 

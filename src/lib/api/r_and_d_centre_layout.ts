@@ -53,6 +53,11 @@ type RAndDCentreApiResponse = {
       laboratory_zones_title?: string;
       laboratory_zones_items?: string | LaboratoryZonesItemsBlock;
       laboratory_zones_subtitle?: string;
+      consultation_background_image?: MediaRef;
+      consultation_title?: string;
+      consultation_description?: string;
+      consultation_cta_title?: string;
+      consultation_cta_url?: string;
     };
     seo?: Record<string, unknown>;
   };
@@ -95,8 +100,8 @@ export type RAndDLaboratoryZonesSection = {
 export type RAndDCentreBottomCtaSection = {
   title: string;
   description: string;
-  ctaText: string;
-  ctaHref: string;
+  ctaText?: string;
+  ctaHref?: string;
   backgroundImage?: string;
 };
 
@@ -284,11 +289,14 @@ export const fetchRAndDCentreLayoutPage = cache(async (slug: string) => {
     };
 
     const bottomCtaSection: RAndDCentreBottomCtaSection = {
-      title: formatBoldText(data.title),
-      description: formatBoldText(meta.short_summary_description || ''),
-      ctaText: 'REQUEST TECHNICAL CONSULTATION',
-      ctaHref: meta.hero_talk_to_team || '/contact-us',
-      backgroundImage: mediaUrl(meta.short_summary_image),
+      title: formatBoldText(meta.consultation_title || data.title),
+      description: formatBoldText(
+        meta.consultation_description || meta.short_summary_description || '',
+      ),
+      ctaText: clean(meta.consultation_cta_title) || 'REQUEST TECHNICAL CONSULTATION',
+      ctaHref: clean(meta.consultation_cta_url) || meta.hero_talk_to_team || '/contact-us',
+      backgroundImage:
+        mediaUrl(meta.consultation_background_image),
     };
 
     const pageData: RAndDCentrePageData = {
