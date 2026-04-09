@@ -182,9 +182,9 @@ export default function OnePackOneCodeLandingSectionClient({
                   <Image
                     src={tab.iconUrl}
                     alt={tab.label}
-                    width={64}
-                    height={64}
-                    className="h-12 w-12 object-contain"
+                    width={120}
+                    height={120}
+                    className="h-[100px] w-[100px] object-contain"
                     priority={false}
                   />
                 ) : null}

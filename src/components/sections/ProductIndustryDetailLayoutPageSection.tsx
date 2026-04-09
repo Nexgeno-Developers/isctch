@@ -75,7 +75,7 @@ export default function ProductIndustryDetailLayoutPageSection({
               <RichText
                 as="div"
                 html={data.support.description}
-                className="text-lg md:text-xl text-black mb-8 md:mb-12 max-w-4xl mx-auto leading-relaxed"
+                className="text-base md:text-base text-black mb-8 md:mb-12 mx-auto leading-relaxed"
               />
             ) : null}
 
@@ -99,15 +99,15 @@ export default function ProductIndustryDetailLayoutPageSection({
                     )}
                   </div>
 
-                  <div className="flex-1 flex flex-col pl-3 pr-3">
-                    <h3 className="text-lg md:text-xl font-bold text-black mb-2 pt-3">
+                  <div className="flex-1 flex flex-col pl-0 pr-0">
+                    <h3 className="capitalize text-lg md:text-[18px] font-bold text-black mb-2 pt-0 text-center">
                       {item.title}
                     </h3>
                     {item.description ? (
                       <RichText
                         as="div"
                         html={item.description}
-                        className="text-sm md:text-base text-gray-600 mb-2 flex-1 line-clamp-2"
+                        className="text-sm md:text-base text-black mb-2 flex-1 line-clamp-2 text-center"
                       />
                     ) : null}
                   </div>
@@ -166,31 +166,19 @@ export default function ProductIndustryDetailLayoutPageSection({
                   </div>
 
                   <div className="flex-1 flex flex-col pl-3 pr-3">
-                    <h3 className="text-lg md:text-xl font-bold text-black mb-2 group-hover:text-[#009FE8] transition-colors pt-3">
+                    <h3 className="capitalize text-lg md:text-xl font-bold text-black mb-2 group-hover:text-[#009FE8] transition-colors pt-3">
                       {p.title}
                     </h3>
                     {p.description ? (
                       <RichText
                         as="div"
                         html={p.description}
-                        className="text-sm md:text-base text-gray-600 mb-2 flex-1 line-clamp-3"
+                        className="text-sm md:text-base text-black mb-2 flex-1 line-clamp-2"
                       />
                     ) : null}
-                    <div className="flex items-center text-[#009FE8] text-sm md:text-base font-medium group-hover:text-[#0077B6] transition-colors mb-4">
-                      Explore
-                      <svg
-                        className="w-4 h-4 ml-2 transform group-hover:translate-x-1 transition-transform"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M17 8l4 4m0 0l-4 4m4-4H3"
-                        />
-                      </svg>
+                    <div className="mt-1 flex items-center text-[#009FE8] text-sm md:text-[15px] font-medium group-hover:text-[#0077B6] transition-colors mb-4">
+                      View Product
+                      
                     </div>
                   </div>
                 </Link>

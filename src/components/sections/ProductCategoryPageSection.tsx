@@ -71,7 +71,7 @@ export default function ProductCategoryPageSection({
                 </h2>
 
                 {(category as any).description && (
-                  <p className="text-lg md:text-xl text-black mb-8 md:mb-12 max-w-4xl mx-auto leading-relaxed">
+                  <p className="text-base md:text-base text-black mb-8 md:mb-12 mx-auto leading-relaxed">
                     {(category as any).description}
                   </p>
                 )}
@@ -125,13 +125,13 @@ function ProductSupportCard({ product }: { product: ProductData }) {
         />
       </div>
 
-      <div className="flex-1 flex flex-col pl-3 pr-3">
-        <h3 className="text-lg md:text-xl font-bold text-black mb-2 group-hover:text-[#009FE8] transition-colors pt-3">
+      <div className="flex-1 flex flex-col pl-0 pr-0">
+        <h3 className="capitalize text-lg md:text-xl font-bold text-black mb-2 group-hover:text-[#009FE8] transition-colors pt-3">
           {(product as any).title}
         </h3>
 
         {(product as any).shortDescription && (
-          <p className="text-sm md:text-base text-gray-600 mb-2 flex-1 line-clamp-2">
+          <p className="text-sm md:text-base text-black text-center mb-2 flex-1 line-clamp-2">
             {(product as any).shortDescription}
           </p>
         )}

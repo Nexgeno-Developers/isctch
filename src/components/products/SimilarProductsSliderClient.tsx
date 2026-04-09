@@ -29,7 +29,7 @@ function SimilarProductSummary({ text }: { text?: string }) {
       />
     );
   }
-  return <p className=" text-sm text-gray-600 line-clamp-2 mb-2 leading-relaxed">{d}</p>;
+  return <p className=" text-sm text-black line-clamp-2 mb-2 leading-relaxed">{d}</p>;
 }
 
 /**
@@ -164,13 +164,13 @@ export default function SimilarProductsSliderClient({
             <div className="bg-[#EDF0F1] rounded-[50px] p-[15px] h-full">
               {/* Product Image Container */}
               <div className="mb-4 aspect-square flex items-center justify-center">
-                <div className="relative w-full h-full rounded-[50px]">
+                <div className="relative w-full h-full rounded-[50px] h-[350px]">
                   <Image
                     src={product.image}
                     alt={product.imageAlt}
                     fill
-                    className="object-contain rounded-[50px]"
-                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                    className="object-contain rounded-[50px] w-full h-full object-top"
+                    sizes=""
                   />
                 </div>
               </div>
@@ -211,14 +211,9 @@ export default function SimilarProductsSliderClient({
                     href={hrefForProduct(product)}
                     className="text-sm font-medium text-[#009FE8] hover:text-[#0077B6] transition-colors"
                   >
-                    Compare
+                    View Product
                   </Link>
-                  <Link
-                    href={hrefForProduct(product)}
-                    className="text-sm font-medium text-[#009FE8] hover:text-[#0077B6] transition-colors"
-                  >
-                    Request Sample
-                  </Link>
+                 
                 </div>
               </div>
             </div>

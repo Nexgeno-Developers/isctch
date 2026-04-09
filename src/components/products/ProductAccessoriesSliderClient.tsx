@@ -66,14 +66,14 @@ export default function ProductAccessoriesSliderClient({
           const content = (
             <div className="bg-[#009FE8] rounded-[50px] overflow-hidden shadow-sm hover:shadow-lg transition-shadow duration-300 flex flex-col h-full p-[15px]">
               {/* Accessory Image */}
-              <div className="relative w-full overflow-hidden rounded-[50px]">
+              <div className="relative w-full overflow-hidden rounded-[50px] h-[350px]">
                 <Image
                   src={accessory.image}
                   alt={accessory.imageAlt}
-                  width={400}
-                  height={400}
-                  className="object-contain w-full h-auto rounded-[50px]"
-                  sizes="(max-width: 768px) 100vw, 33vw"
+                  width={800}
+                  height={800}
+                  className="object-contain w-full h-full object-top rounded-[50px]"
+                  sizes=""
                 />
               </div>
 

@@ -12,7 +12,7 @@ export function InsightsPageHero({
   titleTag?: 'h1' | 'div';
 }) {
   return (
-    <section className="relative overflow-hidden lg:pt-[220px] pt-[120px] lg:pb-[150px] pb-[44px]">
+    <section className="relative overflow-hidden lg:pt-[200px] pt-[120px] lg:pb-[80px] pb-[44px]">
       <div className="absolute inset-0">
         {backgroundImage ? (
           // eslint-disable-next-line @next/next/no-img-element -- CMS URLs may be remote

@@ -12,7 +12,7 @@ interface CompanyHeroProps {
  */
 export default function CompanyHero({ data }: CompanyHeroProps) {
   return (
-    <section className="relative lg:pt-[220px] pt-[120px] lg:pb-[150px] pb-[44px] overflow-hidden">
+    <section className="relative lg:pt-[200px] pt-[120px] lg:pb-[80px] pb-[44px] overflow-hidden">
       {/* Background Image with Overlay */}
       <div className="absolute inset-0">
         {data.backgroundImage ? (

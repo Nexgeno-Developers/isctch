@@ -18,34 +18,34 @@ export default function CompanyNavigation({ data, activePath }: CompanyNavigatio
     switch (iconType) {
       case 'info':
         return (
-         <Image src="/about_us_icon.svg" alt="Info" className='lg:w-20 w-8 lg:h-20 h-8' width={80} height={80} />
+         <Image src="/about_us_icon.svg" alt="Info" className='lg:w-14 w-8 lg:h-14 h-8' width={80} height={80} />
          
         );
       case 'globe':
         return (
-           <Image src="/vission_mission_icon.svg" alt="Info" className='lg:w-20 w-8 lg:h-20 h-8' width={80} height={80} />
+           <Image src="/vission_mission_icon.svg" alt="Info" className='lg:w-14 w-8 lg:h-14 h-8' width={80} height={80} />
         );
       case 'vision':
         return (
           <Image
             src="/hand-holding-heart 1.svg"
             alt="Vision & Mission"
-            className="lg:w-20 w-8 lg:h-20 h-8"
+            className="lg:w-14 w-8 lg:h-14 h-8"
             width={80}
             height={80}
           />
         );
       case 'building':
         return (
-          <Image src="/goverment_icon.svg" alt="Info" className='lg:w-20 w-8 lg:h-20 h-8' width={80} height={80} />
+          <Image src="/goverment_icon.svg" alt="Info" className='lg:w-14 w-8 lg:h-14 h-8' width={80} height={80} />
         );
       case 'document':
         return (
-          <Image src="/media_kit_icon.svg" alt="Info" className='lg:w-20 w-8 lg:h-20 h-8' width={80} height={80} />
+          <Image src="/media_kit_icon.svg" alt="Info" className='lg:w-14 w-8 lg:h-14 h-8' width={80} height={80} />
         );
       case 'heart':
         return (
-          <Image src="/responsibility_icon.svg" className='lg:w-20 w-8 lg:h-20 h-8' alt="Info" width={80} height={80} />
+          <Image src="/responsibility_icon.svg" className='lg:w-14 w-8 lg:h-14 h-8' alt="Info" width={80} height={80} />
         );
       default:
         return null;
@@ -67,7 +67,7 @@ export default function CompanyNavigation({ data, activePath }: CompanyNavigatio
                 className="flex flex-col items-center group transition-transform hover:scale-105 min-w-0"
               >
                 {/* Circular Icon Container */}
-                <div className={`w-20 h-20 md:w-[180px] md:h-[180px] rounded-full flex items-center justify-center mb-2 md:mb-6 transition-colors ${
+                <div className={`w-20 h-20 md:w-[130px] md:h-[130px] rounded-full flex items-center justify-center mb-2 md:mb-6 transition-colors ${
                   isActive
                     ? 'bg-[#009FE8]'
                     : 'bg-[#EDF0F1] '
