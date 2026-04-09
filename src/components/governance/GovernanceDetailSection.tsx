@@ -3,7 +3,8 @@ import { formatBoldText } from '@/lib/htmlText';
 
 export type GovernanceCenterPanelDetailSectionData = {
   layout: 'centerPanel';
-  subtitle: string;
+  subtitle?: string;
+  eyebrow?: string;
   title: string;
   imageSrc: string;
   imageAlt: string;
@@ -18,14 +19,17 @@ export default function GovernanceDetailSection({
 }: {
   data: GovernanceCenterPanelDetailSectionData;
 }) {
+  const subtitle = data.subtitle || data.eyebrow || '';
   return (
     <>
     <section className="bg-gray-50 py-8 md:pt-12">
       <div className="container mx-auto px-4">
         <div className="">
-          <div className="text-[#009FE8] font-semibold text-sm md:text-base">
-            {data.subtitle}
-          </div>
+          {subtitle ? (
+            <div className="text-[#009FE8] font-semibold text-sm md:text-base">
+              {subtitle}
+            </div>
+          ) : null}
 
           <h2 className="mt-2 text-[24px] md:text-5xl font-bold text-black leading-tight" 
            dangerouslySetInnerHTML={{ __html: formatBoldText(data.title) }} />
