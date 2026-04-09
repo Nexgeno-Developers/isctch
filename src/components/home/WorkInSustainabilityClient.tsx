@@ -28,7 +28,7 @@ export default function WorkInSustainabilityClient({ data }: WorkInSustainabilit
   const shouldLoop = data.cards.length > 3;
 
   return (
-    <section className="relative mt-12 mb-12 py-12 md:py-24 bg-gray-50 overflow-hidden">
+    <section className="relative py-12 md:py-24 bg-gray-50 overflow-hidden">
       <div className="absolute inset-0 z-0 pointer-events-none" aria-hidden>
         <Image
           src="/sustanibility_bg_image.webp"

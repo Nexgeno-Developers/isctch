@@ -153,7 +153,7 @@ export default function GovernanceGrcSection({
                 <h3 className="mt-5 text-[15px] md:text-base font-bold text-black">
                   {card.title}
                 </h3>
-                <p className="mt-4 text-[13px] md:text-sm text-black leading-relaxed">
+                <p className="mt-4 text-[14px] md:text-sm text-black leading-relaxed">
                   {card.description}
                 </p>
               </div>

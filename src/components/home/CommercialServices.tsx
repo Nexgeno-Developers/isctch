@@ -83,7 +83,7 @@ function ServiceCard({ card }: { card: CommercialServiceCard }) {
         </div>
 
         {/* Description */}
-        <p className="text-black text-[14px] md:text-base mb-6 leading-relaxed">
+        <p className="text-black text-[14px] md:text-base mb-6 leading-relaxed line-clamp-4">
           {card.description}
         </p>
 

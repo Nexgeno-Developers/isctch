@@ -19,7 +19,7 @@ function FrameworkCard({ title, subtitle, icon }: FrameworkCardProps) {
       </div>
       <div className="pt-1">
         <p className="text-[14px] md:text-lg font-bold text-black leading-snug">{title}</p>
-        <p className="text-[12px] md:text-sm text-black mt-1 leading-snug">
+        <p className="text-[14px] md:text-sm text-black mt-1 leading-snug">
           {subtitle}
         </p>
       </div>
@@ -180,7 +180,7 @@ export default function GovernanceFrameworkSecondarySection({
   const resolved = data ?? DEFAULT_DATA;
 
   return (
-    <section className="bg-gray-50 py-8 md:py-12">
+    <section className="bg-gray-50 py-4 md:py-12">
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
           <div>

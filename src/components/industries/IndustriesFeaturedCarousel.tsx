@@ -63,29 +63,29 @@ export default function IndustriesFeaturedCarousel({
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
     >
-      <div className="mb-8 flex flex-row flex-wrap items-center justify-between gap-4">
-        <h2 className="min-w-0 text-left text-3xl font-bold md:text-4xl lg:text-5xl">
+      <div className="lg:mb-8 mb-4 flex flex-row flex-wrap items-center justify-between lg:gap-4 gap-2">
+        <h2 className="min-w-0 text-left text-[22px] font-bold md:text-4xl lg:text-5xl">
           <span className="text-black">Featured</span>{' '}
           <span className="text-[#009FE8]">Products</span>
         </h2>
-        <div className="flex shrink-0 items-center gap-3">
+        <div className="flex shrink-0 items-center lg:gap-3 gap-1">
           <button
             type="button"
             onClick={() => scrollByDir(-1)}
-            className="flex h-11 w-11 items-center justify-center rounded-full border-2 border-[#009FE8] text-[#009FE8] transition hover:bg-[#009FE8] hover:text-white"
+            className="flex lg:h-12 lg:w-12 h-6 w-6 items-center justify-center rounded-full lg:border-2 border-1 border-[#009FE8] text-[#009FE8] transition hover:bg-[#009FE8] hover:text-white"
             aria-label="Previous products"
           >
-            <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden>
+            <svg className="lg:h-5 lg:w-5 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden>
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
             </svg>
           </button>
           <button
             type="button"
             onClick={() => scrollByDir(1)}
-            className="flex h-11 w-11 items-center justify-center rounded-full border-2 border-[#009FE8] text-[#009FE8] transition hover:bg-[#009FE8] hover:text-white"
+            className="flex lg:h-12 lg:w-12 h-6 w-6 items-center justify-center rounded-full lg:border-2 border-1 border-[#009FE8] text-[#009FE8] transition hover:bg-[#009FE8] hover:text-white"
             aria-label="Next products"
           >
-            <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden>
+            <svg className="lg:h-5 lg:w-5 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden>
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
             </svg>
           </button>
@@ -102,7 +102,7 @@ export default function IndustriesFeaturedCarousel({
             data-carousel-card
             className="w-full shrink-0 snap-start sm:w-[calc((100%-1.5rem)/2)] lg:w-[calc((100%-4.5rem)/4)]"
           >
-            <div className="flex h-full flex-col overflow-hidden rounded-[24px] bg-[#F4F4F4] shadow-sm transition hover:shadow-md">
+            <div className="flex h-full flex-col overflow-hidden rounded-[24px] bg-[#EDF0F1]">
               <div className="relative aspect-square w-full bg-white">
                 {p.image ? (
                   <Image
@@ -116,10 +116,10 @@ export default function IndustriesFeaturedCarousel({
                   <div className="absolute inset-0 bg-gray-200" />
                 )}
               </div>
-              <div className="flex flex-1 flex-col px-5 pb-6 pt-4 text-center md:px-6">
+              <div className="flex flex-1 flex-col px-5 pb-6 pt-4 text-left md:px-6">
                 <h3 className="text-lg font-bold text-black md:text-xl">{p.title}</h3>
                 {p.description ? (
-                  <p className="mt-2 line-clamp-4 text-left text-sm leading-relaxed text-black/75">
+                  <p className="mt-2 line-clamp-2 text-left text-sm leading-relaxed text-black">
                     {p.description}
                   </p>
                 ) : p.subtitle ? (
@@ -127,7 +127,7 @@ export default function IndustriesFeaturedCarousel({
                 ) : null}
                 <Link
                   href={p.href}
-                  className="mt-4 inline-block text-sm font-semibold text-[#009FE8] hover:text-[#0077B6]"
+                  className="mt-2 inline-block text-sm font-semibold text-[#009FE8] hover:text-[#0077B6]"
                 >
                   View product
                 </Link>

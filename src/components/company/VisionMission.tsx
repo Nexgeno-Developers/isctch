@@ -43,7 +43,7 @@ export default function VisionMission({ data }: VisionMissionProps) {
   return (
     <section className="relative w-full h-full overflow-hidden">
       {/* Background Image */}
-      <div className="absolute inset-0 lg:block hidden">
+      <div className="absolute inset-0">
         {data.backgroundImage ? (
           <Image
             src={data.backgroundImage}

@@ -124,7 +124,7 @@ export default function GovernanceComplianceCardsSection({
           {data.title}
           </div>
 
-          <h2 className="mt-2 text-[24px] md:text-5xl font-bold leading-tight"
+          <h2 className="mt-2 text-[24px] md:text-5xl font-bold leading-tight text-black"
               dangerouslySetInnerHTML={{ __html: formatBoldText(data.eyebrow) }} />
 
           <div className="mt-8 grid grid-cols-1 lg:grid-cols-[48%_52%] gap-8 items-start">
@@ -160,7 +160,7 @@ export default function GovernanceComplianceCardsSection({
                       <p className="text-[14px] md:text-lg font-bold text-black leading-snug">
                         {card.title}
                       </p>
-                      <p className="text-[12px] md:text-sm text-black mt-1 leading-snug">
+                      <p className="text-[14px] md:text-sm text-black mt-1 leading-snug">
                         {card.description}
                       </p>
                     </div>

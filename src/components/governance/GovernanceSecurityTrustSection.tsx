@@ -99,14 +99,14 @@ export default function GovernanceSecurityTrustSection({
   data: GovernanceSecurityTrustSectionData;
 }) {
   return (
-    <section className="bg-gray-50 py-10 md:py-12">
+    <section className="bg-gray-50 py-4 md:py-12">
       <div className="container mx-auto px-4">
         <div className="">
           <div className="text-[#009FE8] font-semibold text-sm md:text-base">
           {data.title}
           </div>
 
-          <h2 className="mt-2 text-[24px] md:text-5xl font-bold leading-tight"
+          <h2 className="mt-2 text-[24px] md:text-5xl font-bold leading-tight text-black"
           dangerouslySetInnerHTML={{ __html: formatBoldText(data.eyebrow) }} />
        
 
@@ -135,7 +135,7 @@ export default function GovernanceSecurityTrustSection({
                       <p className="text-[14px] md:text-lg font-bold text-black leading-snug">
                         {card.title}
                       </p>
-                      <p className="text-[12px] md:text-sm text-black mt-1 leading-snug">
+                      <p className="text-[14px] md:text-sm text-black mt-1 leading-snug">
                         {card.description}
                       </p>
                     </div>

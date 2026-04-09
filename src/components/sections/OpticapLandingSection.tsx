@@ -101,7 +101,7 @@ export function OpticapLandingSection({ data }: { data: OpticapLandingSectionDat
         </div>
 
         {data.videoUrl || data.homeVideoBanner ? (
-          <div className="mt-10 md:mt-16 w-full">
+          <div className="mt-10 md:mt-18 w-full">
             {data.videoUrl ? (
               <VideoBanner videoUrl={data.videoUrl} />
             ) : data.homeVideoBanner ? (
@@ -110,7 +110,7 @@ export function OpticapLandingSection({ data }: { data: OpticapLandingSectionDat
           </div>
         ) : null}
 
-        <div className="">
+        <div className="lg:py-0 py-6">
           <ConnectTechnicalExperts
             heading=""
             formTitle={connect.formTitle}

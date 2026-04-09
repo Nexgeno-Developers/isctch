@@ -15,7 +15,7 @@ export default function GlobalPresenceBanner() {
         {/* <div className="absolute inset-0 bg-[#0E233C]/55" aria-hidden /> */}
       </div>
 
-      <div className="relative z-10 container mx-auto px-4 py-8 text-center md:py-16 lg:py-20">
+      <div className="relative z-10 container mx-auto px-4 py-4 text-center md:py-16 lg:py-20">
         <h2 className="text-xl font-bold uppercase tracking-wide text-white md:text-4xl lg:text-5xl">
           HOW GLOBAL BEVERAGE BRANDS SCALE WITH ASEPTIC PRECISION
         </h2>

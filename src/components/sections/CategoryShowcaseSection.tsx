@@ -128,7 +128,7 @@ function ShowcaseCard({ item }: { item: CategoryShowcaseItem }) {
                 alt={item.imageAlt || item.title}
                 width={520}
                 height={520}
-                className="mx-auto h-[310px] w-auto object-contain object-top"
+                className="mx-auto lg:h-[310px] h-[210px] w-auto object-contain object-top"
                 sizes=""
               />
             ) : (

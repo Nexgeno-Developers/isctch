@@ -18,7 +18,7 @@ export default function ProductIndustryDetailLayoutPageSection({
   return (
     <main className="min-h-screen bg-gray-50">
       {/* Hero */}
-      <section className="relative lg:pt-[220px] pt-[150px] lg:pb-[150px] pb-[50px] overflow-hidden">
+      <section className="relative lg:pt-[220px] pt-[110px] lg:pb-[150px] pb-[0px] overflow-hidden">
         <div className="absolute inset-0">
           {data.heroBackgroundImage ? (
             // eslint-disable-next-line @next/next/no-img-element
@@ -42,7 +42,7 @@ export default function ProductIndustryDetailLayoutPageSection({
                 <RichText
                   as="div"
                   html={data.shortDescription}
-                  className="text-center text-base md:text-base text-white mb-8 leading-relaxed max-w-3xl mx-auto mt-6"
+                  className="text-center text-base md:text-base text-white mb-8 leading-relaxed max-w-3xl mx-auto lg:mt-6 mt-2"
                 />
               ) : null}
             </div>
@@ -62,20 +62,20 @@ export default function ProductIndustryDetailLayoutPageSection({
       </section>
 
       {/* Support Section */}
-      <section className="bg-gray-50 py-12 md:pt-24 md:pb-12 pb-8">
+      <section className="bg-gray-50 py-8 md:pt-24 md:pb-12 pb-8">
         <div className="container mx-auto px-4">
           <div className="text-center">
             <p className="text-sm md:text-base text-[#009FE8] uppercase tracking-wide mb-2">
               {data.support.subtitle}
             </p>
 
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6" dangerouslySetInnerHTML={{ __html: data.support.title }} />
+            <h2 className="text-[22px] md:text-4xl lg:text-5xl font-bold lg:mb-6 mb-2" dangerouslySetInnerHTML={{ __html: data.support.title }} />
 
             {data.support.description ? (
               <RichText
                 as="div"
                 html={data.support.description}
-                className="text-base md:text-base text-black mb-8 md:mb-12 mx-auto leading-relaxed"
+                className="text-sm md:text-base text-black mb-8 md:mb-12 mx-auto leading-relaxed"
               />
             ) : null}
 
@@ -138,8 +138,8 @@ export default function ProductIndustryDetailLayoutPageSection({
       {data.recommendedProducts.length ? (
         <section className="bg-gray-50 py-8 md:py-12">
           <div className="container mx-auto px-4">
-            <div className="flex items-center justify-between mb-8 md:mb-12 relative">
-              <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold">
+            <div className="flex items-center justify-between mb-4 md:mb-12 relative">
+              <h2 className="text-[22px] md:text-4xl lg:text-5xl font-bold">
                 <span className="text-black">Recommended Products</span>
               </h2>
             </div>

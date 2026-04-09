@@ -99,7 +99,7 @@ export default function GovernanceManagementPage({
           <GovernanceGrcSection data={data.governanceGrcSection} />
         ) : null}
 
-      <div className="bg-gray-50 pt-12">
+      <div className="bg-gray-50 lg:pt-12">
         <CallToAction />
       </div>
 

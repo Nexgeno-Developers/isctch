@@ -18,7 +18,7 @@ export default function CategoryGlobalImpact({ data }: CategoryGlobalImpactProps
   }
 
   return (
-    <section className="bg-gray-50 py-8 md:py-12">
+    <section className="bg-gray-50 pt-8 md:py-12">
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
           {/* Left Side - Image */}
@@ -41,17 +41,17 @@ export default function CategoryGlobalImpact({ data }: CategoryGlobalImpactProps
             </p>
 
             {/* Main Heading */}
-            <h2 className="text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold text-[#009FE8] leading-tight">
+            <h2 className="text-[22px] md:text-3xl lg:text-4xl xl:text-5xl font-bold text-[#009FE8] leading-tight">
               {data.heading}
             </h2>
 
             {/* Features List */}
-            <ul className="space-y-4 md:space-y-5">
+            <ul className="space-y-2 md:space-y-5">
               {data.features.map((feature, index) => (
                 <li key={index} className="flex items-start gap-4">
                   {/* Blue Checkmark Icon */}
                   <svg
-                    className="w-6 h-6 md:w-7 md:h-7 text-[#009FE8] flex-shrink-0 mt-1"
+                    className="w-4 h-4 md:w-7 md:h-7 text-[#009FE8] flex-shrink-0 mt-1"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -64,7 +64,7 @@ export default function CategoryGlobalImpact({ data }: CategoryGlobalImpactProps
                     />
                   </svg>
                   {/* Feature Text */}
-                  <span className="text-base md:text-lg lg:text-xl text-black font-medium leading-relaxed">
+                  <span className="text-sm md:text-lg lg:text-xl text-black font-medium leading-relaxed">
                     {feature}
                   </span>
                 </li>

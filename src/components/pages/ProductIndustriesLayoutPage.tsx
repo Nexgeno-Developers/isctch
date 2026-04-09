@@ -9,7 +9,7 @@ export default function ProductIndustriesLayoutPage({ data }: { data: ProductInd
   return (
     <main className="min-h-screen bg-[#f8f8f8]">
       {/* Hero */}
-      <section className="relative overflow-hidden pt-[140px] pb-16 md:pt-[200px] md:pb-24 lg:pt-[200px] lg:pb-28">
+      <section className="relative overflow-hidden pt-[110px] pb-8 md:pt-[200px] md:pb-24 lg:pt-[200px] lg:pb-28">
         <div className="absolute inset-0">
           {data.heroBackgroundImage ? (
             // eslint-disable-next-line @next/next/no-img-element
@@ -28,7 +28,7 @@ export default function ProductIndustriesLayoutPage({ data }: { data: ProductInd
             {data.title}
           </h1>
           {data.heroSubtitle ? (
-            <p className="mx-auto mt-6 max-w-3xl text-base leading-relaxed text-white/95 md:text-lg">
+            <p className="mx-auto lg:mt-6 mt-2 max-w-3xl text-base leading-relaxed text-white/95 md:text-lg">
               {data.heroSubtitle}
             </p>
           ) : null}
@@ -43,12 +43,12 @@ export default function ProductIndustriesLayoutPage({ data }: { data: ProductInd
 
       {/* Industrial Segments */}
       {data.industries.length > 0 ? (
-        <section className="bg-[#f8f8f8] py-12 md:py-16 lg:py-20">
+        <section className="bg-[#f8f8f8] py-8 md:py-16 lg:py-20">
           <div className="container mx-auto px-4">
-            <h2 className="mb-10 text-center text-3xl font-bold md:mb-14 md:text-4xl lg:text-5xl text-black">
+            <h2 className="lg:mb-10 mb-6 text-center text-[22px] font-bold md:mb-14 md:text-4xl lg:text-5xl text-black">
               <span className="text-[#009FE8]">Industrial</span> Segments
             </h2>
-            <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-3">
+            <div className="grid grid-cols-1 gap-6 md:gap-10 sm:grid-cols-2 lg:grid-cols-3">
               {data.industries.map((item) => (
                 <Link
                   key={item.id}
@@ -81,7 +81,7 @@ export default function ProductIndustriesLayoutPage({ data }: { data: ProductInd
 
       {/* Latest insights */}
       {data.insights ? (
-        <section className="relative overflow-hidden py-14 md:py-20">
+        <section className="relative overflow-hidden py-8 md:py-20">
           <div className="pointer-events-none absolute inset-0">
             <Image
               src="/technical_bg.jpg"
@@ -95,15 +95,14 @@ export default function ProductIndustriesLayoutPage({ data }: { data: ProductInd
           </div>
           <div className="relative z-10 container mx-auto px-4">
             <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-2 lg:gap-14">
-              <div className="relative w-full overflow-hidden rounded-2xl">
+              <div className="relative w-full overflow-hidden rounded-[50px]">
                 {data.insights.image ? (
                   <Image
                     src={data.insights.image}
                     alt=""
-                    height={500}
-                    width={500}
-                    className="object-cover"
-                    sizes="(max-width: 1024px) 100vw, 50vw"
+                    height={700}
+                    width={700}
+                    className="object-cover rounded-[50px]"
                   />
                 ) : (
                   <div className="absolute inset-0 bg-white/10" />
@@ -114,7 +113,7 @@ export default function ProductIndustriesLayoutPage({ data }: { data: ProductInd
                   {data.insights.eyebrow}
                 </p>
                 {data.insights.title ? (
-                  <h2 className="mt-3 text-2xl font-bold uppercase leading-tight text-white md:text-3xl lg:text-4xl">
+                  <h2 className="mt-3 text-[22px] font-bold uppercase leading-tight text-white md:text-3xl lg:text-4xl">
                     {data.insights.title}
                   </h2>
                 ) : null}
@@ -122,7 +121,7 @@ export default function ProductIndustriesLayoutPage({ data }: { data: ProductInd
                   <RichText
                     as="div"
                     html={data.insights.descriptionHtml}
-                    className="mt-6 text-base leading-relaxed text-white/90 md:text-lg"
+                    className="mt-6 text-sm leading-relaxed text-white/90 md:text-lg"
                   />
                 ) : null}
                 {data.insights.ctaHref ? (
@@ -144,7 +143,7 @@ export default function ProductIndustriesLayoutPage({ data }: { data: ProductInd
 
       {/* Featured products */}
       {data.featuredProducts.length > 0 ? (
-        <section className="relative overflow-hidden py-12 md:py-16 lg:py-20">
+        <section className="relative overflow-hidden py-8 md:py-16 lg:py-20">
           
           <div className="relative z-10 container mx-auto px-4">
             <IndustriesFeaturedCarousel products={data.featuredProducts} />

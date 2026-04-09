@@ -82,7 +82,7 @@ export default function ContactSustainability() {
   };
 
   return (
-    <section className="bg-gray-50 pt-4 md:pt-8 lg:pt-8 pb-24">
+    <section className="bg-gray-50 pt-4 md:pt-8 lg:pt-8 pb-8">
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8">
           {/* Left Panel - Contact Us Form */}
@@ -110,7 +110,7 @@ export default function ContactSustainability() {
                   required
                   maxLength={50}
                   disabled={isSubmitting}
-                  className="w-full px-6 py-4 bg-white rounded-[50px] border-none focus:outline-none focus:ring-2 focus:ring-[#009FE8] text-black placeholder-gray-400 text-base disabled:opacity-70"
+                  className="w-full px-6 lg:py-4 py-3 bg-white rounded-[50px] border-none focus:outline-none focus:ring-2 focus:ring-[#009FE8] text-black placeholder-gray-400 text-base disabled:opacity-70"
                 />
                 {fieldErrors.name ? (
                   <p className="mt-2 text-sm text-[#B42318]">{fieldErrors.name}</p>
@@ -128,7 +128,7 @@ export default function ContactSustainability() {
                   required
                   maxLength={50}
                   disabled={isSubmitting}
-                  className="w-full px-6 py-4 bg-white rounded-[50px] border-none focus:outline-none focus:ring-2 focus:ring-[#009FE8] text-black placeholder-gray-400 text-base disabled:opacity-70"
+                  className="w-full px-6 lg:py-4 py-3 bg-white rounded-[50px] border-none focus:outline-none focus:ring-2 focus:ring-[#009FE8] text-black placeholder-gray-400 text-base disabled:opacity-70"
                 />
                 {fieldErrors.email ? (
                   <p className="mt-2 text-sm text-[#B42318]">{fieldErrors.email}</p>
@@ -173,7 +173,7 @@ export default function ContactSustainability() {
             </h2>
 
             {/* Body Text */}
-            <p className="text-base md:text-lg text-white mb-6 leading-relaxed">
+            <p className="text-sm md:text-lg text-white mb-6 leading-relaxed">
               We are committed to delivering packaging solutions that are as good for the planet as they are for your products. CDP A-grade rated with LEED Platinum facilities.
             </p>
 
