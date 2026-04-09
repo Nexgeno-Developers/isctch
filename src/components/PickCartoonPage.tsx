@@ -45,10 +45,10 @@ export default function PickCartoonPage({ data }: PickCartoonPageProps) {
                   <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6 md:mb-8 text-black" dangerouslySetInnerHTML={{ __html: formatBoldText(section.heading) }} />
                 </div>
 
-                <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-16">
+                <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16">
                   {section.items.map((item) => (
                     <div key={item.id}>
-                      <div className="relative overflow-hidden rounded-[50px] bg-gray-100">
+                      <div className="relative overflow-hidden rounded-3xl md:rounded-[50px] bg-gray-100">
                         {item.image && (
                           <div className="relative w-full pt-[70%]">
                             <Image
@@ -66,7 +66,7 @@ export default function PickCartoonPage({ data }: PickCartoonPageProps) {
                       <RichText
                         as="div"
                         html={item.description}
-                        className="text-base md:text-lg text-black leading-relaxed mt-8"
+                        className="text-sm sm:text-base md:text-lg text-black leading-relaxed mt-5 md:mt-8"
                       />
                     </div>
                   ))}
@@ -80,7 +80,7 @@ export default function PickCartoonPage({ data }: PickCartoonPageProps) {
           return (
             <section key={idx} className="bg-gray-50 py-10 md:py-12">
               <div className="container mx-auto px-4">
-                <div className="relative overflow-hidden rounded-[50px] ">
+                <div className="relative overflow-hidden rounded-3xl md:rounded-[50px]">
                   {section.backgroundImage && (
                     <div className="absolute inset-0">
                       <Image
@@ -94,8 +94,8 @@ export default function PickCartoonPage({ data }: PickCartoonPageProps) {
                     </div>
                   )}
 
-                  <div className="relative px-6  md:px-12 md:pt-[120px] md:pb-[120px] ">
-                    <p className="mx-auto max-w-5xl text-center text-sm md:text-[32px] font-semibold leading-relaxed text-white">
+                  <div className="relative px-6 py-12 md:px-12 md:pt-[120px] md:pb-[120px]">
+                    <p className="mx-auto max-w-5xl text-center text-base sm:text-lg md:text-[32px] font-semibold leading-relaxed text-white">
                       {section.text}
                     </p>
                   </div>
@@ -115,7 +115,7 @@ export default function PickCartoonPage({ data }: PickCartoonPageProps) {
                     <RichText
                       as="div"
                       html={section.description}
-                      className="mt-3 text-base text-black mb-6 leading-relaxed"
+                      className="mt-3 text-sm sm:text-base text-black mb-6 leading-relaxed"
                     />
                   ) : null}
                 </div>
@@ -124,10 +124,10 @@ export default function PickCartoonPage({ data }: PickCartoonPageProps) {
                   {section.items.map((item) => (
                     <div
                       key={item.id}
-                      className="rounded-[50px] bg-white overflow-hidden"
+                      className="rounded-3xl md:rounded-[50px] bg-white overflow-hidden"
                     >
                       <div className="px-5 pt-5">
-                        <div className="relative w-full overflow-hidden rounded-[50px] bg-gray-100">
+                        <div className="relative w-full overflow-hidden rounded-3xl md:rounded-[50px] bg-gray-100">
                           {item.image && (
                             <div className="relative w-full pt-[58%]">
                               <Image
@@ -142,11 +142,11 @@ export default function PickCartoonPage({ data }: PickCartoonPageProps) {
                         </div>
                       </div>
                       <div className="px-5 pb-6 pt-4">
-                        <h3 className="text-[24px] font-bold text-[#009FE8]">{item.title}</h3>
+                        <h3 className="text-xl sm:text-[22px] md:text-[24px] font-bold text-[#009FE8]">{item.title}</h3>
                         <RichText
                           as="div"
                           html={item.description}
-                          className="mt-2 text-base text-black leading-relaxed mb-4"
+                          className="mt-2 text-sm sm:text-base text-black leading-relaxed mb-4"
                         />
                       </div>
                     </div>
@@ -161,24 +161,24 @@ export default function PickCartoonPage({ data }: PickCartoonPageProps) {
           return (
             <section key={idx} className="bg-gray-50 py-10 md:py-12">
               <div className="container mx-auto px-4">
-                <div className="relative px-6  md:px-12 md:pt-[120px] md:pb-[120px] rounded-[50px]">
-                  <div className="absolute inset-0 rounded-[50px]">
+                <div className="relative px-6 py-12 md:px-12 md:pt-[120px] md:pb-[120px] rounded-3xl md:rounded-[50px]">
+                  <div className="absolute inset-0 rounded-3xl md:rounded-[50px]">
                     {section.backgroundImage && (
                       <Image
                         src={section.backgroundImage}
                         alt={section.backgroundAlt || ''}
                         fill
-                        className="object-cover rounded-[50px]"
+                        className="object-cover rounded-3xl md:rounded-[50px]"
                         sizes="(max-width: 768px) 100vw, 1200px"
                       />
                     )}
-                    <div className="absolute inset-0 bg-black/35 rounded-[50px]" />
-                    <div className="absolute inset-0 bg-gradient-to-r from-black/55 via-black/25 to-transparent rounded-[50px]" />
+                    <div className="absolute inset-0 bg-black/35 rounded-3xl md:rounded-[50px]" />
+                    <div className="absolute inset-0 bg-gradient-to-r from-black/55 via-black/25 to-transparent rounded-3xl md:rounded-[50px]" />
                   </div>
 
                   <div className="relative grid grid-cols-1 md:grid-cols-[1.2fr_0.8fr] gap-6 items-end ">
                     <div className="max-w-xl">
-                      <h3 className="text-xl md:text-[32px] font-semibold leading-snug text-white">
+                      <h3 className="text-lg sm:text-xl md:text-[32px] font-semibold leading-snug text-white">
                         {section.headingLines.map((line, i) => (
                           <span key={i} className="block">
                             {line}
@@ -201,21 +201,21 @@ export default function PickCartoonPage({ data }: PickCartoonPageProps) {
                   <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-2 md:mb-2 text-black" dangerouslySetInnerHTML={{ __html: section.heading }} />
 
                   {(section.introText) && (
-                    <p className="mt-3 text-base text-black mb-6 leading-relaxed">
+                    <p className="mt-3 text-sm sm:text-base text-black mb-6 leading-relaxed">
                       {section.introText}
                     </p>
                   )}
                 </div>
 
-                <div className="mt-10 grid grid-cols-1 md:grid-cols-3 gap-12">
+                <div className="mt-10 grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-12">
                   {section.cards.map((card) => (
                     <div
                       key={card.id}
-                      className="rounded-[50px] bg-[#EDF0F1] px-6 py-8 text-center"
+                      className="rounded-3xl md:rounded-[50px] bg-[#EDF0F1] px-6 py-8 text-center"
                     >
                       <div className="mt-1 text-xl md:text-2xl font-extrabold text-black" dangerouslySetInnerHTML={{ __html: card.title }} />
 
-                      <p className="mt-4 text-xs md:text-base text-black leading-relaxed">
+                      <p className="mt-4 text-sm md:text-base text-black leading-relaxed">
                         {card.descriptionEmphasis ? (
                           <span className="font-semibold">{card.descriptionEmphasis} </span>
                         ) : null}
@@ -226,7 +226,7 @@ export default function PickCartoonPage({ data }: PickCartoonPageProps) {
                 </div>
 
                 {section.footnote ? (
-                  <p className="mt-10 text-center text-xs md:text-base text-black">
+                  <p className="mt-10 text-center text-sm md:text-base text-black">
                     {section.footnote}
                   </p>
                 ) : null}
@@ -244,7 +244,7 @@ export default function PickCartoonPage({ data }: PickCartoonPageProps) {
                   dangerouslySetInnerHTML={{ __html: section.heading }}
                 />
 
-                <div className="mt-6 overflow-hidden rounded-[50px] border border-gray-100 bg-gray-50">
+                <div className="mt-6 overflow-hidden rounded-3xl md:rounded-[50px] border border-gray-100 bg-gray-50">
                   <div className="relative w-full overflow-hidden">
                     {section.image && (
                       <Image
@@ -262,14 +262,14 @@ export default function PickCartoonPage({ data }: PickCartoonPageProps) {
                 <RichText
                   as="div"
                   html={section.description}
-                  className="mx-auto mt-6 max-w-5xl text-center text-[10px] md:text-base text-black leading-relaxed"
+                  className="mx-auto mt-6 max-w-5xl text-center text-sm md:text-base text-black leading-relaxed"
                 />
 
                 {section.ctaLink ? (
                   <div className="mt-4 text-center">
                     <Link
                       href={section.ctaLink}
-                      className="text-[#009FE8] text-xs md:text-base font-bold hover:underline transition"
+                      className="text-[#009FE8] text-sm md:text-base font-bold hover:underline transition"
                     >
                       {section.ctaText}
                     </Link>
