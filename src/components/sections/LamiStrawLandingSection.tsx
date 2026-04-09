@@ -65,7 +65,7 @@ function StrawCard({
   const Icon = iconById[card.iconId] ?? iconById.u;
 
   return (
-    <div className="bg-[#EDF0F1] rounded-[50px] p-6 flex flex-col">
+    <div className="bg-white rounded-[50px] p-6 flex flex-col">
       <div className="lg:flex items-start gap-6">
         <IconBase>
           {card.image ? (
@@ -132,18 +132,21 @@ export function LamiStrawLandingSection({
               ))}
             </div>
           </div>
+        </div>
+      </section>
 
-          <div className="mt-10 md:mt-14">
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-8 mx-auto">
+
+      <section className="bg-[#009de61a] py-10 md:py-20">
+         <div className="container mx-auto px-4">
+           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-8 mx-auto">
               {data.cards.map((card) => (
                 <StrawCard key={card.id} card={card} />
               ))}
             </div>
-          </div>
         </div>
       </section>
 
-      <div className="pb-10 md:pb-24 pt-2 md:pt-4">
+      <div className="pb-10 md:pb-24">
         {videoUrl ? (
           <VideoBanner
             prefetchedData={{
