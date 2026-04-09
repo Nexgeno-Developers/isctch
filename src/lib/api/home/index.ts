@@ -271,12 +271,23 @@ type SustainabilityLinkItem = {
   short_summary_description?: string;
 };
 
+type LatestInsightApiItem = {
+  id?: number;
+  title?: string;
+  slug?: string;
+  featured_image?: MediaRef;
+  summary?: string;
+  published_at?: string | null;
+  category?: string | null;
+};
+
 type HomeAutofetchApi = {
   services?: ServiceAutofetchItem[];
   marketing_services?: ServiceAutofetchItem[];
   technical_services?: ServiceAutofetchItem[];
   sustainable_products?: SustainableProductAutofetchItem[];
   sustainabilities?: SustainabilityLinkItem[];
+  latest_insights?: LatestInsightApiItem[] | LatestInsightApiItem | null;
 };
 
 type HomePageApiResponse = {
@@ -293,13 +304,14 @@ type HomePageApiResponse = {
       schema?: unknown;
     };
     autofetch?: HomeAutofetchApi;
+    latest_insights?: LatestInsightApiItem[] | LatestInsightApiItem | null;
   };
 };
 
 // ==================== Helpers ====================
 
 const COMPANY_API_BASE_URL = process.env.COMPANY_API_BASE_URL || 'https://backend-lamipak.webtesting.pw/api';
-const HOME_AUTOFETCH = 'services,sustainable_products,sustainabilities';
+const HOME_AUTOFETCH = 'services,sustainable_products,sustainabilities,latest_insights';
 const HOME_REVALIDATE_SECONDS = 300;
 
 function buildApiUrl(path: string): string {
@@ -373,6 +385,11 @@ function slugToHref(slug?: string): string {
   return cleaned ? `/${cleaned}/` : '/';
 }
 
+function toArray<T>(value: T | T[] | null | undefined): T[] {
+  if (!value) return [];
+  return Array.isArray(value) ? value : [value];
+}
+
 function inferServiceIconFallback(svc: ServiceAutofetchItem): 'gear' | 'megaphone' {
   const s = `${svc.slug || ''} ${svc.title || ''} ${svc.short_summary_title || ''}`.toLowerCase();
   if (s.includes('technical')) return 'gear';
@@ -391,6 +408,32 @@ function deriveProductLabel(description: string, title: string): string {
   if (!d) return title;
   const sentence = d.split(/(?<=[.!?])\s+/)[0]?.trim() || d;
   return sentence.length > 100 ? `${sentence.slice(0, 97)}…` : sentence;
+}
+
+function formatInsightDate(value?: string | null): string {
+  if (!value) return '';
+  const d = new Date(value);
+  if (Number.isNaN(d.getTime())) return '';
+  return new Intl.DateTimeFormat('en-US', {
+    month: 'short',
+    year: 'numeric',
+  })
+    .format(d)
+    .toUpperCase();
+}
+
+function cleanText(value?: string): string {
+  if (!value) return '';
+  return decodeBasicEntities(stripHtml(value));
+}
+
+function buildInsightsLink(slug?: string | null): string {
+  const raw = (slug || '').trim();
+  if (!raw) return '/insights/articles';
+  if (/^https?:\/\//i.test(raw)) return raw;
+  if (raw.startsWith('/')) return raw;
+  if (raw.startsWith('insights/')) return `/${raw}`;
+  return `/insights/articles/${raw}`;
 }
 
 // ==================== Fallback Data ====================
@@ -439,46 +482,7 @@ const FALLBACK_APPROACH: ApproachData = {
   ctaLink: '/solutions',
 };
 
-const FALLBACK_INSIGHTS: LatestInsightsData = {
-  cards: [
-    {
-      id: '1',
-      title: 'Global Dairy Market Outlook',
-      category: 'INDUSTRY',
-      date: 'NOV 2025',
-      image: '/latest_insite_image_1.jpg',
-      imageAlt: 'Global Dairy Market Outlook - White carton packages with green leaf design',
-      link: '/',
-    },
-    {
-      id: '2',
-      title: 'Smart Packaging & Traceability',
-      category: 'INDUSTRY',
-      date: 'NOV 2025',
-      image: '/latest_insite_image_2.jpg',
-      imageAlt: 'Smart Packaging & Traceability - Laboratory with blue liquid containers',
-      link: '/',
-    },
-    {
-      id: '3',
-      title: 'Circular Economy in Packaging',
-      category: 'INDUSTRY',
-      date: 'NOV 2025',
-      image: '/latest_insite_image_3.jpg',
-      imageAlt: 'Circular Economy in Packaging - Person examining plastic pouch in laboratory',
-      link: '/',
-    },
-    {
-      id: '4',
-      title: 'Smart Packaging & Traceability',
-      category: 'INDUSTRY',
-      date: 'NOV 2025',
-      image: '/latest_insite_image_2.jpg',
-      imageAlt: 'Smart Packaging & Traceability - Laboratory with blue liquid containers',
-      link: '/',
-    },
-  ],
-};
+// FALLBACK_INSIGHTS removed: latest insights now mapped from API `latest_insights`.
 
 const FALLBACK_PRESS_RELEASES: LatestPressReleaseData = {
   cards: [
@@ -687,6 +691,36 @@ function mapFaqs(faqs: FaqsItemsApi | undefined): FAQItem[] | null {
   return out.length ? out : null;
 }
 
+function mapLatestInsights(items: LatestInsightApiItem[] | LatestInsightApiItem | null | undefined): LatestInsightsData | null {
+  const list = toArray(items);
+  if (!list.length) return null;
+
+  const cards = list
+    .map((item, idx) => {
+      const id = item.id ?? idx + 1;
+      const title = cleanText(item.title);
+      const image = item.featured_image?.url?.trim();
+      const slug = item.slug?.trim();
+      if (!title || !image || !slug) return null;
+
+      const category = cleanText(item.category || '') || 'INSIGHTS';
+      const date = formatInsightDate(item.published_at);
+
+      return {
+        id: String(id),
+        title,
+        category,
+        date,
+        image,
+        imageAlt: title,
+        link: buildInsightsLink(slug),
+      } as InsightCard;
+    })
+    .filter(Boolean) as InsightCard[];
+
+  return cards.length ? { cards } : null;
+}
+
 function mapVideoBanner(meta: HomeMetaApi | undefined): VideoBannerData | null {
   if (!meta?.global_beverage_video_url?.trim()) return null;
 
@@ -741,6 +775,10 @@ export const fetchHomepageData = cache(async (): Promise<HomepageData | null> =>
     const faqItems = mapFaqs(meta?.faqs_items);
     const faqMapped: FAQData | null = faqItems ? { items: faqItems } : null;
 
+    const latestInsightsMapped = mapLatestInsights(
+      autofetch.latest_insights ?? data.latest_insights,
+    );
+
     const seoMerged = data.seo?.title || data.seo?.description
       ? {
           meta_title: data.seo?.title ?? '',
@@ -758,7 +796,7 @@ export const fetchHomepageData = cache(async (): Promise<HomepageData | null> =>
       workInSustainability: workMapped ?? { cards: [] },
       faq: faqMapped ?? { items: [] },
       latestPressRelease: FALLBACK_PRESS_RELEASES,
-      latestInsights: FALLBACK_INSIGHTS,
+      latestInsights: latestInsightsMapped ?? { cards: [] },
       approach: FALLBACK_APPROACH,
       innovationInPackaging: { cards: [], exploreMoreLink: '/' },
       callToAction: FALLBACK_CTA,

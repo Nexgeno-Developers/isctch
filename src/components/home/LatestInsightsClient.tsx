@@ -134,7 +134,7 @@ export default function LatestInsightsClient({ data }: LatestInsightsClientProps
                   </div>
 
                   {/* Content - Blue Background */}
-                  <div className="bg-[#009FE8] p-4 md:p-6">
+                  <div className="bg-[#009FE8] p-4 md:p-6 h-full">
                     {/* Category and Date */}
                     <div className="flex items-center justify-between mb-3">
                       <span className="text-white text-sm md:text-base font-medium uppercase tracking-wide">
@@ -146,7 +146,7 @@ export default function LatestInsightsClient({ data }: LatestInsightsClientProps
                     </div>
 
                     {/* Title */}
-                    <h3 className="text-[18px] md:text-2xl lg:text-3xl font-bold text-white leading-tight">
+                    <h3 className="text-[18px] md:text-[20px] lg:text-[24px] font-bold text-white line-clamp-2">
                       {card.title}
                     </h3>
                   </div>
