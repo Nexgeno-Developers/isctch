@@ -4,7 +4,6 @@ import { HeroWithBreadcrumbsSection } from '@/components/sections/HeroWithBreadc
 import Image from 'next/image';
 import Link from 'next/link';
 import LatestNewsClient, { type MarketingNewsItem } from '@/components/marketing/LatestNewsClient';
-import { fetchMarketingLatestNews, fetchMarketingPressNews } from '@/lib/api';
 import { RichText } from '@/components/common/RichText';
 import { formatBoldText } from '@/lib/htmlText';
 export type MarketingHighlight = {
@@ -34,6 +33,8 @@ export type MarketingServicesLayoutPageData = {
   highlights: MarketingHighlight[];
   servicesHeading?: string;
   services: MarketingServiceListItem[];
+  latestInsights?: MarketingNewsItem[];
+  latestNews?: MarketingNewsItem[];
 };
 
 export default async function MarketingServicesLayoutPage({
@@ -41,10 +42,8 @@ export default async function MarketingServicesLayoutPage({
 }: {
   data: MarketingServicesLayoutPageData;
 }) {
-  const [trendItems, pressItems] = await Promise.all([
-    fetchMarketingLatestNews().catch(() => [] as MarketingNewsItem[]),
-    fetchMarketingPressNews().catch(() => [] as MarketingNewsItem[]),
-  ]);
+  const trendItems = data.latestInsights ?? [];
+  const pressItems = data.latestNews ?? [];
 
   return (
     <main className="min-h-screen bg-gray-50">
@@ -194,8 +193,9 @@ export default async function MarketingServicesLayoutPage({
         </section>
       )}
 
-      {/* Latest News (static for now; uses local fallback data) */}
-      <LatestNewsClient trendItems={trendItems} pressItems={pressItems} />
+      {(trendItems.length > 0 || pressItems.length > 0) ? (
+        <LatestNewsClient trendItems={trendItems} pressItems={pressItems} />
+      ) : null}
 
       <CallToAction />
       <NewsletterSubscription />

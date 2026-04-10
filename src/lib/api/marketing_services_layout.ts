@@ -3,6 +3,7 @@ import type {
   MarketingServiceListItem,
   MarketingServicesLayoutPageData,
 } from '@/components/pages/MarketingServicesLayoutPage';
+import type { MarketingNewsItem } from '@/components/marketing/LatestNewsClient';
 
 type Media = { url?: string | null } | null | undefined;
 
@@ -44,8 +45,19 @@ type MarketingServicesApiResponse = {
             short_summary_description?: string;
           }>
         | null;
+      latest_insights?: MarketingNewsApiItem[] | MarketingNewsApiItem | null;
+      latest_news?: MarketingNewsApiItem[] | MarketingNewsApiItem | null;
     };
   };
+};
+
+type MarketingNewsApiItem = {
+  id?: number;
+  title?: string;
+  slug?: string;
+  featured_image?: Media;
+  summary?: string;
+  published_at?: string | null;
 };
 
 import { formatBoldText } from '@/lib/htmlText';
@@ -84,6 +96,29 @@ function slugToHref(slug: string) {
   return s ? `/${s}/` : '/';
 }
 
+function mapMarketingNewsItems(
+  list: MarketingNewsApiItem[] | MarketingNewsApiItem | null | undefined,
+): MarketingNewsItem[] {
+  const items = toArray(list);
+  if (!items.length) return [];
+
+  return items
+    .map((item, idx) => {
+      const title = item.title?.trim();
+      const image = mediaUrl(item.featured_image);
+      if (!title || !image) return null;
+      return {
+        id: String(item.id ?? `news-${idx + 1}`),
+        title,
+        image,
+        imageAlt: title,
+        date: '',
+        time: '',
+      } as MarketingNewsItem;
+    })
+    .filter(Boolean) as MarketingNewsItem[];
+}
+
 export async function fetchMarketingServicesLayoutPage(slug: string) {
   const baseUrl = process.env.COMPANY_API_BASE_URL;
   if (!baseUrl) return null;
@@ -91,7 +126,7 @@ export async function fetchMarketingServicesLayoutPage(slug: string) {
   for (const candidate of slugCandidates(slug)) {
     try {
       const apiSlugPath = buildPageApiPath(candidate);
-      const res = await fetch(`${baseUrl}/v1/page/${apiSlugPath}?autofetch=marketing_services`, {
+      const res = await fetch(`${baseUrl}/v1/page/${apiSlugPath}?autofetch=marketing_services,latest_insights,latest_news`, {
         cache: 'no-store',
       });
       if (!res.ok) continue;
@@ -137,6 +172,9 @@ export async function fetchMarketingServicesLayoutPage(slug: string) {
         })
         .filter(Boolean) as MarketingServiceListItem[];
 
+      const latestInsights = mapMarketingNewsItems(data.autofetch?.latest_insights);
+      const latestNews = mapMarketingNewsItems(data.autofetch?.latest_news);
+
       return {
         slug: data.slug,
         title: formatBoldText(data.title),
@@ -152,6 +190,8 @@ export async function fetchMarketingServicesLayoutPage(slug: string) {
           highlights: highlightItems,
           servicesHeading: formatBoldText(meta.short_summary_title || '') || undefined,
           services,
+          latestInsights,
+          latestNews,
         } satisfies MarketingServicesLayoutPageData,
         // useful plain text for SEO fallback if needed
         summary: stripHtml(meta.hero_description || data.content || ''),
