@@ -49,7 +49,7 @@ export default function LatestNewsClient({ trendItems, pressItems }: LatestNewsC
       <div className="container mx-auto px-4">
         {/* Heading */}
         <div className="text-center mb-6 md:mb-8">
-          <h2 className="text-3xl md:text-4xl lg:text-5xl text-black font-bold mb-6 md:mb-8 leading-[70px] text-center">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl text-black font-bold mb-2 md:mb-4 leading-[70px] text-center">
             Latest News
           </h2>
         </div>
@@ -84,7 +84,7 @@ export default function LatestNewsClient({ trendItems, pressItems }: LatestNewsC
                     : 'text-gray-500 border-transparent hover:text-[#009FE8]'
                 }`}
               >
-                Press Release &amp; Event
+                Press Release
               </button>
             </div>
           </div>
@@ -203,7 +203,7 @@ export default function LatestNewsClient({ trendItems, pressItems }: LatestNewsC
                     </div>
                   ) : null}
                   
-                  <h3 className="text-lg md:text-xl font-semibold text-[#0E233C] mb-0 leading-snug pt-4">
+                  <h3 className="text-lg md:text-xl font-semibold text-[#0E233C] mb-0 leading-snug pt-4 line-clamp-2">
                     {item.title}
                   </h3>
 
