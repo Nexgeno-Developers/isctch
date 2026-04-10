@@ -1,5 +1,7 @@
 import type { AboutUsQuadrantSection } from '@/fake-api/company';
 import { decodeHtmlEntities, normalizeText, formatBoldText } from '@/lib/htmlText';
+import { mapPageBlocksToNavigation, type AboutUsPageBlock } from '@/lib/api/about_us_navigation';
+import type { CompanyNavigationData } from '@/components/company/CompanyNavigation';
 
 type Media = { url?: string | null } | null | undefined;
 
@@ -18,6 +20,7 @@ type AboutUsLayout2ApiResponse = {
       about_title_secondary?: string;
       about_image_secondary?: Media | string | null;
       about_description_secondary?: string;
+      page_blocks?: AboutUsPageBlock[];
     };
     seo?: Record<string, unknown>;
   };
@@ -28,6 +31,7 @@ export type AboutUsLayout2PageData = {
   heroBackgroundImage?: string;
   quadrant: AboutUsQuadrantSection;
   videoUrl?: string;
+  navigation?: CompanyNavigationData | null;
 };
 
 function buildPageApiPath(slug: string) {
@@ -193,6 +197,7 @@ export async function fetchAboutUsLayout2Page(slug: string) {
       heroBackgroundImage: meta.breadcrumb_image?.url || undefined,
       quadrant,
       videoUrl: meta.about_video_url?.trim() || undefined,
+      navigation: mapPageBlocksToNavigation(meta.page_blocks),
     };
 
     return {

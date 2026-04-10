@@ -1,8 +1,9 @@
 import { fetchCompanyData } from '@/lib/api';
-import CompanyNavigation from './CompanyNavigation';
+import CompanyNavigation, { type CompanyNavigationData } from './CompanyNavigation';
 
 interface CompanyNavigationServerProps {
   activePath?: string;
+  data?: CompanyNavigationData | null;
 }
 
 /**
@@ -10,8 +11,18 @@ interface CompanyNavigationServerProps {
  * 
  * Fetches navigation data server-side and passes it to the component.
  */
-export default async function CompanyNavigationServer({ activePath }: CompanyNavigationServerProps) {
-  const companyData = await fetchCompanyData();
+export default async function CompanyNavigationServer({
+  activePath,
+  data,
+}: CompanyNavigationServerProps) {
+  const navigation =
+    data !== undefined
+      ? data
+      : ((await fetchCompanyData())?.navigation as CompanyNavigationData | undefined) ?? null;
 
-  return <CompanyNavigation data={companyData.navigation} activePath={activePath} />;
+  if (!navigation || navigation.items.length === 0) {
+    return null;
+  }
+
+  return <CompanyNavigation data={navigation} activePath={activePath} />;
 }

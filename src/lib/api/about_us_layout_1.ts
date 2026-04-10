@@ -1,5 +1,7 @@
 import type { CompanyHero, CompanyStatistic, JourneyData } from '@/fake-api/company';
 import { normalizeText, formatBoldText } from '@/lib/htmlText';
+import { mapPageBlocksToNavigation, type AboutUsPageBlock } from '@/lib/api/about_us_navigation';
+import type { CompanyNavigationData } from '@/components/company/CompanyNavigation';
 
 type Media = { url?: string | null } | null | undefined;
 
@@ -13,6 +15,7 @@ type AboutUsLayout1ApiResponse = {
       business_statistics_items?: string | StatsJson;
       journey_items?: string | JourneyJson;
       video_url?: string;
+      page_blocks?: AboutUsPageBlock[];
     };
     seo?: Record<string, unknown>;
   };
@@ -23,6 +26,7 @@ export type AboutUsLayout1PageData = {
   statistics: CompanyStatistic[];
   journey: JourneyData;
   videoUrl?: string;
+  navigation?: CompanyNavigationData | null;
 };
 
 function buildPageApiPath(slug: string) {
@@ -156,6 +160,7 @@ export async function fetchAboutUsLayout1Page(slug: string) {
       statistics,
       journey,
       videoUrl: meta.video_url?.trim() || undefined,
+      navigation: mapPageBlocksToNavigation(meta.page_blocks),
     };
 
     return {

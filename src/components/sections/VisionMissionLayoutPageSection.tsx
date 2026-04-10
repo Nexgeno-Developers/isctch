@@ -29,7 +29,7 @@ export function VisionMissionLayoutPageSection({
         </div>
       </section>
 
-      <CompanyNavigationServer activePath={activePath || '/vision-mission'} />
+      <CompanyNavigationServer activePath={activePath || '/vision-mission'} data={data.navigation} />
 
       <VisionMission data={data.visionMission} />
       <OurValues data={data.ourValues} />

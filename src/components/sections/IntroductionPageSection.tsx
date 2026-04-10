@@ -33,7 +33,7 @@ export function IntroductionPageSection({
         </div>
       </section>
 
-      <CompanyNavigationServer activePath={activePath || '/introduction'} />
+      <CompanyNavigationServer activePath={activePath || '/introduction'} data={data.navigation} />
 
       <AboutUsQuadrant
         data={data.quadrant}

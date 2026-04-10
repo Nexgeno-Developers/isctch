@@ -6,6 +6,8 @@ import type { GovernanceComplianceCardsSectionData } from '@/components/governan
 import type { GovernanceSecurityTrustSectionData } from '@/components/governance/GovernanceSecurityTrustSection';
 import type { GovernanceWhistleblowingSectionData } from '@/components/governance/GovernanceWhistleblowingSection';
 import type { GovernanceWhistleblowingCardsSectionData } from '@/components/governance/GovernanceWhistleblowingCardsSection';
+import { mapPageBlocksToNavigation, type AboutUsPageBlock } from '@/lib/api/about_us_navigation';
+import type { CompanyNavigationData } from '@/components/company/CompanyNavigation';
 
 type Media = { url?: string | null } | null | undefined;
 import { decodeHtmlEntities, normalizeText, formatBoldText } from '@/lib/htmlText';
@@ -74,6 +76,7 @@ type AboutUsLayout4ApiResponse = {
         title?: string[];
         description?: string[];
       };
+      page_blocks?: AboutUsPageBlock[];
     };
     seo?: Record<string, unknown>;
   };
@@ -92,6 +95,7 @@ export type AboutUsLayout4PageData = {
     | GovernanceWhistleblowingCardsSectionData
   >;
   governanceGrcSection: GovernanceGrcSectionData;
+  navigation?: CompanyNavigationData | null;
 };
 
 function buildPageApiPath(slug: string) {
@@ -386,6 +390,7 @@ export async function fetchAboutUsLayout4Page(slug: string) {
       governanceFrameworkSecondarySection,
       governanceDetailSections: detailSections,
       governanceGrcSection,
+      navigation: mapPageBlocksToNavigation(meta.page_blocks),
     };
 
     return {

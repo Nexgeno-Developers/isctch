@@ -122,6 +122,7 @@ export default async function DynamicPage({ params, searchParams }: PageProps) {
               statistics={payload.page.statistics}
               journey={payload.page.journey}
               videoUrl={payload.page.videoUrl}
+              navigation={payload.page.navigation}
               activePath={`/${fullSlug}`}
             />
           );
