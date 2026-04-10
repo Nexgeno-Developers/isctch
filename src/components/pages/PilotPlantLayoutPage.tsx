@@ -36,6 +36,7 @@ export default function PilotPlantLayoutPage({ data }: { data: PilotPlantPageDat
         scopeTitleBlue={data.scopeTitleBlue}
         scopeTitleBlack={data.scopeTitleBlack}
         scopeGrid={data.scopeGrid}
+        agileHtml={data.agileHtml}
         agileEyebrow={data.agileEyebrow}
         agileTitle={data.agileTitle}
         agileBody={data.agileBody}
