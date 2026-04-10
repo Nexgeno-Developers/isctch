@@ -4,6 +4,7 @@ import type { CareerLandingPageData } from '@/lib/api/career_layout';
 import CompanyHero from '@/components/company/CompanyHero';
 import Breadcrumbs from '@/components/common/Breadcrumbs';
 import VideoModalClient from '@/components/common/VideoModalClient';
+import { RichText } from '@/components/common/RichText';
 import VerticalTabsFeatures from '@/components/technical-services/VerticalTabsFeatures';
 import ConnectTechnicalExperts from '@/components/technical-services/ConnectTechnicalExperts';
 import CareerListingClient from '@/components/career/CareerListingClient';
@@ -31,15 +32,31 @@ export default function CareerLandingPage({ data }: CareerLandingPageProps) {
       </section>
 
       {data.heroSplit && (
-        <section className="bg-gray-50">
+        <section className="bg-gray-50 pt-8 md:pt-20">
           <div className="grid grid-cols-1 items-stretch gap-0 lg:grid-cols-2">
-            <div className="flex items-center justify-center p-8 md:p-12 lg:p-16 xl:p-20">
+            <div className="flex items-center justify-center pl-8 pr-8 lg:pl-16 lg:pr-10">
               <div className="max-w-xl">
                 <h2 className="mb-6 text-3xl font-bold leading-[1.15] text-black md:text-4xl lg:text-5xl" dangerouslySetInnerHTML={{ __html: formatBoldText(data.heroSplit.heading) }} />
 
-                <p className="mt-8 text-base font-semibold text-[#0E233C] md:text-lg">
-                  {data.heroSplit.emphasis}
-                </p>
+                {data.heroSplit.bodyHtml ? (
+                  <RichText
+                    html={data.heroSplit.bodyHtml}
+                    className="mt-8 space-y-4 text-base font-normal leading-relaxed text-[#0E233C] md:text-lg [&_p]:mb-0 [&_p+_p]:mt-4"
+                  />
+                ) : (
+                  <>
+                    {data.heroSplit.paragraphs.length > 0 ? (
+                      <div className="mt-8 space-y-4 text-base font-normal leading-relaxed text-[#0E233C] md:text-lg">
+                        {data.heroSplit.paragraphs.map((p, i) => (
+                          <p key={i} dangerouslySetInnerHTML={{ __html: formatBoldText(p) }} />
+                        ))}
+                      </div>
+                    ) : null}
+                    {data.heroSplit.emphasis ? (
+                      <p className="mt-8 text-base font-semibold text-[#0E233C] md:text-lg">{data.heroSplit.emphasis}</p>
+                    ) : null}
+                  </>
+                )}
 
                 <Link
                   href={data.heroSplit.ctaLink}
@@ -51,7 +68,7 @@ export default function CareerLandingPage({ data }: CareerLandingPageProps) {
               </div>
             </div>
 
-            <div className="relative min-h-[320px] overflow-hidden lg:min-h-[560px]">
+            <div className="relative min-h-[320px] overflow-hidden lg:min-h-[460px]">
               {data.heroSplit.mediaLink ? (
                 <VideoModalClient
                   videoUrl={data.heroSplit.mediaLink}
@@ -102,11 +119,18 @@ export default function CareerLandingPage({ data }: CareerLandingPageProps) {
 
                 <div className="max-w-3xl">
                   <h2 className="mb-5 text-2xl font-bold text-black md:text-3xl lg:text-5xl" dangerouslySetInnerHTML={{ __html: formatBoldText(data.leadershipMessage.heading) }} />
-                  <div className="space-y-5 text-sm leading-relaxed text-black md:text-base">
-                    {data.leadershipMessage.paragraphs.map((p, i) => (
-                      <p key={i}>{p}</p>
-                    ))}
-                  </div>
+                  {data.leadershipMessage.bodyHtml ? (
+                    <RichText
+                      html={data.leadershipMessage.bodyHtml}
+                      className="space-y-5 text-sm leading-relaxed text-black md:text-base [&_p]:mb-0 [&_p+_p]:mt-5"
+                    />
+                  ) : (
+                    <div className="space-y-5 text-sm leading-relaxed text-black md:text-base">
+                      {data.leadershipMessage.paragraphs.map((p, i) => (
+                        <p key={i} dangerouslySetInnerHTML={{ __html: formatBoldText(p) }} />
+                      ))}
+                    </div>
+                  )}
                 </div>
               </div>
             </div>
@@ -121,9 +145,18 @@ export default function CareerLandingPage({ data }: CareerLandingPageProps) {
               <div className="container mx-auto px-4">
                 <div className="mx-auto max-w-3xl text-center">
                   <h2 className="text-2xl font-bold text-black md:text-3xl lg:text-5xl" dangerouslySetInnerHTML={{ __html: formatBoldText(data.verticalFeaturesHeader.heading)}} />
-                  <p className="mt-3 text-sm text-gray-600 md:text-base">
-                    {data.verticalFeaturesHeader.description}
-                  </p>
+                  {data.verticalFeaturesHeader.description ? (
+                    /<[^>]+>/.test(data.verticalFeaturesHeader.description) ? (
+                      <RichText
+                        html={data.verticalFeaturesHeader.description}
+                        className="mt-3 text-sm text-gray-600 md:text-base [&_p]:mb-0 [&_p+_p]:mt-3"
+                      />
+                    ) : (
+                      <p className="mt-3 text-sm text-gray-600 md:text-base">
+                        {data.verticalFeaturesHeader.description}
+                      </p>
+                    )
+                  ) : null}
                 </div>
               </div>
             </section>
@@ -137,9 +170,16 @@ export default function CareerLandingPage({ data }: CareerLandingPageProps) {
           <div className="container mx-auto px-4">
             <div className="mx-auto mb-10 max-w-4xl text-center md:mb-12">
               <h2 className="text-2xl font-bold leading-tight text-black md:text-3xl lg:text-5xl" dangerouslySetInnerHTML={{ __html: formatBoldText(data.expertsSection.heading) }} />
-              <p className="mt-4 text-sm text-gray-600 md:text-base">
-                {data.expertsSection.description}
-              </p>
+              {data.expertsSection.description ? (
+                /<[^>]+>/.test(data.expertsSection.description) ? (
+                  <RichText
+                    html={data.expertsSection.description}
+                    className="mt-4 text-sm text-gray-600 md:text-base [&_p]:mb-0 [&_p+_p]:mt-3"
+                  />
+                ) : (
+                  <p className="mt-4 text-sm text-gray-600 md:text-base">{data.expertsSection.description}</p>
+                )
+              ) : null}
             </div>
 
             <div className="grid grid-cols-1 gap-6 md:grid-cols-3 md:gap-8">

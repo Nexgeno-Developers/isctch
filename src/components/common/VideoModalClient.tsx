@@ -17,6 +17,13 @@ type VideoModalClientProps = {
 
 const isProbablyMp4 = (url: string) => /\.mp4(\?|#|$)/i.test(url);
 const isProbablyWebm = (url: string) => /\.webm(\?|#|$)/i.test(url);
+const isProbablyMov = (url: string) => /\.mov(\?|#|$)/i.test(url);
+
+/** CMS file URLs (e.g. /storage/.../file.mp4) without going through YouTube/Vimeo embed. */
+const isDirectVideoFileUrl = (url: string) => {
+  if (/(?:youtube\.com|youtu\.be|vimeo\.com|player\.vimeo\.com)/i.test(url)) return false;
+  return isProbablyMp4(url) || isProbablyWebm(url) || isProbablyMov(url);
+};
 
 export default function VideoModalClient({
   videoUrl,
@@ -63,7 +70,7 @@ export default function VideoModalClient({
     };
   }, []);
 
-  const isFileVideo = isProbablyMp4(videoUrl) || isProbablyWebm(videoUrl);
+  const isFileVideo = isDirectVideoFileUrl(videoUrl);
 
   return (
     <div className={className}>
@@ -83,9 +90,9 @@ export default function VideoModalClient({
             className="absolute inset-0 w-full h-full object-cover"
           />
         ) : (
-          <div className="absolute inset-0 bg-gray-200" />
+          <div className="absolute inset-0" />
         )}
-        <div className="pointer-events-none absolute inset-0 bg-black/25" aria-hidden />
+        {/* <div className="pointer-events-none absolute inset-0 bg-black/25" aria-hidden /> */}
 
         <span className="absolute inset-0 flex items-center justify-center">
           <span className="group flex cursor-pointer items-center justify-center rounded-full bg-white/40 p-4 transition md:p-5">

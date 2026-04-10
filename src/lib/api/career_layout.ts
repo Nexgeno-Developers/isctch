@@ -25,6 +25,8 @@ export interface CareerLandingPageData {
   heroBackgroundImage?: string;
   heroSplit?: {
     heading: string;
+    /** Rich HTML from CMS (preferred when `hero_description` contains tags). */
+    bodyHtml?: string;
     paragraphs: string[];
     emphasis: string;
     ctaText: string;
@@ -39,6 +41,7 @@ export interface CareerLandingPageData {
     name: string;
     role: string;
     heading: string;
+    bodyHtml?: string;
     paragraphs: string[];
   };
   verticalFeatures?: Array<{
@@ -153,6 +156,16 @@ function getYouTubeThumbnail(url: string): string {
   return '/about_banner.jpg';
 }
 
+function isYouTubeUrl(url: string): boolean {
+  return /(?:youtube\.com|youtu\.be)/i.test(url);
+}
+
+function heroMediaPoster(rawVideoUrl: string | undefined, fallback?: string): string {
+  if (!rawVideoUrl) return fallback || '/about_banner.jpg';
+  if (isYouTubeUrl(rawVideoUrl)) return getYouTubeThumbnail(rawVideoUrl);
+  return fallback || '/about_banner.jpg';
+}
+
 function toEmbedUrl(url: string): string {
   const ytMatch = /(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/)([a-zA-Z0-9_-]+)/.exec(url);
   if (ytMatch) {
@@ -185,26 +198,38 @@ export async function fetchCareerLayoutPage(slug: string): Promise<{
     const meta = data.meta || {};
     const seo = (data.seo || {}) as Record<string, unknown>;
 
-    const heroDescriptionParagraphs = splitParagraphs(meta.hero_description);
+    const heroDescriptionRaw = meta.hero_description?.trim() || '';
+    const heroDescriptionIsHtml = /<[^>]+>/.test(heroDescriptionRaw);
+    const heroDescriptionParagraphs = heroDescriptionIsHtml
+      ? []
+      : splitParagraphs(meta.hero_description);
     const heroHeading = meta.hero_title || 'Build Your International Career At LamiPak';
 
     const embedVideoUrl = meta.hero_video_url ? toEmbedUrl(meta.hero_video_url) : undefined;
-    const heroThumbnail = embedVideoUrl ? getYouTubeThumbnail(meta.hero_video_url!) : undefined;
+    const breadcrumbUrl = meta.breadcrumb_image?.url;
+    const heroPoster = meta.hero_video_url
+      ? heroMediaPoster(meta.hero_video_url, breadcrumbUrl)
+      : undefined;
 
     const heroSplit = meta.hero_title
       ? {
           heading: formatBoldText(heroHeading),
-          paragraphs: heroDescriptionParagraphs.map(formatBoldText),
-          emphasis: formatBoldText(heroDescriptionParagraphs[0] || ''),
+          bodyHtml: heroDescriptionIsHtml ? heroDescriptionRaw : undefined,
+          paragraphs: heroDescriptionParagraphs.map((p) => formatBoldText(p.trim())),
+          emphasis: heroDescriptionIsHtml
+            ? ''
+            : formatBoldText(heroDescriptionParagraphs[0] || ''),
           ctaText: formatBoldText('Explore More'),
           ctaLink: meta.hero_navigation_link || '/',
-          mediaImage: heroThumbnail || meta.breadcrumb_image?.url || '/about_banner.jpg',
+          mediaImage: heroPoster || breadcrumbUrl || '/about_banner.jpg',
           mediaAlt: formatBoldText(heroHeading),
           mediaLink: embedVideoUrl,
         }
       : undefined;
 
-    const hrDescriptionParagraphs = splitParagraphs(meta.hr_description);
+    const hrDescriptionRaw = meta.hr_description?.trim() || '';
+    const hrDescriptionIsHtml = /<[^>]+>/.test(hrDescriptionRaw);
+    const hrDescriptionParagraphs = hrDescriptionIsHtml ? [] : splitParagraphs(meta.hr_description);
 
     const leadershipMessage =
       meta.hr_title || meta.hr_description
@@ -214,9 +239,12 @@ export async function fetchCareerLayoutPage(slug: string): Promise<{
             name: formatBoldText(meta.hr_name || ''),
             role: formatBoldText(meta.hr_designation || ''),
             heading: formatBoldText(meta.hr_title || 'Brings Life To Packaging'),
+            bodyHtml: hrDescriptionIsHtml ? hrDescriptionRaw : undefined,
             paragraphs: hrDescriptionParagraphs.length
               ? hrDescriptionParagraphs.map(formatBoldText)
-              : [formatBoldText(stripHtml(meta.hr_description))],
+              : hrDescriptionIsHtml
+                ? []
+                : [formatBoldText(stripHtml(meta.hr_description))],
           }
         : undefined;
 
