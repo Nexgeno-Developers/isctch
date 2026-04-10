@@ -1,5 +1,6 @@
 import { cache } from 'react';
 import { normalizeText } from '@/lib/htmlText';
+import type { MarketingNewsItem } from '@/components/marketing/LatestNewsClient';
 
 type Media = { url?: string | null } | null | undefined;
 
@@ -36,7 +37,20 @@ type InnovationsApiResponse = {
       }>;
     };
     seo?: Record<string, unknown>;
+    autofetch?: {
+      latest_insights?: MarketingNewsApiItem[] | MarketingNewsApiItem | null;
+      latest_news?: MarketingNewsApiItem[] | MarketingNewsApiItem | null;
+    };
   };
+};
+
+type MarketingNewsApiItem = {
+  id?: number;
+  title?: string;
+  slug?: string;
+  featured_image?: Media;
+  summary?: string;
+  published_at?: string | null;
 };
 
 export type InnovationsFeatureCard = {
@@ -58,6 +72,8 @@ export type InnovationsPageData = {
   introHeadingBlue: string;
   introBody: string;
   featureCards: InnovationsFeatureCard[];
+  latestInsights: MarketingNewsItem[];
+  latestNews: MarketingNewsItem[];
 };
 
 const EMPTY_PAGE: InnovationsPageData = {
@@ -67,6 +83,8 @@ const EMPTY_PAGE: InnovationsPageData = {
   introHeadingBlue: '',
   introBody: '',
   featureCards: [],
+  latestInsights: [],
+  latestNews: [],
 };
 
 function mediaUrl(media?: Media) {
@@ -77,6 +95,34 @@ function mediaUrl(media?: Media) {
 function clean(s?: string | null) {
   const t = (s ?? '').trim();
   return t || undefined;
+}
+
+function toArray<T>(value: T | T[] | null | undefined): T[] {
+  if (!value) return [];
+  return Array.isArray(value) ? value : [value];
+}
+
+function mapMarketingNewsItems(
+  list: MarketingNewsApiItem[] | MarketingNewsApiItem | null | undefined,
+): MarketingNewsItem[] {
+  const items = toArray(list);
+  if (!items.length) return [];
+
+  return items
+    .map((item, idx) => {
+      const title = item.title?.trim();
+      const image = mediaUrl(item.featured_image);
+      if (!title || !image) return null;
+      return {
+        id: String(item.id ?? `news-${idx + 1}`),
+        title,
+        image,
+        imageAlt: title,
+        date: '',
+        time: '',
+      } as MarketingNewsItem;
+    })
+    .filter(Boolean) as MarketingNewsItem[];
 }
 
 function htmlToPlainText(html?: string | null): string {
@@ -169,6 +215,9 @@ function mapApiToPage(api: NonNullable<InnovationsApiResponse['data']>): Innovat
     }
   }
 
+  base.latestInsights = mapMarketingNewsItems(api.autofetch?.latest_insights);
+  base.latestNews = mapMarketingNewsItems(api.autofetch?.latest_news);
+
   return base;
 }
 
@@ -180,7 +229,10 @@ export const fetchInnovationsLayoutPage = cache(async (slug: string) => {
   if (!baseUrl) return null;
 
   try {
-    const res = await fetch(`${baseUrl}/v1/page/${encodeURIComponent(cleanSlug)}`, { cache: 'no-store' });
+    const res = await fetch(
+      `${baseUrl}/v1/page/${encodeURIComponent(cleanSlug)}?autofetch=latest_insights,latest_news`,
+      { cache: 'no-store' },
+    );
     if (!res.ok) return null;
     const payload = (await res.json()) as InnovationsApiResponse;
     const data = payload.data;

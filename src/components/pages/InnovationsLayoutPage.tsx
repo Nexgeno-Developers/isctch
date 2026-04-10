@@ -1,17 +1,14 @@
 import type { InnovationsPageData } from '@/lib/api/innovations_layout';
-import { fetchMarketingLatestNews, fetchMarketingPressNews } from '@/lib/api';
 import InnovationsFeatureCards from '@/components/innovations/InnovationsFeatureCards';
 import InnovationsHero from '@/components/innovations/InnovationsHero';
 import InnovationsIntro from '@/components/innovations/InnovationsIntro';
 import CallToAction from '@/components/home/CallToAction';
 import NewsletterSubscription from '@/components/home/NewsletterSubscription';
-import LatestNewsClient, { type MarketingNewsItem } from '@/components/marketing/LatestNewsClient';
+import LatestNewsClient from '@/components/marketing/LatestNewsClient';
 
 export default async function InnovationsLayoutPage({ data }: { data: InnovationsPageData }) {
-  const [trendItems, pressItems] = await Promise.all([
-    fetchMarketingLatestNews().catch(() => [] as MarketingNewsItem[]),
-    fetchMarketingPressNews().catch(() => [] as MarketingNewsItem[]),
-  ]);
+  const trendItems = data.latestInsights || [];
+  const pressItems = data.latestNews || [];
 
   return (
     <main className="min-h-screen bg-white">
