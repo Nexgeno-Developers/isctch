@@ -5,7 +5,7 @@ type Props = Pick<NpdPageData, 'heroBackgroundImage' | 'title'>;
 
 export default function NpdHero({ heroBackgroundImage, title }: Props) {
   return (
-    <section className="relative overflow-hidden pt-[140px] pb-20 md:pt-[200px] md:pb-28 lg:pt-[220px] lg:pb-32">
+    <section className="relative overflow-hidden pt-[110px] pb-12 md:pt-[200px] md:pb-28 lg:pt-[220px] lg:pb-32">
       <div className="absolute inset-0">
         {heroBackgroundImage ? (
           // eslint-disable-next-line @next/next/no-img-element

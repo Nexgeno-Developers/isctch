@@ -30,19 +30,19 @@ export default function PilotPlantIntro({
   secondaryCta,
 }: Props) {
   return (
-    <section className="bg-gray-50 py-14 md:py-20 lg:py-24">
+    <section className="bg-gray-50 py-8 md:py-20 lg:py-24">
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-2 lg:gap-16 xl:gap-20">
           <div className="order-2 lg:order-1">
             <p className="text-xs font-semibold uppercase text-[#009FE8] md:text-sm">
               {introLabel}
             </p>
-            <h2 className="mt-4 text-3xl font-bold leading-tight text-black md:text-4xl lg:text-5xl lg:leading-snug">
+            <h2 className="mt-4 text-[22px] font-bold leading-tight text-black md:text-4xl lg:text-5xl lg:leading-snug">
               <span className="text-black">{introHeadingBlack}</span>{' '}
               <span className="text-[#009FE8]">{introHeadingBlue}</span>
             </h2>
-            <p className="mt-6 text-base leading-relaxed text-black md:text-lg">{introBody}</p>
-            <div className="mt-10 flex max-w-xl flex-col gap-4 sm:flex-row sm:flex-wrap">
+            <p className="lg:mt-6 mt-2 text-sm leading-relaxed text-black md:text-lg">{introBody}</p>
+            <div className="lg:mt-10 mt-6 flex max-w-xl flex-col gap-4 sm:flex-row sm:flex-wrap">
               <Link
                 href={primaryCta.href}
                 className="inline-flex min-h-[52px] flex-1 items-center justify-center rounded-[50px] bg-[#0061A5] px-2 py-3.5 text-center text-sm font-semibold uppercase tracking-wide text-white  transition hover:bg-[#081c33] md:text-base"

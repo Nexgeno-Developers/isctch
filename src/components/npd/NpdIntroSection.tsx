@@ -23,25 +23,25 @@ export default function NpdIntroSection({
   secondaryCta,
 }: Props) {
   return (
-    <section className="bg-gray-50 py-14 md:py-20 lg:py-24">
+    <section className="bg-gray-50 py-8 md:py-20 lg:py-24">
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-2 lg:gap-16 xl:gap-20">
           <div className="order-2 lg:order-1">
             <h2
-              className="text-3xl font-bold leading-tight text-black md:text-4xl lg:text-5xl lg:leading-snug [&_span]:font-bold"
+              className="text-[22px] font-bold leading-tight text-black md:text-4xl lg:text-5xl lg:leading-snug [&_span]:font-bold"
               dangerouslySetInnerHTML={{ __html: formatBoldText(heroTitle) }}
             />
-            <p className="mt-6 text-base leading-relaxed text-black md:text-base">{introBody}</p>
-            <div className="mt-10 flex gap-4">
+            <p className="lg:mt-6 mt-4 text-sm leading-relaxed text-black md:text-base">{introBody}</p>
+            <div className="lg:mt-10 mt-6 lg:flex flex lg:flex-col lg:flex-initial flex-wrap lg:gap-4 gap-3">
               <Link
                 href={primaryCta.href}
-                className="rounded-[50px] bg-[#009FE8] px-8 py-4 text-center text-sm font-semibold uppercase tracking-wide text-white shadow-sm transition hover:bg-[#0088cc] md:text-base"
+                className="block rounded-[50px] bg-[#009FE8] px-8 py-4 text-center text-sm font-semibold uppercase tracking-wide text-white shadow-sm transition hover:bg-[#0088cc] md:text-base"
               >
                 Start your product journey
               </Link>
               <Link
                 href={secondaryCta.href}
-                className="rounded-[50px] bg-[#009FE8] px-8 py-4 text-center text-sm font-semibold uppercase tracking-wide text-white shadow-sm transition hover:bg-[#0088cc] md:text-base"
+                className="block rounded-[50px] bg-[#009FE8] px-8 py-4 text-center text-sm font-semibold uppercase tracking-wide text-white shadow-sm transition hover:bg-[#0088cc] md:text-base"
               >
                 Book Innovation Consultation
               </Link>

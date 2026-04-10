@@ -16,7 +16,7 @@ export default function PilotPlantInnovationEcosystem({ titleBlack, titleBlue, s
           <span className="text-black">The Innovation</span>{' '}
           <span className="text-[#009FE8]">Ecosystem</span>
         </h2>
-        <div className="mt-12 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:mt-8 lg:grid-cols-4 lg:gap-6">
+        <div className="lg:mt-12 mt-4 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:mt-8 lg:grid-cols-4 lg:gap-6">
           {steps.map((step) => (
             <article
               key={step.id}
@@ -45,7 +45,7 @@ export default function PilotPlantInnovationEcosystem({ titleBlack, titleBlue, s
               </div>
               <div className="flex flex-1 flex-col px-6 pb-8 pt-7 md:px-7 md:pb-9 md:pt-8">
                 <h3 className="text-lg font-bold text-black md:text-xl">{step.title}</h3>
-                <p className="mt-3 text-sm leading-relaxed text-gray-600 md:text-base">{step.description}</p>
+                <p className="lg:mt-3 mt-1 text-sm leading-relaxed text-gray-600 md:text-base">{step.description}</p>
               </div>
             </article>
           ))}

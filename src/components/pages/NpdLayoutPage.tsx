@@ -41,7 +41,7 @@ export default function NpdLayoutPage({ data }: { data: NpdPageData }) {
       />
       <VideoBanner prefetchedData={videoBannerPrefetched} />
 
-      <div className="bg-gray-50 pt-12 lg:pt-24">
+      <div className="bg-gray-50 pt-8 lg:pt-24">
         <CallToAction />
       </div>
 

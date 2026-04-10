@@ -34,11 +34,11 @@ export default function PilotPlantScopeAndAgile({
             <p className="text-xs font-semibold uppercase text-[#009FE8] md:text-sm">
               {scopeTitleBlue || scopeLabel}
             </p>
-            <h2 className="mt-3 text-3xl font-bold leading-tight md:text-4xl lg:text-5xl text-black"
+            <h2 className="mt-3 text-[22px] font-bold leading-tight md:text-4xl lg:text-5xl text-black"
               
               dangerouslySetInnerHTML={{ __html: formatBoldText(scopeTitleBlack) }} />
          
-            <div className="mt-10 grid grid-cols-2 gap-4 md:gap-5">
+            <div className="lg:mt-10 mt-6 grid grid-cols-2 gap-4 md:gap-5">
               {scopeGrid.map((item) => (
                 <div
                   key={item.id}

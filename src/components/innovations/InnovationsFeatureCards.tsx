@@ -27,7 +27,7 @@ export default function InnovationsFeatureCards({ cards }: { cards: InnovationsF
                   <div className="absolute inset-0 bg-gradient-to-br from-gray-200 to-gray-300" />
                 )}
               </div>
-              <div className="flex flex-1 flex-col px-7 pb-9 pt-8 md:px-2 md:pb-4 md:pt-9">
+              <div className="flex flex-1 flex-col px-3 pb-4 pt-8 md:px-2 md:pb-4 md:pt-9">
                 <h3 className="text-xl font-bold text-black md:text-2xl">{card.title}</h3>
                 <p className="mt-4 text-sm leading-relaxed text-black md:text-base">{card.description}</p>
                 <ul className="mt-6 space-y-3">
@@ -38,7 +38,7 @@ export default function InnovationsFeatureCards({ cards }: { cards: InnovationsF
                     </li>
                   ))}
                 </ul>
-                <div className="mt-10">
+                <div className="lg:mt-10">
                   <Link
                     href={card.ctaHref}
                     className="inline-flex min-h-[48px] items-center justify-center rounded-full bg-[#009FE8] px-10 py-3 text-sm font-semibold uppercase tracking-wide text-white shadow-sm transition hover:bg-[#0088cc] md:text-base"

@@ -14,7 +14,7 @@ export default function PilotPlantFacilitySection({
           <span className="text-black">{facilityTitleBlack}</span>{' '}
           <span className="text-[#009FE8]">{facilityTitleBlue}</span>
         </h2>
-        <p className="mx-auto mt-6 max-w-3xl text-base leading-relaxed text-black md:text-base">
+        <p className="mx-auto lg:mt-6 mt-2 max-w-3xl text-sm leading-relaxed text-black md:text-base">
           {facilityDescription}
         </p>
       </div>

@@ -21,13 +21,13 @@ export default function PilotPlantFeatureCards({ cards }: { cards: PilotPlantFea
   return (
     <section className="bg-gray-50 pb-12 md:pb-16 lg:pb-20">
       <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 gap-8 md:grid-cols-2 md:gap-10 lg:grid-cols-3 lg:gap-8">
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-10 lg:grid-cols-3 lg:gap-8">
           {cards.map((card) => (
             <article
               key={card.id}
               className="flex flex-col overflow-hidden rounded-[50px] bg-white p-4"
             >
-              <div className="relative w-full overflow-hidden  h-[300px]">
+              <div className="relative w-full overflow-hidden  h-[250px] lg:h-[300px]">
                 {card.image ? (
                   <Image
                     src={card.image}
