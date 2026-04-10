@@ -38,13 +38,13 @@ export default function ProductIndustryDetailLayoutPageSection({
               <h1 className="text-[30px] md:text-5xl lg:text-6xl xl:text-6xl font-bold text-white tracking-tight">
                 {data.title}
               </h1>
-              {data.shortDescription ? (
+              {/* {data.shortDescription ? (
                 <RichText
                   as="div"
                   html={data.shortDescription}
                   className="text-center text-base md:text-base text-white mb-8 leading-relaxed max-w-3xl mx-auto lg:mt-6 mt-2"
                 />
-              ) : null}
+              ) : null} */}
             </div>
           </div>
         </div>

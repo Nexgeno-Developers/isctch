@@ -68,7 +68,7 @@ function PressReleaseCard({ card, imagePosition }: { card: PressReleaseCard; ima
         </div>
 
         {/* Title */}
-        <h3 className="text-[18px] md:text-2xl font-semibold mb-4 flex-1 text-black">
+        <h3 className="text-[18px] md:text-2xl font-semibold mb-4 flex-1 text-black line-clamp-3">
           {card.title}
         </h3>
 

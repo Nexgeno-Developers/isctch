@@ -464,7 +464,7 @@ export async function getHomepageData(): Promise<HomepageData> {
       ctaLink: '/contact',
     },
     newsletterSubscription: {
-      headline: 'Stay Ahead in Aseptic Engineering.',
+      headline: 'Stay Ahead in Aseptic Packaging.',
       subtitle: 'Get the Latest Insights Delivered to Your Inbox.',
       placeholder: 'Enter your email',
       buttonText: 'SUBSCRIBE',
