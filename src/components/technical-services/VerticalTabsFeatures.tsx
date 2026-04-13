@@ -2,8 +2,6 @@
 
 import { useState } from 'react';
 import Image from 'next/image';
-import { formatBoldText } from '@/lib/htmlText';
-
 interface FeatureDetail {
   id: string;
   title: string;
@@ -32,9 +30,32 @@ export default function VerticalTabsFeatures({ features }: VerticalTabsFeaturesP
   }
 
   return (
-    <section className="bg-gray-50 py-12 md:py-12 lg:py-12">
+    <section className="bg-gray-50 py-8 md:py-12 lg:py-12">
       <div className="container mx-auto px-4">
-        <div className="flex gap-4 md:gap-6 overflow-hidden">
+        {/* Mobile: full-width stacked cards (hover % widths are unusable on narrow viewports) */}
+        <div className="flex flex-col gap-4 md:hidden">
+          {features.map((feature) => (
+            <article
+              key={feature.id}
+              className="rounded-[25px] overflow-hidden bg-[#EDF0F1] p-4 shadow-sm"
+            >
+              <div className="relative w-full aspect-[4/3] rounded-[18px] overflow-hidden bg-gray-200">
+                <Image
+                  src={feature.image}
+                  alt={feature.imageAlt}
+                  fill
+                  className="object-cover"
+                  sizes="100vw"
+                />
+              </div>
+              <h3 className="text-lg font-bold text-black mt-4 lg:mb-3 mb-2">{feature.title}</h3>
+              <p className="text-black lg:text-base text-sm leading-relaxed lg:mb-0 mb-3">{feature.description}</p>
+            </article>
+          ))}
+        </div>
+
+        {/* Desktop / tablet: horizontal hover tabs */}
+        <div className="hidden md:flex gap-4 md:gap-6 overflow-hidden">
           {features.map((feature, index) => {
             const isHovered = hoveredIndex === index;
 

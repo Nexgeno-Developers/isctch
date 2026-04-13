@@ -19,7 +19,7 @@ export default function TechnicalServiceDetailLayoutPage({
   return (
     <main className="min-h-screen bg-gray-50">
       {/* Hero Section */}
-      <section className="relative lg:pt-[220px] pt-[150px] lg:pb-[150px] pb-[50px] overflow-hidden">
+      <section className="relative lg:pt-[220px] pt-[110px] lg:pb-[150px] pb-[30px] overflow-hidden">
         <div className="absolute inset-0">
           {data.heroBackgroundImage ? (
             // eslint-disable-next-line @next/next/no-img-element
@@ -38,7 +38,7 @@ export default function TechnicalServiceDetailLayoutPage({
         <div className="relative z-10 h-full flex flex-col">
           <div className="container mx-auto flex-1 flex flex-col justify-center px-4">
             <div className="text-center">
-              <h1 className="text-[30px] md:text-5xl lg:text-6xl xl:text-7xl font-bold text-white tracking-tight uppercase">
+              <h1 className="text-[22px] md:text-5xl lg:text-6xl xl:text-7xl font-bold text-white tracking-tight uppercase leading-tight md:leading-normal">
                 {data.title}
               </h1>
             </div>
@@ -59,7 +59,7 @@ export default function TechnicalServiceDetailLayoutPage({
       </section>
 
       {/* Intro Section with Circular Graphic */}
-      <section className="bg-gray-50 py-12 pt-12 pb-4 md:pt-20 pb-8">
+      <section className="bg-gray-50 pt-8 pb-0 md:pt-20 md:pb-8">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 lg:grid-cols-[30%_70%] gap-8 lg:gap-12 items-center">
             <div className="flex justify-center lg:justify-start">
@@ -83,14 +83,14 @@ export default function TechnicalServiceDetailLayoutPage({
             </div>
 
             <div>
-              <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-black mb-6 uppercase">
+              <h2 className="text-[22px] md:text-4xl lg:text-5xl font-bold text-black lg:mb-6 mb-2 uppercase leading-tight md:leading-normal">
                 {data.title}
               </h2>
               {data.introDescriptionHtml ? (
                 <RichText
                   as="div"
                   html={data.introDescriptionHtml}
-                  className="text-base md:text-base text-black leading-relaxed"
+                  className="text-sm md:text-base text-black leading-relaxed"
                 />
               ) : (
                 <RichText
@@ -109,7 +109,7 @@ export default function TechnicalServiceDetailLayoutPage({
         <VerticalTabsFeatures features={data.detailedFeatures} />
       ) : null}
 
-      <section className="bg-gray-50 pt-4 lg:pt-12">
+      <section className="bg-gray-50 pt-0 lg:pt-12">
       <VideoBanner videoOnly={true} />
       </section>
 
@@ -117,10 +117,10 @@ export default function TechnicalServiceDetailLayoutPage({
 
       {/* Operational blocks (from meta.page_blocks) */}
       {data.operationalBlocks.length > 0 ? (
-        <section className="bg-gray-50 pt-12 pb-4 md:py-16 md:pt-16 md:pb-8 lg:pt-20 lg:pb-8">
+        <section className="bg-gray-50 pt-8 pb-4 md:py-16 md:pt-16 md:pb-8 lg:pt-20 lg:pb-8">
           <div className="container mx-auto px-4">
-            <div className="mb-10 md:mb-14">
-              <h2 className="text-black text-3xl md:text-4xl lg:text-5xl font-bold text-center" dangerouslySetInnerHTML={{ __html: formatBoldText(data.operationalTitle || 'Driving Operational Success') }} />
+            <div className="mb-4 md:mb-14">
+              <h2 className="text-black text-[22px] md:text-4xl lg:text-5xl font-bold text-center leading-tight md:leading-normal" dangerouslySetInnerHTML={{ __html: formatBoldText(data.operationalTitle || 'Driving Operational Success') }} />
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
@@ -130,7 +130,7 @@ export default function TechnicalServiceDetailLayoutPage({
                   href={item.href}
                   className="group bg-white rounded-[20px] p-4 md:p-5 transition-shadow duration-300 flex flex-col h-full"
                 >
-                  <div className="relative w-full h-[430px] overflow-hidden rounded-2xl">
+                  <div className="relative w-full md:h-[430px] overflow-hidden rounded-2xl">
                     {item.image ? (
                       <Image
                         src={item.image}
