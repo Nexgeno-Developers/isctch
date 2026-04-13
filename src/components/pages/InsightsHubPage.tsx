@@ -16,7 +16,7 @@ function ViewAllButton({
 }) {
   if (!href) return null;
   return (
-    <div className="flex justify-center mt-10 md:mt-12">
+    <div className="flex justify-center mt-6 md:mt-12">
       <Link
         href={href}
         className="inline-flex min-w-[200px] capitalize items-center justify-center rounded-full border-2 border-[#009FE8] px-8 py-3 text-sm md:text-base font-semibold text-[#009FE8] transition-colors hover:bg-[#009FE8] hover:text-white"
@@ -85,7 +85,7 @@ export default function InsightsHubPage({ data }: { data: InsightsHubData }) {
           section.variant === 'webinar' ? 'bg-[#C5E3F4]' : 'bg-gray-50';
 
         return (
-          <section key={section.id} className={`${sectionBg} py-12 md:py-16`}>
+          <section key={section.id} className={`${sectionBg} py-8 md:py-16`}>
             <div className="container mx-auto px-4">
               <h2
                 className="text-center text-2xl md:text-5xl font-bold text-black"
@@ -96,7 +96,7 @@ export default function InsightsHubPage({ data }: { data: InsightsHubData }) {
                   {section.subtitle}
                 </p>
               ) : null}
-              <div className="mt-10 grid grid-cols-1 gap-6 md:grid-cols-3 md:gap-8">
+              <div className="mt-4 lg:mt-10 grid grid-cols-1 gap-6 md:grid-cols-3 md:gap-8">
                 {section.items.map((item) => (
                   <InsightCard key={item.id} item={item} variant={section.variant} />
                 ))}

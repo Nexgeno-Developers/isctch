@@ -13,7 +13,7 @@ export function SubCategoryGridSection({
   if (!pageContext?.mainCategory) return null;
 
   return (
-    <section className="bg-gray-50 py-12 md:py-16">
+    <section className="bg-gray-50 py-8 md:py-16">
       <div className="container mx-auto px-4">
         <div className="text-center mb-10">
           {data.eyebrow && (

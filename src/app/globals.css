@@ -117,6 +117,8 @@ body {
 .articals_detials ol
 {
   margin-bottom: 15px;
+  font-size: 14px;
+  line-height: 26px;
 }
 
 @media (max-width: 767px) {
@@ -125,6 +127,14 @@ body {
 }
 body .product-features-swiper {
   padding-bottom: 0rem;
+}
+.articals_detials p,
+.articals_detials ul,
+.articals_detials li,
+.articals_detials ol
+{
+  font-size: 14px;
+  line-height: 24px;
 }
 body .swiper-button-prev-similar {
   right: 2rem !important;

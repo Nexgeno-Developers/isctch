@@ -19,7 +19,7 @@ export default function OperationalSuccess({ data }: OperationalSuccessProps) {
   }
 
   return (
-    <section className="bg-gray-50 py-12 md:py-16 lg:py-20">
+    <section className="bg-gray-50 py-8 md:py-16 lg:py-20">
       <div className="container mx-auto px-4">
         {/* Section Heading */}
         <div className="text-center mb-8 md:mb-12">

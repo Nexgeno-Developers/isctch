@@ -69,9 +69,9 @@ export default function InsightsArticleDetailPage({ data }: { data: InsightsArti
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-12 lg:gap-10">
           <article className="lg:col-span-9">
-            <div className="rounded-[50px] bg-white p-5 md:p-8 lg:p-10">
+            <div className="lg:rounded-[50px] rounded-[20px] bg-white p-5 md:p-8 lg:p-10">
               <header className="mb-8">
-                <h1 className="text-2xl font-bold leading-tight text-black md:text-3xl lg:text-5xl">
+                <h1 className="text-[22px] font-bold leading-tight text-black md:text-3xl lg:text-4xl">
                   <span dangerouslySetInnerHTML={{ __html: data.titleMain }} />
                   {data.titleAccent ? (
                     <>
@@ -81,7 +81,7 @@ export default function InsightsArticleDetailPage({ data }: { data: InsightsArti
                   ) : null}
                 </h1>
                 {data.summary ? (
-                  <p className="mt-4 text-base leading-relaxed text-black/70 md:text-lg">
+                  <p className="mt-4 text-sm leading-relaxed text-black md:text-[14px]">
                     {data.summary}
                   </p>
                 ) : null}
@@ -149,7 +149,7 @@ export default function InsightsArticleDetailPage({ data }: { data: InsightsArti
 
               <RichText
                 html={data.bodyHtml}
-                className="articals_detials prose prose-lg max-w-none text-black prose-headings:font-bold prose-headings:text-black prose-p:leading-relaxed prose-h2:text-xl prose-h2:mt-8 prose-h2:mb-3 leading-[28px]"
+                className="articals_detials prose prose-lg max-w-none text-black prose-headings:font-bold prose-headings:text-black prose-p:leading-relaxed prose-h2:text-xl prose-h2:mt-8 prose-h2:mb-3"
               />
             </div>
           </article>
@@ -190,9 +190,9 @@ export default function InsightsArticleDetailPage({ data }: { data: InsightsArti
         </div>
 
         {data.relatedPosts?.length ? (
-          <section className="mt-16">
-            <h2 className="text-2xl font-bold text-black">Related posts</h2>
-            <div className="mt-6 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+          <section className="mt-4 lg:mt-16">
+            <h2 className="text-[22px] font-bold text-black">Related posts</h2>
+            <div className="lg:mt-6 mt-4 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
               {data.relatedPosts.map((item) => (
                 <RelatedArticleCard key={item.id} item={item} />
               ))}
