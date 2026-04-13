@@ -102,8 +102,8 @@ function LaboratoryZoneIcon() {
 
 function LaboratoryZoneRow({ item }: { item: RAndDLaboratoryZoneItem }) {
   return (
-    <div className="flex flex-col gap-5 border-b border-black/[0.08] py-9 last:border-b-0 md:flex-row md:items-start md:gap-10 md:py-11">
-      <div className="flex shrink-0 justify-center md:w-[72px] md:justify-start md:pt-1">
+    <div className="flex flex-col gap-5 border-b border-black/[0.08] lg:py-9 py-4 last:border-b-0 md:flex-row md:items-start md:gap-10 md:py-11">
+      <div className="flex shrink-0 lg:justify-center justify-start md:w-[72px] md:justify-start md:pt-1">
         {item.iconUrl ? (
           <Image
             src={item.iconUrl}
@@ -119,7 +119,7 @@ function LaboratoryZoneRow({ item }: { item: RAndDLaboratoryZoneItem }) {
       </div>
       <div className="min-w-0 flex-1 text-left">
         <h3 className="text-base font-bold uppercase tracking-[0.06em] text-black md:text-lg" dangerouslySetInnerHTML={{ __html: item.title }}></h3>
-        <p className="mt-3 text-sm leading-relaxed text-black/75 md:text-base" dangerouslySetInnerHTML={{ __html: item.description }}></p>
+        <p className="mt-3 text-sm leading-relaxed text-black md:text-base" dangerouslySetInnerHTML={{ __html: item.description }}></p>
         <div className="mt-5 flex flex-wrap gap-2">
           {item.tags.map((tag) => (
             <span
@@ -153,7 +153,7 @@ function LifecycleTestingCard({ card, index }: { card: RAndDCentreLifecycleCard;
         )}
       </div>
       <h3 className="text-lg font-bold leading-snug text-[#0E233C] md:text-xl" dangerouslySetInnerHTML={{ __html: card.title }} />
-      <p className="mt-3 flex-1 text-sm leading-relaxed text-black/70 md:text-base" dangerouslySetInnerHTML={{ __html: card.description }} />
+      <p className="mt-3 flex-1 text-sm leading-relaxed text-black md:text-base" dangerouslySetInnerHTML={{ __html: card.description }} />
       <div className="mt-6 flex flex-wrap gap-2">
         {card.tags.map((tag) => (
           <span
@@ -222,7 +222,7 @@ export default function RAndDCentreLayoutPage({ data }: { data: RAndDCentrePageD
   return (
     <main className="min-h-screen bg-white">
       {/* Hero */}
-      <section className="relative overflow-hidden pt-[140px] pb-20 md:pt-[200px] md:pb-28 lg:pt-[220px] lg:pb-32">
+      <section className="relative overflow-hidden pt-[110px] pb-8 md:pt-[200px] md:pb-16 lg:pt-[220px] lg:pb-32">
         <div className="absolute inset-0">
           {data.heroBackgroundImage ? (
             // eslint-disable-next-line @next/next/no-img-element
@@ -240,10 +240,10 @@ export default function RAndDCentreLayoutPage({ data }: { data: RAndDCentrePageD
           <p className="mb-4 text-xs font-semibold uppercase text-white md:text-sm">
             {data.heroEyebrow}
           </p>
-          <h1 className="text-2xl font-bold uppercase leading-tight tracking-tight text-white md:text-4xl lg:text-5xl xl:text-[3.25rem]">
+          <h1 className="text-[22px] font-bold uppercase leading-tight tracking-tight text-white md:text-4xl lg:text-5xl xl:text-[3.25rem]">
             {data.heroTitle}
           </h1>
-          <p className="mx-auto mt-8 max-w-3xl text-base leading-relaxed text-white md:text-lg">
+          <p className="mx-auto lg:mt-8 mt-4 max-w-3xl text-sm leading-relaxed text-white md:text-lg">
             {data.heroDescription}
           </p>
         </div>
@@ -256,17 +256,17 @@ export default function RAndDCentreLayoutPage({ data }: { data: RAndDCentrePageD
       </section>
 
       {/* Intro + stats */}
-      <section className="bg-gray-50 py-14 md:py-20 lg:py-24">
+      <section className="bg-gray-50 py-8 md:py-20 lg:py-24">
         <div className="container mx-auto  px-4">
-          <div className="grid grid-cols-1 items-start gap-12 lg:grid-cols-2 lg:gap-16 xl:gap-24">
+          <div className="grid grid-cols-1 items-start gap-6 lg:grid-cols-2 lg:gap-16 xl:gap-24">
             <div>
-              <h2 className="text-3xl font-bold leading-tight text-black md:text-4xl lg:text-[2.75rem] lg:leading-snug" dangerouslySetInnerHTML={{ __html: data.introHeading }} />
+              <h2 className="text-[22px] font-bold leading-tight text-black md:text-4xl lg:text-[2.75rem] lg:leading-snug" dangerouslySetInnerHTML={{ __html: data.introHeading }} />
               <RichText
                 as="div"
                 html={data.introBodyHtml}
-                className="mt-6 text-base leading-relaxed text-black md:text-lg [&_p]:mb-4 [&_p:last-child]:mb-0"
+                className="lg:mt-6 mt-4 text-sm leading-relaxed text-black md:text-lg [&_p]:mb-4 [&_p:last-child]:mb-0"
               />
-              <div className="mt-10 flex flex-col gap-6 sm:flex-row sm:flex-wrap sm:items-center">
+              <div className="lg:mt-10 mt-6 flex flex-col gap-6 sm:flex-row sm:flex-wrap sm:items-center">
                 <Link
                   href={data.primaryCta.href}
                   className="group inline-flex items-center text-sm font-semibold uppercase tracking-wide text-[#009FE8] transition hover:text-[#0077B6]"
@@ -300,7 +300,7 @@ export default function RAndDCentreLayoutPage({ data }: { data: RAndDCentrePageD
       {/* End-to-end testing — full packaging lifecycle */}
       <section className="bg-gray-50">
         <div className="container mx-auto px-4">
-          <h2 className="mb-12 text-center text-3xl font-bold leading-tight md:mb-10 md:text-4xl lg:text-5xl text-black" dangerouslySetInnerHTML={{ __html: data.lifecycleSection.title }} />
+          <h2 className="lg:mb-12 mb-4 text-center text-[22px] font-bold leading-tight md:mb-10 md:text-4xl lg:text-5xl text-black" dangerouslySetInnerHTML={{ __html: data.lifecycleSection.title }} />
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-7 lg:grid-cols-3 lg:gap-8">
             {data.lifecycleSection.cards.map((card, idx) => (
               <LifecycleTestingCard key={card.id} card={card} index={idx} />
@@ -310,12 +310,12 @@ export default function RAndDCentreLayoutPage({ data }: { data: RAndDCentrePageD
       </section>
 
       {/* Specialized laboratory zones */}
-      <section className="bg-gray-50 py-16 md:py-20 lg:py-20">
+      <section className="bg-gray-50 py-8 md:py-20 lg:py-20">
         <div className="container mx-auto px-4">
           <div className="mb-10 text-center md:mb-14">
-            <h2 className="text-2xl font-bold  leading-tight tracking-tight text-black md:text-3xl lg:text-5xl lg:leading-snug" dangerouslySetInnerHTML={{ __html: data.laboratoryZonesSection.title }} />
+            <h2 className="text-[22px] font-bold  leading-tight tracking-tight text-black md:text-3xl lg:text-5xl lg:leading-snug" dangerouslySetInnerHTML={{ __html: data.laboratoryZonesSection.title }} />
             {data.laboratoryZonesSection.subtitle ? (
-              <p className="mt-4 text-black md:text-base">
+              <p className="lg:mt-4 mt-2 text-sm text-black md:text-base">
                 {data.laboratoryZonesSection.subtitle}
               </p>
             ) : null}
@@ -329,7 +329,7 @@ export default function RAndDCentreLayoutPage({ data }: { data: RAndDCentrePageD
       </section>
 
       {/* Technical consultation CTA */}
-      <section className="relative overflow-hidden py-20 md:py-28 lg:py-32">
+      <section className="relative overflow-hidden lg:py-20 py-8 md:py-28 lg:py-32">
         <div className="pointer-events-none absolute inset-0">
           <Image
             src={data.bottomCtaSection.backgroundImage || '/technical_bg.jpg'}
@@ -357,24 +357,22 @@ export default function RAndDCentreLayoutPage({ data }: { data: RAndDCentrePageD
           <h2 className="text-xl font-bold uppercase leading-snug tracking-tight text-white md:text-3xl lg:text-[2rem]">
             {data.bottomCtaSection.title}
           </h2>
-          <p className="mt-6 text-base leading-relaxed text-white/95 md:text-lg">
+          <p className="mt-6 text-sm leading-relaxed text-white/95 md:text-lg">
             {data.bottomCtaSection.description}
           </p>
           {data.bottomCtaSection.ctaText && data.bottomCtaSection.ctaHref ? (
             <Link
               href={data.bottomCtaSection.ctaHref}
-              className="mt-10 inline-flex items-center text-sm font-semibold uppercase tracking-[0.12em] text-white transition hover:text-white/85 md:text-base"
+              className="lg:mt-10 mt-6 inline-flex items-center text-sm font-semibold uppercase tracking-[0.12em] text-white transition hover:text-white/85 md:text-base"
             >
-              {data.bottomCtaSection.ctaText}
-              <span className="ml-2 font-normal" aria-hidden>
-                →
-              </span>
+              {data.bottomCtaSection.ctaText}  →
+             
             </Link>
           ) : null}
         </div>
       </section>
 
-      <div className="bg-gray-50 lg:pt-24 pt-4">
+      <div className="bg-gray-50 lg:pt-24 pt-12">
         <CallToAction />
         </div>
         
