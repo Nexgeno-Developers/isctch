@@ -33,21 +33,21 @@ export default function MarketingServiceDetailLayoutPage({
       />
 
       {/* Intro split section */}
-      <section className="bg-gray-50 py-12 md:py-16 lg:pt-20 lg:pb-8">
+      <section className="bg-gray-50 py-8 md:py-16 lg:pt-20 lg:pb-8">
         <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-12 items-center">
           <div className="flex items-center">
             <div className="">
-              <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-[#0E233C] mb-4 leading-snug"
+              <h2 className="text-[22px] md:text-3xl lg:text-4xl font-bold text-[#000] mb-4 leading-snug"
                 dangerouslySetInnerHTML={{ __html: formatBoldText(data.introTitle) }} />
               {data.heroDescriptionHtml ? (
                 <RichText
                   as="div"
-                  className="text-base md:text-lg text-black leading-relaxed mb-6"
+                  className="text-sm md:text-lg text-black leading-relaxed lg:mb-6 mb-2"
                   html={data.heroDescriptionHtml}
                 />
               ) : (
-                <p className="text-base md:text-lg text-black leading-relaxed mb-6">
+                <p className="text-sm md:text-lg text-black leading-relaxed mb-6">
                   {data.introDescription}
                 </p>
               )}
@@ -80,7 +80,7 @@ export default function MarketingServiceDetailLayoutPage({
 
       {/* Highlights */}
       {data.highlights.length > 0 && (
-        <section className="bg-gray-50 py-10 md:py-16">
+        <section className="bg-gray-50 pb-8 md:py-16">
           <div className="container mx-auto px-4">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
               {data.highlights.map((highlight) => (
@@ -129,20 +129,20 @@ export default function MarketingServiceDetailLayoutPage({
 
       {/* Brand journey */}
       {data.brandJourneyItems.length > 0 && (
-        <section className="bg-gray-50 pt-10 md:pt-16">
+        <section className="bg-gray-50 pt-8 md:pt-16">
           <div className="container mx-auto px-4">
             {data.brandJourneyTitle ? (
-              <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-black mb-8 text-center"
+              <h2 className="text-[22px] md:text-4xl lg:text-5xl font-bold text-black lg:mb-8 mb-4 text-center"
                 
                  dangerouslySetInnerHTML={{ __html: formatBoldText(data.brandJourneyTitle) }} />
            
             ) : null}
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 md:gap-5">
+            <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 md:gap-5">
               {data.brandJourneyItems.map((item) => (
                 <div
                   key={item.id}
-                  className="bg-[#EDF0F1] rounded-[50px] px-8 text-center py-8 md:px-6 duration-300 flex flex-col"
+                  className="bg-[#EDF0F1] rounded-[50px] px-2 text-center lg:py-8 py-8 md:px-6 duration-300 flex flex-col"
                 >
                   {item.icon ? (
                     <div className="mb-4 w-12 h-12 flex items-center justify-center w-full">
@@ -170,11 +170,14 @@ export default function MarketingServiceDetailLayoutPage({
         </section>
       )}
 
-      <div className="mt-10">
+      <div className="lg:mt-10 mt-4">
         <ConnectTechnicalExperts />
       </div>
 
-      <CallToAction />
+<div className="bg-gray-50 lg:pt-0 pt-4">
+<CallToAction />
+</div>
+      
       <NewsletterSubscription />
     </main>
   );

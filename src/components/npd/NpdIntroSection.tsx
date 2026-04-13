@@ -32,7 +32,7 @@ export default function NpdIntroSection({
               dangerouslySetInnerHTML={{ __html: formatBoldText(heroTitle) }}
             />
             <p className="lg:mt-6 mt-4 text-sm leading-relaxed text-black md:text-base">{introBody}</p>
-            <div className="lg:mt-10 mt-6 lg:flex flex lg:flex-col lg:flex-initial flex-wrap lg:gap-4 gap-3">
+            <div className="mt-6 lg:mt-10 flex flex-col lg:flex-row flex-wrap lg:flex-nowrap gap-3 lg:gap-4">
               <Link
                 href={primaryCta.href}
                 className="block rounded-[50px] bg-[#009FE8] px-8 py-4 text-center text-sm font-semibold uppercase tracking-wide text-white shadow-sm transition hover:bg-[#0088cc] md:text-base"

@@ -97,7 +97,7 @@ export default function ConnectTechnicalExpertsClient({
       <div className="container mx-auto px-4">
         {/* Section Heading */}
         {headingHtml ? (
-          <div className="text-center mb-8 md:mb-12">
+          <div className="text-center mb-4 md:mb-12">
             <h2
               className="text-[22px] md:text-4xl lg:text-5xl font-bold text-black"
               dangerouslySetInnerHTML={{ __html: headingHtml }}
@@ -239,7 +239,7 @@ export default function ConnectTechnicalExpertsClient({
             </div>
 
             {/* Right Section - Illustration */}
-            <div className="relative bg-[#009FE8] flex items-center justify-center p-8 lg:p-0">
+            <div className="relative bg-[#fff] flex items-center justify-center p-8 pt-0 lg:p-8 lg:pt-8">
               <Image
                 src={illustrationImage}
                 alt={illustrationAlt}

@@ -45,18 +45,18 @@ export default function LatestNewsClient({ trendItems, pressItems }: LatestNewsC
   const shouldLoop = items.length > 3;
 
   return (
-    <section className="bg-gray-50 py-12 md:py-16 lg:py-20">
+    <section className="bg-gray-50 pb-8 md:py-16 lg:py-20">
       <div className="container mx-auto px-4">
         {/* Heading */}
-        <div className="text-center mb-6 md:mb-8">
-          <h2 className="text-3xl md:text-4xl lg:text-5xl text-black font-bold mb-2 md:mb-4 leading-[70px] text-center">
+        <div className="text-center mb-3 md:mb-8">
+          <h2 className="text-[22px] md:text-4xl lg:text-5xl text-black font-bold mb-0 md:mb-4 lg:leading-[70px] text-center">
             Latest News
           </h2>
         </div>
 
         {/* Tabs */}
         {hasTrend && hasPress ? (
-          <div className="flex justify-center mb-8 md:mb-10">
+          <div className="flex justify-center mb-4 md:mb-10">
             <div className="inline-flex items-center gap-8">
               <button
                 type="button"
@@ -203,7 +203,7 @@ export default function LatestNewsClient({ trendItems, pressItems }: LatestNewsC
                     </div>
                   ) : null}
                   
-                  <h3 className="text-lg md:text-xl font-semibold text-[#0E233C] mb-0 leading-snug pt-4 line-clamp-2">
+                  <h3 className="text-[18px] md:text-xl font-semibold text-black mb-0 leading-snug lg:pt-4 pt-2 line-clamp-2">
                     {item.title}
                   </h3>
 
