@@ -125,6 +125,37 @@ body {
   body .product-sustainability-series-swiper {
     padding-bottom: 0rem !important;
 }
+
+.articals_detials h1
+{
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: 20px;
+}
+.articals_detials h2
+{
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.articals_detials h3
+{
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+
+.articals_detials h4
+{
+  font-size: 14px;
+  font-weight: 700;
+}
+
+
+
 body .product-features-swiper {
   padding-bottom: 0rem;
 }

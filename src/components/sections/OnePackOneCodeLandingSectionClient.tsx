@@ -17,7 +17,7 @@ function HeroBreadcrumbs({
   return (
     <nav className="flex items-center gap-2 text-sm md:text-base" aria-label="Breadcrumb">
       <Link href="/" className="text-black hover:text-black transition-colors" aria-label="Home">
-        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <svg className="lg:w-5 w-4 lg:h-5 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path
             strokeLinecap="round"
             strokeLinejoin="round"
@@ -31,16 +31,16 @@ function HeroBreadcrumbs({
         const isLast = index === safeItems.length - 1;
         return (
           <span key={`${item.label}-${index}`} className="flex items-center gap-2">
-            <svg className="w-4 h-4 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg className="lg:w-4 w-3 lg:h-4 h-3 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
             </svg>
 
             {item.href && !isLast ? (
-              <Link href={item.href} className="text-black hover:text-black transition-colors">
+              <Link href={item.href} className="text-black hover:text-black transition-colors lg:text-sm text-xs">
                 {item.label}
               </Link>
             ) : (
-              <span className="text-black">{item.label}</span>
+              <span className="text-black lg:text-sm text-xs">{item.label}</span>
             )}
           </span>
         );

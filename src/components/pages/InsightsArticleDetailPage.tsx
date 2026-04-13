@@ -65,7 +65,7 @@ export default function InsightsArticleDetailPage({ data }: { data: InsightsArti
         </div>
       </section>
 
-<div className="bg-gray-50 lg:py-20 py-12">
+<div className="bg-gray-50 lg:py-20 py-8">
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-12 lg:gap-10">
           <article className="lg:col-span-9">
