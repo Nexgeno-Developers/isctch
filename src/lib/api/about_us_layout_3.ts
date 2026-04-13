@@ -1,5 +1,7 @@
 import type { OurValuesSection, VisionMissionSection } from '@/fake-api/company';
 import { normalizeText, formatBoldText } from '@/lib/htmlText';
+import { mapPageBlocksToNavigation, type AboutUsPageBlock } from '@/lib/api/about_us_navigation';
+import type { CompanyNavigationData } from '@/components/company/CompanyNavigation';
 
 type Media = { url?: string | null } | null | undefined;
 
@@ -23,6 +25,7 @@ type AboutUsLayout3ApiResponse = {
         image?: Array<Media>;
         description?: string[];
       };
+      page_blocks?: AboutUsPageBlock[];
     };
     seo?: Record<string, unknown>;
   };
@@ -33,6 +36,7 @@ export type AboutUsLayout3PageData = {
   heroBackgroundImage?: string;
   visionMission: VisionMissionSection;
   ourValues: OurValuesSection;
+  navigation?: CompanyNavigationData | null;
 };
 
 function buildPageApiPath(slug: string) {
@@ -112,6 +116,7 @@ export async function fetchAboutUsLayout3Page(slug: string) {
       heroBackgroundImage: meta.breadcrumb_image?.url || undefined,
       visionMission,
       ourValues,
+      navigation: mapPageBlocksToNavigation(meta.page_blocks),
     };
 
     return {

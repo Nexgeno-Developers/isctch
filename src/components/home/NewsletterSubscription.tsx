@@ -1,4 +1,6 @@
-import { fetchHomepageData } from '@/lib/api/home';
+import { formatBoldText } from '@/lib/htmlText';
+import { RichText } from '@/components/common/RichText';
+import { getCompanyCommonData } from '@/lib/api/company_common';
 import NewsletterForm from './NewsletterForm';
 
 /**
@@ -7,9 +9,13 @@ import NewsletterForm from './NewsletterForm';
  * Fetches homepage data server-side and renders the newsletter subscription section.
  */
 export default async function NewsletterSubscription() {
-  const homepageData = await fetchHomepageData();
-  if (!homepageData) return null;
-  const data = homepageData.newsletterSubscription;
+  const companyData = await getCompanyCommonData();
+  if (!companyData) return null;
+
+  const title = companyData.subscribeTitle;
+  const subtitle = companyData.subscribeSubtitle;
+
+  if (!title && !subtitle) return null;
 
   return (
     <section 
@@ -30,19 +36,26 @@ export default async function NewsletterSubscription() {
       <div className="relative z-10 container mx-auto px-4">
         <div className=" mx-auto text-center">
           {/* Headline */}
-          <h2 className="text-[20px] md:text-4xl lg:text-5xl font-bold text-white mb-4">
-            {data.headline}
-          </h2>
+          {title ? (
+            <h2
+              className="text-[20px] md:text-4xl lg:text-5xl font-bold text-white mb-4"
+              dangerouslySetInnerHTML={{ __html: formatBoldText(title) }}
+            />
+          ) : null}
 
           {/* Subtitle */}
-          <p className="text-white text-[14px] md:text-lg mb-4 md:mb-12">
-            {data.subtitle}
-          </p>
+          {subtitle ? (
+            <RichText
+              as="div"
+              html={subtitle}
+              className="text-white text-[14px] md:text-lg mb-4 md:mb-12"
+            />
+          ) : null}
 
           {/* Newsletter Form */}
           <NewsletterForm 
-            placeholder={data.placeholder}
-            buttonText={data.buttonText}
+            placeholder="Business Email"
+            buttonText="Subscribe"
           />
         </div>
       </div>

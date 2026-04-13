@@ -355,12 +355,7 @@ export default async function TechnicalServicesLayoutPage({
         </section>
       ) : null}
 
-      <ConnectTechnicalExperts
-        heading={data.connectSection.heading}
-        formTitle={data.connectSection.formTitle}
-        illustrationImage={data.connectSection.illustrationImage}
-        illustrationAlt={data.connectSection.illustrationAlt}
-      />
+      <ConnectTechnicalExperts />
 
       <CallToAction />
     </main>

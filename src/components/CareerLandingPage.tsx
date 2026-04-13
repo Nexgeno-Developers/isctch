@@ -202,14 +202,7 @@ export default function CareerLandingPage({ data }: CareerLandingPageProps) {
         </section>
       )}
 
-      {data.connectSection && (
-        <ConnectTechnicalExperts
-          heading={data.connectSection.heading}
-          formTitle={data.connectSection.formTitle}
-          illustrationImage={data.connectSection.illustrationImage}
-          illustrationAlt={data.connectSection.illustrationAlt}
-        />
-      )}
+      <ConnectTechnicalExperts />
 
       <div className="bg-gray-50 pt-12">
         <CallToAction />

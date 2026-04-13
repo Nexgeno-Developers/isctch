@@ -7,6 +7,7 @@ import NewsletterSubscription from '@/components/home/NewsletterSubscription';
 import VideoBanner from '@/components/home/VideoBanner';
 import JourneyClient from '@/components/company/JourneyClient';
 import type { CompanyHero as CompanyHeroData, CompanyStatistic, JourneyData } from '@/fake-api/company';
+import type { CompanyNavigationData } from '@/components/company/CompanyNavigation';
 
 export function AboutUsPageSection({
   hero,
@@ -14,12 +15,14 @@ export function AboutUsPageSection({
   journey,
   videoUrl,
   activePath,
+  navigation,
 }: {
   hero: CompanyHeroData;
   statistics: CompanyStatistic[];
   journey: JourneyData;
   videoUrl?: string;
   activePath?: string;
+  navigation?: CompanyNavigationData | null;
 }) {
   return (
     <main className="min-h-screen bg-gray-50">
@@ -29,7 +32,7 @@ export function AboutUsPageSection({
           <Breadcrumbs items={[{ label: 'About us' }]} />
         </div>
       </section>
-      <CompanyNavigationServer activePath={activePath || '/about-us'} />
+      <CompanyNavigationServer activePath={activePath || '/about-us'} data={navigation} />
       <CompanyStatistics statistics={statistics} />
       <JourneyClient data={journey} />
       <VideoBanner videoOnly={true} videoUrl={videoUrl} />

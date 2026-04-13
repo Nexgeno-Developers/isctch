@@ -1,9 +1,8 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { formatBoldText } from '@/lib/htmlText';
 import LatestInsights from '@/components/home/LatestInsights';
 import ContactSustainability from '@/components/products/ContactSustainability';
-import TechnicalConsultationCTA from '@/components/products/TechnicalConsultationCTA';
+import IndustryConsultationCTA from '@/components/products/IndustryConsultationCTA';
 import CategoryGlobalImpact from '@/components/products/CategoryGlobalImpact';
 import type { ProductIndustryDetailPageData } from '@/lib/api/product_industry_detail_layout';
 import { RichText } from '@/components/common/RichText';
@@ -119,7 +118,7 @@ export default function ProductIndustryDetailLayoutPageSection({
       </section>
 
       {/* Pilot Plant CTA */}
-      {data.pilotPlantCta ? <TechnicalConsultationCTA data={data.pilotPlantCta} /> : null}
+      <IndustryConsultationCTA />
 
       {/* Global Impact */}
       {data.globalImpact ? (

@@ -13,14 +13,6 @@ export function OpticapLandingSection({ data }: { data: OpticapLandingSectionDat
   const hasHtmlIntro = Boolean(data.descriptionHtml?.trim());
   const showSizeFormat = Boolean(data.sizeFormatText?.trim());
 
-  // API for `product_category_detail_5` may not return `connectSection`.
-  // Use a consistent fallback so the CTA form section always appears.
-  const connect = data.connectSection ?? {
-    formTitle: 'Send Us A Message',
-    illustrationImage: '/connected_image.jpg',
-    illustrationAlt: 'Connect with Technical Experts',
-  };
-
   return (
     <>
       <section className="bg-gray-50 pt-10 md:pt-20">
@@ -111,12 +103,7 @@ export function OpticapLandingSection({ data }: { data: OpticapLandingSectionDat
         ) : null}
 
         <div className="lg:py-0 py-6">
-          <ConnectTechnicalExperts
-            heading=""
-            formTitle={connect.formTitle}
-            illustrationImage={connect.illustrationImage}
-            illustrationAlt={connect.illustrationAlt}
-          />
+          <ConnectTechnicalExperts />
         </div>
       </section>
       <CallToAction />

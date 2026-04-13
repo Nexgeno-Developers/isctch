@@ -4,18 +4,18 @@ import { formatBoldText } from '@/lib/htmlText';
 import { getCompanyCommonData } from '@/lib/api/company_common';
 
 /**
- * Technical Consultation CTA Component (Server Component)
+ * Industry Consultation CTA Component (Server Component)
  * 
- * Displays a call-to-action banner for technical consultation or other CTAs.
+ * Displays a call-to-action banner for industry consultation or other CTAs.
  * Data comes from server-side API.
- * Can be used with product technicalConsultation data or custom CTA data.
+ * Can be used with product industryConsultation data or custom CTA data.
  */
-export default async function TechnicalConsultationCTA() {
+export default async function IndustryConsultationCTA() {
   const companyData = await getCompanyCommonData();
   if (!companyData) return null;
 
-  const mainText = companyData.guidanceTitle;
-  const ctaLink = companyData.guidanceUrl;
+  const mainText = companyData.industryDetailGuidanceTitle;
+  const ctaLink = companyData.industryDetailGuidanceUrl;
   if (!mainText) return null;
 
   return (
@@ -48,7 +48,7 @@ export default async function TechnicalConsultationCTA() {
                   href={ctaLink}
                   className="lg:inline-flex items-center text-white text-base md:text-lg lg:text-xl font-bold tracking-wider hover:text-[#009FE8] transition-colors group whitespace-nowrap"
                 >
-                  REQUEST TECHNICAL CONSULTATION
+                  CONTACT US
                   <svg
                     className="w-5 h-5 md:w-6 md:h-6 ml-2 transform group-hover:translate-x-1 transition-transform"
                     fill="none"

@@ -1,5 +1,5 @@
 import type { InnovationsPageData } from '@/lib/api/innovations_layout';
-import { fetchMarketingLatestNews, fetchMarketingPressNews } from '@/lib/api';
+// import { fetchMarketingLatestNews, fetchMarketingPressNews } from '@/lib/api';
 import { plainTextFromMaybeHtml } from '@/lib/htmlText';
 import InnovationsFeatureCards from '@/components/innovations/InnovationsFeatureCards';
 import InnovationsHero from '@/components/innovations/InnovationsHero';
@@ -7,13 +7,11 @@ import InnovationsIntro from '@/components/innovations/InnovationsIntro';
 import Breadcrumbs from '@/components/common/Breadcrumbs';
 import CallToAction from '@/components/home/CallToAction';
 import NewsletterSubscription from '@/components/home/NewsletterSubscription';
-import LatestNewsClient, { type MarketingNewsItem } from '@/components/marketing/LatestNewsClient';
+import LatestNewsClient from '@/components/marketing/LatestNewsClient';
 
 export default async function InnovationsLayoutPage({ data }: { data: InnovationsPageData }) {
-  const [trendItems, pressItems] = await Promise.all([
-    fetchMarketingLatestNews().catch(() => [] as MarketingNewsItem[]),
-    fetchMarketingPressNews().catch(() => [] as MarketingNewsItem[]),
-  ]);
+  const trendItems = data.latestInsights || [];
+  const pressItems = data.latestNews || [];
 
   const breadcrumbLabel = plainTextFromMaybeHtml(data.title).trim() || 'Innovations';
 

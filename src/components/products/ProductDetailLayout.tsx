@@ -141,7 +141,7 @@ export default function ProductDetailLayout({
         />
 
         <div className="pb-4 md:pb-12">
-        <TechnicalConsultationCTA data={product.technicalConsultation} />
+          <TechnicalConsultationCTA />
         </div>
        
         <NewsletterSubscription />

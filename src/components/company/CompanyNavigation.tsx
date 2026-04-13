@@ -1,8 +1,21 @@
 import Link from 'next/link';
-import type { CompanyNavigation as CompanyNavigationType } from '@/fake-api/company';
 import Image from 'next/image';
+
+export type CompanyNavigationItem = {
+  id: string;
+  label: string;
+  href: string;
+  icon?: string;
+  iconUrl?: string;
+  iconAlt?: string;
+};
+
+export type CompanyNavigationData = {
+  items: CompanyNavigationItem[];
+};
+
 interface CompanyNavigationProps {
-  data: CompanyNavigationType;
+  data: CompanyNavigationData;
   activePath?: string;
 }
 
@@ -14,7 +27,9 @@ interface CompanyNavigationProps {
  * Highlights the active item based on the current pathname.
  */
 export default function CompanyNavigation({ data, activePath }: CompanyNavigationProps) {
-  const getIcon = (iconType: string) => {
+  if (!data?.items?.length) return null;
+  const getIcon = (iconType?: string) => {
+    if (!iconType) return null;
     switch (iconType) {
       case 'info':
         return (
@@ -60,6 +75,9 @@ export default function CompanyNavigation({ data, activePath }: CompanyNavigatio
             const normalizedActive = (activePath || '').replace(/\/+$/, '') || '/';
             const normalizedHref = (item.href || '').replace(/\/+$/, '') || '/';
             const isActive = normalizedActive === normalizedHref;
+            const iconUrl = item.iconUrl;
+            const iconAlt = item.iconAlt || item.label || 'Navigation icon';
+            const isSvgIcon = iconUrl ? /\.svg(\?|#|$)/i.test(iconUrl) : false;
             return (
               <Link
                 key={item.id}
@@ -73,7 +91,26 @@ export default function CompanyNavigation({ data, activePath }: CompanyNavigatio
                     : 'bg-[#EDF0F1] '
                 }`}>
                   <div className={`transition-all ${isActive ? 'brightness-0 invert-[1]' : ''}`}>
-                    {getIcon(item.icon)}
+                    {iconUrl ? (
+                      isSvgIcon ? (
+                        // eslint-disable-next-line @next/next/no-img-element
+                        <img
+                          src={iconUrl}
+                          alt={iconAlt}
+                          className="lg:w-14 w-8 lg:h-14 h-8"
+                        />
+                      ) : (
+                        <Image
+                          src={iconUrl}
+                          alt={iconAlt}
+                          className="lg:w-14 w-8 lg:h-14 h-8"
+                          width={80}
+                          height={80}
+                        />
+                      )
+                    ) : (
+                      getIcon(item.icon)
+                    )}
                   </div>
                 </div>
                 

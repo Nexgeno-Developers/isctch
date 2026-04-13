@@ -41,7 +41,7 @@ export default function GovernanceManagementLayoutPageSection({
         </div>
       </section>
 
-      <CompanyNavigationServer activePath={activePath} />
+      <CompanyNavigationServer activePath={activePath} data={data.navigation} />
 
       <GovernanceFrameworkSection data={data.governanceFrameworkSection} />
 

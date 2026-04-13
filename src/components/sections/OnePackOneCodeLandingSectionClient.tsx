@@ -4,7 +4,6 @@ import { Fragment, useState } from 'react';
 import type { OnePackOneCodeLandingSectionData } from '@/lib/api/product_category_layout_4';
 import Image from 'next/image';
 import Link from 'next/link';
-import ConnectTechnicalExperts from '@/components/technical-services/ConnectTechnicalExperts';
 import VideoBanner from '@/components/home/VideoBanner';
 import { cleanVideoUrlFromApi } from '@/lib/cleanVideoUrl';
 
@@ -225,14 +224,7 @@ export default function OnePackOneCodeLandingSectionClient({
       ) : null}
 </div>
       
-<div className="py-6 md:py-0">
-<ConnectTechnicalExperts
-        heading=""
-        formTitle={data.connectSection?.formTitle || 'Send Us A Message'}
-        illustrationImage={data.connectSection?.illustrationImage || '/connected_image.jpg'}
-        illustrationAlt={data.connectSection?.illustrationAlt || 'Connect with Technical Experts'}
-      />
-</div>
+      
      
     </>
   );

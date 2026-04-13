@@ -19,12 +19,6 @@ export default function MarketingServiceDetailLayoutPage({
   parentHref?: string;
   parentLabel?: string;
 }) {
-  const connect = {
-    formTitle: 'Send Us A Message',
-    illustrationImage: '/connected_image.jpg',
-    illustrationAlt: 'Connect with experts',
-  };
-
   return (
     <main className="min-h-screen bg-gray-50">
       <HeroWithBreadcrumbsSection
@@ -177,12 +171,7 @@ export default function MarketingServiceDetailLayoutPage({
       )}
 
       <div className="mt-10">
-        <ConnectTechnicalExperts
-          heading=""
-          formTitle={connect.formTitle}
-          illustrationImage={connect.illustrationImage}
-          illustrationAlt={connect.illustrationAlt}
-        />
+        <ConnectTechnicalExperts />
       </div>
 
       <CallToAction />
