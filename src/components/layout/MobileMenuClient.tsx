@@ -121,7 +121,7 @@ export default function MobileMenuClient({ navigation, cta }: MobileMenuClientPr
     <>
       <button
         type="button"
-        className="relative z-[60] flex h-11 w-11 min-[992px]:hidden items-center justify-center rounded-full text-white hover:bg-white/10 active:bg-white/15 transition-colors touch-manipulation"
+        className="relative z-[60] flex h-11 w-11 min-[1023px]:hidden items-center justify-center rounded-full text-white hover:bg-white/10 active:bg-white/15 transition-colors touch-manipulation"
         aria-label={isOpen ? 'Close menu' : 'Open menu'}
         aria-expanded={isOpen}
         onClick={() => setIsOpen(!isOpen)}
@@ -139,7 +139,7 @@ export default function MobileMenuClient({ navigation, cta }: MobileMenuClientPr
 
       {/* Backdrop */}
       <div
-        className={`fixed inset-0 z-[55] min-[992px]:hidden bg-[#0a1628]/70 backdrop-blur-sm transition-opacity duration-300 ${
+        className={`fixed inset-0 z-[55] min-[1023px]:hidden bg-[#0a1628]/70 backdrop-blur-sm transition-opacity duration-300 ${
           isOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
         }`}
         aria-hidden={!isOpen}
@@ -148,7 +148,7 @@ export default function MobileMenuClient({ navigation, cta }: MobileMenuClientPr
 
       {/* Panel: entire sheet slides off-screen when closed (background must move with it, not only inner content) */}
       <aside
-        className={`fixed inset-y-0 right-0 z-[60] flex w-full max-w-[100vw] flex-col bg-gradient-to-b from-[#0c1f45] via-[#0a1a3a] to-[#081428] shadow-[-8px_0_40px_rgba(0,0,0,0.35)] min-[992px]:hidden sm:max-w-[min(100%,22rem)] border-l border-white/[0.08] transition-transform duration-300 ease-[cubic-bezier(0.32,0.72,0,1)] will-change-transform ${
+        className={`fixed inset-y-0 right-0 z-[60] flex w-full max-w-[100vw] flex-col bg-gradient-to-b from-[#0c1f45] via-[#0a1a3a] to-[#081428] shadow-[-8px_0_40px_rgba(0,0,0,0.35)] min-[1023px]:hidden sm:max-w-[min(100%,22rem)] border-l border-white/[0.08] transition-transform duration-300 ease-[cubic-bezier(0.32,0.72,0,1)] will-change-transform ${
           isOpen ? 'translate-x-0 pointer-events-auto' : 'translate-x-full pointer-events-none'
         }`}
         style={{

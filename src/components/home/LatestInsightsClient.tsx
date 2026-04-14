@@ -32,7 +32,7 @@ export default function LatestInsightsClient({ data }: LatestInsightsClientProps
     <section className="pt-4 md:py-12 bg-gray-50">
       <div className="container mx-auto px-4">
         {/* Header with Title and Navigation */}
-        <div className="mb-6 flex items-center justify-between md:mb-12 md:max-[991px]:items-stretch md:max-[991px]:gap-4 min-[992px]:flex-row min-[992px]:items-center min-[992px]:justify-between">
+        <div className="mb-6 flex items-center justify-between md:mb-12 md:max-[991px]:items-stretch md:max-[991px]:gap-4 min-[1023px]:flex-row min-[1023px]:items-center min-[1023px]:justify-between">
           <h2 className="text-[22px] md:text-4xl lg:text-5xl font-bold">
             <span className="text-black">Latest</span>{' '}
             <span className="text-[#009FE8]">Insights</span>
