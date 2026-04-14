@@ -43,14 +43,14 @@ export default function WorkInSustainabilityClient({ data }: WorkInSustainabilit
       </div>
       <div className="relative z-10 container mx-auto px-4">
         {/* Header with Title and Navigation */}
-        <div className="flex items-center justify-between mb-4 md:mb-12">
+        <div className="mb-4 flex items-center justify-between md:mb-12 md:max-[991px]:flex-col md:max-[991px]:items-stretch md:max-[991px]:gap-4 min-[992px]:flex-row min-[992px]:items-center min-[992px]:justify-between">
           <h2 className="text-[22px] md:text-4xl lg:text-5xl font-bold text-white">
           Our Contributions <span className="text-[#009FE8]">Sustainability</span>
           </h2>
 
           {/* Navigation Arrows */}
           {data.cards.length > 3 && (
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-3 md:max-[991px]:self-end">
               <button
                 onClick={() => swiperRef.current?.slidePrev()}
                 className="cursor-pointer lg:w-12 lg:h-12 w-8 h-8 rounded-full lg:border-2 border-1 border-[#009FE8] bg-white hover:bg-[#009FE8] flex items-center justify-center transition-all group shadow-lg"
@@ -183,7 +183,7 @@ function WorkCard({ card }: { card: SustainabilityWorkCard }) {
           alt={card.imageAlt}
           fill
           className="object-cover"
-          sizes="(max-width: 768px) 100vw, 33vw"
+          sizes="(max-width: 767px) 100vw, (max-width: 991px) 50vw, 33vw"
         />
       </div>
 

@@ -48,7 +48,7 @@ function ServiceCard({ card }: { card: CommercialServiceCard }) {
           alt={card.imageAlt}
           fill
           className="object-cover"
-          sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 50vw"
+          sizes="(max-width: 767px) 100vw, (max-width: 991px) 50vw, 50vw"
         />
       </div>
 

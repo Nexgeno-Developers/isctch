@@ -29,7 +29,7 @@ export default async function LatestPressRelease() {
         </div>
 
         {/* Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-8 lg:grid-cols-3">
           {visibleCards.map((card, index) => (
             <PressReleaseCard key={card.id} card={card} imagePosition={index % 2 === 1 ? 'top' : 'bottom'} />
           ))}
@@ -53,7 +53,7 @@ function PressReleaseCard({ card, imagePosition }: { card: PressReleaseCard; ima
             alt={card.imageAlt}
             fill
             className="object-cover"
-            sizes="(max-width: 768px) 100vw, 33vw"
+            sizes="(max-width: 767px) 100vw, (max-width: 991px) 50vw, 33vw"
           />
         </div>
       )}
@@ -102,7 +102,7 @@ function PressReleaseCard({ card, imagePosition }: { card: PressReleaseCard; ima
             alt={card.imageAlt}
             fill
             className="object-cover"
-            sizes="(max-width: 768px) 100vw, 33vw"
+            sizes="(max-width: 767px) 100vw, (max-width: 991px) 50vw, 33vw"
           />
         </div>
       )}

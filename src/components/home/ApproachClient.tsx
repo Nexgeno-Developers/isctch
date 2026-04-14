@@ -29,7 +29,7 @@ export default function ApproachClient({ data }: ApproachClientProps) {
   return (
     <section className="bg-[#f8f8f8] overflow-x-hidden">
       <div className="container mx-auto px-4 lg:px-0 max-w-full lg:pt-0 pt-10">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10 lg:gap-12 items-center">
           {/* Left Side - Image */}
           <div className="relative w-full overflow-hidden">
             {data.image ? (
@@ -49,7 +49,7 @@ export default function ApproachClient({ data }: ApproachClientProps) {
           </div>
 
           {/* Right Side - Content */}
-          <div className="px-0 pb-8 md:px-4 lg:pe-[50px] lg:ps-5 lg:pb-0 min-w-0">
+          <div className="px-0 pb-8 md:px-2 md:pb-10 lg:pe-[50px] lg:ps-5 lg:pb-0 min-w-0">
             {/* Subtitle */}
             <div className="mb-2">
               <span className="text-sm text-gray-600 uppercase tracking-wider">

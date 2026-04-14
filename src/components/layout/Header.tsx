@@ -16,7 +16,7 @@ export default async function Header() {
     <header className="absolute w-full top-3 sm:top-5 md:top-[30px] z-50 left-0 right-0">
       <div className="container mx-auto px-4 flex flex-col items-end">
         {/* Desktop submenu strip (top-right) */}
-        <div className="hidden lg:flex items-center justify-end gap-6 pr-1 mb-2 text-white">
+        <div className="hidden min-[992px]:flex items-center justify-end gap-6 pr-1 mb-2 text-white">
           {(topBarMenu ?? []).map((item) => (
             <Link
               key={item.id}
@@ -39,7 +39,7 @@ export default async function Header() {
                   alt={headerData.logo.text || 'Logo'}
                   width={300}
                   height={300}
-                  className="lg:w-[120px] w-[70px] h-auto object-left lg:mt-0 mt-4"
+                  className="min-[992px]:w-[120px] w-[70px] h-auto object-left min-[992px]:mt-0 mt-4"
                   priority
                 />
                 
@@ -52,7 +52,7 @@ export default async function Header() {
           </Link>
 
           {/* Desktop Navigation + CTA (Right side) */}
-          <div className="hidden md:flex items-center gap-6 lg:gap-7 ml-auto">
+          <div className="hidden min-[992px]:flex items-center gap-6 lg:gap-7 ml-auto">
             <nav className="flex items-center space-x-[20px] lg:space-x-[25px]">
               {headerData.navigation.map((item) => (
                 <NavigationDropdown key={item.id} item={item} />
@@ -70,7 +70,7 @@ export default async function Header() {
           </div>
 
           {/* Mobile Menu */}
-          <div className="md:hidden">
+          <div className="min-[992px]:hidden">
             <MobileMenu navigation={headerData.navigation} cta={headerData.cta} />
           </div>
         </div>
