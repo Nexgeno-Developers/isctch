@@ -10,7 +10,7 @@ export default function ProductIndustriesLayoutPage({ data }: { data: ProductInd
   return (
     <main className="min-h-screen bg-[#f8f8f8]">
       {/* Hero */}
-      <section className="relative overflow-hidden pt-[110px] pb-8 md:pt-[200px] md:pb-24 lg:pt-[200px] lg:pb-28">
+      <section className="relative overflow-hidden pt-[110px] pb-8 md:pt-[150px] md:pb-12 lg:pt-[200px] lg:pb-28">
         <div className="absolute inset-0">
           {data.heroBackgroundImage ? (
             // eslint-disable-next-line @next/next/no-img-element
@@ -52,12 +52,12 @@ export default function ProductIndustriesLayoutPage({ data }: { data: ProductInd
                 __html: formatBoldText(data.industriesTitle || '*Industrial* Segments'),
               }}
             />
-            <div className="grid grid-cols-1 gap-6 md:gap-10 sm:grid-cols-2 lg:grid-cols-3">
+            <div className="grid grid-cols-1 gap-6 md:gap-6 lg:gap-10 sm:grid-cols-2 lg:grid-cols-3">
               {data.industries.map((item) => (
                 <Link
                   key={item.id}
                   href={item.href}
-                  className="group flex flex-col rounded-[20px] bg-white p-6 transition md:pt-12 md:pb-12 md:pr-12 md:pl-12"
+                  className="group flex flex-col rounded-[20px] bg-white p-6 transition md:pt-8 md:pb-8 md:pr-8 md:pl-8 lg:pt-12 lg:pb-12 lg:pr-12 lg:pl-12"
                 >
                   {item.iconUrl ? (
                     <div className="mb-4 flex h-[100px] w-[100px] items-center justify-center md:h-[200px] md:w-[200px]">

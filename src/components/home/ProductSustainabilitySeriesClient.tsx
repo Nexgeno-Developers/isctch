@@ -195,14 +195,14 @@ function ProductCard({ product }: { product: SustainabilityProductCard }) {
       </div>
 
       {/* Content */}
-      <div className="px-2 py-4 md:p-6">
+      <div className="px-2 py-4 md:p-4 lg:p-6">
         {/* Label */}
         {/* <span className="inline-block text-[#009FE8] text-[12px] md:text-base font-medium mb-3">
           {product.label}
         </span> */}
 
         {/* Title */}
-        <h3 className="text-[18px] md:text-3xl font-bold text-black lg:mb-4 mb-1">
+        <h3 className="text-[18px] md:text-2xl lg:text-3xl font-bold text-black lg:mb-4 mb-1">
           {product.title}
         </h3>
 

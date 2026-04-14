@@ -63,8 +63,8 @@ export function SustainableSolutionsSection({
                 <section className="bg-[#009de61a] py-6 md:py-0">
                   <div className="container mx-auto px-4">
                     <div
-                      className={`grid grid-cols-1 lg:grid-cols-[55%_45%] gap-8 md:gap-10 items-center ${
-                        reverse ? 'lg:grid-cols-[45%_55%]' : ''
+                      className={`grid grid-cols-1 md:grid-cols-[45%_45%] lg:grid-cols-[55%_45%] gap-8 md:gap-10 items-center ${
+                        reverse ? 'md:grid-cols-[45%_45%] lg:grid-cols-[45%_55%]' : ''
                       }`}
                     >
                       <div className={reverse ? 'lg:order-2 order-2' : 'lg:order-2 order-2'}>
@@ -115,7 +115,7 @@ export function SustainableSolutionsSection({
         </>
       ) : null}
 
-      <div className="pb-10 md:pb-24">
+      <div className="pb-10 md:pb-12 lg:pb-24">
         {videoUrl ? (
           <VideoBanner
             prefetchedData={{

@@ -32,7 +32,7 @@ export default function LatestInsightsClient({ data }: LatestInsightsClientProps
     <section className="pt-4 md:py-12 bg-gray-50">
       <div className="container mx-auto px-4">
         {/* Header with Title and Navigation */}
-        <div className="mb-6 flex items-center justify-between md:mb-12 md:max-[991px]:flex-col md:max-[991px]:items-stretch md:max-[991px]:gap-4 min-[992px]:flex-row min-[992px]:items-center min-[992px]:justify-between">
+        <div className="mb-6 flex items-center justify-between md:mb-12 md:max-[991px]:items-stretch md:max-[991px]:gap-4 min-[992px]:flex-row min-[992px]:items-center min-[992px]:justify-between">
           <h2 className="text-[22px] md:text-4xl lg:text-5xl font-bold">
             <span className="text-black">Latest</span>{' '}
             <span className="text-[#009FE8]">Insights</span>
@@ -102,6 +102,11 @@ export default function LatestInsightsClient({ data }: LatestInsightsClientProps
           }}
           breakpoints={{
             768: {
+              slidesPerView: 2,
+              slidesPerGroup: 1,
+              spaceBetween: 32,
+            },
+            992: {
               slidesPerView: 3,
               slidesPerGroup: 1,
               spaceBetween: 32,

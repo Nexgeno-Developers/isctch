@@ -43,7 +43,7 @@ export default function WorkInSustainabilityClient({ data }: WorkInSustainabilit
       </div>
       <div className="relative z-10 container mx-auto px-4">
         {/* Header with Title and Navigation */}
-        <div className="mb-4 flex items-center justify-between md:mb-12 md:max-[991px]:flex-col md:max-[991px]:items-stretch md:max-[991px]:gap-4 min-[992px]:flex-row min-[992px]:items-center min-[992px]:justify-between">
+        <div className="mb-4 flex items-center justify-between md:mb-12  md:max-[991px]:items-stretch md:max-[991px]:gap-4 min-[992px]:flex-row min-[992px]:items-center min-[992px]:justify-between">
           <h2 className="text-[22px] md:text-4xl lg:text-5xl font-bold text-white">
           Our Contributions <span className="text-[#009FE8]">Sustainability</span>
           </h2>
@@ -111,7 +111,7 @@ export default function WorkInSustainabilityClient({ data }: WorkInSustainabilit
           }}
           breakpoints={{
             768: {
-              slidesPerView: 3,
+              slidesPerView: 2,
               slidesPerGroup: 1,
               spaceBetween: 32,
             },
@@ -188,7 +188,7 @@ function WorkCard({ card }: { card: SustainabilityWorkCard }) {
       </div>
 
       <div className="pt-4 px-0 pb-2 flex flex-col flex-1">
-        <h3 className="text-[18px] md:text-[26px] mt-2 font-bold text-black mb-3 leading-tight">
+        <h3 className="text-[18px] md:text-[22px] lg:text-[26px] mt-2 font-bold text-black mb-3 leading-tight">
           {card.title}
         </h3>
 

@@ -91,7 +91,7 @@ export default function GovernanceWhistleblowingCardsSection({
     <section className="bg-gray-50 py-8 md:pb-12 pt-10 md:pt-20">
       <div className="container mx-auto px-4">
         <div className="">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-3 gap-6 md:gap-8">
             {data.cards.map((card) => (
               <div
                 key={card.id}

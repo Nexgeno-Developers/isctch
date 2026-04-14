@@ -70,7 +70,7 @@ export default function CompanyNavigation({ data, activePath }: CompanyNavigatio
   return (
     <section className="py-8 md:py-16 bg-gray-50">
       <div className="container mx-auto px-4">
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-5 md:gap-8 lg:gap-6">
+        <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-4 gap-5 md:gap-8 lg:gap-6">
           {data.items.map((item) => {
             const normalizedActive = (activePath || '').replace(/\/+$/, '') || '/';
             const normalizedHref = (item.href || '').replace(/\/+$/, '') || '/';
@@ -97,7 +97,7 @@ export default function CompanyNavigation({ data, activePath }: CompanyNavigatio
                         <img
                           src={iconUrl}
                           alt={iconAlt}
-                          className="lg:w-14 w-8 lg:h-14 h-8"
+                          className="lg:w-14 md:w-14 w-8 md:h-14 lg:h-14 h-8"
                         />
                       ) : (
                         <Image
@@ -115,7 +115,7 @@ export default function CompanyNavigation({ data, activePath }: CompanyNavigatio
                 </div>
                 
                 {/* Label */}
-                <span className={`text-[14px] md:text-[20px] font-medium text-center transition-colors leading-tight ${
+                <span className={`text-[14px] md:text-[16px] lg:text-[20px] font-medium text-center transition-colors leading-tight ${
                   isActive ? 'text-[#009FE8] font-semibold' : 'text-black'
                 }`}>
                   {item.label}

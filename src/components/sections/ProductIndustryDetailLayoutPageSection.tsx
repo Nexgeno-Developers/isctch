@@ -17,7 +17,7 @@ export default function ProductIndustryDetailLayoutPageSection({
   return (
     <main className="min-h-screen bg-gray-50">
       {/* Hero */}
-      <section className="relative lg:pt-[220px] pt-[110px] lg:pb-[150px] pb-[30px] overflow-hidden">
+      <section className="relative lg:pt-[220px] md:pt-[150px] pt-[110px] lg:pb-[150px] md:pb-[50px] pb-[30px] overflow-hidden">
         <div className="absolute inset-0">
           {data.heroBackgroundImage ? (
             // eslint-disable-next-line @next/next/no-img-element
@@ -34,7 +34,7 @@ export default function ProductIndustryDetailLayoutPageSection({
         <div className="relative z-10 h-full flex flex-col">
           <div className="container mx-auto flex-1 flex flex-col justify-center px-4">
             <div className="text-center">
-              <h1 className="text-[22px] md:text-5xl lg:text-6xl xl:text-6xl font-bold text-white tracking-tight">
+              <h1 className="text-[22px] md:text-3xl lg:text-6xl xl:text-6xl font-bold text-white tracking-tight">
                 {data.title}
               </h1>
               {/* {data.shortDescription ? (

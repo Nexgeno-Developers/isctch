@@ -146,7 +146,7 @@ export default function OnePackOneCodeLandingSectionClient({
 
   return (
     <>
-      <section className="relative overflow-hidden bg-[#0c1f45] h-[200px] md:h-[420px]">
+      <section className="relative overflow-hidden bg-[#0c1f45] h-[200px] lg:h-[420px] md:h-[220px]">
         <div className="absolute inset-0">
           {data.hero.backgroundImage ? (
             // eslint-disable-next-line @next/next/no-img-element
@@ -157,8 +157,8 @@ export default function OnePackOneCodeLandingSectionClient({
           <div className="absolute inset-0 bg-[#0e233c52] opacity-90" />
         </div>
 
-        <div className="relative z-10 h-full flex items-center justify-center text-center px-4">
-          <h1 className="lg:pt-0 pt-[100px] text-[22px] md:text-5xl font-extrabold tracking-tight text-white leading-tight">
+        <div className="relative z-10 h-full flex lg:items-center md:items-end justify-center text-center px-4">
+          <h1 className="lg:pt-0 lg:pt-[100px] text-[22px] md:text-3xl lg:pb-0 md:pb-8 font-extrabold tracking-tight text-white leading-tight">
             {titleText}
           </h1>
         </div>

@@ -40,7 +40,7 @@ export default function ProductDetailLayout({
       )}
 
       <main className="min-h-screen bg-gray-50">
-        <section className="relative lg:pt-[220px] pt-[150px] lg:pb-[150px] pb-[50px] overflow-hidden">
+        <section className="relative lg:pt-[220px] md:pt-[150px] pt-[150px] lg:pb-[150px] md:pb-[50px] pb-[50px] overflow-hidden">
           <div className="absolute inset-0">
             {product.heroBackgroundImage ? (
               <img
@@ -58,12 +58,12 @@ export default function ProductDetailLayout({
           <div className="relative z-10 h-full flex flex-col">
             <div className="container mx-auto flex-1 flex flex-col justify-center px-4">
               <div className="text-center">
-                <h1 className="text-[30px] md:text-5xl lg:text-6xl xl:text-6xl font-bold text-white mb-6 tracking-tight">
+                <h1 className="text-[30px] md:text-3xl lg:text-6xl xl:text-6xl font-bold text-white mb-6 tracking-tight">
                   {product.title}
                 </h1>
 
                 {product.shortDescription && (
-                  <p className="text-center text-base md:text-base text-white mb-8 leading-relaxed max-w-3xl mx-auto">
+                  <p className="text-center text-base md:text-base text-white lg:mb-8 leading-relaxed max-w-3xl mx-auto">
                     {product.shortDescription}
                   </p>
                 )}
