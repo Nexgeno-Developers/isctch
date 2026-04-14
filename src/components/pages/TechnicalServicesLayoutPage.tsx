@@ -60,7 +60,7 @@ export default async function TechnicalServicesLayoutPage({
   return (
     <main className="min-h-screen bg-gray-50">
       {/* Hero Section */}
-      <section className="relative lg:pt-[220px] pt-[110px] lg:pb-[150px] pb-[30px] overflow-hidden">
+      <section className="relative lg:pt-[220px] md:pt-[150px] pt-[110px] lg:pb-[150px] md:pb-[50px] pb-[30px] overflow-hidden">
         <div className="absolute inset-0">
           {data.heroBackgroundImage ? (
             // eslint-disable-next-line @next/next/no-img-element
@@ -78,7 +78,7 @@ export default async function TechnicalServicesLayoutPage({
         <div className="relative z-10 h-full flex flex-col">
           <div className="container mx-auto flex-1 flex flex-col justify-center px-4">
             <div className="text-center">
-              <h1 className="text-[22px] md:text-5xl lg:text-6xl xl:text-6xl font-bold text-white tracking-tight leading-tight md:leading-normal">
+              <h1 className="text-[22px] md:text-3xl lg:text-6xl xl:text-6xl font-bold text-white tracking-tight leading-tight md:leading-normal">
                 {data.heroTitle}
               </h1>
             </div>
@@ -139,7 +139,7 @@ export default async function TechnicalServicesLayoutPage({
               <h2 className="text-[22px] md:text-4xl lg:text-5xl font-bold text-black leading-tight md:leading-normal lg:leading-[65px]" dangerouslySetInnerHTML={{ __html: formatBoldText(data.upgradeSection.heading) }} />
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
               {data.upgradeSection.cards.map((card) => {
                 const hasVideo = Boolean(card.videoUrl) && isEmbeddableVideoUrl(card.videoUrl);
                 const poster =
@@ -175,7 +175,7 @@ export default async function TechnicalServicesLayoutPage({
                     </div>
 
                     <div className="pl-[15px] pr-[15px] pt-[25px] pb-[15px] flex-1 flex flex-col">
-                      <h3 className="text-[20px] md:text-3xl font-bold text-[#009FE8] lg:mb-4 mb-2">
+                      <h3 className="text-[20px] md:text-2xl lg:text-3xl font-bold text-[#009FE8] lg:mb-4 mb-2">
                         {card.title}
                       </h3>
                       <p className="text-black lg:mb-6 mb-2 flex-1 leading-relaxed line-clamp-4 lg:text-base text-sm">

@@ -19,7 +19,7 @@ export default function TechnicalServiceDetailLayoutPage({
   return (
     <main className="min-h-screen bg-gray-50">
       {/* Hero Section */}
-      <section className="relative lg:pt-[220px] pt-[110px] lg:pb-[150px] pb-[30px] overflow-hidden">
+      <section className="relative lg:pt-[220px] md:pt-[150px] pt-[110px] lg:pb-[150px] md:pb-[50px] pb-[30px] overflow-hidden">
         <div className="absolute inset-0">
           {data.heroBackgroundImage ? (
             // eslint-disable-next-line @next/next/no-img-element
@@ -38,7 +38,7 @@ export default function TechnicalServiceDetailLayoutPage({
         <div className="relative z-10 h-full flex flex-col">
           <div className="container mx-auto flex-1 flex flex-col justify-center px-4">
             <div className="text-center">
-              <h1 className="text-[22px] md:text-5xl lg:text-6xl xl:text-7xl font-bold text-white tracking-tight uppercase leading-tight md:leading-normal">
+              <h1 className="text-[22px] md:text-3xl lg:text-6xl xl:text-7xl font-bold text-white tracking-tight uppercase leading-tight md:leading-normal">
                 {data.title}
               </h1>
             </div>
@@ -130,7 +130,7 @@ export default function TechnicalServiceDetailLayoutPage({
                   href={item.href}
                   className="group bg-white rounded-[20px] p-4 md:p-5 transition-shadow duration-300 flex flex-col h-full"
                 >
-                  <div className="relative w-full md:h-[430px] overflow-hidden rounded-2xl">
+                  <div className="relative w-full md:h-[230px] lg:h-[430px] overflow-hidden rounded-2xl">
                     {item.image ? (
                       <Image
                         src={item.image}

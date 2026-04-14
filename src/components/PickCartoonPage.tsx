@@ -120,7 +120,7 @@ export default function PickCartoonPage({ data }: PickCartoonPageProps) {
                   ) : null}
                 </div>
 
-                <div className="lg:mt-8 mt-4 grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div className="lg:mt-8 mt-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                   {section.items.map((item) => (
                     <div
                       key={item.id}
@@ -180,7 +180,7 @@ export default function PickCartoonPage({ data }: PickCartoonPageProps) {
                     <div className="max-w-xl">
                       <h3 className="text-lg sm:text-xl md:text-[32px] font-semibold leading-snug text-white">
                         {section.headingLines.map((line, i) => (
-                          <span key={i} className="block">
+                          <span key={i}>
                             {line}
                           </span>
                         ))}
@@ -207,7 +207,7 @@ export default function PickCartoonPage({ data }: PickCartoonPageProps) {
                   )}
                 </div>
 
-                <div className="lg:mt-10 mt-4 grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-12">
+                <div className="lg:mt-10 mt-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-6 lg:gap-12">
                   {section.cards.map((card) => (
                     <div
                       key={card.id}

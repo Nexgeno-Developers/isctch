@@ -222,7 +222,7 @@ export default function RAndDCentreLayoutPage({ data }: { data: RAndDCentrePageD
   return (
     <main className="min-h-screen bg-white">
       {/* Hero */}
-      <section className="relative overflow-hidden pt-[110px] pb-8 md:pt-[200px] md:pb-16 lg:pt-[220px] lg:pb-32">
+      <section className="relative overflow-hidden pt-[110px] md:pt-[150px] pb-8 md:pt-[200px] md:pb-16 lg:pt-[220px] lg:pb-32">
         <div className="absolute inset-0">
           {data.heroBackgroundImage ? (
             // eslint-disable-next-line @next/next/no-img-element
@@ -240,10 +240,10 @@ export default function RAndDCentreLayoutPage({ data }: { data: RAndDCentrePageD
           <p className="mb-4 text-xs font-semibold uppercase text-white md:text-sm">
             {data.heroEyebrow}
           </p>
-          <h1 className="text-[22px] font-bold uppercase leading-tight tracking-tight text-white md:text-4xl lg:text-5xl xl:text-[3.25rem]">
+          <h1 className="text-[22px] font-bold uppercase leading-tight tracking-tight text-white md:text-3xl lg:text-5xl xl:text-[3.25rem]">
             {data.heroTitle}
           </h1>
-          <p className="mx-auto lg:mt-8 mt-4 max-w-3xl text-sm leading-relaxed text-white md:text-lg">
+          <p className="mx-auto lg:mt-8 mt-4 max-w-3xl text-sm leading-relaxed text-white md:text-base lg:text-lg">
             {data.heroDescription}
           </p>
         </div>
