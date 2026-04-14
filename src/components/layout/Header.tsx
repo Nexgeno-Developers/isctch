@@ -16,7 +16,7 @@ export default async function Header() {
     <header className="absolute w-full top-3 sm:top-5 md:top-[30px] z-50 left-0 right-0">
       <div className="container_width container mx-auto px-4 flex flex-col items-end">
         {/* Desktop submenu strip (top-right) */}
-        <div className="hidden min-[1023px]:max-lg:flex xl:flex items-center justify-end gap-6 pr-1 mb-2 text-white">
+        <div className="hidden min-[1023px]:max-lg:flex xl:flex md:flex items-center justify-end gap-6 pr-1 mb-2 text-white">
           {(topBarMenu ?? []).map((item) => (
             <Link
               key={item.id}
