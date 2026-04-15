@@ -2,6 +2,7 @@ import type { PilotPlantPageData } from '@/lib/api/pilot_plant_layout';
 import { PilotPlantScopeIcon } from '@/components/pilot-plant/scopeIcons';
 import { formatBoldText } from '@/lib/htmlText';
 import { RichText } from '@/components/common/RichText';
+import Link from 'next/link';
 type Props = Pick<
   PilotPlantPageData,
   | 'scopeLabel'
@@ -26,10 +27,14 @@ export default function PilotPlantScopeAndAgile({
   agileBody,
   agileHighlights,
 }: Props) {
+  const gridClassName = `lg:mt-10 mt-6 grid gap-4 md:gap-5 ${
+    scopeGrid.length > 4 ? 'grid-cols-1 sm:grid-cols-3' : 'grid-cols-2'
+  }`;
+
   return (
     <section className="bg-gray-50 pb-14 md:pb-20 lg:pb-24">
       <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 gap-12 lg:grid-cols-2 lg:gap-14 xl:gap-20 lg:items-start">
+        <div className="grid grid-cols-1 gap-12 lg:grid-cols-2 lg:gap-14 xl:gap-20 lg:items-center">
           <div>
             <p className="text-xs font-semibold uppercase text-[#009FE8] md:text-sm">
               {scopeTitleBlue || scopeLabel}
@@ -38,29 +43,46 @@ export default function PilotPlantScopeAndAgile({
               
               dangerouslySetInnerHTML={{ __html: formatBoldText(scopeTitleBlack) }} />
          
-            <div className="lg:mt-10 mt-6 grid grid-cols-2 gap-4 md:gap-5">
-              {scopeGrid.map((item) => (
-                <div
-                  key={item.id}
-                  className="flex flex-col rounded-[30px] bg-[#EDF0F1] p-5 "
-                >
-                  {item.iconUrl ? (
-                    // eslint-disable-next-line @next/next/no-img-element -- CMS icons (SVG/PNG)
-                    <img
-                      src={item.iconUrl}
-                      alt=""
-                      className="h-10 w-10 object-contain"
-                      aria-hidden
-                    />
-                  ) : (
-                    <PilotPlantScopeIcon id={item.icon} />
-                  )}
-                  <p className="mt-4 text-[10px] font-semibold uppercase tracking-wider text-black md:text-[11px]">
-                    {item.categoryLabel}
-                  </p>
-                  <p className="mt-1 text-sm font-bold leading-snug text-black md:text-base">{item.title}</p>
-                </div>
-              ))}
+            <div className={gridClassName}>
+              {scopeGrid.map((item) => {
+                const cardContent = (
+                  <>
+                    {item.iconUrl ? (
+                      // eslint-disable-next-line @next/next/no-img-element -- CMS icons (SVG/PNG)
+                      <img
+                        src={item.iconUrl}
+                        alt=""
+                        className="h-[100px] w-[100px] object-contain"
+                        aria-hidden
+                      />
+                    ) : (
+                      <PilotPlantScopeIcon id={item.icon} />
+                    )}
+                    {/* <p className="mt-4 text-[10px] font-semibold uppercase tracking-wider text-black md:text-[11px]">
+                    {item.title}
+                    </p> */}
+                    <p className="mt-3 text-sm font-bold leading-snug text-black md:text-base"> {item.categoryLabel}</p>
+                  </>
+                );
+
+                if (item.href) {
+                  return (
+                    <Link
+                      key={item.id}
+                      href={item.href}
+                      className="flex flex-col rounded-[30px] bg-[#fff] p-5 transition-opacity hover:opacity-80"
+                    >
+                      {cardContent}
+                    </Link>
+                  );
+                }
+
+                return (
+                  <div key={item.id} className="flex flex-col rounded-[30px] bg-[#EDF0F1] p-5">
+                    {cardContent}
+                  </div>
+                );
+              })}
             </div>
           </div>
 

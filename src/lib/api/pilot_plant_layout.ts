@@ -37,6 +37,14 @@ type PilotPlantApiResponse = {
         icon?: Media[];
         description?: string[];
       };
+      application_versatility_product_industries?: Array<{
+        id?: number | string;
+        title?: string;
+        slug?: string;
+        short_summary_icon?: Media;
+        short_summary_title?: string;
+        short_summary_description?: string;
+      }>;
       ecosystem_items?: {
         itration?: string[];
         title?: string[];
@@ -95,6 +103,7 @@ export type PilotPlantScopeGridItem = {
   iconUrl?: string;
   categoryLabel: string;
   title: string;
+  href?: string;
 };
 
 export type PilotPlantAgileHighlight = {
@@ -327,8 +336,36 @@ function mapApiToPage(api: NonNullable<PilotPlantApiResponse['data']>): PilotPla
   base.scopeTitleBlack = clean(meta.application_versatility_title) || '';
   base.scopeTitleBlue = clean(meta.application_versatility_subtitle) || '';
 
+  const scopeProductIndustries = meta.application_versatility_product_industries;
+  if (scopeProductIndustries?.length) {
+    const iconByIdx: PilotPlantScopeIconId[] = ['drop', 'leaf', 'glass', 'mug'];
+    const scopeFromIndustries: PilotPlantScopeGridItem[] = scopeProductIndustries
+      .map((item, i) => {
+        const categoryLabel = clean(item.short_summary_title) || clean(item.title);
+        const title = clean(item.short_summary_description);
+        if (!categoryLabel || !title) return null;
+
+        const rawSlug = clean(item.slug);
+        const href = rawSlug ? `/${rawSlug.replace(/^\/+/, '')}` : undefined;
+
+        return {
+          id: String(item.id ?? `scope-industry-${i + 1}`),
+          icon: iconByIdx[i % iconByIdx.length],
+          iconUrl: mediaUrl(item.short_summary_icon),
+          categoryLabel,
+          title,
+          href,
+        };
+      })
+      .filter(Boolean) as PilotPlantScopeGridItem[];
+
+    if (scopeFromIndustries.length) {
+      base.scopeGrid = scopeFromIndustries;
+    }
+  }
+
   const scopeItems = meta.application_versatility_items;
-  if (scopeItems?.title?.length) {
+  if (!base.scopeGrid.length && scopeItems?.title?.length) {
     const iconByIdx: PilotPlantScopeIconId[] = ['drop', 'leaf', 'glass', 'mug'];
     const grid: PilotPlantScopeGridItem[] = [];
     for (let i = 0; i < scopeItems.title.length; i++) {
