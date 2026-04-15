@@ -4,7 +4,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { useState } from 'react';
 // import { formatBoldText } from '@/lib/htmlText';
-import type { ApproachData } from '@/fake-api/homepage';
+import type { ApproachData } from '@/lib/api/home';
 
 interface ApproachClientProps {
   data: ApproachData;
@@ -53,7 +53,7 @@ export default function ApproachClient({ data }: ApproachClientProps) {
             {/* Subtitle */}
             <div className="mb-2">
               <span className="text-sm text-gray-600 uppercase tracking-wider">
-                Our Approach
+                {data.eyebrow}
               </span>
             </div>
 
@@ -136,7 +136,7 @@ export default function ApproachClient({ data }: ApproachClientProps) {
                 }`}
               > */}
                 <Link
-                href='/contact'
+                href={data.ctaLink}
                 className={`inline-flex items-center text-[#009FE8] font-semibold lg:text-lg text-base transition-all ${
                   allQuestionsAnswered
                     ? 'opacity-100 hover:text-[#007bb5]'
