@@ -136,7 +136,7 @@ export default function ApproachClient({ data }: ApproachClientProps) {
                 }`}
               > */}
                 <Link
-                href='/'
+                href='/contact'
                 className={`inline-flex items-center text-[#009FE8] font-semibold lg:text-lg text-base transition-all ${
                   allQuestionsAnswered
                     ? 'opacity-100 hover:text-[#007bb5]'
