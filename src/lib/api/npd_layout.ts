@@ -38,6 +38,8 @@ type NpdMeta = {
     title?: string;
     description?: string;
   }>;
+  packaging_solution_title?: string;
+  packaging_solution_description?: string;
 };
 
 type NpdApiResponse = {
@@ -75,6 +77,8 @@ export type NpdPageData = {
   ecosystemTitleBlack: string;
   ecosystemTitleBlue: string;
   ecosystemCards: NpdEcosystemCard[];
+  packagingSolutionTitle: string;
+  packagingSolutionDescription: string;
   /** YouTube or other video URL for the section video banner (optional). */
   videoUrl?: string;
 };
@@ -91,6 +95,8 @@ const EMPTY_PAGE: NpdPageData = {
   ecosystemTitleBlack: '',
   ecosystemTitleBlue: '',
   ecosystemCards: [],
+  packagingSolutionTitle: '',
+  packagingSolutionDescription: '',
 };
 
 function buildPageApiPath(slug: string) {
@@ -176,6 +182,8 @@ function mapInnovationDetail1ToPage(api: NonNullable<NpdApiResponse['data']>): N
 
   const ecoMapped = mapEcosystemItemsBlock(meta.ecosystem_items);
   base.ecosystemCards = ecoMapped.length ? ecoMapped : [];
+  base.packagingSolutionTitle = clean(meta.packaging_solution_title) ?? '';
+  base.packagingSolutionDescription = clean(meta.packaging_solution_description) ?? '';
 
   const v = clean(meta.video_url);
   if (v) base.videoUrl = v;
@@ -244,6 +252,9 @@ function mapLegacyNpdToPage(api: NonNullable<NpdApiResponse['data']>): NpdPageDa
     base.ecosystemCards = mapped.length ? mapped : [];
   }
 
+  base.packagingSolutionTitle = clean(meta.packaging_solution_title) ?? '';
+  base.packagingSolutionDescription = clean(meta.packaging_solution_description) ?? '';
+
   const v = clean(meta.video_url);
   if (v) base.videoUrl = v;
 
@@ -274,7 +285,7 @@ export const fetchNpdLayoutPage = async (slug: string) => {
   try {
     const apiSlugPath = buildPageApiPath(cleanSlug);
     const payload = await fetchJsonCached<NpdApiResponse>(
-      `${baseUrl}/v1/page/${apiSlugPath}`,
+      `${baseUrl}/v1/page/${apiSlugPath}?include=packaging_solution`,
       { tags: [`page:${apiSlugPath}`] },
     );
     const data = payload?.data;

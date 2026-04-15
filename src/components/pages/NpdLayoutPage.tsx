@@ -9,6 +9,7 @@ import NpdInnovationEcosystem from '@/components/npd/NpdInnovationEcosystem';
 import NpdIntroSection from '@/components/npd/NpdIntroSection';
 import { NPD_STATIC_VIDEO_BANNER } from '@/components/npd/npdVideoBannerData';
 import { fetchInnovationsLayoutPage } from '@/lib/api/innovations_layout';
+import { formatBoldText } from '@/lib/htmlText';
 
 export default async function NpdLayoutPage({ data }: { data: NpdPageData }) {
   const innovationsData = await fetchInnovationsLayoutPage('innovations');
@@ -45,6 +46,25 @@ export default async function NpdLayoutPage({ data }: { data: NpdPageData }) {
         ecosystemTitleBlue={data.ecosystemTitleBlue}
         ecosystemCards={data.ecosystemCards}
       />
+      {(data.packagingSolutionTitle || data.packagingSolutionDescription) && (
+        <section className="bg-gray-50 pb-12">
+          <div className="container mx-auto px-4">
+            <div className="mx-auto max-w-5xl text-center">
+              {data.packagingSolutionTitle ? (
+                <h2
+                  className="text-[22px] font-bold leading-tight text-black md:text-4xl lg:text-5xl lg:leading-snug"
+                  dangerouslySetInnerHTML={{ __html: formatBoldText(data.packagingSolutionTitle) }}
+                />
+              ) : null}
+              {data.packagingSolutionDescription ? (
+                <p className="mt-2 text-sm leading-relaxed text-black md:mt-3 md:text-base">
+                  {data.packagingSolutionDescription}
+                </p>
+              ) : null}
+            </div>
+          </div>
+        </section>
+      )}
       <VideoBanner prefetchedData={videoBannerPrefetched} />
       <LatestNewsClient trendItems={trendItems} pressItems={pressItems} />
 
