@@ -141,7 +141,7 @@ export default function CareerLandingPage({ data }: CareerLandingPageProps) {
       {data.verticalFeatures && data.verticalFeatures.length > 0 && (
         <>
           {data.verticalFeaturesHeader && (
-            <section className="bg-gray-50 pt-10 md:pt-8">
+            <section className="bg-gray-50">
               <div className="container mx-auto px-4">
                 <div className="mx-auto max-w-3xl text-center">
                   <h2 className="text-2xl font-bold text-black md:text-3xl lg:text-5xl" dangerouslySetInnerHTML={{ __html: formatBoldText(data.verticalFeaturesHeader.heading)}} />
@@ -204,7 +204,7 @@ export default function CareerLandingPage({ data }: CareerLandingPageProps) {
 
       <ConnectTechnicalExperts />
 
-      <div className="bg-gray-50 pt-12">
+      <div className="bg-gray-50">
         <CallToAction />
       </div>
 

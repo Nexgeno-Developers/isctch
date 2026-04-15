@@ -298,11 +298,11 @@ export default async function TechnicalServicesLayoutPage({
               <h2 className="text-[22px] md:text-4xl lg:text-5xl font-bold text-black leading-tight md:leading-normal" dangerouslySetInnerHTML={{ __html: formatBoldText(data.operationalSuccess.heading) }} />
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
+            <div className="flex flex-wrap justify-center gap-6 md:gap-8">
               {data.operationalSuccess.cards.map((card) => (
                 <div
                   key={card.id}
-                  className="bg-white rounded-3xl md:rounded-[50px] overflow-hidden transition-all duration-300 flex flex-col h-full p-[15px]"
+                  className="bg-white rounded-3xl w-1/1 lg:w-1/3 max-w-sm flex flex-col overflow-hidden transition-all duration-300 flex flex-col h-full p-[15px]"
                 >
                   <div className="relative w-full h-auto overflow-hidden bg-gray-100 rounded-3xl md:rounded-[50px]">
                     {card.image ? (
