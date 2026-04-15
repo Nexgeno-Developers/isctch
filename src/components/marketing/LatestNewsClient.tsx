@@ -2,6 +2,7 @@
 
 import { useRef, useState } from 'react';
 import Image from 'next/image';
+import { formatCardDate, formatCardTime } from '@/lib/dateTime';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Pagination } from 'swiper/modules';
 import type { Swiper as SwiperType } from 'swiper';
@@ -130,17 +131,20 @@ export default function LatestNewsClient({ trendItems, pressItems }: LatestNewsC
                 </div>
 
                 <div className="px-6 pt-5 pb-6 flex-1 flex flex-col">
-                  {(item.time || item.date) ? (
-                    <div className="mt-auto flex items-center justify-between text-xs md:text-sm text-gray-500">
-                      {item.time ? (
-                        <div className="flex items-center gap-1.5">
-                          {/* Time icon */}
-                          <span className="inline-flex items-center justify-center w-4 h-4 rounded-full bg-[#E7F4FF]">
+                  {(() => {
+                    const metaTime = formatCardTime(item.time);
+                    const metaDate = formatCardDate(item.date);
+                    if (!metaTime && !metaDate) return null;
+                    return (
+                      <div className="flex items-center justify-between gap-4 text-xs text-[#7A7A7A] md:text-sm">
+                        {metaTime ? (
+                          <div className="inline-flex items-center gap-2">
                             <svg
-                              className="w-4 h-4 text-[#797979]"
+                              className="h-5 w-5"
                               viewBox="0 0 24 24"
                               fill="none"
                               xmlns="http://www.w3.org/2000/svg"
+                              aria-hidden
                             >
                               <path
                                 d="M12 6v6l3 3"
@@ -149,29 +153,22 @@ export default function LatestNewsClient({ trendItems, pressItems }: LatestNewsC
                                 strokeLinecap="round"
                                 strokeLinejoin="round"
                               />
-                              <circle
-                                cx="12"
-                                cy="12"
-                                r="8"
-                                stroke="currentColor"
-                                strokeWidth="1.8"
-                              />
+                              <circle cx="12" cy="12" r="8" stroke="currentColor" strokeWidth="1.8" />
                             </svg>
-                          </span>
-                          <span>{item.time}</span>
-                        </div>
-                      ) : (
-                        <span />
-                      )}
-                      {item.date ? (
-                        <div className="flex items-center gap-1.5">
-                          {/* Calendar icon */}
-                          <span className="inline-flex items-center justify-center w-4 h-4 rounded-md bg-[#E7F4FF]">
+                            <span className="font-medium">{metaTime}</span>
+                          </div>
+                        ) : (
+                          <span aria-hidden />
+                        )}
+
+                        {metaDate ? (
+                          <div className="inline-flex items-center gap-2">
                             <svg
-                              className="w-4 h-4 text-[#797979]"
+                              className="h-5 w-5"
                               viewBox="0 0 24 24"
                               fill="none"
                               xmlns="http://www.w3.org/2000/svg"
+                              aria-hidden
                             >
                               <rect
                                 x="4"
@@ -182,12 +179,7 @@ export default function LatestNewsClient({ trendItems, pressItems }: LatestNewsC
                                 stroke="currentColor"
                                 strokeWidth="1.8"
                               />
-                              <path
-                                d="M4 9h16"
-                                stroke="currentColor"
-                                strokeWidth="1.8"
-                                strokeLinecap="round"
-                              />
+                              <path d="M4 9h16" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
                               <path
                                 d="M9 4v3M15 4v3"
                                 stroke="currentColor"
@@ -195,14 +187,14 @@ export default function LatestNewsClient({ trendItems, pressItems }: LatestNewsC
                                 strokeLinecap="round"
                               />
                             </svg>
-                          </span>
-                          <span>{item.date}</span>
-                        </div>
-                      ) : null}
-                    </div>
-                  ) : null}
+                            <span className="font-medium">{metaDate}</span>
+                          </div>
+                        ) : null}
+                      </div>
+                    );
+                  })()}
                   
-                  <h3 className="text-[18px] md:text-xl font-semibold text-black mb-0 leading-snug lg:pt-4 pt-2 line-clamp-2">
+                  <h3 className="text-[18px] md:text-xl font-semibold text-black mb-0 leading-snug mt-3 line-clamp-2">
                     {item.title}
                   </h3>
 

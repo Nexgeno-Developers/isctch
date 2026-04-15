@@ -1,5 +1,6 @@
 import { fetchJsonCached } from '@/lib/api/apiCache';
 import { formatBoldText } from '@/lib/htmlText';
+import { isoDateFrom, isoTimeFrom } from '@/lib/dateTime';
 
 // ==================== Types ====================
 
@@ -164,6 +165,7 @@ export type InsightCard = {
   title: string;
   category: string;
   date: string;
+  time?: string;
   image: string;
   imageAlt: string;
   link: string;
@@ -286,6 +288,8 @@ type LatestInsightApiItem = {
   featured_image?: MediaRef;
   summary?: string;
   published_at?: string | null;
+  date?: string | null;
+  time?: string | null;
   category?: string | null;
 };
 
@@ -711,13 +715,15 @@ function mapLatestInsights(items: LatestInsightApiItem[] | LatestInsightApiItem 
       if (!title || !image || !slug) return null;
 
       const category = cleanText(item.category || '') || 'INSIGHTS';
-      const date = formatInsightDate(item.published_at);
+      const rawDate = cleanText(item.date || '') || isoDateFrom(item.published_at) || '';
+      const rawTime = cleanText(item.time || '') || isoTimeFrom(item.published_at) || '';
 
       return {
         id: String(id),
         title,
         category,
-        date,
+        date: rawDate,
+        time: rawTime || undefined,
         image,
         imageAlt: title,
         link: buildInsightsLink(slug),

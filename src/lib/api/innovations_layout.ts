@@ -1,6 +1,7 @@
 import { fetchJsonCached } from '@/lib/api/apiCache';
 import { normalizeText } from '@/lib/htmlText';
 import type { MarketingNewsItem } from '@/components/marketing/LatestNewsClient';
+import { isoDateFrom, isoTimeFrom } from '@/lib/dateTime';
 
 type Media = { url?: string | null } | null | undefined;
 
@@ -51,6 +52,8 @@ type MarketingNewsApiItem = {
   featured_image?: Media;
   summary?: string;
   published_at?: string | null;
+  date?: string | null;
+  time?: string | null;
 };
 
 export type InnovationsFeatureCard = {
@@ -113,13 +116,15 @@ function mapMarketingNewsItems(
       const title = item.title?.trim();
       const image = mediaUrl(item.featured_image);
       if (!title || !image) return null;
+      const rawDate = item.date?.trim() || isoDateFrom(item.published_at) || '';
+      const rawTime = item.time?.trim() || isoTimeFrom(item.published_at) || '';
       return {
         id: String(item.id ?? `news-${idx + 1}`),
         title,
         image,
         imageAlt: title,
-        date: '',
-        time: '',
+        date: rawDate || undefined,
+        time: rawTime || undefined,
       } as MarketingNewsItem;
     })
     .filter(Boolean) as MarketingNewsItem[];

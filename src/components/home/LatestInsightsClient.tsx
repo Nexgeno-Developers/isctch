@@ -3,6 +3,7 @@
 import { useRef } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { formatCardDate, formatCardTime } from '@/lib/dateTime';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Pagination, Navigation } from 'swiper/modules';
 import type { Swiper as SwiperType } from 'swiper';
@@ -134,15 +135,83 @@ export default function LatestInsightsClient({ data }: LatestInsightsClientProps
 
                   {/* Content - Blue Background */}
                   <div className="bg-[#009FE8] p-4 md:p-6 h-full flex flex-col">
-                    {/* Category and Date */}
-                    <div className="flex items-center justify-between mb-3">
-                      <span className="text-white text-sm md:text-base font-medium uppercase tracking-wide">
-                        {card.category}
-                      </span>
-                      <span className="text-white text-sm md:text-base font-medium">
-                        {card.date}
-                      </span>
-                    </div>
+                    {(() => {
+                      const metaTime = formatCardTime(card.time);
+                      const metaDate = formatCardDate(card.date);
+                      if (!card.category && !metaTime && !metaDate) return null;
+                      return (
+                        <div className="mb-3 flex flex-col gap-2">
+                          {card.category ? (
+                            <span className="text-white text-xs md:text-sm font-semibold uppercase tracking-wide">
+                              {card.category}
+                            </span>
+                          ) : null}
+
+                          {metaTime || metaDate ? (
+                            <div className="flex items-center justify-between gap-4 text-xs text-white/90 md:text-sm">
+                              {metaTime ? (
+                                <div className="inline-flex items-center gap-2">
+                                  <svg
+                                    className="h-5 w-5"
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    aria-hidden
+                                  >
+                                    <path
+                                      d="M12 6v6l3 3"
+                                      stroke="currentColor"
+                                      strokeWidth="1.8"
+                                      strokeLinecap="round"
+                                      strokeLinejoin="round"
+                                    />
+                                    <circle cx="12" cy="12" r="8" stroke="currentColor" strokeWidth="1.8" />
+                                  </svg>
+                                  <span className="font-medium">{metaTime}</span>
+                                </div>
+                              ) : (
+                                <span aria-hidden />
+                              )}
+
+                              {metaDate ? (
+                                <div className="inline-flex items-center gap-2">
+                                  <svg
+                                    className="h-5 w-5"
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    aria-hidden
+                                  >
+                                    <rect
+                                      x="4"
+                                      y="5"
+                                      width="16"
+                                      height="15"
+                                      rx="2"
+                                      stroke="currentColor"
+                                      strokeWidth="1.8"
+                                    />
+                                    <path
+                                      d="M4 9h16"
+                                      stroke="currentColor"
+                                      strokeWidth="1.8"
+                                      strokeLinecap="round"
+                                    />
+                                    <path
+                                      d="M9 4v3M15 4v3"
+                                      stroke="currentColor"
+                                      strokeWidth="1.8"
+                                      strokeLinecap="round"
+                                    />
+                                  </svg>
+                                  <span className="font-medium">{metaDate}</span>
+                                </div>
+                              ) : null}
+                            </div>
+                          ) : null}
+                        </div>
+                      );
+                    })()}
 
                     {/* Title */}
                     <h3 className="text-[18px] md:text-[20px] lg:text-[24px] font-bold text-white leading-snug line-clamp-2 min-h-[52px] md:min-h-[56px] lg:min-h-[68px]">
