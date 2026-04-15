@@ -113,7 +113,7 @@ export default function CompanyStatistics({ statistics }: CompanyStatisticsProps
           {statistics.map((stat) => (
             <div
               key={stat.id}
-              className="bg-[#EDF0F1] rounded-[28px] md:rounded-[50px] p-4 md:p-10 duration-300 flex flex-col text-center"
+              className="bg-[#EDF0F1] rounded-[28px] md:rounded-[50px] p-4 md:p-7 lg:p-10 duration-300 flex flex-col text-center"
             >
               <div className="mb-4 md:mb-6 w-12 h-12 flex items-center justify-center w-full">
                 {stat.icon ? (

@@ -146,7 +146,7 @@ export function LamiStrawLandingSection({
         </div>
       </section>
 
-      <div className="pb-10 md:pb-24">
+      <div className="pb-10 md:pb-12 lg:pb-24">
         {videoUrl ? (
           <VideoBanner
             prefetchedData={{

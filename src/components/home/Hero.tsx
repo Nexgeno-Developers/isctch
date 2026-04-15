@@ -90,7 +90,7 @@ export default function Hero({ data }: HeroProps) {
   }, [currentSlide]);
 
   return (
-    <section className="relative h-auto md:h-screen md:min-h-[max(100dvh,600px)] overflow-hidden">
+    <section className="relative  md:h-screen md:min-h-[max(100dvh,600px)] banner_heights overflow-hidden">
       {/* Background Image with Overlay */}
       <div className="absolute inset-0">
         {slides.map((slide, index) => (
@@ -139,10 +139,10 @@ export default function Hero({ data }: HeroProps) {
             </div> */}
 
             {/* Main Headline */}
-            <div className="lg:max-w-5xl">
+            <div className="md:max-w-3xl lg:max-w-5xl">
               <h1 className="text-white text-[24px] sm:text-3xl md:text-4xl lg:text-5xl font-bold leading-tight [overflow-wrap:anywhere] lg:mb-0 mb-3 [text-shadow:0_1px_3px_rgba(0,0,0,0.22)]" dangerouslySetInnerHTML={{ __html: formatBoldText(currentSlideData.title) }} />
 
-              <p className="text-[14px] lg:text-base text-white lg:py-[20px] pt-0 pb-0 lg:!leading-[32px] !leading-[22px] lg:pr-[200px] lg:line-clamp-4 line-clamp-3 [text-shadow:0_1px_2px_rgba(0,0,0,0.2)]">
+              <p className="text-[14px] md:text-base md:leading-7 md:line-clamp-4 lg:text-base text-white lg:py-[20px] pt-0 pb-0 lg:!leading-[32px] !leading-[22px] md:max-w-2xl lg:max-w-none lg:pr-[200px] lg:line-clamp-4 line-clamp-3 [text-shadow:0_1px_2px_rgba(0,0,0,0.2)]">
                 {formatBoldText(currentSlideData.description)}
               </p>
             </div>

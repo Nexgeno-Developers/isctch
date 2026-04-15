@@ -48,20 +48,8 @@ export default async function TechnicalConsultationCTA() {
                   href={ctaLink}
                   className="lg:inline-flex items-center text-white text-base md:text-lg lg:text-xl font-bold tracking-wider hover:text-[#009FE8] transition-colors group whitespace-nowrap"
                 >
-                  REQUEST TECHNICAL CONSULTATION
-                  <svg
-                    className="w-5 h-5 md:w-6 md:h-6 ml-2 transform group-hover:translate-x-1 transition-transform"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M17 8l4 4m0 0l-4 4m4-4H3"
-                    />
-                  </svg>
+                  REQUEST TECHNICAL CONSULTATION →
+                 
                 </Link>
               ) : null}
             </div>

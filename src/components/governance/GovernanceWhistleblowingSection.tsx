@@ -13,7 +13,7 @@ export default function GovernanceWhistleblowingSection({
   data: GovernanceWhistleblowingSectionData;
 }) {
   return (
-    <section className="bg-[#EDF0F1] py-10 md:py-20 mt-8 md:mt-12">
+    <section className="bg-[#EDF0F1] py-10 md:py-20 mt-8 md:mt-0 lg:mt-12">
       <div className="container mx-auto px-4">
         <div className="max-w-4xl mx-auto text-center">
           <div className="text-[#009FE8] font-semibold text-sm md:text-base">

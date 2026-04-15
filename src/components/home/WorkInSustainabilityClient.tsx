@@ -43,14 +43,14 @@ export default function WorkInSustainabilityClient({ data }: WorkInSustainabilit
       </div>
       <div className="relative z-10 container mx-auto px-4">
         {/* Header with Title and Navigation */}
-        <div className="flex items-center justify-between mb-4 md:mb-12">
+        <div className="mb-4 flex items-center justify-between md:mb-12  md:max-[991px]:items-stretch md:max-[991px]:gap-4 min-[1023px]:flex-row min-[1023px]:items-center min-[1023px]:justify-between">
           <h2 className="text-[22px] md:text-4xl lg:text-5xl font-bold text-white">
           Our Contributions <span className="text-[#009FE8]">Sustainability</span>
           </h2>
 
           {/* Navigation Arrows */}
           {data.cards.length > 3 && (
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-3 md:max-[991px]:self-end">
               <button
                 onClick={() => swiperRef.current?.slidePrev()}
                 className="cursor-pointer lg:w-12 lg:h-12 w-8 h-8 rounded-full lg:border-2 border-1 border-[#009FE8] bg-white hover:bg-[#009FE8] flex items-center justify-center transition-all group shadow-lg"
@@ -111,6 +111,11 @@ export default function WorkInSustainabilityClient({ data }: WorkInSustainabilit
           }}
           breakpoints={{
             768: {
+              slidesPerView: 2,
+              slidesPerGroup: 1,
+              spaceBetween: 32,
+            },
+            992: {
               slidesPerView: 3,
               slidesPerGroup: 1,
               spaceBetween: 32,
@@ -183,12 +188,12 @@ function WorkCard({ card }: { card: SustainabilityWorkCard }) {
           alt={card.imageAlt}
           fill
           className="object-cover"
-          sizes="(max-width: 768px) 100vw, 33vw"
+          sizes="(max-width: 767px) 100vw, (max-width: 991px) 50vw, 33vw"
         />
       </div>
 
       <div className="pt-4 px-0 pb-2 flex flex-col flex-1">
-        <h3 className="text-[18px] md:text-[26px] mt-2 font-bold text-black mb-3 leading-tight">
+        <h3 className="text-[18px] md:text-[22px] lg:text-[26px] mt-2 font-bold text-black mb-3 leading-tight">
           {card.title}
         </h3>
 

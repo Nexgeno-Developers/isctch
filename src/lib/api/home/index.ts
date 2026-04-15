@@ -151,6 +151,7 @@ export type Question = {
 };
 
 export type ApproachData = {
+  eyebrow: string;
   title: string;
   subtitle: string;
   image: string;
@@ -252,6 +253,17 @@ type HomeMetaApi = {
   global_beverage_video_url?: string;
   global_beverage_image?: MediaRef;
   faqs_items?: FaqsItemsApi;
+  approach_title?: string;
+  approach_subtitle?: string;
+  approach_image?: MediaRef | string;
+  approach_short_description?: string;
+  approach_question_1?: string;
+  approach_product_industries?: string;
+  approach_question_2?: string;
+  approach_production_scale?: string;
+  approach_question_3?: string;
+  approach_market_region?: string;
+  approach_navigation_url?: string;
 };
 
 type ServiceAutofetchItem = {
@@ -470,6 +482,7 @@ function buildpressreleaseLink(slug?: string | null): string {
 // ==================== Fallback Data ====================
 
 const FALLBACK_APPROACH: ApproachData = {
+  eyebrow: 'Our Approach',
   title: 'We engineer the future of <span class="text-[#009FE8]">aseptic packaging.</span>',
   subtitle: 'Answer three questions and discover your optimal packaging system.',
   image: '/approcah_image.jpg',
@@ -512,6 +525,96 @@ const FALLBACK_APPROACH: ApproachData = {
   ctaText: 'DISCOVER YOUR SYSTEM',
   ctaLink: '/solutions',
 };
+
+type JsonOptionValue = { value?: string } | string;
+
+const INDUSTRY_LABEL_BY_ID: Record<string, string> = {
+  '16': 'Dairy',
+  '21': 'Juices Nectar & Still Drinks',
+  '22': 'Plant Based',
+  '23': 'Ready To Drink',
+  '24': 'Alcohol',
+  '25': 'Culinary',
+  '26': 'Functional',
+  '27': 'Nutraceutical',
+};
+
+function parseJsonArray(raw?: string): unknown[] {
+  if (!raw) return [];
+  try {
+    const parsed = JSON.parse(raw);
+    return Array.isArray(parsed) ? parsed : [];
+  } catch {
+    return [];
+  }
+}
+
+function slugifyValue(input: string): string {
+  return input.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+}
+
+function mediaUrlFromRef(input?: MediaRef | string): string | undefined {
+  if (!input) return undefined;
+  if (typeof input === 'string') {
+    const trimmed = input.trim();
+    if (/^https?:\/\//i.test(trimmed) || trimmed.startsWith('/')) return trimmed;
+    return undefined;
+  }
+  return input.url?.trim() || undefined;
+}
+
+function mapApproach(meta: HomeMetaApi | undefined): ApproachData | null {
+  if (!meta) return null;
+
+  const q1 = cleanText(meta.approach_question_1);
+  const q2 = cleanText(meta.approach_question_2);
+  const q3 = cleanText(meta.approach_question_3);
+
+  const industries = parseJsonArray(meta.approach_product_industries).map(String);
+  const scales = parseJsonArray(meta.approach_production_scale) as JsonOptionValue[];
+  const regions = parseJsonArray(meta.approach_market_region) as JsonOptionValue[];
+
+  const q1Options: QuestionOption[] = industries
+    .map((id, i) => {
+      const label = INDUSTRY_LABEL_BY_ID[id] || '';
+      if (!label) return null;
+      return { id: `1-${i + 1}`, label, value: slugifyValue(label) };
+    })
+    .filter(Boolean) as QuestionOption[];
+
+  const q2Options: QuestionOption[] = scales
+    .map((entry, i) => {
+      const label = cleanText(typeof entry === 'string' ? entry : entry.value || '');
+      if (!label) return null;
+      return { id: `2-${i + 1}`, label, value: slugifyValue(label) };
+    })
+    .filter(Boolean) as QuestionOption[];
+
+  const q3Options: QuestionOption[] = regions
+    .map((entry, i) => {
+      const label = cleanText(typeof entry === 'string' ? entry : entry.value || '');
+      if (!label) return null;
+      return { id: `3-${i + 1}`, label, value: slugifyValue(label) };
+    })
+    .filter(Boolean) as QuestionOption[];
+
+  const questions: Question[] = [];
+  if (q1 && q1Options.length) questions.push({ id: '1', question: q1, options: q1Options });
+  if (q2 && q2Options.length) questions.push({ id: '2', question: q2, options: q2Options });
+  if (q3 && q3Options.length) questions.push({ id: '3', question: q3, options: q3Options });
+  if (!questions.length) return null;
+
+  return {
+    eyebrow: cleanText(meta.approach_title) || FALLBACK_APPROACH.eyebrow,
+    title: formatBoldText(cleanText(meta.approach_subtitle) || FALLBACK_APPROACH.title),
+    subtitle: cleanText(meta.approach_short_description) || FALLBACK_APPROACH.subtitle,
+    image: mediaUrlFromRef(meta.approach_image) || FALLBACK_APPROACH.image,
+    imageAlt: 'Approach section image',
+    questions,
+    ctaText: FALLBACK_APPROACH.ctaText,
+    ctaLink: normalizeNavHref(meta.approach_navigation_url || FALLBACK_APPROACH.ctaLink),
+  };
+}
 
 // FALLBACK_INSIGHTS removed: latest insights now mapped from API `latest_insights`.
 
@@ -857,7 +960,7 @@ export const fetchHomepageData = async (): Promise<HomepageData | null> => {
       faq: faqMapped ?? { items: [] },
       latestPressRelease: latestPressReleaseMapped ?? { cards: [] },
       latestInsights: latestInsightsMapped ?? { cards: [] },
-      approach: FALLBACK_APPROACH,
+      approach: mapApproach(meta) ?? FALLBACK_APPROACH,
       innovationInPackaging: { cards: [], exploreMoreLink: '/' },
       callToAction: FALLBACK_CTA,
       newsletterSubscription: FALLBACK_NEWSLETTER,

@@ -96,7 +96,7 @@ export default function InsightsHubPage({ data }: { data: InsightsHubData }) {
                   {section.subtitle}
                 </p>
               ) : null}
-              <div className="mt-4 lg:mt-10 grid grid-cols-1 gap-6 md:grid-cols-3 md:gap-8">
+              <div className="mt-4 lg:mt-10 flex lg:flex-nowrap md:flex-nowrap flex-wrap justify-center gap-6 md:gap-8">
                 {section.items.map((item) => (
                   <InsightCard key={item.id} item={item} variant={section.variant} />
                 ))}

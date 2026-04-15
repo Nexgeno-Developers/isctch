@@ -278,7 +278,7 @@ export default function VideoBanner({
   return (
     <>
       
-      <section className="relative min-h-[200px] h-[200px] md:h-screen md:min-h-0 overflow-hidden">
+      <section className="relative min-h-[200px] h-[200px] md:h-[450px] lg:h-screen md:min-h-0 overflow-hidden">
       {/* Background video always mounted so it keeps playing behind the lightbox */}
       <div className="absolute inset-0 z-0">
         {backgroundInnerEl}

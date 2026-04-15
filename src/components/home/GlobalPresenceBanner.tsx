@@ -25,8 +25,8 @@ export default async function GlobalPresenceBanner() {
         />
       </div>
 
-      <div className="relative z-10 container mx-auto px-4 py-4 text-center md:py-16 lg:py-[150px]">
-        <h2 className="text-xl font-bold uppercase tracking-wide text-white md:text-4xl lg:text-5xl">
+      <div className="relative z-10 container mx-auto px-4 py-4 text-center md:py-20 lg:py-[150px]">
+        <h2 className="text-xl font-bold capitalize tracking-wide text-white md:text-4xl lg:text-5xl">
           {title}
         </h2>
         {description ? (

@@ -13,9 +13,9 @@ export default async function Footer() {
   return (
     <footer className="bg-[#009FE8] text-white overflow-x-hidden">
       <div className="container mx-auto px-4 pt-12 md:pt-16 pb-8">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-8 xl:gap-10">
+        <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-12 gap-x-6 gap-y-10 sm:gap-10 lg:gap-8 xl:gap-10">
           {/* Left Section - Logo, Description, and Social Icons */}
-          <div className="w-full sm:col-span-2 lg:col-span-4 xl:col-span-4 lg:pr-4 xl:pr-8">
+          <div className="w-full col-span-2 lg:col-span-4 xl:col-span-4 lg:pr-4 xl:pr-8">
             {/* Logo */}
             <Link href={footerData.logo.href} className="block mb-4">
               {footerData.logo.image ? (

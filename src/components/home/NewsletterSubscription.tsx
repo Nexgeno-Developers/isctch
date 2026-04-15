@@ -21,7 +21,7 @@ export default async function NewsletterSubscription() {
     <section 
       className="relative py-10 md:py-24 overflow-hidden"
       style={{
-        backgroundImage: 'url(/newsletter_bg.png)',
+        backgroundImage: 'url(/newsletter_bg.webp)',
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat'

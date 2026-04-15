@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import { fetchCompanyProfileData } from '@/lib/api';
+import { FooterSocialIcon } from '@/components/layout/FooterSocialIcon';
 
 function IconLocation() {
   return (
@@ -18,30 +19,6 @@ function IconPhone() {
         strokeLinejoin="round"
         d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.1 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.12.9.32 1.77.59 2.61a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.47-1.16a2 2 0 0 1 2.11-.45c.84.27 1.71.47 2.61.59A2 2 0 0 1 22 16.92z"
       />
-    </svg>
-  );
-}
-
-function SocialIconTwitter() {
-  return (
-    <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-      <path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z" />
-    </svg>
-  );
-}
-
-function SocialIconInstagram() {
-  return (
-    <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-      <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
-    </svg>
-  );
-}
-
-function SocialIconLinkedIn() {
-  return (
-    <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-      <path d="M20.45 20.45h-3.55v-5.4c0-1.29-.02-2.95-1.8-2.95-1.8 0-2.08 1.4-2.08 2.85v5.5H9.47V9h3.4v1.5h.05c.47-.9 1.63-1.85 3.35-1.85 3.58 0 4.24 2.36 4.24 5.43v6.37zM5.34 7.43c-1.14 0-2.06-.93-2.06-2.07 0-1.14.92-2.06 2.06-2.06 1.14 0 2.07.92 2.07 2.06 0 1.14-.93 2.07-2.07 2.07zM7.12 20.45H3.56V9h3.56v11.45z" />
     </svg>
   );
 }
@@ -70,14 +47,19 @@ export default async function ContactUsMessageRight() {
   const companyProfile = await fetchCompanyProfileData();
   const headquartersAddress = companyProfile?.address || 'Head Office, Mumbai, India';
   const headquartersPhone = companyProfile?.phone || '02134567890';
-  const companyWebsite = companyProfile?.website;
   const salesPartnerEmail = companyProfile?.salesPartnerEmail || 'sales@lamipak.com';
   const technicalSupportEmail =
     companyProfile?.technicalSupportEmail || 'tech.support@lamipak.com';
   const careersEmail = companyProfile?.careersEmail || 'hr@lamipak.com';
-  const socialInstagram = companyProfile?.instagramUrl;
-  const socialX = companyProfile?.xUrl;
-  const socialLinkedIn = companyProfile?.linkedinUrl;
+  const socialLinks = [
+    { icon: 'x', platform: 'X', href: companyProfile?.xUrl },
+    { icon: 'linkedin', platform: 'LinkedIn', href: companyProfile?.linkedinUrl },
+    { icon: 'facebook', platform: 'Facebook', href: companyProfile?.facebookUrl },
+    { icon: 'instagram', platform: 'Instagram', href: companyProfile?.instagramUrl },
+    { icon: 'youtube', platform: 'YouTube', href: companyProfile?.youtubeUrl },
+    { icon: 'tiktok', platform: 'TikTok', href: companyProfile?.tiktokUrl },
+    { icon: 'vimeo', platform: 'Vimeo', href: companyProfile?.vimeoUrl },
+  ].filter((item): item is { icon: string; platform: string; href: string } => Boolean(item.href));
   const googleMapImage = companyProfile?.googleMapImage;
 
   return (
@@ -99,13 +81,13 @@ export default async function ContactUsMessageRight() {
             </div>
             <div className="text-sm text-black">{headquartersPhone}</div>
           </div>
-          {companyWebsite && (
+          {/* {companyWebsite && (
             <div className="text-sm text-black">
               <a href={companyWebsite} target="_blank" rel="noopener noreferrer" className="underline">
                 {companyWebsite}
               </a>
             </div>
-          )}
+          )} */}
         </div>
       </div>
 
@@ -132,41 +114,22 @@ export default async function ContactUsMessageRight() {
 
       <WorldPresenceCard mapImage={googleMapImage} />
 
-      <div className="flex items-center justify-center gap-3">
-        {socialX && (
-          <a
-            href={socialX}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="w-10 h-10 rounded-full bg-[#EDF0F1] flex items-center justify-center text-black hover:opacity-80 transition-opacity"
-            aria-label="X"
-          >
-            <SocialIconTwitter />
-          </a>
-        )}
-        {socialInstagram && (
-          <a
-            href={socialInstagram}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="w-10 h-10 rounded-full bg-[#EDF0F1] flex items-center justify-center text-black hover:opacity-80 transition-opacity"
-            aria-label="Instagram"
-          >
-            <SocialIconInstagram />
-          </a>
-        )}
-        {socialLinkedIn && (
-          <a
-            href={socialLinkedIn}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="w-10 h-10 rounded-full bg-[#EDF0F1] flex items-center justify-center text-black hover:opacity-80 transition-opacity"
-            aria-label="LinkedIn"
-          >
-            <SocialIconLinkedIn />
-          </a>
-        )}
-      </div>
+      {socialLinks.length > 0 && (
+        <div className="flex items-center justify-center gap-3">
+          {socialLinks.map((social) => (
+            <a
+              key={social.icon}
+              href={social.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex h-10 w-10 items-center justify-center rounded-full bg-[#EDF0F1] text-black transition-opacity hover:opacity-80"
+              aria-label={social.platform}
+            >
+              <FooterSocialIcon icon={social.icon} />
+            </a>
+          ))}
+        </div>
+      )}
     </aside>
   );
 }

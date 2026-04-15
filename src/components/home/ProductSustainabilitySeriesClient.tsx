@@ -46,14 +46,14 @@ export default function ProductSustainabilitySeriesClient({ data }: ProductSusta
           {/* Content Wrapper */}
           <div className="relative z-10">
           {/* Section Title and Navigation */}
-          <div className="flex items-center justify-between mb-4 md:mb-12">
+          <div className="mb-4 flex items-center justify-between md:mb-12 md:max-[991px]:flex-col md:max-[991px]:items-stretch md:max-[991px]:gap-4 min-[1023px]:flex-row min-[1023px]:items-center min-[1023px]:justify-between">
             <h2 className="text-[22px] md:text-4xl lg:text-5xl font-bold text-white">
               Product Sustainability Series
             </h2>
 
             {/* Navigation Arrows */}
             {data.products.length > 3 && (
-              <div className="flex items-center gap-3">
+              <div className="flex items-center gap-3 md:max-[991px]:self-end">
                 <button
                   onClick={() => swiperRef.current?.slidePrev()}
                   className="cursor-pointer w-12 h-12 rounded-full border-2 border-white bg-transparent hover:bg-white flex items-center justify-center transition-all group shadow-lg"
@@ -114,6 +114,11 @@ export default function ProductSustainabilitySeriesClient({ data }: ProductSusta
             }}
             breakpoints={{
               768: {
+                slidesPerView: 2,
+                slidesPerGroup: 1,
+                spaceBetween: 28,
+              },
+              992: {
                 slidesPerView: 3,
                 slidesPerGroup: 1,
                 spaceBetween: 32,
@@ -185,19 +190,19 @@ function ProductCard({ product }: { product: SustainabilityProductCard }) {
           height={400}
           width={400}
           className="object-cover"
-          sizes="(max-width: 768px) 100vw, 33vw w-full"
+          sizes="(max-width: 767px) 100vw, (max-width: 991px) 50vw, 33vw"
         />
       </div>
 
       {/* Content */}
-      <div className="px-2 py-4 md:p-6">
+      <div className="px-2 py-4 md:p-4 lg:p-6">
         {/* Label */}
         {/* <span className="inline-block text-[#009FE8] text-[12px] md:text-base font-medium mb-3">
           {product.label}
         </span> */}
 
         {/* Title */}
-        <h3 className="text-[18px] md:text-3xl font-bold text-black lg:mb-4 mb-1">
+        <h3 className="text-[18px] md:text-2xl lg:text-3xl font-bold text-black lg:mb-4 mb-1">
           {product.title}
         </h3>
 

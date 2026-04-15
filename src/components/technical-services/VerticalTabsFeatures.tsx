@@ -30,7 +30,7 @@ export default function VerticalTabsFeatures({ features }: VerticalTabsFeaturesP
   }
 
   return (
-    <section className="bg-gray-50 py-8 md:py-12 lg:py-12">
+    <section className="bg-gray-50 pt-8 md:pt-12 lg:pt-20">
       <div className="container mx-auto px-4">
         {/* Mobile: full-width stacked cards (hover % widths are unusable on narrow viewports) */}
         <div className="flex flex-col gap-4 md:hidden">

@@ -32,7 +32,7 @@ export function InsightCard({
 
   return (
     <article
-      className={`flex flex-col overflow-hidden rounded-[50px] bg-white p-4 md:p-5 h-full`}
+      className={`rounded-[50px] bg-white p-4 md:p-5 h-full`}
     >
       <div className="relative w-full overflow-hidden rounded-[50px] bg-gray-100">
         {showImage ? (

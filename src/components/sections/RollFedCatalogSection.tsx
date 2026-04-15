@@ -96,7 +96,7 @@ export function RollFedCatalogSection({ data }: { data: RollFedCatalogSectionPro
         </div>
       </section>
 
-      <div className="pb-10 md:pb-24 md:pt-8 pt-0 lg:mt-5 mt-0">
+      <div className="pb-10 md:pb-12 lg:pb-24 md:pt-8 pt-0 lg:mt-5 mt-0">
         {videoUrl ? (
           <VideoBanner
             prefetchedData={{

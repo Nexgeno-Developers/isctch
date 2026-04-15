@@ -14,9 +14,9 @@ export default async function Header() {
 
   return (
     <header className="absolute w-full top-3 sm:top-5 md:top-[30px] z-50 left-0 right-0">
-      <div className="container mx-auto px-4 flex flex-col items-end">
+      <div className="container_width container mx-auto px-4 flex flex-col items-end">
         {/* Desktop submenu strip (top-right) */}
-        <div className="hidden lg:flex items-center justify-end gap-6 pr-1 mb-2 text-white">
+        <div className="hidden min-[1023px]:max-lg:flex xl:flex md:flex items-center justify-end gap-6 pr-1 mb-2 text-white">
           {(topBarMenu ?? []).map((item) => (
             <Link
               key={item.id}
@@ -31,15 +31,15 @@ export default async function Header() {
 
         <div className="flex items-center justify-between gap-3 h-14 sm:h-16 md:h-20 relative min-w-0 w-full">
           {/* Logo */}
-          <Link href={headerData.logo.href} className="flex items-center min-w-0 shrink">
+          <Link href={headerData.logo.href} className="flex shrink-0 items-center">
             {headerData.logo.image ? (
-              <div className="flex items-center gap-3 min-w-0">
+              <div className="flex shrink-0 items-center gap-3">
                 <Image
                   src={headerData.logo.image}
                   alt={headerData.logo.text || 'Logo'}
                   width={300}
                   height={300}
-                  className="lg:w-[120px] w-[70px] h-auto object-left lg:mt-0 mt-4"
+                  className="mt-4 h-auto w-[70px] shrink-0 object-left min-1023px]:mt-0 min-[1023px]:w-[120px] lg:max-xl:w-[100px] xl:w-[120px]"
                   priority
                 />
                 
@@ -52,8 +52,8 @@ export default async function Header() {
           </Link>
 
           {/* Desktop Navigation + CTA (Right side) */}
-          <div className="hidden md:flex items-center gap-6 lg:gap-7 ml-auto">
-            <nav className="flex items-center space-x-[20px] lg:space-x-[25px]">
+          <div className="ml-auto hidden min-w-0 min-[1023px]:flex min-[1023px]:items-center min-[1023px]:gap-4 lg:max-xl:gap-3 xl:gap-7">
+            <nav className="flex min-w-0 items-center space-x-3 lg:max-xl:space-x-2 xl:space-x-[25px]">
               {headerData.navigation.map((item) => (
                 <NavigationDropdown key={item.id} item={item} />
               ))}
@@ -62,7 +62,7 @@ export default async function Header() {
             {headerData.cta && (
               <Link
                 href={headerData.cta.href}
-                className="capitalize border border-[#00d4ff] text-white px-6 py-2 rounded-full hover:bg-[#00d4ff] hover:text-[#0a1a3a] transition-all font-medium text-[16px] tracking-wider"
+                className="shrink-0 rounded-full border border-[#00d4ff] px-4 py-1.5 text-sm font-medium tracking-wider text-white capitalize transition-all hover:bg-[#00d4ff] hover:text-[#0a1a3a] lg:max-xl:px-3 lg:max-xl:py-1 lg:max-xl:text-xs xl:px-6 xl:py-2 xl:text-[16px]"
               >
                 {headerData.cta.text}
               </Link>
@@ -70,7 +70,7 @@ export default async function Header() {
           </div>
 
           {/* Mobile Menu */}
-          <div className="md:hidden">
+          <div className="min-[1023px]:hidden">
             <MobileMenu navigation={headerData.navigation} cta={headerData.cta} />
           </div>
         </div>

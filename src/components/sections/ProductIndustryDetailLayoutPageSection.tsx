@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import LatestInsights from '@/components/home/LatestInsights';
+import NewsletterSubscription from '@/components/home/NewsletterSubscription';
 import ContactSustainability from '@/components/products/ContactSustainability';
 import IndustryConsultationCTA from '@/components/products/IndustryConsultationCTA';
 import CategoryGlobalImpact from '@/components/products/CategoryGlobalImpact';
@@ -17,7 +18,7 @@ export default function ProductIndustryDetailLayoutPageSection({
   return (
     <main className="min-h-screen bg-gray-50">
       {/* Hero */}
-      <section className="relative lg:pt-[220px] pt-[110px] lg:pb-[150px] pb-[30px] overflow-hidden">
+      <section className="relative lg:pt-[220px] md:pt-[150px] pt-[110px] lg:pb-[150px] md:pb-[50px] pb-[30px] overflow-hidden">
         <div className="absolute inset-0">
           {data.heroBackgroundImage ? (
             // eslint-disable-next-line @next/next/no-img-element
@@ -34,7 +35,7 @@ export default function ProductIndustryDetailLayoutPageSection({
         <div className="relative z-10 h-full flex flex-col">
           <div className="container mx-auto flex-1 flex flex-col justify-center px-4">
             <div className="text-center">
-              <h1 className="text-[22px] md:text-5xl lg:text-6xl xl:text-6xl font-bold text-white tracking-tight">
+              <h1 className="text-[22px] md:text-3xl lg:text-6xl xl:text-6xl font-bold text-white tracking-tight">
                 {data.title}
               </h1>
               {/* {data.shortDescription ? (
@@ -78,11 +79,11 @@ export default function ProductIndustryDetailLayoutPageSection({
               />
             ) : null}
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6 md:gap-8 justify-items-center">
+            <div className="flex flex-wrap justify-center gap-6 md:gap-8">
               {data.support.items.map((item) => (
                 <div
                   key={item.id}
-                  className="text-start group bg-[#EDF0F1] rounded-[50px] overflow-hidden transition-all duration-300 flex flex-col h-full p-[15px] w-full"
+                  className="w-full sm:w-[calc(50%-1rem)] md:w-[calc(33.333%-1.5rem)] lg:w-[calc(25%-1.5rem)] xl:w-[calc(20%-2rem)] flex justify-center text-start group bg-[#EDF0F1] rounded-[50px] overflow-hidden transition-all duration-300 flex flex-col h-full p-[15px] w-full"
                 >
                   <div className="relative w-full aspect-square overflow-hidden bg-white rounded-[50px] mb-4">
                     {item.image ? (
@@ -189,6 +190,10 @@ export default function ProductIndustryDetailLayoutPageSection({
 
       <LatestInsights />
       <ContactSustainability />
+      <div className="bg-gray-50 lg:pt-12 md:pt-12 pt-8">
+      <NewsletterSubscription />
+      </div>
+      
     </main>
   );
 }

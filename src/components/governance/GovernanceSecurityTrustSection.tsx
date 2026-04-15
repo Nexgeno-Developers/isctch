@@ -150,9 +150,9 @@ export default function GovernanceSecurityTrustSection({
               {data.stats.map((stat) => (
                 <div
                   key={stat.id}
-                  className="bg-[#EDF0F1] rounded-[28px] md:rounded-[50px] px-4 py-10 md:py-16 text-center"
+                  className="bg-[#EDF0F1] rounded-[28px] md:rounded-[50px] px-2 py-10 md:py-8 lg:py-16 text-center"
                 >
-                  <div className="text-black font-extrabold text-[28px] md:text-[42px] leading-none">
+                  <div className="text-black font-extrabold text-[28px] md:text-[32px] lg:text-[42px] leading-none">
                     {stat.value}
                   </div>
                   <div className="mt-3 text-[14px] md:text-sm text-black leading-snug">

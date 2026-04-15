@@ -4,7 +4,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { useState } from 'react';
 // import { formatBoldText } from '@/lib/htmlText';
-import type { ApproachData } from '@/fake-api/homepage';
+import type { ApproachData } from '@/lib/api/home';
 
 interface ApproachClientProps {
   data: ApproachData;
@@ -29,7 +29,7 @@ export default function ApproachClient({ data }: ApproachClientProps) {
   return (
     <section className="bg-[#f8f8f8] overflow-x-hidden">
       <div className="container mx-auto px-4 lg:px-0 max-w-full lg:pt-0 pt-10">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10 lg:gap-12 items-center">
           {/* Left Side - Image */}
           <div className="relative w-full overflow-hidden">
             {data.image ? (
@@ -49,16 +49,16 @@ export default function ApproachClient({ data }: ApproachClientProps) {
           </div>
 
           {/* Right Side - Content */}
-          <div className="px-0 pb-8 md:px-4 lg:pe-[50px] lg:ps-5 lg:pb-0 min-w-0">
+          <div className="px-0 pb-8 md:px-2 md:pb-10 lg:pe-[50px] lg:ps-5 lg:pb-0 min-w-0">
             {/* Subtitle */}
             <div className="mb-2">
               <span className="text-sm text-gray-600 uppercase tracking-wider">
-                Our Approach
+                {data.eyebrow}
               </span>
             </div>
 
             {/* Title */}
-            <h2 className="text-[22px] md:text-4xl lg:text-5xl font-bold mb-4 leading-tight md:leading-16 text-black text-black" dangerouslySetInnerHTML={{ __html: data.title }} />
+            <h2 className="text-[22px] md:text-4xl lg:text-5xl font-bold mb-4 leading-tight lg:leading-16 md:leading-12 text-black text-black capitalize" dangerouslySetInnerHTML={{ __html: data.title }} />
 
             {/* Subtitle */}
             <p className="text-black mb-8 text-[14px] md:text-lg leading-relaxed">
@@ -136,7 +136,7 @@ export default function ApproachClient({ data }: ApproachClientProps) {
                 }`}
               > */}
                 <Link
-                href='/'
+                href={data.ctaLink}
                 className={`inline-flex items-center text-[#009FE8] font-semibold lg:text-lg text-base transition-all ${
                   allQuestionsAnswered
                     ? 'opacity-100 hover:text-[#007bb5]'

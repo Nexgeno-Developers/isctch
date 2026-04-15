@@ -29,7 +29,7 @@ export default function InnovationsFeatureCards({ cards }: { cards: InnovationsF
               </div>
               <div className="flex flex-1 flex-col px-3 pb-4 pt-8 md:px-2 md:pb-4 md:pt-9">
                 <h3 className="text-xl font-bold text-black md:text-2xl">{card.title}</h3>
-                <p className="mt-4 text-sm leading-relaxed text-black md:text-base">{card.description}</p>
+                <p className="mt-4 text-sm leading-relaxed text-black md:text-base line-clamp-3">{card.description}</p>
                 <ul className="mt-6 space-y-3">
                   {card.bullets.filter(Boolean).map((line, i) => (
                     <li key={i} className="flex gap-3 text-sm leading-snug text-black md:text-base">
@@ -38,7 +38,7 @@ export default function InnovationsFeatureCards({ cards }: { cards: InnovationsF
                     </li>
                   ))}
                 </ul>
-                <div className="lg:mt-10">
+                <div className="mt-0">
                   <Link
                     href={card.ctaHref}
                     className="inline-flex min-h-[48px] items-center justify-center rounded-full bg-[#009FE8] px-10 py-3 text-sm font-semibold uppercase tracking-wide text-white shadow-sm transition hover:bg-[#0088cc] md:text-base"

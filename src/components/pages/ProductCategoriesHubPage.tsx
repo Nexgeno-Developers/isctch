@@ -24,7 +24,7 @@ export function ProductCategoriesHubPage({
           <SectionRenderer section={section} pageContext={pageContext} />
           {videoUrl && section.type === 'categoryShowcase' ? (
             <div className="">
-              <div className="pb-10 md:pb-24">
+              <div className="pb-10 md:pb-12 lg:pb-24">
                   <VideoBanner videoOnly videoUrl={videoUrl} />
               </div>
             </div>

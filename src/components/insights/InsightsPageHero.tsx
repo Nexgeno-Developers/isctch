@@ -12,7 +12,7 @@ export function InsightsPageHero({
   titleTag?: 'h1' | 'div';
 }) {
   return (
-    <section className="relative overflow-hidden lg:pt-[200px] pt-[110px] lg:pb-[80px] pb-[30px]">
+    <section className="relative overflow-hidden lg:pt-[200px] md:pt-[150px] pt-[110px] lg:pb-[80px] md:pb-[50px] pb-[30px]">
       <div className="absolute inset-0">
         {backgroundImage ? (
           // eslint-disable-next-line @next/next/no-img-element -- CMS URLs may be remote
@@ -31,12 +31,12 @@ export function InsightsPageHero({
         <div className="container mx-auto text-center">
           {titleTag === 'div' ? (
             <div
-              className="text-[22px] font-bold leading-tight tracking-tight text-white md:text-5xl lg:text-6xl xl:text-6xl capitalize"
+              className="text-[22px] font-bold leading-tight tracking-tight text-white md:text-3xl lg:text-6xl xl:text-6xl capitalize"
               dangerouslySetInnerHTML={{ __html: titleHtml }}
             />
           ) : (
             <h1
-              className="text-[22px] font-bold leading-tight tracking-tight text-white md:text-5xl lg:text-6xl xl:text-6xl capitalize"
+              className="text-[22px] font-bold leading-tight tracking-tight text-white md:text-3xl lg:text-6xl xl:text-6xl capitalize"
               dangerouslySetInnerHTML={{ __html: titleHtml }}
             />
           )}

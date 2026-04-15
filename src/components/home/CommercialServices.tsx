@@ -16,7 +16,7 @@ export default async function CommercialServices() {
   const data = homepageData.commercialServices;
 
   return (
-    <section className="bg-[#f8f8f8] pt-10 md:pt-24 pb-8">
+    <section className="bg-[#f8f8f8] pt-10 md:pt-16 lg:pt-24 pb-8">
       <div className="container mx-auto px-4">
         {/* Section Title */}
         <h2 className="text-[22px] md:text-4xl lg:text-5xl font-bold text-center mb-4 md:mb-12">
@@ -48,7 +48,7 @@ function ServiceCard({ card }: { card: CommercialServiceCard }) {
           alt={card.imageAlt}
           fill
           className="object-cover"
-          sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 50vw"
+          sizes="(max-width: 767px) 100vw, (max-width: 991px) 50vw, 50vw"
         />
       </div>
 
@@ -56,7 +56,7 @@ function ServiceCard({ card }: { card: CommercialServiceCard }) {
       <div className="p-6 md:p-8">
         {/* Title with Icon */}
         <div className="flex items-center justify-between mb-2">
-          <h3 className="text-[18px] md:text-3xl font-bold text-[#009FE8]">
+          <h3 className="text-[18px] md:text-2xl lg:text-3xl font-bold text-[#009FE8]">
             {card.title}
           </h3>
           {/* Icon: CMS SVG URL or built-in glyph */}

@@ -46,7 +46,7 @@ export default function ProductFeaturesSliderClient({
         }}
         breakpoints={{
           768: {
-            slidesPerView: 3,
+            slidesPerView: 2,
             slidesPerGroup: 1,
             spaceBetween: 32,
           },

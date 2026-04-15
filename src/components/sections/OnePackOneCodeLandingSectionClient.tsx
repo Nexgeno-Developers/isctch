@@ -104,7 +104,7 @@ function FeatureBlock({
         <div className="">
           <div className="text-5xl md:text-6xl font-extrabold text-[#B7D7EA] leading-none">{feature.number}</div>
           <div className="min-w-0 lg:py-5 py-3">
-            <h3 className="text-[22px] md:text-3xl font-bold text-black">{feature.title}</h3>
+            <h3 className="text-[22px] md:text-3xl md:text-5xl font-bold text-black">{feature.title}</h3>
           </div>
         </div>
         <div className="space-y-3">
@@ -146,7 +146,7 @@ export default function OnePackOneCodeLandingSectionClient({
 
   return (
     <>
-      <section className="relative overflow-hidden bg-[#0c1f45] h-[200px] md:h-[420px]">
+      <section className="relative lg:pt-[200px] md:pt-[150px] pt-[120px] lg:pb-[80px] md:pb-[50px] pb-[44px] overflow-hidden">
         <div className="absolute inset-0">
           {data.hero.backgroundImage ? (
             // eslint-disable-next-line @next/next/no-img-element
@@ -157,8 +157,8 @@ export default function OnePackOneCodeLandingSectionClient({
           <div className="absolute inset-0 bg-[#0e233c52] opacity-90" />
         </div>
 
-        <div className="relative z-10 h-full flex items-center justify-center text-center px-4">
-          <h1 className="lg:pt-0 pt-[100px] text-[22px] md:text-5xl font-extrabold tracking-tight text-white leading-tight">
+        <div className="relative z-10 h-full flex lg:items-center md:items-end justify-center text-center px-4">
+          <h1 className="text-[24px] md:text-3xl lg:text-6xl xl:text-6xl font-bold text-white tracking-tight leading-tight">
             {titleText}
           </h1>
         </div>

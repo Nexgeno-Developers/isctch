@@ -13,6 +13,8 @@ import Breadcrumbs from '@/components/common/Breadcrumbs';
 import { RichText } from '@/components/common/RichText';
 import CallToAction from '@/components/home/CallToAction';
 import NewsletterSubscription from '@/components/home/NewsletterSubscription';
+import LatestNewsClient from '@/components/marketing/LatestNewsClient';
+import { fetchInnovationsLayoutPage } from '@/lib/api/innovations_layout';
 
 function LifecycleLineIcon({ variant }: { variant: number }) {
   const c = 'h-10 w-10 text-[#009FE8]';
@@ -218,11 +220,15 @@ function StatCard({ card, index }: { card: RAndDCentreStatCard; index: number })
   );
 }
 
-export default function RAndDCentreLayoutPage({ data }: { data: RAndDCentrePageData }) {
+export default async function RAndDCentreLayoutPage({ data }: { data: RAndDCentrePageData }) {
+  const innovationsData = await fetchInnovationsLayoutPage('innovations');
+  const trendItems = innovationsData?.page.latestInsights || [];
+  const pressItems = innovationsData?.page.latestNews || [];
+
   return (
     <main className="min-h-screen bg-white">
       {/* Hero */}
-      <section className="relative overflow-hidden pt-[110px] pb-8 md:pt-[200px] md:pb-16 lg:pt-[220px] lg:pb-32">
+      <section className="relative overflow-hidden pt-[110px] md:pt-[150px] pb-8 md:pt-[200px] md:pb-16 lg:pt-[220px] lg:pb-32">
         <div className="absolute inset-0">
           {data.heroBackgroundImage ? (
             // eslint-disable-next-line @next/next/no-img-element
@@ -240,10 +246,10 @@ export default function RAndDCentreLayoutPage({ data }: { data: RAndDCentrePageD
           <p className="mb-4 text-xs font-semibold uppercase text-white md:text-sm">
             {data.heroEyebrow}
           </p>
-          <h1 className="text-[22px] font-bold uppercase leading-tight tracking-tight text-white md:text-4xl lg:text-5xl xl:text-[3.25rem]">
+          <h1 className="text-[22px] font-bold uppercase leading-tight tracking-tight text-white md:text-3xl lg:text-5xl xl:text-[3.25rem]">
             {data.heroTitle}
           </h1>
-          <p className="mx-auto lg:mt-8 mt-4 max-w-3xl text-sm leading-relaxed text-white md:text-lg">
+          <p className="mx-auto lg:mt-8 mt-4 max-w-3xl text-sm leading-relaxed text-white md:text-base lg:text-lg">
             {data.heroDescription}
           </p>
         </div>
@@ -256,7 +262,7 @@ export default function RAndDCentreLayoutPage({ data }: { data: RAndDCentrePageD
       </section>
 
       {/* Intro + stats */}
-      <section className="bg-gray-50 py-8 md:py-20 lg:py-24">
+      <section className="bg-gray-50 pt-8 md:pt-20 lg:pt-24">
         <div className="container mx-auto  px-4">
           <div className="grid grid-cols-1 items-start gap-6 lg:grid-cols-2 lg:gap-16 xl:gap-24">
             <div>
@@ -297,8 +303,11 @@ export default function RAndDCentreLayoutPage({ data }: { data: RAndDCentrePageD
         </div>
       </section>
 
+      <LatestNewsClient trendItems={trendItems} pressItems={pressItems} />
+
+
       {/* End-to-end testing — full packaging lifecycle */}
-      <section className="bg-gray-50">
+      {/* <section className="bg-gray-50">
         <div className="container mx-auto px-4">
           <h2 className="lg:mb-12 mb-4 text-center text-[22px] font-bold leading-tight md:mb-10 md:text-4xl lg:text-5xl text-black" dangerouslySetInnerHTML={{ __html: data.lifecycleSection.title }} />
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-7 lg:grid-cols-3 lg:gap-8">
@@ -307,10 +316,10 @@ export default function RAndDCentreLayoutPage({ data }: { data: RAndDCentrePageD
             ))}
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* Specialized laboratory zones */}
-      <section className="bg-gray-50 py-8 md:py-20 lg:py-20">
+      <section className="bg-gray-50 pb-8 md:pb-20 lg:pb-20">
         <div className="container mx-auto px-4">
           <div className="mb-10 text-center md:mb-14">
             <h2 className="text-[22px] font-bold  leading-tight tracking-tight text-black md:text-3xl lg:text-5xl lg:leading-snug" dangerouslySetInnerHTML={{ __html: data.laboratoryZonesSection.title }} />
@@ -372,6 +381,7 @@ export default function RAndDCentreLayoutPage({ data }: { data: RAndDCentrePageD
         </div>
       </section>
 
+     
       <div className="bg-gray-50 lg:pt-24 pt-12">
         <CallToAction />
         </div>

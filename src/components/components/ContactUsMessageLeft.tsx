@@ -776,13 +776,17 @@ export default function ContactUsMessageLeft() {
           ) : null}
         </div>
 
-        <button
+
+<div className="flex justify-center">
+<button
           type="submit"
           disabled={isSubmitting}
-          className="w-full cursor-pointer justify-center inline-flex items-center bg-[#009FE8] text-white text-base md:text-lg font-bold uppercase tracking-wider hover:bg-[#0077B6] transition-colors group py-4 rounded-[50px] disabled:cursor-not-allowed disabled:opacity-70"
+          className="w-[250px] mx-auto cursor-pointer justify-center inline-flex items-center bg-[#009FE8] text-white text-base md:text-lg font-bold uppercase tracking-wider hover:bg-[#0077B6] transition-colors group py-4 rounded-[50px] disabled:cursor-not-allowed disabled:opacity-70"
         >
           {isSubmitting ? 'Sending...' : 'Send Inquiry'}
         </button>
+</div>
+        
 
         {errorMessage ? (
           <p className="text-sm text-[#B42318]" role="alert">

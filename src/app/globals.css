@@ -126,6 +126,7 @@ body {
     padding-bottom: 0rem !important;
 }
 
+
 .articals_detials h1
 {
   font-size: 24px;
@@ -174,4 +175,11 @@ body .swiper-button-prev-similar {
 body .swiper-button-prev-similar, body .swiper-button-next-similar {
   top: -2.6rem !important;
 }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  .banner_heights {
+    min-height: max(60dvh, 600px);
+    height: 60vh !important;
+  }
 }

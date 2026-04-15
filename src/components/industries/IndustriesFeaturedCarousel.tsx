@@ -72,7 +72,7 @@ export default function IndustriesFeaturedCarousel({
           <button
             type="button"
             onClick={() => scrollByDir(-1)}
-            className="flex lg:h-12 lg:w-12 h-6 w-6 items-center justify-center rounded-full lg:border-2 border-1 border-[#009FE8] text-[#009FE8] transition hover:bg-[#009FE8] hover:text-white"
+            className="cursor-pointer flex lg:h-12 lg:w-12 h-6 w-6 items-center justify-center rounded-full lg:border-2 border-1 border-[#009FE8] text-[#009FE8] transition hover:bg-[#009FE8] hover:text-white"
             aria-label="Previous products"
           >
             <svg className="lg:h-5 lg:w-5 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden>
@@ -82,7 +82,7 @@ export default function IndustriesFeaturedCarousel({
           <button
             type="button"
             onClick={() => scrollByDir(1)}
-            className="flex lg:h-12 lg:w-12 h-6 w-6 items-center justify-center rounded-full lg:border-2 border-1 border-[#009FE8] text-[#009FE8] transition hover:bg-[#009FE8] hover:text-white"
+            className="cursor-pointer flex lg:h-12 lg:w-12 h-6 w-6 items-center justify-center rounded-full lg:border-2 border-1 border-[#009FE8] text-[#009FE8] transition hover:bg-[#009FE8] hover:text-white"
             aria-label="Next products"
           >
             <svg className="lg:h-5 lg:w-5 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden>

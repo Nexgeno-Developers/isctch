@@ -12,7 +12,7 @@ interface CompanyHeroProps {
  */
 export default function CompanyHero({ data }: CompanyHeroProps) {
   return (
-    <section className="relative lg:pt-[200px] pt-[120px] lg:pb-[80px] pb-[44px] overflow-hidden">
+    <section className="relative lg:pt-[200px] md:pt-[150px] pt-[120px] lg:pb-[80px] md:pb-[50px] pb-[44px] overflow-hidden">
       {/* Background Image with Overlay */}
       <div className="absolute inset-0">
         {data.backgroundImage ? (
@@ -35,7 +35,7 @@ export default function CompanyHero({ data }: CompanyHeroProps) {
         <div className="container mx-auto flex-1 flex flex-col justify-center px-4">
           <div className="text-center">
             {/* Title */}
-            <h1 className="text-[24px] md:text-5xl lg:text-6xl xl:text-6xl font-bold text-white tracking-tight leading-tight">
+            <h1 className="text-[24px] md:text-3xl lg:text-6xl xl:text-6xl font-bold text-white tracking-tight leading-tight">
               {data.title}
             </h1>
           </div>

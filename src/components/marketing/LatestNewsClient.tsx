@@ -48,9 +48,9 @@ export default function LatestNewsClient({ trendItems, pressItems }: LatestNewsC
     <section className="bg-gray-50 pb-8 md:py-16 lg:py-20">
       <div className="container mx-auto px-4">
         {/* Heading */}
-        <div className="text-center mb-3 md:mb-8">
+        <div className="text-center mb-3 md:mb-4">
           <h2 className="text-[22px] md:text-4xl lg:text-5xl text-black font-bold mb-0 md:mb-4 lg:leading-[70px] text-center">
-            Latest News
+            Latest <span className="text-[#009FE8]">News</span>
           </h2>
         </div>
 
@@ -107,9 +107,14 @@ export default function LatestNewsClient({ trendItems, pressItems }: LatestNewsC
           }}
           breakpoints={{
             768: {
+              slidesPerView: 2,
+              slidesPerGroup: 1,
+              spaceBetween: 32,
+            },
+            992: {
               slidesPerView: 3,
               slidesPerGroup: 1,
-              spaceBetween: 24,
+              spaceBetween: 32,
             },
           }}
           speed={500}
