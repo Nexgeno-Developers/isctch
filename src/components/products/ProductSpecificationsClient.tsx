@@ -124,7 +124,7 @@ export default function ProductSpecificationsClient({ product }: ProductSpecific
                 ref={prevElRef}
                 type="button"
                 aria-label="Previous image"
-                className="cursor-pointer absolute left-[-100px] top-1/2 -translate-y-1/2 z-10 h-11 w-11 rounded-full bg-white/90 ring-1 ring-black/10 grid place-items-center text-black/70 hover:text-black hover:bg-white transition"
+                className="cursor-pointer absolute left-[-50px] top-1/2 -translate-y-1/2 z-10 h-11 w-11 rounded-full bg-white/90 ring-1 ring-black/10 grid place-items-center text-black/70 hover:text-black hover:bg-white transition"
               >
                 <svg
                   width="18"
@@ -143,7 +143,7 @@ export default function ProductSpecificationsClient({ product }: ProductSpecific
                 ref={nextElRef}
                 type="button"
                 aria-label="Next image"
-                className="cursor-pointer absolute right-[-100px] top-1/2 -translate-y-1/2 z-10 h-11 w-11 rounded-full bg-white/90 ring-1 ring-black/10 grid place-items-center text-black/70 hover:text-black hover:bg-white transition"
+                className="cursor-pointer absolute right-[-50px] top-1/2 -translate-y-1/2 z-10 h-11 w-11 rounded-full bg-white/90 ring-1 ring-black/10 grid place-items-center text-black/70 hover:text-black hover:bg-white transition"
               >
                 <svg
                   width="18"

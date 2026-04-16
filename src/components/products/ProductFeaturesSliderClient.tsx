@@ -50,6 +50,11 @@ export default function ProductFeaturesSliderClient({
             slidesPerGroup: 1,
             spaceBetween: 32,
           },
+          992: {
+            slidesPerView: 3,
+            slidesPerGroup: 1,
+            spaceBetween: 32,
+          },
         }}
         speed={500}
         pagination={{
