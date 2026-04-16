@@ -43,6 +43,7 @@ import { fetchAboutUsLayout1Page } from '@/lib/api/about_us_layout_1';
 import { fetchAboutUsLayout2Page } from '@/lib/api/about_us_layout_2';
 import { fetchAboutUsLayout3Page } from '@/lib/api/about_us_layout_3';
 import { fetchAboutUsLayout4Page } from '@/lib/api/about_us_layout_4';
+import { fetchContactUsLayoutPage } from '@/lib/api/contact_us_layout';
 
 import { getSubCategoryPage } from '@/fake-api/page-builder';
 import { getDynamicPageBySlug, type DynamicPageData } from '@/fake-api/dynamic-pages';
@@ -601,6 +602,16 @@ async function resolveApiLayout(
     }
     case 'technical_service_detail': {
       const page = await fetchTechnicalServiceDetailLayoutPage(fullSlug);
+      if (!page) return null;
+      return {
+        kind: 'api-layout',
+        layout,
+        payload: page,
+        metadata: buildApiLayoutMetadata(page),
+      };
+    }
+    case 'contact_us': {
+      const page = await fetchContactUsLayoutPage(fullSlug);
       if (!page) return null;
       return {
         kind: 'api-layout',

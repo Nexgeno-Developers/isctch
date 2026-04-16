@@ -10,7 +10,7 @@ const FORM_TYPE_MAP: Record<FormType, string> = {
   contact: 'contact',
 };
 
-const PLACEHOLDER_VALUES = new Set(['select function', 'select option', 'select country']);
+const PLACEHOLDER_VALUES = new Set(['select function', 'select option', 'select country', 'select title']);
 const MAX_FIELD_LENGTH = 50;
 const MAX_MESSAGE_LENGTH = 200;
 
@@ -267,9 +267,8 @@ function buildPayload(
   else addMaxLengthError(fieldErrors, 'emailAddress', 'Email address', email, MAX_FIELD_LENGTH);
   if (!companyName) fieldErrors.companyName = 'Company name is required.';
   else addMaxLengthError(fieldErrors, 'companyName', 'Company name', companyName, MAX_FIELD_LENGTH);
-  if (!websiteUrl) fieldErrors.websiteUrl = 'Company website URL is required.';
-  else addMaxLengthError(fieldErrors, 'websiteUrl', 'Company website URL', websiteUrl, MAX_FIELD_LENGTH);
-  if (!jobTitle) fieldErrors.jobTitle = 'Job title is required.';
+  if (websiteUrl) addMaxLengthError(fieldErrors, 'websiteUrl', 'Company website URL', websiteUrl, MAX_FIELD_LENGTH);
+  if (!jobTitle || isPlaceholder(jobTitle)) fieldErrors.jobTitle = 'Job title is required.';
   else addMaxLengthError(fieldErrors, 'jobTitle', 'Job title', jobTitle, MAX_FIELD_LENGTH);
   if (!countryRegion || isPlaceholder(countryRegion)) {
     fieldErrors.countryRegion = 'Please select a country/region.';
@@ -301,13 +300,16 @@ function buildPayload(
     last_name: lastName,
     email,
     company_name: companyName,
-    company_url: websiteUrl,
     job_function: jobFunction,
     job_title: jobTitle,
     country: countryRegion,
     interests: interestedIn,
     interested_products: productsText,
   };
+
+  if (websiteUrl) {
+    payload.company_url = websiteUrl;
+  }
 
   if (phoneDigits) {
     payload.phone = phoneDigits;

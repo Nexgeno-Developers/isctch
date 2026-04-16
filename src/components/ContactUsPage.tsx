@@ -1,12 +1,11 @@
 import CompanyHero from '@/components/company/CompanyHero';
 import Breadcrumbs from '@/components/common/Breadcrumbs';
-import CallToAction from '@/components/home/CallToAction';
 import NewsletterSubscription from '@/components/home/NewsletterSubscription';
 import ContactUsMessageSection from '@/components/components/ContactUsMessageSection';
-import type { DynamicPageData } from '@/fake-api/dynamic-pages';
+import type { ContactUsLayoutPageData } from '@/lib/api/contact_us_layout';
 
 export interface ContactUsPageProps {
-  data: DynamicPageData;
+  data: ContactUsLayoutPageData;
 }
 
 export default function ContactUsPage({ data }: ContactUsPageProps) {

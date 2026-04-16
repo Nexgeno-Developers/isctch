@@ -43,6 +43,17 @@ const JOB_FUNCTION_OPTIONS = [
   'Other',
 ];
 
+const JOB_TITLE_OPTIONS = [
+  'Select title',
+  'Director',
+  'Manager',
+  'Senior',
+  'Junior',
+  'Assistant',
+  'Designer',
+  'Analyst',
+];
+
 const INTEREST_OPTIONS = [
   'Select option',
   'Products & Services',
@@ -408,7 +419,7 @@ export default function ContactUsMessageLeft() {
     companyName: '',
     websiteUrl: '',
     jobFunction: 'Select function',
-    jobTitle: '',
+    jobTitle: 'Select title',
     countryRegion: 'Select country',
     interestedIn: 'Select option',
     products: [],
@@ -469,8 +480,8 @@ export default function ContactUsMessageLeft() {
       errors.countryRegion = 'Please select a country/region.';
     }
 
-    if (!formData.websiteUrl.trim()) {
-      errors.websiteUrl = 'Company website URL is required.';
+    if (!formData.jobTitle.trim() || formData.jobTitle === 'Select title') {
+      errors.jobTitle = 'Please select a job title.';
     }
 
     const selectedProducts = formData.products.join(', ');
@@ -647,16 +658,16 @@ export default function ContactUsMessageLeft() {
 
           <div>
             <label className="block text-sm font-medium text-black mb-2" htmlFor="websiteUrl">
-              Company Website URL <span className="text-[#333]">*</span>
+              Company Website URL
             </label>
             <input
               id="websiteUrl"
               name="websiteUrl"
-              type="url"
+              type="text"
+              inputMode="url"
               value={formData.websiteUrl}
               onChange={handleChange}
               disabled={isSubmitting}
-              required
               maxLength={50}
               placeholder="https://www.example.com"
               className="w-full px-6 py-4 rounded-[15px] border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#009FE8] text-black placeholder-gray-400 text-base disabled:opacity-70"
@@ -681,26 +692,17 @@ export default function ContactUsMessageLeft() {
             onChange={updateField}
           />
 
-          <div>
-            <label className="block text-sm font-medium text-black mb-2" htmlFor="jobTitle">
-              Job Title <span className="text-[#333]">*</span>
-            </label>
-            <input
-              id="jobTitle"
-              name="jobTitle"
-              type="text"
-              value={formData.jobTitle}
-              onChange={handleChange}
-              disabled={isSubmitting}
-              required
-              maxLength={50}
-              placeholder="Select title"
-              className="w-full px-6 py-4 rounded-[15px] border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#009FE8] text-black placeholder-gray-400 text-base disabled:opacity-70"
-            />
-            {fieldErrors.jobTitle ? (
-              <p className="mt-2 text-sm text-[#B42318]">{fieldErrors.jobTitle}</p>
-            ) : null}
-          </div>
+          <SearchableSelect
+            id="jobTitle"
+            name="jobTitle"
+            label="Job Title"
+            options={JOB_TITLE_OPTIONS}
+            value={formData.jobTitle}
+            disabled={isSubmitting}
+            required
+            error={fieldErrors.jobTitle}
+            onChange={updateField}
+          />
         </div>
 
         {/* Fifth row */}

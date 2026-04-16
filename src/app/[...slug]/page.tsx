@@ -179,6 +179,8 @@ export default async function DynamicPage({ params, searchParams }: PageProps) {
           return <TechnicalServicesLayoutPage data={payload.page} />;
         case 'technical_service_detail':
           return <TechnicalServiceDetailLayoutPage data={payload.page} />;
+        case 'contact_us':
+          return <ContactUsPage data={payload.page} />;
         default:
           break;
       }

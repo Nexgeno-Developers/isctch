@@ -37,6 +37,11 @@ function buildSlugCandidates(slug: string) {
     candidates.push(productCandidate);
   }
 
+  // Common legacy aliases.
+  if (clean === 'contact-us' && !candidates.includes('contact')) {
+    candidates.push('contact');
+  }
+
   return candidates;
 }
 
