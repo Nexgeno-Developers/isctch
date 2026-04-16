@@ -243,11 +243,28 @@ class FormSubmissionController extends Controller
 
     private function scalarValueOrDash(Request $request, string $key): string
     {
-        if (!$request->exists($key)) {
-            return '-';
+        // External lead API expects some TitleCase keys, while our public API uses snake_case.
+        // If the TitleCase key is missing, fall back to its snake_case counterpart.
+        $resolvedKey = $key;
+        if (!$request->exists($resolvedKey)) {
+            $alias = match ($key) {
+                'Job_Position' => 'job_title',
+                'Interested' => 'interests',
+                'Message' => 'message',
+                'Interested_Products' => 'interested_products',
+                'Interested_Marketing_Support_Service' => 'interested_marketing_support_service',
+                'Interested_Technical_Support_Service' => 'interested_technical_support_service',
+                default => null,
+            };
+
+            if ($alias && $request->exists($alias)) {
+                $resolvedKey = $alias;
+            } else {
+                return '-';
+            }
         }
 
-        $value = $request->input($key);
+        $value = $request->input($resolvedKey);
         if ($value === null) {
             return '-';
         }
@@ -284,12 +301,17 @@ class FormSubmissionController extends Controller
         }
 
         if ($key === 'website') {
-            if (!$request->exists('website')) {
+            $resolvedKey = 'website';
+            if (!$request->exists('website') && $request->exists('company_url')) {
+                $resolvedKey = 'company_url';
+            }
+
+            if (!$request->exists($resolvedKey)) {
                 // Missing fields should follow the "use '-'" rule.
                 return '-';
             }
 
-            $value = $request->input('website');
+            $value = $request->input($resolvedKey);
             if ($value === null) {
                 return 'https://www.lamipak.biz/';
             }
@@ -463,12 +485,14 @@ class FormSubmissionController extends Controller
                     'email' => 'required|email|max:50',
                     'phone' => 'nullable|digits_between:10,15|max:50',
                     'company_name' => 'required|string|max:50',
-                    'company_url' => 'required|string|max:50',
+                    'company_url' => 'nullable|string|max:255',
                     'job_function'=> 'required|string|max:50',
                     'job_title'   => 'required|string|max:50',
                     'country'     => 'required|string|max:50',
                     'interests' => 'required|string|max:200',
-                    'interested_products' => 'required|string|max:200',
+                    'interested_products' => 'nullable|string|max:200|required_if:interests,Products & Services',
+                    'interested_marketing_support_service' => 'nullable|string|max:200|required_if:interests,Products & Services',
+                    'interested_technical_support_service' => 'nullable|string|max:200|required_if:interests,Products & Services',
                     'message' => 'nullable|string|max:200',
                 ];                  
 

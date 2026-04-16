@@ -20,6 +20,9 @@ const PLACEHOLDER_VALUES = new Set([
   'select technical support service',
 ]);
 const MAX_FIELD_LENGTH = 50;
+const MAX_URL_LENGTH = 255;
+const MAX_INTEREST_LENGTH = 200;
+const MAX_INTEREST_VALUE_LENGTH = 200;
 const MAX_MESSAGE_LENGTH = 200;
 
 const BACKEND_FIELD_MAP: Record<FormType, Record<string, string>> = {
@@ -277,7 +280,7 @@ function buildPayload(
   else addMaxLengthError(fieldErrors, 'emailAddress', 'Email address', email, MAX_FIELD_LENGTH);
   if (!companyName) fieldErrors.companyName = 'Company name is required.';
   else addMaxLengthError(fieldErrors, 'companyName', 'Company name', companyName, MAX_FIELD_LENGTH);
-  if (websiteUrl) addMaxLengthError(fieldErrors, 'websiteUrl', 'Company website URL', websiteUrl, MAX_FIELD_LENGTH);
+  if (websiteUrl) addMaxLengthError(fieldErrors, 'websiteUrl', 'Company website URL', websiteUrl, MAX_URL_LENGTH);
   if (!jobTitle || isPlaceholder(jobTitle)) fieldErrors.jobTitle = 'Job title is required.';
   else addMaxLengthError(fieldErrors, 'jobTitle', 'Job title', jobTitle, MAX_FIELD_LENGTH);
   if (!countryRegion || isPlaceholder(countryRegion)) {
@@ -289,7 +292,7 @@ function buildPayload(
   else addMaxLengthError(fieldErrors, 'jobFunction', 'Job function', jobFunction, MAX_FIELD_LENGTH);
   if (!interestedIn || isPlaceholder(interestedIn))
     fieldErrors.interestedIn = 'Please select an option.';
-  else addMaxLengthError(fieldErrors, 'interestedIn', 'Interest', interestedIn, MAX_FIELD_LENGTH);
+  else addMaxLengthError(fieldErrors, 'interestedIn', 'Interest', interestedIn, MAX_INTEREST_LENGTH);
 
   if (wantsProductsAndServices) {
     if (!interestedProduct || isPlaceholder(interestedProduct)) {
@@ -300,7 +303,7 @@ function buildPayload(
         'interestedProduct',
         'Interested product',
         interestedProduct,
-        MAX_FIELD_LENGTH,
+        MAX_INTEREST_VALUE_LENGTH,
       );
     }
 
@@ -312,7 +315,7 @@ function buildPayload(
         'interestedMarketingSupportService',
         'Interested marketing support service',
         interestedMarketingSupportService,
-        MAX_FIELD_LENGTH,
+        MAX_INTEREST_VALUE_LENGTH,
       );
     }
 
@@ -324,12 +327,18 @@ function buildPayload(
         'interestedTechnicalSupportService',
         'Interested technical support service',
         interestedTechnicalSupportService,
-        MAX_FIELD_LENGTH,
+        MAX_INTEREST_VALUE_LENGTH,
       );
     }
   } else {
     if (interestedProduct && !isPlaceholder(interestedProduct)) {
-      addMaxLengthError(fieldErrors, 'interestedProduct', 'Interested product', interestedProduct, MAX_FIELD_LENGTH);
+      addMaxLengthError(
+        fieldErrors,
+        'interestedProduct',
+        'Interested product',
+        interestedProduct,
+        MAX_INTEREST_VALUE_LENGTH,
+      );
     }
     if (interestedMarketingSupportService && !isPlaceholder(interestedMarketingSupportService)) {
       addMaxLengthError(
@@ -337,7 +346,7 @@ function buildPayload(
         'interestedMarketingSupportService',
         'Interested marketing support service',
         interestedMarketingSupportService,
-        MAX_FIELD_LENGTH,
+        MAX_INTEREST_VALUE_LENGTH,
       );
     }
     if (interestedTechnicalSupportService && !isPlaceholder(interestedTechnicalSupportService)) {
@@ -346,7 +355,7 @@ function buildPayload(
         'interestedTechnicalSupportService',
         'Interested technical support service',
         interestedTechnicalSupportService,
-        MAX_FIELD_LENGTH,
+        MAX_INTEREST_VALUE_LENGTH,
       );
     }
   }
