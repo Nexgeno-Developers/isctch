@@ -35,7 +35,7 @@ export default function LamiraSpecialAbilitiesSection({
 
         <div className="lg:mt-8 mt-4 grid grid-cols-1 lg:grid-cols-[1fr_1fr_1fr] lg:gap-6 gap-4 items-start">
           {/* Hover swap: show content first, then image + play button */}
-          <div className="group relative overflow-hidden rounded-[50px] bg-[#EDF0F1] min-h-[250px]">
+          <div className="group relative overflow-hidden rounded-[50px] bg-[#EDF0F1] h-[250px]">
             {/* Content layer */}
             <div className="absolute inset-0 p-6 md:p-7 transition-opacity duration-300 opacity-100 group-hover:opacity-0 group-hover:pointer-events-none">
               <h3 className="text-base md:text-[20px] font-semibold text-black">
@@ -61,7 +61,7 @@ export default function LamiraSpecialAbilitiesSection({
           {abilities.map((ability) => (
             <div
               key={ability.id}
-              className="group relative overflow-hidden rounded-[50px] bg-[#EDF0F1] min-h-[250px]"
+              className="group relative overflow-hidden rounded-[50px] bg-[#EDF0F1] h-[250px]"
             >
               {/* Text layer */}
               <div className="p-6 md:p-7 transition-opacity duration-300 opacity-100 group-hover:opacity-0 relative z-10 group-hover:pointer-events-none">
