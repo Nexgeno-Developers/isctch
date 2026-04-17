@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import Image from 'next/image';
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useLayoutEffect, useRef } from 'react';
 import { formatBoldText } from '@/lib/htmlText';
 import type { Hero } from '@/lib/api/home';
 
@@ -75,18 +75,35 @@ export default function Hero({ data }: HeroProps) {
 
   const currentSlideData = slides[currentSlide];
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const container = categoryScrollerRef.current;
     const activeButton = categoryButtonRefs.current[currentSlide];
     if (!container || !activeButton) return;
 
-    // Scroll only inside the pill rail (avoid page jump on home).
-    const safeLeftPadding = 8;
-    const targetLeft = Math.max(0, activeButton.offsetLeft - safeLeftPadding);
-    container.scrollTo({
-      left: targetLeft,
-      behavior: 'smooth',
-    });
+    const pad = 12;
+    const c = container;
+    const scrollMax = Math.max(0, c.scrollWidth - c.clientWidth);
+
+    let target = c.scrollLeft;
+
+    // First slide: keep rail at the start so the leftmost pill stays fully visible (overflow on the right).
+    if (currentSlide === 0) {
+      target = 0;
+    } else {
+      const cRect = c.getBoundingClientRect();
+      const aRect = activeButton.getBoundingClientRect();
+
+      // Scroll the minimum amount so the active pill shows full text — avoids the old
+      // "snap active to the left edge" behavior that clipped the first pill.
+      if (aRect.left < cRect.left + pad) {
+        target = c.scrollLeft + (aRect.left - cRect.left - pad);
+      } else if (aRect.right > cRect.right - pad) {
+        target = c.scrollLeft + (aRect.right - cRect.right + pad);
+      }
+    }
+
+    target = Math.max(0, Math.min(target, scrollMax));
+    c.scrollTo({ left: target, behavior: currentSlide === 0 ? 'auto' : 'smooth' });
   }, [currentSlide]);
 
   return (
@@ -174,7 +191,7 @@ export default function Hero({ data }: HeroProps) {
             <div className="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4 min-w-0">
               <div
                 ref={categoryScrollerRef}
-                className="flex items-center gap-3 sm:gap-2 md:gap-3 overflow-x-auto pb-2 scrollbar-hide flex-1 min-w-0 pl-2 pr-2"
+                className="flex items-center gap-3 sm:gap-2 md:gap-3 overflow-x-auto overscroll-x-contain pb-2 scrollbar-hide flex-1 min-w-0 min-h-0 pr-2 [scroll-padding-inline-end:8px]"
               >
                 {data.categories.map((category) => (
                   <button
