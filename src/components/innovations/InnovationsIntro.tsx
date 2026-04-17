@@ -1,7 +1,10 @@
 import type { InnovationsPageData } from '@/lib/api/innovations_layout';
 import Image from 'next/image';
 
-type Props = Pick<InnovationsPageData, 'introHeadingBlack' | 'introHeadingBlue' | 'introBody'>;
+type Props = Pick<
+  InnovationsPageData,
+  'introHeadingBlack' | 'introHeadingBlue' | 'introBody' | 'introImage' | 'introImageAlt'
+>;
 
 function needsSeparatorBetweenHeadings(black: string, blue: string): boolean {
   const b = black.trimEnd();
@@ -11,8 +14,16 @@ function needsSeparatorBetweenHeadings(black: string, blue: string): boolean {
   return true;
 }
 
-export default function InnovationsIntro({ introHeadingBlack, introHeadingBlue, introBody }: Props) {
+export default function InnovationsIntro({
+  introHeadingBlack,
+  introHeadingBlue,
+  introBody,
+  introImage,
+  introImageAlt,
+}: Props) {
   const gap = needsSeparatorBetweenHeadings(introHeadingBlack, introHeadingBlue);
+  const imageSrc = introImage?.trim() || '/driving_image_1.jpg';
+  const imageAlt = introImageAlt?.trim() || 'Innovations Process Illustration';
 
   return (
     <section className="bg-gray-50 py-8 md:py-20 lg:py-24">
@@ -32,7 +43,13 @@ export default function InnovationsIntro({ introHeadingBlack, introHeadingBlue, 
       className=""
       aria-hidden
     >
-      <Image src="/driving_image_1.jpg" alt="Innovations Process Illustration" width={1000} height={1000} className='rounded-[50px] w-full'/>
+      <Image
+        src={imageSrc}
+        alt={imageAlt}
+        width={1000}
+        height={1000}
+        className="rounded-[50px] w-full h-auto object-cover"
+      />
     </div>
             </div>
           </div>

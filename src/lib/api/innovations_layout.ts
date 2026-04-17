@@ -3,7 +3,7 @@ import { normalizeText } from '@/lib/htmlText';
 import type { MarketingNewsItem } from '@/components/marketing/LatestNewsClient';
 import { isoDateFrom, isoTimeFrom } from '@/lib/dateTime';
 
-type Media = { url?: string | null } | null | undefined;
+type Media = { id?: number; filename?: string | null; url?: string | null } | null | undefined;
 
 type InnovationsApiResponse = {
   data?: {
@@ -74,6 +74,9 @@ export type InnovationsPageData = {
   introHeadingBlack: string;
   introHeadingBlue: string;
   introBody: string;
+  /** Right-column image in the intro section (CMS `hero_image`). */
+  introImage?: string;
+  introImageAlt?: string;
   featureCards: InnovationsFeatureCard[];
   latestInsights: MarketingNewsItem[];
   latestNews: MarketingNewsItem[];
@@ -169,6 +172,16 @@ function mapApiToPage(api: NonNullable<InnovationsApiResponse['data']>): Innovat
     clean(meta.intro_body) ||
     htmlToPlainText(meta.hero_description) ||
     '';
+
+  const introImg = mediaUrl(meta.hero_image);
+  if (introImg) {
+    base.introImage = introImg;
+    base.introImageAlt =
+      clean(meta.hero_image?.filename) ||
+      (split ? `${split.black} ${split.blue}`.trim() : clean(meta.hero_title)) ||
+      base.title ||
+      'Innovations';
+  }
 
   // Feature cards from CMS: page_blocks (preferred)
   if (meta.page_blocks?.length) {

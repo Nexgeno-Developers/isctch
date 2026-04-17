@@ -27,6 +27,8 @@ export default async function InnovationsLayoutPage({ data }: { data: Innovation
         introHeadingBlack={data.introHeadingBlack}
         introHeadingBlue={data.introHeadingBlue}
         introBody={data.introBody}
+        introImage={data.introImage}
+        introImageAlt={data.introImageAlt}
       />
       <InnovationsFeatureCards cards={data.featureCards} />
       <LatestNewsClient trendItems={trendItems} pressItems={pressItems} />
