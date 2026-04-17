@@ -60,7 +60,7 @@ export default function NgoAllianceCardsSection({ data }: NgoAllianceCardsSectio
             <div
               key={card.id}
               className="w-[min(22rem,calc(100vw-2.5rem))] shrink-0 snap-start lg:w-auto lg:min-w-0 lg:flex-1 lg:snap-none"
-            >
+            > 
               <AllianceCardLink href={card.href} accent={accent}>
                 {card.imageUrl ? (
                   <div className="relative mb-5 w-full overflow-hidden">
