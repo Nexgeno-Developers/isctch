@@ -37,7 +37,7 @@ type MenuGroupApiResponse = {
 const MENU_GROUP_FALLBACK_TITLE: Record<number, string> = {
   2: 'Quick Links',
   3: 'Legal',
-  4: 'Connect',
+  4: 'Innovations',
   5: 'Contact',
 };
 
@@ -167,7 +167,7 @@ async function fetchCompanyData(): Promise<CompanyApiResponse['data'] | null> {
 }
 
 export async function fetchFooterData(): Promise<FooterData> {
-  const [company, quickBundle, legalBundle, connectBundle, contactBundle] = await Promise.all([
+  const [company, quickBundle, legalBundle, innovationsBundle, contactBundle] = await Promise.all([
     fetchCompanyData(),
     fetchMenuGroup(2),
     fetchMenuGroup(3),
@@ -193,9 +193,11 @@ export async function fetchFooterData(): Promise<FooterData> {
   };
 
   pushColumn('footer-menu-2', quickBundle);
-  pushColumn('footer-menu-3', legalBundle);
-  pushColumn('footer-menu-4', connectBundle);
   pushColumn('footer-menu-5', contactBundle);
+  pushColumn('footer-menu-3', legalBundle);
+  pushColumn('footer-menu-4', innovationsBundle);
+  
+
 
   const socialLinks: SocialLink[] = [];
   for (const { metaKey, icon, platform } of SOCIAL_KEYS) {

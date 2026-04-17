@@ -273,21 +273,21 @@ export async function getFooterData(): Promise<FooterData> {
       },
       {
         id: '2',
+        title: 'Innovations',
+        links: [
+          { id: '9', label: 'Insights', href: '/' },
+          { id: '10', label: 'Careers', href: '/career' },
+          { id: '11', label: 'Contact Us', href: '/contact-us' },
+        ],
+      },
+      {
+        id: '3',
         title: 'Legal',
         links: [
           { id: '5', label: 'Terms & Condition', href: '/' },
           { id: '6', label: 'Privacy Policy', href: '/' },
           { id: '7', label: 'Downloads', href: '/' },
           { id: '8', label: 'Blogs', href: '/' },
-        ],
-      },
-      {
-        id: '3',
-        title: 'Connect',
-        links: [
-          { id: '9', label: 'Insights', href: '/' },
-          { id: '10', label: 'Careers', href: '/career' },
-          { id: '11', label: 'Contact Us', href: '/contact-us' },
         ],
       },
       {
