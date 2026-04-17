@@ -23,6 +23,14 @@ type ApiPage = {
   seo?: ApiSeo | null;
 };
 
+/** Default index,follow; only block when CMS explicitly sends noindex / nofollow. */
+function robotsAllows(value: string | null | undefined, blockLower: 'noindex' | 'nofollow'): boolean {
+  if (value == null) return true;
+  const t = String(value).trim().toLowerCase();
+  if (!t) return true;
+  return t !== blockLower;
+}
+
 export function buildApiMetadata(page: ApiPage): Metadata {
   const seo = (page.seo || {}) as ApiSeo;
 
@@ -35,8 +43,8 @@ export function buildApiMetadata(page: ApiPage): Metadata {
     description: seo.description || undefined,
     keywords: seo.keywords || undefined,
     robots: {
-      index: seo.robots_index === 'index',
-      follow: seo.robots_follow === 'follow',
+      index: robotsAllows(seo.robots_index, 'noindex'),
+      follow: robotsAllows(seo.robots_follow, 'nofollow'),
     },
     alternates: {
       canonical,
