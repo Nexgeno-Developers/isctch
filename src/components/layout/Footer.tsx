@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { fetchFooterData } from '@/lib/api/footer';
 import { FooterSocialIcon } from '@/components/layout/FooterSocialIcon';
-
+import Image from 'next/image';
 /**
  * Footer Component
  * 
@@ -19,7 +19,9 @@ export default async function Footer() {
             {/* Logo */}
             <Link href={footerData.logo.href} className="block mb-4">
               {footerData.logo.image ? (
-                <img
+                <Image
+                  width={160}
+                  height={160}
                   src={footerData.logo.image}
                   alt={footerData.logo.text || 'Logo'}
                   className="h-auto w-auto max-h-14 md:max-h-16 max-w-[160px] object-contain object-left"
