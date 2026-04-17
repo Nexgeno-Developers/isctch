@@ -94,7 +94,7 @@ export default function Breadcrumbs({ items }: BreadcrumbsProps) {
                 {item.label}
               </Link>
             ) : (
-              <span className="text-black lg:text-sm text-xs">{item.label}</span>
+              <span className="text-black lg:text-sm text-xs capitalize">{item.label}</span>
             )}
           </span>
         ))}

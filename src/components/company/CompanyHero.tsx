@@ -35,7 +35,7 @@ export default function CompanyHero({ data }: CompanyHeroProps) {
         <div className="container mx-auto flex-1 flex flex-col justify-center px-4">
           <div className="text-center">
             {/* Title */}
-            <h1 className="text-[24px] md:text-3xl lg:text-6xl xl:text-6xl font-bold text-white tracking-tight leading-tight">
+            <h1 className="text-[24px] md:text-3xl lg:text-6xl xl:text-6xl font-bold text-white tracking-tight leading-tight capitalize">
               {data.title}
             </h1>
           </div>

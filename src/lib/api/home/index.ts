@@ -255,15 +255,16 @@ type HomeMetaApi = {
   faqs_items?: FaqsItemsApi;
   approach_title?: string;
   approach_subtitle?: string;
-  approach_image?: MediaRef | string;
+  approach_image?: MediaRef | string | number;
   approach_short_description?: string;
   approach_question_1?: string;
-  approach_product_industries?: string;
+  approach_product_industries?: string | unknown[];
   approach_question_2?: string;
-  approach_production_scale?: string;
+  approach_production_scale?: string | unknown[];
   approach_question_3?: string;
-  approach_market_region?: string;
+  approach_market_region?: string | unknown[];
   approach_navigation_url?: string;
+  approach_cta_text?: string;
 };
 
 type ServiceAutofetchItem = {
@@ -539,8 +540,9 @@ const INDUSTRY_LABEL_BY_ID: Record<string, string> = {
   '27': 'Nutraceutical',
 };
 
-function parseJsonArray(raw?: string): unknown[] {
-  if (!raw) return [];
+function parseJsonArray(raw?: string | unknown[] | null): unknown[] {
+  if (Array.isArray(raw)) return raw;
+  if (typeof raw !== 'string' || !raw.trim()) return [];
   try {
     const parsed = JSON.parse(raw);
     return Array.isArray(parsed) ? parsed : [];
@@ -561,6 +563,94 @@ function mediaUrlFromRef(input?: MediaRef | string): string | undefined {
     return undefined;
   }
   return input.url?.trim() || undefined;
+}
+
+/** Map media IDs → URLs from other home meta fields (banners, global beverage). */
+function buildHomeMetaImageMap(meta: HomeMetaApi): Map<string, string> {
+  const map = new Map<string, string>();
+  const ingest = (list?: MediaRef[]) => {
+    for (const item of list || []) {
+      if (item?.id != null && item.url) {
+        const u = item.url.trim();
+        if (u) map.set(String(item.id), u);
+      }
+    }
+  };
+  ingest(meta.banner_items?.desktop_banner);
+  ingest(meta.banner_items?.mobile_banner);
+  const g = meta.global_beverage_image;
+  if (g && typeof g === 'object' && g.id != null && g.url) {
+    const u = g.url.trim();
+    if (u) map.set(String(g.id), u);
+  }
+  return map;
+}
+
+/**
+ * Resolve approach hero image: full URL, media object, numeric ID (via banner map), or relative path.
+ */
+function lookupApproachImageFromMeta(meta: HomeMetaApi | undefined): string | undefined {
+  if (!meta) return undefined;
+  const ai = meta.approach_image;
+  if (ai && typeof ai === 'object') {
+    const ref = ai as MediaRef;
+    const u = ref.url?.trim();
+    if (u) return u;
+    if (ref.id != null) {
+      const fromMap = buildHomeMetaImageMap(meta).get(String(ref.id));
+      if (fromMap) return fromMap;
+    }
+  }
+  if (typeof ai === 'number' && Number.isFinite(ai)) {
+    return buildHomeMetaImageMap(meta).get(String(ai));
+  }
+  if (typeof ai === 'string') {
+    const t = ai.trim();
+    if (!t) return undefined;
+    if (/^https?:\/\//i.test(t) || t.startsWith('/')) return t;
+    if (/^\d+$/.test(t)) {
+      return buildHomeMetaImageMap(meta).get(t);
+    }
+  }
+  return undefined;
+}
+
+async function fetchMediaUrlById(id: string): Promise<string | undefined> {
+  const base = COMPANY_API_BASE_URL.replace(/\/+$/, '');
+  const candidates = [
+    `${base}/v1/media/${encodeURIComponent(id)}`,
+    `${base}/v1/medias/${encodeURIComponent(id)}`,
+    `${base}/v1/media-library/${encodeURIComponent(id)}`,
+    `${base}/v1/media-items/${encodeURIComponent(id)}`,
+  ];
+
+  for (const url of candidates) {
+    try {
+      const payload = await fetchJsonCached<Record<string, unknown>>(url, {
+        tags: [`media:${id}`],
+      });
+      if (!payload) continue;
+      const data = payload.data;
+      if (data && typeof data === 'object') {
+        const o = data as Record<string, unknown>;
+        const nested = [
+          o.url,
+          (o.file as MediaRef | undefined)?.url,
+          (o.media as MediaRef | undefined)?.url,
+          o.original_url,
+          (o.attributes as { url?: string } | undefined)?.url,
+        ];
+        for (const c of nested) {
+          if (typeof c === 'string' && c.trim()) return c.trim();
+        }
+      }
+      const top = payload.url;
+      if (typeof top === 'string' && top.trim()) return top.trim();
+    } catch {
+      continue;
+    }
+  }
+  return undefined;
 }
 
 function mapApproach(meta: HomeMetaApi | undefined): ApproachData | null {
@@ -604,14 +694,16 @@ function mapApproach(meta: HomeMetaApi | undefined): ApproachData | null {
   if (q3 && q3Options.length) questions.push({ id: '3', question: q3, options: q3Options });
   if (!questions.length) return null;
 
+  const approachImage = lookupApproachImageFromMeta(meta) || FALLBACK_APPROACH.image;
+
   return {
     eyebrow: cleanText(meta.approach_title) || FALLBACK_APPROACH.eyebrow,
     title: formatBoldText(cleanText(meta.approach_subtitle) || FALLBACK_APPROACH.title),
     subtitle: cleanText(meta.approach_short_description) || FALLBACK_APPROACH.subtitle,
-    image: mediaUrlFromRef(meta.approach_image) || FALLBACK_APPROACH.image,
+    image: approachImage,
     imageAlt: 'Approach section image',
     questions,
-    ctaText: FALLBACK_APPROACH.ctaText,
+    ctaText: cleanText(meta.approach_cta_text) || FALLBACK_APPROACH.ctaText,
     ctaLink: normalizeNavHref(meta.approach_navigation_url || FALLBACK_APPROACH.ctaLink),
   };
 }
@@ -941,6 +1033,22 @@ export const fetchHomepageData = async (): Promise<HomepageData | null> => {
     );
     const globalPresenceMapped = mapGlobalPresenceBanner(meta);
 
+    const mappedApproach = mapApproach(meta);
+    let approach = mappedApproach ?? FALLBACK_APPROACH;
+    const approachImageRaw = meta?.approach_image;
+    const approachMediaId =
+      typeof approachImageRaw === 'number' && Number.isFinite(approachImageRaw)
+        ? String(approachImageRaw)
+        : typeof approachImageRaw === 'string' && /^\d+$/.test(approachImageRaw.trim())
+          ? approachImageRaw.trim()
+          : null;
+    if (mappedApproach && approachMediaId && !lookupApproachImageFromMeta(meta)) {
+      const fetched = await fetchMediaUrlById(approachMediaId);
+      if (fetched) {
+        approach = { ...mappedApproach, image: fetched };
+      }
+    }
+
     const seoMerged = data.seo?.title || data.seo?.description
       ? {
           meta_title: data.seo?.title ?? '',
@@ -960,7 +1068,7 @@ export const fetchHomepageData = async (): Promise<HomepageData | null> => {
       faq: faqMapped ?? { items: [] },
       latestPressRelease: latestPressReleaseMapped ?? { cards: [] },
       latestInsights: latestInsightsMapped ?? { cards: [] },
-      approach: mapApproach(meta) ?? FALLBACK_APPROACH,
+      approach,
       innovationInPackaging: { cards: [], exploreMoreLink: '/' },
       callToAction: FALLBACK_CTA,
       newsletterSubscription: FALLBACK_NEWSLETTER,
