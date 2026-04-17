@@ -142,8 +142,6 @@ export type QuestionOption = {
   id: string;
   label: string;
   value: string;
-  /** CMS industry icons (step 1) */
-  iconUrl?: string;
 };
 
 export type Question = {
@@ -586,19 +584,11 @@ function buildApproachIndustryOptions(raw?: string | unknown[] | null): Question
     const slugRaw = typeof o.slug === 'string' ? o.slug.trim() : '';
     const value = slugRaw ? slugifyValue(slugRaw) : slugifyValue(label);
 
-    const icon = o.short_summary_icon;
-    let iconUrl: string | undefined;
-    if (icon && typeof icon === 'object' && icon !== null) {
-      iconUrl = mediaUrlFromRef(icon as MediaRef);
-    }
-
-    const row: QuestionOption = {
+    out.push({
       id: `1-${idNum || ++fallbackKey}`,
       label,
       value,
-    };
-    if (iconUrl) row.iconUrl = iconUrl;
-    out.push(row);
+    });
   }
 
   return out;

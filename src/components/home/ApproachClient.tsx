@@ -112,21 +112,12 @@ export default function ApproachClient({ data }: ApproachClientProps) {
                         key={option.id}
                         type="button"
                         onClick={() => handleOptionSelect(currentQuestion.id, option.value)}
-                        className={`cursor-pointer px-4 py-2 rounded-full text-[14px] font-medium transition-all inline-flex items-center gap-2 ${
+                        className={`cursor-pointer px-4 py-2 rounded-full text-[14px] font-medium transition-all ${
                           isSelected
                             ? 'bg-[#009FE8] text-white shadow-md'
                             : 'bg-gray-100 text-black hover:bg-gray-200'
                         }`}
                       >
-                        {option.iconUrl ? (
-                          <Image
-                            src={option.iconUrl}
-                            alt=""
-                            width={22}
-                            height={22}
-                            className="shrink-0 object-contain"
-                          />
-                        ) : null}
                         {option.label}
                       </button>
                     );
