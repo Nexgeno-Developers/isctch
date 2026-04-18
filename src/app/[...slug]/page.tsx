@@ -6,38 +6,6 @@ import { resolveDynamicPage } from '@/lib/api/resolveDynamicPage';
 
 import LamiraPage from '@/components/LamiraPage';
 import GreenEffortsPage from '@/components/GreenEffortsPage';
-import CmsPage from '@/components/CmsPage';
-import PickCartoonPage from '@/components/PickCartoonPage';
-import CertificationsAchievementsPage from '@/components/CertificationsAchievementsPage';
-import NgosPage from '@/components/NgosPage';
-import CarbonNetZeroRoadmapPage from '@/components/CarbonNetZeroRoadmapPage';
-import OurCompanyDynamicPage from '@/components/OurCompanyDynamicPage';
-import ContactUsPage from '@/components/ContactUsPage';
-import GovernanceManagementPage from '@/components/GovernanceManagementPage';
-import { PageBuilder } from '@/components/pageBuilder/PageBuilder';
-import { ProductCategoriesHubPage } from '@/components/pages/ProductCategoriesHubPage';
-import ProductDetailLayout from '@/components/products/ProductDetailLayout';
-import { AboutUsPageSection } from '@/components/sections/AboutUsPageSection';
-import { IntroductionPageSection } from '@/components/sections/IntroductionPageSection';
-import { VisionMissionPageSection } from '@/components/sections/VisionMissionPageSection';
-import { VisionMissionLayoutPageSection } from '@/components/sections/VisionMissionLayoutPageSection';
-import GovernanceManagementLayoutPageSection from '@/components/sections/GovernanceManagementLayoutPageSection';
-import ProductCategoryPageSection from '@/components/sections/ProductCategoryPageSection';
-import ProductIndustryDetailLayoutPageSection from '@/components/sections/ProductIndustryDetailLayoutPageSection';
-import ProductIndustriesLayoutPage from '@/components/pages/ProductIndustriesLayoutPage';
-import RAndDCentreLayoutPage from '@/components/pages/RAndDCentreLayoutPage';
-import NpdLayoutPage from '@/components/pages/NpdLayoutPage';
-import PilotPlantLayoutPage from '@/components/pages/PilotPlantLayoutPage';
-import InnovationsLayoutPage from '@/components/pages/InnovationsLayoutPage';
-import InsightsHubPage from '@/components/pages/InsightsHubPage';
-import DefaultLayoutPage from '@/components/pages/DefaultLayoutPage';
-import InsightsListingPage from '@/components/pages/InsightsListingPage';
-import InsightsArticleDetailPage from '@/components/pages/InsightsArticleDetailPage';
-import CareerLandingPage from '@/components/CareerLandingPage';
-import MarketingServicesLayoutPage from '@/components/pages/MarketingServicesLayoutPage';
-import MarketingServiceDetailLayoutPage from '@/components/pages/MarketingServiceDetailLayoutPage';
-import TechnicalServicesLayoutPage from '@/components/pages/TechnicalServicesLayoutPage';
-import TechnicalServiceDetailLayoutPage from '@/components/pages/TechnicalServiceDetailLayoutPage';
 
 interface PageProps {
   params: Promise<{
@@ -110,44 +78,10 @@ export default async function DynamicPage({ params, searchParams }: PageProps) {
               }}
             />
           );
-        case 'rnd_center':
-          return <RAndDCentreLayoutPage data={payload.page} />;
-        case 'product_industries':
-          return <ProductIndustriesLayoutPage data={payload.page} />;
-        case 'product_industry_detail':
-          return <ProductIndustryDetailLayoutPageSection data={payload.page} />;
-        case 'about_4':
-          return (
-            <GovernanceManagementLayoutPageSection
-              data={payload.page}
-              activePath={`/${fullSlug}`}
-            />
-          );
-        case 'about_3':
-          return (
-            <VisionMissionLayoutPageSection
-              data={payload.page}
-              activePath={`/${fullSlug}`}
-            />
-          );
-        case 'about_1':
-          return (
-            <AboutUsPageSection
-              hero={payload.page.hero}
-              statistics={payload.page.statistics}
-              journey={payload.page.journey}
-              videoUrl={payload.page.videoUrl}
-              navigation={payload.page.navigation}
-              activePath={`/${fullSlug}`}
-            />
-          );
-        case 'about_2':
-          return (
-            <IntroductionPageSection
-              data={payload.page}
-              activePath={`/${fullSlug}`}
-            />
-          );
+    
+       
+      
+      
         case 'product_categories':
           return (
             <ProductCategoriesHubPage
@@ -201,20 +135,8 @@ export default async function DynamicPage({ params, searchParams }: PageProps) {
       }
       break;
     }
-    case 'product-category':
-      return (
-        <ProductCategoryPageSection
-          category={resolved.category}
-          products={resolved.products}
-        />
-      );
-    case 'product':
-      return (
-        <ProductDetailLayout
-          product={resolved.product}
-          slugPath={resolved.slugPath}
-        />
-      );
+   
+   
     case 'sub-category':
       return (
         <PageBuilder
@@ -225,8 +147,7 @@ export default async function DynamicPage({ params, searchParams }: PageProps) {
           }}
         />
       );
-    case 'legacy-vision-mission':
-      return <VisionMissionPageSection data={resolved.page} />;
+   
     case 'dynamic': {
       const data = resolved.page;
 
