@@ -6,7 +6,7 @@ import CallToAction from '@/components/home/CallToAction';
 import NewsletterSubscription from '@/components/home/NewsletterSubscription';
 import VideoBanner from '@/components/home/VideoBanner';
 import JourneyClient from '@/components/company/JourneyClient';
-import type { CompanyHero as CompanyHeroData, CompanyStatistic, JourneyData } from '@/fake-api/company';
+import type { CompanyHero as CompanyHeroData, CompanyStatistic, JourneyData } from '@/types/company';
 import type { CompanyNavigationData } from '@/components/company/CompanyNavigation';
 
 export function AboutUsPageSection({

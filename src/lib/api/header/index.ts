@@ -1,4 +1,5 @@
 import type { HeaderData, NavigationItem } from './types';
+import { aboutUsPath, contactUsPath } from '@/config/publicRoutes';
 import { fetchJsonCached } from '@/lib/api/apiCache';
 
 type HeaderMenuItemApi = {
@@ -46,10 +47,14 @@ const DEFAULT_HEADER_DATA: HeaderData = {
     image: DEFAULT_LOGO_IMAGE,
     href: '/',
   },
-  navigation: [],
+  navigation: [
+    { id: 'nav-home', label: 'Home', href: '/' },
+    { id: 'nav-about', label: 'About Us', href: aboutUsPath() },
+    { id: 'nav-contact', label: 'Contact Us', href: contactUsPath() },
+  ],
   cta: {
     text: 'Contact Us',
-    href: '/contact',
+    href: contactUsPath(),
   },
 };
 

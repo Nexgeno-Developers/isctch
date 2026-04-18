@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { fetchCompanyProfileData } from '@/lib/api';
+import { fetchCompanyProfileData } from '@/lib/companyProfile';
 import { FooterSocialIcon } from '@/components/layout/FooterSocialIcon';
 
 function IconLocation() {

@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import type { CompanyHero as CompanyHeroType } from '@/fake-api/company';
+import type { CompanyHero as CompanyHeroType } from '@/types/company';
 
 interface CompanyHeroProps {
   data: CompanyHeroType;

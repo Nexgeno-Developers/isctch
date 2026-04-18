@@ -1,4 +1,4 @@
-import { fetchCompanyData } from '@/lib/api';
+import { getDefaultAboutSubNavigation } from '@/config/publicRoutes';
 import CompanyNavigation, { type CompanyNavigationData } from './CompanyNavigation';
 
 interface CompanyNavigationServerProps {
@@ -15,10 +15,8 @@ export default async function CompanyNavigationServer({
   activePath,
   data,
 }: CompanyNavigationServerProps) {
-  const navigation =
-    data !== undefined
-      ? data
-      : ((await fetchCompanyData())?.navigation as CompanyNavigationData | undefined) ?? null;
+  const navigation: CompanyNavigationData | null =
+    data !== undefined ? data : getDefaultAboutSubNavigation();
 
   if (!navigation || navigation.items.length === 0) {
     return null;

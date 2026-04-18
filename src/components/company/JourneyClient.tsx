@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import Image from 'next/image';
 import { formatBoldText } from '@/lib/htmlText';
-import type { JourneyData } from '@/fake-api/company';
+import type { JourneyData } from '@/types/company';
 
 interface JourneyClientProps {
   data: JourneyData;

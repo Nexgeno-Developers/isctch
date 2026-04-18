@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
-import type { CompanyStatistic } from '@/fake-api/company';
+import type { CompanyStatistic } from '@/types/company';
 
 interface CompanyStatisticsProps {
   statistics: CompanyStatistic[];

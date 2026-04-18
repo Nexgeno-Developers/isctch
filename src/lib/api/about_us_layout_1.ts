@@ -1,4 +1,4 @@
-import type { CompanyHero, CompanyStatistic, JourneyData } from '@/fake-api/company';
+import type { CompanyHero, CompanyStatistic, JourneyData } from '@/types/company';
 import { normalizeText, formatBoldText } from '@/lib/htmlText';
 import { mapPageBlocksToNavigation, type AboutUsPageBlock } from '@/lib/api/about_us_navigation';
 import type { CompanyNavigationData } from '@/components/company/CompanyNavigation';
@@ -106,7 +106,7 @@ export async function fetchAboutUsLayout1Page(slug: string) {
     const meta = data.meta || {};
     const hero: CompanyHero = {
       title: data.title,
-      backgroundImage: meta.breadcrumb_image?.url || '',
+      backgroundImage: mediaOrStringUrl(meta.breadcrumb_image) || '',
     };
 
     const statsJson = normalizeMaybeJson(meta.business_statistics_items, (raw) =>
