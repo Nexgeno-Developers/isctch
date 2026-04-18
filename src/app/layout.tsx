@@ -21,6 +21,10 @@ const GTM_ID = "GTM-TZNFVFFC";
 export const metadata: Metadata = {
   title: "Lamipak - Your Platform",
   description: "Building the future with innovative solutions",
+  robots: {
+    index: true,
+    follow: true,
+  },
   manifest: "/site.webmanifest",
   icons: {
     icon: [

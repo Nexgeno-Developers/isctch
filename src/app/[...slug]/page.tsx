@@ -1,3 +1,4 @@
+import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 import type { ComponentType } from 'react';
@@ -6,68 +7,36 @@ import { resolveDynamicPage } from '@/lib/api/resolveDynamicPage';
 
 import LamiraPage from '@/components/LamiraPage';
 import GreenEffortsPage from '@/components/GreenEffortsPage';
-import CmsPage from '@/components/CmsPage';
-import PickCartoonPage from '@/components/PickCartoonPage';
-import CertificationsAchievementsPage from '@/components/CertificationsAchievementsPage';
-import NgosPage from '@/components/NgosPage';
-import CarbonNetZeroRoadmapPage from '@/components/CarbonNetZeroRoadmapPage';
-import OurCompanyDynamicPage from '@/components/OurCompanyDynamicPage';
-import ContactUsPage from '@/components/ContactUsPage';
-import GovernanceManagementPage from '@/components/GovernanceManagementPage';
-import { PageBuilder } from '@/components/pageBuilder/PageBuilder';
-import { ProductCategoriesHubPage } from '@/components/pages/ProductCategoriesHubPage';
-import ProductDetailLayout from '@/components/products/ProductDetailLayout';
-import { AboutUsPageSection } from '@/components/sections/AboutUsPageSection';
-import { IntroductionPageSection } from '@/components/sections/IntroductionPageSection';
-import { VisionMissionPageSection } from '@/components/sections/VisionMissionPageSection';
-import { VisionMissionLayoutPageSection } from '@/components/sections/VisionMissionLayoutPageSection';
-import GovernanceManagementLayoutPageSection from '@/components/sections/GovernanceManagementLayoutPageSection';
-import ProductCategoryPageSection from '@/components/sections/ProductCategoryPageSection';
-import ProductIndustryDetailLayoutPageSection from '@/components/sections/ProductIndustryDetailLayoutPageSection';
-import ProductIndustriesLayoutPage from '@/components/pages/ProductIndustriesLayoutPage';
-import RAndDCentreLayoutPage from '@/components/pages/RAndDCentreLayoutPage';
-import NpdLayoutPage from '@/components/pages/NpdLayoutPage';
-import PilotPlantLayoutPage from '@/components/pages/PilotPlantLayoutPage';
-import InnovationsLayoutPage from '@/components/pages/InnovationsLayoutPage';
-import InsightsHubPage from '@/components/pages/InsightsHubPage';
-import DefaultLayoutPage from '@/components/pages/DefaultLayoutPage';
-import InsightsListingPage from '@/components/pages/InsightsListingPage';
-import InsightsArticleDetailPage from '@/components/pages/InsightsArticleDetailPage';
-import CareerLandingPage from '@/components/CareerLandingPage';
-import MarketingServicesLayoutPage from '@/components/pages/MarketingServicesLayoutPage';
-import MarketingServiceDetailLayoutPage from '@/components/pages/MarketingServiceDetailLayoutPage';
-import TechnicalServicesLayoutPage from '@/components/pages/TechnicalServicesLayoutPage';
-import TechnicalServiceDetailLayoutPage from '@/components/pages/TechnicalServiceDetailLayoutPage';
+
 
 interface PageProps {
-  params: Promise<{
-    slug: string[];
-  }>;
-  searchParams?: Promise<Record<string, string | string[] | undefined>>;
+  params: Promise<{ slug: string[] }>;
 }
 
-const PACKAGING_MAIN = 'packaging' as const;
-
-const componentMap: Record<string, ComponentType<any>> = {
-  lamira: LamiraPage,
-  green: GreenEffortsPage,
-  certifications: CertificationsAchievementsPage,
-  'our-company': OurCompanyDynamicPage,
-  'our-factory': OurCompanyDynamicPage,
-  'carbon-roadmap': CarbonNetZeroRoadmapPage,
-  'pick-carton': PickCartoonPage,
-  'contact-us': ContactUsPage,
-  'governance-management': GovernanceManagementPage,
-};
+function fullSlugFromParams(slug: string[] | undefined): string {
+  return (slug?.filter(Boolean).join('/') || '').replace(/^\/+|\/+$/g, '');
+}
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
-  const fullSlug = slug?.join('/') || '';
-  const resolved = await resolveDynamicPage(fullSlug, 1);
-  return resolved.metadata;
+  const fullSlug = fullSlugFromParams(slug);
+
+  if (fullSlug === ABOUT_US_PAGE_SLUG) {
+    return {
+      title: 'About Us',
+      alternates: { canonical: getCanonicalUrl(`/${fullSlug}`) },
+    };
+  }
+  if (fullSlug === CONTACT_US_PAGE_SLUG) {
+    return {
+      title: 'Contact Us',
+      alternates: { canonical: getCanonicalUrl(`/${fullSlug}`) },
+    };
+  }
+  return { title: 'Not Found' };
 }
 
-export default async function DynamicPage({ params, searchParams }: PageProps) {
+export default async function CatchAllPage({ params }: PageProps) {
   const { slug } = await params;
   const fullSlug = slug?.join('/') || '';
   const search = await searchParams;
