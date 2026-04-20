@@ -32,7 +32,7 @@ export default function HomeSupportMovement({ data }: Props) {
     <section id="donate" className="w-full" aria-labelledby="support-movement-heading">
       <div className="bg-[#f7f4ef] px-4 py-12 sm:px-6 md:px-8 lg:px-12 xl:px-16">
         <div className="mx-auto max-w-3xl text-center">
-          <p className="text-3xl font-bold tracking-tight sm:text-4xl md:text-[2.5rem]">
+          <p className="text-3xl font-bold tracking-tight lg:text-[60px]">
             <span className="text-[#00AEEF]">{header.titleCyan}</span>
             <span className="text-[#e87722]">{header.titleOrange}</span>
           </p>
@@ -49,9 +49,10 @@ export default function HomeSupportMovement({ data }: Props) {
         </div>
       </div>
 
-      <div className="bg-[#0a8cc9] px-4 py-14 sm:px-6 md:px-8 lg:px-12 lg:py-16 xl:px-16">
-        <div className="mx-auto grid max-w-6xl gap-12 lg:grid-cols-2 lg:items-center lg:gap-14">
-          <div>
+      <div className="bg-[#0a8cc9] lg:py-24 py-10">
+        <div className="container mx-auto px-4">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
+          <div >
             <h2
               id="support-movement-heading"
               className="text-3xl font-bold text-white sm:text-4xl md:text-[2.35rem]"
@@ -75,6 +76,7 @@ export default function HomeSupportMovement({ data }: Props) {
               </p>
             </div>
           </div>
+          
 
           <div className="rounded-2xl bg-white p-6 shadow-lg sm:p-8">
             <form onSubmit={handleSubmit} className="space-y-5">
@@ -121,6 +123,7 @@ export default function HomeSupportMovement({ data }: Props) {
               <p className="text-center text-xs text-[#6b7280]">{form.footnote}</p>
             </form>
           </div>
+        </div>
         </div>
       </div>
     </section>

@@ -14,7 +14,7 @@ type Props = {
   data: HomeEngagementData;
 };
 
-const SECTION_PAD = 'px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16';
+const SECTION_PAD = '';
 
 function ArrowIcon({ direction }: { direction: 'prev' | 'next' }) {
   return (
@@ -54,7 +54,7 @@ export default function HomeEngagement({ data }: Props) {
       className="w-full bg-[#F0F0FF] py-14 md:py-16 lg:py-20"
       aria-labelledby="engagement-heading"
     >
-      <div className={`mx-auto w-full max-w-6xl ${SECTION_PAD}`}>
+      <div className="container mx-auto px-4">
         <div className="text-center">
           <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#F28500] sm:text-sm">
             {kicker}
