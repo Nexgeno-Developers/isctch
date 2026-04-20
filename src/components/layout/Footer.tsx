@@ -8,7 +8,7 @@ export default function Footer() {
   const footerData = getFooterLayout();
 
   return (
-    <footer className="bg-[#1A1A2E] text-white overflow-x-hidden">
+    <footer className="bg-[#1A1A2E] text-on-footer overflow-x-hidden">
       <div className="container mx-auto px-4 pt-12 md:pt-16 pb-8">
         <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-12 gap-x-6 gap-y-10 sm:gap-10 lg:gap-8 xl:gap-10">
           <div className="w-full col-span-2 lg:col-span-4 xl:col-span-4 lg:pr-4 xl:pr-8">
@@ -22,13 +22,13 @@ export default function Footer() {
                   className="h-auto w-auto max-h-14 md:max-h-16 max-w-[160px] object-contain object-left"
                 />
               ) : (
-                <h2 className="text-2xl md:text-3xl font-normal text-white">
+                <h2 className="text-2xl md:text-3xl font-normal text-on-footer">
                   {footerData.logo.text}
                 </h2>
               )}
             </Link>
 
-            <p className="text-white text-sm md:text-base font-thin mb-6 leading-relaxed break-words text-pretty">
+            <p className="text-on-footer text-sm md:text-base font-thin mb-6 leading-relaxed break-words text-pretty">
               {footerData.description}
             </p>
 
@@ -40,7 +40,7 @@ export default function Footer() {
                     href={social.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-white hover:opacity-80 transition-opacity"
+                    className="text-on-footer hover:opacity-80 transition-opacity"
                     aria-label={social.platform}
                   >
                     {social.icon ? <FooterSocialIcon icon={social.icon} /> : null}
@@ -52,7 +52,7 @@ export default function Footer() {
 
           {footerData.columns.map((column) => (
             <div key={column.id} className="w-full sm:col-span-1 lg:col-span-2 min-w-0">
-              <h3 className="text-white font-bold mb-4 text-base md:text-lg">{column.title}</h3>
+              <h3 className="text-on-footer font-bold mb-4 text-base md:text-lg">{column.title}</h3>
               <ul className="space-y-2">
                 {column.links.map((link) => (
                   <li key={link.id}>
@@ -71,7 +71,7 @@ export default function Footer() {
 
         <div className="border-t border-white/20 pt-8 mt-12">
           <div className="text-center">
-            <p className="text-white text-sm md:text-[14px] font-thin">{footerData.copyright}</p>
+            <p className="text-on-footer text-sm md:text-[14px] font-thin">{footerData.copyright}</p>
           </div>
         </div>
       </div>
