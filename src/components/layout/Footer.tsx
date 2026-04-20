@@ -8,8 +8,8 @@ export default function Footer() {
   const footerData = getFooterLayout();
 
   return (
-    <footer className="overflow-x-hidden bg-[#1a1a2e] text-white">
-      <div className="mx-auto max-w-6xl px-4 pb-10 pt-14 sm:px-6 md:px-8 lg:px-10 lg:pb-12 lg:pt-16">
+    <footer className="overflow-x-hidden bg-[#1a1a2e] text-white lg:py-20 py-10">
+      <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 gap-12 md:grid-cols-2 lg:grid-cols-4 lg:gap-10 xl:gap-12">
           <div className="md:col-span-2 lg:col-span-1">
             <Link
@@ -18,20 +18,14 @@ export default function Footer() {
             >
               {footerData.logo.image ? (
                 <Image
-                  width={56}
-                  height={56}
+                  width={156}
+                  height={156}
                   src={footerData.logo.image}
                   alt={footerData.logo.text}
-                  className="h-12 w-12 shrink-0 object-contain md:h-14 md:w-14"
+                  className="w-[200px shrink-0 object-cover"
                 />
               ) : null}
-              {footerData.logo.orgLine ? (
-                <span className="text-left text-[10px] font-semibold uppercase leading-snug tracking-wide text-[#5ec4f0] sm:text-[11px] md:text-xs">
-                  {footerData.logo.orgLine}
-                </span>
-              ) : (
-                <span className="self-center text-lg font-semibold text-white">{footerData.logo.text}</span>
-              )}
+             
             </Link>
 
             <p className="mb-6 max-w-sm text-sm leading-relaxed text-white/70 md:text-[15px]">

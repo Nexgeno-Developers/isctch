@@ -65,22 +65,22 @@ const FALLBACK_BEYOND_SUPPORT: DonateBeyondSupportData = {
 export default function DonationBeyondSupportSection({ data }: { data?: DonateBeyondSupportData }) {
   const safeData = data ?? FALLBACK_BEYOND_SUPPORT;
   return (
-    <section className="bg-[#f7f5f2] px-4 py-14 sm:px-6 md:px-8 lg:px-12 lg:py-16 xl:px-16">
-      <div className="mx-auto max-w-6xl">
+    <section className="bg-[#FFF8F0] py-10 lg:py-20">
+      <div className="mx-auto container px-4">
         <div className="text-center">
           <h2 className="text-4xl font-bold tracking-tight text-[#1f233b] sm:text-5xl">{safeData.heading}</h2>
-          <p className="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-[#666d82] sm:text-lg">{safeData.subheading}</p>
+          <p className="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-black/70 lg::text-base">{safeData.subheading}</p>
         </div>
 
-        <div className="mt-10 grid gap-6 md:grid-cols-3">
+        <div className="mt-10 grid gap-10 md:grid-cols-3">
           {safeData.cards.map((card, idx) => (
-            <article key={`${card.title}-${idx}`} className="rounded-2xl border border-[#eef1f6] bg-white p-7 shadow-[0_8px_30px_-12px_rgba(15,23,42,0.14)]">
+            <article key={`${card.title}-${idx}`} className="rounded-2xl border border-[#F1F5F9] bg-[#ffffff82] p-10 shadow-[0_8px_30px_-12px_rgba(15,23,42,0.14)]">
               <div className={`mb-5 inline-flex rounded-2xl p-3 ${card.icon === 'advocacy' ? 'bg-[#fff2e3]' : 'bg-[#eaf7fd]'}`}>
                 <CardIcon icon={card.icon} />
               </div>
-              <h3 className="text-3xl font-bold leading-tight text-[#1f233b]">{card.title}</h3>
-              <p className="mt-4 text-base leading-relaxed text-[#666d82]">{card.description}</p>
-              <Link href={card.ctaHref} className="mt-6 inline-flex items-center text-xl font-semibold text-[#00a3e8] hover:underline">
+              <h3 className="text-[24px] font-bold leading-tight text-black">{card.title}</h3>
+              <p className="mt-4 text-base leading-relaxed text-black">{card.description}</p>
+              <Link href={card.ctaHref} className="mt-6 inline-flex items-center text-base font-semibold text-[#00a3e8] hover:underline">
                 {card.ctaLabel} <span className="ml-2" aria-hidden>→</span>
               </Link>
             </article>

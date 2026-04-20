@@ -192,3 +192,10 @@ body .swiper-button-prev-similar, body .swiper-button-next-similar {
     height: 60vh !important;
   }
 }
+
+
+@media (min-width: 96rem) {
+  .container {
+      max-width: 88rem;
+  }
+}

@@ -17,7 +17,7 @@ export default function DonationJoinMovementSection({ data }: { data?: DonateJoi
   const safeData = data ?? FALLBACK_JOIN_MOVEMENT;
   return (
     <section className="relative overflow-hidden">
-      <div className="relative h-[420px] w-full sm:h-[460px]">
+      <div className="relative h-[420px] w-full lg:h-[500px]">
         <Image
           src={safeData.backgroundImage.src}
           alt={safeData.backgroundImage.alt}
