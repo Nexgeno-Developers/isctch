@@ -1,22 +1,17 @@
 import Link from 'next/link';
-import { fetchFooterData } from '@/lib/api/footer';
-import { FooterSocialIcon } from '@/components/layout/FooterSocialIcon';
 import Image from 'next/image';
-/**
- * Footer Component
- * 
- * Server Component that fetches footer data from API
- */
-export default async function Footer() {
-  const footerData = await fetchFooterData();
+import { getFooterLayout } from '@/lib/api/footer';
+import { FooterSocialIcon } from '@/components/layout/FooterSocialIcon';
+
+/** Data: `src/lib/api/footer` */
+export default function Footer() {
+  const footerData = getFooterLayout();
 
   return (
     <footer className="bg-[#009FE8] text-white overflow-x-hidden">
       <div className="container mx-auto px-4 pt-12 md:pt-16 pb-8">
         <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-12 gap-x-6 gap-y-10 sm:gap-10 lg:gap-8 xl:gap-10">
-          {/* Left Section - Logo, Description, and Social Icons */}
           <div className="w-full col-span-2 lg:col-span-4 xl:col-span-4 lg:pr-4 xl:pr-8">
-            {/* Logo */}
             <Link href={footerData.logo.href} className="block mb-4">
               {footerData.logo.image ? (
                 <Image
@@ -33,12 +28,10 @@ export default async function Footer() {
               )}
             </Link>
 
-            {/* Description */}
             <p className="text-white text-sm md:text-base font-thin mb-6 leading-relaxed break-words text-pretty">
               {footerData.description}
             </p>
 
-            {/* Social Media Icons */}
             {footerData.socialLinks && footerData.socialLinks.length > 0 && (
               <div className="flex flex-wrap items-center gap-4 gap-y-3">
                 {footerData.socialLinks.map((social) => (
@@ -57,12 +50,9 @@ export default async function Footer() {
             )}
           </div>
 
-          {/* Middle Section - Four Columns */}
           {footerData.columns.map((column) => (
             <div key={column.id} className="w-full sm:col-span-1 lg:col-span-2 min-w-0">
-              <h3 className="text-white font-bold mb-4 text-base md:text-lg">
-                {column.title}
-              </h3>
+              <h3 className="text-white font-bold mb-4 text-base md:text-lg">{column.title}</h3>
               <ul className="space-y-2">
                 {column.links.map((link) => (
                   <li key={link.id}>
@@ -79,12 +69,9 @@ export default async function Footer() {
           ))}
         </div>
 
-        {/* Bottom Section - Copyright */}
         <div className="border-t border-white/20 pt-8 mt-12">
           <div className="text-center">
-            <p className="text-white text-sm md:text-[14px] font-thin">
-              {footerData.copyright}
-            </p>
+            <p className="text-white text-sm md:text-[14px] font-thin">{footerData.copyright}</p>
           </div>
         </div>
       </div>

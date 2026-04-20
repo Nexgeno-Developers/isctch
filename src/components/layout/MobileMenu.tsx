@@ -1,20 +1,15 @@
-import type { HeaderData } from '@/lib/api/header';
 import MobileMenuClient from './MobileMenuClient';
+import type { NavItem } from '@/lib/api/header/types';
 
 /**
- * Mobile Menu Component (Server Component)
- * 
- * Receives navigation data from Header server component
- * and passes it to client component for interactivity.
+ * Server wrapper: passes header navigation + CTA into the client drawer (`src/lib/api/header`).
  */
 export default function MobileMenu({
   navigation,
   cta,
 }: {
-  navigation: HeaderData['navigation'];
-  cta: HeaderData['cta'];
+  navigation: NavItem[];
+  cta?: { text: string; href: string };
 }) {
-  return (
-    <MobileMenuClient navigation={navigation} cta={cta} />
-  );
+  return <MobileMenuClient navigation={navigation} cta={cta} />;
 }

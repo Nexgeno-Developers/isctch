@@ -1,19 +1,21 @@
-export interface NavigationItem {
+export type NavItem = {
   id: string;
   label: string;
   href: string;
-  children?: NavigationItem[];
-}
+  children?: NavItem[];
+};
 
-export interface HeaderData {
+/** Static header payload (replace with API fetch later if needed). */
+export type HeaderData = {
   logo: {
     text?: string;
     image?: string;
     href: string;
+    acronym?: string;
+    organizationName?: string;
+    tagline?: string;
+    lockupImage?: string;
   };
-  navigation: NavigationItem[];
-  cta?: {
-    text: string;
-    href: string;
-  };
-}
+  navigation: NavItem[];
+  cta?: { text: string; href: string };
+};

@@ -1,89 +1,87 @@
+'use client';
+
 import Link from 'next/link';
-import type { NavigationItem } from '@/lib/api/header';
+import { usePathname } from 'next/navigation';
+import type { NavItem } from '@/lib/api/header/types';
+
+function isActivePath(pathname: string, href: string): boolean {
+  if (href === '#' || href.startsWith('#')) return false;
+  if (href === '/') return pathname === '/';
+  try {
+    const path = new URL(href, 'https://example.com').pathname;
+    return pathname === path || pathname.startsWith(`${path}/`);
+  } catch {
+    return pathname === href;
+  }
+}
+
+function navLinkClass(active: boolean): string {
+  return `relative whitespace-nowrap border-b-2 pb-0.5 text-[13px] font-semibold uppercase tracking-wide transition-colors xl:text-sm ${
+    active
+      ? 'border-[#009fe8] text-[#009fe8]'
+      : 'border-transparent text-[#3d5566] hover:border-[#009fe8]/40 hover:text-[#009fe8]'
+  }`;
+}
 
 interface NavigationDropdownProps {
-  item: NavigationItem;
+  item: NavItem;
 }
 
 /**
- * Navigation Dropdown Component (Server Component)
- * 
- * Pure CSS hover-based dropdown - no client-side JavaScript needed.
- * Uses CSS :hover pseudo-class for interactivity.
+ * Desktop: flat link, or parent + hover dropdown when `item.children` is set.
+ * Data: `src/lib/api/header` → `HEADER_LAYOUT.navigation`.
  */
 export default function NavigationDropdown({ item }: NavigationDropdownProps) {
-  if (!item.children || item.children.length === 0) {
+  const pathname = usePathname();
+  const selfActive = isActivePath(pathname, item.href);
+  const childActive =
+    item.children?.some((c) => isActivePath(pathname, c.href)) ?? false;
+  const active = selfActive || childActive;
+
+  if (!item.children?.length) {
     return (
-      <Link
-        href={item.href}
-        className="relative group text-[15px] font-[500] tracking-wider text-white transition-colors hover:text-[#00d4ff] lg:max-xl:text-[13px] lg:max-xl:tracking-wide"
-      >
+      <Link href={item.href} className={navLinkClass(active)}>
         {item.label}
-        <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#00d4ff] transition-all group-hover:w-full" />
       </Link>
     );
   }
 
   return (
-    <div className="relative group">
+    <div className="group relative">
       <Link
         href={item.href}
-        className="relative flex items-center space-x-1 py-2 text-[17px] font-medium tracking-wider text-white transition-colors hover:text-[#00d4ff] lg:max-xl:py-1 lg:max-xl:text-[14px] lg:max-xl:tracking-wide"
+        className={`${navLinkClass(active)} inline-flex items-center gap-1`}
       >
         <span>{item.label}</span>
         <svg
-          className="h-4 w-4 shrink-0 transition-transform duration-200 group-hover:rotate-180 lg:max-xl:h-3.5 lg:max-xl:w-3.5"
+          className="h-3.5 w-3.5 shrink-0 transition-transform duration-200 group-hover:rotate-180"
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"
+          aria-hidden
         >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={2}
-            d="M19 9l-7 7-7-7"
-          />
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
         </svg>
-        <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#00d4ff] transition-all group-hover:w-full" />
       </Link>
 
-      {/* Invisible bridge to prevent hover gap (must not block clicks) */}
-      <div className="absolute top-full left-0 w-full h-3 bg-transparent pointer-events-none" />
-
-      {/* Dropdown Menu - CSS hover based */}
-      <div className="absolute top-full left-0 mt-0 pt-3 min-w-[260px] max-w-[min(100vw-2rem,320px)] bg-transparent z-50 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 pointer-events-none group-hover:pointer-events-auto">
-        {/* Arrow indicator */}
-        {/* <div className="absolute top-0 left-6 w-4 h-4 bg-white border-l border-t border-gray-100 rotate-45" /> */}
-        
-        {/* Dropdown content */}
-        <div className="relative bg-white rounded-xl shadow-2xl border border-gray-100 py-2 mt-2">
-          {item.children.map((child, index) => (
-            <Link
-              key={child.id}
-              href={child.href}
-              className="block px-5 py-3 text-black hover:bg-gradient-to-r hover:from-blue-50 hover:to-purple-50 hover:text-blue-600 transition-all duration-150 group/item relative"
-            >
-              <span className="relative z-10 flex items-center">
+      <div className="pointer-events-none absolute left-0 top-full z-50 pt-2 opacity-0 transition-opacity duration-150 group-hover:pointer-events-auto group-hover:opacity-100">
+        <div className="min-w-[220px] rounded-lg border border-gray-100 bg-white py-2 shadow-xl">
+          {item.children.map((child) => {
+            const cActive = isActivePath(pathname, child.href);
+            return (
+              <Link
+                key={child.id}
+                href={child.href}
+                className={`block px-4 py-2.5 text-sm font-medium transition-colors ${
+                  cActive
+                    ? 'bg-[#009fe8]/10 text-[#009fe8]'
+                    : 'text-[#3d5566] hover:bg-gray-50 hover:text-[#009fe8]'
+                }`}
+              >
                 {child.label}
-                {/* <svg
-                  className="w-4 h-4 ml-auto opacity-0 group-hover/item:opacity-100 transition-opacity transform group-hover/item:translate-x-1"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M9 5l7 7-7 7"
-                  />
-                </svg> */}
-              </span>
-              {index < item.children!.length - 1 && (
-                <div className="absolute bottom-0 left-5 right-5 h-px bg-gray-100" />
-              )}
-            </Link>
-          ))}
+              </Link>
+            );
+          })}
         </div>
       </div>
     </div>

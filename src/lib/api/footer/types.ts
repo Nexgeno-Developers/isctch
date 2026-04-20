@@ -1,28 +1,21 @@
-export interface FooterColumn {
+export type FooterColumn = {
   id: string;
   title: string;
-  links: Array<{
-    id: string;
-    label: string;
-    href: string;
-  }>;
-}
+  links: Array<{ id: string; label: string; href: string }>;
+};
 
-export interface SocialLink {
+export type SocialLink = {
   id: string;
   platform: string;
   href: string;
   icon?: string;
-}
+};
 
-export interface FooterData {
-  logo: {
-    text: string;
-    image?: string;
-    href: string;
-  };
+/** Static footer payload (replace with API fetch later if needed). */
+export type FooterData = {
+  logo: { text: string; image?: string; href: string };
   description: string;
   columns: FooterColumn[];
   socialLinks?: SocialLink[];
   copyright: string;
-}
+};
