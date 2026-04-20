@@ -47,9 +47,17 @@ export type DonateBeyondSupportData = {
   cards: DonateBeyondSupportCard[];
 };
 
+export type DonateJoinMovementData = {
+  heading: string;
+  buttonLabel: string;
+  buttonHref: string;
+  backgroundImage: { src: string; alt: string };
+};
+
 export type DonatePageData = {
   hero: DonateHeroData;
   stats: DonateStatsData;
   contribution: DonateContributionData;
   beyondSupport: DonateBeyondSupportData;
+  joinMovement: DonateJoinMovementData;
 };

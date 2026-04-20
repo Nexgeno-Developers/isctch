@@ -3,6 +3,7 @@ import type { Metadata } from 'next';
 import DonationContributionSection from '@/components/donate/DonationContributionSection';
 import DonationBeyondSupportSection from '@/components/donate/DonationBeyondSupportSection';
 import DonationHero from '@/components/donate/DonationHero';
+import DonationJoinMovementSection from '@/components/donate/DonationJoinMovementSection';
 import HomeImpactStats from '@/components/home/HomeImpactStats';
 import { donatePath } from '@/config/publicRoutes';
 import { getCanonicalUrl } from '@/config/site';
@@ -28,6 +29,7 @@ export async function DonatePageView({ slug = 'donate' }: { slug?: string }) {
       <HomeImpactStats data={impactStats} />
       <DonationContributionSection data={data.contribution} />
       <DonationBeyondSupportSection data={data.beyondSupport} />
+      <DonationJoinMovementSection data={data.joinMovement} />
     </main>
   );
 }

@@ -30,17 +30,50 @@ function CardIcon({ icon }: { icon: DonateBeyondSupportCard['icon'] }) {
   );
 }
 
-export default function DonationBeyondSupportSection({ data }: { data: DonateBeyondSupportData }) {
+const FALLBACK_BEYOND_SUPPORT: DonateBeyondSupportData = {
+  heading: 'Beyond Financial Support',
+  subheading:
+    'There are countless ways to strengthen the fabric of global peace. Explore how you can contribute your time and voice.',
+  cards: [
+    {
+      icon: 'volunteer',
+      title: 'Volunteer Globally',
+      description:
+        'Join our field teams in humanitarian relief, educational initiatives, or community organizing projects.',
+      ctaLabel: 'Learn More',
+      ctaHref: '/#get-involved',
+    },
+    {
+      icon: 'advocacy',
+      title: 'Advocacy & Voice',
+      description:
+        'Champion our causes in your own community by sharing our mission and participating in digital campaigns.',
+      ctaLabel: 'View Toolkit',
+      ctaHref: '/#get-involved',
+    },
+    {
+      icon: 'partners',
+      title: 'Corporate Partners',
+      description:
+        'Align your organization with peace through strategic sponsorship, grants, and employee engagement.',
+      ctaLabel: 'Partner with us',
+      ctaHref: '/contact-us',
+    },
+  ],
+};
+
+export default function DonationBeyondSupportSection({ data }: { data?: DonateBeyondSupportData }) {
+  const safeData = data ?? FALLBACK_BEYOND_SUPPORT;
   return (
     <section className="bg-[#f7f5f2] px-4 py-14 sm:px-6 md:px-8 lg:px-12 lg:py-16 xl:px-16">
       <div className="mx-auto max-w-6xl">
         <div className="text-center">
-          <h2 className="text-4xl font-bold tracking-tight text-[#1f233b] sm:text-5xl">{data.heading}</h2>
-          <p className="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-[#666d82] sm:text-lg">{data.subheading}</p>
+          <h2 className="text-4xl font-bold tracking-tight text-[#1f233b] sm:text-5xl">{safeData.heading}</h2>
+          <p className="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-[#666d82] sm:text-lg">{safeData.subheading}</p>
         </div>
 
         <div className="mt-10 grid gap-6 md:grid-cols-3">
-          {data.cards.map((card, idx) => (
+          {safeData.cards.map((card, idx) => (
             <article key={`${card.title}-${idx}`} className="rounded-2xl border border-[#eef1f6] bg-white p-7 shadow-[0_8px_30px_-12px_rgba(15,23,42,0.14)]">
               <div className={`mb-5 inline-flex rounded-2xl p-3 ${card.icon === 'advocacy' ? 'bg-[#fff2e3]' : 'bg-[#eaf7fd]'}`}>
                 <CardIcon icon={card.icon} />

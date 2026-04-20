@@ -77,6 +77,15 @@ const STATIC_DONATE_PAGE: DonatePageData = {
       },
     ],
   },
+  joinMovement: {
+    heading: 'Together, we are the architects of a better world.',
+    buttonLabel: 'Join the Movement',
+    buttonHref: '/#get-involved',
+    backgroundImage: {
+      src: 'https://images.unsplash.com/photo-1446776877081-d282a0f896e2?auto=format&fit=crop&w=1800&q=80',
+      alt: 'Earth from space with glowing horizon',
+    },
+  },
 };
 
 type MetaRecord = Record<string, string | undefined>;
@@ -110,6 +119,15 @@ function parseAmounts(raw: string): number[] {
     .map((s) => Number.parseInt(s.replace(/\D/g, ''), 10))
     .filter((n) => Number.isFinite(n) && n > 0);
   return values.length ? values : STATIC_DONATE_PAGE.contribution.amounts;
+}
+
+function normalizeImageUrl(url: string): string {
+  const u = url.trim();
+  if (!u) return STATIC_DONATE_PAGE.joinMovement.backgroundImage.src;
+  if (/^https?:\/\//i.test(u)) return u;
+  if (u.startsWith('/')) return u;
+  if (!COMPANY_API_DOMAIN) return `/${u.replace(/^\/+/, '')}`;
+  return `${COMPANY_API_DOMAIN}/${u.replace(/^\/+/, '')}`;
 }
 
 function normalizeMeta(data: PageApiPayload['data']): MetaRecord | undefined {
@@ -231,6 +249,28 @@ function donateFromMeta(meta: MetaRecord | undefined): DonatePageData | null {
         STATIC_DONATE_PAGE.beyondSupport.subheading,
       cards: beyondCards,
     },
+    joinMovement: {
+      heading:
+        pick(meta, ['donate_join_heading', 'donation_join_heading']) ||
+        STATIC_DONATE_PAGE.joinMovement.heading,
+      buttonLabel:
+        pick(meta, ['donate_join_button_label', 'donation_join_button_label']) ||
+        STATIC_DONATE_PAGE.joinMovement.buttonLabel,
+      buttonHref:
+        pick(meta, ['donate_join_button_url', 'donation_join_button_url']) ||
+        STATIC_DONATE_PAGE.joinMovement.buttonHref,
+      backgroundImage: {
+        src: (() => {
+          const imageRaw = pick(meta, ['donate_join_image', 'donation_join_image']);
+          return imageRaw
+            ? normalizeImageUrl(imageRaw)
+            : STATIC_DONATE_PAGE.joinMovement.backgroundImage.src;
+        })(),
+        alt:
+          pick(meta, ['donate_join_image_alt', 'donation_join_image_alt']) ||
+          STATIC_DONATE_PAGE.joinMovement.backgroundImage.alt,
+      },
+    },
   };
 }
 
@@ -263,6 +303,14 @@ async function resolveDonatePageData(slug: string): Promise<DonatePageData> {
           ? mapped.beyondSupport.cards
           : STATIC_DONATE_PAGE.beyondSupport.cards,
     },
+    joinMovement: {
+      ...STATIC_DONATE_PAGE.joinMovement,
+      ...mapped.joinMovement,
+      backgroundImage: {
+        ...STATIC_DONATE_PAGE.joinMovement.backgroundImage,
+        ...mapped.joinMovement?.backgroundImage,
+      },
+    },
   };
 }
 
@@ -270,7 +318,7 @@ export async function getDonatePageData(slug = 'donate'): Promise<DonatePageData
   const cleanSlug = slug.replace(/^\/+|\/+$/g, '');
   const cached = unstable_cache(
     async () => resolveDonatePageData(cleanSlug),
-    ['donate-page-v2', cleanSlug, process.env.COMPANY_API_BASE_URL || 'static', COMPANY_API_DOMAIN || ''],
+    ['donate-page-v3', cleanSlug, process.env.COMPANY_API_BASE_URL || 'static', COMPANY_API_DOMAIN || ''],
     {
       revalidate: DONATE_REVALIDATE_SECONDS,
       tags: [API_CACHE_TAG, 'donate-page', `page:${cleanSlug}`],
@@ -279,4 +327,12 @@ export async function getDonatePageData(slug = 'donate'): Promise<DonatePageData
   return cached();
 }
 
-export type { DonateContributionData, DonateHeroData, DonatePageData, DonateStatItem, DonateStatsData } from './types';
+export type {
+  DonateBeyondSupportData,
+  DonateContributionData,
+  DonateHeroData,
+  DonateJoinMovementData,
+  DonatePageData,
+  DonateStatItem,
+  DonateStatsData,
+} from './types';

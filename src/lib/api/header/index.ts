@@ -29,7 +29,7 @@ export const HEADER_LAYOUT: HeaderData = {
   ],
   cta: {
     text: 'Donate for peace',
-    href: '#donate',
+    href: 'donate',
   },
 };
 
