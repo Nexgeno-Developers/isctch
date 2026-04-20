@@ -2,16 +2,9 @@
 
 import Link from 'next/link';
 import Image from 'next/image';
-import { Merriweather } from 'next/font/google';
 import { HEADER_LAYOUT } from '@/lib/api/header';
 import NavigationDropdown from './NavigationDropdown';
 import MobileMenu from './MobileMenu';
-
-const taglineFont = Merriweather({
-  weight: ['400'],
-  style: ['italic'],
-  subsets: ['latin'],
-});
 
 export default function Header() {
   const { logo, navigation, cta } = HEADER_LAYOUT;
@@ -21,53 +14,27 @@ export default function Header() {
       <div className="relative mx-auto flex max-w-[1320px] items-center justify-between gap-4 px-4 py-3 lg:px-6 lg:py-4">
         <Link
           href={logo.href}
-          className="relative z-10 flex min-w-0 shrink-0 items-center gap-3 text-left"
+          className="relative z-10 flex min-w-0 shrink-0 items-center"
         >
           {logo.lockupImage ? (
             <Image
               src={logo.lockupImage}
-              alt={logo.text || 'iSCTH'}
+              alt={logo.text || 'Logo'}
               width={360}
               height={96}
-              className="h-14 w-auto max-w-[min(100%,280px)] object-contain object-left sm:h-16 lg:max-w-[320px]"
+              className="h-12 w-auto max-w-[min(100%,280px)] object-contain object-left sm:h-14 lg:max-w-[320px]"
               priority
             />
-          ) : (
-            <>
-              {logo.image ? (
-                <div className="flex h-12 w-12 shrink-0 items-center justify-center overflow-hidden rounded-full bg-[#e8f4fc] ring-2 ring-[#009fe8]/25 sm:h-14 sm:w-14">
-                  <Image
-                    src={logo.image}
-                    alt=""
-                    width={112}
-                    height={112}
-                    className="h-full w-full object-contain p-1"
-                    priority
-                    aria-hidden
-                  />
-                </div>
-              ) : null}
-              <div className="min-w-0">
-                <div className="flex flex-wrap items-baseline gap-x-2 gap-y-0.5">
-                  {logo.acronym ? (
-                    <span className="text-xl font-bold tracking-tight text-[#009fe8] sm:text-2xl">
-                      {logo.acronym}
-                    </span>
-                  ) : null}
-                  {logo.organizationName ? (
-                    <span className="max-w-[14rem] text-[9px] font-semibold leading-snug text-[#009fe8] min-[400px]:max-w-[18rem] min-[400px]:text-[10px] sm:max-w-none sm:text-[11px] lg:text-xs">
-                      {logo.organizationName}
-                    </span>
-                  ) : null}
-                </div>
-                {logo.tagline ? (
-                  <p className={`mt-0.5 text-[11px] text-[#e87722] sm:text-xs ${taglineFont.className}`}>
-                    {logo.tagline}
-                  </p>
-                ) : null}
-              </div>
-            </>
-          )}
+          ) : logo.image ? (
+            <Image
+              src={logo.image}
+              alt={logo.text || 'Logo'}
+              width={280}
+              height={96}
+              className="h-12 w-auto max-h-14 object-contain object-left sm:h-14 sm:max-h-16"
+              priority
+            />
+          ) : null}
         </Link>
 
         <nav

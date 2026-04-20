@@ -2,17 +2,15 @@ import { aboutUsPath, contactUsPath } from '@/config/publicRoutes';
 import type { FooterData } from './types';
 
 const LOGO_SRC = '/iscth-logo.png';
-const LOGO_ALT =
-  'International Spiritual Council for Transforming Humanity (iSCTH)';
 
 const FOOTER_BODY: Omit<FooterData, 'copyright'> = {
   logo: {
-    text: LOGO_ALT,
+    text: 'Logo',
     image: LOGO_SRC,
     href: '/',
   },
   description:
-    'International Spiritual Council for Transforming Humanity — fostering unity, compassion, and transformation across communities worldwide.',
+    'Building peace and connection across communities through dialogue, service, and shared purpose.',
   columns: [
     {
       id: 'footer-menu-2',
@@ -39,7 +37,7 @@ export function getFooterLayout(): FooterData {
   const year = new Date().getFullYear();
   return {
     ...FOOTER_BODY,
-    copyright: `© ${year} International Spiritual Council for Transforming Humanity. All rights reserved.`,
+    copyright: `© ${year} iSCTH. All rights reserved.`,
   };
 }
 

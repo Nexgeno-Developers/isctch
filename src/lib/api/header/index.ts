@@ -2,21 +2,15 @@ import { aboutUsPath, contactUsPath } from '@/config/publicRoutes';
 import type { HeaderData } from './types';
 
 const LOGO_SRC = '/iscth-logo.png';
-const LOGO_ALT =
-  'International Spiritual Council for Transforming Humanity (iSCTH)';
 
 /**
  * Header layout source — edit here or swap this module for live CMS/API later.
  */
 export const HEADER_LAYOUT: HeaderData = {
   logo: {
-    text: LOGO_ALT,
+    text: 'Logo',
     image: LOGO_SRC,
     href: '/',
-    acronym: 'iSCTH',
-    organizationName:
-      'INTERNATIONAL SPIRITUAL COUNCIL FOR TRANSFORMING HUMANITY',
-    tagline: 'One World... One Family',
   },
   navigation: [
     { id: 'nav-about', label: 'About', href: aboutUsPath() },

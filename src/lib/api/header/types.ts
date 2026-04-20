@@ -8,12 +8,11 @@ export type NavItem = {
 /** Static header payload (replace with API fetch later if needed). */
 export type HeaderData = {
   logo: {
+    /** Image alt text (keep short when the mark is purely visual). */
     text?: string;
     image?: string;
     href: string;
-    acronym?: string;
-    organizationName?: string;
-    tagline?: string;
+    /** Optional full-width lockup under /public */
     lockupImage?: string;
   };
   navigation: NavItem[];

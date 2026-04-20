@@ -8,7 +8,7 @@ export default function Footer() {
   const footerData = getFooterLayout();
 
   return (
-    <footer className="bg-[#009FE8] text-white overflow-x-hidden">
+    <footer className="bg-[#1A1A2E] text-white overflow-x-hidden">
       <div className="container mx-auto px-4 pt-12 md:pt-16 pb-8">
         <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-12 gap-x-6 gap-y-10 sm:gap-10 lg:gap-8 xl:gap-10">
           <div className="w-full col-span-2 lg:col-span-4 xl:col-span-4 lg:pr-4 xl:pr-8">

@@ -16,10 +16,10 @@ function isActivePath(pathname: string, href: string): boolean {
 }
 
 function navLinkClass(active: boolean): string {
-  return `relative whitespace-nowrap border-b-2 pb-0.5 text-[13px] font-semibold uppercase tracking-wide transition-colors xl:text-sm ${
+  return `relative whitespace-nowrap border-b-2 pb-0.5 text-[13px] font-semibold uppercase tracking-wide xl:text-sm ${
     active
-      ? 'border-[#009fe8] text-[#009fe8]'
-      : 'border-transparent text-[#3d5566] hover:border-[#009fe8]/40 hover:text-[#009fe8]'
+      ? 'border-[#009fe8] !text-[#475569]'
+      : 'border-transparent !text-[#475569] hover:border-[#009fe8]/40 hover:text-[#009fe8]'
   }`;
 }
 
