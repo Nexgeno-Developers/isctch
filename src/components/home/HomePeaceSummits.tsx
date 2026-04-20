@@ -51,7 +51,11 @@ export default function HomePeaceSummits({ data }: Props) {
   const infinite = total > 1;
 
   return (
-    <section className="w-full bg-white py-14 md:py-18 lg:py-20" aria-labelledby="peace-summits-heading">
+    <section
+      id="summits"
+      className="w-full bg-white py-14 md:py-18 lg:py-20"
+      aria-labelledby="peace-summits-heading"
+    >
       <div className={`mx-auto w-full max-w-[100vw] ${SECTION_PAD}`}>
         <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
           <div className="text-center sm:text-left">

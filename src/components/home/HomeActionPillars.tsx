@@ -84,6 +84,7 @@ function PillarIcon({
 export default function HomeActionPillars({ data }: Props) {
   return (
     <section
+      id="what-we-do"
       className="bg-[#E6F4FA] py-14 md:py-18 lg:py-20"
       aria-labelledby="action-pillars-heading"
     >

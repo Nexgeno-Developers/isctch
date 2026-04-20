@@ -3,76 +3,85 @@ import Image from 'next/image';
 import { getFooterLayout } from '@/lib/api/footer';
 import { FooterSocialIcon } from '@/components/layout/FooterSocialIcon';
 
-/** Data: `src/lib/api/footer` */
+/** Data: `src/lib/api/footer` — four-column navy footer + social + copyright. */
 export default function Footer() {
   const footerData = getFooterLayout();
 
   return (
-    <footer className="bg-[#1A1A2E] text-on-footer overflow-x-hidden">
-      <div className="container mx-auto px-4 pt-12 md:pt-16 pb-8">
-        <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-12 gap-x-6 gap-y-10 sm:gap-10 lg:gap-8 xl:gap-10">
-          <div className="w-full col-span-2 lg:col-span-4 xl:col-span-4 lg:pr-4 xl:pr-8">
-            <Link href={footerData.logo.href} className="block mb-4">
+    <footer className="overflow-x-hidden bg-[#1a1a2e] text-white">
+      <div className="mx-auto max-w-6xl px-4 pb-10 pt-14 sm:px-6 md:px-8 lg:px-10 lg:pb-12 lg:pt-16">
+        <div className="grid grid-cols-1 gap-12 md:grid-cols-2 lg:grid-cols-4 lg:gap-10 xl:gap-12">
+          <div className="md:col-span-2 lg:col-span-1">
+            <Link
+              href={footerData.logo.href}
+              className="group mb-5 flex max-w-md gap-3 sm:max-w-none"
+            >
               {footerData.logo.image ? (
                 <Image
-                  width={160}
-                  height={160}
+                  width={56}
+                  height={56}
                   src={footerData.logo.image}
-                  alt={footerData.logo.text || 'Logo'}
-                  className="h-auto w-auto max-h-14 md:max-h-16 max-w-[160px] object-contain object-left"
+                  alt={footerData.logo.text}
+                  className="h-12 w-12 shrink-0 object-contain md:h-14 md:w-14"
                 />
+              ) : null}
+              {footerData.logo.orgLine ? (
+                <span className="text-left text-[10px] font-semibold uppercase leading-snug tracking-wide text-[#5ec4f0] sm:text-[11px] md:text-xs">
+                  {footerData.logo.orgLine}
+                </span>
               ) : (
-                <h2 className="text-2xl md:text-3xl font-normal text-on-footer">
-                  {footerData.logo.text}
-                </h2>
+                <span className="self-center text-lg font-semibold text-white">{footerData.logo.text}</span>
               )}
             </Link>
 
-            <p className="text-on-footer text-sm md:text-base font-thin mb-6 leading-relaxed break-words text-pretty">
+            <p className="mb-6 max-w-sm text-sm leading-relaxed text-white/70 md:text-[15px]">
               {footerData.description}
             </p>
 
-            {footerData.socialLinks && footerData.socialLinks.length > 0 && (
-              <div className="flex flex-wrap items-center gap-4 gap-y-3">
+            {footerData.socialLinks && footerData.socialLinks.length > 0 ? (
+              <div className="flex flex-wrap items-center gap-5">
                 {footerData.socialLinks.map((social) => (
                   <a
                     key={social.id}
                     href={social.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-on-footer hover:opacity-80 transition-opacity"
+                    className="text-white/75 transition-colors hover:text-white"
                     aria-label={social.platform}
                   >
                     {social.icon ? <FooterSocialIcon icon={social.icon} /> : null}
                   </a>
                 ))}
               </div>
-            )}
+            ) : null}
           </div>
 
           {footerData.columns.map((column) => (
-            <div key={column.id} className="w-full sm:col-span-1 lg:col-span-2 min-w-0">
-              <h3 className="text-on-footer font-bold mb-4 text-base md:text-lg">{column.title}</h3>
-              <ul className="space-y-2">
+            <div key={column.id} className="min-w-0">
+              <h3 className="mb-4 text-sm font-bold uppercase tracking-[0.14em] text-white md:text-base">
+                {column.title}
+              </h3>
+              <ul className="space-y-3">
                 {column.links.map((link) => (
                   <li key={link.id}>
                     <Link
                       href={link.href}
-                      className="font-thin text-white hover:opacity-80 transition-opacity text-sm md:text-base break-words [overflow-wrap:anywhere]"
+                      className="text-sm text-[#c5c8d6] transition-colors hover:text-white md:text-[15px]"
                     >
                       {link.label}
                     </Link>
                   </li>
                 ))}
               </ul>
+              {column.accentText ? (
+                <p className="mt-6 text-base font-bold text-[#F28500]">{column.accentText}</p>
+              ) : null}
             </div>
           ))}
         </div>
 
-        <div className="border-t border-white/20 pt-8 mt-12">
-          <div className="text-center">
-            <p className="text-on-footer text-sm md:text-[14px] font-thin">{footerData.copyright}</p>
-          </div>
+        <div className="mt-14 border-t border-white/10 pt-8 lg:mt-16">
+          <p className="text-center text-xs text-white/45 md:text-sm">{footerData.copyright}</p>
         </div>
       </div>
     </footer>

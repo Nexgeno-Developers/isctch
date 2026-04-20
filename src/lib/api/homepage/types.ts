@@ -100,10 +100,48 @@ export type HomePeaceSummitsData = {
   summits: HomePeaceSummitCard[];
 };
 
+/** #IamPEACE strip + Support the Movement donation panel (homepage). */
+export type HomeSupportMovementData = {
+  header: {
+    titleCyan: string;
+    titleOrange: string;
+    subline: string;
+  };
+  panel: {
+    headline: string;
+    body: string;
+    donorsLine: string;
+    avatars: { src: string; alt: string }[];
+  };
+  form: {
+    amounts: number[];
+    defaultAmount: number;
+    namePlaceholder: string;
+    emailPlaceholder: string;
+    submitLabel: string;
+    footnote: string;
+  };
+};
+
+export type HomeEngagementCard = {
+  title: string;
+  description: string;
+};
+
+/** Engagement slider — Join Our Global Family (homepage). */
+export type HomeEngagementData = {
+  kicker: string;
+  title: string;
+  cards: HomeEngagementCard[];
+  cta: { label: string; href: string };
+};
+
 export type HomePageData = {
   hero: HomeHeroData;
   impactStats: HomeImpactStatsData;
   aboutCoreValues: HomeAboutCoreValuesData;
   actionPillars: HomeActionPillarsData;
   peaceSummits: HomePeaceSummitsData;
+  supportMovement: HomeSupportMovementData;
+  engagement: HomeEngagementData;
 };

@@ -14,6 +14,9 @@ import type {
   HomePageData,
   HomePeaceSummitCard,
   HomePeaceSummitsData,
+  HomeSupportMovementData,
+  HomeEngagementCard,
+  HomeEngagementData,
 } from './types';
 import { aboutUsPath } from '@/config/publicRoutes';
 import { API_CACHE_TAG, fetchJsonCached } from '@/lib/api/apiCache';
@@ -424,6 +427,187 @@ function peaceSummitsFromMeta(meta: MetaRecord | undefined): HomePeaceSummitsDat
   };
 }
 
+const STATIC_SUPPORT_MOVEMENT: HomeSupportMovementData = {
+  header: {
+    titleCyan: '#Iam',
+    titleOrange: 'PEACE',
+    subline: 'From Inner Peace to World Peace.',
+  },
+  panel: {
+    headline: 'Support the Movement',
+    body:
+      'Your contribution directly funds global peace summits, humanitarian aid, and education programs that reach thousands of communities. Every gift helps us expand dialogue, heal divisions, and build a more compassionate world.',
+    donorsLine: 'JOINED BY 45,000+ DONORS',
+    avatars: [
+      {
+        src: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=120&h=120&q=80',
+        alt: 'Donor portrait',
+      },
+      {
+        src: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=120&h=120&q=80',
+        alt: 'Donor portrait',
+      },
+      {
+        src: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=120&h=120&q=80',
+        alt: 'Donor portrait',
+      },
+    ],
+  },
+  form: {
+    amounts: [25, 50, 100],
+    defaultAmount: 100,
+    namePlaceholder: 'Full Name',
+    emailPlaceholder: 'Email Address',
+    submitLabel: 'DONATE FOR PEACE',
+    footnote: 'SECURE ENCRYPTED PAYMENT GATEWAY',
+  },
+};
+
+function parseDonationAmounts(raw: string): number[] {
+  const parts = raw
+    .split(/[,\s]+/)
+    .map((s) => Number.parseInt(s.replace(/\D/g, ''), 10))
+    .filter((n) => Number.isFinite(n) && n > 0);
+  return parts.length ? parts : STATIC_SUPPORT_MOVEMENT.form.amounts;
+}
+
+function supportMovementFromMeta(meta: MetaRecord | undefined): HomeSupportMovementData | null {
+  if (!meta) return null;
+
+  const panelHeadline = pick(meta, [
+    'donation_headline',
+    'support_movement_headline',
+    'donation_panel_headline',
+  ]);
+  if (!panelHeadline) return null;
+
+  const amountsRaw = pick(meta, ['donation_amounts', 'support_donation_amounts']);
+  const amounts = amountsRaw ? parseDonationAmounts(amountsRaw) : STATIC_SUPPORT_MOVEMENT.form.amounts;
+  const defaultRaw = pick(meta, ['donation_default_amount']);
+  const defaultAmount = defaultRaw ? parseIntSafe(defaultRaw, amounts[amounts.length - 1] ?? 100) : STATIC_SUPPORT_MOVEMENT.form.defaultAmount;
+
+  const avatars: HomeSupportMovementData['panel']['avatars'] = [];
+  for (let i = 1; i <= 3; i++) {
+    const srcRaw = pick(meta, [`donation_avatar_${i}_src`, `support_avatar_${i}`]);
+    const alt = pick(meta, [`donation_avatar_${i}_alt`]) || `Supporter ${i}`;
+    const fallback = STATIC_SUPPORT_MOVEMENT.panel.avatars[i - 1];
+    avatars.push({
+      src: srcRaw ? normalizeImageUrl(srcRaw) : (fallback?.src ?? STATIC_SUPPORT_MOVEMENT.panel.avatars[0].src),
+      alt,
+    });
+  }
+
+  return {
+    header: {
+      titleCyan: pick(meta, ['donation_header_cyan', 'peace_brand_cyan']) || STATIC_SUPPORT_MOVEMENT.header.titleCyan,
+      titleOrange: pick(meta, ['donation_header_orange', 'peace_brand_orange']) || STATIC_SUPPORT_MOVEMENT.header.titleOrange,
+      subline: pick(meta, ['donation_subline', 'support_subline']) || STATIC_SUPPORT_MOVEMENT.header.subline,
+    },
+    panel: {
+      headline: panelHeadline,
+      body: pick(meta, ['donation_body', 'support_movement_body']) || STATIC_SUPPORT_MOVEMENT.panel.body,
+      donorsLine: pick(meta, ['donation_donors_line', 'support_donors_line']) || STATIC_SUPPORT_MOVEMENT.panel.donorsLine,
+      avatars: avatars.length === 3 ? avatars : STATIC_SUPPORT_MOVEMENT.panel.avatars,
+    },
+    form: {
+      amounts,
+      defaultAmount: amounts.includes(defaultAmount) ? defaultAmount : amounts[0] ?? 100,
+      namePlaceholder:
+        pick(meta, ['donation_name_placeholder']) || STATIC_SUPPORT_MOVEMENT.form.namePlaceholder,
+      emailPlaceholder:
+        pick(meta, ['donation_email_placeholder']) || STATIC_SUPPORT_MOVEMENT.form.emailPlaceholder,
+      submitLabel: pick(meta, ['donation_submit_label']) || STATIC_SUPPORT_MOVEMENT.form.submitLabel,
+      footnote: pick(meta, ['donation_footnote']) || STATIC_SUPPORT_MOVEMENT.form.footnote,
+    },
+  };
+}
+
+const STATIC_ENGAGEMENT: HomeEngagementData = {
+  kicker: 'Engagement',
+  title: 'Join Our Global Family',
+  cards: [
+    {
+      title: 'Peace Ambassador',
+      description:
+        'Represent the movement in your region, host gatherings, and welcome newcomers into a culture of kindness.',
+    },
+    {
+      title: 'Community Chapter Lead',
+      description:
+        'Coordinate local chapters, partner with schools and faith groups, and keep momentum between global events.',
+    },
+    {
+      title: 'Youth Facilitator',
+      description:
+        'Mentor young leaders through workshops, dialogue circles, and service projects that build lasting friendships.',
+    },
+    {
+      title: 'Interfaith Liaison',
+      description:
+        'Bridge diverse traditions through shared meals, study circles, and joint service that highlight our common humanity.',
+    },
+    {
+      title: 'Digital Storyteller',
+      description:
+        'Amplify voices of hope through social content, newsletters, and campaigns that inspire action worldwide.',
+    },
+    {
+      title: 'Summit Volunteer',
+      description:
+        'Support flagship gatherings with logistics, hospitality, and participant care that make every summit memorable.',
+    },
+    {
+      title: 'Education Partner',
+      description:
+        'Integrate peace literacy into classrooms and community programs with curriculum, training, and follow-up.',
+    },
+    {
+      title: 'Policy Fellow',
+      description:
+        'Connect grassroots insight with institutions through briefings, coalitions, and ethical advocacy for peace.',
+    },
+  ],
+  cta: {
+    label: 'Apply as peace ambassador',
+    href: '/#apply-peace-ambassador',
+  },
+};
+
+function engagementCardsFromMeta(meta: MetaRecord | undefined): HomeEngagementCard[] | null {
+  if (!meta) return null;
+  const out: HomeEngagementCard[] = [];
+  for (let i = 1; i <= 16; i++) {
+    const title = pick(meta, [`engagement_card_${i}_title`, `engagement_${i}_title`]);
+    if (!title) continue;
+    const description =
+      pick(meta, [`engagement_card_${i}_description`, `engagement_${i}_description`]) || '';
+    out.push({ title, description });
+  }
+  return out.length ? out : null;
+}
+
+function engagementFromMeta(meta: MetaRecord | undefined): HomeEngagementData | null {
+  if (!meta) return null;
+
+  const title = pick(meta, ['engagement_title', 'join_family_title', 'home_engagement_title']);
+  const kicker = pick(meta, ['engagement_kicker', 'engagement_label', 'home_engagement_kicker']);
+  const list = engagementCardsFromMeta(meta);
+
+  if (!title && !kicker && !list) return null;
+
+  return {
+    kicker: kicker || STATIC_ENGAGEMENT.kicker,
+    title: title || STATIC_ENGAGEMENT.title,
+    cards: list ?? STATIC_ENGAGEMENT.cards,
+    cta: {
+      label:
+        pick(meta, ['engagement_cta_label', 'peace_ambassador_cta_label']) ||
+        STATIC_ENGAGEMENT.cta.label,
+      href: pick(meta, ['engagement_cta_url', 'peace_ambassador_cta_url']) || STATIC_ENGAGEMENT.cta.href,
+    },
+  };
+}
+
 function buildCompanyApiUrl(endpoint: string): string | null {
   const baseUrl = process.env.COMPANY_API_BASE_URL?.trim();
   if (!baseUrl) return null;
@@ -602,8 +786,18 @@ async function resolveHomePage(): Promise<HomePageData> {
   const aboutCoreValues = aboutCoreValuesFromMeta(meta) ?? STATIC_ABOUT_CORE_VALUES;
   const actionPillars = actionPillarsFromMeta(meta) ?? STATIC_ACTION_PILLARS;
   const peaceSummits = peaceSummitsFromMeta(meta) ?? STATIC_PEACE_SUMMITS;
+  const supportMovement = supportMovementFromMeta(meta) ?? STATIC_SUPPORT_MOVEMENT;
+  const engagement = engagementFromMeta(meta) ?? STATIC_ENGAGEMENT;
 
-  return { hero, impactStats, aboutCoreValues, actionPillars, peaceSummits };
+  return {
+    hero,
+    impactStats,
+    aboutCoreValues,
+    actionPillars,
+    peaceSummits,
+    supportMovement,
+    engagement,
+  };
 }
 
 const PAGE_CACHE_SECONDS = Number(
@@ -643,6 +837,14 @@ export async function getHomePeaceSummits(): Promise<HomePeaceSummitsData> {
   return (await getCachedHomePage()).peaceSummits;
 }
 
+export async function getHomeSupportMovement(): Promise<HomeSupportMovementData> {
+  return (await getCachedHomePage()).supportMovement;
+}
+
+export async function getHomeEngagement(): Promise<HomeEngagementData> {
+  return (await getCachedHomePage()).engagement;
+}
+
 export type {
   HomeAboutCoreValuesData,
   HomeActionPillarIconId,
@@ -650,6 +852,8 @@ export type {
   HomeActionPillarsData,
   HomeCoreValueIconId,
   HomeCoreValueItem,
+  HomeEngagementCard,
+  HomeEngagementData,
   HomeHeroData,
   HomeHeroCta,
   HomeImpactStatItem,
@@ -657,4 +861,5 @@ export type {
   HomePageData,
   HomePeaceSummitCard,
   HomePeaceSummitsData,
+  HomeSupportMovementData,
 } from './types';

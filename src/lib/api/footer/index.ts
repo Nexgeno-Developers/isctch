@@ -5,29 +5,48 @@ const LOGO_SRC = '/iscth-logo.png';
 
 const FOOTER_BODY: Omit<FooterData, 'copyright'> = {
   logo: {
-    text: 'Logo',
+    text: 'iSCTH',
+    orgLine: 'INTERNATIONAL SPIRITUAL COUNCIL FOR TRANSFORMING HUMANITY',
     image: LOGO_SRC,
     href: '/',
   },
   description:
-    'Building peace and connection across communities through dialogue, service, and shared purpose.',
+    'A global movement dedicated to the vision of One World - One Family. We believe peace starts within and radiates through collective action.',
+  socialLinks: [
+    { id: 'social-ig', platform: 'Instagram', href: '#', icon: 'instagram' },
+    { id: 'social-x', platform: 'X', href: '#', icon: 'x' },
+    { id: 'social-fb', platform: 'Facebook', href: '#', icon: 'facebook' },
+    { id: 'social-li', platform: 'LinkedIn', href: '#', icon: 'linkedin' },
+  ],
   columns: [
     {
-      id: 'footer-menu-2',
-      title: 'Quick Links',
+      id: 'movement',
+      title: 'Movement',
       links: [
-        { id: 'fl-1', label: 'Home', href: '/' },
-        { id: 'fl-2', label: 'About Us', href: aboutUsPath() },
-        { id: 'fl-3', label: 'Contact Us', href: contactUsPath() },
+        { id: 'mv-1', label: 'About', href: aboutUsPath() },
+        { id: 'mv-2', label: 'What We Do', href: '/#what-we-do' },
+        { id: 'mv-3', label: 'Summits', href: '/#summits' },
       ],
     },
     {
-      id: 'footer-menu-5',
-      title: 'Contact',
-      links: [{ id: 'fl-4', label: 'Get in touch', href: contactUsPath() }],
+      id: 'action',
+      title: 'Action',
+      links: [
+        { id: 'ac-1', label: 'Get Involved', href: '/#get-involved' },
+        { id: 'ac-2', label: 'Donate', href: '/#donate' },
+        { id: 'ac-3', label: 'Volunteer', href: '/#get-involved' },
+      ],
+    },
+    {
+      id: 'connect',
+      title: 'Connect',
+      links: [
+        { id: 'cn-1', label: 'Contact', href: contactUsPath() },
+        { id: 'cn-2', label: 'Partner', href: contactUsPath() },
+      ],
+      accentText: '#IAMPEACE',
     },
   ],
-  socialLinks: undefined,
 };
 
 /**
@@ -37,7 +56,7 @@ export function getFooterLayout(): FooterData {
   const year = new Date().getFullYear();
   return {
     ...FOOTER_BODY,
-    copyright: `© ${year} iSCTH. All rights reserved.`,
+    copyright: `© ${year} iSCTH. All rights reserved. #IamPEACE`,
   };
 }
 
