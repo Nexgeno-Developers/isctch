@@ -2,7 +2,8 @@
 
 import { useRef } from 'react';
 import Image from 'next/image';
-import { Autoplay, A11y, Navigation } from 'swiper/modules';
+import type { Swiper as SwiperClass } from 'swiper';
+import { Autoplay, A11y } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
 import type { HomePeaceSummitsData } from '@/lib/api/homepage/types';
@@ -37,17 +38,17 @@ function ArrowIcon({ direction }: { direction: 'prev' | 'next' }) {
 const SECTION_PAD = 'px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16';
 
 /**
- * Global Peace Summits — Swiper with Navigation-bound arrows (reliable clicks), loop + autoplay.
+ * Peace summits carousel: left/right arrows both step the track; `rewind` wraps
+ * last→first and first→last (infinite in both directions). Autoplay continues after manual use.
  */
 export default function HomePeaceSummits({ data }: Props) {
   const { summits, kicker, title } = data;
   const total = summits.length;
-  const prevRef = useRef<HTMLButtonElement>(null);
-  const nextRef = useRef<HTMLButtonElement>(null);
+  const swiperRef = useRef<SwiperClass | null>(null);
 
   if (total === 0) return null;
 
-  const canLoop = total > 1;
+  const infinite = total > 1;
 
   return (
     <section className="w-full bg-white py-14 md:py-18 lg:py-20" aria-labelledby="peace-summits-heading">
@@ -66,18 +67,18 @@ export default function HomePeaceSummits({ data }: Props) {
           </div>
           <div className="relative z-20 flex items-center justify-center gap-2 sm:justify-end">
             <button
-              ref={prevRef}
               type="button"
               className="inline-flex h-10 w-10 cursor-pointer items-center justify-center rounded-full border-2 border-[#00AEEF] bg-white text-[#00AEEF] transition-colors hover:bg-[#00AEEF] hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#00AEEF]"
               aria-label="Previous summit"
+              onClick={() => swiperRef.current?.slidePrev()}
             >
               <ArrowIcon direction="prev" />
             </button>
             <button
-              ref={nextRef}
               type="button"
               className="inline-flex h-10 w-10 cursor-pointer items-center justify-center rounded-full border-2 border-[#00AEEF] bg-white text-[#00AEEF] transition-colors hover:bg-[#00AEEF] hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#00AEEF]"
               aria-label="Next summit"
+              onClick={() => swiperRef.current?.slideNext()}
             >
               <ArrowIcon direction="next" />
             </button>
@@ -87,7 +88,7 @@ export default function HomePeaceSummits({ data }: Props) {
         <div className="relative z-0 mt-10 md:mt-12 w-full min-w-0">
           <Swiper
             className="peace-summits-swiper w-full !pb-1"
-            modules={[Autoplay, A11y, Navigation]}
+            modules={[Autoplay, A11y]}
             spaceBetween={18}
             slidesPerView={1.1}
             slidesPerGroup={1}
@@ -95,12 +96,10 @@ export default function HomePeaceSummits({ data }: Props) {
               640: { slidesPerView: 1.3, spaceBetween: 20, slidesPerGroup: 1 },
               768: { slidesPerView: 3, spaceBetween: 22, slidesPerGroup: 1 },
             }}
-            loop={canLoop}
-            loopAdditionalSlides={canLoop ? total : 0}
-            loopPreventsSliding={false}
+            rewind={infinite}
             speed={750}
             autoplay={
-              canLoop
+              infinite
                 ? {
                     delay: 4000,
                     disableOnInteraction: false,
@@ -109,22 +108,8 @@ export default function HomePeaceSummits({ data }: Props) {
                   }
                 : false
             }
-            navigation={{
-              prevEl: prevRef.current,
-              nextEl: nextRef.current,
-            }}
-            onBeforeInit={(swiper) => {
-              const nav = swiper.params.navigation;
-              if (nav && typeof nav !== 'boolean') {
-                nav.prevEl = prevRef.current;
-                nav.nextEl = nextRef.current;
-              }
-            }}
             onSwiper={(swiper) => {
-              if (swiper.params.navigation && typeof swiper.params.navigation !== 'boolean') {
-                swiper.navigation.init();
-                swiper.navigation.update();
-              }
+              swiperRef.current = swiper;
             }}
           >
             {summits.map((summit, index) => (
