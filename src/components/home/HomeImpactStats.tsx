@@ -95,7 +95,7 @@ export default function HomeImpactStats({ data }: { data: HomeImpactStatsData })
   return (
     <section
       ref={sectionRef}
-      className="bg-[#00AEEF] lg:py-20 py-10">
+      className="bg-[#00AEEF] lg:py-24 py-10">
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-2 gap-y-10 gap-x-4 sm:gap-x-8 lg:grid-cols-4 lg:gap-x-4">
           {data.items.map((item, index) => (

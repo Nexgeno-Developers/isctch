@@ -85,22 +85,22 @@ export default function HomeActionPillars({ data }: Props) {
   return (
     <section
       id="what-we-do"
-      className="bg-[#E6F4FA] py-14 md:py-18 lg:py-20"
+      className="bg-[#E8F7FD] py-14 md:py-18 lg:py-24"
       aria-labelledby="action-pillars-heading"
     >
-      <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <div className="container mx-auto px-4">
         <p className="text-center text-xs font-bold uppercase tracking-[0.2em] text-[#d98a29] sm:text-sm">
           {data.kicker}
         </p>
         <h2
           id="action-pillars-heading"
-          className="mt-3 text-center text-3xl font-bold tracking-tight text-[#00AEEF] sm:text-4xl md:text-[2.35rem]"
+          className="mt-3 text-center text-3xl font-bold tracking-tight text-[#00AEEF] lg:text-[48px]"
         >
           {data.title}
         </h2>
 
         <ul
-          className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3"
+          className="mt-12 grid gap-10 sm:grid-cols-2 lg:grid-cols-3"
           role="list"
         >
           {data.pillars.map((pillar, index) => {
@@ -108,18 +108,18 @@ export default function HomeActionPillars({ data }: Props) {
             return (
               <li
                 key={`pillar-${index}`}
-                className={`flex flex-col rounded-xl bg-white px-5 pb-6 pt-0 shadow-[0_4px_24px_-4px_rgba(15,23,42,0.08)] ${
+                className={`flex flex-col bg-white px-10 py-10 ${
                   topBlue ? 'border-t-4 border-[#00AEEF]' : 'border-t-4 border-[#d98a29]'
                 }`}
               >
-                <div className="pt-5">
+                <div className="pt-0">
                   <PillarIcon
                     id={pillar.icon}
                     accent={topBlue ? 'orange' : 'cyan'}
                   />
                 </div>
-                <h3 className="mt-4 text-lg font-bold text-[#1a1a2e]">{pillar.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-[#5a6d7d] sm:text-[15px]">
+                <h3 className="mt-6 text-lg font-bold text-black lg:text-[20px]">{pillar.title}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-black lg:text-base">
                   {pillar.description}
                 </p>
               </li>

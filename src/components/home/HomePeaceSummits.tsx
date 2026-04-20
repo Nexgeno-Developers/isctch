@@ -53,7 +53,7 @@ export default function HomePeaceSummits({ data }: Props) {
   return (
     <section
       id="summits"
-      className="w-full bg-white py-14 md:py-18 lg:py-20"
+      className="w-full bg-white py-14 md:py-18 lg:py-24"
       aria-labelledby="peace-summits-heading"
     >
       <div className={`mx-auto w-full max-w-[100vw] ${SECTION_PAD}`}>
@@ -131,9 +131,9 @@ export default function HomePeaceSummits({ data }: Props) {
                       {summit.location}
                     </span>
                   </div>
-                  <div className="flex flex-1 flex-col pt-4">
-                    <h3 className="text-lg font-bold text-[#1a1a2e]">{summit.title}</h3>
-                    <p className="mt-2 text-sm leading-relaxed text-[#5a6d7d] sm:text-[15px]">
+                  <div className="flex flex-1 flex-col pt-7">
+                    <h3 className="text-lg font-bold text-black lg:text-[20px]">{summit.title}</h3>
+                    <p className="mt-2 text-sm leading-relaxed text-black lg:text-base mb-0 mb-0 ">
                       {summit.description}
                     </p>
                   </div>

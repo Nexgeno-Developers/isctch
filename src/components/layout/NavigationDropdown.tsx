@@ -16,9 +16,9 @@ function isActivePath(pathname: string, href: string): boolean {
 }
 
 function navLinkClass(active: boolean): string {
-  return `relative whitespace-nowrap border-b-2 pb-0.5 text-[13px] font-semibold uppercase tracking-wide xl:text-sm ${
+  return `relative whitespace-nowrap border-b-2 pb-0.5 text-[14px] font-semibold uppercase tracking-wide lg:text-base ${
     active
-      ? 'border-[#009fe8] !text-[#475569]'
+      ? 'border-[#009fe8] !text-[#0284C7]'
       : 'border-transparent !text-[#475569] hover:border-[#009fe8]/40 hover:text-[#009fe8]'
   }`;
 }

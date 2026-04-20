@@ -76,10 +76,9 @@ function CoreValueGlyph({ id }: { id: HomeCoreValueIconId }) {
 export default function HomeAboutCoreValues({ data }: Props) {
   return (
     <section
-      className="bg-white py-14 md:py-18 lg:py-22"
-      aria-labelledby="about-core-heading"
+      className="bg-white py-14 md:py-18 lg:py-24"
     >
-      <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <div className="container mx-auto px-4">
         <div className="grid gap-12 lg:grid-cols-2 lg:gap-14 lg:items-start">
           <div>
             <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#d98a29] sm:text-sm">
@@ -93,7 +92,7 @@ export default function HomeAboutCoreValues({ data }: Props) {
               <br />
               {data.headlineLine2}
             </h2>
-            <p className="mt-6 text-base leading-relaxed text-[#5a6d7d] sm:text-lg">
+            <p className="mt-6 text-base leading-relaxed text-black sm:text-base">
               {data.body}
             </p>
             <blockquote className="mt-8 border-l-4 border-[#d98a29] py-1 pl-5 text-base font-medium leading-relaxed text-[#1a1a2e] sm:text-lg">
