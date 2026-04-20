@@ -78,7 +78,7 @@ export default function HomePeaceSummits({ data }: Props) {
             >
               <ArrowIcon direction="prev" />
             </button>
-            <button
+            <button 
               type="button"
               className="inline-flex h-10 w-10 cursor-pointer items-center justify-center rounded-full border-2 border-[#00AEEF] bg-white text-[#00AEEF] transition-colors hover:bg-[#00AEEF] hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#00AEEF]"
               aria-label="Next summit"
