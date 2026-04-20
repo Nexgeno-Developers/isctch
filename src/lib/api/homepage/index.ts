@@ -12,6 +12,8 @@ import type {
   HomeHeroData,
   HomeImpactStatsData,
   HomePageData,
+  HomePeaceSummitCard,
+  HomePeaceSummitsData,
 } from './types';
 import { aboutUsPath } from '@/config/publicRoutes';
 import { API_CACHE_TAG, fetchJsonCached } from '@/lib/api/apiCache';
@@ -266,6 +268,162 @@ function actionPillarsFromMeta(meta: MetaRecord | undefined): HomeActionPillarsD
   };
 }
 
+const STATIC_PEACE_SUMMITS: HomePeaceSummitsData = {
+  kicker: 'Events',
+  title: 'Global Peace Summits',
+  summits: [
+    {
+      location: 'Geneva, Switzerland',
+      title: 'The Diplomatic Dialogue',
+      description:
+        'Focusing on neutral mediation and international law frameworks for a peaceful 21st century.',
+      image: {
+        src: 'https://images.unsplash.com/photo-1520637836862-4d197d17c13a?auto=format&fit=crop&w=900&q=80',
+        alt: 'International conference hall and diplomacy setting',
+      },
+    },
+    {
+      location: 'Erding, Germany',
+      title: 'The Community Core',
+      description:
+        'Harnessing the power of local communities and grassroots activism to spark national change.',
+      image: {
+        src: 'https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=900&q=80',
+        alt: 'Diverse group of people gathering in a community space',
+      },
+    },
+    {
+      location: 'Dubai, UAE',
+      title: 'Future Harmony',
+      description:
+        'Exploring the intersection of technology, sustainable cities, and ethical human progress.',
+      image: {
+        src: 'https://images.unsplash.com/photo-1518684079-3c830dcef090?auto=format&fit=crop&w=900&q=80',
+        alt: 'Modern city skyline at sunset',
+      },
+    },
+    {
+      location: 'Nairobi, Kenya',
+      title: 'Grassroots Horizons',
+      description:
+        'Connecting regional leaders and youth networks to scale peace initiatives from the village to the continent.',
+      image: {
+        src: 'https://images.unsplash.com/photo-1489392191049-fc10c97e64f6?auto=format&fit=crop&w=900&q=80',
+        alt: 'African city skyline and open horizon',
+      },
+    },
+    {
+      location: 'Tokyo, Japan',
+      title: 'East Meets West',
+      description:
+        'Dialogues that honor ancestral wisdom while designing modern institutions rooted in compassion and clarity.',
+      image: {
+        src: 'https://images.unsplash.com/photo-1540959733332-eab4deab21af?auto=format&fit=crop&w=900&q=80',
+        alt: 'Tokyo cityscape at night',
+      },
+    },
+    {
+      location: 'New York, USA',
+      title: 'Urban Peace Labs',
+      description:
+        'City-wide experiments in restorative justice, public art, and neighborhood trust in the world’s great metros.',
+      image: {
+        src: 'https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9?auto=format&fit=crop&w=900&q=80',
+        alt: 'New York City skyline',
+      },
+    },
+    {
+      location: 'Cairo, Egypt',
+      title: 'Nile Dialogues',
+      description:
+        'Cross-regional conversations on water, heritage, and cooperation along shared rivers and shared futures.',
+      image: {
+        src: 'https://images.unsplash.com/photo-1572252009286-268acec5ca0a?auto=format&fit=crop&w=900&q=80',
+        alt: 'Historic architecture and river city view',
+      },
+    },
+    {
+      location: 'São Paulo, Brazil',
+      title: 'Americas Forum',
+      description:
+        'Linking civic innovators across the hemisphere to align human rights, inclusion, and climate-conscious growth.',
+      image: {
+        src: 'https://images.unsplash.com/photo-1483729558449-99ef09a8c325?auto=format&fit=crop&w=900&q=80',
+        alt: 'Urban skyline in the Americas',
+      },
+    },
+  ],
+};
+
+function peaceSummitsListFromMeta(meta: MetaRecord | undefined): HomePeaceSummitCard[] | null {
+  if (!meta) return null;
+  const out: HomePeaceSummitCard[] = [];
+  for (let i = 1; i <= 16; i++) {
+    const title = pick(meta, [
+      `peace_summit_${i}_title`,
+      `summit_${i}_title`,
+      `home_peace_summit_${i}_title`,
+    ]);
+    if (!title) continue;
+    const location =
+      pick(meta, [
+        `peace_summit_${i}_location`,
+        `summit_${i}_location`,
+        `home_peace_summit_${i}_location`,
+      ]) ||
+      STATIC_PEACE_SUMMITS.summits[out.length]?.location ||
+      '';
+    const description =
+      pick(meta, [
+        `peace_summit_${i}_description`,
+        `summit_${i}_description`,
+        `home_peace_summit_${i}_description`,
+      ]) || '';
+    const imageSrc = pick(meta, [
+      `peace_summit_${i}_image`,
+      `summit_${i}_image`,
+      `home_peace_summit_${i}_image`,
+    ]);
+    const imageAlt =
+      pick(meta, [`peace_summit_${i}_image_alt`, `summit_${i}_image_alt`]) || title;
+    const fallbackImg = STATIC_PEACE_SUMMITS.summits[out.length]?.image ?? STATIC_PEACE_SUMMITS.summits[0].image;
+    out.push({
+      location,
+      title,
+      description,
+      image: {
+        src: imageSrc ? normalizeImageUrl(imageSrc) : fallbackImg.src,
+        alt: imageAlt,
+      },
+    });
+  }
+  return out.length ? out : null;
+}
+
+function peaceSummitsFromMeta(meta: MetaRecord | undefined): HomePeaceSummitsData | null {
+  if (!meta) return null;
+
+  const list = peaceSummitsListFromMeta(meta);
+  const title = pick(meta, [
+    'peace_summits_title',
+    'global_peace_summits_title',
+    'home_peace_summits_title',
+  ]);
+  const kicker = pick(meta, [
+    'peace_summits_kicker',
+    'events_kicker',
+    'home_peace_summits_kicker',
+  ]);
+
+  if (!list && !title && !kicker) return null;
+
+  return {
+    kicker: kicker || STATIC_PEACE_SUMMITS.kicker,
+    title: title || STATIC_PEACE_SUMMITS.title,
+    summits: list ?? STATIC_PEACE_SUMMITS.summits,
+  };
+}
+
 function buildCompanyApiUrl(endpoint: string): string | null {
   const baseUrl = process.env.COMPANY_API_BASE_URL?.trim();
   if (!baseUrl) return null;
@@ -443,8 +601,9 @@ async function resolveHomePage(): Promise<HomePageData> {
   const impactStats = impactFromMeta(meta) ?? STATIC_IMPACT_STATS;
   const aboutCoreValues = aboutCoreValuesFromMeta(meta) ?? STATIC_ABOUT_CORE_VALUES;
   const actionPillars = actionPillarsFromMeta(meta) ?? STATIC_ACTION_PILLARS;
+  const peaceSummits = peaceSummitsFromMeta(meta) ?? STATIC_PEACE_SUMMITS;
 
-  return { hero, impactStats, aboutCoreValues, actionPillars };
+  return { hero, impactStats, aboutCoreValues, actionPillars, peaceSummits };
 }
 
 const PAGE_CACHE_SECONDS = Number(
@@ -480,6 +639,10 @@ export async function getHomeActionPillars(): Promise<HomeActionPillarsData> {
   return (await getCachedHomePage()).actionPillars;
 }
 
+export async function getHomePeaceSummits(): Promise<HomePeaceSummitsData> {
+  return (await getCachedHomePage()).peaceSummits;
+}
+
 export type {
   HomeAboutCoreValuesData,
   HomeActionPillarIconId,
@@ -492,4 +655,6 @@ export type {
   HomeImpactStatItem,
   HomeImpactStatsData,
   HomePageData,
+  HomePeaceSummitCard,
+  HomePeaceSummitsData,
 } from './types';

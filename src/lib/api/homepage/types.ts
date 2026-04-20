@@ -87,9 +87,23 @@ export type HomeActionPillarsData = {
   pillars: HomeActionPillarItem[];
 };
 
+export type HomePeaceSummitCard = {
+  location: string;
+  title: string;
+  description: string;
+  image: { src: string; alt: string };
+};
+
+export type HomePeaceSummitsData = {
+  kicker: string;
+  title: string;
+  summits: HomePeaceSummitCard[];
+};
+
 export type HomePageData = {
   hero: HomeHeroData;
   impactStats: HomeImpactStatsData;
   aboutCoreValues: HomeAboutCoreValuesData;
   actionPillars: HomeActionPillarsData;
+  peaceSummits: HomePeaceSummitsData;
 };

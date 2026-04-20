@@ -19,6 +19,10 @@ const nextConfig: NextConfig = {
         protocol: 'http',
         hostname: 'backend-lamipak.webtesting.pw',
       },
+      {
+        protocol: 'https',
+        hostname: 'images.unsplash.com',
+      },
     ],
   },
 };
