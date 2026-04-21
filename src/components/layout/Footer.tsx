@@ -20,7 +20,7 @@ export default function Footer() {
                 <Image
                   width={156}
                   height={156}
-                  src={footerData.logo.image}
+                  src="/footer_logo.png"
                   alt={footerData.logo.text}
                   className="w-[200px shrink-0 object-cover"
                 />
