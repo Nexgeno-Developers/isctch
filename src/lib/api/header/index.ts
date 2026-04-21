@@ -13,7 +13,7 @@ export const HEADER_LAYOUT: HeaderData = {
     href: '/',
   },
   navigation: [
-    { id: 'nav-about', label: 'About', href: aboutUsPath() },
+    { id: 'nav-about', label: 'About', href: '/' },
     {
       id: 'nav-what',
       label: 'What we do',
@@ -25,7 +25,7 @@ export const HEADER_LAYOUT: HeaderData = {
     },
     { id: 'nav-summits', label: 'Summits', href: '#summits' },
     { id: 'nav-involved', label: 'Get involved', href: '#get-involved' },
-    { id: 'nav-contact', label: 'Contact', href: contactUsPath() },
+    { id: 'nav-contact', label: 'Contact', href: '/' },
   ],
   cta: {
     text: 'Donate for peace',
