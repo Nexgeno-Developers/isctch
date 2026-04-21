@@ -29,6 +29,11 @@ const HOMEPAGE_PAGE_SLUG = (process.env.HOMEPAGE_PAGE_SLUG || 'home').replace(
 const COMPANY_API_DOMAIN =
   process.env.COMPANY_API_DOMAIN?.replace(/\/+$/, '') || '';
 
+/** When true, hero copy can still come from the CMS but the image always uses STATIC_HOME_HERO.image. */
+const HOME_HERO_FORCE_STATIC_IMAGE = ['1', 'true', 'yes'].includes(
+  (process.env.HOME_HERO_FORCE_STATIC_IMAGE || '').toLowerCase().trim(),
+);
+
 const STATIC_HOME_HERO: HomeHeroData = {
   overline: 'ONE WORLD . ONE FAMILY',
   headline: {
@@ -783,7 +788,10 @@ async function resolveHomePage(): Promise<HomePageData> {
   const payload = await fetchPagePayload();
   const meta = normalizeMeta(payload?.data);
 
-  const hero = heroFromMeta(meta) ?? STATIC_HOME_HERO;
+  let hero = heroFromMeta(meta) ?? STATIC_HOME_HERO;
+  if (HOME_HERO_FORCE_STATIC_IMAGE) {
+    hero = { ...hero, image: STATIC_HOME_HERO.image };
+  }
   const impactStats = impactFromMeta(meta) ?? STATIC_IMPACT_STATS;
   const aboutCoreValues = aboutCoreValuesFromMeta(meta) ?? STATIC_ABOUT_CORE_VALUES;
   const actionPillars = actionPillarsFromMeta(meta) ?? STATIC_ACTION_PILLARS;
