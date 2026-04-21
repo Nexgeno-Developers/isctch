@@ -11,12 +11,11 @@ export default function HomeHero({ data }: HomeHeroProps) {
 
   return (
     <section
-      className="relative overflow-hidden bg-gradient-to-r from-sky-50 via-white to-amber-50/50"
-      aria-labelledby="hero-heading"
+      className="relative overflow-hidden lg:py-24 py-12 bg-gradient-to-r from-sky-50 via-white to-amber-50/50"
     >
-      <div className="mx-auto max-w-6xl px-4 py-14 sm:py-18 md:py-20 lg:py-24 lg:px-8">
+      <div className="container mx-auto px-4 ">
         <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-10 xl:gap-16">
-          <div className="order-2 max-w-xl lg:order-1">
+          <div className="order-2 lg:order-1">
             <p className="mb-4 text-xs font-bold uppercase tracking-[0.2em] text-[#e87722] sm:text-sm">
               {overline}
             </p>
@@ -50,7 +49,7 @@ export default function HomeHero({ data }: HomeHeroProps) {
             </div>
           </div>
 
-          <div className="relative order-1 mx-auto w-full max-w-[320px] sm:max-w-md lg:order-2 lg:mx-0 lg:max-w-none lg:justify-self-end">
+          <div className="relative order-1 mx-auto w-full max-w-[360px] sm:max-w-md lg:order-2 lg:mx-0 lg:max-w-none lg:justify-self-end">
             <div className="relative aspect-square w-full max-w-md">
               <div className="absolute inset-0 rounded-full bg-white p-1 shadow-[0_20px_50px_-12px_rgba(0,0,0,0.15)] ring-4 ring-white">
                 <div className="relative h-full w-full overflow-hidden rounded-full">

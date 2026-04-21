@@ -45,9 +45,10 @@ const STATIC_HOME_HERO: HomeHeroData = {
   secondaryCta: {
     label: 'Learn more',
     href: aboutUsPath(),
+    
   },
   image: {
-    src: '/homepage-hero.png',
+    src: '/hero_images.png',
     alt: 'Diverse group of smiling people representing global community',
   },
   statCard: {
@@ -678,10 +679,11 @@ function heroFromMeta(meta: MetaRecord | undefined): HomeHeroData | null {
     },
     image: {
       src: (() => {
-        const imageSrc = pick(meta, ['hero_image', 'hero_image_url', 'image']);
+        // Avoid generic `image` / `image_alt` — page featured image would override the hero asset.
+        const imageSrc = pick(meta, ['hero_image', 'hero_image_url', 'home_hero_image']);
         return imageSrc ? normalizeImageUrl(imageSrc) : STATIC_HOME_HERO.image.src;
       })(),
-      alt: pick(meta, ['hero_image_alt', 'image_alt']) || STATIC_HOME_HERO.image.alt,
+      alt: pick(meta, ['hero_image_alt', 'home_hero_image_alt']) || STATIC_HOME_HERO.image.alt,
     },
     statCard: {
       label: pick(meta, ['hero_stat_label', 'stat_label']) || STATIC_HOME_HERO.statCard.label,

@@ -10,8 +10,9 @@ export default function Header() {
   const { logo, navigation, cta } = HEADER_LAYOUT;
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-gray-200/90 bg-white shadow-sm">
-      <div className="relative mx-auto flex max-w-[1320px] items-center justify-between gap-4 px-4 py-3 lg:px-6 lg:py-4">
+    <header className="sticky top-0 z-50 w-full border-b border-gray-200/90 bg-white shadow-sm py-3">
+      <div className="container mx-auto px-4">
+      <div className="flex items-center justify-between">
         <Link
           href={logo.href}
           className="relative z-10 flex min-w-0 shrink-0 items-center"
@@ -60,6 +61,8 @@ export default function Header() {
             <MobileMenu navigation={navigation} cta={cta} />
           </div>
         </div>
+      </div>
+        
       </div>
     </header>
   );
