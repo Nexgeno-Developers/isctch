@@ -16,33 +16,33 @@ export default function HomeHero({ data }: HomeHeroProps) {
       <div className="container mx-auto px-4 ">
         <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-10 xl:gap-16">
           <div className="order-2 lg:order-1">
-            <p className="mb-4 text-xs font-bold uppercase tracking-[0.2em] text-[#e87722] sm:text-sm">
+            <p className="mb-4 text-[14px] font-bold uppercase tracking-[0.2em] text-[#EF7D00]">
               {overline}
             </p>
 
             <h1
               id="hero-heading"
-              className="text-3xl font-bold leading-tight tracking-tight text-[#1a1a2e] sm:text-4xl md:text-5xl lg:text-[2.75rem] xl:text-5xl"
+              className="text-3xl leading-tight tracking-tight text-[#1a1a2e] lg:text-[72px]"
             >
-              <span className="text-[#009fe8]">{headline.accent}</span>{' '}
+              <span className="font-bold text-[#009FE3]">{headline.accent}</span>{' '}
               <span className="text-[#1a1a2e]">{headline.lineMiddle}</span>{' '}
               <span className="text-[#e87722]">{headline.accentWord}</span>
             </h1>
 
-            <p className="mt-6 text-base leading-relaxed text-[#5a6d7d] sm:text-lg">
+            <p className="mt-6 text-[18px] leading-relaxed text-[#3E4850]">
               {description}
             </p>
 
             <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
               <Link
                 href={primaryCta.href}
-                className="inline-flex min-h-12 items-center justify-center rounded-lg bg-[#e87722] px-8 text-center text-sm font-bold uppercase tracking-wide text-white shadow-md transition-colors hover:bg-[#d96a18]"
+                className="inline-flex min-h-[54px] items-center justify-center rounded-[8px] bg-[#FF8918] px-12 text-center text-sm font-bold uppercase tracking-wide text-white transition-colors hover:bg-[#d96a18]"
               >
                 {primaryCta.label}
               </Link>
               <Link
                 href={secondaryCta.href}
-                className="inline-flex min-h-12 items-center justify-center rounded-lg border-2 border-[#1a1a2e] bg-transparent px-8 text-center text-sm font-bold uppercase tracking-wide text-[#1a1a2e] transition-colors hover:bg-[#1a1a2e]/5"
+                className="inline-flex min-h-[54px] items-center justify-center rounded-lg border-2 border-[#006491] bg-transparent px-12 text-center text-sm font-bold uppercase tracking-wide text-[#006491] transition-colors hover:bg-[#1a1a2e]/5"
               >
                 {secondaryCta.label}
               </Link>
@@ -64,21 +64,16 @@ export default function HomeHero({ data }: HomeHeroProps) {
                 </div>
               </div>
 
-              <div className="absolute -bottom-2 left-0 z-10 w-[min(100%,220px)] rounded-2xl border border-gray-100/80 bg-white p-4 shadow-lg sm:-bottom-3 sm:left-2 sm:p-5">
+              <div className="absolute -bottom-2 left-0 z-10 w-[min(100%,260px)] rounded-2xl border border-gray-100/80 bg-white p-4 shadow-lg sm:-bottom-3 sm:left-2 sm:p-5">
                 <div className="flex items-start gap-3">
-                  <div
-                    className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-[#009fe8]/15 text-[#009fe8]"
-                    aria-hidden
-                  >
-                    <svg className="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z" />
-                    </svg>
-                  </div>
+                 
+                   <Image src="/active_icons.svg" alt="Star" width={44} height={44} />
+                  
                   <div className="min-w-0">
-                    <p className="text-[10px] font-bold uppercase tracking-[0.15em] text-[#5a6d7d] sm:text-xs">
+                    <p className="text-[10px] font-bold uppercase tracking-[0.15em] text-[#3E4850] sm:text-xs">
                       {statCard.label}
                     </p>
-                    <p className="text-2xl font-bold text-[#009fe8] sm:text-3xl">{statCard.value}</p>
+                    <p className="text-2xl font-bold text-[#006491] sm:text-3xl">{statCard.value}</p>
                   </div>
                 </div>
               </div>

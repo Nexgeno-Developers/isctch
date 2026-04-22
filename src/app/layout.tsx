@@ -1,15 +1,15 @@
 import type { Metadata, Viewport } from "next";
-import { Poppins } from "next/font/google";
+import { Lato } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import NavigationProgressProvider from "@/components/common/NavigationProgressProvider";
 
-const poppins = Poppins({
-  weight: ['300', '400', '500', '600', '700', '800', '900'],
+const lato = Lato({
+  weight: ['100', '300', '400', '700', '900'],
   subsets: ["latin"],
-  variable: "--font-poppins",
+  variable: "--font-lato",
 });
 
 export const viewport: Viewport = {
@@ -53,7 +53,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         </Script>
       </head>
       <body
-        className={`${poppins.variable} font-sans antialiased`}
+        className={`${lato.variable} font-sans antialiased`}
       >
         <noscript>
           <iframe
