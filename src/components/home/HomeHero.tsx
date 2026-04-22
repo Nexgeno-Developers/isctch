@@ -11,7 +11,7 @@ export default function HomeHero({ data }: HomeHeroProps) {
 
   return (
     <section
-      className="relative overflow-hidden lg:py-24 py-12 bg-gradient-to-r from-sky-50 via-white to-amber-50/50"
+      className="relative overflow-hidden lg:py-24 py-12 bg-[linear-gradient(125.74deg,_#F0FBFF_0%,_#FFF8F0_100%)]"
     >
       <div className="container mx-auto px-4 ">
         <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-10 xl:gap-16">

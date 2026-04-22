@@ -10,7 +10,7 @@ export default function Header() {
   const { logo, navigation, cta } = HEADER_LAYOUT;
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-gray-200/90 bg-white shadow-sm py-3">
+    <header className="sticky top-0 z-50 w-full bg-white  py-3">
       <div className="container mx-auto px-4">
       <div className="flex items-center justify-between">
         <Link
@@ -32,7 +32,7 @@ export default function Header() {
               alt={logo.text || 'Logo'}
               width={280}
               height={96}
-              className="h-12 w-auto max-h-14 object-contain object-left sm:h-14 sm:max-h-16"
+              className="w-[110px] object-contain object-left"
               priority
             />
           ) : null}
@@ -51,7 +51,9 @@ export default function Header() {
           {cta ? (
             <Link
               href={cta.href}
-              className="hidden min-h-[44px] min-w-0 items-center justify-center rounded-md bg-[#e87722] px-5 py-2.5 text-center text-[11px] font-bold uppercase tracking-wide text-white shadow-sm transition-colors hover:bg-[#d96a18] lg:flex xl:px-7 xl:text-[13px]"
+              className="hidden min-h-[44px] min-w-0 items-center justify-center rounded-[8px] bg-[#FF8918] px-5 py-2.1
+               text-center text-[14px] font-bold uppercase tracking-wide text-white transition-colors hover:bg-[#d96a18] 
+               lg:flex xl:px-7"
             >
               {cta.text}
             </Link>
