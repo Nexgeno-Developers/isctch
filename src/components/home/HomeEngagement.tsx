@@ -66,8 +66,8 @@ export default function HomeEngagement({ data }: Props) {
               }
             >
               {cards.map((card, index) => (
-                <SwiperSlide key={`${card.title}-${index}`} className="h-auto">
-                  <article className="flex h-full flex-col rounded-[8px] border-b-[4px] border-b-[#F28500] bg-white px-7 py-8 shadow-[0_8px_30px_-12px_rgba(15,23,42,0.12)]">
+                <SwiperSlide key={`${card.title}-${index}`} className="!h-auto">
+                  <article className="flex h-full min-h-[245px] flex-col rounded-[8px] border-b-[4px] border-b-[#F28500] bg-white px-7 py-8 shadow-[0_8px_30px_-12px_rgba(15,23,42,0.12)] lg:min-h-[285px]">
                     <span className="text-3xl font-semibold tabular-nums text-[#00649133] sm:text-4xl">
                       {String(index + 1).padStart(2, '0')}
                     </span>
@@ -87,7 +87,7 @@ export default function HomeEngagement({ data }: Props) {
         <div className="mt-12 flex justify-center md:mt-14">
           <Link
             href={cta.href}
-            className="inline-flex min-h-14 items-center justify-center rounded-xl bg-[#F28500] px-10 py-4 text-center text-sm font-bold uppercase tracking-wide text-white shadow-[0_10px_25px_-8px_rgba(242,133,0,0.55)] transition-opacity hover:opacity-95"
+            className="inline-flex min-h-14 items-center justify-center rounded-xl bg-[#EF7D00] px-10 py-4 text-center text-sm font-bold uppercase tracking-wide text-white  transition-opacity hover:opacity-95"
           >
             {cta.label}
           </Link>

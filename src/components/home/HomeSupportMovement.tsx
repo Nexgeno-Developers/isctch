@@ -113,7 +113,7 @@ export default function HomeSupportMovement({ data }: Props) {
               <input type="hidden" name="amount" value={amount} readOnly />
               <button
                 type="submit"
-                className="w-full rounded-xl bg-[#e87722] py-4 text-center text-sm font-bold uppercase tracking-wide text-white shadow-md transition-colors hover:bg-[#d96a18]"
+                className="cursor-pointer w-full rounded-xl bg-[#EF7D00] py-4 text-center text-sm font-bold uppercase tracking-wide text-white shadow-md transition-colors hover:bg-[#d96a18]"
               >
                 {form.submitLabel}
               </button>
