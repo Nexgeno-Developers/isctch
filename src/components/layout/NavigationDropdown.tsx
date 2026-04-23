@@ -72,9 +72,9 @@ export default function NavigationDropdown({ item }: NavigationDropdownProps) {
               <Link
                 key={child.id}
                 href={child.href}
-                className={`block px-4 py-2.5 text-sm font-medium transition-colors ${
+                className={`block px-4 py-2.5 text-base font-semibold transition-colors ${
                   cActive
-                    ? 'bg-[#009fe8]/10 text-[#009fe8]'
+                    ? 'bg-[#009fe8]/10 text-[#475569]'
                     : 'text-[#3d5566] hover:bg-gray-50 hover:text-[#009fe8]'
                 }`}
               >
