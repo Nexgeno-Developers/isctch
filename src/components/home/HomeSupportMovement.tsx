@@ -30,21 +30,18 @@ export default function HomeSupportMovement({ data }: Props) {
 
   return (
     <section id="donate" className="w-full" aria-labelledby="support-movement-heading">
-      <div className="bg-[#f7f4ef] px-4 py-12 sm:px-6 md:px-8 lg:px-12 xl:px-16">
-        <div className="mx-auto max-w-3xl text-center">
-          <p className="text-3xl font-bold tracking-tight lg:text-[60px]">
-            <span className="text-[#00AEEF]">{header.titleCyan}</span>
-            <span className="text-[#e87722]">{header.titleOrange}</span>
+      <div className="bg-[#FFF5E6] lg:py-20 py-8">
+       
+        <div className="container mx-auto px-4 text-center">
+          <p className="text-3xl font-black tracking-tight lg:text-[52px]">
+            <span className="text-[#009FE3]">{header.titleCyan}</span>
+            <span className="text-[#EF7D00]">{header.titleOrange}</span>
           </p>
-          <p className="mt-4 text-base text-[#6b7280] sm:text-lg">{header.subline}</p>
+          <p className="mt-2 text-base text-[#3E4850] lg:text-[24px]">{header.subline}</p>
           <div className="relative mx-auto mt-10 max-w-xl px-4">
-            <div className="h-px w-full bg-[#d6d3cd]" />
-            <div
-              className="absolute left-1/2 top-1/2 flex h-9 w-9 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-[#d6d3cd] bg-[#f7f4ef]"
-              aria-hidden
-            >
-              <StarIcon />
-            </div>
+           
+           <Image src="/devider.svg" className="mx-auto w-[210px]" alt="Peace" width={100} height={100} />
+
           </div>
         </div>
       </div>
