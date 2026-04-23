@@ -8,9 +8,9 @@ export default function Footer() {
   const footerData = getFooterLayout();
 
   return (
-    <footer className="overflow-x-hidden bg-[#1a1a2e] text-white lg:py-20 py-10">
+    <footer className="overflow-x-hidden bg-[#1a1a2e] text-white lg:pt-20 lg:pb-12 py-8">
       <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 gap-12 md:grid-cols-2 lg:grid-cols-4 lg:gap-10 xl:gap-12">
+        <div className="grid grid-cols-1 gap-12 md:grid-cols-2 lg:grid-cols-[40%_20%_20%_20%] lg:gap-10 xl:gap-12">
           <div className="md:col-span-2 lg:col-span-1">
             <Link
               href={footerData.logo.href}
@@ -68,7 +68,7 @@ export default function Footer() {
                 ))}
               </ul>
               {column.accentText ? (
-                <p className="mt-6 text-base font-bold text-[#F28500]">{column.accentText}</p>
+                <p className="mt-6 text-base font-bold text-[#ef7d00]">{column.accentText}</p>
               ) : null}
             </div>
           ))}

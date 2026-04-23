@@ -287,7 +287,7 @@ const STATIC_PEACE_SUMMITS: HomePeaceSummitsData = {
       description:
         'Focusing on neutral mediation and international law frameworks for a peaceful 21st century.',
       image: {
-        src: '/diplomatic_image.jpg',
+        src: '/diplomatic_image1.jpg',
         alt: 'International conference hall and diplomacy setting',
       },
     },
@@ -327,7 +327,7 @@ const STATIC_PEACE_SUMMITS: HomePeaceSummitsData = {
       description:
         'Dialogues that honor ancestral wisdom while designing modern institutions rooted in compassion and clarity.',
       image: {
-        src: '/diplomatic_image.jpg',
+        src: '/diplomatic_image1.jpg',
         alt: 'Tokyo cityscape at night',
       },
     },

@@ -16,16 +16,16 @@ export default function DonationContributionSection({ data }: { data: DonateCont
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-20">
           <div className="">
-          <h2 className="text-4xl font-bold leading-tight tracking-tight text-[#1f233b] sm:text-5xl capitalize">
+          <h2 className="mt-3 text-left text-3xl font-black tracking-tight text-[#1A1A2E] lg:text-[36px]">
             {data.heading}
           </h2>
-          <p className="mt-7 text-base leading-relaxed text-black">
+          <p className="mt-7 text-base leading-relaxed text-[#3E4850] lg:text-[18px]">
             {data.paragraphOne}
           </p>
-          <p className="mt-5 text-base leading-relaxed text-black">
+          <p className="mt-5 text-base leading-relaxed text-[#3E4850] lg:text-[18px]">
             {data.paragraphTwo}
           </p>
-          <blockquote className="mt-8 border-l-4 border-[#f28500] bg-[#f2ece5] px-5 py-5 text-2xl font-semibold leading-snug text-[#1f233b]">
+          <blockquote className="mt-8 border-l-4 border-[#EF7D00] bg-[#FFF8F0] px-5 py-5 lg:text-[24px] font-semibold leading-snug text-[#1f233b]">
             "{data.quote}"
           </blockquote>
           </div>
@@ -134,7 +134,7 @@ export default function DonationContributionSection({ data }: { data: DonateCont
 
           <button
             type="button"
-            className="cursor-pointer mt-8 w-full rounded-lg bg-[#f28500] py-5 text-[18px] font-semibold capitalize tracking-wide text-white shadow-[0_10px_25px_-10px_rgba(242,133,0,0.8)] transition-colors hover:bg-[#df7a00]"
+            className="cursor-pointer mt-8 w-full rounded-lg bg-[#EF7D00] py-4 text-[18px] font-semibold capitalize tracking-wide text-white shadow-[0_10px_25px_-10px_rgba(242,133,0,0.8)] transition-colors hover:bg-[#df7a00]"
           >
             {submitLabel}
           </button>

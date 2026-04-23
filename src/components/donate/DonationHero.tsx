@@ -3,7 +3,7 @@ import type { DonateHeroData } from '@/lib/api/donate/types';
 
 export default function DonationHero({ data }: { data: DonateHeroData }) {
   return (
-    <section className="bg-gradient-to-r from-[#F0FBFF] to-[#FFF8F0] py-20">
+    <section className="relative overflow-hidden lg:py-20 py-8 bg-[linear-gradient(125.74deg,_#F0FBFF_0%,_#FFF8F0_100%)]">
       <div className="container mx-auto px-4 text-center">
         <p className="text-xs text-[#8b97a7]">
           <Link href="/" className="hover:underline">

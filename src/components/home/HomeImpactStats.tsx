@@ -37,7 +37,7 @@ function StatItem({ item, active }: { item: HomeImpactStatItem; active: boolean 
     return (
       <div className="flex flex-col items-center px-2 text-center">
         <span
-          className="text-4xl font-bold tabular-nums sm:text-5xl md:text-6xl"
+          className="text-2xl font-bold tabular-nums lg:text-[48px] text-white"
           aria-hidden
         >
           {item.symbol}
