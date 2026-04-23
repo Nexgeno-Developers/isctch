@@ -49,7 +49,7 @@ export default function HomeSupportMovement({ data }: Props) {
       <div className="bg-[#0a8cc9] lg:py-24 py-10">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
-          <div >
+          <div className="flex h-full flex-col justify-center">
             <h2
               id="support-movement-heading"
               className="mt-3 text-3xl font-black tracking-tight text-[#fff] lg:text-[36px]"
