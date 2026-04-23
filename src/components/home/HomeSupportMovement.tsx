@@ -52,11 +52,11 @@ export default function HomeSupportMovement({ data }: Props) {
           <div >
             <h2
               id="support-movement-heading"
-              className="text-3xl font-bold text-white sm:text-4xl md:text-[2.35rem]"
+              className="mt-3 text-3xl font-black tracking-tight text-[#fff] lg:text-[36px]"
             >
               {panel.headline}
             </h2>
-            <p className="mt-5 text-base leading-relaxed text-white/95 sm:text-lg">{panel.body}</p>
+            <p className="mt-5 text-base leading-relaxed text-white sm:text-[18px]">{panel.body}</p>
             <div className="mt-10 flex flex-wrap items-center gap-4">
               <div className="flex -space-x-3">
                 {panel.avatars.map((a, i) => (
@@ -85,7 +85,7 @@ export default function HomeSupportMovement({ data }: Props) {
                       key={n}
                       type="button"
                       onClick={() => setAmount(n)}
-                      className={`rounded-lg border-2 py-3 text-center text-base font-semibold transition-colors ${
+                      className={`cursor-pointer rounded-lg border-2 py-3 text-center text-base font-semibold transition-colors ${
                         selected
                           ? 'border-[#0a8cc9] bg-[#e8f6fc] text-[#0a8cc9]'
                           : 'border-[#d1d5db] bg-white text-[#1a1a2e] hover:border-[#9ca3af]'
