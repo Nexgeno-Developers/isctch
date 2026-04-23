@@ -8,7 +8,7 @@ const FALLBACK_JOIN_MOVEMENT: DonateJoinMovementData = {
   buttonLabel: 'Join the Movement',
   buttonHref: '/#get-involved',
   backgroundImage: {
-    src: 'https://images.unsplash.com/photo-1446776877081-d282a0f896e2?auto=format&fit=crop&w=1800&q=80',
+    src: '/calltoaction_images.webp',
     alt: 'Earth from space with glowing horizon',
   },
 };
@@ -17,13 +17,12 @@ export default function DonationJoinMovementSection({ data }: { data?: DonateJoi
   const safeData = data ?? FALLBACK_JOIN_MOVEMENT;
   return (
     <section className="relative overflow-hidden">
-      <div className="relative h-[420px] w-full lg:h-[500px]">
+      <div className="relative h-[420px] w-full lg:h-[550px]">
         <Image
           src={safeData.backgroundImage.src}
           alt={safeData.backgroundImage.alt}
           fill
           className="object-cover"
-          sizes="100vw"
           priority={false}
         />
         <div className="absolute inset-0 bg-black/35" />
@@ -34,7 +33,7 @@ export default function DonationJoinMovementSection({ data }: { data?: DonateJoi
           </h2>
           <Link
             href={safeData.buttonHref}
-            className="mt-8 inline-flex min-h-14 items-center justify-center rounded-xl bg-white px-10 py-4 text-lg font-semibold text-[#00a3e8] shadow-[0_10px_30px_-12px_rgba(0,0,0,0.45)] transition-colors hover:bg-[#f3f7fb]"
+            className="mt-8 inline-flex min-h-14 items-center justify-center rounded-xl bg-white px-10 py-4 text-lg font-semibold text-[#009FE3] shadow-[0_10px_30px_-12px_rgba(0,0,0,0.45)] transition-colors hover:bg-[#f3f7fb]"
           >
             {safeData.buttonLabel}
           </Link>

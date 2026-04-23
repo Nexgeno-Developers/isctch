@@ -82,7 +82,7 @@ const STATIC_DONATE_PAGE: DonatePageData = {
     buttonLabel: 'Join the Movement',
     buttonHref: '/#get-involved',
     backgroundImage: {
-      src: 'https://images.unsplash.com/photo-1446776877081-d282a0f896e2?auto=format&fit=crop&w=1800&q=80',
+      src: '/calltoaction_images1.webp',
       alt: 'Earth from space with glowing horizon',
     },
   },
@@ -126,6 +126,8 @@ function normalizeImageUrl(url: string): string {
   if (!u) return STATIC_DONATE_PAGE.joinMovement.backgroundImage.src;
   if (/^https?:\/\//i.test(u)) return u;
   if (u.startsWith('/')) return u;
+  if (u.startsWith('public/')) return `/${u.replace(/^public\/+/, '')}`;
+  if (!u.includes('/')) return `/${u}`;
   if (!COMPANY_API_DOMAIN) return `/${u.replace(/^\/+/, '')}`;
   return `${COMPANY_API_DOMAIN}/${u.replace(/^\/+/, '')}`;
 }
