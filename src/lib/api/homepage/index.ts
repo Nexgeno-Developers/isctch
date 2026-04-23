@@ -287,7 +287,7 @@ const STATIC_PEACE_SUMMITS: HomePeaceSummitsData = {
       description:
         'Focusing on neutral mediation and international law frameworks for a peaceful 21st century.',
       image: {
-        src: 'https://images.unsplash.com/photo-1520637836862-4d197d17c13a?auto=format&fit=crop&w=900&q=80',
+        src: '/diplomatic_image.jpg',
         alt: 'International conference hall and diplomacy setting',
       },
     },
@@ -297,7 +297,7 @@ const STATIC_PEACE_SUMMITS: HomePeaceSummitsData = {
       description:
         'Harnessing the power of local communities and grassroots activism to spark national change.',
       image: {
-        src: 'https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=900&q=80',
+        src: '/comminuty_core_images.jpg',
         alt: 'Diverse group of people gathering in a community space',
       },
     },
@@ -307,7 +307,7 @@ const STATIC_PEACE_SUMMITS: HomePeaceSummitsData = {
       description:
         'Exploring the intersection of technology, sustainable cities, and ethical human progress.',
       image: {
-        src: 'https://images.unsplash.com/photo-1518684079-3c830dcef090?auto=format&fit=crop&w=900&q=80',
+        src: '/future_images.jpg',
         alt: 'Modern city skyline at sunset',
       },
     },
@@ -317,7 +317,7 @@ const STATIC_PEACE_SUMMITS: HomePeaceSummitsData = {
       description:
         'Connecting regional leaders and youth networks to scale peace initiatives from the village to the continent.',
       image: {
-        src: 'https://images.unsplash.com/photo-1489392191049-fc10c97e64f6?auto=format&fit=crop&w=900&q=80',
+        src: '/comminuty_core_images.jpg',
         alt: 'African city skyline and open horizon',
       },
     },
@@ -327,7 +327,7 @@ const STATIC_PEACE_SUMMITS: HomePeaceSummitsData = {
       description:
         'Dialogues that honor ancestral wisdom while designing modern institutions rooted in compassion and clarity.',
       image: {
-        src: 'https://images.unsplash.com/photo-1540959733332-eab4deab21af?auto=format&fit=crop&w=900&q=80',
+        src: '/diplomatic_image.jpg',
         alt: 'Tokyo cityscape at night',
       },
     },
@@ -337,28 +337,8 @@ const STATIC_PEACE_SUMMITS: HomePeaceSummitsData = {
       description:
         'City-wide experiments in restorative justice, public art, and neighborhood trust in the world’s great metros.',
       image: {
-        src: 'https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9?auto=format&fit=crop&w=900&q=80',
+        src: '/comminuty_core_images.jpg',
         alt: 'New York City skyline',
-      },
-    },
-    {
-      location: 'Cairo, Egypt',
-      title: 'Nile Dialogues',
-      description:
-        'Cross-regional conversations on water, heritage, and cooperation along shared rivers and shared futures.',
-      image: {
-        src: 'https://images.unsplash.com/photo-1572252009286-268acec5ca0a?auto=format&fit=crop&w=900&q=80',
-        alt: 'Historic architecture and river city view',
-      },
-    },
-    {
-      location: 'São Paulo, Brazil',
-      title: 'Americas Forum',
-      description:
-        'Linking civic innovators across the hemisphere to align human rights, inclusion, and climate-conscious growth.',
-      image: {
-        src: 'https://images.unsplash.com/photo-1483729558449-99ef09a8c325?auto=format&fit=crop&w=900&q=80',
-        alt: 'Urban skyline in the Americas',
       },
     },
   ],

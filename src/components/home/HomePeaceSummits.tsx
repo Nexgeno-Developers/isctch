@@ -51,20 +51,18 @@ export default function HomePeaceSummits({ data }: Props) {
   const infinite = total > 1;
 
   return (
-    <section
-      id="summits"
-      className="w-full bg-white py-14 md:py-18 lg:py-24"
-      aria-labelledby="peace-summits-heading"
+    <section 
+      className="w-full bg-white py-8 lg:py-20"
     >
-      <div className={`mx-auto w-full max-w-[100vw] ${SECTION_PAD}`}>
+      <div className='container mx-auto px-4'>
         <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
           <div className="text-center sm:text-left">
-            <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#d98a29] sm:text-sm">
+            <p className="text-xs font-bold uppercase tracking-[0.2em]  text-[#EF7D00] sm:text-sm">
               {kicker}
             </p>
             <h2
               id="peace-summits-heading"
-              className="mt-3 text-3xl font-bold tracking-tight text-[#00AEEF] sm:text-4xl md:text-[2.35rem]"
+              className="mt-3 text-3xl font-black tracking-tight text-[#009fe3] lg:text-[36px]"
             >
               {title}
             </h2>
@@ -93,7 +91,7 @@ export default function HomePeaceSummits({ data }: Props) {
           <Swiper
             className="peace-summits-swiper w-full !pb-1"
             modules={[Autoplay, A11y]}
-            spaceBetween={18}
+            spaceBetween={22}
             slidesPerView={1.1}
             slidesPerGroup={1}
             breakpoints={{
@@ -132,8 +130,8 @@ export default function HomePeaceSummits({ data }: Props) {
                     </span>
                   </div>
                   <div className="flex flex-1 flex-col pt-7">
-                    <h3 className="text-lg font-bold text-black lg:text-[20px]">{summit.title}</h3>
-                    <p className="mt-2 text-sm leading-relaxed text-black lg:text-base mb-0 mb-0 ">
+                    <h3 className="text-lg font-black text-[#1A1A2E] lg:text-[24px]">{summit.title}</h3>
+                    <p className="mt-1 text-sm leading-relaxed text-[#3E4850] lg:text-[18px] mb-0 mb-0 ">
                       {summit.description}
                     </p>
                   </div>
