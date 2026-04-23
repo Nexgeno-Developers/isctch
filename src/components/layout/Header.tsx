@@ -51,7 +51,7 @@ export default function Header() {
           {cta ? (
             <Link
               href={cta.href}
-              className="hidden min-h-[44px] min-w-0 items-center justify-center rounded-[8px] bg-[#FF8918] px-5 py-2.1
+              className="hidden min-h-[44px] min-w-0 items-center justify-center rounded-[8px] bg-[#EF7D00] px-5 py-2.1
                text-center text-[14px] font-bold uppercase tracking-wide text-white transition-colors hover:bg-[#d96a18] 
                lg:flex xl:px-7"
             >

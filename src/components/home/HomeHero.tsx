@@ -36,7 +36,7 @@ export default function HomeHero({ data }: HomeHeroProps) {
             <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
               <Link
                 href={primaryCta.href}
-                className="inline-flex min-h-[54px] items-center justify-center rounded-[8px] bg-[#FF8918] px-7 text-center text-sm font-bold uppercase tracking-wide text-white transition-colors hover:bg-[#d96a18]"
+                className="inline-flex min-h-[54px] items-center justify-center rounded-[8px] bg-[#EF7D00] px-7 text-center text-sm font-bold uppercase tracking-wide text-white transition-colors hover:bg-[#d96a18]"
               >
                 {primaryCta.label}
               </Link>

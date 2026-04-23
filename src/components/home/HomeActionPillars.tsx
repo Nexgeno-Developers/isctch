@@ -1,4 +1,5 @@
 import type { HomeActionPillarIconId, HomeActionPillarsData } from '@/lib/api/homepage/types';
+import Image from 'next/image';
 
 type Props = {
   data: HomeActionPillarsData;
@@ -26,49 +27,27 @@ function PillarIcon({
   switch (id) {
     case 'people':
       return (
-        <svg className="h-9 w-9 shrink-0" viewBox="0 0 24 24" aria-hidden>
-          <path {...stroke} d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
-          <circle {...stroke} cx="9" cy="7" r="3.5" />
-          <path {...stroke} d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75" />
-        </svg>
+        <Image src="/dialog_icons.svg" alt="People" width={30} height={30} />
       );
     case 'meditation':
       return (
-        <svg className="h-9 w-9 shrink-0" viewBox="0 0 24 24" aria-hidden>
-          <circle {...stroke} cx="12" cy="5" r="2" />
-          <path
-            {...stroke}
-            d="M12 21v-6M8 15h8M9 15c0-2 1.5-3 3-3s3 1 3 3M7 21h10"
-          />
-        </svg>
+        <Image src="/peace_tols_icon.svg" alt="People" width={30} height={30} />
       );
     case 'graduation':
       return (
-        <svg className="h-9 w-9 shrink-0" viewBox="0 0 24 24" aria-hidden>
-          <path {...stroke} d="M2 12l10-5 10 5-10 5-10-5z" />
-          <path {...stroke} d="M6 15v2.5c0 1.5 3 2.5 6 2.5s6-1 6-2.5V15" />
-        </svg>
+        <Image src="/leadership_icons.svg" alt="People" width={30} height={30} />
       );
     case 'megaphone':
       return (
-        <svg className="h-9 w-9 shrink-0" viewBox="0 0 24 24" aria-hidden>
-          <path {...stroke} d="M3 11l4-2v8l-4-2V11zM7 9v6l10 4V5L7 9z" />
-          <path {...stroke} d="M18 9a3 3 0 0 1 0 6" />
-        </svg>
+        <Image src="/voice_icons.svg" alt="People" width={30} height={30} />
       );
     case 'book':
       return (
-        <svg className="h-9 w-9 shrink-0" viewBox="0 0 24 24" aria-hidden>
-          <path {...stroke} d="M4 5c0-1 1.5-2 4-2s4 1 4 2v14c-1.5-1-2.5-1-4-1s-2.5 0-4 1V5z" />
-          <path {...stroke} d="M12 5c0-1 1.5-2 4-2s4 1 4 2v14c-1.5-1-2.5-1-4-1s-2.5 0-4 1" />
-        </svg>
+        <Image src="/education_icons.svg" alt="People" width={30} height={30} />
       );
     case 'scales-policy':
       return (
-        <svg className="h-9 w-9 shrink-0" viewBox="0 0 24 24" aria-hidden>
-          <path {...stroke} d="M12 3v18M5 7l-2 5h4L5 7zm14 0l-2 5h4l-2-5z" />
-          <path {...stroke} d="M7 12h10M9 19h6" />
-        </svg>
+        <Image src="/plocy_icons.svg" alt="People" width={30} height={30} />
       );
     default: {
       const _n: never = id;
@@ -87,12 +66,12 @@ export default function HomeActionPillars({ data }: Props) {
       className="bg-[#E8F7FD] py-8 lg:py-20"
     >
       <div className="container mx-auto px-4">
-        <p className="text-center text-xs font-bold uppercase tracking-[0.2em] text-[#d98a29] sm:text-sm">
+        <p className="text-center text-xs font-bold uppercase tracking-[0.2em]  text-[#EF7D00] sm:text-sm">
           {data.kicker}
         </p>
         <h2
           id="action-pillars-heading"
-          className="mt-3 text-center text-3xl font-bold tracking-tight text-[#00AEEF] lg:text-[48px]"
+          className="mt-3 text-center text-3xl font-black tracking-tight text-[#009fe3] lg:text-[36px]"
         >
           {data.title}
         </h2>
@@ -106,8 +85,8 @@ export default function HomeActionPillars({ data }: Props) {
             return (
               <li
                 key={`pillar-${index}`}
-                className={`flex flex-col bg-white px-10 py-10 ${
-                  topBlue ? 'border-t-4 border-[#00AEEF]' : 'border-t-4 border-[#d98a29]'
+                className={`flex flex-col bg-white px-10 py-10 rounded-[8px] ${
+                  topBlue ? 'border-t-3 border-[#009FE3]' : 'border-t-3 border-[#EF7D00]'
                 }`}
               >
                 <div className="pt-0">
@@ -116,8 +95,8 @@ export default function HomeActionPillars({ data }: Props) {
                     accent={topBlue ? 'orange' : 'cyan'}
                   />
                 </div>
-                <h3 className="mt-6 text-lg font-bold text-black lg:text-[20px]">{pillar.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-black lg:text-base">
+                <h3 className="mt-6 text-lg font-bold text-[#1A1A2E] lg:text-[20px]">{pillar.title}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-[#3E4850] lg:text-base">
                   {pillar.description}
                 </p>
               </li>

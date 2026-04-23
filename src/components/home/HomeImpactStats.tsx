@@ -55,7 +55,7 @@ function StatItem({ item, active }: { item: HomeImpactStatItem; active: boolean 
   return (
     <div className="flex flex-col items-center px-2 text-center">
       <span
-        className="text-2xl font-bold tabular-nums lg:text-[48px]"
+        className="text-2xl font-bold tabular-nums lg:text-[48px] text-white"
         aria-live={active ? 'polite' : 'off'}
       >
         {item.prefix ?? ''}
@@ -95,7 +95,7 @@ export default function HomeImpactStats({ data }: { data: HomeImpactStatsData })
   return (
     <section
       ref={sectionRef}
-      className="bg-[#00AEEF] lg:py-20 py-8">
+      className="bg-[#009FE3] lg:py-20 py-8">
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-2 gap-y-10 gap-x-4 sm:gap-x-8 lg:grid-cols-4 lg:gap-x-4">
           {data.items.map((item, index) => (
