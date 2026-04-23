@@ -42,7 +42,7 @@ function StatItem({ item, active }: { item: HomeImpactStatItem; active: boolean 
         >
           {item.symbol}
         </span>
-        <span className="mt-3 max-w-[12rem] text-[11px] font-semibold uppercase tracking-[0.12em] text-white/90 sm:text-xs">
+        <span className="mt-3 max-w-[12rem] text-[11px] font-semibold uppercase tracking-[0.12em] text-[#8ACEFF] sm:text-xs">
           {item.label}
         </span>
       </div>
@@ -55,14 +55,14 @@ function StatItem({ item, active }: { item: HomeImpactStatItem; active: boolean 
   return (
     <div className="flex flex-col items-center px-2 text-center">
       <span
-        className="text-4xl font-bold tabular-nums sm:text-5xl md:text-6xl"
+        className="text-2xl font-bold tabular-nums lg:text-[48px]"
         aria-live={active ? 'polite' : 'off'}
       >
         {item.prefix ?? ''}
         {formatted}
         {item.suffix ?? ''}
       </span>
-      <span className="mt-3 max-w-[12rem] text-[11px] font-semibold uppercase tracking-[0.12em] text-white/90 sm:text-xs">
+      <span className="mt-3 max-w-[12rem] text-[11px] font-semibold uppercase tracking-[0.12em] text-[#8ACEFF] sm:text-xs">
         {item.label}
       </span>
     </div>
@@ -95,7 +95,7 @@ export default function HomeImpactStats({ data }: { data: HomeImpactStatsData })
   return (
     <section
       ref={sectionRef}
-      className="bg-[#00AEEF] lg:py-24 py-10">
+      className="bg-[#00AEEF] lg:py-20 py-8">
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-2 gap-y-10 gap-x-4 sm:gap-x-8 lg:grid-cols-4 lg:gap-x-4">
           {data.items.map((item, index) => (

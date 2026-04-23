@@ -11,7 +11,7 @@ export default function HomeHero({ data }: HomeHeroProps) {
 
   return (
     <section
-      className="relative overflow-hidden lg:py-24 py-12 bg-[linear-gradient(125.74deg,_#F0FBFF_0%,_#FFF8F0_100%)]"
+      className="relative overflow-hidden lg:py-20 py-8 bg-[linear-gradient(125.74deg,_#F0FBFF_0%,_#FFF8F0_100%)]"
     >
       <div className="container mx-auto px-4 ">
         <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-10 xl:gap-16">
@@ -26,7 +26,7 @@ export default function HomeHero({ data }: HomeHeroProps) {
             >
               <span className="font-bold text-[#009FE3]">{headline.accent}</span>{' '}
               <span className="text-[#1a1a2e]">{headline.lineMiddle}</span>{' '}
-              <span className="text-[#e87722]">{headline.accentWord}</span>
+              <span className="text-[#EF7D00]">{headline.accentWord}</span>
             </h1>
 
             <p className="mt-6 text-[18px] leading-relaxed text-[#3E4850]">
@@ -36,13 +36,13 @@ export default function HomeHero({ data }: HomeHeroProps) {
             <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
               <Link
                 href={primaryCta.href}
-                className="inline-flex min-h-[54px] items-center justify-center rounded-[8px] bg-[#FF8918] px-12 text-center text-sm font-bold uppercase tracking-wide text-white transition-colors hover:bg-[#d96a18]"
+                className="inline-flex min-h-[54px] items-center justify-center rounded-[8px] bg-[#FF8918] px-7 text-center text-sm font-bold uppercase tracking-wide text-white transition-colors hover:bg-[#d96a18]"
               >
                 {primaryCta.label}
               </Link>
               <Link
                 href={secondaryCta.href}
-                className="inline-flex min-h-[54px] items-center justify-center rounded-lg border-2 border-[#006491] bg-transparent px-12 text-center text-sm font-bold uppercase tracking-wide text-[#006491] transition-colors hover:bg-[#1a1a2e]/5"
+                className="inline-flex min-h-[54px] items-center justify-center rounded-lg border-2 border-[#006491] bg-transparent px-7 text-center text-sm font-bold uppercase tracking-wide text-[#006491] transition-colors hover:bg-[#1a1a2e]/5"
               >
                 {secondaryCta.label}
               </Link>

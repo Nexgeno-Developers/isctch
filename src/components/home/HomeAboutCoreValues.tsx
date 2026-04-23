@@ -1,4 +1,5 @@
 import type { HomeAboutCoreValuesData, HomeCoreValueIconId } from '@/lib/api/homepage/types';
+import Image from 'next/image';
 
 type Props = {
   data: HomeAboutCoreValuesData;
@@ -18,49 +19,23 @@ function CoreValueGlyph({ id }: { id: HomeCoreValueIconId }) {
   switch (id) {
     case 'hand-heart':
       return (
-        <svg className={iconClass} viewBox="0 0 24 24" aria-hidden>
-          <path
-            {...stroke}
-            d="M12 18.5C8.5 15.2 5 12.1 5 8.5 5 6.5 6.4 5 8.2 5c1.4 0 2.7.8 3.4 2 .2.4.8.4 1 0C13.3 5.8 14.6 5 16 5 17.8 5 19 6.5 19 8.5c0 3.6-3.5 6.7-7 10"
-          />
-          <path {...stroke} d="M8 20c1.2-2.2 3.5-3.5 4-3.5s2.8 1.3 4 3.5" />
-        </svg>
+        <Image src="/true_icon.svg" alt="Hand heart" width={20} height={20} />
       );
     case 'leaf':
       return (
-        <svg className={iconClass} viewBox="0 0 24 24" aria-hidden>
-          <path
-            {...stroke}
-            d="M12 3C7 6 4 10 4 14c0 3.3 2.7 6 6 6 4 0 8-4 8-10 0-3-1.5-5.5-4-7"
-          />
-          <path {...stroke} d="M12 20V10M12 10c2 1.5 4 4 5 7" />
-        </svg>
+        <Image src="/selfless_icon.svg" alt="Hand heart" width={20} height={20} />
       );
     case 'handshake':
       return (
-        <svg className={iconClass} viewBox="0 0 24 24" aria-hidden>
-          <path
-            {...stroke}
-            d="M4 14l2.5 2.5c.8.8 2.1.9 3 .2l.5-.4c.9-.7 2.2-.6 3 .2v0c.8.8 2 .9 2.8.2L21 14"
-          />
-          <path {...stroke} d="M3 10l4-2 3 3-2 4M21 10l-4-2-3 3 2 4" />
-        </svg>
+        <Image src="/respect_icon.svg" alt="Hand heart" width={20} height={20} />
       );
     case 'heart':
       return (
-        <svg className={iconClass} viewBox="0 0 24 24" aria-hidden>
-          <path
-            {...stroke}
-            d="M12 21s-7-4.35-7-10a5 5 0 0 1 9.9-1 5 5 0 0 1 9.9 1c0 5.65-7 10-7 10z"
-          />
-        </svg>
+        <Image src="/forgive_icon.svg" alt="Hand heart" width={20} height={20} />
       );
     case 'scales':
       return (
-        <svg className={iconClass} viewBox="0 0 24 24" aria-hidden>
-          <path {...stroke} d="M12 3v18M5 7h14M5 7l-2 5h4L5 7zm14 0l-2 5h4l-2-5z" />
-          <path {...stroke} d="M7 12h10" />
-        </svg>
+        <Image src="/equality.svg" alt="Hand heart" width={20} height={20} />
       );
     default: {
       const _never: never = id;
@@ -76,26 +51,26 @@ function CoreValueGlyph({ id }: { id: HomeCoreValueIconId }) {
 export default function HomeAboutCoreValues({ data }: Props) {
   return (
     <section
-      className="bg-white py-14 md:py-18 lg:py-24"
+      className="bg-white py-8 lg:py-20"
     >
       <div className="container mx-auto px-4">
         <div className="grid gap-12 lg:grid-cols-2 lg:gap-14 lg:items-start">
           <div>
-            <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#d98a29] sm:text-sm">
+            <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#EF7D00] sm:text-sm">
               {data.aboutKicker}
             </p>
             <h2
               id="about-core-heading"
-              className="mt-3 text-2xl font-bold leading-tight tracking-tight text-[#00AEEF] sm:text-3xl md:text-4xl lg:text-[2.35rem]"
+              className="mt-3 text-2xl font-black leading-tight tracking-tight text-[#009FE3]  lg:text-[36px]"
             >
               {data.headlineLine1}
               <br />
               {data.headlineLine2}
             </h2>
-            <p className="mt-6 text-base leading-relaxed text-black sm:text-base">
+            <p className="mt-6 text-[18px] leading-relaxed text-[#3E4850]">
               {data.body}
             </p>
-            <blockquote className="mt-8 border-l-4 border-[#d98a29] py-1 pl-5 text-base font-medium leading-relaxed text-[#1a1a2e] sm:text-lg">
+            <blockquote className="mt-8 border-l-4 border-[#EF7D00] py-3 pl-5 text-base font-medium leading-relaxed text-[#1A1A2E] lg:text-[20px]">
               <span className="font-semibold">{data.visionLabel}</span>{' '}
               {data.visionText}
             </blockquote>
@@ -109,10 +84,10 @@ export default function HomeAboutCoreValues({ data }: Props) {
               {data.values.map((item, index) => (
                 <li
                   key={`core-value-${index}`}
-                  className="flex items-center gap-4 rounded-lg bg-[#F8F9FF] px-4 py-3.5 sm:px-5"
+                  className="flex items-center gap-4 rounded-lg bg-[#F5F2FF] px-4 py-5 sm:px-5"
                 >
                   <CoreValueGlyph id={item.icon} />
-                  <span className="text-sm font-bold uppercase tracking-wide text-[#1a1a2e] sm:text-base">
+                  <span className="text-sm font-bold uppercase tracking-wide text-[#1A1A2E] sm:text-base">
                     {item.label}
                   </span>
                 </li>
