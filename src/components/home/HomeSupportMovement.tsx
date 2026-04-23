@@ -117,7 +117,7 @@ export default function HomeSupportMovement({ data }: Props) {
               >
                 {form.submitLabel}
               </button>
-              <p className="text-center text-xs text-[#6b7280]">{form.footnote}</p>
+              <p className="text-center font-black text-xs text-[#6b7280]">{form.footnote}</p>
             </form>
           </div>
         </div>
