@@ -4,13 +4,29 @@ import { unstable_cache } from 'next/cache';
 
 import { API_CACHE_TAG, fetchJsonCached } from '@/lib/api/apiCache';
 import { WHAT_WE_DO_PAGE_SLUG } from '@/config/publicRoutes';
-import type { HomePeaceSummitCard } from '@/lib/api/homepage/types';
-import type { WhatWeDoPageData } from './types';
+import type { HomePeaceSummitCard, WhatWeDoInitiativeIcon, WhatWeDoPageData } from './types';
 
 const COMPANY_API_DOMAIN = process.env.COMPANY_API_DOMAIN?.replace(/\/+$/, '') || '';
 const WHAT_WE_DO_REVALIDATE_SECONDS = Number(
   process.env.WHAT_WE_DO_PAGE_REVALIDATE_SECONDS ?? process.env.HOMEPAGE_HERO_REVALIDATE_SECONDS ?? 60 * 60,
 );
+
+const ICON_MAP: Record<string, WhatWeDoInitiativeIcon> = {
+  people: { src: '/dialog_icons.svg', alt: 'People icon' },
+  meditation: { src: '/peace_tols_icon.svg', alt: 'Meditation icon' },
+  graduation: { src: '/leadership_icons.svg', alt: 'Graduation icon' },
+  megaphone: { src: '/voice_icons.svg', alt: 'Megaphone icon' },
+  book: { src: '/education_icons.svg', alt: 'Book icon' },
+  'scales-policy': { src: '/plocy_icons.svg', alt: 'Policy scales icon' },
+};
+
+function iconFromId(icon: string): WhatWeDoInitiativeIcon {
+  return ICON_MAP[icon] ?? ICON_MAP.people;
+}
+
+function fallbackIconAt(index: number): WhatWeDoInitiativeIcon {
+  return STATIC_WHAT_WE_DO_PAGE.peaceSummits.summits[index]?.icon ?? ICON_MAP.people;
+}
 
 const STATIC_WHAT_WE_DO_PAGE: WhatWeDoPageData = {
   hero: {
@@ -25,13 +41,18 @@ const STATIC_WHAT_WE_DO_PAGE: WhatWeDoPageData = {
     title: 'Global Peace Summits',
     summits: [
       {
-        location: 'Geneva, Switzerland',
-        title: 'The Diplomatic Dialogue',
+        location: '450+ Communities United',
+        title: 'Interfaith Solidarity',
         description:
-          'Focusing on neutral mediation and international law frameworks for a peaceful 21st century.',
+          'We bridge the gap between religious divides by fostering direct communication and joint humanitarian projects. Our interfaith councils serve as the first line of defense against radicalization and communal conflict.',
         image: {
           src: '/diplomatic_image1.jpg',
           alt: 'International conference hall and diplomacy setting',
+        },
+        icon: iconFromId('people'),
+        cta: {
+          label: 'Learn More',
+          href: '/interfaith-dialogues',
         },
       },
       {
@@ -43,6 +64,11 @@ const STATIC_WHAT_WE_DO_PAGE: WhatWeDoPageData = {
           src: '/comminuty_core_images.jpg',
           alt: 'Diverse group of people gathering in a community space',
         },
+        icon: iconFromId('megaphone'),
+        cta: {
+          label: 'Get Involved',
+          href: '/community-activism',
+        },
       },
       {
         location: 'Dubai, UAE',
@@ -53,9 +79,14 @@ const STATIC_WHAT_WE_DO_PAGE: WhatWeDoPageData = {
           src: '/future_images.jpg',
           alt: 'Modern city skyline at sunset',
         },
+        icon: iconFromId('book'),
+        cta: {
+          label: 'Explore Programs',
+          href: '/peace-education',
+        },
       },
 
-       {
+      {
         location: 'Dubai, UAE',
         title: 'Future Harmony',
         description:
@@ -64,9 +95,14 @@ const STATIC_WHAT_WE_DO_PAGE: WhatWeDoPageData = {
           src: '/future_images.jpg',
           alt: 'Modern city skyline at sunset',
         },
+        icon: iconFromId('graduation'),
+        cta: {
+          label: 'Join Youth Program',
+          href: '/youth-leadership',
+        },
       },
 
-       {
+      {
         location: 'Dubai, UAE',
         title: 'Future Harmony',
         description:
@@ -75,9 +111,14 @@ const STATIC_WHAT_WE_DO_PAGE: WhatWeDoPageData = {
           src: '/future_images.jpg',
           alt: 'Modern city skyline at sunset',
         },
+        icon: iconFromId('meditation'),
+        cta: {
+          label: 'Practice Mindfulness',
+          href: '/inner-peace-tools',
+        },
       },
 
-       {
+      {
         location: 'Dubai, UAE',
         title: 'Future Harmony',
         description:
@@ -85,6 +126,11 @@ const STATIC_WHAT_WE_DO_PAGE: WhatWeDoPageData = {
         image: {
           src: '/future_images.jpg',
           alt: 'Modern city skyline at sunset',
+        },
+        icon: iconFromId('scales-policy'),
+        cta: {
+          label: 'Support Advocacy',
+          href: '/policy-advocacy',
         },
       },
     ],
@@ -173,7 +219,25 @@ function peaceSummitsListFromMeta(meta: MetaRecord | undefined): HomePeaceSummit
         `summit_${i}_image_alt`,
         `what_we_do_card_${i}_image_alt`,
       ]) || title;
-    const fallback =
+    const iconRaw = pick(meta, [
+      `peace_summit_${i}_icon`,
+      `summit_${i}_icon`,
+      `home_peace_summit_${i}_icon`,
+      `what_we_do_card_${i}_icon`,
+    ]);
+    const ctaLabelRaw = pick(meta, [
+      `peace_summit_${i}_cta_label`,
+      `summit_${i}_cta_label`,
+      `home_peace_summit_${i}_cta_label`,
+      `what_we_do_card_${i}_cta_label`,
+    ]);
+    const ctaHrefRaw = pick(meta, [
+      `peace_summit_${i}_cta_href`,
+      `summit_${i}_cta_href`,
+      `home_peace_summit_${i}_cta_href`,
+      `what_we_do_card_${i}_cta_href`,
+    ]);
+    const fallbackImage =
       STATIC_WHAT_WE_DO_PAGE.peaceSummits.summits[out.length]?.image ||
       STATIC_WHAT_WE_DO_PAGE.peaceSummits.summits[0].image;
     out.push({
@@ -181,8 +245,13 @@ function peaceSummitsListFromMeta(meta: MetaRecord | undefined): HomePeaceSummit
       title,
       description,
       image: {
-        src: imageSrc ? normalizeImageUrl(imageSrc) : fallback.src,
+        src: imageSrc ? normalizeImageUrl(imageSrc) : fallbackImage.src,
         alt: imageAlt,
+      },
+      icon: iconRaw ? iconFromId(iconRaw) : fallbackIconAt(out.length),
+      cta: {
+        label: ctaLabelRaw || STATIC_WHAT_WE_DO_PAGE.peaceSummits.summits[out.length]?.cta.label || 'Learn More',
+        href: ctaHrefRaw || STATIC_WHAT_WE_DO_PAGE.peaceSummits.summits[out.length]?.cta.href || '#',
       },
     });
   }
@@ -259,7 +328,7 @@ export async function getWhatWeDoPageData(slug = WHAT_WE_DO_PAGE_SLUG): Promise<
   const cleanSlug = slug.replace(/^\/+|\/+$/g, '');
   const cached = unstable_cache(
     async () => resolveWhatWeDoPageData(cleanSlug),
-    ['what-we-do-page-v2', cleanSlug, process.env.COMPANY_API_BASE_URL || 'static', COMPANY_API_DOMAIN || ''],
+    ['what-we-do-page-v3', cleanSlug, process.env.COMPANY_API_BASE_URL || 'static', COMPANY_API_DOMAIN || ''],
     {
       revalidate: WHAT_WE_DO_REVALIDATE_SECONDS,
       tags: [API_CACHE_TAG, 'what-we-do-page', `page:${cleanSlug}`],
