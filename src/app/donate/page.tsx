@@ -1,10 +1,10 @@
 import type { Metadata } from 'next';
 import { redirect } from 'next/navigation';
 
-import DonationContributionSection from '@/components/donate/DonationContributionSection';
 import DonationBeyondSupportSection from '@/components/donate/DonationBeyondSupportSection';
-import DonationHero from '@/components/donate/DonationHero';
+import DonationContributionSection from '@/components/donate/DonationContributionSection';
 import DonationJoinMovementSection from '@/components/donate/DonationJoinMovementSection';
+import PageBreadcrumbHero from '@/components/common/PageBreadcrumbHero';
 import HomeImpactStats from '@/components/home/HomeImpactStats';
 import { DONATE_PAGE_SLUG, donatePath } from '@/config/publicRoutes';
 import { getCanonicalUrl } from '@/config/site';
@@ -26,7 +26,13 @@ export async function DonatePageView({ slug = DONATE_PAGE_SLUG }: { slug?: strin
 
   return (
     <main>
-      <DonationHero data={data.hero} />
+      <PageBreadcrumbHero
+        breadcrumbHomeLabel={data.hero.breadcrumbHomeLabel}
+        breadcrumbCurrentLabel={data.hero.breadcrumbCurrentLabel}
+        kicker={data.hero.kicker}
+        titleBlue={data.hero.titleBlue}
+        titleOrange={data.hero.titleOrange}
+      />
       <HomeImpactStats data={impactStats} />
       <DonationContributionSection data={data.contribution} />
       <DonationBeyondSupportSection data={data.beyondSupport} />

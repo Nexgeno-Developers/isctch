@@ -14,6 +14,10 @@ export const DONATE_PAGE_SLUG = (
   process.env.DONATE_PAGE_SLUG || 'donate'
 ).replace(/^\/+|\/+$/g, '');
 
+export const WHAT_WE_DO_PAGE_SLUG = (
+  process.env.WHAT_WE_DO_PAGE_SLUG || 'what-we-do'
+).replace(/^\/+|\/+$/g, '');
+
 export function normalizeSlug(value: string): string {
   return value.replace(/^\/+|\/+$/g, '');
 }
@@ -53,4 +57,8 @@ export function contactUsPath(): string {
 
 export function donatePath(): string {
   return `/${DONATE_PAGE_SLUG}`;
+}
+
+export function whatWeDoPath(): string {
+  return `/${WHAT_WE_DO_PAGE_SLUG}`;
 }
