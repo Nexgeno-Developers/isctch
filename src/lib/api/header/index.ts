@@ -1,4 +1,4 @@
-import { aboutUsPath, contactUsPath } from '@/config/publicRoutes';
+import { aboutUsPath, contactUsPath, donatePath } from '@/config/publicRoutes';
 import type { HeaderData } from './types';
 
 const LOGO_SRC = '/iscth-logo.png';
@@ -29,7 +29,7 @@ export const HEADER_LAYOUT: HeaderData = {
   ],
   cta: {
     text: 'Donate for peace',
-    href: 'donate',
+    href: donatePath(),
   },
 };
 

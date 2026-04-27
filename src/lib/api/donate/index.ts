@@ -3,6 +3,7 @@ import 'server-only';
 import { unstable_cache } from 'next/cache';
 
 import { API_CACHE_TAG, fetchJsonCached } from '@/lib/api/apiCache';
+import { DONATE_PAGE_SLUG } from '@/config/publicRoutes';
 import type { DonatePageData } from './types';
 
 const COMPANY_API_DOMAIN = process.env.COMPANY_API_DOMAIN?.replace(/\/+$/, '') || '';
@@ -316,7 +317,7 @@ async function resolveDonatePageData(slug: string): Promise<DonatePageData> {
   };
 }
 
-export async function getDonatePageData(slug = 'donate'): Promise<DonatePageData> {
+export async function getDonatePageData(slug = DONATE_PAGE_SLUG): Promise<DonatePageData> {
   const cleanSlug = slug.replace(/^\/+|\/+$/g, '');
   const cached = unstable_cache(
     async () => resolveDonatePageData(cleanSlug),

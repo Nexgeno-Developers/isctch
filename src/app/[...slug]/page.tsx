@@ -5,6 +5,8 @@ import {
   ABOUT_US_PAGE_SLUG,
   CONTACT_US_PAGE_SLUG,
   DONATE_PAGE_SLUG,
+  fullSlugFromParams,
+  matchesRouteSlug,
 } from '@/config/publicRoutes';
 import { DonatePageView } from '@/app/donate/page';
 import { getCanonicalUrl } from '@/config/site';
@@ -12,15 +14,6 @@ import { getDonatePageData } from '@/lib/api/donate';
 
 interface PageProps {
   params: Promise<{ slug: string[] }>;
-}
-
-function fullSlugFromParams(slug: string[] | undefined): string {
-  return (slug?.filter(Boolean).join('/') || '').replace(/^\/+|\/+$/g, '');
-}
-
-function isDonateLikePath(fullSlug: string): boolean {
-  const segments = fullSlug.split('/').filter(Boolean);
-  return segments.length > 0 && segments[segments.length - 1] === DONATE_PAGE_SLUG;
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
@@ -39,7 +32,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       alternates: { canonical: getCanonicalUrl(`/${fullSlug}`) },
     };
   }
-  if (isDonateLikePath(fullSlug)) {
+  if (matchesRouteSlug(fullSlug, DONATE_PAGE_SLUG, 'last-segment')) {
     const data = await getDonatePageData(fullSlug);
     return {
       title: 'Donate',
@@ -58,7 +51,7 @@ export default async function CatchAllPage({ params }: PageProps) {
     return <main className="min-h-[40vh]" />;
   }
 
-  if (isDonateLikePath(fullSlug)) {
+  if (matchesRouteSlug(fullSlug, DONATE_PAGE_SLUG, 'last-segment')) {
     return <DonatePageView slug={fullSlug} />;
   }
 

@@ -14,6 +14,35 @@ export const DONATE_PAGE_SLUG = (
   process.env.DONATE_PAGE_SLUG || 'donate'
 ).replace(/^\/+|\/+$/g, '');
 
+export function normalizeSlug(value: string): string {
+  return value.replace(/^\/+|\/+$/g, '');
+}
+
+export function fullSlugFromParams(slug: string[] | undefined): string {
+  return normalizeSlug(slug?.filter(Boolean).join('/') || '');
+}
+
+/**
+ * Shared slug matcher for catch-all routes.
+ * - exact mode: full slug must match (e.g. "123/donate123")
+ * - last-segment mode: last segment must match (e.g. ".../donate123")
+ */
+export function matchesRouteSlug(
+  fullSlug: string,
+  routeSlug: string,
+  mode: 'exact' | 'last-segment' = 'exact',
+): boolean {
+  const normalizedFullSlug = normalizeSlug(fullSlug);
+  const normalizedRouteSlug = normalizeSlug(routeSlug);
+  if (!normalizedFullSlug || !normalizedRouteSlug) return false;
+  if (normalizedFullSlug === normalizedRouteSlug) return true;
+  if (mode === 'exact') return false;
+
+  const fullLast = normalizedFullSlug.split('/').filter(Boolean).pop();
+  const routeLast = normalizedRouteSlug.split('/').filter(Boolean).pop();
+  return Boolean(fullLast && routeLast && fullLast === routeLast);
+}
+
 export function aboutUsPath(): string {
   return `/${ABOUT_US_PAGE_SLUG}`;
 }
