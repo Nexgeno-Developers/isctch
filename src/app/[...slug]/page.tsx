@@ -39,7 +39,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     const data = await getWhatWeDoPageData(fullSlug);
     return {
       title: 'What we do',
-      description: data.actionPillars.title.slice(0, 160),
+      description: data.peaceSummits.title.slice(0, 160),
       alternates: { canonical: getCanonicalUrl(`/${fullSlug}`) },
     };
   }

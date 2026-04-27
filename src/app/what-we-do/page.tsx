@@ -2,7 +2,6 @@ import type { Metadata } from 'next';
 import { redirect } from 'next/navigation';
 
 import PageBreadcrumbHero from '@/components/common/PageBreadcrumbHero';
-import HomeActionPillars from '@/components/home/HomeActionPillars';
 import WhatWeDoInitiativesSection from '@/components/what-we-do/WhatWeDoInitiativesSection';
 import { WHAT_WE_DO_PAGE_SLUG, whatWeDoPath } from '@/config/publicRoutes';
 import { getCanonicalUrl } from '@/config/site';
@@ -12,7 +11,7 @@ export async function generateMetadata(): Promise<Metadata> {
   const data = await getWhatWeDoPageData(WHAT_WE_DO_PAGE_SLUG);
   return {
     title: 'What we do',
-    description: data.actionPillars.title.slice(0, 160),
+    description: data.peaceSummits.title.slice(0, 160),
     alternates: { canonical: getCanonicalUrl(whatWeDoPath()) },
   };
 }

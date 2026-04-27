@@ -1,4 +1,4 @@
-import type { HomeActionPillarsData, HomePeaceSummitsData } from '@/lib/api/homepage/types';
+import type { HomePeaceSummitsData } from '@/lib/api/homepage/types';
 
 export type WhatWeDoHeroData = {
   breadcrumbHomeLabel: string;
@@ -10,6 +10,5 @@ export type WhatWeDoHeroData = {
 
 export type WhatWeDoPageData = {
   hero: WhatWeDoHeroData;
-  actionPillars: HomeActionPillarsData;
   peaceSummits: HomePeaceSummitsData;
 };

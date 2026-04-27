@@ -4,7 +4,7 @@ import { unstable_cache } from 'next/cache';
 
 import { API_CACHE_TAG, fetchJsonCached } from '@/lib/api/apiCache';
 import { WHAT_WE_DO_PAGE_SLUG } from '@/config/publicRoutes';
-import type { HomeActionPillarIconId, HomeActionPillarItem, HomePeaceSummitCard } from '@/lib/api/homepage/types';
+import type { HomePeaceSummitCard } from '@/lib/api/homepage/types';
 import type { WhatWeDoPageData } from './types';
 
 const COMPANY_API_DOMAIN = process.env.COMPANY_API_DOMAIN?.replace(/\/+$/, '') || '';
@@ -19,48 +19,6 @@ const STATIC_WHAT_WE_DO_PAGE: WhatWeDoPageData = {
     kicker: 'Our Mission in Action',
     titleBlue: 'Turning Peace',
     titleOrange: 'into Practice',
-  },
-  actionPillars: {
-    kicker: 'What we do',
-    title: 'Our Action Pillars',
-    pillars: [
-      {
-        icon: 'people',
-        title: 'Interfaith Dialogues',
-        description:
-          'Building bridges between faiths to celebrate our shared human spirit and universal truths.',
-      },
-      {
-        icon: 'meditation',
-        title: 'Inner Peace Tools',
-        description:
-          'Mindfulness and meditation practices designed to cultivate resilience and personal tranquility.',
-      },
-      {
-        icon: 'graduation',
-        title: 'Youth Leadership',
-        description:
-          'Empowering the next generation with ethical leadership skills and a global perspective.',
-      },
-      {
-        icon: 'megaphone',
-        title: 'Raising Our Voice',
-        description:
-          'Advocating for the marginalized through global awareness campaigns and digital activism.',
-      },
-      {
-        icon: 'book',
-        title: 'Peace Education',
-        description:
-          'Integrating peace-building curriculum into schools and community learning centers.',
-      },
-      {
-        icon: 'scales-policy',
-        title: 'Policy Advocacy',
-        description:
-          'Collaborating with international bodies to influence policies that support global harmony.',
-      },
-    ],
   },
   peaceSummits: {
     kicker: 'Events',
@@ -87,6 +45,39 @@ const STATIC_WHAT_WE_DO_PAGE: WhatWeDoPageData = {
         },
       },
       {
+        location: 'Dubai, UAE',
+        title: 'Future Harmony',
+        description:
+          'Exploring the intersection of technology, sustainable cities, and ethical human progress.',
+        image: {
+          src: '/future_images.jpg',
+          alt: 'Modern city skyline at sunset',
+        },
+      },
+
+       {
+        location: 'Dubai, UAE',
+        title: 'Future Harmony',
+        description:
+          'Exploring the intersection of technology, sustainable cities, and ethical human progress.',
+        image: {
+          src: '/future_images.jpg',
+          alt: 'Modern city skyline at sunset',
+        },
+      },
+
+       {
+        location: 'Dubai, UAE',
+        title: 'Future Harmony',
+        description:
+          'Exploring the intersection of technology, sustainable cities, and ethical human progress.',
+        image: {
+          src: '/future_images.jpg',
+          alt: 'Modern city skyline at sunset',
+        },
+      },
+
+       {
         location: 'Dubai, UAE',
         title: 'Future Harmony',
         description:
@@ -143,85 +134,6 @@ function pick(meta: MetaRecord | undefined, keys: string[]): string {
     if (typeof value === 'string' && value.trim()) return value.trim();
   }
   return '';
-}
-
-const ACTION_PILLAR_ICON_IDS: HomeActionPillarIconId[] = [
-  'people',
-  'meditation',
-  'graduation',
-  'megaphone',
-  'book',
-  'scales-policy',
-];
-
-function normalizeActionPillarIcon(raw: string, fallbackIndex: number): HomeActionPillarIconId {
-  const s = raw.trim().toLowerCase().replace(/_/g, '-').replace(/\s+/g, '-');
-  if ((ACTION_PILLAR_ICON_IDS as string[]).includes(s)) return s as HomeActionPillarIconId;
-  if (s.includes('people') || s.includes('group') || s.includes('interfaith')) return 'people';
-  if (s.includes('meditat') || s.includes('mindful') || s.includes('inner-peace')) return 'meditation';
-  if (s.includes('graduat') || s.includes('youth') || s.includes('cap')) return 'graduation';
-  if (s.includes('megaphone') || s.includes('voice') || s.includes('raising')) return 'megaphone';
-  if (s.includes('book') || (s.includes('education') && !s.includes('policy'))) return 'book';
-  if (s.includes('scale') || s.includes('policy') || s.includes('advocacy')) return 'scales-policy';
-  return STATIC_WHAT_WE_DO_PAGE.actionPillars.pillars[fallbackIndex]?.icon ?? 'people';
-}
-
-function actionPillarsListFromMeta(meta: MetaRecord | undefined): HomeActionPillarItem[] | null {
-  if (!meta) return null;
-  const out: HomeActionPillarItem[] = [];
-  for (let i = 1; i <= 12; i++) {
-    const title = pick(meta, [
-      `action_pillar_${i}_title`,
-      `pillar_${i}_title`,
-      `home_action_pillar_${i}_title`,
-      `what_we_do_pillar_${i}_title`,
-    ]);
-    if (!title) continue;
-    const description = pick(meta, [
-      `action_pillar_${i}_description`,
-      `pillar_${i}_description`,
-      `home_action_pillar_${i}_description`,
-      `what_we_do_pillar_${i}_description`,
-    ]);
-    const iconRaw = pick(meta, [
-      `action_pillar_${i}_icon`,
-      `pillar_${i}_icon`,
-      `home_action_pillar_${i}_icon`,
-      `what_we_do_pillar_${i}_icon`,
-    ]);
-    out.push({
-      title,
-      description: description || '',
-      icon: iconRaw
-        ? normalizeActionPillarIcon(iconRaw, out.length)
-        : STATIC_WHAT_WE_DO_PAGE.actionPillars.pillars[out.length]?.icon ?? 'people',
-    });
-  }
-  return out.length ? out : null;
-}
-
-function actionPillarsFromMeta(meta: MetaRecord | undefined): WhatWeDoPageData['actionPillars'] | null {
-  if (!meta) return null;
-  const list = actionPillarsListFromMeta(meta);
-  const title = pick(meta, [
-    'action_pillars_title',
-    'pillars_title',
-    'home_action_pillars_title',
-    'what_we_do_title',
-  ]);
-  const kicker = pick(meta, [
-    'action_pillars_kicker',
-    'pillars_kicker',
-    'what_we_do_kicker',
-    'home_action_pillars_kicker',
-  ]);
-  if (!list && !title && !kicker) return null;
-
-  return {
-    kicker: kicker || STATIC_WHAT_WE_DO_PAGE.actionPillars.kicker,
-    title: title || STATIC_WHAT_WE_DO_PAGE.actionPillars.title,
-    pillars: list ?? STATIC_WHAT_WE_DO_PAGE.actionPillars.pillars,
-  };
 }
 
 function peaceSummitsListFromMeta(meta: MetaRecord | undefined): HomePeaceSummitCard[] | null {
@@ -335,12 +247,10 @@ async function resolveWhatWeDoPageData(slug: string): Promise<WhatWeDoPageData> 
   const meta = normalizeMeta(payload?.data);
 
   const hero = heroFromMeta(meta) ?? STATIC_WHAT_WE_DO_PAGE.hero;
-  const actionPillars = actionPillarsFromMeta(meta) ?? STATIC_WHAT_WE_DO_PAGE.actionPillars;
   const peaceSummits = peaceSummitsFromMeta(meta) ?? STATIC_WHAT_WE_DO_PAGE.peaceSummits;
 
   return {
     hero: { ...STATIC_WHAT_WE_DO_PAGE.hero, ...hero },
-    actionPillars: { ...STATIC_WHAT_WE_DO_PAGE.actionPillars, ...actionPillars },
     peaceSummits: { ...STATIC_WHAT_WE_DO_PAGE.peaceSummits, ...peaceSummits },
   };
 }
@@ -349,7 +259,7 @@ export async function getWhatWeDoPageData(slug = WHAT_WE_DO_PAGE_SLUG): Promise<
   const cleanSlug = slug.replace(/^\/+|\/+$/g, '');
   const cached = unstable_cache(
     async () => resolveWhatWeDoPageData(cleanSlug),
-    ['what-we-do-page-v1', cleanSlug, process.env.COMPANY_API_BASE_URL || 'static', COMPANY_API_DOMAIN || ''],
+    ['what-we-do-page-v2', cleanSlug, process.env.COMPANY_API_BASE_URL || 'static', COMPANY_API_DOMAIN || ''],
     {
       revalidate: WHAT_WE_DO_REVALIDATE_SECONDS,
       tags: [API_CACHE_TAG, 'what-we-do-page', `page:${cleanSlug}`],
