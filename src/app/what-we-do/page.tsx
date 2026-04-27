@@ -3,7 +3,7 @@ import { redirect } from 'next/navigation';
 
 import PageBreadcrumbHero from '@/components/common/PageBreadcrumbHero';
 import HomeActionPillars from '@/components/home/HomeActionPillars';
-import HomePeaceSummits from '@/components/home/HomePeaceSummits';
+import WhatWeDoInitiativesSection from '@/components/what-we-do/WhatWeDoInitiativesSection';
 import { WHAT_WE_DO_PAGE_SLUG, whatWeDoPath } from '@/config/publicRoutes';
 import { getCanonicalUrl } from '@/config/site';
 import { getWhatWeDoPageData } from '@/lib/api/whatWeDo';
@@ -29,11 +29,9 @@ export async function WhatWeDoPageView({ slug = WHAT_WE_DO_PAGE_SLUG }: { slug?:
         titleBlue={data.hero.titleBlue}
         titleOrange={data.hero.titleOrange}
       />
-      <section id="programs">
-        <HomeActionPillars data={data.actionPillars} />
-      </section>
+     
       <section id="initiatives">
-        <HomePeaceSummits data={data.peaceSummits} />
+        <WhatWeDoInitiativesSection data={data.peaceSummits} />
       </section>
     </main>
   );
