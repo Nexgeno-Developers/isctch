@@ -1,12 +1,13 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
+import { getInvolvedPath } from '@/config/publicRoutes';
 import type { DonateJoinMovementData } from '@/lib/api/donate/types';
 
 const FALLBACK_JOIN_MOVEMENT: DonateJoinMovementData = {
   heading: 'Together, we are the architects of a better world.',
   buttonLabel: 'Join the Movement',
-  buttonHref: '/#get-involved',
+  buttonHref: getInvolvedPath(),
   backgroundImage: {
     src: '/calltoaction_images.webp',
     alt: 'Earth from space with glowing horizon',

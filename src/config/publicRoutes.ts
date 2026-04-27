@@ -18,6 +18,10 @@ export const WHAT_WE_DO_PAGE_SLUG = (
   process.env.WHAT_WE_DO_PAGE_SLUG || 'what-we-do'
 ).replace(/^\/+|\/+$/g, '');
 
+export const GET_INVOLVED_PAGE_SLUG = (
+  process.env.GET_INVOLVED_PAGE_SLUG || 'get-involved'
+).replace(/^\/+|\/+$/g, '');
+
 export function normalizeSlug(value: string): string {
   return value.replace(/^\/+|\/+$/g, '');
 }
@@ -61,4 +65,8 @@ export function donatePath(): string {
 
 export function whatWeDoPath(): string {
   return `/${WHAT_WE_DO_PAGE_SLUG}`;
+}
+
+export function getInvolvedPath(): string {
+  return `/${GET_INVOLVED_PAGE_SLUG}`;
 }

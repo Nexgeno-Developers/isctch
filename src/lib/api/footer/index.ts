@@ -1,4 +1,4 @@
-import { aboutUsPath, contactUsPath, donatePath, whatWeDoPath } from '@/config/publicRoutes';
+import { aboutUsPath, contactUsPath, donatePath, getInvolvedPath, whatWeDoPath } from '@/config/publicRoutes';
 import type { FooterData } from './types';
 
 const LOGO_SRC = '/iscth-logo.png';
@@ -32,9 +32,9 @@ const FOOTER_BODY: Omit<FooterData, 'copyright'> = {
       id: 'action',
       title: 'Action',
       links: [
-        { id: 'ac-1', label: 'Get Involved', href: '/#get-involved' },
+        { id: 'ac-1', label: 'Get Involved', href: getInvolvedPath() },
         { id: 'ac-2', label: 'Donate', href: donatePath() },
-        { id: 'ac-3', label: 'Volunteer', href: '/#get-involved' },
+        { id: 'ac-3', label: 'Volunteer', href: getInvolvedPath() },
       ],
     },
     {

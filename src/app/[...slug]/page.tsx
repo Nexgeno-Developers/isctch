@@ -5,14 +5,17 @@ import {
   ABOUT_US_PAGE_SLUG,
   CONTACT_US_PAGE_SLUG,
   DONATE_PAGE_SLUG,
+  GET_INVOLVED_PAGE_SLUG,
   WHAT_WE_DO_PAGE_SLUG,
   fullSlugFromParams,
   matchesRouteSlug,
 } from '@/config/publicRoutes';
 import { DonatePageView } from '@/app/donate/page';
+import { GetInvolvedPageView } from '@/app/get-involved/page';
 import { WhatWeDoPageView } from '@/app/what-we-do/page';
 import { getCanonicalUrl } from '@/config/site';
 import { getDonatePageData } from '@/lib/api/donate';
+import { getGetInvolvedPageData } from '@/lib/api/getInvolved';
 import { getWhatWeDoPageData } from '@/lib/api/whatWeDo';
 
 interface PageProps {
@@ -43,6 +46,14 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       alternates: { canonical: getCanonicalUrl(`/${fullSlug}`) },
     };
   }
+  if (matchesRouteSlug(fullSlug, GET_INVOLVED_PAGE_SLUG, 'last-segment')) {
+    const data = await getGetInvolvedPageData();
+    return {
+      title: 'Get Involved',
+      description: data.program.description[0]?.slice(0, 160),
+      alternates: { canonical: getCanonicalUrl(`/${fullSlug}`) },
+    };
+  }
   if (matchesRouteSlug(fullSlug, DONATE_PAGE_SLUG, 'last-segment')) {
     const data = await getDonatePageData(fullSlug);
     return {
@@ -64,6 +75,10 @@ export default async function CatchAllPage({ params }: PageProps) {
 
   if (matchesRouteSlug(fullSlug, WHAT_WE_DO_PAGE_SLUG, 'last-segment')) {
     return <WhatWeDoPageView slug={fullSlug} />;
+  }
+
+  if (matchesRouteSlug(fullSlug, GET_INVOLVED_PAGE_SLUG, 'last-segment')) {
+    return <GetInvolvedPageView />;
   }
 
   if (matchesRouteSlug(fullSlug, DONATE_PAGE_SLUG, 'last-segment')) {

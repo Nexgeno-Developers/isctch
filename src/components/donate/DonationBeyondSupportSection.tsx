@@ -2,6 +2,8 @@ import Link from 'next/link';
 import type { DonateBeyondSupportCard, DonateBeyondSupportData } from '@/lib/api/donate/types';
 import Image from 'next/image';
 
+import { getInvolvedPath } from '@/config/publicRoutes';
+
 function CardIcon({ icon }: { icon: DonateBeyondSupportCard['icon'] }) {
   if (icon === 'advocacy') {
     return (
@@ -29,7 +31,7 @@ const FALLBACK_BEYOND_SUPPORT: DonateBeyondSupportData = {
       description:
         'Join our field teams in humanitarian relief, educational initiatives, or community organizing projects.',
       ctaLabel: 'Learn More',
-      ctaHref: '/#get-involved',
+      ctaHref: getInvolvedPath(),
     },
     {
       icon: 'advocacy',
@@ -37,7 +39,7 @@ const FALLBACK_BEYOND_SUPPORT: DonateBeyondSupportData = {
       description:
         'Champion our causes in your own community by sharing our mission and participating in digital campaigns.',
       ctaLabel: 'View Toolkit',
-      ctaHref: '/#get-involved',
+      ctaHref: getInvolvedPath(),
     },
     {
       icon: 'partners',

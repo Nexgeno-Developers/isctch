@@ -18,7 +18,7 @@ import type {
   HomeEngagementCard,
   HomeEngagementData,
 } from './types';
-import { aboutUsPath } from '@/config/publicRoutes';
+import { aboutUsPath, getInvolvedPath } from '@/config/publicRoutes';
 import { API_CACHE_TAG, fetchJsonCached } from '@/lib/api/apiCache';
 
 const HOMEPAGE_PAGE_SLUG = (process.env.HOMEPAGE_PAGE_SLUG || 'home').replace(
@@ -555,7 +555,7 @@ const STATIC_ENGAGEMENT: HomeEngagementData = {
   ],
   cta: {
     label: 'Apply as peace ambassador',
-    href: '/#apply-peace-ambassador',
+    href: getInvolvedPath(),
   },
 };
 

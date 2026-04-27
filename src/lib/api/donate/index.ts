@@ -3,7 +3,7 @@ import 'server-only';
 import { unstable_cache } from 'next/cache';
 
 import { API_CACHE_TAG, fetchJsonCached } from '@/lib/api/apiCache';
-import { DONATE_PAGE_SLUG } from '@/config/publicRoutes';
+import { DONATE_PAGE_SLUG, getInvolvedPath } from '@/config/publicRoutes';
 import type { DonatePageData } from './types';
 
 const COMPANY_API_DOMAIN = process.env.COMPANY_API_DOMAIN?.replace(/\/+$/, '') || '';
@@ -58,7 +58,7 @@ const STATIC_DONATE_PAGE: DonatePageData = {
         description:
           'Join our field teams in humanitarian relief, educational initiatives, or community organizing projects.',
         ctaLabel: 'Learn More',
-        ctaHref: '/#get-involved',
+        ctaHref: getInvolvedPath(),
       },
       {
         icon: 'advocacy',
@@ -66,7 +66,7 @@ const STATIC_DONATE_PAGE: DonatePageData = {
         description:
           'Champion our causes in your own community by sharing our mission and participating in digital campaigns.',
         ctaLabel: 'View Toolkit',
-        ctaHref: '/#get-involved',
+        ctaHref: getInvolvedPath(),
       },
       {
         icon: 'partners',
@@ -81,7 +81,7 @@ const STATIC_DONATE_PAGE: DonatePageData = {
   joinMovement: {
     heading: 'Together, we are the architects of a better world.',
     buttonLabel: 'Join the Movement',
-    buttonHref: '/#get-involved',
+    buttonHref: getInvolvedPath(),
     backgroundImage: {
       src: '/calltoaction_images1.webp',
       alt: 'Earth from space with glowing horizon',
