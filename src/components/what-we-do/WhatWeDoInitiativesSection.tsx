@@ -21,7 +21,7 @@ export default function WhatWeDoInitiativesSection({ data }: Props) {
           <div key={`${item.title}-${index}`} className={`${sectionBg} py-8 lg:py-20`}>
             <div className="container mx-auto grid items-center gap-8 px-4 md:grid-cols-2 md:gap-12">
               <div className={imageOrder}>
-                <div className="relative aspect-[16/10] w-full overflow-hidden rounded-md shadow-[0_10px_24px_rgba(15,23,42,0.12)]">
+                <div className="relative aspect-[16/10] w-full overflow-hidden rounded-md">
                   <Image
                     src={item.image.src}
                     alt={item.image.alt}
@@ -34,20 +34,20 @@ export default function WhatWeDoInitiativesSection({ data }: Props) {
 
               <div className={textOrder}>
                 <div className="flex items-center mb-4">
-                  <Image src={item.icon.src} alt={item.icon.alt} width={40} height={40} />
-                  <span className="ms-3 inline-flex rounded-full bg-[#F7921E] px-3 py-1 text-[11px] font-bold text-white">
-                    {item.location}
+                 
+                  <span className="flex items-center rounded-full bg-[#F7921E] px-5 py-2 text-[11px] font-bold text-white gap-3">
+                     <Image src={item.icon.src} alt={item.icon.alt} width={25} height={25} className='brightness-0 invert' /> <span className='text-[14px]'>{item.location}</span>
                   </span>
                 </div>
-                <h3 className="mt-2 text-3xl font-black tracking-tight text-[#0F2233] lg:text-[46px] lg:leading-[1.1]">
+                <h3 className="mt-8 text-2xl font-black leading-tight tracking-tight text-[#1A1A2E]  lg:text-[36px]">
                   {item.title}
                 </h3>
-                <p className="mt-4 max-w-[580px] text-base leading-8 text-[#4A5A68] lg:text-[34px] lg:leading-[1.55]">
+                <p className="mt-4 text-base leading-8 text-[#3E4850] lg:text-[18px]">
                   {item.description}
                 </p>
                 <Link
                   href={item.cta.href}
-                  className="mt-6 inline-flex items-center gap-2 text-[20px] font-semibold text-[#0B77B8] transition-colors hover:text-[#005d90]"
+                  className="mt-6 inline-flex items-center gap-2 text-[20px] font-semibold text-[#006491] transition-colors hover:text-[#005d90]"
                 >
                   {item.cta.label}
                   <span aria-hidden>→</span>

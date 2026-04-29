@@ -51,22 +51,22 @@ const STATIC_WHAT_WE_DO_PAGE: WhatWeDoPageData = {
         },
         icon: iconFromId('people'),
         cta: {
-          label: 'Learn More',
+          label: 'Connect with the Council',
           href: '/interfaith-dialogues',
         },
       },
       {
-        location: 'Erding, Germany',
-        title: 'The Community Core',
+        location: '1.2M Lives Touched',
+        title: 'Inner Peace & Wellbeing',
         description:
-          'Harnessing the power of local communities and grassroots activism to spark national change.',
+          'Global peace begins with individual mental health. We provid mindfulness training, trauma-informed care, and wellness workshops in conflict-affected zones to help survivors reclaim their inner stability.',
         image: {
           src: '/comminuty_core_images.jpg',
           alt: 'Diverse group of people gathering in a community space',
         },
         icon: iconFromId('megaphone'),
         cta: {
-          label: 'Get Involved',
+          label: 'Connect to Access Resources',
           href: '/community-activism',
         },
       },
