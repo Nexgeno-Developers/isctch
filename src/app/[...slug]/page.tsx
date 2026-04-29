@@ -10,10 +10,12 @@ import {
   fullSlugFromParams,
   matchesRouteSlug,
 } from '@/config/publicRoutes';
+import { ContactPageView } from '@/app/contact-us/page';
 import { DonatePageView } from '@/app/donate/page';
 import { GetInvolvedPageView } from '@/app/get-involved/page';
 import { WhatWeDoPageView } from '@/app/what-we-do/page';
 import { getCanonicalUrl } from '@/config/site';
+import { getContactPageData } from '@/lib/api/contact';
 import { getDonatePageData } from '@/lib/api/donate';
 import { getGetInvolvedPageData } from '@/lib/api/getInvolved';
 import { getWhatWeDoPageData } from '@/lib/api/whatWeDo';
@@ -33,8 +35,10 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     };
   }
   if (fullSlug === CONTACT_US_PAGE_SLUG) {
+    const data = await getContactPageData(fullSlug);
     return {
-      title: 'Contact Us',
+      title: data.hero.breadcrumbCurrentLabel,
+      description: data.secretariat.description.slice(0, 160),
       alternates: { canonical: getCanonicalUrl(`/${fullSlug}`) },
     };
   }
@@ -69,8 +73,12 @@ export default async function CatchAllPage({ params }: PageProps) {
   const { slug } = await params;
   const fullSlug = fullSlugFromParams(slug);
 
-  if (fullSlug === ABOUT_US_PAGE_SLUG || fullSlug === CONTACT_US_PAGE_SLUG) {
+  if (fullSlug === ABOUT_US_PAGE_SLUG) {
     return <main className="min-h-[40vh]" />;
+  }
+
+  if (fullSlug === CONTACT_US_PAGE_SLUG) {
+    return <ContactPageView slug={fullSlug} />;
   }
 
   if (matchesRouteSlug(fullSlug, WHAT_WE_DO_PAGE_SLUG, 'last-segment')) {
