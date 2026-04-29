@@ -21,7 +21,7 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 function ContactGlyph({ icon }: { icon: string }) {
-  const className = 'h-5 w-5 text-[#009FE3]';
+  const className = 'h-7 w-7 text-[#009FE3]';
 
   if (icon === 'pin') {
     return (
@@ -122,27 +122,28 @@ export async function ContactPageView({ slug = CONTACT_US_PAGE_SLUG }: { slug?: 
         titleOrange={data.hero.titleOrange}
       />
 
-      <section className="bg-[#F7F8FA] py-14 sm:py-16 lg:py-20">
-        <div className="mx-auto grid max-w-[1120px] gap-10 px-4 lg:grid-cols-[minmax(0,1fr)_minmax(420px,1fr)] lg:items-start xl:gap-16">
-          <aside className="rounded-[6px] border border-[#CFE9F5] bg-[#EAF8FE] px-8 py-9 text-[#1B2535] shadow-[0_22px_50px_-36px_rgba(0,159,227,0.55)] sm:px-12 sm:py-12">
-            <h2 className="max-w-[330px] text-[27px] font-black leading-tight tracking-normal">
+      <section className="bg-[#fff] py-14 sm:py-16 lg:py-20">
+        <div className="container mx-auto px-4">
+          <div className="grid gap-10 lg:grid-cols-2 lg:gap-16">
+          <aside className="rounded-[8px] border border-[#CFE9F5] bg-[#EAF8FE] px-8 py-9 text-[#1B2535] sm:px-12 sm:py-12">
+            <h2 className="mt-3 text-left text-3xl font-black tracking-tight text-[#1A1A2E] lg:text-[30px]">
               {data.secretariat.heading}
             </h2>
-            <p className="mt-9 max-w-[410px] text-[15px] leading-8 text-[#33485B]">
+            <p className="mt-5 text-[18px] leading-relaxed text-[#3E4850]">
               {data.secretariat.description}
             </p>
 
             <div className="mt-9 space-y-8">
               {data.secretariat.details.map((item) => (
                 <div key={item.id} className="flex gap-5">
-                  <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-[8px] bg-white shadow-sm">
+                  <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-[8px] bg-white">
                     <ContactGlyph icon={item.icon} />
                   </div>
                   <div className="pt-1">
-                    <p className="text-[13px] font-black text-[#1B2535]">
+                    <p className="text-[18px] font-black text-[#1B2535]">
                       {item.title}
                     </p>
-                    <div className="mt-1 text-[14px] leading-6 text-[#1B2535]">
+                    <div className="mt-1 text-[16px] leading-6 text-[#1B2535]">
                       {item.lines.map((line) => (
                         <p key={line}>{line}</p>
                       ))}
@@ -153,7 +154,7 @@ export async function ContactPageView({ slug = CONTACT_US_PAGE_SLUG }: { slug?: 
             </div>
 
             <div className="mt-12 border-t border-[#D8EEF7] pt-8">
-              <p className="text-[11px] font-black uppercase tracking-[0.12em] text-[#1B2535]">
+              <p className="text-[14px] font-black uppercase tracking-[0.12em] text-[#1B2535]">
                 {data.secretariat.socialHeading}
               </p>
               <div className="mt-5 flex flex-wrap gap-3">
@@ -162,7 +163,7 @@ export async function ContactPageView({ slug = CONTACT_US_PAGE_SLUG }: { slug?: 
                     key={social.id}
                     href={social.href}
                     aria-label={social.label}
-                    className="flex h-9 w-9 items-center justify-center rounded-[8px] bg-white text-[#009FE3] shadow-sm transition-colors hover:bg-[#009FE3] hover:text-white"
+                    className="flex h-9 w-9 items-center justify-center rounded-[8px] bg-white text-[#009FE3] transition-colors hover:bg-[#009FE3] hover:text-white"
                   >
                     <FooterSocialIcon icon={social.icon} />
                   </Link>
@@ -172,10 +173,10 @@ export async function ContactPageView({ slug = CONTACT_US_PAGE_SLUG }: { slug?: 
           </aside>
 
           <section className="rounded-[6px] border-t-[3px] border-[#EF7D00] bg-white px-8 py-10 shadow-[0_24px_70px_-42px_rgba(0,159,227,0.55)] sm:px-12 lg:px-14 lg:py-14">
-            <h2 className="text-[22px] font-black tracking-normal text-[#1B2535]">
+            <h2 className="text-left text-3xl font-black tracking-tight text-[#1A1A2E] lg:text-[30px]">
               {data.form.title}
             </h2>
-            <p className="mt-2 text-[12px] leading-6 text-[#66788A]">
+            <p className="mt-5 pb-3 text-[18px] leading-relaxed text-[#3E4850]">
               {data.form.subtitle}
             </p>
 
@@ -253,6 +254,7 @@ export async function ContactPageView({ slug = CONTACT_US_PAGE_SLUG }: { slug?: 
               </div>
             </form>
           </section>
+        </div>
         </div>
       </section>
     </main>
