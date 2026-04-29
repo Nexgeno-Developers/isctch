@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { redirect } from 'next/navigation';
 
 import PageBreadcrumbHero from '@/components/common/PageBreadcrumbHero';
+import ContactGlobalPresenceSection from '@/components/contact/ContactGlobalPresenceSection';
 import { FooterSocialIcon } from '@/components/layout/FooterSocialIcon';
 import {
   CONTACT_US_PAGE_SLUG,
@@ -122,6 +123,7 @@ export async function ContactPageView({ slug = CONTACT_US_PAGE_SLUG }: { slug?: 
         titleOrange={data.hero.titleOrange}
       />
 
+      
       <section className="bg-[#fff] py-14 sm:py-16 lg:py-20">
         <div className="container mx-auto px-4">
           <div className="grid gap-10 lg:grid-cols-2 lg:gap-16">
@@ -257,6 +259,9 @@ export async function ContactPageView({ slug = CONTACT_US_PAGE_SLUG }: { slug?: 
         </div>
         </div>
       </section>
+
+      <ContactGlobalPresenceSection data={data.globalPresence} />
+
     </main>
   );
 }

@@ -6,6 +6,15 @@ export type ContactHeroData = {
   titleOrange: string;
 };
 
+export type ContactGlobalPresenceData = {
+  heading: string;
+  description: string;
+  image: {
+    src: string;
+    alt: string;
+  };
+};
+
 export type ContactDetailIcon = 'mail' | 'pin' | 'phone';
 
 export type ContactDetailItem = {
@@ -57,6 +66,7 @@ export type ContactFormData = {
 
 export type ContactPageData = {
   hero: ContactHeroData;
+  globalPresence: ContactGlobalPresenceData;
   secretariat: ContactSecretariatData;
   form: ContactFormData;
 };

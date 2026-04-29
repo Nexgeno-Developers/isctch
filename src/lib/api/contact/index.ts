@@ -14,6 +14,7 @@ import type {
 const CONTACT_REVALIDATE_SECONDS = Number(
   process.env.CONTACT_PAGE_REVALIDATE_SECONDS ?? process.env.HOMEPAGE_HERO_REVALIDATE_SECONDS ?? 60 * 60,
 );
+const COMPANY_API_DOMAIN = process.env.COMPANY_API_DOMAIN?.trim().replace(/\/+$/, '') || '';
 
 const STATIC_CONTACT_PAGE: ContactPageData = {
   hero: {
@@ -22,6 +23,15 @@ const STATIC_CONTACT_PAGE: ContactPageData = {
     kicker: '',
     titleBlue: 'Let Us Walk',
     titleOrange: 'This Path Together',
+  },
+  globalPresence: {
+    heading: 'Our Presence is Global',
+    description:
+      'With coordination hubs in over 45 countries, we are never too far away to help foster dialogue and build sustainable peace.',
+    image: {
+      src: '/contact_bg_image.webp',
+      alt: 'Global network map showing connected regional hubs',
+    },
   },
   secretariat: {
     heading: 'Reach Out to our Global Secretariat',
@@ -112,6 +122,17 @@ function pick(meta: MetaRecord | undefined, keys: string[]): string {
     if (typeof value === 'string' && value.trim()) return value.trim();
   }
   return '';
+}
+
+function normalizeImageUrl(url: string, fallback: string): string {
+  const u = url.trim();
+  if (!u) return fallback;
+  if (/^https?:\/\//i.test(u)) return u;
+  if (u.startsWith('/')) return u;
+  if (u.startsWith('public/')) return `/${u.replace(/^public\/+/, '')}`;
+  if (!u.includes('/')) return `/${u}`;
+  if (!COMPANY_API_DOMAIN) return `/${u.replace(/^\/+/, '')}`;
+  return `${COMPANY_API_DOMAIN}/${u.replace(/^\/+/, '')}`;
 }
 
 function splitLines(raw: string, fallback: string[]): string[] {
@@ -206,6 +227,18 @@ function contactFromMeta(meta: MetaRecord | undefined): ContactPageData | null {
     pick(meta, ['contact_enquiry_options', 'contact_form_enquiry_options']),
     STATIC_CONTACT_PAGE.form.enquiryOptions,
   );
+  const globalPresenceHeading =
+    pick(meta, [
+      'contact_global_presence_heading',
+      'contact_presence_heading',
+      'global_presence_heading',
+    ]) || STATIC_CONTACT_PAGE.globalPresence.heading;
+  const globalPresenceImage = pick(meta, [
+    'contact_global_presence_image',
+    'contact_presence_image',
+    'global_presence_image',
+    'contact_global_image',
+  ]);
 
   return {
     hero: {
@@ -222,6 +255,28 @@ function contactFromMeta(meta: MetaRecord | undefined): ContactPageData | null {
       titleOrange:
         pick(meta, ['contact_title_orange', 'contact_heading_orange', 'title_orange']) ||
         STATIC_CONTACT_PAGE.hero.titleOrange,
+    },
+    globalPresence: {
+      heading: globalPresenceHeading,
+      description:
+        pick(meta, [
+          'contact_global_presence_description',
+          'contact_presence_description',
+          'global_presence_description',
+        ]) || STATIC_CONTACT_PAGE.globalPresence.description,
+      image: {
+        src: normalizeImageUrl(
+          globalPresenceImage,
+          STATIC_CONTACT_PAGE.globalPresence.image.src,
+        ),
+        alt:
+          pick(meta, [
+            'contact_global_presence_image_alt',
+            'contact_presence_image_alt',
+            'global_presence_image_alt',
+          ]) ||
+          STATIC_CONTACT_PAGE.globalPresence.image.alt,
+      },
     },
     secretariat: {
       heading:
@@ -278,6 +333,14 @@ async function resolveContactPageData(slug: string): Promise<ContactPageData> {
 
   return {
     hero: { ...STATIC_CONTACT_PAGE.hero, ...mapped.hero },
+    globalPresence: {
+      ...STATIC_CONTACT_PAGE.globalPresence,
+      ...mapped.globalPresence,
+      image: {
+        ...STATIC_CONTACT_PAGE.globalPresence.image,
+        ...mapped.globalPresence.image,
+      },
+    },
     secretariat: {
       ...STATIC_CONTACT_PAGE.secretariat,
       ...mapped.secretariat,
@@ -303,7 +366,7 @@ export async function getContactPageData(slug = CONTACT_US_PAGE_SLUG): Promise<C
   const cleanSlug = slug.replace(/^\/+|\/+$/g, '');
   const cached = unstable_cache(
     async () => resolveContactPageData(cleanSlug),
-    ['contact-page-v1', cleanSlug, process.env.COMPANY_API_BASE_URL || 'static'],
+    ['contact-page-v2', cleanSlug, process.env.COMPANY_API_BASE_URL || 'static'],
     {
       revalidate: CONTACT_REVALIDATE_SECONDS,
       tags: [API_CACHE_TAG, 'contact-page', `page:${cleanSlug}`],
@@ -318,6 +381,7 @@ export type {
   ContactFormData,
   ContactFormField,
   ContactFormOption,
+  ContactGlobalPresenceData,
   ContactHeroData,
   ContactPageData,
   ContactSecretariatData,
