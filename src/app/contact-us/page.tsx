@@ -94,7 +94,7 @@ function Field({
     <div>
       <label
         htmlFor={id}
-        className="block text-[10px] font-black uppercase tracking-[0.18em] text-[#1B2535]"
+        className="block text-[12px] font-black uppercase tracking-[0.18em] text-[#1B2535]"
       >
         {label}
       </label>
@@ -194,7 +194,7 @@ export async function ContactPageView({ slug = CONTACT_US_PAGE_SLUG }: { slug?: 
               <div>
                 <label
                   htmlFor={data.form.enquiryName}
-                  className="block text-[10px] font-black uppercase tracking-[0.18em] text-[#1B2535]"
+                  className="block text-[12px] font-black uppercase tracking-[0.18em] text-[#1B2535]"
                 >
                   {data.form.enquiryLabel}
                 </label>
@@ -231,7 +231,7 @@ export async function ContactPageView({ slug = CONTACT_US_PAGE_SLUG }: { slug?: 
               <div className="md:col-span-2">
                 <label
                   htmlFor="message"
-                  className="block text-[10px] font-black uppercase tracking-[0.18em] text-[#1B2535]"
+                  className="block text-[12px] font-black uppercase tracking-[0.18em] text-[#1B2535]"
                 >
                   {data.form.messageLabel}
                 </label>
@@ -247,7 +247,7 @@ export async function ContactPageView({ slug = CONTACT_US_PAGE_SLUG }: { slug?: 
               <div className="md:col-span-2">
                 <button
                   type="button"
-                  className="mt-2 inline-flex min-h-14 items-center justify-center rounded-[3px] bg-[#EF7D00] px-12 text-[14px] font-black tracking-[0.12em] text-white shadow-[0_16px_28px_-16px_rgba(239,125,0,0.85)] transition-colors hover:bg-[#D96F00]"
+                  className="cursor-pointer w-full rounded-xl bg-[#EF7D00] py-4 text-center text-sm font-bold uppercase tracking-wide text-white shadow-md transition-colors hover:bg-[#d96a18]"
                 >
                   {data.form.submitLabel}
                 </button>
