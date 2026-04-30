@@ -47,19 +47,19 @@ export default function AboutManagementTeamSection({
 
   return (
     <>
-      <section className="bg-white py-10 lg:py-16">
+      <section className="bg-white py-8 lg:py-20">
         <div className="container mx-auto px-4">
-          <div className="max-w-[1080px]">
+          <div className="">
             <div className="flex items-center gap-4">
               <span className="h-px w-14 bg-[#EF7D00]" aria-hidden />
               <p className="text-[11px] font-black uppercase tracking-[0.16em] text-[#EF7D00]">
                 {team.kicker}
               </p>
             </div>
-            <h2 className="mt-7 text-3xl font-black text-[#1A1A2E] lg:text-[40px]">
+            <h2 className="mt-5 text-2xl font-black text-[#1A1A2E] lg:text-[36px]">
               {team.heading}
             </h2>
-            <div className="mt-7 space-y-4 text-base leading-8 text-[#3E4850]">
+            <div className="mt-5 space-y-4 text-base leading-8 text-[#3E4850] lg:text-[18px]">
               {team.description.map((paragraph) => (
                 <p key={paragraph}>{paragraph}</p>
               ))}
@@ -95,8 +95,8 @@ export default function AboutManagementTeamSection({
                         sizes="(max-width: 639px) 90vw, (max-width: 1023px) 50vw, 25vw"
                       />
                     </div>
-                    <h3 className="mt-6 text-xl font-black text-[#1A1A2E]">{member.name}</h3>
-                    <p className="mt-2 text-sm font-bold text-[#009FE3]">{member.designation}</p>
+                    <h3 className="mt-6 text-xl font-black text-[#1A1A2E] text-[24px]">{member.name}</h3>
+                    <p className="mt-1 text-[18px] font-bold text-[#009FE3]">{member.designation}</p>
                   </article>
                 </SwiperSlide>
               ))}
@@ -124,9 +124,9 @@ export default function AboutManagementTeamSection({
         </div>
       </section>
 
-      <section className="bg-[#009FE3] py-14 lg:py-20">
+      <section className="bg-[linear-gradient(107.53deg,_#006491_0%,_#009FE3_100%)] py-14 lg:py-20">
         <div className="container mx-auto px-4 text-center">
-          <h2 className="mx-auto max-w-[620px] text-[34px] font-black leading-tight text-white lg:text-[48px]">
+          <h2 className="mx-auto text-[34px] font-black leading-tight text-white lg:text-[36px]">
             {cta.heading}
           </h2>
           <div className="mt-9 flex flex-col items-center justify-center gap-5 sm:flex-row">

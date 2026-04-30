@@ -120,8 +120,7 @@ const STATIC_ABOUT_PAGE: AboutPageData = {
     kicker: 'Stewards of Vision and Integrity',
     heading: 'Management Team',
     description: [
-      'The iSCTH Management Team translates vision into action. With backgrounds spanning peace-building, education, governance, strategy, and operations, the team ensures ethical leadership, transparency, and sustainable impact.',
-      'Working closely with founders, the global board, and advisors, the team leads with humility, service, and accountability.',
+      'The iSCTH Management Team translates vision into action. With backgrounds spanning peace-building, education, governance, strategy, and operations, the team ensures ethical leadership, transparency, and sustainable impact. Working closely with founders, the global board, and advisors, the team leads with humility, service, and accountability.',
     ],
     members: [
       {
