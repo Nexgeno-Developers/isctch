@@ -65,37 +65,45 @@ export default function AboutCoreValuesSection({ data }: Props) {
           </h2>
         </div>
 
-        <div className="mt-10 hidden gap-5 lg:flex lg:items-stretch xl:gap-7">
+        <div
+          className="mt-10 hidden gap-5 lg:flex lg:items-stretch xl:gap-7"
+          onMouseLeave={() => setActiveIndex(0)}
+        >
           {values.map((value, index) => {
             const isActive = index === activeIndex;
 
-            if (isActive) {
-              return (
-                <OpenValueCard
-                  key={value.title}
-                  value={value}
-                  className="min-h-[430px] min-w-0 flex-[1_1_360px] transition-all duration-300 xl:flex-[0_1_430px]"
-                />
-              );
-            }
-
             return (
-              <button
+              <div
                 key={value.title}
-                type="button"
-                className="group flex min-h-[430px] flex-[0_0_92px] items-center justify-center rounded-[34px] bg-[#009FE3] px-4 text-white shadow-[0_20px_45px_-35px_rgba(0,95,143,0.85)] transition duration-200 hover:-translate-y-1 hover:bg-[#008ED0] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#009FE3] xl:flex-[0_0_112px]"
+                className={`min-h-[430px] min-w-0 overflow-hidden ${
+                  isActive
+                    ? 'flex-[1_1_360px] xl:flex-[0_1_430px]'
+                    : 'flex-[0_0_92px] xl:flex-[0_0_112px]'
+                }`}
                 onMouseEnter={() => setActiveIndex(index)}
-                onFocus={() => setActiveIndex(index)}
-                onClick={() => setActiveIndex(index)}
-                aria-label={`Open ${value.title}`}
               >
-                <span
-                  className="rotate-180 whitespace-nowrap text-[21px] font-black leading-none xl:text-[24px]"
-                  style={verticalLabelStyle}
-                >
-                  {value.title}
-                </span>
-              </button>
+                {isActive ? (
+                  <OpenValueCard
+                    value={value}
+                    className="h-full min-h-[430px] opacity-100 shadow-[0_22px_45px_-34px_rgba(15,23,42,0.45)]"
+                  />
+                ) : (
+                  <button
+                    type="button"
+                    className="group flex h-full min-h-[430px] w-full items-center justify-center rounded-[34px] bg-[#009FE3] px-4 text-white shadow-[0_20px_45px_-35px_rgba(0,95,143,0.85)] hover:bg-[#008ED0] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#009FE3]"
+                    onFocus={() => setActiveIndex(index)}
+                    onClick={() => setActiveIndex(index)}
+                    aria-label={`Open ${value.title}`}
+                  >
+                    <span
+                      className="rotate-180 whitespace-nowrap text-[21px] font-black leading-none xl:text-[24px]"
+                      style={verticalLabelStyle}
+                    >
+                      {value.title}
+                    </span>
+                  </button>
+                )}
+              </div>
             );
           })}
         </div>
