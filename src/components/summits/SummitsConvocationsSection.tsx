@@ -1,8 +1,13 @@
 'use client';
 
-import { useMemo, useState } from 'react';
+import { useRef } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import type { Swiper as SwiperClass } from 'swiper';
+import { A11y } from 'swiper/modules';
+import { Swiper, SwiperSlide } from 'swiper/react';
+
+import 'swiper/css';
 
 type ConvocationEvent = {
   day: string;
@@ -36,24 +41,24 @@ const UPCOMING_EVENTS: ConvocationEvent[] = [
 
 const GALLERY_IMAGES: GalleryImage[] = [
   {
-    src: '/hero_images.png',
-    alt: 'Youth peace participants standing together',
-  },
-  {
     src: '/solidarity_images.webp',
-    alt: 'Hands joined in solidarity',
+    alt: 'Multicultural peace participants standing together',
   },
   {
     src: '/diplomatic_image1.jpg',
-    alt: 'Public peace march in a city square',
+    alt: 'Geneva summit venue beside the water',
   },
   {
-    src: '/calltoaction_images.webp',
-    alt: 'People celebrating peace at sunset',
+    src: '/global_images.webp',
+    alt: 'Planet earth glowing from space',
   },
   {
     src: '/peace_images.webp',
-    alt: 'Peace volunteers gathered around a globe',
+    alt: 'Mindfulness practice by the sea',
+  },
+  {
+    src: '/youth_images.webp',
+    alt: 'Young peace leaders gathered together',
   },
 ];
 
@@ -120,12 +125,8 @@ function ClockIcon() {
 }
 
 export default function SummitsConvocationsSection() {
-  const [galleryPage, setGalleryPage] = useState(0);
-  const maxGalleryPage = Math.max(0, GALLERY_IMAGES.length - 4);
-  const visibleImages = useMemo(
-    () => GALLERY_IMAGES.slice(galleryPage, galleryPage + 4),
-    [galleryPage],
-  );
+  const gallerySwiperRef = useRef<SwiperClass | null>(null);
+  const galleryInfinite = GALLERY_IMAGES.length > 1;
 
   return (
     <>
@@ -222,39 +223,53 @@ export default function SummitsConvocationsSection() {
             </div>
           </div>
 
-          <div className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-            {visibleImages.map((image) => (
-              <div
-                key={image.src}
-                className="relative aspect-[4/3] overflow-hidden rounded-md bg-[#E8EEF5] shadow-[0_14px_24px_-20px_rgba(15,23,42,0.55)]"
-              >
-                <Image
-                  src={image.src}
-                  alt={image.alt}
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 639px) 100vw, (max-width: 1023px) 50vw, 25vw"
-                />
-              </div>
-            ))}
+          <div className="mt-14">
+            <Swiper
+              className="summits-peace-gallery-swiper w-full !pb-1"
+              modules={[A11y]}
+              spaceBetween={28}
+              slidesPerView={1.12}
+              slidesPerGroup={1}
+              breakpoints={{
+                640: { slidesPerView: 2, spaceBetween: 22, slidesPerGroup: 1 },
+                1024: { slidesPerView: 4, spaceBetween: 28, slidesPerGroup: 1 },
+              }}
+              rewind={galleryInfinite}
+              speed={650}
+              onSwiper={(swiper) => {
+                gallerySwiperRef.current = swiper;
+              }}
+            >
+              {GALLERY_IMAGES.map((image) => (
+                <SwiperSlide key={image.src} className="h-auto">
+                  <div className="relative aspect-[4/3] overflow-hidden rounded-md bg-[#E8EEF5] shadow-[0_14px_24px_-20px_rgba(15,23,42,0.55)]">
+                    <Image
+                      src={image.src}
+                      alt={image.alt}
+                      fill
+                      className="object-cover"
+                      sizes="(max-width: 639px) 90vw, (max-width: 1023px) 50vw, 25vw"
+                    />
+                  </div>
+                </SwiperSlide>
+              ))}
+            </Swiper>
           </div>
 
           <div className="mt-7 flex justify-center gap-3">
             <button
               type="button"
               aria-label="Previous peace chain image"
-              onClick={() => setGalleryPage((current) => Math.max(0, current - 1))}
-              disabled={galleryPage === 0}
-              className="inline-flex h-9 w-9 cursor-pointer items-center justify-center rounded-full border border-[#009FE3] text-[#009FE3] transition-colors hover:bg-[#009FE3] hover:text-white disabled:cursor-not-allowed disabled:border-[#BFDDEF] disabled:text-[#BFDDEF] disabled:hover:bg-transparent"
+              onClick={() => gallerySwiperRef.current?.slidePrev()}
+              className="inline-flex h-9 w-9 cursor-pointer items-center justify-center rounded-full border border-[#009FE3] bg-white text-[#009FE3] transition-colors hover:bg-[#009FE3] hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#009FE3]"
             >
               <ArrowIcon direction="previous" />
             </button>
             <button
               type="button"
               aria-label="Next peace chain image"
-              onClick={() => setGalleryPage((current) => Math.min(maxGalleryPage, current + 1))}
-              disabled={galleryPage === maxGalleryPage}
-              className="inline-flex h-9 w-9 cursor-pointer items-center justify-center rounded-full border border-[#009FE3] text-[#009FE3] transition-colors hover:bg-[#009FE3] hover:text-white disabled:cursor-not-allowed disabled:border-[#BFDDEF] disabled:text-[#BFDDEF] disabled:hover:bg-transparent"
+              onClick={() => gallerySwiperRef.current?.slideNext()}
+              className="inline-flex h-9 w-9 cursor-pointer items-center justify-center rounded-full border border-[#009FE3] bg-white text-[#009FE3] transition-colors hover:bg-[#009FE3] hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#009FE3]"
             >
               <ArrowIcon direction="next" />
             </button>

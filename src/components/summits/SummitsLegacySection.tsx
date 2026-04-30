@@ -1,8 +1,13 @@
 'use client';
 
-import { useMemo, useState } from 'react';
+import { useRef } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import type { Swiper as SwiperClass } from 'swiper';
+import { Autoplay, A11y } from 'swiper/modules';
+import { Swiper, SwiperSlide } from 'swiper/react';
+
+import 'swiper/css';
 
 type SummitCard = {
   location: string;
@@ -87,9 +92,8 @@ function ArrowIcon({ direction }: { direction: 'previous' | 'next' }) {
 }
 
 export default function SummitsLegacySection() {
-  const [page, setPage] = useState(0);
-  const maxPage = Math.max(0, SUMMIT_CARDS.length - 3);
-  const visibleCards = useMemo(() => SUMMIT_CARDS.slice(page, page + 3), [page]);
+  const swiperRef = useRef<SwiperClass | null>(null);
+  const infinite = SUMMIT_CARDS.length > 1;
 
   return (
     <section className="bg-white py-10 lg:py-16">
@@ -109,60 +113,85 @@ export default function SummitsLegacySection() {
             <button
               type="button"
               aria-label="Previous summit"
-              onClick={() => setPage((current) => Math.max(0, current - 1))}
-              disabled={page === 0}
-              className="inline-flex h-10 w-10 cursor-pointer items-center justify-center rounded-full border border-[#009FE3] text-[#009FE3] transition-colors hover:bg-[#009FE3] hover:text-white disabled:cursor-not-allowed disabled:border-[#BFDDEF] disabled:text-[#BFDDEF] disabled:hover:bg-transparent"
+              onClick={() => swiperRef.current?.slidePrev()}
+              className="inline-flex h-10 w-10 cursor-pointer items-center justify-center rounded-full border border-[#009FE3] bg-white text-[#009FE3] transition-colors hover:bg-[#009FE3] hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#009FE3]"
             >
               <ArrowIcon direction="previous" />
             </button>
             <button
               type="button"
               aria-label="Next summit"
-              onClick={() => setPage((current) => Math.min(maxPage, current + 1))}
-              disabled={page === maxPage}
-              className="inline-flex h-10 w-10 cursor-pointer items-center justify-center rounded-full border border-[#009FE3] text-[#009FE3] transition-colors hover:bg-[#009FE3] hover:text-white disabled:cursor-not-allowed disabled:border-[#BFDDEF] disabled:text-[#BFDDEF] disabled:hover:bg-transparent"
+              onClick={() => swiperRef.current?.slideNext()}
+              className="inline-flex h-10 w-10 cursor-pointer items-center justify-center rounded-full border border-[#009FE3] bg-white text-[#009FE3] transition-colors hover:bg-[#009FE3] hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#009FE3]"
             >
               <ArrowIcon direction="next" />
             </button>
           </div>
         </div>
 
-        <div className="mt-10 grid gap-8 md:grid-cols-3">
-          {visibleCards.map((summit) => (
-            <article
-              key={summit.title}
-              className="overflow-hidden rounded-md bg-white shadow-[0_10px_26px_-16px_rgba(15,23,42,0.45)] ring-1 ring-[#E5ECF3]"
-            >
-              <div className="h-2 bg-[#009FE3]" />
-              <div className="relative aspect-[16/10] w-full overflow-hidden bg-[#F3F7FB]">
-                <Image
-                  src={summit.image.src}
-                  alt={summit.image.alt}
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 767px) 100vw, 33vw"
-                />
-              </div>
-              <div className="p-7">
-                <p className="text-[11px] font-black uppercase tracking-[0.12em] text-[#009FE3]">
-                  {summit.location}
-                </p>
-                <h3 className="mt-3 text-[22px] font-black leading-tight text-[#1A1A2E]">
-                  {summit.title}
-                </h3>
-                <p className="mt-4 min-h-[96px] text-sm leading-7 text-[#526477]">
-                  {summit.description}
-                </p>
-                <Link
-                  href={summit.href}
-                  className="mt-5 inline-flex items-center gap-2 text-sm font-black uppercase tracking-[0.08em] text-[#EF7D00] transition-colors hover:text-[#cf6800]"
-                >
-                  Read More
-                  <span aria-hidden>-&gt;</span>
-                </Link>
-              </div>
-            </article>
-          ))}
+        <div className="relative z-0 mt-10 w-full min-w-0 md:mt-12">
+          <Swiper
+            className="summits-legacy-swiper w-full !pb-1"
+            modules={[Autoplay, A11y]}
+            spaceBetween={28}
+            slidesPerView={1.08}
+            slidesPerGroup={1}
+            breakpoints={{
+              640: { slidesPerView: 1.4, spaceBetween: 22, slidesPerGroup: 1 },
+              768: { slidesPerView: 2, spaceBetween: 24, slidesPerGroup: 1 },
+              1024: { slidesPerView: 3, spaceBetween: 28, slidesPerGroup: 1 },
+            }}
+            rewind={infinite}
+            speed={750}
+            autoplay={
+              infinite
+                ? {
+                    delay: 4200,
+                    disableOnInteraction: false,
+                    pauseOnMouseEnter: true,
+                    stopOnLastSlide: false,
+                  }
+                : false
+            }
+            onSwiper={(swiper) => {
+              swiperRef.current = swiper;
+            }}
+          >
+            {SUMMIT_CARDS.map((summit) => (
+              <SwiperSlide key={summit.title} className="h-auto">
+                <article className="flex h-full flex-col overflow-hidden rounded-md bg-white shadow-[0_10px_26px_-16px_rgba(15,23,42,0.45)] ring-1 ring-[#E5ECF3]">
+                  <div className="h-2 bg-[#009FE3]" />
+                  <div className="relative aspect-[16/10] w-full overflow-hidden bg-[#F3F7FB]">
+                    <Image
+                      src={summit.image.src}
+                      alt={summit.image.alt}
+                      fill
+                      className="object-cover"
+                      sizes="(max-width: 767px) 90vw, (max-width: 1023px) 50vw, 33vw"
+                    />
+                  </div>
+                  <div className="flex flex-1 flex-col p-7">
+                    <p className="text-[11px] font-black uppercase tracking-[0.12em] text-[#009FE3]">
+                      {summit.location}
+                    </p>
+                    <h3 className="mt-3 text-[22px] font-black leading-tight text-[#1A1A2E]">
+                      {summit.title}
+                    </h3>
+                    <p className="mt-4 min-h-[96px] flex-1 text-sm leading-7 text-[#526477]">
+                      {summit.description}
+                    </p>
+                    <Link
+                      href={summit.href}
+                      className="mt-5 inline-flex items-center gap-2 text-sm font-black uppercase tracking-[0.08em] text-[#EF7D00] transition-colors hover:text-[#cf6800]"
+                    >
+                      Read More
+                      <span aria-hidden>-&gt;</span>
+                    </Link>
+                  </div>
+                </article>
+              </SwiperSlide>
+            ))}
+          </Swiper>
         </div>
       </div>
     </section>
