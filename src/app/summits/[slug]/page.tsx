@@ -38,7 +38,7 @@ function ArrowIcon({ direction }: { direction: 'previous' | 'next' }) {
 function RelatedSummitCard({ card }: { card: SummitRelatedCard }) {
   return (
     <article className="overflow-hidden rounded-md bg-white shadow-[0_10px_26px_-16px_rgba(15,23,42,0.45)] ring-1 ring-[#E5ECF3]">
-      <div className="h-2 bg-[#009FE3]" />
+      {/* <div className="h-2 bg-[#009FE3]" /> */}
       <div className="relative aspect-[16/10] w-full overflow-hidden bg-[#F3F7FB]">
         <Image
           src={card.image.src}

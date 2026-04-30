@@ -161,7 +161,7 @@ export default function SummitsLegacySection() {
             {SUMMIT_CARDS.map((summit) => (
               <SwiperSlide key={summit.title} className="h-auto">
                 <article className="flex h-full flex-col overflow-hidden rounded-md bg-white shadow-[0_10px_26px_-16px_rgba(15,23,42,0.45)] ring-1 ring-[#E5ECF3]">
-                  <div className="h-2 bg-[#009FE3]" />
+                  {/* <div className="h-2 bg-[#009FE3]" /> */}
                   <div className="relative aspect-[16/10] w-full overflow-hidden bg-[#F3F7FB]">
                     <Image
                       src={summit.image.src}
