@@ -35,8 +35,8 @@ export default function WhatWeDoInitiativesSection({ data }: Props) {
               <div className={textOrder}>
                 <div className="flex items-center mb-4">
                  
-                  <span className="flex items-center rounded-full bg-[#F7921E] px-5 py-2 text-[11px] font-bold text-white gap-3">
-                     <Image src={item.icon.src} alt={item.icon.alt} width={25} height={25} className='brightness-0 invert' /> <span className='text-[14px]'>{item.location}</span>
+                  <span className="flex items-center rounded-full bg-[#F7921E] px-4 py-[6px] text-[12px] font-bold text-white gap-2">
+                     <Image src={item.icon.src} alt={item.icon.alt} width={16} height={16} className='brightness-0 invert' /> <span className='text-[11px]'>{item.location}</span>
                   </span>
                 </div>
                 <h3 className="mt-8 text-2xl font-black leading-tight tracking-tight text-[#1A1A2E]  lg:text-[36px]">
