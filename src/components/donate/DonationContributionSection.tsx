@@ -276,6 +276,29 @@ function getCountryNames(): string[] {
   );
 }
 
+function DropdownChevron({ open }: { open: boolean }) {
+  return (
+    <span
+      aria-hidden
+      className="pointer-events-none absolute right-4 top-1/2 flex h-7 w-7 -translate-y-1/2 items-center justify-center rounded-full text-[#b8c2d0]"
+    >
+      <svg
+        className={`h-4 w-4 transition-transform duration-200 ${open ? 'rotate-180' : ''}`}
+        viewBox="0 0 24 24"
+        fill="none"
+      >
+        <path
+          d="m6 9 6 6 6-6"
+          stroke="currentColor"
+          strokeWidth="2.2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+      </svg>
+    </span>
+  );
+}
+
 function CountrySearchDropdown({ placeholder }: { placeholder: string }) {
   const countries = useMemo(() => getCountryNames(), []);
   const [query, setQuery] = useState('');
@@ -314,14 +337,9 @@ function CountrySearchDropdown({ placeholder }: { placeholder: string }) {
         role="combobox"
         aria-expanded={open}
         aria-controls="donation-country-list"
-        className={`${fieldClass} pr-10`}
+        className={`${fieldClass} pr-12`}
       />
-      <span
-        aria-hidden
-        className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-[#b8c2d0]"
-      >
-        v
-      </span>
+      <DropdownChevron open={open} />
 
       {open && (
         <div
@@ -408,14 +426,9 @@ function CurrencySearchDropdown({
         role="combobox"
         aria-expanded={open}
         aria-controls="donation-currency-list"
-        className={`${fieldClass} pr-10`}
+        className={`${fieldClass} pr-12`}
       />
-      <span
-        aria-hidden
-        className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-[#b8c2d0]"
-      >
-        v
-      </span>
+      <DropdownChevron open={open} />
 
       {open && (
         <div
@@ -471,8 +484,8 @@ export default function DonationContributionSection({ data }: { data: DonateCont
   return (
     <section className="bg-[#F8F9FA] py-10 lg:py-20">
       <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-20">
-          <div className="">
+        <div className="lg:flex gap-20 items-center">
+          <div className="w-full lg:w-1/2">
           <h2 className="mt-3 text-left text-3xl font-black tracking-tight text-[#1A1A2E] lg:text-[36px]">
             {data.heading}
           </h2>
@@ -490,7 +503,7 @@ export default function DonationContributionSection({ data }: { data: DonateCont
 
         <form
           onSubmit={handleSubmit}
-          className="rounded-[15px] bg-white p-6 shadow-[0_8px_30px_-10px_rgba(15,23,42,0.2)] sm:p-7"
+          className="w-full lg:w-1/2 rounded-[15px] bg-white p-6 shadow-[0_8px_30px_-10px_rgba(15,23,42,0.2)] sm:p-7"
         >
           <div className="mb-5 flex items-center justify-between">
             <h3 className="text-2xl font-bold text-[#1f233b]">{data.formTitle}</h3>
@@ -524,7 +537,7 @@ export default function DonationContributionSection({ data }: { data: DonateCont
             </button>
           </div>
 
-          <div className="mt-5 space-y-3">
+          <div className="mt-5 grid grid-cols-1 gap-3 sm:grid-cols-2">
             <input
               type="text"
               name="fullName"
