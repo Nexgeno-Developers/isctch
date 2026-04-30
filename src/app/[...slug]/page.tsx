@@ -14,12 +14,14 @@ import {
 import { ContactPageView } from '@/app/contact-us/page';
 import { DonatePageView } from '@/app/donate/page';
 import { GetInvolvedPageView } from '@/app/get-involved/page';
+import { SummitDetailPageView } from '@/app/summits/[slug]/page';
 import { SummitsPageView } from '@/app/summits/page';
 import { WhatWeDoPageView } from '@/app/what-we-do/page';
 import { getCanonicalUrl } from '@/config/site';
 import { getContactPageData } from '@/lib/api/contact';
 import { getDonatePageData } from '@/lib/api/donate';
 import { getGetInvolvedPageData } from '@/lib/api/getInvolved';
+import { getSummitDetailPageData, isSummitDetailPath } from '@/lib/api/summits';
 import { getWhatWeDoPageData } from '@/lib/api/whatWeDo';
 
 interface PageProps {
@@ -60,6 +62,14 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       alternates: { canonical: getCanonicalUrl(`/${fullSlug}`) },
     };
   }
+  if (isSummitDetailPath(fullSlug)) {
+    const data = await getSummitDetailPageData(fullSlug);
+    return {
+      title: data.detail.title,
+      description: data.detail.summary.slice(0, 160),
+      alternates: { canonical: getCanonicalUrl(`/${fullSlug}`) },
+    };
+  }
   if (matchesRouteSlug(fullSlug, GET_INVOLVED_PAGE_SLUG, 'last-segment')) {
     const data = await getGetInvolvedPageData();
     return {
@@ -97,6 +107,10 @@ export default async function CatchAllPage({ params }: PageProps) {
 
   if (matchesRouteSlug(fullSlug, SUMMITS_PAGE_SLUG, 'last-segment')) {
     return <SummitsPageView />;
+  }
+
+  if (isSummitDetailPath(fullSlug)) {
+    return <SummitDetailPageView slug={fullSlug} />;
   }
 
   if (matchesRouteSlug(fullSlug, GET_INVOLVED_PAGE_SLUG, 'last-segment')) {

@@ -6,6 +6,7 @@ import Link from 'next/link';
 import type { Swiper as SwiperClass } from 'swiper';
 import { Autoplay, A11y } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
+import { summitDetailPath } from '@/config/publicRoutes';
 
 import 'swiper/css';
 
@@ -30,7 +31,7 @@ const SUMMIT_CARDS: SummitCard[] = [
       src: '/diplomatic_image1.jpg',
       alt: 'International diplomatic dialogue venue',
     },
-    href: '#',
+    href: summitDetailPath('neutrality-global-ethics'),
   },
   {
     location: 'Erding, Germany',
@@ -41,7 +42,7 @@ const SUMMIT_CARDS: SummitCard[] = [
       src: '/comminuty_core_images.jpg',
       alt: 'Community gathering for peace dialogue',
     },
-    href: '#',
+    href: summitDetailPath('the-bavarian-peace-accord'),
   },
   {
     location: 'Dubai, UAE',
@@ -52,7 +53,7 @@ const SUMMIT_CARDS: SummitCard[] = [
       src: '/future_images.jpg',
       alt: 'Modern Dubai skyline beside the water',
     },
-    href: '#',
+    href: summitDetailPath('innovation-for-stability'),
   },
   {
     location: 'Nairobi, Kenya',
@@ -63,7 +64,7 @@ const SUMMIT_CARDS: SummitCard[] = [
       src: '/solidarity_images.webp',
       alt: 'Peace leaders working together',
     },
-    href: '#',
+    href: summitDetailPath('grassroots-horizons'),
   },
 ];
 

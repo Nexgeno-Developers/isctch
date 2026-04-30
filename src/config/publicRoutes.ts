@@ -75,6 +75,10 @@ export function summitsPath(): string {
   return `/${SUMMITS_PAGE_SLUG}`;
 }
 
+export function summitDetailPath(slug: string): string {
+  return `/${SUMMITS_PAGE_SLUG}/${normalizeSlug(slug)}`;
+}
+
 export function getInvolvedPath(): string {
   return `/${GET_INVOLVED_PAGE_SLUG}`;
 }
