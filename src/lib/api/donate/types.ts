@@ -24,6 +24,11 @@ export type DonateContributionData = {
   secureLabel: string;
   oneTimeLabel: string;
   monthlyLabel: string;
+  fullNamePlaceholder: string;
+  emailPlaceholder: string;
+  countryPlaceholder: string;
+  phonePlaceholder: string;
+  currencyPlaceholder: string;
   amounts: number[];
   defaultAmount: number;
   otherLabel: string;

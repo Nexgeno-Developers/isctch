@@ -38,6 +38,11 @@ const STATIC_DONATE_PAGE: DonatePageData = {
     secureLabel: '100% Secure',
     oneTimeLabel: 'One-time',
     monthlyLabel: 'Monthly',
+    fullNamePlaceholder: 'Full Name*',
+    emailPlaceholder: 'Email Address*',
+    countryPlaceholder: 'Country*',
+    phonePlaceholder: 'Phone (optional)',
+    currencyPlaceholder: 'Currency',
     amounts: [25, 50, 100, 250, 500],
     defaultAmount: 50,
     otherLabel: 'Other',
@@ -88,6 +93,35 @@ const STATIC_DONATE_PAGE: DonatePageData = {
     },
   },
 };
+
+function staticDonateContentKey(): string {
+  const contribution = STATIC_DONATE_PAGE.contribution;
+  return [
+    STATIC_DONATE_PAGE.hero.kicker,
+    STATIC_DONATE_PAGE.hero.titleBlue,
+    STATIC_DONATE_PAGE.hero.titleOrange,
+    contribution.heading,
+    contribution.paragraphOne,
+    contribution.paragraphTwo,
+    contribution.quote,
+    contribution.formTitle,
+    contribution.secureLabel,
+    contribution.oneTimeLabel,
+    contribution.monthlyLabel,
+    contribution.fullNamePlaceholder,
+    contribution.emailPlaceholder,
+    contribution.countryPlaceholder,
+    contribution.phonePlaceholder,
+    contribution.currencyPlaceholder,
+    contribution.amounts.join(','),
+    String(contribution.defaultAmount),
+    contribution.otherLabel,
+    contribution.customAmountPlaceholder,
+    contribution.submitOneTimeLabel,
+    contribution.submitMonthlyLabel,
+    contribution.footnote,
+  ].join('|');
+}
 
 type MetaRecord = Record<string, string | undefined>;
 type PageApiPayload = { data?: { meta?: MetaRecord | MetaRecord[] } };
@@ -225,6 +259,21 @@ function donateFromMeta(meta: MetaRecord | undefined): DonatePageData | null {
       monthlyLabel:
         pick(meta, ['donation_monthly_label', 'donate_monthly_label']) ||
         STATIC_DONATE_PAGE.contribution.monthlyLabel,
+      fullNamePlaceholder:
+        pick(meta, ['donation_full_name_placeholder', 'donate_full_name_placeholder']) ||
+        STATIC_DONATE_PAGE.contribution.fullNamePlaceholder,
+      emailPlaceholder:
+        pick(meta, ['donation_email_placeholder', 'donate_email_placeholder']) ||
+        STATIC_DONATE_PAGE.contribution.emailPlaceholder,
+      countryPlaceholder:
+        pick(meta, ['donation_country_placeholder', 'donate_country_placeholder']) ||
+        STATIC_DONATE_PAGE.contribution.countryPlaceholder,
+      phonePlaceholder:
+        pick(meta, ['donation_phone_placeholder', 'donate_phone_placeholder']) ||
+        STATIC_DONATE_PAGE.contribution.phonePlaceholder,
+      currencyPlaceholder:
+        pick(meta, ['donation_currency_placeholder', 'donate_currency_placeholder']) ||
+        STATIC_DONATE_PAGE.contribution.currencyPlaceholder,
       amounts,
       defaultAmount,
       otherLabel:
@@ -321,7 +370,13 @@ export async function getDonatePageData(slug = DONATE_PAGE_SLUG): Promise<Donate
   const cleanSlug = slug.replace(/^\/+|\/+$/g, '');
   const cached = unstable_cache(
     async () => resolveDonatePageData(cleanSlug),
-    ['donate-page-v3', cleanSlug, process.env.COMPANY_API_BASE_URL || 'static', COMPANY_API_DOMAIN || ''],
+    [
+      'donate-page-v3',
+      cleanSlug,
+      process.env.COMPANY_API_BASE_URL || 'static',
+      COMPANY_API_DOMAIN || '',
+      staticDonateContentKey(),
+    ],
     {
       revalidate: DONATE_REVALIDATE_SECONDS,
       tags: [API_CACHE_TAG, 'donate-page', `page:${cleanSlug}`],
