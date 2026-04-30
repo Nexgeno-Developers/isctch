@@ -29,7 +29,7 @@ function OpenValueCard({
           alt={value.image.alt}
           fill
           className="object-cover"
-          sizes="(max-width: 1023px) 100vw, 430px"
+          sizes="(max-width: 1023px) 100vw, 520px"
         />
       </div>
       <h3 className="mt-8 text-[25px] font-black leading-tight text-[#1A1A2E]">
@@ -77,8 +77,8 @@ export default function AboutCoreValuesSection({ data }: Props) {
                 key={value.title}
                 className={`min-h-[430px] min-w-0 overflow-hidden ${
                   isActive
-                    ? 'flex-[1_1_360px] xl:flex-[0_1_430px]'
-                    : 'flex-[0_0_92px] xl:flex-[0_0_112px]'
+                    ? 'flex-[3_1_360px] xl:flex-[3_1_390px]'
+                    : 'flex-[1_1_92px] xl:flex-[1_1_112px]'
                 }`}
                 onMouseEnter={() => setActiveIndex(index)}
               >
