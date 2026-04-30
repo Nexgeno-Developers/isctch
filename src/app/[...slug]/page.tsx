@@ -11,6 +11,7 @@ import {
   fullSlugFromParams,
   matchesRouteSlug,
 } from '@/config/publicRoutes';
+import { AboutPageView } from '@/app/about-us/page';
 import { ContactPageView } from '@/app/contact-us/page';
 import { DonatePageView } from '@/app/donate/page';
 import { GetInvolvedPageView } from '@/app/get-involved/page';
@@ -18,6 +19,7 @@ import { SummitDetailPageView } from '@/app/summits/[slug]/page';
 import { SummitsPageView } from '@/app/summits/page';
 import { WhatWeDoPageView } from '@/app/what-we-do/page';
 import { getCanonicalUrl } from '@/config/site';
+import { getAboutPageData } from '@/lib/api/about';
 import { getContactPageData } from '@/lib/api/contact';
 import { getDonatePageData } from '@/lib/api/donate';
 import { getGetInvolvedPageData } from '@/lib/api/getInvolved';
@@ -32,9 +34,11 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const { slug } = await params;
   const fullSlug = fullSlugFromParams(slug);
 
-  if (fullSlug === ABOUT_US_PAGE_SLUG) {
+  if (matchesRouteSlug(fullSlug, ABOUT_US_PAGE_SLUG, 'last-segment')) {
+    const data = await getAboutPageData(fullSlug);
     return {
-      title: 'About Us',
+      title: data.hero.breadcrumbCurrentLabel,
+      description: data.story.body[0]?.slice(0, 160),
       alternates: { canonical: getCanonicalUrl(`/${fullSlug}`) },
     };
   }
@@ -93,8 +97,8 @@ export default async function CatchAllPage({ params }: PageProps) {
   const { slug } = await params;
   const fullSlug = fullSlugFromParams(slug);
 
-  if (fullSlug === ABOUT_US_PAGE_SLUG) {
-    return <main className="min-h-[40vh]" />;
+  if (matchesRouteSlug(fullSlug, ABOUT_US_PAGE_SLUG, 'last-segment')) {
+    return <AboutPageView slug={fullSlug} />;
   }
 
   if (fullSlug === CONTACT_US_PAGE_SLUG) {
