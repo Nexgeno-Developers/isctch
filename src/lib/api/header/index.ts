@@ -1,4 +1,4 @@
-import { contactUsPath, donatePath, getInvolvedPath, whatWeDoPath } from '@/config/publicRoutes';
+import { contactUsPath, donatePath, getInvolvedPath, summitsPath, whatWeDoPath } from '@/config/publicRoutes';
 import type { HeaderData } from './types';
 
 const LOGO_SRC = '/iscth-logo.png';
@@ -23,7 +23,7 @@ export const HEADER_LAYOUT: HeaderData = {
         { id: 'nav-wwd-2', label: 'Initiatives', href: `${whatWeDoPath()}#initiatives` },
       ],
     },
-    { id: 'nav-summits', label: 'Summits', href: '#summits' },
+    { id: 'nav-summits', label: 'Summits', href: summitsPath() },
     { id: 'nav-involved', label: 'Get involved', href: getInvolvedPath() },
     { id: 'nav-contact', label: 'Contact', href: contactUsPath() },
   ],

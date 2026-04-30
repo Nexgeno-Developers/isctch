@@ -6,6 +6,7 @@ import {
   CONTACT_US_PAGE_SLUG,
   DONATE_PAGE_SLUG,
   GET_INVOLVED_PAGE_SLUG,
+  SUMMITS_PAGE_SLUG,
   WHAT_WE_DO_PAGE_SLUG,
   fullSlugFromParams,
   matchesRouteSlug,
@@ -13,6 +14,7 @@ import {
 import { ContactPageView } from '@/app/contact-us/page';
 import { DonatePageView } from '@/app/donate/page';
 import { GetInvolvedPageView } from '@/app/get-involved/page';
+import { SummitsPageView } from '@/app/summits/page';
 import { WhatWeDoPageView } from '@/app/what-we-do/page';
 import { getCanonicalUrl } from '@/config/site';
 import { getContactPageData } from '@/lib/api/contact';
@@ -50,6 +52,14 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       alternates: { canonical: getCanonicalUrl(`/${fullSlug}`) },
     };
   }
+  if (matchesRouteSlug(fullSlug, SUMMITS_PAGE_SLUG, 'last-segment')) {
+    return {
+      title: 'Summits',
+      description:
+        'Explore global summits and events convening leaders, activists, and communities for peace.',
+      alternates: { canonical: getCanonicalUrl(`/${fullSlug}`) },
+    };
+  }
   if (matchesRouteSlug(fullSlug, GET_INVOLVED_PAGE_SLUG, 'last-segment')) {
     const data = await getGetInvolvedPageData();
     return {
@@ -83,6 +93,10 @@ export default async function CatchAllPage({ params }: PageProps) {
 
   if (matchesRouteSlug(fullSlug, WHAT_WE_DO_PAGE_SLUG, 'last-segment')) {
     return <WhatWeDoPageView slug={fullSlug} />;
+  }
+
+  if (matchesRouteSlug(fullSlug, SUMMITS_PAGE_SLUG, 'last-segment')) {
+    return <SummitsPageView />;
   }
 
   if (matchesRouteSlug(fullSlug, GET_INVOLVED_PAGE_SLUG, 'last-segment')) {
