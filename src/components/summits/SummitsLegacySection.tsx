@@ -97,14 +97,14 @@ export default function SummitsLegacySection() {
   const infinite = SUMMIT_CARDS.length > 1;
 
   return (
-    <section className="bg-white py-10 lg:py-16">
+    <section className="bg-white py-8 lg:py-20">
       <div className="container mx-auto px-4">
         <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
           <div className="max-w-[640px]">
-            <h2 className="text-2xl font-black tracking-tight text-[#1A1A2E] lg:text-[32px]">
+            <h2 className="text-2xl font-black tracking-tight text-[#1A1A2E] lg:text-[36px]">
               Our Legacy Of Dialogue
             </h2>
-            <p className="mt-3 text-base leading-7 text-[#526477] lg:text-[17px]">
+            <p className="mt-3 text-[18px] leading-relaxed text-[#3E4850]">
               Reflecting on the international milestones where leaders and activists converged to draft the
               blueprints of a more peaceful future.
             </p>
@@ -175,10 +175,10 @@ export default function SummitsLegacySection() {
                     <p className="text-[11px] font-black uppercase tracking-[0.12em] text-[#009FE3]">
                       {summit.location}
                     </p>
-                    <h3 className="mt-3 text-[22px] font-black leading-tight text-[#1A1A2E]">
+                    <h3 className="mt-3 text-[24px] font-black leading-tight text-[#1A1A2E]">
                       {summit.title}
                     </h3>
-                    <p className="mt-4 min-h-[96px] flex-1 text-sm leading-7 text-[#526477]">
+                    <p className="mt-4 text-[16px] leading-relaxed text-[#3E4850] text-ellipsis line-clamp-3">
                       {summit.description}
                     </p>
                     <Link

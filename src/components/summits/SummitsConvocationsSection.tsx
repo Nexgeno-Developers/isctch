@@ -130,14 +130,14 @@ export default function SummitsConvocationsSection() {
 
   return (
     <>
-      <section className="bg-[#E5F6FD] py-10 lg:py-14">
+      <section className="bg-[#009FE31A] py-8 lg:py-20">
         <div className="container mx-auto px-4">
           <div className="flex flex-col gap-5 md:flex-row md:items-start md:justify-between">
             <div>
-              <h2 className="text-2xl font-black text-[#1A1A2E] lg:text-[34px]">
+              <h2 className="text-2xl font-black text-[#1A1A2E] lg:text-[36px]">
                 Upcoming Convocations
               </h2>
-              <p className="mt-3 max-w-[430px] text-sm leading-6 text-[#526477]">
+              <p className="mt-3 text-[18px] leading-relaxed text-[#3E4850]">
                 Secure your place in the next chapter of global diplomatic history.
               </p>
             </div>
@@ -154,17 +154,17 @@ export default function SummitsConvocationsSection() {
             {UPCOMING_EVENTS.map((event) => (
               <article
                 key={event.title}
-                className="flex flex-col gap-5 rounded-md bg-white p-6 shadow-[0_14px_30px_-24px_rgba(15,23,42,0.4)] sm:flex-row sm:items-center"
+                className="flex flex-col gap-5 rounded-md bg-white p-6  sm:flex-row sm:items-center"
               >
                 <div className="flex h-24 w-24 shrink-0 flex-col items-center justify-center rounded-[8px] bg-[#EF7D00] text-white">
                   <span className="text-[28px] font-black leading-none">{event.day}</span>
                   <span className="mt-2 text-[10px] font-black uppercase">{event.month}</span>
                 </div>
                 <div>
-                  <h3 className="text-lg font-black leading-tight text-[#1A1A2E]">
+                  <h3 className="text-lg font-black leading-tight text-[#1A1A2E] lg:text-[20px]">
                     {event.title}
                   </h3>
-                  <div className="mt-3 flex flex-wrap gap-x-5 gap-y-2 text-xs font-semibold text-[#607082]">
+                  <div className="mt-3 flex flex-wrap gap-x-5 gap-y-2 text-[14px] font-semibold text-[#3E4850]">
                     <span className="inline-flex items-center gap-1.5">
                       <MapPinIcon />
                       {event.location}
@@ -181,14 +181,14 @@ export default function SummitsConvocationsSection() {
         </div>
       </section>
 
-      <section className="bg-[#F8FAFC] py-10 lg:py-16">
+      <section className="bg-white py-10 lg:py-16">
         <div className="container mx-auto px-4">
           <div className="grid gap-10 lg:grid-cols-2 lg:items-center lg:gap-16">
             <div>
-              <h2 className="text-2xl font-black text-[#1A1A2E] lg:text-[34px]">
+              <h2 className="text-2xl font-black text-[#1A1A2E] lg:text-[36px]">
                 The Global Peace Chains
               </h2>
-              <p className="mt-6 text-sm leading-8 text-[#526477] lg:text-base">
+              <p className="mt-3 text-[18px] leading-relaxed text-[#3E4850]">
                 Beyond conference rooms, our movement takes to the streets. The Peace Chains are
                 synchronized global marches where thousands join hands to symbolize human
                 connectivity and our shared commitment to non-violence.
