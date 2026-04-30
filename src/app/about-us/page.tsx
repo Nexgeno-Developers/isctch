@@ -3,6 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { redirect } from 'next/navigation';
 
+import AboutCoreValuesSection from '@/components/about/AboutCoreValuesSection';
 import AboutManagementTeamSection from '@/components/about/AboutManagementTeamSection';
 import { ABOUT_US_PAGE_SLUG, aboutUsPath } from '@/config/publicRoutes';
 import { getCanonicalUrl } from '@/config/site';
@@ -128,6 +129,8 @@ export async function AboutPageView({ slug = ABOUT_US_PAGE_SLUG }: { slug?: stri
           ))}
         </div>
       </section>
+
+      <AboutCoreValuesSection data={data.coreValues} />
 
       <AboutManagementTeamSection team={data.managementTeam} cta={data.cta} />
     </main>

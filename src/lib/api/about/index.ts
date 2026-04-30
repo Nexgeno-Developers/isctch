@@ -4,7 +4,14 @@ import { unstable_cache } from 'next/cache';
 
 import { API_CACHE_TAG, fetchJsonCached } from '@/lib/api/apiCache';
 import { ABOUT_US_PAGE_SLUG, donatePath, getInvolvedPath } from '@/config/publicRoutes';
-import type { AboutManagementTeamData, AboutPageData, AboutTeamMember, AboutValueCard } from './types';
+import type {
+  AboutCoreValue,
+  AboutCoreValuesData,
+  AboutManagementTeamData,
+  AboutPageData,
+  AboutTeamMember,
+  AboutValueCard,
+} from './types';
 
 const COMPANY_API_DOMAIN = process.env.COMPANY_API_DOMAIN?.replace(/\/+$/, '') || '';
 const ABOUT_REVALIDATE_SECONDS = Number(
@@ -49,6 +56,66 @@ const STATIC_ABOUT_PAGE: AboutPageData = {
       icon: 'flag',
     },
   ],
+  coreValues: {
+    kicker: 'Our DNA',
+    heading: 'Core Values',
+    values: [
+      {
+        title: 'Radical Empathy',
+        description:
+          'We enter every dialogue with humility, listening deeply enough to understand both pain and possibility before proposing action.',
+        image: {
+          src: '/comminuty_core_images.jpg',
+          alt: 'Community members supporting one another with empathy',
+        },
+      },
+      {
+        title: 'Structural Integrity',
+        description:
+          'Peace must be visible in systems, decisions, and daily conduct. We build transparent frameworks that keep trust at the center.',
+        image: {
+          src: '/policy_images.webp',
+          alt: 'Policy and governance work for transparent peace systems',
+        },
+      },
+      {
+        title: 'Ancestral Wisdom',
+        description:
+          'We honor spiritual traditions and inherited knowledge as living resources for healing communities and guiding modern leadership.',
+        image: {
+          src: '/solidarity_images.webp',
+          alt: 'Multicultural community honoring shared wisdom',
+        },
+      },
+      {
+        title: 'Global Inclusivity',
+        description:
+          'Every culture, faith, language, and generation belongs in the work of peace. Our platforms are designed to widen participation.',
+        image: {
+          src: '/global_images.webp',
+          alt: 'Global view representing inclusive international cooperation',
+        },
+      },
+      {
+        title: 'Spiritual Courage',
+        description:
+          'We choose principled action, compassionate truth-telling, and steady service even when the path toward reconciliation is difficult.',
+        image: {
+          src: '/peace_images.webp',
+          alt: 'Meditation and inner courage for peace work',
+        },
+      },
+      {
+        title: 'Adaptive Diplomacy',
+        description:
+          'Conflict changes quickly, so our methods stay flexible: combining dialogue, technology, education, and local leadership.',
+        image: {
+          src: '/diplomatic_image1.jpg',
+          alt: 'International diplomacy setting for adaptive collaboration',
+        },
+      },
+    ],
+  },
   managementTeam: {
     kicker: 'Stewards of Vision and Integrity',
     heading: 'Management Team',
@@ -123,6 +190,14 @@ function staticAboutContentKey(): string {
       card.title,
       card.description,
       card.icon,
+    ]),
+    STATIC_ABOUT_PAGE.coreValues.kicker,
+    STATIC_ABOUT_PAGE.coreValues.heading,
+    ...STATIC_ABOUT_PAGE.coreValues.values.flatMap((value) => [
+      value.title,
+      value.description,
+      value.image.src,
+      value.image.alt,
     ]),
     STATIC_ABOUT_PAGE.managementTeam.kicker,
     STATIC_ABOUT_PAGE.managementTeam.heading,
@@ -225,6 +300,62 @@ function valueCardsFromMeta(meta: MetaRecord | undefined): AboutValueCard[] {
   return cards.length ? cards : fallback;
 }
 
+function coreValuesFromMeta(meta: MetaRecord | undefined): AboutCoreValuesData {
+  const fallback = STATIC_ABOUT_PAGE.coreValues;
+  if (!meta) return fallback;
+
+  const values: AboutCoreValue[] = [];
+  for (let i = 1; i <= 10; i++) {
+    const title = pick(meta, [
+      `about_core_value_${i}_title`,
+      `core_value_${i}_title`,
+      `about_dna_${i}_title`,
+    ]);
+    if (!title) continue;
+
+    const fallbackValue = fallback.values[values.length] || fallback.values[0];
+    values.push({
+      title,
+      description:
+        pick(meta, [
+          `about_core_value_${i}_description`,
+          `core_value_${i}_description`,
+          `about_dna_${i}_description`,
+        ]) ||
+        fallbackValue.description ||
+        '',
+      image: {
+        src: normalizeImageUrl(
+          pick(meta, [
+            `about_core_value_${i}_image`,
+            `core_value_${i}_image`,
+            `about_dna_${i}_image`,
+          ]),
+          fallbackValue.image.src,
+        ),
+        alt:
+          pick(meta, [
+            `about_core_value_${i}_image_alt`,
+            `core_value_${i}_image_alt`,
+            `about_dna_${i}_image_alt`,
+          ]) ||
+          fallbackValue.image.alt ||
+          title,
+      },
+    });
+  }
+
+  return {
+    kicker:
+      pick(meta, ['about_core_values_kicker', 'core_values_kicker', 'about_dna_kicker']) ||
+      fallback.kicker,
+    heading:
+      pick(meta, ['about_core_values_heading', 'core_values_heading', 'about_dna_heading']) ||
+      fallback.heading,
+    values: values.length ? values : fallback.values,
+  };
+}
+
 function teamMembersFromMeta(meta: MetaRecord | undefined): AboutTeamMember[] {
   const fallback = STATIC_ABOUT_PAGE.managementTeam.members;
   if (!meta) return fallback;
@@ -320,6 +451,7 @@ async function resolveAboutPageData(slug: string): Promise<AboutPageData> {
     },
     quote: pick(meta, ['about_quote', 'about_statement']) || fallback.quote,
     valueCards: valueCardsFromMeta(meta),
+    coreValues: coreValuesFromMeta(meta),
     managementTeam: managementTeamFromMeta(meta),
     cta: {
       heading:
@@ -346,7 +478,7 @@ export async function getAboutPageData(slug = ABOUT_US_PAGE_SLUG): Promise<About
   const cached = unstable_cache(
     async () => resolveAboutPageData(cleanSlug),
     [
-      'about-page-v2',
+      'about-page-v3',
       cleanSlug,
       process.env.COMPANY_API_BASE_URL || 'static',
       COMPANY_API_DOMAIN || '',
@@ -361,6 +493,8 @@ export async function getAboutPageData(slug = ABOUT_US_PAGE_SLUG): Promise<About
 }
 
 export type {
+  AboutCoreValue,
+  AboutCoreValuesData,
   AboutCtaData,
   AboutHeroData,
   AboutManagementTeamData,

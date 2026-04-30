@@ -24,6 +24,18 @@ export type AboutValueCard = {
   icon: 'eye' | 'flag';
 };
 
+export type AboutCoreValue = {
+  title: string;
+  description: string;
+  image: AboutImage;
+};
+
+export type AboutCoreValuesData = {
+  kicker: string;
+  heading: string;
+  values: AboutCoreValue[];
+};
+
 export type AboutTeamMember = {
   name: string;
   designation: string;
@@ -50,6 +62,7 @@ export type AboutPageData = {
   story: AboutStoryData;
   quote: string;
   valueCards: AboutValueCard[];
+  coreValues: AboutCoreValuesData;
   managementTeam: AboutManagementTeamData;
   cta: AboutCtaData;
 };
