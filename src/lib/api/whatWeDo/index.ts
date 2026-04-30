@@ -13,11 +13,11 @@ const WHAT_WE_DO_REVALIDATE_SECONDS = Number(
 
 const ICON_MAP: Record<string, WhatWeDoInitiativeIcon> = {
   people: { src: '/dialog_icons.svg', alt: 'People icon' },
-  meditation: { src: '/peace_tols_icon.svg', alt: 'Meditation icon' },
-  graduation: { src: '/leadership_icons.svg', alt: 'Graduation icon' },
-  megaphone: { src: '/voice_icons.svg', alt: 'Megaphone icon' },
-  book: { src: '/education_icons.svg', alt: 'Book icon' },
-  'scales-policy': { src: '/plocy_icons.svg', alt: 'Policy scales icon' },
+  meditation: { src: '/rforms_icon.svg', alt: 'Meditation icon' },
+  graduation: { src: '/voice_icons.svg', alt: 'Graduation icon' },
+  megaphone: { src: '/peace_tols_icon.svg', alt: 'Megaphone icon' },
+  book: { src: '/hubs_icon.svg', alt: 'Book icon' },
+  'scales-policy': { src: '/leadership_icons.svg', alt: 'Policy scales icon' },
 };
 
 function iconFromId(icon: string): WhatWeDoInitiativeIcon {
@@ -46,96 +46,114 @@ const STATIC_WHAT_WE_DO_PAGE: WhatWeDoPageData = {
         description:
           'We bridge the gap between religious divides by fostering direct communication and joint humanitarian projects. Our interfaith councils serve as the first line of defense against radicalization and communal conflict.',
         image: {
-          src: '/diplomatic_image1.jpg',
+          src: '/solidarity_images.webp',
           alt: 'International conference hall and diplomacy setting',
         },
         icon: iconFromId('people'),
         cta: {
           label: 'Connect with the Council',
-          href: '/interfaith-dialogues',
+          href: '/',
         },
       },
       {
         location: '1.2M Lives Touched',
         title: 'Inner Peace & Wellbeing',
         description:
-          'Global peace begins with individual mental health. We provid mindfulness training, trauma-informed care, and wellness workshops in conflict-affected zones to help survivors reclaim their inner stability.',
+          'Global peace begins with individual mental health. We provide mindfulness training, trauma-informed care, and wellness workshops in conflict-affected zones to help survivors reclaim their inner stability.',
         image: {
-          src: '/comminuty_core_images.jpg',
+          src: '/peace_images.webp',
           alt: 'Diverse group of people gathering in a community space',
         },
         icon: iconFromId('megaphone'),
         cta: {
           label: 'Connect to Access Resources',
-          href: '/community-activism',
+          href: '/',
         },
       },
       {
-        location: 'Dubai, UAE',
-        title: 'Future Harmony',
+        location: '85 Global Youth Hubs',
+        title: 'Youth Empowerment',
         description:
-          'Exploring the intersection of technology, sustainable cities, and ethical human progress.',
+          'Empowering the next generation of peace-builders through leadership academies and digital literacy programs. We provide the tools for youth to navigate misinformation and lead their communities.',
         image: {
-          src: '/future_images.jpg',
+          src: '/youth_images.webp',
           alt: 'Modern city skyline at sunset',
         },
         icon: iconFromId('book'),
         cta: {
-          label: 'Explore Programs',
-          href: '/peace-education',
+          label: 'Connect to Get Involved',
+          href: '/',
         },
       },
 
       {
-        location: 'Dubai, UAE',
-        title: 'Future Harmony',
+        location: '12B Media Impressions',
+        title: 'Global Voice',
         description:
-          'Exploring the intersection of technology, sustainable cities, and ethical human progress.',
+          'Amplifying the stories that matter. Our media wing produces documentaries and digital campaigns that counter narratives of hate with stories of human connection and resilience.',
         image: {
-          src: '/future_images.jpg',
+          src: '/global_images.webp',
           alt: 'Modern city skyline at sunset',
         },
         icon: iconFromId('graduation'),
         cta: {
-          label: 'Join Youth Program',
-          href: '/youth-leadership',
+          label: 'Participate in Campaigns',
+          href: '/',
         },
       },
 
       {
-        location: 'Dubai, UAE',
-        title: 'Future Harmony',
+        location: '14 Legislative Reforms',
+        title: 'Advocacy & Policy',
         description:
-          'Exploring the intersection of technology, sustainable cities, and ethical human progress.',
+          'Working with governments and NGOs to institutionalize peace through legislative change. Our policy experts provide data-driven insights to help leaders make peaceful transitions.',
         image: {
-          src: '/future_images.jpg',
+          src: '/policy_images.webp',
           alt: 'Modern city skyline at sunset',
         },
         icon: iconFromId('meditation'),
         cta: {
-          label: 'Practice Mindfulness',
-          href: '/inner-peace-tools',
+          label: 'Request Policy Papers',
+          href: '/',
         },
       },
 
       {
-        location: 'Dubai, UAE',
-        title: 'Future Harmony',
+        location: '300+ Schools Partnered',
+        title: 'Education for Peace',
         description:
-          'Exploring the intersection of technology, sustainable cities, and ethical human progress.',
+          'Curating the worlds most comprehensive peace education curriculum. We train educators to teach empathy, conflict resolution, and global citizenship as core academic subjects.',
         image: {
-          src: '/future_images.jpg',
+          src: '/education_images.webp',
           alt: 'Modern city skyline at sunset',
         },
         icon: iconFromId('scales-policy'),
         cta: {
-          label: 'Support Advocacy',
-          href: '/policy-advocacy',
+          label: 'Learn About the Curriculum',
+          href: '/',
         },
       },
     ],
   },
 };
+
+function staticWhatWeDoContentKey(): string {
+  return [
+    STATIC_WHAT_WE_DO_PAGE.hero.kicker,
+    STATIC_WHAT_WE_DO_PAGE.hero.titleBlue,
+    STATIC_WHAT_WE_DO_PAGE.hero.titleOrange,
+    ...STATIC_WHAT_WE_DO_PAGE.peaceSummits.summits.flatMap((summit) => [
+      summit.location,
+      summit.title,
+      summit.description,
+      summit.image.src,
+      summit.image.alt,
+      summit.icon.src,
+      summit.cta.label,
+      summit.cta.href,
+    ]),
+  ].join('|');
+}
 
 type MetaRecord = Record<string, string | undefined>;
 type PageApiPayload = { data?: { meta?: MetaRecord | MetaRecord[] } };
@@ -328,7 +346,13 @@ export async function getWhatWeDoPageData(slug = WHAT_WE_DO_PAGE_SLUG): Promise<
   const cleanSlug = slug.replace(/^\/+|\/+$/g, '');
   const cached = unstable_cache(
     async () => resolveWhatWeDoPageData(cleanSlug),
-    ['what-we-do-page-v3', cleanSlug, process.env.COMPANY_API_BASE_URL || 'static', COMPANY_API_DOMAIN || ''],
+    [
+      'what-we-do-page-v3',
+      cleanSlug,
+      process.env.COMPANY_API_BASE_URL || 'static',
+      COMPANY_API_DOMAIN || '',
+      staticWhatWeDoContentKey(),
+    ],
     {
       revalidate: WHAT_WE_DO_REVALIDATE_SECONDS,
       tags: [API_CACHE_TAG, 'what-we-do-page', `page:${cleanSlug}`],
