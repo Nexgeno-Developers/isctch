@@ -57,7 +57,7 @@ export async function AboutPageView({ slug = ABOUT_US_PAGE_SLUG }: { slug?: stri
 
   return (
     <main className="bg-[#F4F8FC]">
-      <section className="bg-[linear-gradient(125deg,_#F0FBFF_0%,_#FFF8F0_100%)] py-10 lg:py-16">
+      <section className="bg-[linear-gradient(125deg,_#F0FBFF_0%,_#FFF8F0_100%)] py-12 lg:py-20">
         <div className="container mx-auto px-4 text-center">
           <p className="text-xs text-[#8b97a7]">
             <Link href="/" className="hover:underline">
@@ -65,22 +65,23 @@ export async function AboutPageView({ slug = ABOUT_US_PAGE_SLUG }: { slug?: stri
             </Link>{' '}
             / <span className="text-[#EF7D00]">{data.hero.breadcrumbCurrentLabel}</span>
           </p>
-          <h1 className="mt-8 text-[34px] font-black leading-tight tracking-tight lg:text-[44px]">
+          <h1 className="mt-8 text-[34px] font-black leading-tight tracking-tight lg:text-[52px]">
             <span className="text-[#009FE3]">{data.hero.titleBlue}</span>{' '}
             <span className="text-[#EF7D00]">{data.hero.titleOrange}</span>
           </h1>
         </div>
       </section>
 
-      <section className="py-10 lg:py-16">
+      <section className="bg-white py-8 lg:py-20">
         <div className="container mx-auto grid gap-12 px-4 lg:grid-cols-2 lg:items-center lg:gap-20">
-          <div className="relative aspect-[5/6] overflow-hidden rounded-md bg-[#E8EEF5] shadow-[0_22px_45px_-30px_rgba(15,23,42,0.55)]">
+          <div className="relative overflow-hidden rounded-[8px]">
             <Image
               src={data.story.image.src}
               alt={data.story.image.alt}
-              fill
+              width={1000}
+              height={1000}
               className="object-cover"
-              sizes="(max-width: 1023px) 100vw, 50vw"
+             
               priority
             />
           </div>
@@ -92,10 +93,10 @@ export async function AboutPageView({ slug = ABOUT_US_PAGE_SLUG }: { slug?: stri
                 {data.story.kicker}
               </p>
             </div>
-            <h2 className="mt-6 text-2xl font-black text-[#3E4850] lg:text-[32px]">
+            <h2 className="mt-6 text-2xl font-black leading-tight tracking-tight text-[#1A1A2E]  lg:text-[36px]">
               {data.story.heading}
             </h2>
-            <div className="mt-8 space-y-5 text-sm leading-8 text-[#3E4850]">
+            <div className="mt-8 space-y-5 text-[18px] leading-relaxed text-[#3E4850]">
               {data.story.body.map((paragraph) => (
                 <p key={paragraph}>{paragraph}</p>
               ))}
@@ -112,21 +113,23 @@ export async function AboutPageView({ slug = ABOUT_US_PAGE_SLUG }: { slug?: stri
         </div>
       </section>
 
-      <section className="py-10 lg:py-16">
-        <div className="container mx-auto grid gap-8 px-4 md:grid-cols-2">
+      <section className="pt-8 lg:pt-20">
+        <div className="container mx-auto px-4">
+          <div className="grid gap-8 px-4 md:grid-cols-2">
           {data.valueCards.map((card) => (
             <article
               key={card.number}
-              className="rounded-[8px] bg-white p-8 shadow-[0_18px_40px_-34px_rgba(15,23,42,0.55)]"
+              className="rounded-[8px] bg-white px-12 py-12 shadow-[0_18px_40px_-34px_rgba(15,23,42,0.55)]"
             >
               <div className="flex items-start justify-between gap-5">
-                <p className="text-[42px] font-light leading-none text-[#DFF4FD]">{card.number}</p>
+                <p className="text-[60px] font-black leading-none text-[#0064911A]">{card.number}</p>
                 <ValueIcon icon={card.icon} />
               </div>
-              <h3 className="mt-9 text-xl font-black text-[#1A1A2E]">{card.title}</h3>
-              <p className="mt-5 text-sm leading-7 text-[#3E4850]">{card.description}</p>
+              <h3 className="mt-9 text-xl font-black text-[28px] text-[#1A1A2E]">{card.title}</h3>
+              <p className="mt-5 text-[18px] leading-relaxed text-[#3E4850]">{card.description}</p>
             </article>
           ))}
+        </div>
         </div>
       </section>
 

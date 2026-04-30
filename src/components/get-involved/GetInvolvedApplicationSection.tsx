@@ -58,8 +58,9 @@ export default function GetInvolvedApplicationSection({
 }) {
   return (
     <section className="bg-white py-12 sm:py-14 lg:py-16">
-      <div className="container mx-auto grid gap-10 px-4 lg:grid-cols-[minmax(0,1fr)_340px] lg:items-start xl:grid-cols-[minmax(0,1fr)_420px] xl:gap-12">
-        <div className="max-w-[640px]">
+      <div className="container mx-auto px-4">
+        <div className="grid gap-10 lg:grid-cols-2 lg:items-center lg:gap-16">
+        <div className="">
           <div className="flex items-center gap-3">
             <span className="h-[2px] w-7 bg-[#F28A11]" aria-hidden />
             <p className="text-[11px] font-black uppercase tracking-[0.16em] text-[#039FE8]">
@@ -67,17 +68,17 @@ export default function GetInvolvedApplicationSection({
             </p>
           </div>
 
-          <h2 className="mt-5 max-w-[460px] text-[40px] font-black leading-[0.98] tracking-tight text-[#1B2535] sm:text-[46px]">
+          <h2 className="mt-5 text-[40px] font-black leading-[0.98] tracking-tight text-[#1B2535] sm:text-[46px]">
             {program.title}
           </h2>
 
-          <div className="mt-6 max-w-[580px] space-y-4 text-[18px] leading-9 text-[#5B6673]">
+          <div className="mt-6 space-y-4 text-[18px] leading-9 text-[#5B6673]">
             {program.description.map((paragraph, index) => (
               <p key={`${paragraph}-${index}`}>{paragraph}</p>
             ))}
           </div>
 
-          <div className="relative mt-8 aspect-[1.18] w-full max-w-[520px] overflow-hidden rounded-[16px] bg-slate-100 shadow-[0_20px_55px_-30px_rgba(15,23,42,0.35)]">
+          <div className="relative mt-8 aspect-[1.18] w-full overflow-hidden rounded-[16px] bg-slate-100 shadow-[0_20px_55px_-30px_rgba(15,23,42,0.35)]">
             <Image
               src={program.image.src}
               alt={program.image.alt}
@@ -121,6 +122,7 @@ export default function GetInvolvedApplicationSection({
               </button>
             </div>
           </form>
+        </div>
         </div>
       </div>
     </section>

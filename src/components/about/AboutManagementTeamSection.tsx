@@ -47,7 +47,7 @@ export default function AboutManagementTeamSection({
 
   return (
     <>
-      <section className="bg-[#F4F8FC] py-10 lg:py-16">
+      <section className="bg-white py-10 lg:py-16">
         <div className="container mx-auto px-4">
           <div className="max-w-[1080px]">
             <div className="flex items-center gap-4">

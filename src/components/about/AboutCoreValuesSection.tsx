@@ -32,10 +32,10 @@ function OpenValueCard({
           sizes="(max-width: 1023px) 100vw, 520px"
         />
       </div>
-      <h3 className="mt-8 text-[25px] font-black leading-tight text-[#1A1A2E]">
+      <h3 className="mt-8 text-[24px] font-black leading-tight text-[#1A1A2E]">
         {value.title}
       </h3>
-      <p className="mt-5 text-base leading-7 text-[#1A1A2E]">
+      <p className="mt-3 text-base leading-8 text-[#3E4850] lg:text-[18px]">
         {value.description}
       </p>
     </article>
@@ -57,10 +57,10 @@ export default function AboutCoreValuesSection({ data }: Props) {
     <section className="bg-[#F4F8FC] py-12 lg:py-20">
       <div className="container mx-auto px-4">
         <div className="text-center">
-          <p className="text-xs font-black uppercase tracking-[0.18em] text-[#005F8F]">
+          {/* <p className="text-xs font-black uppercase tracking-[0.18em] text-[#005F8F]">
             {data.kicker}
-          </p>
-          <h2 className="mt-4 text-[32px] font-black leading-tight text-[#1A1A2E] lg:text-[46px]">
+          </p> */}
+          <h2 className="mt-4 text-2xl font-black leading-tight tracking-tight text-[#1A1A2E]  lg:text-[36px]">
             {data.heading}
           </h2>
         </div>
