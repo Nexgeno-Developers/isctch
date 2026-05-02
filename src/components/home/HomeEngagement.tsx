@@ -24,7 +24,7 @@ export default function HomeEngagement({ data }: Props) {
 
   return (
     <section 
-      className="w-full bg-[#EFECFF] py-8 lg:py-20"
+      className="w-full bg-[#E3EFFC] py-8 lg:py-20"
     >
       <div className="container mx-auto px-4">
         <div className="text-center">

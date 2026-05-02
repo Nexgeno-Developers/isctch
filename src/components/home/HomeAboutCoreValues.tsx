@@ -70,14 +70,14 @@ export default function HomeAboutCoreValues({ data }: Props) {
             <p className="mt-6 text-[18px] leading-relaxed text-[#3E4850]">
               {data.body}
             </p>
-            <blockquote className="mt-8 border-l-4 border-[#EF7D00] py-3 pl-5 text-base font-medium leading-relaxed text-[#1A1A2E] lg:text-[20px]">
-              <span className="font-semibold">{data.visionLabel}</span>{' '}
+            <blockquote className="italic mt-8 border-l-4 border-[#EF7D00] bg-[#FDF2E5] px-5 py-5 lg:text-[20px] leading-snug text-[#1f233b]">
+              <span className="">{data.visionLabel}</span>{' '}
               {data.visionText}
             </blockquote>
           </div>
 
           <div>
-            <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#1a1a2e] sm:text-sm">
+            <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#EF7D00] sm:text-sm">
               {data.coreValuesKicker}
             </p>
             <ul className="mt-5 flex flex-col gap-3" role="list">

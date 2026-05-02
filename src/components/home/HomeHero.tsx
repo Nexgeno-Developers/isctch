@@ -42,7 +42,7 @@ export default function HomeHero({ data }: HomeHeroProps) {
               </Link>
               <Link
                 href={secondaryCta.href}
-                className="inline-flex min-h-[54px] items-center justify-center rounded-lg border-2 border-[#006491] bg-transparent px-7 text-center text-sm font-bold uppercase tracking-wide text-[#006491] transition-colors hover:bg-[#1a1a2e]/5"
+                className="inline-flex min-h-[54px] items-center justify-center rounded-lg border-2 border-[#009FE3] bg-transparent px-7 text-center text-sm font-bold uppercase tracking-wide text-[#009FE3] transition-colors hover:bg-[#1a1a2e]/5"
               >
                 {secondaryCta.label}
               </Link>
@@ -67,13 +67,13 @@ export default function HomeHero({ data }: HomeHeroProps) {
               <div className="absolute -bottom-2 left-0 z-10 w-[min(100%,260px)] rounded-2xl border border-gray-100/80 bg-white p-4 shadow-lg sm:-bottom-3 sm:left-2 sm:p-5">
                 <div className="flex items-start gap-3">
                  
-                   <Image src="/active_icons.svg" alt="Star" width={44} height={44} />
+                   <Image src="/active_users.svg" alt="Star" width={44} height={44} />
                   
                   <div className="min-w-0">
                     <p className="text-[10px] font-bold uppercase tracking-[0.15em] text-[#3E4850] sm:text-xs">
                       {statCard.label}
                     </p>
-                    <p className="text-2xl font-bold text-[#006491] sm:text-3xl">{statCard.value}</p>
+                    <p className="text-2xl font-bold text-[#009FE3] sm:text-3xl">{statCard.value}</p>
                   </div>
                 </div>
               </div>

@@ -18,7 +18,7 @@ export default function HomeSupportMovement({ data, donationForm }: Props) {
 
   return (
     <section id="donate" className="w-full" aria-labelledby="support-movement-heading">
-      <div className="bg-[#FFF5E6] lg:py-20 py-8">
+      <div className="bg-[#FBECE5] lg:py-20 py-8">
        
         <div className="container mx-auto px-4 text-center">
           <p className="text-3xl font-black tracking-tight lg:text-[52px]">
