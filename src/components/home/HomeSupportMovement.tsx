@@ -2,7 +2,7 @@ import Image from 'next/image';
 
 import DonationPaymentForm from '@/components/donate/DonationPaymentForm';
 import type { DonateContributionData } from '@/lib/api/donate/types';
-import type { HomeSupportMovementData } from '@/lib/api/homepage/types';
+import type { HomeSupportMovementData } from '@/lib/api/homepage';
 
 type Props = {
   data: HomeSupportMovementData;

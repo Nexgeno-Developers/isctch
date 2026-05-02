@@ -1,4 +1,4 @@
-import type { HomeActionPillarIconId, HomeActionPillarsData } from '@/lib/api/homepage/types';
+import type { HomeActionPillarIconId, HomeActionPillarsData } from '@/lib/api/homepage';
 import Image from 'next/image';
 
 type Props = {

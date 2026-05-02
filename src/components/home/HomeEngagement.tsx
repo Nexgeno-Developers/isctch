@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { Autoplay, A11y } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
-import type { HomeEngagementData } from '@/lib/api/homepage/types';
+import type { HomeEngagementData } from '@/lib/api/homepage';
 
 import 'swiper/css';
 

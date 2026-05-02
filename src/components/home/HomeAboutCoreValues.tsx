@@ -1,4 +1,4 @@
-import type { HomeAboutCoreValuesData, HomeCoreValueIconId } from '@/lib/api/homepage/types';
+import type { HomeAboutCoreValuesData, HomeCoreValueIconId } from '@/lib/api/homepage';
 import Image from 'next/image';
 
 type Props = {

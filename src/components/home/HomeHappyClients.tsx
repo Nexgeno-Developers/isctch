@@ -6,7 +6,7 @@ import type { Swiper as SwiperClass } from 'swiper';
 import { Autoplay, A11y } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
-import type { HomeHappyClientsData } from '@/lib/api/homepage/types';
+import type { HomeHappyClientsData } from '@/lib/api/homepage';
 
 import 'swiper/css';
 
@@ -52,16 +52,19 @@ function StarRow() {
   );
 }
 
-function formatRating(rating: number): string {
-  if (rating >= 5) return '5/5';
-  return `${rating.toFixed(1)}/5`;
+function formatRating(rating: number | undefined): string {
+  const r =
+    typeof rating === 'number' && Number.isFinite(rating) ? Math.min(5, Math.max(0, rating)) : 4.8;
+  if (r >= 5) return '5/5';
+  return `${r.toFixed(1)}/5`;
 }
 
 /**
  * Testimonial carousel — same Swiper behavior and header/nav row as {@link HomePeaceSummits}.
  */
 export default function HomeHappyClients({ data }: Props) {
-  const { title, testimonials } = data;
+  const title = typeof data?.title === 'string' ? data.title : '';
+  const testimonials = Array.isArray(data?.testimonials) ? data.testimonials : [];
   const total = testimonials.length;
   const swiperRef = useRef<SwiperClass | null>(null);
 

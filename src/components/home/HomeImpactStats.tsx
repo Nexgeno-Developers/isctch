@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
-import type { HomeImpactStatsData, HomeImpactStatItem } from '@/lib/api/homepage/types';
+import type { HomeImpactStatsData, HomeImpactStatItem } from '@/lib/api/homepage';
 
 const DURATION_MS = 1200;
 

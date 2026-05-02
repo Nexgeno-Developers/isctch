@@ -6,7 +6,7 @@ import type { Swiper as SwiperClass } from 'swiper';
 import { Autoplay, A11y } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
-import type { HomePeaceSummitsData } from '@/lib/api/homepage/types';
+import type { HomePeaceSummitsData } from '@/lib/api/homepage';
 
 import 'swiper/css';
 

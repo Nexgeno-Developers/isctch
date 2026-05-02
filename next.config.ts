@@ -1,12 +1,19 @@
 import type { NextConfig } from "next";
 
+const DEV_FALLBACK_CMS_HOST = "istch.webtesting.pw";
+
 /** Allow hero/CMS images hosted on the same host as COMPANY_API_DOMAIN. */
 function companyApiImagePatterns(): {
   protocol: "http" | "https";
   hostname: string;
 }[] {
   const raw = process.env.COMPANY_API_DOMAIN?.trim();
-  if (!raw) return [];
+  if (!raw) {
+    if (process.env.NODE_ENV === "development") {
+      return [{ protocol: "https", hostname: DEV_FALLBACK_CMS_HOST }];
+    }
+    return [];
+  }
   try {
     const base = /^https?:\/\//i.test(raw) ? raw : `https://${raw}`;
     const u = new URL(base);

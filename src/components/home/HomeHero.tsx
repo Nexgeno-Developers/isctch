@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import type { HomeHeroData } from '@/lib/api/homepage/types';
+import type { HomeHeroData } from '@/lib/api/homepage';
 
 type HomeHeroProps = {
   data: HomeHeroData;
