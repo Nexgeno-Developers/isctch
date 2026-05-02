@@ -62,6 +62,20 @@ const GALLERY_IMAGES: GalleryImage[] = [
   },
 ];
 
+function LinkChevronIcon() {
+  return (
+    <svg className="h-4 w-4 shrink-0" viewBox="0 0 24 24" fill="none" aria-hidden>
+      <path
+        d="m9 18 6-6-6-6"
+        stroke="currentColor"
+        strokeWidth="2.2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
 function ArrowIcon({ direction }: { direction: 'previous' | 'next' }) {
   return (
     <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" aria-hidden>
@@ -146,7 +160,7 @@ export default function SummitsConvocationsSection() {
               className="inline-flex items-center gap-2 text-sm font-black text-[#009FE3] transition-colors hover:text-[#007eb5]"
             >
               View All Events
-              <span aria-hidden>-&gt;</span>
+              <LinkChevronIcon />
             </Link>
           </div>
 
