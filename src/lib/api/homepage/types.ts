@@ -113,14 +113,6 @@ export type HomeSupportMovementData = {
     donorsLine: string;
     avatars: { src: string; alt: string }[];
   };
-  form: {
-    amounts: number[];
-    defaultAmount: number;
-    namePlaceholder: string;
-    emailPlaceholder: string;
-    submitLabel: string;
-    footnote: string;
-  };
 };
 
 export type HomeEngagementCard = {

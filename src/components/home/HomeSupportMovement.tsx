@@ -1,32 +1,20 @@
-'use client';
-
-import { useState } from 'react';
 import Image from 'next/image';
 
+import DonationPaymentForm from '@/components/donate/DonationPaymentForm';
+import type { DonateContributionData } from '@/lib/api/donate/types';
 import type { HomeSupportMovementData } from '@/lib/api/homepage/types';
 
 type Props = {
   data: HomeSupportMovementData;
+  donationForm: DonateContributionData;
 };
 
-function StarIcon() {
-  return (
-    <svg className="h-3.5 w-3.5 text-amber-400" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
-      <path d="M12 2l2.4 7.4H22l-6 4.6 2.3 7L12 17.8 5.7 21l2.3-7-6-4.6h7.6L12 2z" />
-    </svg>
-  );
-}
-
 /**
- * #IamPEACE header + Support the Movement donation panel. Data from `getHomePageData().supportMovement`.
+ * #IamPEACE header + Support the Movement panel. Copy from `getHomePageData().supportMovement`;
+ * payment form matches `/donate` via `donationForm` from `getDonatePageData().contribution`.
  */
-export default function HomeSupportMovement({ data }: Props) {
-  const { header, panel, form } = data;
-  const [amount, setAmount] = useState(form.defaultAmount);
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-  };
+export default function HomeSupportMovement({ data, donationForm }: Props) {
+  const { header, panel } = data;
 
   return (
     <section id="donate" className="w-full" aria-labelledby="support-movement-heading">
@@ -75,51 +63,10 @@ export default function HomeSupportMovement({ data }: Props) {
           </div>
           
 
-          <div className="rounded-2xl bg-white p-6 shadow-lg sm:p-8">
-            <form onSubmit={handleSubmit} className="space-y-5">
-              <div className="grid grid-cols-3 gap-3">
-                {form.amounts.map((n) => {
-                  const selected = amount === n;
-                  return (
-                    <button
-                      key={n}
-                      type="button"
-                      onClick={() => setAmount(n)}
-                      className={`cursor-pointer rounded-lg border-2 py-3 text-center text-base font-semibold transition-colors ${
-                        selected
-                          ? 'border-[#0a8cc9] bg-[#e8f6fc] text-[#0a8cc9]'
-                          : 'border-[#d1d5db] bg-white text-[#1a1a2e] hover:border-[#9ca3af]'
-                      }`}
-                    >
-                      ${n}
-                    </button>
-                  );
-                })}
-              </div>
-              <input
-                type="text"
-                name="name"
-                autoComplete="name"
-                placeholder={form.namePlaceholder}
-                className="w-full rounded-xl border-0 bg-[#f3f0f9] px-4 py-3.5 text-[#1a1a2e] placeholder:text-[#9ca3af] focus:ring-2 focus:ring-[#0a8cc9]/40 focus:outline-none"
-              />
-              <input
-                type="email"
-                name="email"
-                autoComplete="email"
-                placeholder={form.emailPlaceholder}
-                className="w-full rounded-xl border-0 bg-[#f3f0f9] px-4 py-3.5 text-[#1a1a2e] placeholder:text-[#9ca3af] focus:ring-2 focus:ring-[#0a8cc9]/40 focus:outline-none"
-              />
-              <input type="hidden" name="amount" value={amount} readOnly />
-              <button
-                type="submit"
-                className="cursor-pointer w-full rounded-xl bg-[#EF7D00] py-4 text-center text-sm font-bold uppercase tracking-wide text-white shadow-md transition-colors hover:bg-[#d96a18]"
-              >
-                {form.submitLabel}
-              </button>
-              <p className="text-center font-black text-xs text-[#6b7280]">{form.footnote}</p>
-            </form>
-          </div>
+          <DonationPaymentForm
+            data={donationForm}
+            formClassName="w-full rounded-2xl bg-white p-6 shadow-lg sm:p-8"
+          />
         </div>
         </div>
       </div>

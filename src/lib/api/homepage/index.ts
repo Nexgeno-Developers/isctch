@@ -439,23 +439,7 @@ const STATIC_SUPPORT_MOVEMENT: HomeSupportMovementData = {
       },
     ],
   },
-  form: {
-    amounts: [25, 50, 100],
-    defaultAmount: 100,
-    namePlaceholder: 'Full Name',
-    emailPlaceholder: 'Email Address',
-    submitLabel: 'DONATE FOR PEACE',
-    footnote: 'SECURE ENCRYPTED PAYMENT GATEWAY',
-  },
 };
-
-function parseDonationAmounts(raw: string): number[] {
-  const parts = raw
-    .split(/[,\s]+/)
-    .map((s) => Number.parseInt(s.replace(/\D/g, ''), 10))
-    .filter((n) => Number.isFinite(n) && n > 0);
-  return parts.length ? parts : STATIC_SUPPORT_MOVEMENT.form.amounts;
-}
 
 function supportMovementFromMeta(meta: MetaRecord | undefined): HomeSupportMovementData | null {
   if (!meta) return null;
@@ -466,11 +450,6 @@ function supportMovementFromMeta(meta: MetaRecord | undefined): HomeSupportMovem
     'donation_panel_headline',
   ]);
   if (!panelHeadline) return null;
-
-  const amountsRaw = pick(meta, ['donation_amounts', 'support_donation_amounts']);
-  const amounts = amountsRaw ? parseDonationAmounts(amountsRaw) : STATIC_SUPPORT_MOVEMENT.form.amounts;
-  const defaultRaw = pick(meta, ['donation_default_amount']);
-  const defaultAmount = defaultRaw ? parseIntSafe(defaultRaw, amounts[amounts.length - 1] ?? 100) : STATIC_SUPPORT_MOVEMENT.form.defaultAmount;
 
   const avatars: HomeSupportMovementData['panel']['avatars'] = [];
   for (let i = 1; i <= 3; i++) {
@@ -494,16 +473,6 @@ function supportMovementFromMeta(meta: MetaRecord | undefined): HomeSupportMovem
       body: pick(meta, ['donation_body', 'support_movement_body']) || STATIC_SUPPORT_MOVEMENT.panel.body,
       donorsLine: pick(meta, ['donation_donors_line', 'support_donors_line']) || STATIC_SUPPORT_MOVEMENT.panel.donorsLine,
       avatars: avatars.length === 3 ? avatars : STATIC_SUPPORT_MOVEMENT.panel.avatars,
-    },
-    form: {
-      amounts,
-      defaultAmount: amounts.includes(defaultAmount) ? defaultAmount : amounts[0] ?? 100,
-      namePlaceholder:
-        pick(meta, ['donation_name_placeholder']) || STATIC_SUPPORT_MOVEMENT.form.namePlaceholder,
-      emailPlaceholder:
-        pick(meta, ['donation_email_placeholder']) || STATIC_SUPPORT_MOVEMENT.form.emailPlaceholder,
-      submitLabel: pick(meta, ['donation_submit_label']) || STATIC_SUPPORT_MOVEMENT.form.submitLabel,
-      footnote: pick(meta, ['donation_footnote']) || STATIC_SUPPORT_MOVEMENT.form.footnote,
     },
   };
 }
