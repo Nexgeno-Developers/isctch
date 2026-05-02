@@ -8,6 +8,7 @@ import HomeImpactStats from '@/components/home/HomeImpactStats';
 import HomeAboutCoreValues from '@/components/home/HomeAboutCoreValues';
 import HomeActionPillars from '@/components/home/HomeActionPillars';
 import HomePeaceSummits from '@/components/home/HomePeaceSummits';
+import HomeHappyClients from '@/components/home/HomeHappyClients';
 import HomeSupportMovement from '@/components/home/HomeSupportMovement';
 import HomeEngagement from '@/components/home/HomeEngagement';
 
@@ -21,8 +22,10 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function HomePage() {
-  const [{ hero, impactStats, aboutCoreValues, actionPillars, peaceSummits, supportMovement, engagement }, donate] =
-    await Promise.all([getHomePageData(), getDonatePageData(DONATE_PAGE_SLUG)]);
+  const [
+    { hero, impactStats, aboutCoreValues, actionPillars, peaceSummits, happyClients, supportMovement, engagement },
+    donate,
+  ] = await Promise.all([getHomePageData(), getDonatePageData(DONATE_PAGE_SLUG)]);
 
   return (
     <main>
@@ -32,6 +35,7 @@ export default async function HomePage() {
       <HomeActionPillars data={actionPillars} />
       <HomePeaceSummits data={peaceSummits} />
       <HomeSupportMovement data={supportMovement} donationForm={donate.contribution} />
+      <HomeHappyClients data={happyClients} />
       <HomeEngagement data={engagement} />
     </main>
   );

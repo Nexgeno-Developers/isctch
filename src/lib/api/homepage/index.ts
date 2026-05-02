@@ -10,6 +10,8 @@ import type {
   HomeCoreValueIconId,
   HomeCoreValueItem,
   HomeHeroData,
+  HomeHappyClientTestimonial,
+  HomeHappyClientsData,
   HomeImpactStatsData,
   HomePageData,
   HomePeaceSummitCard,
@@ -343,6 +345,102 @@ const STATIC_PEACE_SUMMITS: HomePeaceSummitsData = {
     },
   ],
 };
+
+const loremQuote =
+  'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.';
+
+const STATIC_HAPPY_CLIENTS: HomeHappyClientsData = {
+  title: 'Happy Clients',
+  testimonials: [
+    {
+      quote: loremQuote,
+      rating: 4.8,
+      authorName: 'John Smith',
+      authorInitial: 'J',
+    },
+    {
+      quote: loremQuote,
+      rating: 4.8,
+      authorName: 'John Smith',
+      authorInitial: 'J',
+    },
+    {
+      quote: loremQuote,
+      rating: 4.8,
+      authorName: 'John Smith',
+      authorInitial: 'J',
+    },
+    {
+      quote: loremQuote,
+      rating: 4.9,
+      authorName: 'Maria Chen',
+      authorInitial: 'M',
+    },
+    {
+      quote: loremQuote,
+      rating: 4.7,
+      authorName: 'David Okonkwo',
+      authorInitial: 'D',
+    },
+    {
+      quote: loremQuote,
+      rating: 5,
+      authorName: 'Elena Rossi',
+      authorInitial: 'E',
+    },
+  ],
+};
+
+function happyClientsListFromMeta(meta: MetaRecord | undefined): HomeHappyClientTestimonial[] | null {
+  if (!meta) return null;
+  const out: HomeHappyClientTestimonial[] = [];
+  for (let i = 1; i <= 16; i++) {
+    const quote = pick(meta, [
+      `happy_client_${i}_quote`,
+      `testimonial_${i}_quote`,
+      `home_happy_client_${i}_quote`,
+    ]);
+    if (!quote) continue;
+    const authorName =
+      pick(meta, [`happy_client_${i}_name`, `testimonial_${i}_name`, `home_happy_client_${i}_name`]) ||
+      'Client';
+    const initialRaw = pick(meta, [
+      `happy_client_${i}_initial`,
+      `testimonial_${i}_initial`,
+      `home_happy_client_${i}_initial`,
+    ]);
+    const authorInitial = (initialRaw || authorName.trim().charAt(0) || '?').toUpperCase().slice(0, 1);
+    const ratingRaw = pick(meta, [`happy_client_${i}_rating`, `testimonial_${i}_rating`]);
+    const rating = ratingRaw ? Number.parseFloat(ratingRaw.replace(/[^\d.]/g, '')) : 4.8;
+    const avatarSrc = pick(meta, [`happy_client_${i}_avatar`, `testimonial_${i}_image`]);
+    const avatarAlt = pick(meta, [`happy_client_${i}_avatar_alt`, `testimonial_${i}_image_alt`]) || authorName;
+    const item: HomeHappyClientTestimonial = {
+      quote,
+      rating: Number.isFinite(rating) ? Math.min(5, Math.max(0, rating)) : 4.8,
+      authorName,
+      authorInitial,
+    };
+    if (avatarSrc) {
+      item.avatar = { src: normalizeImageUrl(avatarSrc), alt: avatarAlt };
+    }
+    out.push(item);
+  }
+  return out.length ? out : null;
+}
+
+function happyClientsFromMeta(meta: MetaRecord | undefined): HomeHappyClientsData | null {
+  if (!meta) return null;
+
+  const list = happyClientsListFromMeta(meta);
+  const title = pick(meta, ['happy_clients_title', 'testimonials_title', 'home_happy_clients_title']);
+
+  if (!list && !title) return null;
+
+  return {
+    title: title || STATIC_HAPPY_CLIENTS.title,
+    testimonials: list ?? STATIC_HAPPY_CLIENTS.testimonials,
+  };
+}
 
 function peaceSummitsListFromMeta(meta: MetaRecord | undefined): HomePeaceSummitCard[] | null {
   if (!meta) return null;
@@ -745,6 +843,7 @@ async function resolveHomePage(): Promise<HomePageData> {
   const aboutCoreValues = aboutCoreValuesFromMeta(meta) ?? STATIC_ABOUT_CORE_VALUES;
   const actionPillars = actionPillarsFromMeta(meta) ?? STATIC_ACTION_PILLARS;
   const peaceSummits = peaceSummitsFromMeta(meta) ?? STATIC_PEACE_SUMMITS;
+  const happyClients = happyClientsFromMeta(meta) ?? STATIC_HAPPY_CLIENTS;
   const supportMovement = supportMovementFromMeta(meta) ?? STATIC_SUPPORT_MOVEMENT;
   const engagement = engagementFromMeta(meta) ?? STATIC_ENGAGEMENT;
 
@@ -754,6 +853,7 @@ async function resolveHomePage(): Promise<HomePageData> {
     aboutCoreValues,
     actionPillars,
     peaceSummits,
+    happyClients,
     supportMovement,
     engagement,
   };
@@ -796,6 +896,10 @@ export async function getHomePeaceSummits(): Promise<HomePeaceSummitsData> {
   return (await getCachedHomePage()).peaceSummits;
 }
 
+export async function getHomeHappyClients(): Promise<HomeHappyClientsData> {
+  return (await getCachedHomePage()).happyClients;
+}
+
 export async function getHomeSupportMovement(): Promise<HomeSupportMovementData> {
   return (await getCachedHomePage()).supportMovement;
 }
@@ -818,6 +922,8 @@ export type {
   HomeImpactStatItem,
   HomeImpactStatsData,
   HomePageData,
+  HomeHappyClientTestimonial,
+  HomeHappyClientsData,
   HomePeaceSummitCard,
   HomePeaceSummitsData,
   HomeSupportMovementData,

@@ -100,6 +100,21 @@ export type HomePeaceSummitsData = {
   summits: HomePeaceSummitCard[];
 };
 
+export type HomeHappyClientTestimonial = {
+  quote: string;
+  /** Shown next to stars, e.g. 4.8 → "4.8/5". */
+  rating: number;
+  authorName: string;
+  /** Shown in the avatar circle when `avatar` is omitted. */
+  authorInitial: string;
+  avatar?: { src: string; alt: string };
+};
+
+export type HomeHappyClientsData = {
+  title: string;
+  testimonials: HomeHappyClientTestimonial[];
+};
+
 /** #IamPEACE strip + Support the Movement donation panel (homepage). */
 export type HomeSupportMovementData = {
   header: {
@@ -134,6 +149,7 @@ export type HomePageData = {
   aboutCoreValues: HomeAboutCoreValuesData;
   actionPillars: HomeActionPillarsData;
   peaceSummits: HomePeaceSummitsData;
+  happyClients: HomeHappyClientsData;
   supportMovement: HomeSupportMovementData;
   engagement: HomeEngagementData;
 };
