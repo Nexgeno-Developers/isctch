@@ -1,5 +1,8 @@
+'use client';
+
 import Image from 'next/image';
 
+import CountrySearchDropdown from '@/components/common/CountrySearchDropdown';
 import type { GetInvolvedApplicationData, GetInvolvedProgramData } from '@/lib/api/getInvolved/types';
 
 function CheckIcon() {
@@ -21,15 +24,20 @@ function CheckIcon() {
   );
 }
 
+const countryInputClassName =
+  'w-full rounded-[4px] border border-[#E5E7EB] bg-white px-4 py-3 pr-12 text-sm text-[#1F2A37] outline-none transition-colors placeholder:text-[#9AA6B2] focus:border-[#009FE3]';
+
 function Field({
+  name,
   label,
   placeholder,
   type = 'text',
   span = 'half',
 }: {
+  name: string;
   label: string;
   placeholder: string;
-  type?: 'text' | 'email' | 'tel' | 'number' | 'textarea';
+  type?: 'text' | 'email' | 'tel' | 'number' | 'textarea' | 'country';
   span?: 'full' | 'half';
 }) {
   const wrapperClass = span === 'full' ? 'md:col-span-2' : '';
@@ -37,13 +45,30 @@ function Field({
   const inputClass =
     'w-full rounded-[4px] border border-[#E5E7EB] bg-white px-4 py-3 text-sm text-[#1F2A37] outline-none transition-colors placeholder:text-[#9AA6B2] focus:border-[#009FE3]';
 
+  if (type === 'country') {
+    return (
+      <div className={wrapperClass}>
+        <label className={labelClass}>{label}</label>
+        <CountrySearchDropdown
+          name={name}
+          placeholder={placeholder}
+          inputClassName={countryInputClassName}
+        />
+      </div>
+    );
+  }
+
   return (
     <div className={wrapperClass}>
       <label className={labelClass}>{label}</label>
       {type === 'textarea' ? (
-        <textarea className={`${inputClass} min-h-[96px] resize-none`} placeholder={placeholder} />
+        <textarea
+          name={name}
+          className={`${inputClass} min-h-[96px] resize-none`}
+          placeholder={placeholder}
+        />
       ) : (
-        <input className={inputClass} type={type} placeholder={placeholder} />
+        <input className={inputClass} name={name} type={type} placeholder={placeholder} />
       )}
     </div>
   );
@@ -60,69 +85,70 @@ export default function GetInvolvedApplicationSection({
     <section className="bg-white py-12 sm:py-14 lg:py-16">
       <div className="container mx-auto px-4">
         <div className="grid gap-10 lg:grid-cols-2 lg:items-center lg:gap-16">
-        <div className="">
-          <div className="flex items-center gap-3">
-            <span className="h-[2px] w-7 bg-[#F28A11]" aria-hidden />
-            <p className="text-[11px] font-black uppercase tracking-[0.16em] text-[#039FE8]">
-              {program.kicker}
-            </p>
-          </div>
-
-          <h2 className="mt-5 text-[40px] font-black leading-[0.98] tracking-tight text-[#1B2535] sm:text-[46px]">
-            {program.title}
-          </h2>
-
-          <div className="mt-6 space-y-4 text-[18px] leading-9 text-[#5B6673]">
-            {program.description.map((paragraph, index) => (
-              <p key={`${paragraph}-${index}`}>{paragraph}</p>
-            ))}
-          </div>
-
-          <div className="relative mt-8 aspect-[1.18] w-full overflow-hidden rounded-[16px] bg-slate-100 shadow-[0_20px_55px_-30px_rgba(15,23,42,0.35)]">
-            <Image
-              src={program.image.src}
-              alt={program.image.alt}
-              fill
-              className="object-cover"
-              sizes="(max-width: 1023px) 100vw, 520px"
-            />
-          </div>
-
-          <ul className="mt-7 space-y-4">
-            {program.benefits.map((benefit) => (
-              <li key={benefit} className="flex items-start gap-3 text-[15px] leading-7 text-[#556270]">
-                <CheckIcon />
-                <span>{benefit}</span>
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        <div className="rounded-[18px] border border-[#EEF2F7] bg-white p-6 shadow-[0_24px_70px_-40px_rgba(15,23,42,0.28)] sm:p-8">
-          <h3 className="text-[24px] font-black tracking-tight text-[#1B2535]">{application.title}</h3>
-          <p className="mt-2 text-sm leading-6 text-[#8A97A5]">{application.subtitle}</p>
-
-          <form className="mt-7 grid gap-4 md:grid-cols-2">
-            {application.fields.map((field) => (
-              <Field
-                key={field.name}
-                label={field.label}
-                placeholder={field.placeholder}
-                type={field.type}
-                span={field.span}
-              />
-            ))}
-
-            <div className="md:col-span-2">
-              <button
-                type="button"
-                className="mt-2 inline-flex min-h-[52px] w-full items-center justify-center rounded-[6px] bg-[#F28A11] px-6 text-base font-black text-white transition-colors hover:bg-[#DE7F13]"
-              >
-                {application.submitLabel}
-              </button>
+          <div className="">
+            <div className="flex items-center gap-3">
+              <span className="h-[2px] w-7 bg-[#F28A11]" aria-hidden />
+              <p className="text-[11px] font-black uppercase tracking-[0.16em] text-[#EF7D00]">
+                {program.kicker}
+              </p>
             </div>
-          </form>
-        </div>
+
+            <h2 className="mt-5 text-[40px] font-black leading-[0.98] tracking-tight text-[#1B2535] sm:text-[46px]">
+              {program.title}
+            </h2>
+
+            <div className="mt-6 space-y-4 text-[18px] leading-9 text-[#5B6673]">
+              {program.description.map((paragraph, index) => (
+                <p key={`${paragraph}-${index}`}>{paragraph}</p>
+              ))}
+            </div>
+
+            <div className="relative mt-8 aspect-[1.18] w-full overflow-hidden rounded-[16px] bg-slate-100 shadow-[0_20px_55px_-30px_rgba(15,23,42,0.35)]">
+              <Image
+                src={program.image.src}
+                alt={program.image.alt}
+                fill
+                className="object-cover"
+                sizes="(max-width: 1023px) 100vw, 520px"
+              />
+            </div>
+
+            <ul className="mt-7 space-y-4">
+              {program.benefits.map((benefit) => (
+                <li key={benefit} className="flex items-start gap-3 text-[15px] leading-7 text-[#556270]">
+                  <CheckIcon />
+                  <span>{benefit}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div className="rounded-[18px] border border-[#EEF2F7] bg-white p-6 shadow-[0_24px_70px_-40px_rgba(15,23,42,0.28)] sm:p-8">
+            <h3 className="text-[24px] font-black tracking-tight text-[#1B2535]">{application.title}</h3>
+            <p className="mt-2 text-sm leading-6 text-[#8A97A5]">{application.subtitle}</p>
+
+            <form className="mt-7 grid gap-4 md:grid-cols-2">
+              {application.fields.map((field) => (
+                <Field
+                  key={field.name}
+                  name={field.name}
+                  label={field.label}
+                  placeholder={field.placeholder}
+                  type={field.type}
+                  span={field.span}
+                />
+              ))}
+
+              <div className="md:col-span-2">
+                <button
+                  type="button"
+                  className="mt-2 inline-flex min-h-[52px] w-full items-center justify-center rounded-[6px] bg-[#F28A11] px-6 text-base font-black text-white transition-colors hover:bg-[#DE7F13]"
+                >
+                  {application.submitLabel}
+                </button>
+              </div>
+            </form>
+          </div>
         </div>
       </div>
     </section>

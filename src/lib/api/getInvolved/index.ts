@@ -12,7 +12,7 @@ const STATIC_GET_INVOLVED_PAGE: GetInvolvedPageData = {
   },
   program: {
     kicker: 'Leadership Program',
-    title: 'The iSCTH Peace Ambassador',
+    title: 'Peace Ambassador',
     description: [
       'Join a global network of diplomatic leaders committed to conflict resolution and human unity.',
       'As a Peace Ambassador, you serve as the voice of reconciliation in your community and represent iSCTH at international summits.',
@@ -35,8 +35,8 @@ const STATIC_GET_INVOLVED_PAGE: GetInvolvedPageData = {
       { name: 'email', label: 'Email Address', placeholder: 'jane@peace.org', type: 'email', span: 'half' },
       { name: 'phone', label: 'Phone', placeholder: '+1...', type: 'tel', span: 'half' },
       { name: 'age', label: 'Age', placeholder: '25', type: 'number', span: 'half' },
-      { name: 'country', label: 'Country', placeholder: 'Country', span: 'half' },
-      { name: 'occupation', label: 'Occupation', placeholder: 'Current Role / Title', span: 'full' },
+      { name: 'country', label: 'Country', placeholder: 'Country', type: 'country', span: 'half' },
+      { name: 'occupation', label: 'Occupation', placeholder: 'Current Role / Title', span: 'half' },
       {
         name: 'motivation',
         label: 'Motivation for Joining',

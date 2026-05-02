@@ -21,7 +21,7 @@ export type GetInvolvedApplicationField = {
   name: string;
   label: string;
   placeholder: string;
-  type?: 'text' | 'email' | 'tel' | 'number' | 'textarea';
+  type?: 'text' | 'email' | 'tel' | 'number' | 'textarea' | 'country';
   span?: 'full' | 'half';
 };
 
