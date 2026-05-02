@@ -5,6 +5,9 @@ import "./globals.css";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import NavigationProgressProvider from "@/components/common/NavigationProgressProvider";
+import MovementCtaSection from "@/components/common/MovementCtaSection";
+import { ABOUT_US_PAGE_SLUG } from "@/config/publicRoutes";
+import { getAboutPageData } from "@/lib/api/about";
 
 const lato = Lato({
   weight: ['100', '300', '400', '700', '900'],
@@ -36,11 +39,13 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const aboutData = await getAboutPageData(ABOUT_US_PAGE_SLUG);
+
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
@@ -67,6 +72,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         <NavigationProgressProvider>
           <Header />
           {children}
+          <MovementCtaSection data={aboutData.cta} />
           <Footer />
         </NavigationProgressProvider>
       </body>

@@ -135,7 +135,7 @@ export async function AboutPageView({ slug = ABOUT_US_PAGE_SLUG }: { slug?: stri
 
       <AboutCoreValuesSection data={data.coreValues} />
 
-      <AboutManagementTeamSection team={data.managementTeam} cta={data.cta} />
+      <AboutManagementTeamSection team={data.managementTeam} />
     </main>
   );
 }
