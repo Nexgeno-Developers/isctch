@@ -142,7 +142,7 @@ export default function GetInvolvedApplicationSection({
               <div className="md:col-span-2">
                 <button
                   type="button"
-                  className="mt-2 inline-flex min-h-[52px] w-full items-center justify-center rounded-[6px] bg-[#F28A11] px-6 text-base font-black text-white transition-colors hover:bg-[#DE7F13]"
+                  className="cursor-pointer mt-2 inline-flex min-h-[52px] w-full items-center justify-center rounded-[6px] bg-[#F28A11] px-6 text-base font-black text-white transition-colors hover:bg-[#DE7F13]"
                 >
                   {application.submitLabel}
                 </button>
