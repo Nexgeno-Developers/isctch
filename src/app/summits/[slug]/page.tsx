@@ -2,83 +2,14 @@ import type { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 
+import SummitDetailRelatedEvents from '@/components/summits/SummitDetailRelatedEvents';
 import { getCanonicalUrl } from '@/config/site';
 import { SUMMITS_PAGE_SLUG, summitDetailPath } from '@/config/publicRoutes';
-import { getSummitDetailPageData, getSummitDetailSlugFromPath } from '@/lib/api/summits';
-import type { SummitRelatedCard } from '@/lib/api/summits/types';
+import { getSummitDetailPageData } from '@/lib/api/summits';
 
 type PageProps = {
   params: Promise<{ slug: string }>;
 };
-
-function ReadMoreChevronIcon() {
-  return (
-    <svg className="h-4 w-4 shrink-0" viewBox="0 0 24 24" fill="none" aria-hidden>
-      <path
-        d="m9 18 6-6-6-6"
-        stroke="currentColor"
-        strokeWidth="2.2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
-  );
-}
-
-function ArrowIcon({ direction }: { direction: 'previous' | 'next' }) {
-  return (
-    <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" aria-hidden>
-      {direction === 'previous' ? (
-        <path
-          d="m15 18-6-6 6-6"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-      ) : (
-        <path
-          d="m9 18 6-6-6-6"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-      )}
-    </svg>
-  );
-}
-
-function RelatedSummitCard({ card }: { card: SummitRelatedCard }) {
-  return (
-    <article className="overflow-hidden rounded-md bg-white shadow-[0_10px_26px_-16px_rgba(15,23,42,0.45)] ring-1 ring-[#E5ECF3]">
-      {/* <div className="h-2 bg-[#009FE3]" /> */}
-      <div className="relative aspect-[16/10] w-full overflow-hidden bg-[#F3F7FB]">
-        <Image
-          src={card.image.src}
-          alt={card.image.alt}
-          fill
-          className="object-cover"
-          sizes="(max-width: 767px) 100vw, 33vw"
-        />
-      </div>
-      <div className="p-7">
-        <p className="text-[11px] font-black uppercase tracking-[0.12em] text-[#009FE3]">
-          {card.location}
-        </p>
-        <h3 className="mt-3 text-xl font-black leading-tight text-[#1A1A2E]">{card.title}</h3>
-        <p className="mt-4 min-h-[84px] text-sm leading-7 text-[#526477]">{card.description}</p>
-        <Link
-          href={card.href}
-          className="mt-5 inline-flex items-center gap-2 text-sm font-black uppercase tracking-[0.08em] text-[#EF7D00] transition-colors hover:text-[#cf6800]"
-        >
-          Read More
-          <ReadMoreChevronIcon />
-        </Link>
-      </div>
-    </article>
-  );
-}
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
@@ -93,7 +24,6 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 }
 
 export async function SummitDetailPageView({ slug }: { slug: string }) {
-  const detailSlug = getSummitDetailSlugFromPath(slug);
   const data = await getSummitDetailPageData(slug);
 
   return (
@@ -135,11 +65,11 @@ export async function SummitDetailPageView({ slug }: { slug: string }) {
                 <p className="text-[12px] font-black uppercase tracking-[0.12em] text-[#009FE3]">
                   {data.detail.location}
                 </p>
-                <h2 className="mt-4 text-2xl font-black leading-tight text-[#1A1A2E] lg:text-[32px]">
+                <h2 className="mt-4 text-2xl font-black leading-tight text-[#1A1A2E] lg:text-[36px]">
                   {data.detail.title}
                 </h2>
-                <p className="mt-6 text-sm leading-7 text-[#526477]">{data.detail.summary}</p>
-                <div className="mt-4 space-y-4 text-sm leading-7 text-[#526477]">
+                <p className="mt-4 text-base leading-relaxed text-[#3E4850] lg:text-[18px]">{data.detail.summary}</p>
+                <div className="space-y-4 mt-4 text-base leading-relaxed text-[#3E4850] lg:text-[18px]">
                   {data.detail.paragraphs.map((paragraph) => (
                     <p key={paragraph}>{paragraph}</p>
                   ))}
@@ -174,28 +104,7 @@ export async function SummitDetailPageView({ slug }: { slug: string }) {
             </aside>
           </div>
 
-          <div className="mt-12 grid gap-8 md:grid-cols-3">
-            {data.related.cards.slice(0, 3).map((card) => (
-              <RelatedSummitCard key={`${card.title}-${card.image.src}`} card={card} />
-            ))}
-          </div>
-
-          <div className="mt-7 flex justify-center gap-3">
-            <Link
-              href={summitDetailPath(detailSlug)}
-              aria-label="Previous related summit"
-              className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-[#009FE3] bg-white text-[#009FE3] transition-colors hover:bg-[#009FE3] hover:text-white"
-            >
-              <ArrowIcon direction="previous" />
-            </Link>
-            <Link
-              href={summitDetailPath(detailSlug)}
-              aria-label="Next related summit"
-              className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-[#009FE3] bg-white text-[#009FE3] transition-colors hover:bg-[#009FE3] hover:text-white"
-            >
-              <ArrowIcon direction="next" />
-            </Link>
-          </div>
+          <SummitDetailRelatedEvents cards={data.related.cards} />
         </div>
       </section>
     </main>
