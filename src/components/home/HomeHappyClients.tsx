@@ -52,27 +52,13 @@ function StarRow() {
   );
 }
 
-function QuoteMarkIcon() {
-  return (
-    <svg
-      className="h-10 w-12 shrink-0 text-[#009fe3] sm:h-12 sm:w-14"
-      viewBox="0 0 48 40"
-      fill="currentColor"
-      aria-hidden
-    >
-      <path d="M8 20c0-6 4-12 12-14v6c-4 1.5-6 5-6 8h6v10H8V20zm24 0c0-6 4-12 12-14v6c-4 1.5-6 5-6 8h6v10H32V20z" />
-    </svg>
-  );
-}
-
 function formatRating(rating: number): string {
   if (rating >= 5) return '5/5';
   return `${rating.toFixed(1)}/5`;
 }
 
 /**
- * Testimonial carousel — same Swiper behavior as {@link HomePeaceSummits}
- * (breakpoints, rewind, autoplay); layout matches the Happy Clients mockup.
+ * Testimonial carousel — same Swiper behavior and header/nav row as {@link HomePeaceSummits}.
  */
 export default function HomeHappyClients({ data }: Props) {
   const { title, testimonials } = data;
@@ -89,12 +75,34 @@ export default function HomeHappyClients({ data }: Props) {
       aria-labelledby="happy-clients-heading"
     >
       <div className="container mx-auto px-4">
-        <h2
-          id="happy-clients-heading"
-          className="text-center text-3xl font-black tracking-tight text-[#1A1A2E] lg:text-[36px]"
-        >
-          {title}
-        </h2>
+        <div className="flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
+          <div className="text-left">
+            <h2
+              id="happy-clients-heading"
+              className="text-3xl font-black tracking-tight text-[#009fe3] lg:text-[36px]"
+            >
+              {title}
+            </h2>
+          </div>
+          <div className="relative z-20 flex w-full items-center justify-end gap-2 sm:w-auto">
+            <button
+              type="button"
+              className="inline-flex h-10 w-10 cursor-pointer items-center justify-center rounded-full border-2 border-[#00AEEF] bg-white text-[#00AEEF] transition-colors hover:bg-[#00AEEF] hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#00AEEF]"
+              aria-label="Previous testimonial"
+              onClick={() => swiperRef.current?.slidePrev()}
+            >
+              <ArrowIcon direction="prev" />
+            </button>
+            <button
+              type="button"
+              className="inline-flex h-10 w-10 cursor-pointer items-center justify-center rounded-full border-2 border-[#00AEEF] bg-white text-[#00AEEF] transition-colors hover:bg-[#00AEEF] hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#00AEEF]"
+              aria-label="Next testimonial"
+              onClick={() => swiperRef.current?.slideNext()}
+            >
+              <ArrowIcon direction="next" />
+            </button>
+          </div>
+        </div>
 
         <div className="relative z-0 mt-10 md:mt-12 w-full min-w-0">
           <Swiper
@@ -166,25 +174,6 @@ export default function HomeHappyClients({ data }: Props) {
               </SwiperSlide>
             ))}
           </Swiper>
-        </div>
-
-        <div className="mt-8 flex justify-center gap-2">
-          <button
-            type="button"
-            className="inline-flex h-10 w-10 cursor-pointer items-center justify-center rounded-full border-2 border-[#1A1A2E] bg-white text-[#1A1A2E] transition-colors hover:bg-[#1A1A2E] hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#009fe3]"
-            aria-label="Previous testimonial"
-            onClick={() => swiperRef.current?.slidePrev()}
-          >
-            <ArrowIcon direction="prev" />
-          </button>
-          <button
-            type="button"
-            className="inline-flex h-10 w-10 cursor-pointer items-center justify-center rounded-full border-2 border-[#1A1A2E] bg-white text-[#1A1A2E] transition-colors hover:bg-[#1A1A2E] hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#009fe3]"
-            aria-label="Next testimonial"
-            onClick={() => swiperRef.current?.slideNext()}
-          >
-            <ArrowIcon direction="next" />
-          </button>
         </div>
       </div>
     </section>
