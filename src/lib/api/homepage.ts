@@ -20,7 +20,12 @@ export type HomeImpactStatItem =
   | { mode: 'symbol'; symbol: string; label: string };
 export type HomeImpactStatsData = { items: HomeImpactStatItem[] };
 export type HomeCoreValueIconId = 'hand-heart' | 'leaf' | 'handshake' | 'heart' | 'scales';
-export type HomeCoreValueItem = { icon: HomeCoreValueIconId; label: string };
+export type HomeCoreValueItem = {
+  icon: HomeCoreValueIconId;
+  label: string;
+  /** CMS `core_values.icon[].url` when present — shown instead of local glyph. */
+  iconSrc?: string;
+};
 export type HomeAboutCoreValuesData = {
   aboutKicker: string;
   headlineLine1: string;
@@ -249,14 +254,20 @@ function pillarIcon(title: string, i: number): HomeActionPillarIconId {
   return PILLAR_FALLBACK[i] ?? 'people';
 }
 
-function coreValues(block: unknown): HomeCoreValueItem[] | null {
+function coreValues(block: unknown, norm: (u: string) => string): HomeCoreValueItem[] | null {
   if (!rec(block) || !Array.isArray(block.title)) return null;
   const titles = block.title;
+  const icons = block.icon;
   const out: HomeCoreValueItem[] = [];
   for (let i = 0; i < titles.length; i++) {
     const label = str(titles[i]);
     if (!label || label === 'data') continue;
-    out.push({ icon: coreIcon(label), label });
+    const url = cellUrl(Array.isArray(icons) ? icons[i] : undefined, norm);
+    out.push({
+      icon: coreIcon(label),
+      label,
+      ...(url ? { iconSrc: url } : {}),
+    });
   }
   return out.length ? out : null;
 }
@@ -451,7 +462,7 @@ function parseLayout(m: Record<string, unknown>, c: Ctx): HomePageData {
 
   const aboutTitle = str(m.about_title);
   const { line1, line2 } = aboutTitle ? aboutLines(aboutTitle) : { line1: '', line2: '' };
-  const coreList = coreValues(m.core_values);
+  const coreList = coreValues(m.core_values, norm);
 
   const iamRaw = str(m.i_am_piece_title).trim();
   const peaceIdx = iamRaw.toUpperCase().lastIndexOf('PEACE');

@@ -86,7 +86,18 @@ export default function HomeAboutCoreValues({ data }: Props) {
                   key={`core-value-${index}`}
                   className="flex items-center gap-4 rounded-lg bg-[#F5F2FF] px-4 py-5 sm:px-5"
                 >
-                  <CoreValueGlyph id={item.icon} />
+                  {item.iconSrc ? (
+                    <Image
+                      src={item.iconSrc}
+                      alt={item.label}
+                      width={30}
+                      height={30}
+                      className="h-6 w-6 shrink-0 object-contain"
+                      unoptimized
+                    />
+                  ) : (
+                    <CoreValueGlyph id={item.icon} />
+                  )}
                   <span className="text-sm font-bold uppercase tracking-wide text-[#1A1A2E] sm:text-base">
                     {item.label}
                   </span>
