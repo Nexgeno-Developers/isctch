@@ -192,7 +192,7 @@ export default function SummitsLegacySection() {
                     <h3 className="mt-3 text-[24px] font-black leading-tight text-[#1A1A2E]">
                       {summit.title}
                     </h3>
-                    <p className="mt-4 text-[16px] leading-relaxed text-[#3E4850] text-ellipsis line-clamp-3">
+                    <p className="mt-4 text-[18px] leading-relaxed text-[#3E4850] text-ellipsis line-clamp-3">
                       {summit.description}
                     </p>
                     <Link
