@@ -90,10 +90,21 @@ export default function HomeActionPillars({ data }: Props) {
                 }`}
               >
                 <div className="pt-0">
-                  <PillarIcon
-                    id={pillar.icon}
-                    accent={topBlue ? 'orange' : 'cyan'}
-                  />
+                  {pillar.iconSrc ? (
+                    <Image
+                      src={pillar.iconSrc}
+                      alt={pillar.title}
+                      width={30}
+                      height={30}
+                      className="h-[30px] w-[30px] object-contain"
+                      unoptimized
+                    />
+                  ) : (
+                    <PillarIcon
+                      id={pillar.icon}
+                      accent={topBlue ? 'orange' : 'cyan'}
+                    />
+                  )}
                 </div>
                 <h3 className="mt-6 text-lg font-bold text-[#1A1A2E] lg:text-[20px]">{pillar.title}</h3>
                 <p className="mt-2 text-sm leading-relaxed text-[#3E4850] lg:text-base">

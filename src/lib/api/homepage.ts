@@ -38,7 +38,13 @@ export type HomeAboutCoreValuesData = {
 };
 export type HomeActionPillarIconId =
   | 'people' | 'meditation' | 'graduation' | 'megaphone' | 'book' | 'scales-policy';
-export type HomeActionPillarItem = { icon: HomeActionPillarIconId; title: string; description: string };
+export type HomeActionPillarItem = {
+  icon: HomeActionPillarIconId;
+  title: string;
+  description: string;
+  /** `our_actions.icon[].url` from CMS */
+  iconSrc?: string;
+};
 export type HomeActionPillarsData = { kicker: string; title: string; pillars: HomeActionPillarItem[] };
 export type HomePeaceSummitCard = {
   location: string;
@@ -71,6 +77,14 @@ export type HomeEngagementData = {
   cards: HomeEngagementCard[];
   cta: { label: string; href: string };
 };
+/** From page API `data.seo` when present. */
+export type HomePageSeo = {
+  title?: string | null;
+  description?: string | null;
+  keywords?: string | null;
+  canonical_url?: string | null;
+};
+
 export type HomePageData = {
   hero: HomeHeroData;
   impactStats: HomeImpactStatsData;
@@ -80,6 +94,7 @@ export type HomePageData = {
   happyClients: HomeHappyClientsData;
   supportMovement: HomeSupportMovementData;
   engagement: HomeEngagementData;
+  seo?: HomePageSeo | null;
 };
 
 const PAGE_SLUG = (process.env.HOMEPAGE_PAGE_SLUG || 'home').replace(/^\/+|\/+$/g, '');
@@ -89,7 +104,25 @@ const FORCE_STATIC_HERO_IMG = ['1', 'true', 'yes'].includes(
 );
 const REVALIDATE = Number(process.env.HOMEPAGE_HERO_REVALIDATE_SECONDS ?? 60 * 60);
 
-type PagePayload = { data?: { meta?: unknown } };
+type PagePayload = { data?: { meta?: unknown; seo?: unknown } };
+
+function pick(m: Record<string, unknown>, keys: string[]): string {
+  for (const k of keys) {
+    const v = str(m[k]);
+    if (v) return v;
+  }
+  return '';
+}
+
+function seoFromApi(raw: unknown): HomePageSeo | null {
+  if (!rec(raw)) return null;
+  const title = str(raw.title);
+  const description = str(raw.description);
+  const keywords = str(raw.keywords);
+  const canonical_url = str(raw.canonical_url);
+  if (!title && !description && !keywords && !canonical_url) return null;
+  return { title: title || null, description: description || null, keywords: keywords || null, canonical_url: canonical_url || null };
+}
 
 type Ctx = {
   norm: (u: string) => string;
@@ -276,6 +309,7 @@ function pillars(
   block: unknown,
   meta: Record<string, unknown>,
   fb: HomeActionPillarsData,
+  norm: (u: string) => string,
 ): HomeActionPillarsData {
   if (!rec(block) || !Array.isArray(block.title)) {
     return {
@@ -286,14 +320,17 @@ function pillars(
   }
   const titles = block.title;
   const descs = block.description;
+  const icons = block.icon;
   const list: HomeActionPillarItem[] = [];
   for (let i = 0; i < titles.length; i++) {
     const title = str(titles[i]);
     if (!title || title === 'data') continue;
+    const url = cellUrl(Array.isArray(icons) ? icons[i] : undefined, norm);
     list.push({
       icon: pillarIcon(title, list.length),
       title,
       description: Array.isArray(descs) ? str(descs[i]) : '',
+      ...(url ? { iconSrc: url } : {}),
     });
   }
   return {
@@ -349,7 +386,12 @@ function engagement(meta: Record<string, unknown>): HomeEngagementData | null {
     title: str(meta.engagement_title) || 'Join Our Global Family',
     cards,
     cta: {
-      label: 'Apply as peace ambassador',
+      label:
+        pick(meta, [
+          'engagement_cta_label',
+          'engagement_ambassador_cta_label',
+          'peace_ambassador_cta_label',
+        ]) || 'Apply as peace ambassador',
       href: str(meta.engagement_ambassador_navigation_url) || getInvolvedPath(),
     },
   };
@@ -436,6 +478,7 @@ function emptyPage(): HomePageData {
       panel: { headline: '', body: '', donorsLine: '', avatars: [] },
     },
     engagement: { ...c.engageFb },
+    seo: null,
   };
 }
 
@@ -446,16 +489,26 @@ function parseLayout(m: Record<string, unknown>, c: Ctx): HomePageData {
     headline: splitHeroSub(str(m.banner_subtitle)),
     description: stripHtml(str(m.banner_description)) || heroFb.description,
     primaryCta: {
-      label: 'Join the movement',
+      label:
+        pick(m, [
+          'banner_join_cta_label',
+          'banner_primary_cta_label',
+          'hero_primary_cta_label',
+        ]) || 'Join the movement',
       href: str(m.banner_join_navigation) || heroFb.primaryCta.href,
     },
     secondaryCta: {
-      label: 'Learn more',
+      label:
+        pick(m, [
+          'banner_learn_cta_label',
+          'banner_secondary_cta_label',
+          'hero_secondary_cta_label',
+        ]) || 'Learn more',
       href: str(m.banner_learn_more_navigation) || heroFb.secondaryCta.href,
     },
     image: bannerImg(m, norm, heroFb.image),
     statCard: {
-      label: 'Active community',
+      label: pick(m, ['banner_stat_label', 'banner_active_community_label', 'hero_stat_label']) || 'Active community',
       value: str(m.banner_active_community_count) || heroFb.statCard.value,
     },
   };
@@ -490,7 +543,7 @@ function parseLayout(m: Record<string, unknown>, c: Ctx): HomePageData {
       coreValuesKicker: str(m.core_values_title) || aboutFb.coreValuesKicker,
       values: coreList ?? aboutFb.values,
     },
-    actionPillars: pillars(m.our_actions, m, pillarsFb),
+    actionPillars: pillars(m.our_actions, m, pillarsFb, norm),
     peaceSummits: {
       kicker: str(m.events_subtitle) || 'Events',
       title: str(m.events_title) || 'Global Peace Summits',
@@ -526,14 +579,15 @@ async function fetchUncached(): Promise<HomePageData> {
     init: { headers: { Accept: 'application/json' } },
   });
 
+  const seo = seoFromApi(payload?.data?.seo);
   const meta = payload?.data?.meta;
-  if (!isLayout(meta)) return emptyPage();
+  if (!isLayout(meta)) return { ...emptyPage(), seo };
   const c = ctx();
   let data = parseLayout(meta, c);
   if (FORCE_STATIC_HERO_IMG) {
     data = { ...data, hero: { ...data.hero, image: c.heroFb.image } };
   }
-  return data;
+  return { ...data, seo };
 }
 
 const getCachedHomePage = unstable_cache(

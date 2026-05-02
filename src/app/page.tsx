@@ -13,11 +13,19 @@ import HomeSupportMovement from '@/components/home/HomeSupportMovement';
 import HomeEngagement from '@/components/home/HomeEngagement';
 
 export async function generateMetadata(): Promise<Metadata> {
-  const { hero } = await getHomePageData();
+  const { hero, seo } = await getHomePageData();
+  const title = seo?.title?.trim() || 'iSCTH — Home';
+  const description = (seo?.description?.trim() || hero.description || '').slice(0, 160);
+  const keywords = seo?.keywords
+    ?.split(',')
+    .map((s) => s.trim())
+    .filter(Boolean);
+  const canonical = seo?.canonical_url?.trim() || getCanonicalUrl('/');
   return {
-    title: 'iSCTH — Home',
-    description: hero.description.slice(0, 160),
-    alternates: { canonical: getCanonicalUrl('/') },
+    title,
+    description,
+    ...(keywords?.length ? { keywords } : {}),
+    alternates: { canonical },
   };
 }
 

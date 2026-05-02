@@ -24,9 +24,9 @@ export default function HomeHero({ data }: HomeHeroProps) {
               id="hero-heading"
               className="text-3xl leading-tight tracking-tight text-[#1a1a2e] lg:text-[72px]"
             >
-              {headline.accent}
-              {headline.lineMiddle}
-              {headline.accentWord}
+              <span className="font-bold text-[#009FE3]">{headline.accent}</span>{' '}
+              <span className="text-[#1a1a2e]">{headline.lineMiddle}</span>{' '}
+              <span className="text-[#EF7D00]">{headline.accentWord}</span>
             </h1>
 
             <p className="mt-6 text-[18px] leading-relaxed text-[#3E4850]">
