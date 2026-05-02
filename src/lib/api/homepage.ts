@@ -5,65 +5,22 @@ import { unstable_cache } from 'next/cache';
 import { API_CACHE_TAG, fetchJsonCached } from '@/lib/api/apiCache';
 import { aboutUsPath, getInvolvedPath } from '@/config/publicRoutes';
 
-// --- types (homepage UI + `getHomePageData` shape) ---------------------------
-
-export type HomeHeroCta = {
-  label: string;
-  href: string;
-};
-
+export type HomeHeroCta = { label: string; href: string };
 export type HomeHeroData = {
   overline: string;
-  headline: {
-    accent: string;
-    lineMiddle: string;
-    accentWord: string;
-  };
+  headline: { accent: string; lineMiddle: string; accentWord: string };
   description: string;
   primaryCta: HomeHeroCta;
   secondaryCta: HomeHeroCta;
   image: { src: string; alt: string };
-  statCard: {
-    label: string;
-    value: string;
-  };
+  statCard: { label: string; value: string };
 };
-
-/** One stat in the cyan impact bar — either animated count or a fixed symbol (∞). */
 export type HomeImpactStatItem =
-  | {
-      mode: 'count';
-      end: number;
-      prefix?: string;
-      suffix?: string;
-      /** Minimum digit width, e.g. 2 → `07` */
-      pad?: number;
-      label: string;
-    }
-  | {
-      mode: 'symbol';
-      symbol: string;
-      label: string;
-    };
-
-export type HomeImpactStatsData = {
-  items: HomeImpactStatItem[];
-};
-
-/** Icon set for core value cards (mapped to inline SVGs in the UI). */
-export type HomeCoreValueIconId =
-  | 'hand-heart'
-  | 'leaf'
-  | 'handshake'
-  | 'heart'
-  | 'scales';
-
-export type HomeCoreValueItem = {
-  icon: HomeCoreValueIconId;
-  label: string;
-};
-
-/** About + core values two-column block (homepage). */
+  | { mode: 'count'; end: number; prefix?: string; suffix?: string; pad?: number; label: string }
+  | { mode: 'symbol'; symbol: string; label: string };
+export type HomeImpactStatsData = { items: HomeImpactStatItem[] };
+export type HomeCoreValueIconId = 'hand-heart' | 'leaf' | 'handshake' | 'heart' | 'scales';
+export type HomeCoreValueItem = { icon: HomeCoreValueIconId; label: string };
 export type HomeAboutCoreValuesData = {
   aboutKicker: string;
   headlineLine1: string;
@@ -74,63 +31,27 @@ export type HomeAboutCoreValuesData = {
   coreValuesKicker: string;
   values: HomeCoreValueItem[];
 };
-
-/** Icons for action pillar cards (inline SVGs). */
 export type HomeActionPillarIconId =
-  | 'people'
-  | 'meditation'
-  | 'graduation'
-  | 'megaphone'
-  | 'book'
-  | 'scales-policy';
-
-export type HomeActionPillarItem = {
-  icon: HomeActionPillarIconId;
-  title: string;
-  description: string;
-};
-
-export type HomeActionPillarsData = {
-  kicker: string;
-  title: string;
-  pillars: HomeActionPillarItem[];
-};
-
+  | 'people' | 'meditation' | 'graduation' | 'megaphone' | 'book' | 'scales-policy';
+export type HomeActionPillarItem = { icon: HomeActionPillarIconId; title: string; description: string };
+export type HomeActionPillarsData = { kicker: string; title: string; pillars: HomeActionPillarItem[] };
 export type HomePeaceSummitCard = {
   location: string;
   title: string;
   description: string;
   image: { src: string; alt: string };
 };
-
-export type HomePeaceSummitsData = {
-  kicker: string;
-  title: string;
-  summits: HomePeaceSummitCard[];
-};
-
+export type HomePeaceSummitsData = { kicker: string; title: string; summits: HomePeaceSummitCard[] };
 export type HomeHappyClientTestimonial = {
   quote: string;
-  /** Shown next to stars, e.g. 4.8 → "4.8/5". */
   rating: number;
   authorName: string;
-  /** Shown in the avatar circle when `avatar` is omitted. */
   authorInitial: string;
   avatar?: { src: string; alt: string };
 };
-
-export type HomeHappyClientsData = {
-  title: string;
-  testimonials: HomeHappyClientTestimonial[];
-};
-
-/** #IamPEACE strip + Support the Movement donation panel (homepage). */
+export type HomeHappyClientsData = { title: string; testimonials: HomeHappyClientTestimonial[] };
 export type HomeSupportMovementData = {
-  header: {
-    titleCyan: string;
-    titleOrange: string;
-    subline: string;
-  };
+  header: { titleCyan: string; titleOrange: string; subline: string };
   panel: {
     headline: string;
     body: string;
@@ -138,20 +59,13 @@ export type HomeSupportMovementData = {
     avatars: { src: string; alt: string }[];
   };
 };
-
-export type HomeEngagementCard = {
-  title: string;
-  description: string;
-};
-
-/** Engagement slider — Join Our Global Family (homepage). */
+export type HomeEngagementCard = { title: string; description: string };
 export type HomeEngagementData = {
   kicker: string;
   title: string;
   cards: HomeEngagementCard[];
   cta: { label: string; href: string };
 };
-
 export type HomePageData = {
   hero: HomeHeroData;
   impactStats: HomeImpactStatsData;
@@ -163,97 +77,56 @@ export type HomePageData = {
   engagement: HomeEngagementData;
 };
 
-// --- env / cache ------------------------------------------------------------
-
-const DEV_FALLBACK_API_BASE = 'https://istch.webtesting.pw/api';
-const DEV_FALLBACK_API_DOMAIN = 'https://istch.webtesting.pw';
-
-const HOMEPAGE_PAGE_SLUG = (process.env.HOMEPAGE_PAGE_SLUG || 'home').replace(
-  /^\/+|\/+$/g,
-  '',
-);
-
-const HOMEPAGE_PAGE_ID = process.env.HOMEPAGE_PAGE_ID?.trim();
-
-const HOME_HERO_FORCE_STATIC_IMAGE = ['1', 'true', 'yes'].includes(
+const PAGE_SLUG = (process.env.HOMEPAGE_PAGE_SLUG || 'home').replace(/^\/+|\/+$/g, '');
+const PAGE_ID = process.env.HOMEPAGE_PAGE_ID?.trim();
+const FORCE_STATIC_HERO_IMG = ['1', 'true', 'yes'].includes(
   (process.env.HOME_HERO_FORCE_STATIC_IMAGE || '').toLowerCase().trim(),
 );
+const REVALIDATE = Number(process.env.HOMEPAGE_HERO_REVALIDATE_SECONDS ?? 60 * 60);
 
-const PAGE_CACHE_SECONDS = Number(
-  process.env.HOMEPAGE_HERO_REVALIDATE_SECONDS ?? 60 * 60,
-);
+type PagePayload = { data?: { meta?: unknown } };
 
-type PageApiPayload = {
-  data?: { meta?: unknown; slug?: string };
+type Ctx = {
+  norm: (u: string) => string;
+  heroFb: HomeHeroData;
+  aboutFb: HomeAboutCoreValuesData;
+  impactFb: HomeImpactStatsData;
+  pillarsFb: HomeActionPillarsData;
+  clientsFb: HomeHappyClientsData;
+  engageFb: HomeEngagementData;
 };
 
-type LayoutV1ParseContext = {
-  normalizeImageUrl: (url: string) => string;
-  staticHeroFallback: HomeHeroData;
-  staticAboutFallback: HomeAboutCoreValuesData;
-  staticImpactFallback: HomeImpactStatsData;
-  staticActionPillars: HomeActionPillarsData;
-  staticHappyClientsFallback: HomeHappyClientsData;
-  staticEngagementFallback: HomeEngagementData;
-};
-
-function resolvedApiBaseUrl(): string | null {
-  const fromEnv = process.env.COMPANY_API_BASE_URL?.trim();
-  if (fromEnv) return fromEnv.replace(/\/+$/, '');
-  if (process.env.NODE_ENV === 'development') return DEV_FALLBACK_API_BASE.replace(/\/+$/, '');
-  return null;
+function apiBase(): string | null {
+  const e = process.env.COMPANY_API_BASE_URL?.trim();
+  return e ? e.replace(/\/+$/, '') : null;
 }
 
-function resolvedApiDomain(): string {
-  const fromEnv = process.env.COMPANY_API_DOMAIN?.replace(/\/+$/, '') || '';
-  if (fromEnv) return fromEnv;
-  if (process.env.NODE_ENV === 'development') return DEV_FALLBACK_API_DOMAIN;
-  return '';
+function apiDomain(): string {
+  return process.env.COMPANY_API_DOMAIN?.replace(/\/+$/, '') || '';
 }
 
-function buildCompanyApiUrl(endpoint: string): string | null {
-  const base = resolvedApiBaseUrl();
-  if (!base) return null;
-  const path = endpoint.startsWith('/') ? endpoint : `/${endpoint}`;
-  return `${base}${path}`;
-}
-
-function normalizeImageUrl(url: string): string {
-  const domain = resolvedApiDomain();
+function normImg(url: string): string {
+  const d = apiDomain();
   const u = url.trim();
   if (!u) return '/hero_images.png';
   if (/^https?:\/\//i.test(u)) return u;
   if (u.startsWith('/')) return u;
-  if (!domain) return u.startsWith('/') ? u : `/${u}`;
-  return `${domain}/${u.replace(/^\/+/, '')}`;
+  return d ? `${d}/${u.replace(/^\/+/, '')}` : (u.startsWith('/') ? u : `/${u}`);
 }
 
-function homePageApiPath(): string {
-  if (HOMEPAGE_PAGE_ID && /^\d+$/.test(HOMEPAGE_PAGE_ID)) {
-    return `/v1/page/${HOMEPAGE_PAGE_ID}`;
-  }
-  return `/v1/page/${HOMEPAGE_PAGE_SLUG}`;
+function pagePath(): string {
+  return PAGE_ID && /^\d+$/.test(PAGE_ID) ? `/v1/page/${PAGE_ID}` : `/v1/page/${PAGE_SLUG}`;
 }
 
-function homePageCacheKeySegment(): string {
-  return HOMEPAGE_PAGE_ID && /^\d+$/.test(HOMEPAGE_PAGE_ID)
-    ? `id:${HOMEPAGE_PAGE_ID}`
-    : `slug:${HOMEPAGE_PAGE_SLUG}`;
+function cacheSeg(): string {
+  return PAGE_ID && /^\d+$/.test(PAGE_ID) ? `id:${PAGE_ID}` : `slug:${PAGE_SLUG}`;
 }
 
-// --- layout v1: CMS meta → HomePageData -------------------------------------
-
-function isRecord(x: unknown): x is Record<string, unknown> {
-  return typeof x === 'object' && x !== null;
-}
-
-function asString(v: unknown): string {
-  return typeof v === 'string' ? v.trim() : '';
-}
-
-function isLayoutHomeV1Meta(meta: unknown): meta is Record<string, unknown> {
-  return isRecord(meta) && typeof meta.banner_title === 'string' && meta.banner_title.length > 0;
-}
+const rec = (x: unknown): x is Record<string, unknown> =>
+  typeof x === 'object' && x !== null;
+const str = (v: unknown): string => (typeof v === 'string' ? v.trim() : '');
+const isLayout = (m: unknown): m is Record<string, unknown> =>
+  rec(m) && typeof m.banner_title === 'string' && m.banner_title.length > 0;
 
 function stripHtml(html: string): string {
   return html
@@ -265,77 +138,37 @@ function stripHtml(html: string): string {
     .trim();
 }
 
-function splitHeroHeadline(subtitle: string): {
-  accent: string;
-  lineMiddle: string;
-  accentWord: string;
-} {
+function splitHeroSub(subtitle: string): HomeHeroData['headline'] {
   const s = subtitle.trim();
-  const parts = s
-    .split(/\u2014|\u2013|—|–/)
-    .map((p) => p.trim())
-    .filter(Boolean);
-  if (parts.length >= 2) {
-    const accent = parts[0] ?? '';
-    const tail = parts.slice(1).join(' ').trim();
-    const words = tail.split(/\s+/).filter(Boolean);
-    if (words.length >= 2) {
-      return {
-        accent,
-        lineMiddle: words.slice(0, -1).join(' '),
-        accentWord: words[words.length - 1] ?? '',
-      };
-    }
-    return { accent, lineMiddle: tail, accentWord: '' };
-  }
-  return { accent: s, lineMiddle: '', accentWord: '' };
+  const parts = s.split(/\u2014|\u2013|—|–/).map((p) => p.trim()).filter(Boolean);
+  if (parts.length < 2) return { accent: s, lineMiddle: '', accentWord: '' };
+  const accent = parts[0] ?? '';
+  const tail = parts.slice(1).join(' ').trim();
+  const words = tail.split(/\s+/).filter(Boolean);
+  if (words.length < 2) return { accent, lineMiddle: tail, accentWord: '' };
+  return {
+    accent,
+    lineMiddle: words.slice(0, -1).join(' '),
+    accentWord: words[words.length - 1] ?? '',
+  };
 }
 
-function splitIamPeaceTitle(raw: string): { titleCyan: string; titleOrange: string } {
-  const t = raw.trim();
-  const idx = t.toUpperCase().lastIndexOf('PEACE');
-  if (idx >= 0) {
-    return {
-      titleCyan: t.slice(0, idx).trim() || '#Iam',
-      titleOrange: t.slice(idx).trim() || 'PEACE',
-    };
-  }
-  return { titleCyan: '#Iam', titleOrange: t || 'PEACE' };
-}
-
-function scoreAsStatDisplay(s: string): number {
+function statDispScore(s: string): number {
   const t = s.trim();
   if (/∞/.test(t)) return 4;
-  if (/^0\d$/.test(t)) return 3;
-  if (/^\d+\+?$/.test(t)) return 3;
+  if (/^0\d$/.test(t) || /^\d+\+?$/.test(t)) return 3;
   if (t.length <= 4 && !/[a-z]{3,}/i.test(t)) return 2;
   return 0;
 }
 
-function pickLabelAndDisplay(a: string, b: string): { label: string; display: string } {
-  const sa = scoreAsStatDisplay(a);
-  const sb = scoreAsStatDisplay(b);
-  if (sa > sb) return { label: b, display: a };
-  if (sb > sa) return { label: a, display: b };
-  return a.length >= b.length ? { label: a, display: b } : { label: b, display: a };
-}
-
-function displayToStatItem(display: string, label: string): HomeImpactStatItem {
+function toImpactItem(display: string, label: string): HomeImpactStatItem {
   const d = display.trim();
-  if (/∞/.test(d)) {
-    return { mode: 'symbol', symbol: '∞', label };
-  }
-  const plus = /^(\d+)\+$/.exec(d);
-  if (plus) {
-    return { mode: 'count', end: Number.parseInt(plus[1]!, 10), suffix: '+', label };
-  }
-  if (/^0\d$/.test(d)) {
-    return { mode: 'count', end: Number.parseInt(d, 10), suffix: '', pad: 2, label };
-  }
+  if (/∞/.test(d)) return { mode: 'symbol', symbol: '∞', label };
+  const p = /^(\d+)\+$/.exec(d);
+  if (p) return { mode: 'count', end: Number.parseInt(p[1]!, 10), suffix: '+', label };
+  if (/^0\d$/.test(d)) return { mode: 'count', end: Number.parseInt(d, 10), suffix: '', pad: 2, label };
   const plain = /^(\d+)$/.exec(d);
-  if (plain) {
-    return { mode: 'count', end: Number.parseInt(plain[1]!, 10), suffix: '', label };
-  }
+  if (plain) return { mode: 'count', end: Number.parseInt(plain[1]!, 10), suffix: '', label };
   const loose = d.match(/(\d+)/);
   if (loose) {
     return {
@@ -348,32 +181,44 @@ function displayToStatItem(display: string, label: string): HomeImpactStatItem {
   return { mode: 'symbol', symbol: d || '∞', label };
 }
 
-function highlightsFromLayout(highlights: unknown): HomeImpactStatsData | null {
-  if (!isRecord(highlights)) return null;
-  const titles = highlights.title;
-  const values = highlights.value;
-  if (!Array.isArray(titles) || !Array.isArray(values) || titles.length === 0) return null;
-  const n = Math.min(titles.length, values.length);
+function highlights(h: unknown): HomeImpactStatsData | null {
+  if (!rec(h)) return null;
+  const titles = h.title;
+  const values = h.value;
+  if (!Array.isArray(titles) || !Array.isArray(values) || !titles.length) return null;
   const items: HomeImpactStatItem[] = [];
+  const n = Math.min(titles.length, values.length);
   for (let i = 0; i < n; i++) {
-    const a = asString(titles[i]);
-    const b = asString(values[i]);
+    const a = str(titles[i]);
+    const b = str(values[i]);
     if (!a && !b) continue;
-    const { label, display } = pickLabelAndDisplay(a, b);
+    const sa = statDispScore(a);
+    const sb = statDispScore(b);
+    let label: string;
+    let display: string;
+    if (sa > sb) {
+      label = b;
+      display = a;
+    } else if (sb > sa) {
+      label = a;
+      display = b;
+    } else {
+      label = a.length >= b.length ? a : b;
+      display = a.length >= b.length ? b : a;
+    }
     if (!label) continue;
-    items.push(displayToStatItem(display, label));
+    items.push(toImpactItem(display, label));
   }
   return items.length ? { items } : null;
 }
 
-function iconUrlFromCell(cell: unknown, normalizeUrl: (u: string) => string): string | undefined {
-  if (isRecord(cell) && typeof cell.url === 'string' && cell.url.trim()) {
-    return normalizeUrl(cell.url.trim());
-  }
-  return undefined;
+function cellUrl(cell: unknown, norm: (u: string) => string): string | undefined {
+  return rec(cell) && typeof cell.url === 'string' && cell.url.trim()
+    ? norm(cell.url.trim())
+    : undefined;
 }
 
-function normalizeCoreValueIconFromLabel(label: string): HomeCoreValueIconId {
+function coreIcon(label: string): HomeCoreValueIconId {
   const s = label.toLowerCase();
   if (s.includes('friend')) return 'hand-heart';
   if (s.includes('service') || s.includes('selfless')) return 'leaf';
@@ -383,23 +228,7 @@ function normalizeCoreValueIconFromLabel(label: string): HomeCoreValueIconId {
   return 'heart';
 }
 
-function normalizeActionPillarIconFromTitle(
-  title: string,
-  index: number,
-  fallback: HomeActionPillarIconId[],
-): HomeActionPillarIconId {
-  const s = title.toLowerCase();
-  if (s.includes('interfaith') || s.includes('dialogue')) return 'people';
-  if (s.includes('inner') || s.includes('meditat') || s.includes('mindful') || s.includes('peace tool'))
-    return 'meditation';
-  if (s.includes('youth') || s.includes('leadership')) return 'graduation';
-  if (s.includes('voice') || s.includes('raising')) return 'megaphone';
-  if (s.includes('education') || s.includes('curriculum')) return 'book';
-  if (s.includes('policy') || s.includes('advocacy')) return 'scales-policy';
-  return fallback[index] ?? 'people';
-}
-
-const DEFAULT_ACTION_ICONS: HomeActionPillarIconId[] = [
+const PILLAR_FALLBACK: HomeActionPillarIconId[] = [
   'people',
   'meditation',
   'graduation',
@@ -408,93 +237,82 @@ const DEFAULT_ACTION_ICONS: HomeActionPillarIconId[] = [
   'scales-policy',
 ];
 
-function coreValuesFromLayout(block: unknown, normalizeUrl: (u: string) => string): HomeCoreValueItem[] | null {
-  if (!isRecord(block)) return null;
+function pillarIcon(title: string, i: number): HomeActionPillarIconId {
+  const s = title.toLowerCase();
+  if (s.includes('interfaith') || s.includes('dialogue')) return 'people';
+  if (s.includes('inner') || s.includes('meditat') || s.includes('mindful') || s.includes('peace tool'))
+    return 'meditation';
+  if (s.includes('youth') || s.includes('leadership')) return 'graduation';
+  if (s.includes('voice') || s.includes('raising')) return 'megaphone';
+  if (s.includes('education') || s.includes('curriculum')) return 'book';
+  if (s.includes('policy') || s.includes('advocacy')) return 'scales-policy';
+  return PILLAR_FALLBACK[i] ?? 'people';
+}
+
+function coreValues(block: unknown): HomeCoreValueItem[] | null {
+  if (!rec(block) || !Array.isArray(block.title)) return null;
   const titles = block.title;
-  const icons = block.icon;
-  if (!Array.isArray(titles)) return null;
   const out: HomeCoreValueItem[] = [];
   for (let i = 0; i < titles.length; i++) {
-    const label = asString(titles[i]);
+    const label = str(titles[i]);
     if (!label || label === 'data') continue;
-    const iconCell = Array.isArray(icons) ? icons[i] : undefined;
-    const iconSrc = iconUrlFromCell(iconCell, normalizeUrl);
-    out.push({
-      icon: normalizeCoreValueIconFromLabel(label),
-      label,
-      ...(iconSrc ? { iconSrc } : {}),
-    });
+    out.push({ icon: coreIcon(label), label });
   }
   return out.length ? out : null;
 }
 
-function actionPillarsListFromLayout(
-  block: unknown,
-  normalizeUrl: (u: string) => string,
-): HomeActionPillarItem[] | null {
-  if (!isRecord(block)) return null;
-  const titles = block.title;
-  const descriptions = block.description;
-  const icons = block.icon;
-  if (!Array.isArray(titles)) return null;
-  const pillars: HomeActionPillarItem[] = [];
-  for (let i = 0; i < titles.length; i++) {
-    const title = asString(titles[i]);
-    if (!title || title === 'data') continue;
-    const desc = Array.isArray(descriptions) ? asString(descriptions[i]) : '';
-    const iconCell = Array.isArray(icons) ? icons[i] : undefined;
-    const iconSrc = iconUrlFromCell(iconCell, normalizeUrl);
-    pillars.push({
-      icon: normalizeActionPillarIconFromTitle(title, pillars.length, DEFAULT_ACTION_ICONS),
-      title,
-      description: desc,
-      ...(iconSrc ? { iconSrc } : {}),
-    });
-  }
-  return pillars.length ? pillars : null;
-}
-
-function actionPillarsFromLayoutFixed(
+function pillars(
   block: unknown,
   meta: Record<string, unknown>,
-  normalizeUrl: (u: string) => string,
-  fallback: HomeActionPillarsData,
+  fb: HomeActionPillarsData,
 ): HomeActionPillarsData {
-  const pillars = actionPillarsListFromLayout(block, normalizeUrl) ?? fallback.pillars;
+  if (!rec(block) || !Array.isArray(block.title)) {
+    return {
+      kicker: str(meta.our_action_subtitle) || fb.kicker,
+      title: str(meta.our_action_title) || fb.title,
+      pillars: fb.pillars,
+    };
+  }
+  const titles = block.title;
+  const descs = block.description;
+  const list: HomeActionPillarItem[] = [];
+  for (let i = 0; i < titles.length; i++) {
+    const title = str(titles[i]);
+    if (!title || title === 'data') continue;
+    list.push({
+      icon: pillarIcon(title, list.length),
+      title,
+      description: Array.isArray(descs) ? str(descs[i]) : '',
+    });
+  }
   return {
-    kicker: asString(meta.our_action_subtitle) || fallback.kicker,
-    title: asString(meta.our_action_title) || fallback.title,
-    pillars,
+    kicker: str(meta.our_action_subtitle) || fb.kicker,
+    title: str(meta.our_action_title) || fb.title,
+    pillars: list.length ? list : fb.pillars,
   };
 }
 
-function testimonialsFromLayout(
-  block: unknown,
-  normalizeUrl: (u: string) => string,
-): HomeHappyClientTestimonial[] | null {
-  if (!isRecord(block)) return null;
+function testimonials(block: unknown, norm: (u: string) => string): HomeHappyClientTestimonial[] | null {
+  if (!rec(block) || !Array.isArray(block.name) || !Array.isArray(block.review)) return null;
   const names = block.name;
   const reviews = block.review;
   const ratings = block.rating;
   const images = block.image;
-  if (!Array.isArray(names) || !Array.isArray(reviews)) return null;
   const out: HomeHappyClientTestimonial[] = [];
   const n = Math.min(names.length, reviews.length);
   for (let i = 0; i < n; i++) {
-    const authorName = asString(names[i]) || 'Client';
-    const quote = asString(reviews[i]);
+    const authorName = str(names[i]) || 'Client';
+    const quote = str(reviews[i]);
     if (!quote) continue;
-    const ratingRaw = Array.isArray(ratings) ? asString(ratings[i]) : '';
+    const ratingRaw = Array.isArray(ratings) ? str(ratings[i]) : '';
     const rating = ratingRaw ? Number.parseFloat(ratingRaw.replace(/[^\d.]/g, '')) : 4.8;
-    const authorInitial = (authorName.trim().charAt(0) || '?').toUpperCase();
-    const imgCell = Array.isArray(images) ? images[i] : undefined;
-    const avatarUrl = iconUrlFromCell(imgCell, normalizeUrl);
     const item: HomeHappyClientTestimonial = {
       quote,
       rating: Number.isFinite(rating) ? Math.min(5, Math.max(0, rating)) : 4.8,
       authorName,
-      authorInitial,
+      authorInitial: (authorName.trim().charAt(0) || '?').toUpperCase(),
     };
+    const avatarUrl = cellUrl(Array.isArray(images) ? images[i] : undefined, norm);
     if (avatarUrl && /\.(png|jpe?g|webp|gif)(\?|$)/i.test(avatarUrl)) {
       item.avatar = { src: avatarUrl, alt: authorName };
     }
@@ -503,157 +321,52 @@ function testimonialsFromLayout(
   return out.length ? out : null;
 }
 
-function engagementFromLayout(meta: Record<string, unknown>): HomeEngagementData | null {
+function engagement(meta: Record<string, unknown>): HomeEngagementData | null {
   const items = meta.engagement_items;
-  if (!isRecord(items)) return null;
+  if (!rec(items) || !Array.isArray(items.title)) return null;
   const titles = items.title;
   const descriptions = items.description;
-  if (!Array.isArray(titles)) return null;
   const cards: HomeEngagementCard[] = [];
   for (let i = 0; i < titles.length; i++) {
-    const title = asString(titles[i]);
+    const title = str(titles[i]);
     if (!title) continue;
-    const description = Array.isArray(descriptions) ? asString(descriptions[i]) : '';
-    cards.push({ title, description });
+    cards.push({ title, description: Array.isArray(descriptions) ? str(descriptions[i]) : '' });
   }
   if (!cards.length) return null;
   return {
-    kicker: asString(meta.engagement_subtitle) || 'Engagement',
-    title: asString(meta.engagement_title) || 'Join Our Global Family',
+    kicker: str(meta.engagement_subtitle) || 'Engagement',
+    title: str(meta.engagement_title) || 'Join Our Global Family',
     cards,
     cta: {
       label: 'Apply as peace ambassador',
-      href: asString(meta.engagement_ambassador_navigation_url) || getInvolvedPath(),
+      href: str(meta.engagement_ambassador_navigation_url) || getInvolvedPath(),
     },
   };
 }
 
-function splitAboutHeadline(aboutTitle: string): { line1: string; line2: string } {
+function aboutLines(aboutTitle: string): { line1: string; line2: string } {
   const t = aboutTitle.trim();
-  const comma = t.indexOf(',');
-  if (comma >= 0) {
-    return {
-      line1: t.slice(0, comma + 1).trim(),
-      line2: t.slice(comma + 1).trim(),
-    };
-  }
-  return { line1: t, line2: '' };
+  const c = t.indexOf(',');
+  return c >= 0
+    ? { line1: t.slice(0, c + 1).trim(), line2: t.slice(c + 1).trim() }
+    : { line1: t, line2: '' };
 }
 
-function heroImageFromLayout(
+function bannerImg(
   meta: Record<string, unknown>,
-  normalizeUrl: (u: string) => string,
-  fallback: HomeHeroData['image'],
-) {
-  const desktop = meta.banner_desktop_image;
-  const mobile = meta.banner_mobile_image;
-  const pickImg = (v: unknown): { src: string; alt: string } | null => {
+  norm: (u: string) => string,
+  fb: HomeHeroData['image'],
+): HomeHeroData['image'] {
+  const pick = (v: unknown): HomeHeroData['image'] | null => {
     if (v == null) return null;
-    if (typeof v === 'string' && v.trim()) {
-      return { src: normalizeUrl(v), alt: '' };
-    }
-    if (isRecord(v) && typeof v.url === 'string') {
-      const alt = typeof v.filename === 'string' ? v.filename : 'Banner';
-      return { src: normalizeUrl(v.url), alt };
+    if (typeof v === 'string' && v.trim()) return { src: norm(v), alt: '' };
+    if (rec(v) && typeof v.url === 'string') {
+      return { src: norm(v.url), alt: typeof v.filename === 'string' ? v.filename : 'Banner' };
     }
     return null;
   };
-  return pickImg(desktop) ?? pickImg(mobile) ?? fallback;
+  return pick(meta.banner_desktop_image) ?? pick(meta.banner_mobile_image) ?? fb;
 }
-
-function parseHomePageFromLayoutV1(meta: Record<string, unknown>, ctx: LayoutV1ParseContext): HomePageData {
-  const {
-    normalizeImageUrl: norm,
-    staticHeroFallback,
-    staticAboutFallback,
-    staticImpactFallback,
-    staticActionPillars,
-    staticHappyClientsFallback,
-    staticEngagementFallback,
-  } = ctx;
-
-  const headline = splitHeroHeadline(asString(meta.banner_subtitle));
-  const hero: HomeHeroData = {
-    overline: asString(meta.banner_title) || staticHeroFallback.overline,
-    headline,
-    description: stripHtml(asString(meta.banner_description)) || staticHeroFallback.description,
-    primaryCta: {
-      label: 'Join the movement',
-      href: asString(meta.banner_join_navigation) || staticHeroFallback.primaryCta.href,
-    },
-    secondaryCta: {
-      label: 'Learn more',
-      href: asString(meta.banner_learn_more_navigation) || staticHeroFallback.secondaryCta.href,
-    },
-    image: heroImageFromLayout(meta, norm, staticHeroFallback.image),
-    statCard: {
-      label: 'Active community',
-      value: asString(meta.banner_active_community_count) || staticHeroFallback.statCard.value,
-    },
-  };
-
-  const impactStats = highlightsFromLayout(meta.highlights) ?? staticImpactFallback;
-
-  const aboutTitle = asString(meta.about_title);
-  const { line1, line2 } = aboutTitle ? splitAboutHeadline(aboutTitle) : { line1: '', line2: '' };
-
-  const coreList = coreValuesFromLayout(meta.core_values, norm);
-  const aboutCoreValues: HomeAboutCoreValuesData = {
-    aboutKicker: asString(meta.about_subtitle) || staticAboutFallback.aboutKicker,
-    headlineLine1: line1 || staticAboutFallback.headlineLine1,
-    headlineLine2: line2 || staticAboutFallback.headlineLine2,
-    body: stripHtml(asString(meta.about_description)) || staticAboutFallback.body,
-    visionLabel: staticAboutFallback.visionLabel,
-    visionText: staticAboutFallback.visionText,
-    coreValuesKicker: asString(meta.core_values_title) || staticAboutFallback.coreValuesKicker,
-    values: coreList ?? staticAboutFallback.values,
-  };
-
-  const actionPillars = actionPillarsFromLayoutFixed(meta.our_actions, meta, norm, staticActionPillars);
-
-  const peaceSummits: HomePeaceSummitsData = {
-    kicker: asString(meta.events_subtitle) || 'Events',
-    title: asString(meta.events_title) || 'Global Peace Summits',
-    summits: [],
-  };
-
-  const testimonialList = testimonialsFromLayout(meta.testimonials, norm);
-  const rawTestimonialTitle = asString(meta.testimonials_title) || staticHappyClientsFallback.title;
-  const happyClients: HomeHappyClientsData = {
-    title: rawTestimonialTitle.replace(/\b\w/g, (c) => c.toUpperCase()),
-    testimonials: testimonialList ?? staticHappyClientsFallback.testimonials,
-  };
-
-  const iam = splitIamPeaceTitle(asString(meta.i_am_piece_title));
-  const supportMovement: HomeSupportMovementData = {
-    header: {
-      titleCyan: iam.titleCyan,
-      titleOrange: iam.titleOrange,
-      subline: asString(meta.i_am_piece_subtitle) || '',
-    },
-    panel: {
-      headline: asString(meta.support_title) || '',
-      body: stripHtml(asString(meta.support_description)) || '',
-      donorsLine: '',
-      avatars: [],
-    },
-  };
-
-  const engagement = engagementFromLayout(meta) ?? staticEngagementFallback;
-
-  return {
-    hero,
-    impactStats,
-    aboutCoreValues,
-    actionPillars,
-    peaceSummits,
-    happyClients,
-    supportMovement,
-    engagement,
-  };
-}
-
-// --- fetch + empty fallbacks ------------------------------------------------
 
 function emptyHero(): HomeHeroData {
   return {
@@ -667,11 +380,11 @@ function emptyHero(): HomeHeroData {
   };
 }
 
-function buildLayoutParseContext(): LayoutV1ParseContext {
+function makeCtx(): Ctx {
   return {
-    normalizeImageUrl,
-    staticHeroFallback: emptyHero(),
-    staticAboutFallback: {
+    norm: normImg,
+    heroFb: emptyHero(),
+    aboutFb: {
       aboutKicker: '',
       headlineLine1: '',
       headlineLine2: '',
@@ -681,10 +394,10 @@ function buildLayoutParseContext(): LayoutV1ParseContext {
       coreValuesKicker: '',
       values: [],
     },
-    staticImpactFallback: { items: [] },
-    staticActionPillars: { kicker: '', title: '', pillars: [] },
-    staticHappyClientsFallback: { title: '', testimonials: [] },
-    staticEngagementFallback: {
+    impactFb: { items: [] },
+    pillarsFb: { kicker: '', title: '', pillars: [] },
+    clientsFb: { title: '', testimonials: [] },
+    engageFb: {
       kicker: '',
       title: '',
       cards: [],
@@ -693,19 +406,17 @@ function buildLayoutParseContext(): LayoutV1ParseContext {
   };
 }
 
-let layoutCtx: LayoutV1ParseContext | null = null;
-
-function getLayoutParseContext(): LayoutV1ParseContext {
-  if (!layoutCtx) layoutCtx = buildLayoutParseContext();
-  return layoutCtx;
+let _ctx: Ctx | null = null;
+function ctx(): Ctx {
+  return (_ctx ??= makeCtx());
 }
 
-function emptyHomePage(): HomePageData {
-  const ctx = getLayoutParseContext();
+function emptyPage(): HomePageData {
+  const c = ctx();
   return {
-    hero: { ...ctx.staticHeroFallback },
+    hero: { ...c.heroFb },
     impactStats: { items: [] },
-    aboutCoreValues: { ...ctx.staticAboutFallback },
+    aboutCoreValues: { ...c.aboutFb },
     actionPillars: { kicker: '', title: '', pillars: [] },
     peaceSummits: { kicker: '', title: '', summits: [] },
     happyClients: { title: '', testimonials: [] },
@@ -713,89 +424,120 @@ function emptyHomePage(): HomePageData {
       header: { titleCyan: '', titleOrange: '', subline: '' },
       panel: { headline: '', body: '', donorsLine: '', avatars: [] },
     },
-    engagement: { ...ctx.staticEngagementFallback },
+    engagement: { ...c.engageFb },
   };
 }
 
-async function fetchHomePageDataUncached(): Promise<HomePageData> {
-  const url = buildCompanyApiUrl(homePageApiPath());
-  if (!url) return emptyHomePage();
+function parseLayout(m: Record<string, unknown>, c: Ctx): HomePageData {
+  const { norm, heroFb, aboutFb, impactFb, pillarsFb, clientsFb, engageFb } = c;
+  const hero: HomeHeroData = {
+    overline: str(m.banner_title) || heroFb.overline,
+    headline: splitHeroSub(str(m.banner_subtitle)),
+    description: stripHtml(str(m.banner_description)) || heroFb.description,
+    primaryCta: {
+      label: 'Join the movement',
+      href: str(m.banner_join_navigation) || heroFb.primaryCta.href,
+    },
+    secondaryCta: {
+      label: 'Learn more',
+      href: str(m.banner_learn_more_navigation) || heroFb.secondaryCta.href,
+    },
+    image: bannerImg(m, norm, heroFb.image),
+    statCard: {
+      label: 'Active community',
+      value: str(m.banner_active_community_count) || heroFb.statCard.value,
+    },
+  };
 
-  const tag = homePageCacheKeySegment();
-  const payload = await fetchJsonCached<PageApiPayload>(url, {
-    tags: ['homepage', `page:${tag}`],
+  const aboutTitle = str(m.about_title);
+  const { line1, line2 } = aboutTitle ? aboutLines(aboutTitle) : { line1: '', line2: '' };
+  const coreList = coreValues(m.core_values);
+
+  const iamRaw = str(m.i_am_piece_title).trim();
+  const peaceIdx = iamRaw.toUpperCase().lastIndexOf('PEACE');
+  const iam =
+    peaceIdx >= 0
+      ? {
+          cyan: iamRaw.slice(0, peaceIdx).trim() || '#Iam',
+          orange: iamRaw.slice(peaceIdx).trim() || 'PEACE',
+        }
+      : { cyan: '#Iam', orange: iamRaw || 'PEACE' };
+
+  const tList = testimonials(m.testimonials, norm);
+  const tTitle = str(m.testimonials_title) || clientsFb.title;
+
+  return {
+    hero,
+    impactStats: highlights(m.highlights) ?? impactFb,
+    aboutCoreValues: {
+      aboutKicker: str(m.about_subtitle) || aboutFb.aboutKicker,
+      headlineLine1: line1 || aboutFb.headlineLine1,
+      headlineLine2: line2 || aboutFb.headlineLine2,
+      body: stripHtml(str(m.about_description)) || aboutFb.body,
+      visionLabel: aboutFb.visionLabel,
+      visionText: aboutFb.visionText,
+      coreValuesKicker: str(m.core_values_title) || aboutFb.coreValuesKicker,
+      values: coreList ?? aboutFb.values,
+    },
+    actionPillars: pillars(m.our_actions, m, pillarsFb),
+    peaceSummits: {
+      kicker: str(m.events_subtitle) || 'Events',
+      title: str(m.events_title) || 'Global Peace Summits',
+      summits: [],
+    },
+    happyClients: {
+      title: tTitle.replace(/\b\w/g, (x) => x.toUpperCase()),
+      testimonials: tList ?? clientsFb.testimonials,
+    },
+    supportMovement: {
+      header: {
+        titleCyan: iam.cyan,
+        titleOrange: iam.orange,
+        subline: str(m.i_am_piece_subtitle) || '',
+      },
+      panel: {
+        headline: str(m.support_title) || '',
+        body: stripHtml(str(m.support_description)) || '',
+        donorsLine: '',
+        avatars: [],
+      },
+    },
+    engagement: engagement(m) ?? engageFb,
+  };
+}
+
+async function fetchUncached(): Promise<HomePageData> {
+  const base = apiBase();
+  if (!base) return emptyPage();
+
+  const payload = await fetchJsonCached<PagePayload>(`${base}${pagePath()}`, {
+    tags: ['homepage', `page:${cacheSeg()}`],
     init: { headers: { Accept: 'application/json' } },
   });
 
   const meta = payload?.data?.meta;
-  if (!isLayoutHomeV1Meta(meta)) return emptyHomePage();
-
-  const ctx = getLayoutParseContext();
-  let data = parseHomePageFromLayoutV1(meta, ctx);
-
-  if (HOME_HERO_FORCE_STATIC_IMAGE) {
-    data = {
-      ...data,
-      hero: { ...data.hero, image: ctx.staticHeroFallback.image },
-    };
+  if (!isLayout(meta)) return emptyPage();
+  const c = ctx();
+  let data = parseLayout(meta, c);
+  if (FORCE_STATIC_HERO_IMG) {
+    data = { ...data, hero: { ...data.hero, image: c.heroFb.image } };
   }
-
   return data;
 }
 
-// --- public API -------------------------------------------------------------
-
 const getCachedHomePage = unstable_cache(
-  fetchHomePageDataUncached,
+  fetchUncached,
   [
     'homepage-page-v2',
-    homePageCacheKeySegment(),
-    process.env.COMPANY_API_BASE_URL ||
-      (process.env.NODE_ENV === 'development' ? 'dev-fallback' : 'static'),
+    cacheSeg(),
+    process.env.COMPANY_API_BASE_URL || 'static',
   ],
   {
-    revalidate: PAGE_CACHE_SECONDS,
-    tags: [
-      API_CACHE_TAG,
-      'homepage',
-      'homepage-hero',
-      `page:${homePageCacheKeySegment()}`,
-    ],
+    revalidate: REVALIDATE,
+    tags: [API_CACHE_TAG, 'homepage', 'homepage-hero', `page:${cacheSeg()}`],
   },
 );
 
 export async function getHomePageData(): Promise<HomePageData> {
   return getCachedHomePage();
-}
-
-export async function getHomeHero(): Promise<HomeHeroData> {
-  return (await getCachedHomePage()).hero;
-}
-
-export async function getHomeImpactStats(): Promise<HomeImpactStatsData> {
-  return (await getCachedHomePage()).impactStats;
-}
-
-export async function getHomeAboutCoreValues(): Promise<HomeAboutCoreValuesData> {
-  return (await getCachedHomePage()).aboutCoreValues;
-}
-
-export async function getHomeActionPillars(): Promise<HomeActionPillarsData> {
-  return (await getCachedHomePage()).actionPillars;
-}
-
-export async function getHomePeaceSummits(): Promise<HomePeaceSummitsData> {
-  return (await getCachedHomePage()).peaceSummits;
-}
-
-export async function getHomeHappyClients(): Promise<HomeHappyClientsData> {
-  return (await getCachedHomePage()).happyClients;
-}
-
-export async function getHomeSupportMovement(): Promise<HomeSupportMovementData> {
-  return (await getCachedHomePage()).supportMovement;
-}
-
-export async function getHomeEngagement(): Promise<HomeEngagementData> {
-  return (await getCachedHomePage()).engagement;
 }
