@@ -3,6 +3,7 @@ import { redirect } from 'next/navigation';
 
 import PageBreadcrumbHero from '@/components/common/PageBreadcrumbHero';
 import GetInvolvedApplicationSection from '@/components/get-involved/GetInvolvedApplicationSection';
+import GetInvolvedEngageSection from '@/components/get-involved/GetInvolvedEngageSection';
 import { GET_INVOLVED_PAGE_SLUG, getInvolvedPath } from '@/config/publicRoutes';
 import { getCanonicalUrl } from '@/config/site';
 import { getGetInvolvedPageData } from '@/lib/api/getInvolved';
@@ -29,6 +30,7 @@ export async function GetInvolvedPageView() {
         titleOrange={data.hero.titleOrange}
       />
       <GetInvolvedApplicationSection program={data.program} application={data.application} />
+      <GetInvolvedEngageSection data={data.engageSection} />
     </main>
   );
 }

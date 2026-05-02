@@ -1,6 +1,49 @@
 import 'server-only';
 
-import type { GetInvolvedPageData } from './types';
+import { contactUsPath, whatWeDoPath } from '@/config/publicRoutes';
+
+import type { GetInvolvedEngageSectionData, GetInvolvedPageData } from './types';
+
+const STATIC_ENGAGE_SECTION: GetInvolvedEngageSectionData = {
+  title: 'Other Ways To Engage',
+  subtitle:
+    'From individual volunteering to institutional collaboration, there is a place for everyone in our global community.',
+  cards: [
+    {
+      image: {
+        src: '/solidarity_images.webp',
+        alt: 'Volunteers in matching shirts doing community cleanup outdoors',
+      },
+      icon: { src: '/true_icon.svg', alt: '' },
+      title: 'Global Volunteer',
+      description:
+        'Join field teams for humanitarian relief, education drives, and neighborhood peace-building wherever you live.',
+      cta: { label: 'Join Team', href: whatWeDoPath() },
+    },
+    {
+      image: {
+        src: '/comminuty_core_images.jpg',
+        alt: 'People seated in a circle for dialogue and listening',
+      },
+      icon: { src: '/dialog_icons.svg', alt: '' },
+      title: 'Peace Circles',
+      description:
+        'Host or join facilitated circles that build trust, empathy, and shared action across difference in your community.',
+      cta: { label: 'Start a Circle', href: contactUsPath() },
+    },
+    {
+      image: {
+        src: '/diplomatic_image1.jpg',
+        alt: 'Two professionals shaking hands in a bright office',
+      },
+      icon: { src: '/partners_icons.svg', alt: '' },
+      title: 'Collaborate',
+      description:
+        'Partner with iSCTH through grants, sponsorships, and programs that align your mission with global peace outcomes.',
+      cta: { label: 'Partner With Us', href: contactUsPath() },
+    },
+  ],
+};
 
 const STATIC_GET_INVOLVED_PAGE: GetInvolvedPageData = {
   hero: {
@@ -74,6 +117,7 @@ const STATIC_GET_INVOLVED_PAGE: GetInvolvedPageData = {
     ],
     submitLabel: 'Submit Application',
   },
+  engageSection: STATIC_ENGAGE_SECTION,
 };
 
 export async function getGetInvolvedPageData(): Promise<GetInvolvedPageData> {
@@ -83,6 +127,8 @@ export async function getGetInvolvedPageData(): Promise<GetInvolvedPageData> {
 export type {
   GetInvolvedApplicationData,
   GetInvolvedApplicationField,
+  GetInvolvedEngageCard,
+  GetInvolvedEngageSectionData,
   GetInvolvedHeroData,
   GetInvolvedPageData,
   GetInvolvedProgramData,
