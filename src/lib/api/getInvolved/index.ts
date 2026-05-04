@@ -39,7 +39,7 @@ const STATIC_ENGAGE_SECTION: GetInvolvedEngageSectionData = {
       icon: { src: '/partners_icons.svg', alt: '' },
       title: 'Collaborate',
       description:
-        'Partner with iSCTH through grants, sponsorships, and programs that align your mission with global peace outcomes.',
+        'Partner with ISCTH through grants, sponsorships, and programs that align your mission with global peace outcomes.',
       cta: { label: 'Partner With Us', href: contactUsPath() },
     },
   ],
@@ -58,7 +58,7 @@ const STATIC_GET_INVOLVED_PAGE: GetInvolvedPageData = {
     title: 'Peace Ambassador',
     description: [
       'Join a global network of diplomatic leaders committed to conflict resolution and human unity.',
-      'As a Peace Ambassador, you serve as the voice of reconciliation in your community and represent iSCTH at international summits.',
+      'As a Peace Ambassador, you serve as the voice of reconciliation in your community and represent ISCTH at international summits.',
     ],
     image: {
       src: '/hero_images.png',

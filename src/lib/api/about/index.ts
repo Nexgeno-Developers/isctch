@@ -29,8 +29,8 @@ const STATIC_ABOUT_PAGE: AboutPageData = {
     kicker: 'The Genesis',
     heading: 'Lorem Ipsum',
     body: [
-      'iSCTH was founded in response to a growing realization: while the world invests heavily in resolving conflict, far less attention is given to cultivating peace itself.',
-      'Born from the collective wisdom of peace practitioners, spiritual leaders, educators, and global citizens, iSCTH brings together inner awareness and outer action.',
+      'ISCTH was founded in response to a growing realization: while the world invests heavily in resolving conflict, far less attention is given to cultivating peace itself.',
+      'Born from the collective wisdom of peace practitioners, spiritual leaders, educators, and global citizens, ISCTH brings together inner awareness and outer action.',
       'We believe peace must be lived within individuals, embedded in communities, and reflected in institutions. Our work bridges ancient wisdom and contemporary practice to address the emotional, cultural, and systemic roots of conflict.',
     ],
     image: {
@@ -120,7 +120,7 @@ const STATIC_ABOUT_PAGE: AboutPageData = {
     kicker: 'Stewards of Vision and Integrity',
     heading: 'Management Team',
     description: [
-      'The iSCTH Management Team translates vision into action. With backgrounds spanning peace-building, education, governance, strategy, and operations, the team ensures ethical leadership, transparency, and sustainable impact. Working closely with founders, the global board, and advisors, the team leads with humility, service, and accountability.',
+      'The ISCTH Management Team translates vision into action. With backgrounds spanning peace-building, education, governance, strategy, and operations, the team ensures ethical leadership, transparency, and sustainable impact. Working closely with founders, the global board, and advisors, the team leads with humility, service, and accountability.',
     ],
     members: [
       {

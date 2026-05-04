@@ -30,7 +30,7 @@ const STATIC_DONATE_PAGE: DonatePageData = {
   contribution: {
     heading: 'Your contribution builds the foundations of global harmony.',
     paragraphOne:
-      'Peace is not merely the absence of conflict, but the presence of justice and sustainable development. Through your support, iSCTH empowers grassroots movements and diplomatic dialogues across volatile regions.',
+      'Peace is not merely the absence of conflict, but the presence of justice and sustainable development. Through your support, ISCTH empowers grassroots movements and diplomatic dialogues across volatile regions.',
     paragraphTwo:
       'Every donation directly funds diplomatic training, community mediation centers, and crisis intervention programs that bridge the gap between hostility and understanding.',
     quote: 'Peace begins with a single act of kindness that reverberates across borders.',

@@ -15,7 +15,7 @@ import HomeEngagement from '@/components/home/HomeEngagement';
 export async function generateMetadata(): Promise<Metadata> {
   const { hero } = await getHomePageData();
   return {
-    title: 'iSCTH — Home',
+    title: 'ISCTH — Home',
     description: hero.description.slice(0, 160),
     alternates: { canonical: getCanonicalUrl('/') },
   };

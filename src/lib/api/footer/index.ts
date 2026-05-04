@@ -5,7 +5,7 @@ const LOGO_SRC = '/iscth-logo.png';
 
 const FOOTER_BODY: Omit<FooterData, 'copyright'> = {
   logo: {
-    text: 'iSCTH',
+    text: 'ISCTH',
     orgLine: 'INTERNATIONAL SPIRITUAL COUNCIL FOR TRANSFORMING HUMANITY',
     image: LOGO_SRC,
     href: '/',
@@ -56,7 +56,7 @@ export function getFooterLayout(): FooterData {
   const year = new Date().getFullYear();
   return {
     ...FOOTER_BODY,
-    copyright: `© ${year} iSCTH. All rights reserved. #IamPEACE`,
+    copyright: `© ${year} ISCTH. All rights reserved. #IamPEACE`,
   };
 }
 

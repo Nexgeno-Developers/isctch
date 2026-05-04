@@ -78,7 +78,7 @@ const STATIC_ABOUT_CORE_VALUES: HomeAboutCoreValuesData = {
   headlineLine1: 'Humanity is our Religion,',
   headlineLine2: 'Kindness is our Prayer.',
   body:
-    'iSCTH is a global movement rooted in the belief that lasting peace begins with how we treat one another every day. We bring people together across cultures and borders through friendship, service, and shared values—so communities everywhere can grow stronger in empathy, dignity, and trust.',
+    'ISCTH is a global movement rooted in the belief that lasting peace begins with how we treat one another every day. We bring people together across cultures and borders through friendship, service, and shared values—so communities everywhere can grow stronger in empathy, dignity, and trust.',
   visionLabel: '"Vision:',
   visionText: 'To establish peace on earth as One World – One Family."',
   coreValuesKicker: 'Core values',
