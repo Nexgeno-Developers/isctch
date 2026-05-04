@@ -2,6 +2,7 @@
 
 import { useRef } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import type { Swiper as SwiperClass } from 'swiper';
 import { Autoplay, A11y } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -114,8 +115,8 @@ export default function HomePeaceSummits({ data }: Props) {
               swiperRef.current = swiper;
             }}
           >
-            {summits.map((summit, index) => (
-              <SwiperSlide key={`${summit.title}-${index}`} className="h-auto">
+            {summits.map((summit, index) => {
+              const article = (
                 <article className="flex h-full flex-col">
                   <div className="relative aspect-[4/3] w-full overflow-hidden rounded-2xl bg-slate-100">
                     <Image
@@ -136,8 +137,22 @@ export default function HomePeaceSummits({ data }: Props) {
                     </p>
                   </div>
                 </article>
-              </SwiperSlide>
-            ))}
+              );
+              return (
+                <SwiperSlide key={`${summit.title}-${index}`} className="h-auto">
+                  {summit.href ? (
+                    <Link
+                      href={summit.href}
+                      className="block h-full text-inherit no-underline outline-none transition-opacity hover:opacity-95 focus-visible:ring-2 focus-visible:ring-[#00AEEF] focus-visible:ring-offset-2 rounded-2xl"
+                    >
+                      {article}
+                    </Link>
+                  ) : (
+                    article
+                  )}
+                </SwiperSlide>
+              );
+            })}
           </Swiper>
         </div>
       </div>

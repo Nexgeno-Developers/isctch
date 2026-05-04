@@ -3,7 +3,7 @@ import 'server-only';
 import { unstable_cache } from 'next/cache';
 
 import { API_CACHE_TAG, fetchJsonCached } from '@/lib/api/apiCache';
-import { aboutUsPath, getInvolvedPath } from '@/config/publicRoutes';
+import { aboutUsPath, getInvolvedPath, summitDetailPath } from '@/config/publicRoutes';
 
 export type HomeHeroCta = { label: string; href: string };
 export type HomeHeroData = {
@@ -51,6 +51,8 @@ export type HomePeaceSummitCard = {
   title: string;
   description: string;
   image: { src: string; alt: string };
+  /** Link to summit detail when `slug` is present from the page API `autofetch.events`. */
+  href?: string;
 };
 export type HomePeaceSummitsData = { kicker: string; title: string; summits: HomePeaceSummitCard[] };
 export type HomeHappyClientTestimonial = {
@@ -104,7 +106,13 @@ const FORCE_STATIC_HERO_IMG = ['1', 'true', 'yes'].includes(
 );
 const REVALIDATE = Number(process.env.HOMEPAGE_HERO_REVALIDATE_SECONDS ?? 60 * 60);
 
-type PagePayload = { data?: { meta?: unknown; seo?: unknown } };
+type PagePayload = {
+  data?: {
+    meta?: unknown;
+    seo?: unknown;
+    autofetch?: { events?: unknown };
+  };
+};
 
 function pick(m: Record<string, unknown>, keys: string[]): string {
   for (const k of keys) {
@@ -254,6 +262,102 @@ function cellUrl(cell: unknown, norm: (u: string) => string): string | undefined
   return rec(cell) && typeof cell.url === 'string' && cell.url.trim()
     ? norm(cell.url.trim())
     : undefined;
+}
+
+function eventRecordId(ev: Record<string, unknown>): number | null {
+  const raw = ev.id;
+  if (typeof raw === 'number' && Number.isFinite(raw)) return raw;
+  const n = Number.parseInt(String(raw), 10);
+  return Number.isFinite(n) ? n : null;
+}
+
+function formatEventLocationChip(dateStr: string, timeStr: string): string {
+  const d = dateStr.trim();
+  const t = timeStr.trim();
+  if (!d) return t || 'Event';
+  const timePart =
+    t && /^\d{1,2}:\d{2}/.test(t) ? (t.length === 5 ? `${t}:00` : t) : '';
+  const iso = timePart ? `${d}T${timePart}` : `${d}T12:00:00`;
+  const dt = new Date(iso);
+  if (Number.isNaN(dt.getTime())) return t ? `${d} · ${t}` : d;
+  const opts: Intl.DateTimeFormatOptions = timePart
+    ? { month: 'short', day: 'numeric', year: 'numeric', hour: 'numeric', minute: '2-digit' }
+    : { month: 'short', day: 'numeric', year: 'numeric' };
+  return new Intl.DateTimeFormat('en-US', opts).format(dt);
+}
+
+function parseEventsPostIds(meta: Record<string, unknown>): number[] | null {
+  const raw = meta.events_posts;
+  if (typeof raw !== 'string') return null;
+  const s = raw.trim();
+  if (!s) return null;
+  try {
+    const arr = JSON.parse(s) as unknown;
+    if (!Array.isArray(arr)) return null;
+    const nums = arr.map((x) => Number(x)).filter((n) => Number.isFinite(n));
+    return nums.length ? nums : null;
+  } catch {
+    return null;
+  }
+}
+
+function eventToSummitCard(ev: Record<string, unknown>, norm: (u: string) => string): HomePeaceSummitCard | null {
+  const title = str(ev.title);
+  if (!title) return null;
+  const summary = str(ev.summary);
+  const date = str(ev.date);
+  const time = str(ev.time);
+  const slug = str(ev.slug);
+  const img = rec(ev.featured_image) ? (ev.featured_image as Record<string, unknown>) : null;
+  const src = img && typeof img.url === 'string' ? norm(img.url.trim()) : '';
+  const altRaw = img && typeof img.filename === 'string' ? str(img.filename) : title;
+  if (!src) return null;
+  return {
+    location: formatEventLocationChip(date, time),
+    title,
+    description: summary,
+    image: { src, alt: altRaw },
+    ...(slug ? { href: summitDetailPath(slug) } : {}),
+  };
+}
+
+/** Maps page API `data.autofetch.events` (with `?autofetch=events`) into peace summit cards. */
+function peaceSummitsFromAutofetch(
+  autofetch: unknown,
+  meta: Record<string, unknown>,
+  norm: (u: string) => string,
+): HomePeaceSummitCard[] {
+  if (!rec(autofetch) || !Array.isArray(autofetch.events)) return [];
+  const rawList = autofetch.events.filter((x): x is Record<string, unknown> => rec(x));
+  const byId = new Map<number, Record<string, unknown>>();
+  for (const ev of rawList) {
+    const id = eventRecordId(ev);
+    if (id != null) byId.set(id, ev);
+  }
+  const order = parseEventsPostIds(meta);
+  const ordered: Record<string, unknown>[] = [];
+  if (order?.length) {
+    const seen = new Set<number>();
+    for (const id of order) {
+      const ev = byId.get(id);
+      if (ev) {
+        ordered.push(ev);
+        seen.add(id);
+      }
+    }
+    for (const ev of rawList) {
+      const id = eventRecordId(ev);
+      if (id != null && !seen.has(id)) ordered.push(ev);
+    }
+  } else {
+    ordered.push(...rawList);
+  }
+  const cards: HomePeaceSummitCard[] = [];
+  for (const ev of ordered) {
+    const card = eventToSummitCard(ev, norm);
+    if (card) cards.push(card);
+  }
+  return cards;
 }
 
 function coreIcon(label: string): HomeCoreValueIconId {
@@ -574,7 +678,8 @@ async function fetchUncached(): Promise<HomePageData> {
   const base = apiBase();
   if (!base) return emptyPage();
 
-  const payload = await fetchJsonCached<PagePayload>(`${base}${pagePath()}`, {
+  const pageUrl = `${base}${pagePath()}${pagePath().includes('?') ? '&' : '?'}autofetch=events`;
+  const payload = await fetchJsonCached<PagePayload>(pageUrl, {
     tags: ['homepage', `page:${cacheSeg()}`],
     init: { headers: { Accept: 'application/json' } },
   });
@@ -584,6 +689,10 @@ async function fetchUncached(): Promise<HomePageData> {
   if (!isLayout(meta)) return { ...emptyPage(), seo };
   const c = ctx();
   let data = parseLayout(meta, c);
+  const summitCards = peaceSummitsFromAutofetch(payload?.data?.autofetch, meta, c.norm);
+  if (summitCards.length) {
+    data = { ...data, peaceSummits: { ...data.peaceSummits, summits: summitCards } };
+  }
   if (FORCE_STATIC_HERO_IMG) {
     data = { ...data, hero: { ...data.hero, image: c.heroFb.image } };
   }
